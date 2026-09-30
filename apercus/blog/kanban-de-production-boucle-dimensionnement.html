@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperçu · kanban-de-production-boucle-dimensionnement</title>
+<style>
+  :root { --ink: #23235a; --blue: #4a4aa0; --muted: #6b6b8a; --line: #e2e2ee; --bg: #fbfbf9; --note: #ececf5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  .bandeau { background: var(--note); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  h1 { font-size: 34px; line-height: 1.2; color: var(--blue); }
+  h2 { font-size: 26px; line-height: 1.25; margin-top: 48px; color: var(--blue); }
+  h3 { font-size: 20px; margin-top: 28px; }
+  a { color: var(--blue); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 16px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--note); }
+  div[role=region] { overflow-x: auto; }
+  .visuel { margin: 28px 0; }
+  .visuel video { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #f3f3f3; }
+  .visuel figcaption { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--blue); padding-left: 10px; }
+  .visuel .num { font-weight: 700; color: var(--blue); }
+  .visuel code { font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="bandeau"><a href="index.html">← Tous les articles</a> · Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
+<h1>Kanban de production : dimensionner la boucle et calculer le nombre de cartes</h1>
+
+<!--
+FICHLY - BRIEF BLOG - lundi 14/09/2026 - objectif Notoriete - satellite du cluster Flux
+Brief d'origine : "Kanban en production : le signal qui declenche le reapprovisionnement"
+
+MOT-CLE VISE : kanban de production
+Volume France : 80 recherches/mois - Difficulte : 0 - Plancher de volume (20/mois) : franchi
+
+VERDICT DE FAISABILITE ET BASCULEMENT
+Releve Ahrefs France du 11/09/2026 sur la requete tete de serie "methode kanban" :
+page 1 occupee a 100 % par des generalistes du logiciel de gestion de projet
+(Slack DR 92, Wikipedia DR 97, Asana DR 91, Atlassian DR 92, Adobe DR 96,
+businessmap DR 76, organisologie DR 53, bubbleplan DR 49). DR minimum en page 1 : 49.
+fichly.com est a DR 7. Verdict : STOP sur "kanban" et "methode kanban".
+BASCULEMENT DECIDE (skill 3.1, section "Tu ne decides jamais si, tu decides comment") :
+la cible passe sur la variante longue trainee industrielle "kanban de production",
+80 recherches/mois, difficulte 0. Le volume de "kanban" (16 000) est un piege :
+c'est une requete d'outil logiciel, au potentiel de trafic editorial mesure a 0.
+Le sujet du brief est traite en entier, seule la cible du title tag et du H1 change.
+
+TITLE TAG (51 car.) : Kanban de production : calculer le nombre de cartes
+META DESCRIPTION (152 car.) : 3 cartes pour 360 pieces en boucle : la formule de dimensionnement d'un kanban de production, deroulee pas a pas sur une reference d'atelier.
+HANDLE : kanban-de-production-boucle-dimensionnement
+LONGUEUR : environ 1 800 mots redactionnels (hors sommaire, CTA, bio et footer). Requete etroite,
+intention couverte a fond sans etalement. FAQ ramenee a 5 questions pour tenir la fourchette.
+
+CONTRE-ANGLE (ce qui justifie notre place sur ce SERP)
+Toute la page 1 traite du tableau a colonnes "a faire / en cours / fait".
+Personne ne traite la boucle physique d'atelier : carte attachee a un conteneur,
+point de commande, calcul du nombre de cartes. C'est l'objet de cet article.
+La distinction entre kanban logiciel et kanban de production est posee des l'intro.
+
+DECISIONS PRISES
+- Formule de dimensionnement donnee explicitement et deroulee sur un exemple de calcul
+  construit de toutes pieces, presente comme tel, jamais comme un cas client.
+- Aucun seuil universel de performance, conformement aux interdits Fichly.
+- CTA unique vers le produit fiches-lean (objectif Notoriete).
+- Aucun code promo, aucun pourcentage de remise, aucune date d'offre.
+- Zero tiret cadratin, zero balise h1, zero JavaScript, FAQ en details/summary natifs.
+- Gabarit et bloc style repris a l'identique de l'article TPM (Article/1004916867417).
+-->
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article" lang="fr">
+<p>Tapez « kanban » dans un moteur de recherche et vous tomberez sur des tableaux à trois colonnes, à faire, en cours, fait. Ce n'est pas de cela qu'il s'agit ici. Le <strong>kanban de production</strong> est un objet physique : une carte accrochée à un conteneur, qui se détache quand le conteneur se vide et devient l'ordre de réapprovisionnement. Même nom japonais, problème différent. Celui de l'atelier pose une question que les tableaux d'équipe ne posent jamais : combien de cartes mettre en circulation pour qu'une ligne ne s'arrête pas. Voici la formule, déroulée sur une référence.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Sur une ligne, chaque bac de pièces porte une carte. Quand le bac est vide, la carte part chercher un bac plein. Tant qu'il reste des bacs, la ligne tourne. Tout le jeu consiste à savoir combien de bacs il faut. Trop peu, la ligne s'arrête. Trop, vous payez du stock pour rien.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Le kanban de production est une <strong>boucle physique</strong>, pas un tableau à colonnes.</li>
+<li>La carte ne part qu'une fois la pièce réellement consommée.</li>
+<li>Le nombre de cartes se calcule : consommation, délai, conteneur, marge.</li>
+<li>Stock maximal de la boucle = nombre de cartes × quantité par conteneur.</li>
+<li>Le seul levier sans contrepartie est le <strong>raccourcissement du délai de boucle</strong>.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce qu'un kanban de production ?</a></li>
+<li><a href="#difference">Kanban de production ou tableau kanban de projet ?</a></li>
+<li><a href="#boucle">Comment fonctionne une boucle kanban en atelier ?</a></li>
+<li><a href="#formule">Comment calculer le nombre de cartes d'un kanban de production ?</a></li>
+<li><a href="#exemple">Exemple de dimensionnement, pas à pas</a></li>
+<li><a href="#pieges">Les erreurs qui font dérailler un kanban de production</a></li>
+<li><a href="#outils">Les outils qui font tenir un kanban de production</a></li>
+<li><a href="#faq">FAQ : vos questions sur le kanban</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu'est-ce qu'un kanban de production ?</h2>
+<p>Le kanban de production est un système de réapprovisionnement déclenché par la consommation réelle. Le mot japonais signifie étiquette : dans un atelier, il désigne la carte attachée à un conteneur de pièces.</p>
+<p><strong>Sa règle fondatrice tient en une phrase : rien n'est produit tant qu'une carte n'est pas revenue.</strong> Le poste amont ne fabrique pas parce qu'un planning le lui demande, mais parce que l'aval a consommé. C'est un flux tiré, par opposition au flux poussé où chaque poste produit selon une prévision.</p>
+<p><strong>Le kanban ne pilote pas la production, il plafonne le stock.</strong> Le nombre de cartes fixe mécaniquement la quantité maximale qui peut exister entre deux postes. Aucune carte disponible, aucun ordre possible, même si l'amont a du temps machine libre.</p>
+<h2 id="difference">Kanban de production ou tableau kanban de projet ?</h2>
+<p>Les deux systèmes partagent un nom et un principe, la limitation du travail en cours. Ils s'arrêtent là.</p>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>Kanban de production</th>
+<th>Kanban de projet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Objet piloté</td>
+<td>Un conteneur de pièces</td>
+<td>Une tâche</td>
+</tr>
+<tr>
+<td>Déclencheur</td>
+<td>Un conteneur vidé</td>
+<td>Une personne disponible</td>
+</tr>
+<tr>
+<td>Ce qui est limité</td>
+<td>Le stock, par le nombre de cartes</td>
+<td>L'en-cours, par une limite de colonne</td>
+</tr>
+<tr>
+<td>Ce qui se règle</td>
+<td>Par une formule, avant de démarrer</td>
+<td>Par observation, en avançant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La différence décisive est le calcul.</strong> Un tableau d'équipe se règle en observant ce qui bloque. Une boucle d'atelier se dimensionne avant d'exister : une carte manquante arrête la ligne le jour même, une carte de trop devient du stock dormant.</p>
+<h2 id="boucle">Comment fonctionne une boucle kanban en atelier ?</h2>
+<p>Une boucle relie un consommateur et un fournisseur, poste amont, magasin interne ou fournisseur externe. Le mécanisme est identique.</p>
+<ol>
+<li>
+<strong>Le conteneur arrive au poste, carte attachée</strong>, en quantité fixe.</li>
+<li>
+<strong>L'opérateur consomme la dernière pièce et détache la carte.</strong> Ce geste est le point de commande.</li>
+<li>
+<strong>La carte rejoint un point de collecte</strong>, relevé à intervalle fixe.</li>
+<li>
+<strong>Le fournisseur prépare la quantité inscrite</strong>, et rien d'autre.</li>
+<li><strong>Le conteneur plein revient avec sa carte.</strong></li>
+</ol>
+<p>Le temps qui sépare l'étape 2 de l'étape 5 porte un nom, le <strong>délai de boucle</strong>. Il inclut l'attente au point de collecte, la préparation, le transport et la file d'attente amont. C'est la grandeur la plus souvent sous-estimée, parce qu'on ne retient que le temps de fabrication.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Boucle kanban entre un fournisseur et un poste aval : quand la dernière pièce du bac est consommée, la carte se détache (point de commande), attend au point de collecte jusqu&#x27;au relevé, fait la file chez le fournisseur qui prépare la quantité inscrite, puis le bac plein revient avec sa carte. Le délai de boucle additionne attente au point de collecte, file d&#x27;attente amont, préparation et transport." poster="../../livrables/blog/kanban-de-production-boucle-dimensionnement/1-boucle-kanban.png" src="../../livrables/blog/kanban-de-production-boucle-dimensionnement/1-boucle-kanban.mp4"></video>
+  <figcaption><span class="num">Visuel 1</span> <code>1-boucle-kanban</code><br>Fait suivre une carte sur toute la boucle : dernière pièce, la carte se détache, attend le relevé, fait la queue chez le fournisseur, le bac plein revient ; la ligne consomme le bac suivant sans s&#x27;arrêter, et le délai de boucle se remplit segment par segment.</figcaption>
+</figure>
+
+<div class="fichly-note">
+<p><strong>Le point de commande n'est pas un niveau de stock, c'est un événement.</strong> Dans une gestion classique, vous surveillez une quantité et déclenchez sous un seuil. Ici le seuil est le fond du conteneur : personne n'a de décision à prendre, et c'est ce qui rend le système robuste sous tension.</p>
+</div>
+<h2 id="formule">Comment calculer le nombre de cartes d'un kanban de production ?</h2>
+<p>Le nombre de cartes se calcule à partir de quatre grandeurs, et de quatre seulement.</p>
+<p><strong>N = (D × T × (1 + α)) / Q</strong></p>
+<ul>
+<li>
+<strong>D, la consommation moyenne</strong> du poste aval, en pièces par unité de temps.</li>
+<li>
+<strong>T, le délai de boucle</strong>, dans la même unité de temps que D.</li>
+<li>
+<strong>α, le coefficient de sécurité</strong>, 10 à 30 % selon la régularité constatée, jamais selon le confort recherché.</li>
+<li>
+<strong>Q, la quantité par conteneur</strong>, fixe et connue de tous.</li>
+</ul>
+<p><strong>Le résultat s'arrondit à l'entier supérieur</strong>, une demi-carte n'existant pas. N × Q donne le <strong>stock maximal de la boucle</strong>, et (N × Q) / D la <strong>couverture en heures</strong>, le temps pendant lequel la ligne tient si le fournisseur s'arrête net.</p>
+<p><strong>Le choix de Q n'est pas seulement logistique.</strong> Un conteneur trop lourd déplace le problème vers la manutention manuelle, encadrée par le <a href="https://code.travail.gouv.fr/code-du-travail/r4541-9" rel="noopener" target="_blank">code du travail sur le port de charges</a> et documentée par l'<a href="https://www.inrs.fr/risques/manutention-manuelle.html" rel="noopener" target="_blank">INRS sur les risques liés à la manutention</a>. Une boucle se dimensionne avec le poste, pas sur un tableur seul.</p>
+<h2 id="exemple">Exemple de dimensionnement, pas à pas</h2>
+<p>Voici un exemple de calcul construit pour la démonstration, sur une référence fictive alimentant une ligne d'assemblage en [secteur]. Les valeurs ne proviennent d'aucun site.</p>
+<table>
+<thead>
+<tr>
+<th>Donnée</th>
+<th>Valeur</th>
+<th>D'où elle vient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consommation D</td>
+<td>60 pièces par heure</td>
+<td>480 pièces sur 8 heures d'ouverture</td>
+</tr>
+<tr>
+<td>Délai de boucle T</td>
+<td>4 heures</td>
+<td>Collecte, préparation, transport et attente amont cumulés</td>
+</tr>
+<tr>
+<td>Coefficient α</td>
+<td>20 %</td>
+<td>Variabilité de la consommation hebdomadaire</td>
+</tr>
+<tr>
+<td>Quantité par conteneur Q</td>
+<td>120 pièces</td>
+<td>Bac standard du poste</td>
+</tr>
+</tbody>
+</table>
+<p>Le calcul donne N = (60 × 4 × 1,2) / 120, soit 288 / 120, soit 2,4. <strong>Arrondi à l'entier supérieur, la boucle compte 3 cartes</strong>, donc 360 pièces au maximum entre les deux postes, soit 6 heures de couverture.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Calcul du nombre de cartes sur l&#x27;exemple de l&#x27;article : pendant un délai de boucle de 4 heures, la ligne consomme 60 × 4 = 240 pièces, soit deux bacs de 120 ; la marge de 20 % ajoute 48 pièces, soit 2,4 bacs ; arrondi à l&#x27;entier supérieur, 3 cartes, 360 pièces au maximum et 6 heures de couverture." poster="../../livrables/blog/kanban-de-production-boucle-dimensionnement/2-calcul-des-cartes.png" src="../../livrables/blog/kanban-de-production-boucle-dimensionnement/2-calcul-des-cartes.mp4"></video>
+  <figcaption><span class="num">Visuel 2</span> <code>2-calcul-des-cartes</code><br>Rend le calcul visible : pendant les 4 h du délai la ligne consomme 240 pièces (2 bacs), la marge ajoute 48 pièces (2,4 bacs), l&#x27;arrondi donne 3 bacs, donc 3 cartes, 360 pièces et 6 h de couverture.</figcaption>
+</figure>
+
+<p><strong>Un dimensionnement qui donne le nombre de cartes sans énoncer la couverture est incomplet</strong> : c'est la couverture que votre responsable de production vous demandera de défendre. Voici ce qui fait bouger le résultat.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Nouveau calcul</th>
+<th>Stock en boucle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Situation de départ</td>
+<td>(60 × 4 × 1,2) / 120 = 3 cartes</td>
+<td>360 pièces</td>
+</tr>
+<tr>
+<td class="col-oui">Délai de boucle ramené à 2 h</td>
+<td>(60 × 2 × 1,2) / 120 = 2 cartes</td>
+<td class="col-oui">240 pièces</td>
+</tr>
+<tr>
+<td>Conteneur réduit à 60 pièces</td>
+<td>(60 × 4 × 1,2) / 60 = 5 cartes</td>
+<td>300 pièces</td>
+</tr>
+<tr>
+<td class="col-non">Coefficient porté à 40 %</td>
+<td>(60 × 4 × 1,4) / 120 = 3 cartes</td>
+<td class="col-non">360 pièces, sans gain</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Le délai de boucle est le seul levier qui réduit le stock sans contrepartie.</strong> Le coefficient, lui, ne se règle pas : il se mérite en fiabilisant la consommation. Attaquer le délai, c'est attaquer ce qui le compose : la file d'attente amont se traite par la <a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">méthode SMED en cinq étapes</a>, l'attente au point de collecte par une tournée plus fréquente.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Pour chaque levier, le besoin calculé et les bacs entiers qui le couvrent : départ 288 pièces, 3 bacs, 360 pièces ; délai ramené à 2 h, 144 pièces, 2 bacs, 240 pièces ; bacs de 60 pièces, 5 cartes, 300 pièces ; marge portée à 40 %, 336 pièces, toujours 3 bacs et 360 pièces. Seul le délai réduit le stock sans contrepartie." poster="../../livrables/blog/kanban-de-production-boucle-dimensionnement/3-les-leviers.png" src="../../livrables/blog/kanban-de-production-boucle-dimensionnement/3-les-leviers.mp4"></video>
+  <figcaption><span class="num">Visuel 3</span> <code>3-les-leviers</code><br>Montre ce que le tableau des leviers ne montre pas : le besoin calculé, puis les bacs entiers qui le couvrent. Délai de 2 h : un bac de moins ; bacs de 60 : 5 cartes pour 300 pièces ; marge de 40 % : 2,8 s&#x27;arrondit à 3, aucun gain.</figcaption>
+</figure>
+
+<h2 id="pieges">Les erreurs qui font dérailler un kanban de production</h2>
+<p>Un kanban de production échoue rarement sur son calcul, mais sur les règles que personne n'a écrites.</p>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ La boucle est posée sur un flux irrégulier.</span><br><span class="fichly-ok">✅ Elle se réserve aux références consommées de façon répétée.</span> Le kanban suppose une consommation qui ressemble à celle de la semaine précédente. Une référence commandée trois fois par an se gère à l'affaire.</p>
+<p><span class="fichly-ko">❌ La quantité par conteneur varie selon ce qui reste en stock.</span><br><span class="fichly-ok">✅ Un conteneur contient toujours la même quantité.</span> Dès que Q varie, plus personne ne sait combien de pièces circulent et le plafond disparaît.</p>
+<p><span class="fichly-ko">❌ On ajoute une carte dès qu'une rupture survient.</span><br><span class="fichly-ok">✅ On vérifie d'abord si le délai de boucle a grandi.</span> Ajouter une carte soulage le symptôme et masque la cause : une rupture répétée signale un délai qui a dérivé.</p>
+<p><span class="fichly-ko">❌ Les cartes se perdent et personne ne s'en aperçoit.</span><br><span class="fichly-ok">✅ Un inventaire des cartes est fait à date fixe, chaque mois.</span> Une carte perdue réduit le plafond en silence, et la rupture arrive des semaines plus tard.</p>
+<p><span class="fichly-ko">❌ Le dimensionnement est fait une fois pour toutes.</span><br><span class="fichly-ok">✅ Le nombre de cartes se recalcule à chaque changement de cadence.</span> C'est l'étape Check du <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a>, celle que tout le monde saute.</p>
+</div>
+<h2 id="outils">Les outils qui font tenir un kanban de production</h2>
+<p>Une boucle ne s'installe pas seule. Trois outils l'entourent, chacun réglant une question qu'elle ne traite pas.</p>
+<ul>
+<li>
+<strong>La cartographie de flux</strong>, en amont. Avant de dimensionner, il faut savoir où sont les stocks et combien de temps une pièce attend, ce que montre la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping</a>.</li>
+<li>
+<strong>Les huit gaspillages</strong>, pour lire ce que la boucle supprime. Le kanban attaque la surproduction et le stock, deux des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">huit MUDA du Lean</a>, et ne touche ni aux déplacements ni aux retouches.</li>
+<li>
+<strong>Le standard écrit du poste</strong>, pour que la règle survive à celui qui l'a posée : quantité par conteneur, fréquence de tournée, nombre de cartes, conduite à tenir en cas de carte perdue. Nos <a href="https://www.fichly.com/products/fiches-lean">40 outils du Lean à portée de main</a> en donnent la trame.</li>
+</ul>
+<p><strong>La fiabilité de la machine amont est une donnée d'entrée du dimensionnement, pas un sujet à part.</strong> Une panne allonge le délai de boucle, donc consomme la couverture calculée. Les types de défaillance sont définis par la norme <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" rel="noopener" target="_blank">NF EN 13306 sur la terminologie de la maintenance</a>. <strong>Un kanban de production se tient sur deux chiffres tenus à jour : le délai de boucle et la consommation.</strong></p>
+<h2 id="faq">FAQ : vos questions sur le kanban</h2>
+<div class="fichly-faq">
+<details>
+<summary>Qu'est-ce que la méthode kanban en production ?</summary>
+<div class="answer">
+<p>Un réapprovisionnement déclenché par la consommation réelle. Chaque conteneur porte une carte : quand il est vidé, la carte se détache et devient l'ordre de fabriquer la quantité inscrite. Le nombre de cartes fixe le stock maximal entre deux postes.</p>
+</div>
+</details>
+<details>
+<summary>Comment calculer le nombre de cartes kanban ?</summary>
+<div class="answer">
+<p>Multipliez la consommation moyenne par le délai de boucle, majorez d'un coefficient de sécurité, divisez par la quantité par conteneur. Pour 60 pièces par heure, un délai de 4 heures, 20 % de marge et des bacs de 120 pièces : 2,4, soit 3 cartes et 360 pièces.</p>
+</div>
+</details>
+<details>
+<summary>Quelle est la différence entre kanban et flux tiré ?</summary>
+<div class="answer">
+<p>Le flux tiré est le principe, le kanban en est un moyen. Un flux est tiré lorsque la consommation aval commande la production amont, au lieu d'une prévision. D'autres dispositifs suivent la même logique sans carte : emplacements au sol marqués, systèmes à deux bacs.</p>
+</div>
+</details>
+<details>
+<summary>Quel est le point de commande dans un système kanban ?</summary>
+<div class="answer">
+<p>Le moment où le conteneur est vidé et où sa carte se détache. Pas un niveau de stock à surveiller, un événement matériel visible par tous. Personne n'a de seuil à estimer, ce qui rend le déclenchement fiable sous tension.</p>
+</div>
+</details>
+<details>
+<summary>Faut-il un logiciel pour gérer un kanban de production ?</summary>
+<div class="answer">
+<p>Pas pour démarrer. Une première boucle se tient avec des cartes plastifiées, un tableau de collecte et un standard affiché au poste. Le logiciel devient utile quand l'inventaire des cartes devient ingérable à la main.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Une boucle kanban tient sur un standard écrit, pas sur la mémoire de celui qui l'a posée.</strong></p>
+<p>Quantité par conteneur, fréquence de tournée, nombre de cartes, conduite à tenir en cas de carte perdue : quatre lignes qui décident si la boucle survit à un changement d'équipe.</p>
+<p>👉 Découvrez <a href="https://www.fichly.com/products/fiches-lean">40 outils du Lean à portée de main</a> : la fiche kanban, les trames de standard et les outils de flux, prêts à emporter en atelier.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping : définition et étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">La méthode SMED en 5 étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Kanban de production : dimensionner la boucle et calculer le nombre de cartes",
+  "description": "La formule de dimensionnement d'une boucle kanban de production, déroulée pas à pas : consommation, délai de boucle, coefficient de sécurité et quantité par conteneur.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/kanban-de-production-boucle-dimensionnement",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la méthode kanban en production ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un réapprovisionnement déclenché par la consommation réelle. Chaque conteneur porte une carte : quand il est vidé, la carte se détache et devient l'ordre de fabriquer la quantité inscrite. Le nombre de cartes fixe le stock maximal entre deux postes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer le nombre de cartes kanban ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Multipliez la consommation moyenne par le délai de boucle, majorez d'un coefficient de sécurité, divisez par la quantité par conteneur. Pour 60 pièces par heure, un délai de 4 heures, 20 % de marge et des bacs de 120 pièces : 2,4, soit 3 cartes et 360 pièces." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre kanban et flux tiré ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le flux tiré est le principe, le kanban en est un moyen. Un flux est tiré lorsque la consommation aval commande la production amont, au lieu d'une prévision. D'autres dispositifs suivent la même logique sans carte : emplacements au sol marqués, systèmes à deux bacs." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le point de commande dans un système kanban ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le moment où le conteneur est vidé et où sa carte se détache. Pas un niveau de stock à surveiller, un événement matériel visible par tous. Personne n'a de seuil à estimer, ce qui rend le déclenchement fiable sous tension." }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il un logiciel pour gérer un kanban de production ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pas pour démarrer. Une première boucle se tient avec des cartes plastifiées, un tableau de collecte et un standard affiché au poste. Le logiciel devient utile quand l'inventaire des cartes devient ingérable à la main." }
+    }
+  ]
+}
+</script></p>
+
+</main>
+</body>
+</html>

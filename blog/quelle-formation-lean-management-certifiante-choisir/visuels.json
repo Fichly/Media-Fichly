@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-lean-ou-six-sigma",
+    "section": "Formation Lean management vs Formation Lean Six Sigma : Les différences",
+    "apres": "C’est pour cette raison que l’on parle souvent de ",
+    "role": "Montre ce que le tableau ne montre pas : le Lean fait disparaître les attentes (le délai raccourcit, la transformation ne bouge pas), le Six Sigma resserre la dispersion (la cible et les limites ne bougent pas, les défauts disparaissent).",
+    "alt": "Deux panneaux : en Lean, les stocks entre quatre postes disparaissent et la barre du délai de traversée raccourcit, les temps de transformation restant identiques ; en Six Sigma, les mesures des pièces se resserrent autour de la cible et les pièces hors tolérance rentrent dans les limites."
+  },
+  {
+    "id": "2-quatre-ceintures",
+    "section": "Quels types de formations lean certifiantes choisir ?",
+    "apres": "Cette certification atteste d’une ",
+    "role": "Récapitule les quatre niveaux après la Black Belt : un participant monte les marches et sa place dans l'équipe change (comprendre, participer à un chantier, le piloter, accompagner les Green Belts) ; durées et gains visés de l'article.",
+    "alt": "Escalier des quatre ceintures : White Belt (1 jour, comprendre), Yellow Belt (3 jours, participer aux chantiers), Green Belt (5 jours, piloter un projet DMAIC, gains visés de 50 000 € ou plus), Black Belt (7 jours, transformer et accompagner les Green Belts, gains visés de plus de 100 000 €). Un participant monte de marche en marche et sa place dans l'équipe change."
+  },
+  {
+    "id": "3-partir-de-sa-situation",
+    "section": "Comment identifier la formation lean qui vous correspond ?",
+    "apres": "s’adresse à ceux qui souhaitent ",
+    "role": "Parcours de décision de la section : chaque situation trace son chemin vers la ou les ceintures conseillées ; deux situations ont deux options.",
+    "alt": "Quatre situations reliées au niveau conseillé : projet d'entreprise pour ses salariés vers White ou Yellow Belt, démarche professionnelle individuelle vers Yellow ou Green Belt, manager ou ingénieur en poste vers Green Belt, expertise reconnue vers Black Belt."
+  }
+]

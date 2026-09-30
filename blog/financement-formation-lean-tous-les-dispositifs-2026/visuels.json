@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1-chaque-statut-son-montage",
+    "section": "Quel financement selon votre situation ?",
+    "apres": "Une règle simple traverse ce tableau",
+    "role": "Met la règle du tableau en mouvement : pour une même formation, les dispositifs s'empilent dans l'ordre (ce qu'on a, puis le complément lié au statut) et ce qui reste est le reste à charge. Le FNE-Formation reste barré dans la réserve.",
+    "alt": "Même formation pour trois statuts : salarié dont l'entreprise porte le projet, OPCO puis entreprise, reste à charge souvent 0 € ; salarié en démarche personnelle, CPF puis abondement de l'employeur, reste à charge de 150 € sauf si l'employeur abonde ; demandeur d'emploi, CPF exonéré des 150 € puis AIF de France Travail, reste à charge souvent 0 €. Le FNE-Formation est barré : supprimé fin 2024."
+  },
+  {
+    "id": "2-l-accord-avant-le-jour-1",
+    "section": "Exemple : comment un chef d'équipe a financé sa Green Belt",
+    "apres": "Le délai à anticiper : comptez quelques semaines",
+    "role": "Rend visible la règle d'or de l'exemple : même dossier, même délai d'instruction ; si la formation attend l'accord écrit, reste à charge nul ; si elle démarre avant, elle n'est plus finançable.",
+    "alt": "Deux déroulés du même dossier Green Belt : le dirigeant valide, la demande est déposée à l'OPCO, quelques semaines d'instruction. En haut, les 5 jours de formation commencent après l'accord écrit : reste à charge 0 €. En bas, la formation démarre avant l'accord : elle n'est plus finançable et vous payez tout."
+  }
+]

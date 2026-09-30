@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-boucle-kanban",
+    "section": "Comment fonctionne une boucle kanban en atelier ?",
+    "apres": "Le temps qui sépare l'étape 2 de l'étape 5 porte un nom",
+    "role": "Fait suivre une carte sur toute la boucle : dernière pièce, la carte se détache, attend le relevé, fait la queue chez le fournisseur, le bac plein revient ; la ligne consomme le bac suivant sans s'arrêter, et le délai de boucle se remplit segment par segment.",
+    "alt": "Boucle kanban entre un fournisseur et un poste aval : quand la dernière pièce du bac est consommée, la carte se détache (point de commande), attend au point de collecte jusqu'au relevé, fait la file chez le fournisseur qui prépare la quantité inscrite, puis le bac plein revient avec sa carte. Le délai de boucle additionne attente au point de collecte, file d'attente amont, préparation et transport."
+  },
+  {
+    "id": "2-calcul-des-cartes",
+    "section": "Exemple de dimensionnement, pas à pas",
+    "apres": "Le calcul donne N = (60 × 4 × 1,2) / 120",
+    "role": "Rend le calcul visible : pendant les 4 h du délai la ligne consomme 240 pièces (2 bacs), la marge ajoute 48 pièces (2,4 bacs), l'arrondi donne 3 bacs, donc 3 cartes, 360 pièces et 6 h de couverture.",
+    "alt": "Calcul du nombre de cartes sur l'exemple de l'article : pendant un délai de boucle de 4 heures, la ligne consomme 60 × 4 = 240 pièces, soit deux bacs de 120 ; la marge de 20 % ajoute 48 pièces, soit 2,4 bacs ; arrondi à l'entier supérieur, 3 cartes, 360 pièces au maximum et 6 heures de couverture."
+  },
+  {
+    "id": "3-les-leviers",
+    "section": "Exemple de dimensionnement, pas à pas",
+    "apres": "Le délai de boucle est le seul levier qui réduit le stock sans contrepartie.",
+    "role": "Montre ce que le tableau des leviers ne montre pas : le besoin calculé, puis les bacs entiers qui le couvrent. Délai de 2 h : un bac de moins ; bacs de 60 : 5 cartes pour 300 pièces ; marge de 40 % : 2,8 s'arrondit à 3, aucun gain.",
+    "alt": "Pour chaque levier, le besoin calculé et les bacs entiers qui le couvrent : départ 288 pièces, 3 bacs, 360 pièces ; délai ramené à 2 h, 144 pièces, 2 bacs, 240 pièces ; bacs de 60 pièces, 5 cartes, 300 pièces ; marge portée à 40 %, 336 pièces, toujours 3 bacs et 360 pièces. Seul le délai réduit le stock sans contrepartie."
+  }
+]

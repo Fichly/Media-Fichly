@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-plus-souvent-pas-plus-vite",
+    "section": "Pourquoi réduire vos temps de changement de série ?",
+    "apres": "Le SMED ne sert pas à produire plus vite.",
+    "role": "Même machine, même demande, une semaine simulée : avec un changement de 2 h on fait trois grandes séries et le stock monte ; avec 20 min on produit chaque référence chaque jour, pour moins d'arrêt au total et un stock moyen divisé par quatre et demi.",
+    "alt": "Deux plannings d'une même machine sur une semaine, trois références et un carton de chacune enlevé chaque soir. Avec un changement de série de 2 h : 3 grandes séries, 3 changements de 2 h, 6,3 cartons en stock en moyenne. Après SMED, changement de 20 min : 15 séries, 15 changements de 20 min, 1,4 carton en stock en moyenne."
+  },
+  {
+    "id": "2-interne-ou-externe",
+    "section": "Opérations internes et externes : la distinction clé",
+    "apres": "Sur le terrain, la question à se poser pour chaque tâche tient en une phrase",
+    "role": "Remplace l'image « séparer interne et externe » : les huit tâches du tableau, toutes faites machine arrêtée, passent la question une à une ; les quatre externes sortent vers « machine en marche », la zone d'arrêt se resserre.",
+    "alt": "Les huit tâches d'un changement de série sont d'abord toutes réalisées machine arrêtée. Chacune est classée : démonter et monter l'outillage, régler, purger, faire les essais restent internes ; préparer l'outillage suivant, préchauffer le moule, approvisionner la matière et ranger l'outillage précédent passent machine en marche, et l'arrêt se raccourcit."
+  },
+  {
+    "id": "3-cinq-etapes",
+    "section": "Les 5 étapes de la méthode SMED",
+    "apres": "Dans ses écrits, Shigeo Shingo décrit trois phases conceptuelles",
+    "role": "Regroupe l'image « de 52 à 13 minutes » et les schémas par étape : un même changement suivi étape par étape, les blocs se classent, sortent de l'arrêt, se convertissent, rétrécissent ; la bande d'arrêt passe de 52 à 41, 25, 15 puis 13 min.",
+    "alt": "Un changement de série de 52 minutes transformé en cinq étapes : mesurer et classer les tâches, regrouper en sortant les externes de l'arrêt (41 min), convertir la chauffe et le réglage en opérations faites à l'avance (25 min), réduire l'interne restant (15 min), réduire l'externe pour que la préparation ne déborde plus (13 min). Les étapes 1 à 3 livrent l'essentiel du gain."
+  },
+  {
+    "id": "4-dernier-tour-de-filet",
+    "section": "Étape 4 : Réduire les opérations internes restantes",
+    "apres": "Certaines tâches resteront internes.",
+    "role": "Met en mouvement l'image de Shingo : le boulon descend tour après tour et la jauge de serrage reste vide jusqu'au dernier tour ; la bride à came serre en un quart de tour.",
+    "alt": "À gauche, un boulon classique descend en dix tours ; la jauge de serrage reste à zéro jusqu'au dernier : neuf tours pour rien, un tour qui serre. À droite, une bride à came serre en un seul geste d'un quart de tour."
+  },
+  {
+    "id": "5-presse-toyota",
+    "section": "Exemple : la presse de 1 000 tonnes de Toyota",
+    "apres": "L'exemple fondateur vient de Shigeo Shingo lui-même.",
+    "role": "Met les durées de l'exemple sur une même échelle : 4 h, sous les 2 h de Volkswagen à 90 min en séparant, puis moins de 3 min en convertissant ; un zoom sur les 10 premières minutes montre ce que veut dire « single minute ».",
+    "alt": "Sur une échelle de 0 à 4 heures : Volkswagen change l'outillage en 2 h ; Toyota part de 4 h, descend à 90 min en séparant opérations internes et externes, puis sous les 3 minutes en convertissant l'interne en externe. Un zoom sur les 10 premières minutes montre la barre finale sous le seuil du single minute."
+  }
+]

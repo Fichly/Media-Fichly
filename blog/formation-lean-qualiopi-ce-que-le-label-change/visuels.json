@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-le-label-ouvre-les-financements",
+    "section": "Pourquoi QUALIOPI est obligatoire pour financer une formation Lean",
+    "apres": "La question que tout le monde se pose",
+    "role": "Illustre « obligatoire pour financer, pas pour former » : même formation des deux côtés, les deux organismes peuvent former ; seules les portes des financements s'ouvrent ou restent fermées, et la facture change de payeur.",
+    "alt": "Deux organismes vendent la même formation Lean et peuvent tous deux former. Pour l'organisme certifié QUALIOPI, les portes du CPF, de l'OPCO et du plan de développement des compétences s'ouvrent et la facture est prise en charge, tout ou partie ; pour l'organisme sans QUALIOPI, elles restent fermées et l'entreprise paie 100 % de la facture."
+  },
+  {
+    "id": "2-ce-que-l-audit-controle",
+    "section": "Ce que QUALIOPI garantit, et ce qu'il ne garantit pas",
+    "apres": "Voici le point que la plupart des articles évitent.",
+    "role": "Montre le périmètre de l'audit : la loupe coche les pièces du cadre (objectifs, suivi, bilan, réclamations) puis bute sur le bord du périmètre ; les questions de fond (pédagogie, expertise, résultat dans l'atelier) restent à vérifier par l'acheteur.",
+    "alt": "Avant, pendant et après une formation : l'audit QUALIOPI vérifie le cadre (objectifs écrits, qualifications déclarées, suivi des stagiaires, moyens, bilan, réclamations tracées) mais pas le fond (contenu adapté à l'atelier, qualité du formateur, expertise terrain, capacité des équipes à animer un chantier 5S trois mois plus tard), qui reste à vérifier soi-même."
+  },
+  {
+    "id": "3-verifier-l-attestation",
+    "section": "Comment vérifier qu'un organisme est vraiment certifié QUALIOPI",
+    "apres": "QUALIOPI se décline par catégorie d'action",
+    "role": "Parcours de vérification : quatre organismes affichent le même logo, trois contrôles de l'attestation en arrêtent trois ; le dernier peut être financé, et il reste à juger la qualité réelle.",
+    "alt": "Quatre organismes affichent le même logo QUALIOPI. L'organisme A n'a pas d'attestation, celui de B est expiré, celui de C ne couvre que les bilans de compétences ; seul D, certifié pour les actions de formation, permet le financement, et il reste à vérifier la qualité réelle de sa formation."
+  }
+]

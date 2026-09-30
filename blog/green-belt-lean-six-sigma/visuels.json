@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1-dmaic-sur-un-cas",
+    "section": "Que fait concrètement un Green Belt au quotidien ?",
+    "apres": "Prenons un cas courant.",
+    "role": "Fait traverser au cas de l'article les cinq étapes : le périmètre se dessine, le chronomètre remplit la barre des 40 minutes, l'équipe remonte à la cause, les outils rangés au poste font disparaître la part rouge, le standard est figé et le TRS monte.",
+    "alt": "Le DMAIC appliqué à un changement de série d'environ 40 minutes : définir le périmètre et l'objectif, mesurer le temps perdu, analyser la cause avec l'équipe (les outils sont loin de la ligne), améliorer en rangeant les outils au poste (le temps de recherche disparaît), contrôler en figeant le nouveau standard, résultat lu dans le TRS."
+  },
+  {
+    "id": "2-six-jours-un-projet",
+    "section": "Le programme et le déroulé de la formation Green Belt",
+    "apres": "répartis dans le temps : trois jours",
+    "role": "Montre l'alternance du déroulé : 3 jours, 2 jours puis 1 jour de formation répartis sur plusieurs semaines ; entre les blocs, le projet avance dans l'entreprise, étape DMAIC par étape, jusqu'à la soutenance devant le jury.",
+    "alt": "Six jours de formation Green Belt (42 heures) répartis sur plusieurs semaines : trois jours pour poser les bases, deux pour approfondir, un pour la certification. Entre les sessions, le projet avance dans l'entreprise (définir, mesurer, puis analyser, améliorer, contrôler) ; au jour 6, il est défendu devant un jury, sans QCM, pour la certification RS7114."
+  }
+]

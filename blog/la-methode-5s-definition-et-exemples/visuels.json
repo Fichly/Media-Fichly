@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-cinq-s-sur-une-zone",
+    "section": "C'est quoi les 5S ? Définition et origine",
+    "apres": "Retenez la logique de l'enchaînement.",
+    "role": "Met l'enchaînement en mouvement sur une seule zone : les trois premiers S transforment la zone (le douteux sort, chaque outil rejoint sa silhouette, le nettoyage révèle une fuite), le quatrième écrit l'état obtenu, le cinquième revient chaque semaine et rattrape l'outil qui manque.",
+    "alt": "Une même zone d'atelier traverse les cinq S dans l'ordre : les objets douteux partent en zone d'attente datée, chaque outil rejoint sa silhouette, le nettoyage fait apparaître une fuite qui est notée, une photo de l'état attendu est affichée avec un nom, puis un passage chaque semaine repère un outil manquant. Les trois premiers S se font, les deux derniers se tiennent."
+  },
+  {
+    "id": "2-supprimer-c-est-decider",
+    "section": "Seiri, supprimer : décider de ce qui reste",
+    "apres": "La difficulté est humaine, jamais technique.",
+    "role": "Oppose l'erreur type (sans autorité, le tas se déplace de trois mètres) au tri sur deux critères écrits : chaque objet passe devant la fréquence d'usage et le titulaire, le doute attend en zone datée, au délai il est repris ou il sort.",
+    "alt": "Sans autorité de décision, le tas d'objets est seulement déplacé de trois mètres. Avec la personne qui décide et deux critères écrits, fréquence d'usage et titulaire, chaque objet reste à portée, sort de la zone ou attend en zone d'attente datée ; au délai fixé, il est repris ou il sort. Tout ce qui reste a un titulaire et un usage."
+  },
+  {
+    "id": "3-nettoyer-pour-inspecter",
+    "section": "Seiso, nettoyer : nettoyer pour inspecter",
+    "apres": "D'où la règle qui donne sa valeur à l'étape",
+    "role": "Même machine sale, même chiffon, même zone propre à la fin : chez le prestataire la fuite est essuyée et le relevé reste vide, par l'équipe chaque anomalie croisée par le chiffon est notée et part en maintenance.",
+    "alt": "La même machine sale nettoyée deux fois. Par un prestataire : zone propre, fuite essuyée, aucune anomalie notée. Par l'équipe : le nettoyage fait apparaître un capot qui ne ferme plus, une vis desserrée, une fuite naissante et un flexible usé, notés et transmis à la maintenance le jour même."
+  },
+  {
+    "id": "4-grille-d-audit",
+    "section": "La grille d'audit 5S : noter une zone sur vingt points",
+    "apres": "La cinquième ligne est celle qui pèse le plus, et c'est volontaire.",
+    "role": "Montre la grille en usage dans le temps : même grille à chaque passage, note affichée sur une courbe, un écart devient une action datée avec un nom et la ligne remonte ; puis un passage saute et la ligne Suivre baisse alors que la zone est impeccable.",
+    "alt": "La même grille de cinq lignes notées de 0 à 4 est remplie à chaque passage hebdomadaire et la note sur vingt s'affiche sur une courbe : 16, 19, puis 17 avec un écart sur Ranger converti en action datée, un passage sauté, puis 18 sur 20 avec une zone impeccable mais la ligne Suivre à 2 sur 4."
+  }
+]

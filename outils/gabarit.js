@@ -366,7 +366,7 @@
       draw = scenarios[name] || Object.values(scenarios)[0];
     }
     const ready = (async () => {
-      await Promise.all([400, 500, 700, 800].map(w => document.fonts.load(`${w} 30px Poppins`)));
+      await Promise.all([400, 500, 600, 700, 800].map(w => document.fonts.load(`${w} 30px Poppins`)));
       await document.fonts.ready;
       build();
       checkAll();
