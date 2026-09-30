@@ -34,6 +34,7 @@ def readme(inv):
 
 {len(done)} articles sur {len(inv)} ont leurs visuels, {n} visuels au total.
 Méthode et conventions : [GUIDE-VISUELS.md](GUIDE-VISUELS.md). Inventaire Shopify : [inventaire.json](inventaire.json).
+Incohérences relevées dans les textes et images à retirer : [POINTS-A-VERIFIER.md](POINTS-A-VERIFIER.md).
 
 Pour chaque article :
 - `blog/<article>/README.md` : où placer chaque visuel, ce qu'il fait comprendre, hypothèses, code d'intégration ;
