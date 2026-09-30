@@ -1,10 +1,15 @@
-// Gabarit commun des fiches LinkedIn Fichly (1080 × 1350).
-// Charge avant fiche.js : fond papier, bandeau six couleurs, logo, badge auteur,
-// encart bas gauche, helpers SVG, mesures et animations déterministes.
-// Utilisation : const G = window.Gabarit; G.template({ author: 'clement' }); …
+// Gabarit commun des visuels Fichly.
+// LinkedIn (1080 × 1350) : fond papier, bandeau six couleurs, logo, badge auteur, encart bas gauche.
+// Blog (format lu sur le <svg id="stage">, 1200 × 860 pour les articles) : fond papier, bandeau, logo en haut à droite,
+// titre sur une ligne, chute en bas.
+// Charge avant fiche.js : helpers SVG, mesures et animations déterministes.
+// Utilisation : const G = window.Gabarit; G.template({ author: 'clement' }); … ou G.templateBlog(); …
 (() => {
-  const W = 1080, H = 1350;
-  const ASSETS = '../../assets/';
+  const svg = document.getElementById('stage');
+  const W = Number(svg.getAttribute('width')) || 1080, H = Number(svg.getAttribute('height')) || 1350;
+  const RIBBON_H = 18;
+  // Chemin des assets relatif à la page (data-assets sur le <svg>, sinon deux niveaux au-dessus)
+  const ASSETS = svg.getAttribute('data-assets') || '../../assets/';
 
   // Palette de la charte (valeurs de C)
   const C = {
@@ -24,7 +29,6 @@
   };
 
   const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.getElementById('stage');
 
   function el(tag, attrs = {}, parent = svg) {
     const n = document.createElementNS(NS, tag);
@@ -109,6 +113,15 @@
     g.setAttribute('opacity', o);
   }
 
+  // Petite pulsation d'insistance (identité hors de [t0, t0 + dur])
+  function pulse(g, t, t0, cx, cy, amp = 0.08, dur = 0.4) {
+    const p = prog(t, t0, dur);
+    const s = p > 0 && p < 1 ? 1 + amp * Math.sin(Math.PI * p) : 1;
+    g.setAttribute('transform', s === 1 ? '' : `translate(${cx} ${cy}) scale(${s}) translate(${-cx} ${-cy})`);
+  }
+  // Opacité d'un élément visible sur [t0, t1] (fondus d'entrée et de sortie de d secondes)
+  const window01 = (t, t0, t1, d = 0.3) => (t < t0 || t > t1 ? 0 : Math.min(clamp((t - t0) / d), clamp((t1 - t) / d)));
+
   // ---------- Pictos et vocabulaire ----------
   function check(parent, cx, cy, r, bg = C.green) {
     el('circle', { cx, cy, r, fill: bg }, parent);
@@ -148,17 +161,108 @@
   }
   const card = (x, y, w, h, parent = svg) => el('rect', { x, y, width: w, height: h, rx: 24, fill: C.card, stroke: C.line, 'stroke-width': 2 }, parent);
 
+  // Texte sur plusieurs lignes, coupé aux espaces pour tenir dans maxW (renvoie le <text> et le nombre de lignes)
+  function para(parent, x, y, str, maxW, { size = 22, weight = 500, fill = C.ink, anchor = 'start', lh = 1.3 } = {}) {
+    const t = text(parent, x, y, '', { size, weight, fill, anchor });
+    const lines = [];
+    let cur = '';
+    const probe = text(parent, 0, -999, '', { size, weight });
+    for (const w of str.split(' ')) {
+      const test = cur ? cur + ' ' + w : w;
+      probe.textContent = test;
+      if (probe.getComputedTextLength() > maxW && cur) { lines.push(cur); cur = w; } else cur = test;
+    }
+    if (cur) lines.push(cur);
+    probe.remove();
+    lines.forEach((l, i) => {
+      const ts = el('tspan', { x, dy: i === 0 ? 0 : size * lh }, t);
+      ts.textContent = l;
+    });
+    return { t, n: lines.length };
+  }
+  // Flèche droite ou courbe (d = chemin SVG) terminée par une pointe ouverte
+  function arrow(parent, d, { stroke = C.blue, width = 3.5, head = 11, dash = null } = {}) {
+    const g = el('g', {}, parent);
+    const p = el('path', { d, fill: 'none', stroke, 'stroke-width': width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    if (dash) p.setAttribute('stroke-dasharray', dash);
+    const len = p.getTotalLength();
+    const a = p.getPointAtLength(len), b = p.getPointAtLength(Math.max(0, len - 1));
+    const ang = Math.atan2(a.y - b.y, a.x - b.x);
+    const hp = s => `${a.x - head * Math.cos(ang + s)} ${a.y - head * Math.sin(ang + s)}`;
+    const h = el('path', { d: `M ${hp(0.5)} L ${a.x} ${a.y} L ${hp(-0.5)}`, fill: 'none', stroke, 'stroke-width': width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    // draw(p) : 0 = rien, 1 = flèche complète (le trait se dessine, la pointe apparaît à la fin)
+    const draw = q => {
+      p.setAttribute('stroke-dasharray', dash && q >= 1 ? dash : `${len} ${len}`);
+      p.setAttribute('stroke-dashoffset', q >= 1 ? 0 : len * (1 - q));
+      h.setAttribute('opacity', q >= 0.98 ? 1 : 0);
+    };
+    return { g, path: p, head: h, len, draw };
+  }
+  // Machine stylisée (même dessin que les fiches) : k = échelle, largeur 180 k × hauteur 124 k
+  function machine(parent, x, y, k = 1, body = C.blue) {
+    const g = el('g', { transform: `translate(${x} ${y}) scale(${k})` }, parent);
+    el('rect', { x: 0, y: 0, width: 180, height: 124, rx: 16, fill: body }, g);
+    el('rect', { x: 16, y: 16, width: 104, height: 40, rx: 8, fill: C.white }, g);
+    el('rect', { x: 26, y: 30, width: 84, height: 12, rx: 6, fill: C.pLav }, g);
+    const gauge = el('rect', { x: 26, y: 30, width: 84, height: 12, rx: 6, fill: C.green }, g);
+    const lights = [
+      el('circle', { cx: 148, cy: 26, r: 8, fill: C.lightBlue }, g),
+      el('circle', { cx: 148, cy: 50, r: 8, fill: C.green }, g),
+    ];
+    el('rect', { x: 16, y: 72, width: 148, height: 36, rx: 8, fill: C.white, 'fill-opacity': 0.14 }, g);
+    [0, 1, 2, 3].forEach(i => el('rect', { x: 30 + i * 34, y: 80, width: 18, height: 20, rx: 4, fill: C.white, 'fill-opacity': 0.35 }, g));
+    return { g, gauge, lights };
+  }
+  // Carton de pièces (32 × 32 à k = 1), centré sur (x, y)
+  function carton(parent, x, y, k = 1, fill = C.yellow) {
+    const g = el('g', { transform: `translate(${x} ${y})` }, parent);
+    const inner = el('g', k === 1 ? {} : { transform: `scale(${k})` }, g);
+    el('rect', { x: -16, y: -16, width: 32, height: 32, rx: 5, fill }, inner);
+    el('line', { x1: -9, y1: -5, x2: 9, y2: -5, stroke: C.white, 'stroke-width': 3, 'stroke-linecap': 'round' }, inner);
+    return g;
+  }
+
   // ---------- Gabarit LinkedIn ----------
   function template({ author = 'hugo' } = {}) {
     // Cadre fixe (data-frame) : fond papier et bandeau ne bougent jamais, même avec la caméra
     el('rect', { x: 0, y: 0, width: W, height: H, fill: '#f3f3f3', 'data-frame': 1 });
     el('image', { href: ASSETS + 'paper.png', x: 0, y: 0, width: W, height: H, 'data-frame': 1 });
-    RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: 1332, width: 180, height: 18, fill: c, 'data-frame': 1 }));
+    RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: H - RIBBON_H, width: 180, height: RIBBON_H, fill: c, 'data-frame': 1 }));
     el('image', { href: ASSETS + 'fichly-logo.png', x: 884, y: 1228, width: 178, height: 94 });
     const a = AUTHORS[author];
     el('image', { href: ASSETS + a.photo, x: a.x, y: a.y, width: a.size, height: a.size });
     text(svg, 952, 210, a.first, { size: 23, weight: 400, fill: C.blue, anchor: 'middle' });
     text(svg, 952, 243, a.last, { size: 23, weight: 700, fill: C.blue, anchor: 'middle' });
+  }
+
+  // ---------- Gabarit blog (paysage) ----------
+  function templateBlog() {
+    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#f3f3f3', 'data-frame': 1 });
+    el('image', { href: ASSETS + 'paper.png', x: 0, y: 0, width: W, height: W * 1350 / 1080, preserveAspectRatio: 'xMidYMin slice', 'data-frame': 1 });
+    RIBBON.forEach((c, i) => el('rect', { x: i * W / 6, y: H - RIBBON_H, width: W / 6 + 0.5, height: RIBBON_H, fill: c, 'data-frame': 1 }));
+    el('image', { href: ASSETS + 'fichly-logo.png', x: W - 176, y: 26, width: 142, height: 75, 'data-frame': 1 });
+  }
+  // Titre sur une ligne : début en bleu, fin en blanc dans le cadre bleu
+  function blogTitle(a, b, { size = 50, y = 92, maxRight = W - 200 } = {}) {
+    const t1 = text(svg, 60, y, a, { size, weight: 800, fill: C.blue });
+    const x = a ? measure(t1).x + measure(t1).width + size * 0.5 : 44;
+    const kb = el('rect', { x: x - size * 0.25, y: y - size * 0.82, height: size * 1.14, rx: 11, fill: C.blue });
+    const t2 = text(svg, x + size * 0.08, y, b, { size, weight: 800, fill: C.white });
+    kb.setAttribute('width', measure(t2).width + size * 0.66);
+    fit(kb, maxRight, 'cadre du titre');
+    return { t1, kb, t2 };
+  }
+  function blogChapeau(str, { y = 146, maxRight = W - 60 } = {}) {
+    const t = text(svg, 60, y, str, { size: 24, weight: 500, fill: C.blue });
+    fit(t, maxRight, 'chapeau');
+    return t;
+  }
+  // Chute : la phrase à retenir, en bas au-dessus du bandeau
+  function blogChute(str, { y = H - 50 } = {}) {
+    const g = el('g');
+    el('rect', { x: 44, y: y - 30, width: 6, height: 38, rx: 3, fill: C.blue }, g);
+    fit(text(g, 64, y, str, { size: 28, weight: 700, fill: C.blue }), W - 44, 'chute');
+    return g;
   }
 
   // Titre deux lignes en 72 px : ligne 1 bleue, ligne 2 blanche dans le cadre bleu (keyTitle).
@@ -206,7 +310,7 @@
   let world = null;
   function cameraLayer() {
     if (world) return world;
-    const holder = el('g', { 'clip-path': clipRect(0, 0, W, 1332).url });
+    const holder = el('g', { 'clip-path': clipRect(0, 0, W, H - RIBBON_H).url });
     world = el('g', {}, holder);
     [...svg.children].forEach(n => {
       if (n === holder || n.tagName === 'defs' || n.hasAttribute('data-frame')) return;
@@ -279,8 +383,9 @@
   window.Gabarit = {
     W, H, C, svg, el, text, measure, fit, noOverlap,
     clamp, prog, easeOut, easeInOut, back, invEaseInOut,
-    FADE_START, FADE_END, fading, fadeOut, pop, slide, rise,
-    check, cross, badgeNum, pill, card, template, title, chapeau, chute, encart, start,
+    FADE_START, FADE_END, fading, fadeOut, pop, slide, rise, pulse, window01,
+    check, cross, badgeNum, pill, card, para, arrow, machine, carton,
+    template, title, chapeau, chute, encart, templateBlog, blogTitle, blogChapeau, blogChute, start,
     camera, outline, clipRect,
   };
 })();
