@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-cascade-temps-etat",
+    "section": "La cascade des temps d'état : d'où viennent les trois taux (TRS, TRE, TRG)",
+    "apres": "Les trois taux se lisent directement sur ce schéma",
+    "role": "Remplace l'image des temps d'état : la cascade se construit marche par marche, chaque marche retire une famille de pertes ; puis les mêmes 10 h 50 utiles sont rapportées à 14 h, 16 h et 24 h (77 %, 68 %, 45 %).",
+    "alt": "La cascade des temps d'état sur la journée de référence : 24 h de temps total, 16 h d'ouverture, 14 h requises, 12 h de fonctionnement, 11 h 20 de temps net, 10 h 50 de temps utile. Le même temps utile rapporté au temps requis, d'ouverture et total donne un TRS de 77 %, un TRG de 68 % et un TRE de 45 %."
+  },
+  {
+    "id": "2-changements-de-serie-trg",
+    "section": "Le TRG : ce que l'organisation décide",
+    "apres": "rend visible le coût réel d'un changement de format long",
+    "role": "On ajoute 2 h de changements de série : le temps requis fond, le TRS reste à 77 %, le TRG tombe de 68 % à 58 % et la ligne livre 93 pièces de moins. Le problème est dans l'ordonnancement, pas sur la ligne.",
+    "alt": "Sur la journée de 16 h d'ouverture, 2 h de changements de série s'ajoutent aux arrêts planifiés : le temps requis passe de 14 h à 12 h, le TRS reste à 77 %, le TRG baisse de 68 % à 58 % et les pièces conformes passent de 650 à 557."
+  },
+  {
+    "id": "3-piege-comparaison-sites",
+    "section": "Le piège de la comparaison entre sites",
+    "apres": "Deux sites du même groupe annoncent",
+    "role": "Le classement 82 % contre 71 % désigne le site B ; en ramenant A sur le même dénominateur (16 h d'ouverture), son taux tombe à 61 %, le classement s'inverse et l'étiquette « doit progresser » change de site.",
+    "alt": "Deux sites affichent 82 % et 71 %. Le site A calcule un TRS sur 12 h requises en sortant 4 h d'arrêts planifiés, le site B un TRG sur 16 h d'ouverture. Sur la même base de 16 h, A tombe à 61 % : le classement s'inverse, B produit 1 h 32 de temps utile de plus."
+  },
+  {
+    "id": "4-lequel-piloter",
+    "section": "Alors, lequel piloter ?",
+    "apres": "La réponse dépend du levier que vous cherchez à activer",
+    "role": "Un projecteur se pose sur l'endroit où se perd le temps dans la journée de 24 h : dans la machine (TRS, production), entre les productions (TRG, ordonnancement), dans les heures qui dorment (TRE, direction). Chaque zone désigne le taux qui la voit et qui s'en saisit.",
+    "alt": "La journée de 24 h découpée en nuit, arrêts planifiés, pertes machine et temps utile, avec les dénominateurs emboîtés du TRE, du TRG et du TRS. Pertes dans la machine : piloter le TRS, responsable de production. Pertes entre les productions : piloter le TRG, ordonnancement et supply chain. Heures qui dorment : regarder le TRE, direction industrielle."
+  }
+]

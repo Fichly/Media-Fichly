@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperçu · taux-de-rendement-synthetique-definition</title>
+<style>
+  :root { --ink: #23235a; --blue: #4a4aa0; --muted: #6b6b8a; --line: #e2e2ee; --bg: #fbfbf9; --note: #ececf5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  .bandeau { background: var(--note); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  h1 { font-size: 34px; line-height: 1.2; color: var(--blue); }
+  h2 { font-size: 26px; line-height: 1.25; margin-top: 48px; color: var(--blue); }
+  h3 { font-size: 20px; margin-top: 28px; }
+  a { color: var(--blue); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 16px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--note); }
+  div[role=region] { overflow-x: auto; }
+  .visuel { margin: 28px 0; }
+  .visuel video { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #f3f3f3; }
+  .visuel figcaption { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--blue); padding-left: 10px; }
+  .visuel .num { font-weight: 700; color: var(--blue); }
+  .visuel code { font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="bandeau"><a href="index.html">← Tous les articles</a> · Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
+<h1>TRS (Taux de Rendement Synthétique) : Définition, exemples et calculs</h1>
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+
+<div class="fichly-article">
+
+<p>Le calcul du TRS tient en une multiplication de trois taux. La difficulté n'est jamais là. Elle est dans le dénominateur que vous choisissez, dans les arrêts que vous décidez de compter, et dans ce que vous faites du résultat une fois qu'il s'affiche. Deux ateliers identiques peuvent publier 77 % et 62 % sans qu'aucun des deux ne se trompe. Cet article vous donne la formule, le calcul déroulé pas à pas sur un cas complet, les six pertes qui se cachent derrière le chiffre, et la seule comparaison qui ait du sens.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Le TRS (Taux de Rendement Synthétique, OEE en anglais) rapporte le temps réellement utile au temps pendant lequel la machine devait produire. Le TRS se calcule en multipliant disponibilité, performance et qualité. Un TRS ne se compare à aucune norme extérieure : la seule comparaison valable est celle d'une ligne avec son propre historique.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>TRS = disponibilité × performance × qualité, même période et même équipement.</li>
+<li>Le dénominateur est le temps requis, arrêts planifiés déduits.</li>
+<li>Cas de référence : 12 h sur 14 h requises, 650 conformes, TRS 77 %.</li>
+<li>Aucun seuil universel ne vaut : la comparaison se fait dans le temps.</li>
+<li>La décomposition en trois taux indique où agir en premier.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Le TRS : ce que le calcul mesure vraiment</a></li>
+<li><a href="#temps">Quelle est la formule du temps requis du TRS ?</a></li>
+<li><a href="#pourquoi">Pourquoi calculer son TRS ?</a></li>
+<li><a href="#calcul">Comment calculer le TRS pas à pas ?</a></li>
+<li><a href="#rapide">La méthode rapide de calcul du TRS, et ce qu'elle masque</a></li>
+<li><a href="#pertes">Les six grandes pertes derrière un TRS</a></li>
+<li><a href="#seuil">Quel est un bon TRS ?</a></li>
+<li><a href="#anglais">OEE, OOE, TEEP : les équivalents anglais</a></li>
+<li><a href="#decider">Ce qu'un TRS autorise à décider</a></li>
+<li><a href="#releve">Relever les données de TRS sans fausser le calcul</a></li>
+<li><a href="#erreurs">Les erreurs qui faussent un calcul de TRS</a></li>
+<li><a href="#outils">Les outils qui prennent le relais après le TRS</a></li>
+<li><a href="#faq">FAQ : vos questions sur le calcul du TRS</a></li>
+</ol>
+</div>
+
+<h2 id="definition">Le TRS : ce que le calcul mesure vraiment</h2>
+
+<p>Le TRS, ou Taux de Rendement Synthétique, mesure la part du temps de production réellement transformée en pièces bonnes. Il est encadré en France par la norme <a href="https://www.boutique.afnor.org/fr-fr/norme/nf-e60182/moyens-de-production-indicateurs-de-performances-taux-de-rendement-syntheti/fa120534/513" target="_blank" rel="noopener">NF E60-182</a>, publiée par l'<a href="https://www.afnor.org/" target="_blank" rel="noopener">AFNOR</a>.</p>
+
+<p>Sa définition tient en une phrase : c'est le temps utile divisé par le temps requis.</p>
+
+<p>Le <strong>temps utile</strong> est la durée qu'il aurait fallu, à la cadence de référence, pour produire les seules pièces conformes que vous avez livrées. Le <strong>temps requis</strong> est la durée pendant laquelle la machine était censée produire, une fois les arrêts planifiés retirés.</p>
+
+<p>Tout ce qui sépare ces deux durées est une perte. Le TRS ne fait rien d'autre que la chiffrer.</p>
+
+<p>Une conséquence en découle, et elle explique la plupart des malentendus : <strong>un TRS n'est pas une note de performance des équipes</strong>. C'est une mesure de ce qui s'est perdu entre l'intention de produire et la production conforme. Ce sont deux lectures très différentes, et la seconde est la seule qui donne un plan d'action.</p>
+
+<h2 id="temps">Quelle est la formule du temps requis du TRS ?</h2>
+
+<p>Avant toute formule, il faut savoir de quel temps on parle. La norme décrit une cascade, du plus large au plus étroit. Chaque marche descendue retire une famille de pertes.</p>
+
+<table>
+<thead>
+<tr>
+<th>Temps</th>
+<th>Ce qu'il représente</th>
+<th>Ce qu'on retire pour passer au suivant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Temps total (tt)</strong></td>
+<td>La période calendaire, 24 h par jour</td>
+<td>Les périodes où l'atelier est fermé</td>
+</tr>
+<tr>
+<td><strong>Temps d'ouverture (to)</strong></td>
+<td>La durée où l'atelier tourne, selon le nombre d'équipes</td>
+<td>Les arrêts planifiés : maintenance préventive, changements de série, contrôles, nettoyages</td>
+</tr>
+<tr>
+<td><strong>Temps requis (tr)</strong></td>
+<td>La durée où la machine devait produire</td>
+<td>Les arrêts subis : pannes, manques matière, réglages imprévus</td>
+</tr>
+<tr>
+<td><strong>Temps de fonctionnement (tf)</strong></td>
+<td>La durée où la machine a tourné</td>
+<td>Les micro-arrêts et les baisses de cadence</td>
+</tr>
+<tr>
+<td><strong>Temps net (tn)</strong></td>
+<td>La durée passée à la cadence de référence</td>
+<td>Les rebuts, les retouches et les retours production</td>
+</tr>
+<tr>
+<td><strong>Temps utile (tu)</strong></td>
+<td>La durée qui a produit des pièces bonnes</td>
+<td>Rien, c'est le bas de la cascade</td>
+</tr>
+</tbody>
+</table>
+
+<p>Le TRS se lit directement dessus : <strong>tu divisé par tr</strong>.</p>
+
+<div class="fichly-note">
+<p><strong>Le point qui décide de tout.</strong> La frontière entre arrêt planifié et arrêt subi n'est pas une donnée physique, c'est une convention interne. Requalifier une panne récurrente en maintenance planifiée la fait sortir du dénominateur, et fait monter le TRS sans qu'une seule minute d'arrêt ait disparu de l'atelier. Écrivez cette convention, datez-la, et ne la changez pas en cours d'année.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="La journée de référence en 16 cases d&#x27;une heure : une heure de panne récurrente est requalifiée en maintenance planifiée. Le temps requis passe de 14 h à 13 h et le TRS de 77 % à 83 %, alors que la machine reste arrêtée 4 h et livre toujours 650 pièces conformes." poster="../../livrables/blog/taux-de-rendement-synthetique-definition/1-convention-temps-requis.png" src="../../livrables/blog/taux-de-rendement-synthetique-definition/1-convention-temps-requis.mp4"></video>
+  <figcaption><span class="num">Visuel 1</span> <code>1-convention-temps-requis</code><br>Met en mouvement l&#x27;encadré « Le point qui décide de tout » : une heure de panne change de case, le temps requis passe de 14 h à 13 h, le TRS de 77 % à 83 %, alors que la machine reste arrêtée 4 h et livre toujours 650 pièces conformes.</figcaption>
+</figure>
+
+</div>
+
+<h2 id="pourquoi">Pourquoi calculer son TRS ?</h2>
+
+<p>Un atelier sait généralement qu'il perd du temps. Il sait rarement combien, ni où.</p>
+
+<p>Le calcul du TRS répond à ces deux questions en une seule opération. Il donne un volume de perte, exprimé en points, puis il le répartit entre trois familles. C'est cette répartition qui vaut le déplacement.</p>
+
+<p>Trois usages concrets reviennent sur le terrain.</p>
+
+<p><strong>Arbitrer un investissement.</strong> Une machine à 62 % de TRS contient souvent plus de capacité disponible qu'un achat neuf n'en apporterait. Le chiffre permet de poser la question avant de signer.</p>
+
+<p><strong>Prioriser un chantier.</strong> Un TRS bas peut venir d'une disponibilité effondrée, d'une cadence rongée par les micro-arrêts, ou d'un taux de rebut. Ce ne sont pas les mêmes chantiers, ni les mêmes personnes autour de la table.</p>
+
+<p><strong>Objectiver une discussion.</strong> Quand la production et la maintenance ne sont pas d'accord sur l'origine d'un retard, un relevé d'arrêts tranche mieux qu'une réunion.</p>
+
+<h2 id="calcul">Comment calculer le TRS pas à pas ?</h2>
+
+<p>Nous reprenons le cas de référence utilisé partout sur le site, pour que les chiffres restent comparables d'un contenu à l'autre.</p>
+
+<p>Une ligne tourne en deux équipes de 8 heures. Sur la journée : 2 heures de maintenance préventive planifiée, 2 heures d'arrêts subis, une cadence de référence de 60 pièces par heure, 680 pièces produites, 650 conformes.</p>
+
+<h3>Étape 1 : poser le temps requis</h3>
+
+<p>Le temps d'ouverture est de <strong>16 heures</strong>, soit deux équipes de 8 heures.</p>
+
+<p>On retire les 2 heures de maintenance préventive, qui sont un arrêt planifié.</p>
+
+<p><strong>Temps requis = 16 h moins 2 h = 14 heures.</strong></p>
+
+<p>C'est le dénominateur du TRS. Toute la suite s'y rapporte.</p>
+
+<h3>Étape 2 : calculer la disponibilité</h3>
+
+<p>Sur ces 14 heures, la machine a subi 2 heures d'arrêts non planifiés, pannes et réglages imprévus confondus.</p>
+
+<p><strong>Temps de fonctionnement = 14 h moins 2 h = 12 heures.</strong></p>
+
+<p><strong>Disponibilité = 12 / 14 = 85,7 %.</strong></p>
+
+<p>Ce taux ne dit rien de la vitesse ni de la qualité. Il dit seulement combien de temps la machine a tourné par rapport au temps où elle devait tourner.</p>
+
+<h3>Étape 3 : calculer la performance</h3>
+
+<p>À la cadence de référence de 60 pièces par heure, 12 heures de fonctionnement auraient dû produire 720 pièces.</p>
+
+<p>La ligne en a produit <strong>680</strong>.</p>
+
+<p><strong>Performance = 680 / 720 = 94,4 %.</strong></p>
+
+<p>Les 40 pièces manquantes n'ont pas disparu : elles ont été mangées par des micro-arrêts et par une cadence légèrement en dessous du standard. Ces pertes ne se voient sur aucun rapport d'arrêt, parce qu'aucune d'elles n'a duré assez longtemps pour être déclarée.</p>
+
+<h3>Étape 4 : calculer la qualité</h3>
+
+<p>Sur les 680 pièces produites, <strong>650 sont conformes du premier coup</strong>. Les retouches comptent comme des non-conformes : le temps a bien été consommé deux fois.</p>
+
+<p><strong>Qualité = 650 / 680 = 95,6 %.</strong></p>
+
+<h3>Étape 5 : multiplier</h3>
+
+<p><strong>TRS = 85,7 % x 94,4 % x 95,6 % = 77 %.</strong></p>
+
+<p>Sur 14 heures requises, la ligne a produit l'équivalent de <strong>10 h 50 de production conforme à la cadence de référence</strong>. Les 3 h 10 restantes se sont réparties entre pannes, ralentissements et rebuts.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Calcul du TRS pas à pas sur une seule barre de temps : 16 h moins 2 h planifiées donnent 14 h requises ; la disponibilité retire 2 h d&#x27;arrêts subis (85,7 %), la performance 40 pièces (94,4 %), la qualité 30 rebuts (95,6 %). Il reste 10 h 50, soit un TRS de 77 %, et la disponibilité, à 14,3 points, est le premier chantier." poster="../../livrables/blog/taux-de-rendement-synthetique-definition/2-calcul-pas-a-pas.png" src="../../livrables/blog/taux-de-rendement-synthetique-definition/2-calcul-pas-a-pas.mp4"></video>
+  <figcaption><span class="num">Visuel 2</span> <code>2-calcul-pas-a-pas</code><br>Montre pourquoi on multiplie : chaque taux retire une tranche de la même barre de 14 h (2 h d&#x27;arrêts subis, 40 pièces de cadence, 30 rebuts) ; il reste 10 h 50, soit 77 %. La plus grosse tranche, la disponibilité, désigne le chantier.</figcaption>
+</figure>
+
+
+<table>
+<thead>
+<tr>
+<th>Composante</th>
+<th>Calcul</th>
+<th>Résultat</th>
+<th>Ce qu'elle expose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disponibilité</td>
+<td>12 h / 14 h</td>
+<td>85,7 %</td>
+<td>Pannes, manques matière, réglages subis</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>680 / 720</td>
+<td>94,4 %</td>
+<td>Micro-arrêts, cadence sous le standard</td>
+</tr>
+<tr>
+<td>Qualité</td>
+<td>650 / 680</td>
+<td>95,6 %</td>
+<td>Rebuts, retouches, défauts de démarrage</td>
+</tr>
+<tr>
+<td><strong>TRS</strong></td>
+<td>85,7 x 94,4 x 95,6</td>
+<td><strong>77 %</strong></td>
+<td>La perte totale, et sa répartition</td>
+</tr>
+</tbody>
+</table>
+
+<p>Regardez la dernière colonne plutôt que la dernière ligne. C'est la disponibilité qui coûte ici, à 14,3 points de perte contre 5,6 et 4,4. Le chantier se décide sur cette lecture, pas sur le 77 %.</p>
+
+<h2 id="rapide">La méthode rapide de calcul du TRS, et ce qu'elle masque</h2>
+
+<p>Il existe un calcul plus court, souvent présenté comme un TRS simplifié : les pièces bonnes divisées par les pièces théoriquement possibles sur la période.</p>
+
+<p>Sur notre cas : 650 conformes pour 840 possibles en 14 heures à 60 pièces par heure, soit 77 % également. Les deux méthodes convergent quand les données sont propres.</p>
+
+<p>Le raccourci a pourtant deux défauts sérieux.</p>
+
+<p>Le premier : <strong>il ne se décompose pas</strong>. Vous obtenez un chiffre, pas une direction. Impossible de savoir si vous devez appeler la maintenance ou revoir un réglage.</p>
+
+<p>Le second : il se confond facilement avec un simple ratio de tenue d'objectif. Comparer 800 pièces produites à un objectif de 1 000 donne 80 %, mais ce n'est pas un TRS. Un objectif de production intègre déjà des marges, des aléas et parfois une cadence de sécurité. Le TRS, lui, se calcule contre une cadence de référence technique.</p>
+
+<p>Utilisez le raccourci pour un premier ordre de grandeur, jamais pour décider.</p>
+
+<h2 id="pertes">Les six grandes pertes derrière un TRS</h2>
+
+<p>Les trois composantes se subdivisent en six familles de pertes. C'est la grille qui transforme un pourcentage en liste de choses à faire.</p>
+
+<table>
+<thead>
+<tr>
+<th>Composante</th>
+<th>Perte</th>
+<th>Ce qu'on trouve derrière</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">Disponibilité</td>
+<td>Pannes</td>
+<td>Casse d'outillage, défaillance mécanique ou électrique, arrêt sécurité</td>
+</tr>
+<tr>
+<td>Changements et réglages</td>
+<td>Changement de série, réglage de démarrage, attente de composant</td>
+</tr>
+<tr>
+<td rowspan="2">Performance</td>
+<td>Micro-arrêts</td>
+<td>Bourrage, capteur défaillant, nettoyage rapide, reprise manuelle</td>
+</tr>
+<tr>
+<td>Ralentissements</td>
+<td>Vérin grippé, machine sous-dimensionnée, cadence bridée par précaution</td>
+</tr>
+<tr>
+<td rowspan="2">Qualité</td>
+<td>Rebuts de démarrage</td>
+<td>Montée en régime, premiers réglages, premières pièces hors tolérance</td>
+</tr>
+<tr>
+<td>Rebuts de production</td>
+<td>Mauvais assemblage, dimensions dérivantes, étiquetage erroné</td>
+</tr>
+</tbody>
+</table>
+
+<p>Deux d'entre elles se perdent presque toujours dans le relevé : les micro-arrêts et les rebuts de démarrage.</p>
+
+<p>Les micro-arrêts durent quelques secondes et se règlent au poste, donc personne ne les déclare. Cumulés sur une équipe, ils pèsent souvent plus lourd que la panne visible de la semaine. Les rebuts de démarrage, eux, sont vécus comme normaux : on sait que les premières pièces ne sont pas bonnes, donc on ne les compte plus. Le TRS, lui, les compte.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Une équipe de 8 h : la panne de 25 minutes part au rapport d&#x27;arrêts, les 40 micro-arrêts de 45 secondes et les 12 pièces rebutées au démarrage n&#x27;y figurent pas. Le TRS les compte : cumulés, les micro-arrêts pèsent 30 minutes, plus que la panne." poster="../../livrables/blog/taux-de-rendement-synthetique-definition/3-micro-arrets-invisibles.png" src="../../livrables/blog/taux-de-rendement-synthetique-definition/3-micro-arrets-invisibles.mp4"></video>
+  <figcaption><span class="num">Visuel 3</span> <code>3-micro-arrets-invisibles</code><br>Une équipe se déroule : seule la panne entre au rapport d&#x27;arrêts ; les micro-arrêts et les rebuts de démarrage n&#x27;y figurent pas, mais le TRS les compte, et les micro-arrêts cumulés dépassent la panne.</figcaption>
+</figure>
+
+
+<h2 id="seuil">Quel est un bon TRS ?</h2>
+
+<p>C'est la question la plus posée, et elle mérite une vraie réponse plutôt qu'un refus.</p>
+
+<p>Vous trouverez partout des grilles toutes faites : en dessous de 50 % ce serait mauvais, entre 60 et 70 % correct, au delà de 85 % excellent. Ces grilles circulent depuis des décennies. <strong>Elles ne veulent rien dire, et voici précisément pourquoi.</strong></p>
+
+<p><strong>Parce que le dénominateur n'est pas normalisé dans les faits.</strong> Un site généreux dans sa définition des arrêts planifiés sort la moitié de ses pertes du calcul. Il affichera 85 % là où son voisin, plus strict, affichera 68 % avec exactement la même production.</p>
+
+<p><strong>Parce que la cadence de référence est un choix.</strong> Prenez la cadence catalogue du constructeur, votre taux plonge. Prenez la cadence réellement atteignable sur votre produit et votre matière, il remonte de dix points. Aucune machine n'a bougé.</p>
+
+<p><strong>Parce que le type de production change tout.</strong> Une ligne dédiée qui tourne une seule référence n'a rien de comparable avec un atelier qui enchaîne vingt changements de série par semaine. Le second sera structurellement plus bas, et ce n'est pas un défaut de pilotage, c'est son métier.</p>
+
+<p>Ce qui a du sens, en revanche, tient en deux repères.</p>
+
+<p><strong>Repère 1 : votre propre courbe, à périmètre stable.</strong> Un site qui passe de 61 à 68 en six mois, sans avoir touché à ses règles de calcul, a réellement gagné quelque chose. Un site qui affiche 82 sans savoir comment il le calcule n'a rien démontré. Fixez vos règles, datez-les, et suivez la pente plutôt que le niveau.</p>
+
+<p><strong>Repère 2 : la décomposition, qui dit où agir.</strong> C'est elle qui remplace utilement le seuil. Sur notre cas, 14,3 points partent en disponibilité contre 4,4 en qualité. Aucune grille extérieure n'aurait donné cette information, et c'est pourtant la seule qui déclenche une action.</p>
+
+<div class="fichly-note">
+<p><strong>La formule à retenir si l'on vous demande un objectif.</strong> Ne répondez pas par un pourcentage. Répondez par une pente et une composante : gagner cinq points de disponibilité sur une ligne donnée d'ici la fin du trimestre, à règles de calcul inchangées. C'est vérifiable, et ce n'est pas triché.</p>
+</div>
+
+<h2 id="anglais">OEE, OOE, TEEP : les équivalents anglais</h2>
+
+<p>Le sujet revient dès qu'un reporting remonte vers un groupe international. Les ateliers parlent français, les tableaux de bord arrivent en anglais, et les sigles ne se recouvrent pas exactement.</p>
+
+<table>
+<thead>
+<tr>
+<th>Français</th>
+<th>Anglais</th>
+<th>Dénominateur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TRS, Taux de Rendement Synthétique</td>
+<td>
+<strong>OEE</strong>, Overall Equipment Effectiveness</td>
+<td>Temps requis</td>
+</tr>
+<tr>
+<td>TRG, Taux de Rendement Global</td>
+<td>
+<strong>OOE</strong>, Overall Operations Effectiveness</td>
+<td>Temps d'ouverture</td>
+</tr>
+<tr>
+<td>TRE, Taux de Rendement Économique</td>
+<td>
+<strong>TEEP</strong>, Total Effective Equipment Performance</td>
+<td>Temps total</td>
+</tr>
+</tbody>
+</table>
+
+<p>Les trois composantes ont elles aussi leur nom anglais : <strong>Availability</strong> pour la disponibilité, <strong>Performance</strong> pour la performance, <strong>Quality</strong> pour la qualité. La formule s'écrit donc OEE = A x P x Q, ce qui est rassurant : c'est bien le même calcul.</p>
+
+<p>Une prudence s'impose. <strong>Le terme OEE est souvent employé par abus pour désigner n'importe lequel des trois taux</strong>, en particulier dans les documentations d'éditeurs de logiciels. Avant de comparer votre TRS à un OEE annoncé par un fournisseur, demandez sur quelle durée de référence il est calculé. La réponse vous dira lequel des trois vous avez en face.</p>
+
+<h2 id="decider">Ce qu'un TRS autorise à décider</h2>
+
+<p>Un TRS ne se contemple pas. Il ouvre trois décisions, et une seule à la fois.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Trois lignes au même TRS de 77 %. Ouvert en disponibilité, performance et qualité, chacun révèle une perte principale différente : disponibilité pour la ligne A (maintenance et approvisionnement), performance pour la ligne B (micro-arrêts, décision de poste), qualité pour la ligne C (réglage et standard de démarrage)." poster="../../livrables/blog/taux-de-rendement-synthetique-definition/4-meme-trs-trois-chantiers.png" src="../../livrables/blog/taux-de-rendement-synthetique-definition/4-meme-trs-trois-chantiers.mp4"></video>
+  <figcaption><span class="num">Visuel 4</span> <code>4-meme-trs-trois-chantiers</code><br>Trois lignes affichent 77 % : le chiffre seul ne dit pas où agir. Ouvert en trois taux, chaque TRS montre sa plus grosse perte à un endroit différent, qui appelle une décision différente (maintenance, poste, réglage).</figcaption>
+</figure>
+
+
+<p><strong>Si la disponibilité est la plus basse des trois</strong>, la décision est une décision de maintenance et d'approvisionnement. Sortez l'historique des arrêts de la période, triez par temps cumulé et non par nombre d'occurrences, et attaquez les deux premières lignes. La terminologie de référence est posée par la norme <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" target="_blank" rel="noopener">NF EN 13306</a>, utile pour que préventif, correctif et curatif désignent la même chose pour tout le monde.</p>
+
+<p><strong>Si la performance est la plus basse</strong>, la décision est une décision de poste. Les micro-arrêts se traitent au plus près de la machine, par l'observation directe sur une durée continue. Une heure passée à noter chaque interruption, y compris de quinze secondes, en apprend plus qu'un mois de reporting.</p>
+
+<p><strong>Si la qualité est la plus basse</strong>, la décision est une décision de réglage et de standard. Séparez d'abord les rebuts de démarrage des rebuts de production : ce sont deux causes distinctes, et confondre les deux mène à traiter la mauvaise.</p>
+
+<p>Une décision qu'un TRS n'autorise pas : <strong>comparer deux lignes ou deux sites entre eux</strong>. Les périmètres diffèrent presque toujours, et le classement qui en sort demande souvent au mauvais atelier de progresser. Si vous devez publier un chiffre, publiez le dénominateur à côté. « 77 % sur 14 h requises » se discute. « 77 % » ne se discute pas.</p>
+
+<p>Un dernier repère de méthode : mesurez d'abord la machine qui contraint le flux. Améliorer le TRS d'un équipement qui n'attendait personne ne libère aucune capacité pour le client.</p>
+
+<h2 id="releve">Relever les données de TRS sans fausser le calcul</h2>
+
+<p>Le calcul vaut ce que vaut le relevé. Trois niveaux existent, et le choix se fait sur la maturité du site plutôt que sur le budget.</p>
+
+<p><strong>Le relevé manuel</strong>, sur fiche de poste puis tableur, reste le bon point de départ. Il oblige les équipes à nommer les causes d'arrêt, ce qui est déjà la moitié du travail. Sa limite est connue : les micro-arrêts n'y figurent jamais, et le taux de performance en ressort flatté.</p>
+
+<p><strong>Le relevé semi-automatique</strong> associe un comptage machine automatique à une qualification humaine des causes, sur tablette ou borne. C'est le meilleur compromis pour la plupart des sites : la donnée devient fiable sans que l'opérateur cesse d'être celui qui explique l'arrêt.</p>
+
+<p><strong>Le relevé automatique</strong>, par capteurs et remontée vers un système de supervision, donne le TRS en continu. Il est indispensable dès que les micro-arrêts pèsent, parce qu'aucun humain ne peut les tracer à la main.</p>
+
+<div class="fichly-note">
+<p><strong>Le vrai prérequis n'est pas technique.</strong> Un relevé automatique posé sur une nomenclature de causes mal définie produit des tableaux précis et inutilisables. Commencez par écrire la liste des motifs d'arrêt, avec les équipes, avant de choisir l'outil qui les compte.</p>
+</div>
+
+<h2 id="erreurs">Les erreurs qui faussent un calcul de TRS</h2>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Sortir les pannes récurrentes du dénominateur en les requalifiant en arrêts planifiés.</span><br><span class="fichly-ok">✅ Écrivez la règle une fois, datez-la, et signalez tout changement.</span> Un TRS qui monte le jour où la convention change n'est pas une amélioration.</p>
+<p><span class="fichly-ko">❌ Ignorer les micro-arrêts parce qu'ils ne sont pas déclarés.</span><br><span class="fichly-ok">✅ Faites une observation continue d'une heure au poste.</span> Vous saurez en une séance si le sujet pèse ou non.</p>
+<p><span class="fichly-ko">❌ Compter les pièces retouchées comme conformes.</span><br><span class="fichly-ok">✅ Le TRS mesure le bon du premier coup.</span> Une retouche consomme du temps deux fois, elle doit se voir deux fois.</p>
+<p><span class="fichly-ko">❌ Prendre la cadence catalogue comme cadence de référence.</span><br><span class="fichly-ok">✅ Retenez la cadence réellement atteignable sur votre produit et votre matière.</span> Sinon vous mesurez un écart de conception, pas un écart de pilotage.</p>
+<p><span class="fichly-ko">❌ Calculer un TRS moyen sur un atelier entier.</span><br><span class="fichly-ok">✅ Un TRS se calcule par équipement.</span> Une moyenne d'ateliers dilue exactement la machine qu'il fallait voir.</p>
+<p><span class="fichly-ko">❌ Se servir du taux pour évaluer les opérateurs.</span><br><span class="fichly-ok">✅ Servez-vous-en pour localiser les pertes.</span> Un indicateur vécu comme une sanction cesse d'être renseigné honnêtement, et le calcul perd toute valeur.</p>
+</div>
+
+<h2 id="outils">Les outils qui prennent le relais après le TRS</h2>
+
+<p>Le TRS localise la perte. Il ne la corrige pas. Quatre outils prennent le relais selon la composante qui décroche.</p>
+
+<p>Si vos pertes viennent des changements de série et des attentes, la grille des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 MUDA</a> traduit chaque famille de gaspillage en points de taux perdus. C'est le passage le plus direct du chiffre à l'observation de terrain.</p>
+
+<p>Si vous ne savez pas sur quelle machine commencer, la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">cartographie des flux de valeur</a> désigne le goulot avant que vous n'investissiez du temps au mauvais endroit.</p>
+
+<p>Si la disponibilité souffre de réglages longs et de postes désorganisés, un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a> sur la zone récupère des minutes que personne ne comptait, en particulier au démarrage de série.</p>
+
+<p>Et quand la cause reste incertaine, la <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">méthode DMAIC</a> donne le cadre pour la prouver par les données avant de proposer une contre-mesure.</p>
+
+<p>Le TRS, les couches de temps et les six pertes font partie des méthodes réunies dans nos <a href="https://www.fichly.com/products/fiches-lean">fiches pratiques des 40 outils du Lean</a> (49,90 €), une page par outil, à garder près de la ligne plutôt que dans un classeur.</p>
+
+<h2 id="faq">FAQ : vos questions sur le calcul du TRS</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>Quelle est la formule du temps requis (TRS) ?</summary>
+<div class="answer">
+<p>Temps requis = temps d'ouverture moins les arrêts planifiés. Le temps d'ouverture est la durée pendant laquelle l'atelier tourne, selon le nombre d'équipes. Les arrêts planifiés regroupent la maintenance préventive, les changements de série programmés, les contrôles et les nettoyages. Exemple : 16 h d'ouverture moins 2 h de maintenance donnent 14 h de temps requis. C'est le dénominateur du TRS.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment calculer le taux de service TRS ?</summary>
+<div class="answer">
+<p>Le TRS se calcule en multipliant trois taux mesurés sur la même période et le même équipement : la disponibilité, la performance et la qualité. Sur notre exemple : 12 h de fonctionnement sur 14 h requises donnent 85,7 %, 680 pièces produites sur 720 attendues donnent 94,4 %, et 650 pièces conformes sur 680 donnent 95,6 %. Le produit des trois vaut 77 %. Attention au vocabulaire : le taux de service mesure la tenue des délais client, ce n'est pas la même chose qu'un TRS.</p>
+</div>
+</details>
+
+<details>
+<summary>Quel est un bon TRS ?</summary>
+<div class="answer">
+<p>Il n'existe pas de seuil universel, et les grilles que l'on trouve un peu partout ne résistent pas à l'examen. Une valeur dépend d'abord du périmètre de calcul, ensuite de la cadence de référence retenue, enfin du type de production. Ce qui compte est votre propre trajectoire, mesurée à règles de calcul stables, et la répartition des pertes entre disponibilité, performance et qualité. C'est cette répartition qui dit où agir, pas le niveau.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment calculer le TRG ?</summary>
+<div class="answer">
+<p>TRG = temps utile divisé par temps d'ouverture. Le TRG reprend le même numérateur que le TRS, mais réintègre les arrêts planifiés dans son dénominateur. Sur notre exemple, 10 h 50 de temps utile rapportées à 16 h d'ouverture donnent 68 %, contre 77 % de TRS. Le TRG est donc toujours inférieur ou égal au TRS sur une même période.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment dit-on TRS en anglais ?</summary>
+<div class="answer">
+<p>Le TRS se dit OEE, pour Overall Equipment Effectiveness. Ses trois composantes s'écrivent Availability, Performance et Quality, et la formule devient OEE = A x P x Q. Le TRG correspond à l'OOE, Overall Operations Effectiveness, et le TRE au TEEP, Total Effective Equipment Performance. Vérifiez toujours la durée de référence employée : le sigle OEE est souvent utilisé par abus pour les trois.</p>
+</div>
+</details>
+
+<details>
+<summary>Que faire d'un TRS à 60 % ?</summary>
+<div class="answer">
+<p>Ne cherchez pas à le remonter globalement. Regardez laquelle des trois composantes est la plus basse, et traitez celle-là seule. Une disponibilité faible ouvre un sujet maintenance et approvisionnement. Une performance faible ouvre un sujet micro-arrêts, qui se traite par l'observation au poste. Une qualité faible ouvre un sujet réglage et standard de démarrage. Un chantier à la fois, sur l'équipement qui contraint le flux.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Un TRS calculé une fois par mois sur un tableur est une photo du mois dernier.</strong></p>
+<p>Le pilotage demande un relevé continu, machine par machine, arrêt par arrêt, avec les causes attachées au moment où elles se produisent. C'est la seule façon de voir les micro-arrêts, qui sont la perte la plus fréquente et la moins déclarée.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels de suivi de performance</a> : mesure en temps réel, historique des arrêts, et accompagnement au déploiement par nos formateurs.</p>
+</div>
+
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping : définition et étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes et leurs livrables</a></li>
+</ul>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Calcul du TRS : formule, méthode et exemple complet",
+  "description": "77 % sur 14 h requises. La formule du TRS, le calcul pas à pas sur un cas complet, les six pertes derrière le chiffre, et ce qu'il autorise à décider.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fichly",
+    "url": "https://www.fichly.com"
+  },
+  "datePublished": "2025-03-16",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la formule du temps requis (TRS) ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Temps requis = temps d'ouverture moins les arrêts planifiés. Le temps d'ouverture est la durée pendant laquelle l'atelier tourne, selon le nombre d'équipes. Les arrêts planifiés regroupent la maintenance préventive, les changements de série programmés, les contrôles et les nettoyages. Exemple : 16 h d'ouverture moins 2 h de maintenance donnent 14 h de temps requis. C'est le dénominateur du TRS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer le taux de service TRS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le TRS se calcule en multipliant trois taux mesurés sur la même période et le même équipement : la disponibilité, la performance et la qualité. Sur notre exemple : 12 h de fonctionnement sur 14 h requises donnent 85,7 %, 680 pièces produites sur 720 attendues donnent 94,4 %, et 650 pièces conformes sur 680 donnent 95,6 %. Le produit des trois vaut 77 %. Attention au vocabulaire : le taux de service mesure la tenue des délais client, ce n'est pas la même chose qu'un TRS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est un bon TRS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il n'existe pas de seuil universel, et les grilles que l'on trouve un peu partout ne résistent pas à l'examen. Une valeur dépend d'abord du périmètre de calcul, ensuite de la cadence de référence retenue, enfin du type de production. Ce qui compte est votre propre trajectoire, mesurée à règles de calcul stables, et la répartition des pertes entre disponibilité, performance et qualité. C'est cette répartition qui dit où agir, pas le niveau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer le TRG ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TRG = temps utile divisé par temps d'ouverture. Le TRG reprend le même numérateur que le TRS, mais réintègre les arrêts planifiés dans son dénominateur. Sur notre exemple, 10 h 50 de temps utile rapportées à 16 h d'ouverture donnent 68 %, contre 77 % de TRS. Le TRG est donc toujours inférieur ou égal au TRS sur une même période."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment dit-on TRS en anglais ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le TRS se dit OEE, pour Overall Equipment Effectiveness. Ses trois composantes s'écrivent Availability, Performance et Quality, et la formule devient OEE = A x P x Q. Le TRG correspond à l'OOE, Overall Operations Effectiveness, et le TRE au TEEP, Total Effective Equipment Performance. Vérifiez toujours la durée de référence employée : le sigle OEE est souvent utilisé par abus pour les trois."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire d'un TRS à 60 % ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ne cherchez pas à le remonter globalement. Regardez laquelle des trois composantes est la plus basse, et traitez celle-là seule. Une disponibilité faible ouvre un sujet maintenance et approvisionnement. Une performance faible ouvre un sujet micro-arrêts, qui se traite par l'observation au poste. Une qualité faible ouvre un sujet réglage et standard de démarrage. Un chantier à la fois, sur l'équipement qui contraint le flux."
+      }
+    }
+  ]
+}
+</script>
+</main>
+</body>
+</html>

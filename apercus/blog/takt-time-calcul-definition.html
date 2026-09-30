@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperçu · takt-time-calcul-definition</title>
+<style>
+  :root { --ink: #23235a; --blue: #4a4aa0; --muted: #6b6b8a; --line: #e2e2ee; --bg: #fbfbf9; --note: #ececf5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  .bandeau { background: var(--note); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  h1 { font-size: 34px; line-height: 1.2; color: var(--blue); }
+  h2 { font-size: 26px; line-height: 1.25; margin-top: 48px; color: var(--blue); }
+  h3 { font-size: 20px; margin-top: 28px; }
+  a { color: var(--blue); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 16px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--note); }
+  div[role=region] { overflow-x: auto; }
+  .visuel { margin: 28px 0; }
+  .visuel video { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #f3f3f3; }
+  .visuel figcaption { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--blue); padding-left: 10px; }
+  .visuel .num { font-weight: 700; color: var(--blue); }
+  .visuel code { font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="bandeau"><a href="index.html">← Tous les articles</a> · Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
+<h1>Takt time : calculer le rythme imposé par la demande</h1>
+
+<!--
+ARTICLE FICHLY - FICHE DE PRODUCTION
+Mot-cle principal : takt time
+Volume France : 1 700 / mois - Difficulte : 2 - Potentiel de trafic : 30 - Sujet parent : lui-meme (releve Ahrefs France du 11/09/2026)
+Page 1 : Wikipedia FR et EN (DR 97), lean.org (DR 78), tulip (DR 72), fabriq (DR 39), 7-shapes (DR 34). DR minimum : 34.
+Population : 100 % specialistes industriels et lexiques, aucun generaliste du logiciel de gestion de projet.
+VERDICT : GO prudent. Rien sous DR 25, mais aucun generaliste non plus. La grille de prudence vise les SERP envahis
+par Asana et consorts, ce n'est pas le cas ici. Le DR minimum est un indice, pas un verdict.
+Title tag : Takt time : definition, formule de calcul et exemple (52 caracteres)
+Meta description : 95 secondes ou 120 ? Le temps d'ouverture retenu change le takt time de 25 secondes. Formule, exemple de calcul complet et comparaison au temps de cycle. (155 caracteres)
+Handle : takt-time-calcul-definition
+Longueur cible : 1 000 a 1 200 mots. Raison : potentiel de trafic 30, sujet etroit, SERP tenu par des fiches de lexique
+courtes. Un guide long serait du temps mal place. Couvrir l'intention a fond, et s'arreter.
+DECISIONS :
+- Contre-angle 1 : le takt time seul ne sert a rien, il se lit contre le temps de cycle du poste le plus lent (section 3).
+- Contre-angle 2 : le temps d'ouverture au numerateur est le piege reel. On retire le planifie, jamais le subi (section 2).
+- Contre-angle 3 : tableau de correspondance francais / anglais / japonais (section 4). Le lexique est le gisement
+  valide du site, sa meilleure position hors marque est "trs en anglais".
+- Exemple de calcul construit de toutes pieces, annonce comme tel. Temps d'ouverture de 16 h repris du cas de reference
+  TRS deja publie, pour la coherence inter-formats. Aucun client, aucune usine, aucun temoignage.
+- Aucun seuil de performance affirme.
+- CTA unique vers la page Partenaires logiciels (objectif TRS et mesure). Lien produit contextuel obligatoire conserve.
+- Longueur mesuree : 1 199 mots de texte editorial (intro, encarts, 4 sections H2, FAQ), 1 401 mots conteneur complet
+  en comptant sommaire, CTA, bio et bloc articles recommandes.
+- FAQ a 5 questions (la fourchette est 5 a 6). Pas de bloc .fichly-pieges : l'ordre de corps impose par le brief ne
+  le prevoit pas, et la contrainte de longueur ne le permettait pas. Les deux pieges sont traites en texte courant.
+- Bloc <style> et structure de fin repris a l'identique du gabarit TPM (Article 1004916867417). La carte auteur et la bio
+  y sont fusionnees dans .fichly-bio, qui porte la photo et le lien LinkedIn : je n'ai pas invente de classe .fichly-author
+  absente du CSS du gabarit.
+-->
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article" lang="fr">
+<p>Le <strong>takt time</strong> est le rythme que la demande impose à votre ligne. Une division, une ligne de tableur. C'est pourquoi il est mal utilisé : beaucoup d'ateliers l'affichent et n'en tirent aucune décision. <strong>Un takt time seul ne dit rien.</strong> Il ne devient utile qu'une fois posé à côté du temps de cycle de votre poste le plus lent. Voici la formule, le seul chiffre qui pose vraiment problème dans son calcul, un exemple déroulé, et la comparaison qui transforme ce résultat en décision.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Une commande arrive : 480 pièces à livrer aujourd'hui. L'atelier tourne un peu moins de 13 heures. Le takt time, c'est le temps que vous avez pour sortir une pièce, une seule. Ici, 95 secondes. Si votre poste le plus lent en met 108, vous livrerez en retard, et vous le savez dès ce matin.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Takt time = temps de production disponible ÷ demande client, même période.</li>
+<li>Au numérateur, on retire les arrêts <strong>planifiés</strong>, jamais les arrêts subis.</li>
+<li>Un takt se subit. Ce qui se pilote, c'est le temps de cycle.</li>
+<li>Seule lecture utile : cycle du poste le plus lent contre takt time.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce que le takt time ?</a></li>
+<li><a href="#calcul">Comment calculer le takt time ?</a></li>
+<li><a href="#cycle">Takt time et temps de cycle : la comparaison qui décide</a></li>
+<li><a href="#lexique">Takt time, cycle time, lead time : le lexique</a></li>
+<li><a href="#faq">FAQ : vos questions sur le takt time</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu'est-ce que le takt time ?</h2>
+<p>Le takt time est <strong>l'intervalle de temps qui doit séparer la sortie de deux pièces consécutives pour que la demande client soit servie</strong>. Il s'exprime en secondes par pièce.</p>
+<p>Le mot vient de l'allemand <em>Takt</em>, la mesure en musique. <strong>Un métronome, pas une performance.</strong> Produire en avance sur le takt fabrique du stock, premier des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">huit gaspillages du Lean</a>.</p>
+<p><strong>Ce chiffre ne vous appartient pas</strong> : il est fixé par le client et par vos horaires. Vous le constatez, et vous le recalculez à chaque variation de volume. <strong>Ce n'est pas non plus un indicateur de résultat</strong> : le réalisé relève du <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>.</p>
+<h2 id="calcul">Comment calculer le takt time ?</h2>
+<div class="fichly-note">
+<p><strong>Takt time = temps de production disponible ÷ demande client</strong>, sur une même période de référence : une journée, une équipe, une semaine. Les deux termes couvrent la même fenêtre.</p>
+</div>
+<p>Le dénominateur est le nombre de pièces à livrer. <strong>Toute la difficulté est au numérateur</strong>, que les fiches de définition passent sous silence.</p>
+<p>Une règle tranche tous les cas : <strong>on retire ce qui est planifié et connu à l'avance, jamais ce qui est subi.</strong> Déduire une panne revient à l'inscrire dans la cible, donc à cesser de la voir.</p>
+<table>
+<thead>
+<tr>
+<th>Élément du temps d'ouverture</th>
+<th>À retirer ?</th>
+<th>Pourquoi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pauses et repas</td>
+<td class="col-oui">Oui</td>
+<td>Prévu au planning</td>
+</tr>
+<tr>
+<td>Prise de poste, brief sécurité</td>
+<td class="col-oui">Oui</td>
+<td>Durée connue et récurrente</td>
+</tr>
+<tr>
+<td>Maintenance planifiée, nettoyage</td>
+<td class="col-oui">Oui</td>
+<td>Décidé à l'avance</td>
+</tr>
+<tr>
+<td>Pannes, micro-arrêts, attentes</td>
+<td class="col-non">Non</td>
+<td>Subi, c'est le problème à traiter</td>
+</tr>
+<tr>
+<td>Changements de série</td>
+<td class="col-non">Non</td>
+<td>Réductible, c'est un chantier</td>
+</tr>
+</tbody>
+</table>
+<p>Ces déductions s'appuient sur le <a href="https://code.travail.gouv.fr/code-du-travail/l3121-1" rel="noopener" target="_blank">temps de travail effectif</a> et sur les pauses de <a href="https://code.travail.gouv.fr/code-du-travail/l3121-16" rel="noopener" target="_blank">l'article L3121-16</a>. Partez de l'horaire réel de vos équipes, pas de la <a href="https://code.travail.gouv.fr/code-du-travail/l3121-27" rel="noopener" target="_blank">durée légale de 35 heures</a>.</p>
+<h3>Un exemple de calcul, construit pour l'illustration</h3>
+<p>Chiffres pédagogiques, pas un cas client.</p>
+<ul>
+<li>Ouverture : deux équipes de 8 heures, soit <strong>16 heures</strong>.</li>
+<li>Pauses et prise de poste : 40 minutes par équipe, soit 1 h 20.</li>
+<li>Maintenance planifiée : 2 heures.</li>
+<li>Demande client : <strong>480 pièces par jour</strong>.</li>
+</ul>
+<p>Temps disponible : 16 h moins 3 h 20, soit 12 h 40, ou <strong>45 600 secondes</strong>. Takt time : 45 600 ÷ 480 = <strong>95 secondes par pièce</strong>.</p>
+<p>Le calcul paresseux prend les 16 heures brutes : 57 600 ÷ 480 = 120 secondes. <strong>Vingt-cinq secondes d'écart par pièce</strong>, sur une ligne calée pour un rythme qu'elle ne tiendra jamais.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="La journée de 16 heures en barre : pauses, prise de poste et maintenance planifiée (3 h 20) sont retirées, la panne, les micro-arrêts et le changement de série restent dans le calcul. Il reste 12 h 40, soit 45 600 secondes : 45 600 ÷ 480 = 95 secondes par pièce, contre 120 secondes avec les 16 heures brutes, 25 secondes d&#x27;écart par pièce." poster="../../livrables/blog/takt-time-calcul-definition/1-temps-disponible.png" src="../../livrables/blog/takt-time-calcul-definition/1-temps-disponible.mp4"></video>
+  <figcaption><span class="num">Visuel 1</span> <code>1-temps-disponible</code><br>Applique la règle du numérateur à l&#x27;exemple : les arrêts planifiés sortent de la journée, les arrêts subis essaient de sortir et retombent ; la barre se resserre à 12 h 40 = 45 600 s, d&#x27;où 95 s par pièce contre 120 s pour le calcul paresseux.</figcaption>
+</figure>
+
+<h2 id="cycle">Takt time et temps de cycle : la comparaison qui décide</h2>
+<p>Le takt time ne produit une décision qu'en face d'une seconde durée : <strong>le temps de cycle, la durée réelle mise par un poste pour traiter une pièce</strong>. Le takt vient du client, le cycle vient de l'atelier. Le premier se subit, le second se travaille.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Un métronome à 95 secondes et trois postes : à 70 secondes de cycle, les pièces sortent avant le client et le stock grossit (171 pièces de trop sur la journée) ; à 95 secondes, chaque pièce sort sur le battement ; à 108 secondes, chaque pièce sort plus tard que la précédente, 13, 26, 39 secondes, jusqu&#x27;à 1 h 44 de retard sur 480 pièces." poster="../../livrables/blog/takt-time-calcul-definition/2-plus-vite-moins-vite.png" src="../../livrables/blog/takt-time-calcul-definition/2-plus-vite-moins-vite.mp4"></video>
+  <figcaption><span class="num">Visuel 2</span> <code>2-plus-vite-moins-vite</code><br>Anime les trois situations du tableau avec un seul métronome : même takt de 95 s, trois temps de cycle ; plus rapide, les pièces sortent avant le battement et s&#x27;accumulent ; calé, chaque pièce tombe sur le battement ; plus lent, l&#x27;écart grandit de 13 s à chaque pièce.</figcaption>
+</figure>
+
+<p>La lecture se fait sur <strong>le poste le plus lent de la ligne</strong>, jamais sur la moyenne. C'est le goulot qui fixe la cadence de sortie.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Ce que cela signifie</th>
+<th>Ce que vous faites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cycle bien inférieur au takt</td>
+<td>La ligne va plus vite que la demande</td>
+<td>Vous fabriquez du stock. Réduisez le temps ouvert</td>
+</tr>
+<tr>
+<td>Cycle proche du takt</td>
+<td>La ligne est calée sur la demande</td>
+<td>Protégez la stabilité, un aléa fait basculer</td>
+</tr>
+<tr>
+<td>Cycle supérieur au takt</td>
+<td>La ligne ne peut pas livrer</td>
+<td>Traitez le goulot, ou ouvrez du temps</td>
+</tr>
+</tbody>
+</table>
+<p>Dans l'exemple ci-dessus, le takt time vaut 95 secondes. Chronométrez le poste le plus lent : mettons 108 secondes. <strong>13 secondes d'écart par pièce, soit 1 h 44 de retard cumulé sur 480 pièces.</strong> Vous le savez le matin : aucune consigne d'accélération ne comblera l'écart.</p>
+<p>Trois voies, par coût croissant. <strong>Équilibrer la ligne</strong> en déplaçant des tâches du goulot vers les postes en avance, avec un <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">relevé des temps sur la chaîne de valeur</a>. <strong>Réduire le cycle du poste</strong>, en fiabilisant l'équipement par une <a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">TPM</a>. <strong>Ouvrir du temps</strong>, ce qui augmente le takt et se paie.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Quatre postes empilés par tâches face à la ligne du takt à 95 secondes : la moyenne de 89,5 secondes passe sous le takt, mais le poste 3 à 108 secondes dépasse de 13 secondes et fixe la cadence. Une tâche de 14 secondes passe du poste 3 au poste 4 : 94 et 92 secondes, tout passe sous le takt. À droite, les trois voies par coût croissant : équilibrer, réduire le cycle, ouvrir du temps." poster="../../livrables/blog/takt-time-calcul-definition/3-le-goulot-pas-la-moyenne.png" src="../../livrables/blog/takt-time-calcul-definition/3-le-goulot-pas-la-moyenne.mp4"></video>
+  <figcaption><span class="num">Visuel 3</span> <code>3-le-goulot-pas-la-moyenne</code><br>Montre pourquoi on lit le poste le plus lent et pas la moyenne (89,5 s passe sous le takt, le poste 3 à 108 s ne passe pas), puis la première voie en action : une tâche quitte le goulot pour un poste en avance et toute la ligne passe sous 95 s.</figcaption>
+</figure>
+
+<h2 id="lexique">Takt time, cycle time, lead time : le lexique</h2>
+<p>Dans un groupe international, ces durées circulent en anglais et se confondent.</p>
+<table>
+<thead>
+<tr>
+<th>Anglais ou japonais</th>
+<th>Français</th>
+<th>Ce qu'il mesure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Takt time, <em>takuto taimu</em>
+</td>
+<td>Temps de takt</td>
+<td>L'intervalle imposé entre deux pièces</td>
+</tr>
+<tr>
+<td>Cycle time</td>
+<td>Temps de cycle</td>
+<td>Le temps réel mis par un poste</td>
+</tr>
+<tr>
+<td>Lead time</td>
+<td>Temps d'écoulement</td>
+<td>La traversée de tout le flux</td>
+</tr>
+<tr>
+<td>Available working time</td>
+<td>Temps disponible</td>
+<td>Le numérateur du takt</td>
+</tr>
+<tr>
+<td>Bottleneck</td>
+<td>Goulot d'étranglement</td>
+<td>Le poste au cycle le plus long</td>
+</tr>
+<tr>
+<td><em>Heijunka</em></td>
+<td>Lissage de la production</td>
+<td>Ce qui rend un takt stable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lead time et takt time n'ont aucun lien de calcul.</strong> Une ligne tient son takt à la seconde près et affiche trois semaines de traversée, parce que les pièces attendent entre les postes. Pour afficher ces définitions à l'atelier, nos <a href="https://www.fichly.com/products/fiches-lean">40 outils du Lean à portée de main</a> réunissent le takt time et les indicateurs de flux sur des fiches d'une page.</p>
+<h2 id="faq">FAQ : vos questions sur le takt time</h2>
+<div class="fichly-faq">
+<details>
+<summary>Comment calculer le takt time ?</summary>
+<div class="answer">
+<p>Divisez le temps de production disponible par la demande client sur la même période. Exemple pédagogique : 16 heures d'ouverture, moins 3 h 20 de pauses et de maintenance planifiée, soit 45 600 secondes. Pour 480 pièces, le takt time vaut 95 secondes.</p>
+</div>
+</details>
+<details>
+<summary>Quelle est la différence entre le takt time et le temps de cycle ?</summary>
+<div class="answer">
+<p>Le takt time vient du client : le rythme de sortie imposé par la demande. Le temps de cycle vient de l'atelier : la durée réelle mise par un poste. Leur comparaison, sur le poste le plus lent, est la seule qui produit une décision.</p>
+</div>
+</details>
+<details>
+<summary>Que veut dire takt ?</summary>
+<div class="answer">
+<p>Takt est un mot allemand qui désigne la mesure en musique, le battement que suit un orchestre. L'expression est passée de l'industrie aéronautique allemande des années 1930 au système de production Toyota, puis au Lean.</p>
+</div>
+</details>
+<details>
+<summary>Faut-il retirer les pauses du temps d'ouverture ?</summary>
+<div class="answer">
+<p>Oui. Retirez tout ce qui est planifié : pauses, repas, prise de poste, maintenance, nettoyage. Les arrêts subis restent dans le calcul : pannes et micro-arrêts sont le problème à résoudre, pas une donnée d'entrée.</p>
+</div>
+</details>
+<details>
+<summary>Que faire quand le temps de cycle dépasse le takt time ?</summary>
+<div class="answer">
+<p>Trois voies, par coût croissant. Équilibrer la ligne en déplaçant des tâches du goulot vers les postes en avance. Réduire le temps de cycle du poste. Ouvrir du temps, ce qui se paie.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Un takt time se compare à des temps de cycle mesurés, pas estimés.</strong></p>
+<p>Tant que les cycles sont chronométrés à la main une fois par an, l'écart au takt reste une opinion. Un relevé automatique au poste donne la cadence réelle, les micro-arrêts et le motif de chaque perte.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels de pilotage du TRS</a> : mesure des temps au poste, suivi des arrêts et comparaison de la cadence réelle à la demande.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le TRS : définition, exemples et calculs</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping : définition et étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">TPM : par quoi commencer et ce qui la fait tenir</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Takt time : calculer le rythme imposé par la demande",
+  "description": "La formule du takt time, le piège du temps d'ouverture au numérateur, un exemple de calcul complet et la comparaison au temps de cycle du poste le plus lent.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/takt-time-calcul-definition",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment calculer le takt time ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Divisez le temps de production disponible par la demande client sur la même période. Exemple pédagogique : 16 heures d'ouverture, moins 3 h 20 de pauses et de maintenance planifiée, soit 45 600 secondes. Pour 480 pièces, le takt time vaut 95 secondes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre le takt time et le temps de cycle ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le takt time vient du client : le rythme de sortie imposé par la demande. Le temps de cycle vient de l'atelier : la durée réelle mise par un poste. Leur comparaison, sur le poste le plus lent, est la seule qui produit une décision." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que veut dire takt ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Takt est un mot allemand qui désigne la mesure en musique, le battement que suit un orchestre. L'expression est passée de l'industrie aéronautique allemande des années 1930 au système de production Toyota, puis au Lean." }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il retirer les pauses du temps d'ouverture ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Retirez tout ce qui est planifié : pauses, repas, prise de poste, maintenance, nettoyage. Les arrêts subis restent dans le calcul : pannes et micro-arrêts sont le problème à résoudre, pas une donnée d'entrée." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire quand le temps de cycle dépasse le takt time ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Trois voies, par coût croissant. Équilibrer la ligne en déplaçant des tâches du goulot vers les postes en avance. Réduire le temps de cycle du poste. Ouvrir du temps, ce qui se paie." }
+    }
+  ]
+}
+</script></p>
+</main>
+</body>
+</html>

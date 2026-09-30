@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-test-de-la-facture",
+    "section": "Que veut dire Muda ? Définition et origine du mot",
+    "apres": "Prenez une opération de votre processus.",
+    "role": "Applique le test de la facture opération par opération : chacune reçoit la réponse du client et descend dans sa colonne (il paie, il refuse, obligatoire sans valeur) ; puis les MUDA se barrent et les non-valeurs ajoutées nécessaires raccourcissent.",
+    "alt": "Huit opérations d'un processus passées au test de la facture : le client paie la découpe, l'assemblage et le contrôle final exigé ; il refuse le trajet du chariot, l'attente devant la machine et la reprise d'une pièce mal faite, qui sont des MUDA et se suppriment ; le contrôle réglementaire et la traçabilité imposée sont des non-valeurs ajoutées nécessaires, qui se réduisent sans se supprimer."
+  },
+  {
+    "id": "2-mura-muri-muda",
+    "section": "Muda, Mura, Muri : trois pertes à ne pas confondre",
+    "apres": "Une charge irrégulière oblige à surcharger les postes aux pics",
+    "role": "Fait voir la chaîne Mura, Muri, Muda : chaque pic de charge au-dessus de la capacité fait tomber des défauts, des attentes et des stocks tampons ; on les supprime, ils reviennent au pic suivant ; avec la même charge lissée, rien ne tombe.",
+    "alt": "Deux ateliers, même volume sur huit semaines. Charge irrégulière : une semaine sur deux dépasse la capacité, chaque pic fait tomber des défauts, des attentes et des stocks tampons dans le bac ; supprimés à mi-parcours, ils reviennent au pic suivant. Charge lissée : toutes les semaines restent sous la capacité et le bac reste vide."
+  },
+  {
+    "id": "3-huit-muda-au-poste",
+    "section": "Quels sont les 8 MUDA ? La liste, un par un",
+    "apres": "Voici les huit familles, dans l'ordre où elles se repèrent le plus facilement sur le terrain.",
+    "role": "Donne à voir le signe de chaque famille avant la liste détaillée : la pile d'en-cours qui monte, l'opérateur qui attend, les allers-retours du chariot, l'opérateur qui quitte son poste, le stock sans commande, les contrôles répétés, le bac de reprise, la boîte à idées fermée.",
+    "alt": "Les huit MUDA avec leur nom anglais et le signe qui les trahit : surproduction (les en-cours grossissent, la commande n'a pas bougé), attentes (debout devant une machine qui tourne), transports (allers-retours), mouvements (l'opérateur quitte son poste), stocks (personne ne sait à quelle commande ils correspondent), étapes inutiles (justifiées par l'habitude), rebuts et défauts (bac de reprise attitré), compétences (boîte à idées jamais ouverte)."
+  },
+  {
+    "id": "4-muda-dans-le-trs",
+    "section": "Où chaque MUDA se cache dans vos indicateurs",
+    "apres": "Voici où les huit familles se logent dans ce calcul",
+    "role": "Utilise la cascade du TRS de l'exemple comme un tamis : les huit MUDA tombent, quatre se logent dans les pertes de disponibilité, de performance et de qualité, quatre traversent tout le calcul et finissent « nulle part ».",
+    "alt": "Cascade du TRS de l'exemple (14 heures requises, 12 heures disponibles, 680 pièces sur 720, 650 conformes, TRS 77 %) : les attentes se logent dans la disponibilité, les mouvements et les étapes inutiles dans la performance, les défauts dans la qualité ; la surproduction, les stocks, les transports et les compétences non utilisées n'apparaissent nulle part, et la surproduction fait même monter le TRS."
+  }
+]

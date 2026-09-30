@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-la-ligne-de-temps",
+    "section": "Une VSM, ou cartographie des flux, c'est quoi exactement",
+    "apres": "Cette ligne de temps est l'objet de l'exercice.",
+    "role": "Fait voir les deux flux superposés et la ligne de temps en train de se dessiner : la commande remonte de droite à gauche en haut, la pièce avance de gauche à droite en bas, chaque attente trace un long segment bas, chaque passage en machine un court segment haut.",
+    "alt": "Cartographie simplifiée : la commande part du client et remonte vers la planification et le fournisseur, la pièce traverse trois postes et trois stocks. Sous la carte, la ligne de temps alterne segments bas d'attente (1 jour, 1,5 jour, 0,5 jour) et segments hauts de transformation (1, 3 et 1 minute) : 5 minutes de valeur ajoutée pour 3 jours de traversée."
+  },
+  {
+    "id": "2-symboles-vsm",
+    "section": "Les symboles de la VSM : le tableau complet",
+    "apres": "Les symboles ne sont pas décoratifs.",
+    "role": "Version animée de l'image des symboles (fichly-symboles-vsm.png) : chaque symbole fait ce qu'il représente (le camion part, la boîte de données se remplit, le stock se convertit en jours, la flèche rayée pousse, le flux tiré prend dans le supermarché, la carte kanban remonte, l'information papier avance, l'impulsion électronique file, le lissage aligne sa séquence, l'éclair éclate), avec ce qu'on écrit dedans.",
+    "alt": "Les douze symboles de la VSM avec ce qu'on écrit dedans : fournisseur ou client (nom, fréquence de livraison), processus (nom, nombre d'opérateurs), boîte de données (C/T, C/O, disponibilité), stock (quantité et conversion en jours), flux poussé, supermarché et flux tiré (quantité maximale), kanban (quantité par carte), opérateur, information manuelle (nature et fréquence), information électronique (système émetteur), lissage (séquence de mélange) et chantier d'amélioration (action visée sur l'état futur)."
+  },
+  {
+    "id": "3-etat-futur-plan-action",
+    "section": "Étape 7 : concevoir l'état futur et le plan d'action",
+    "apres": "Une seconde carte, avec des éclairs kaizen qui marquent les chantiers à mener.",
+    "role": "Version animée de la VSM simplifiée (fichly-vsm-simplifiee.png) : la carte de l'état actuel devient la seconde carte, des éclairs kaizen s'y posent, et chaque éclair descend dans le plan d'action où il devient une ligne avec un responsable et une échéance.",
+    "alt": "Carte simplifiée d'une ligne de fabrication (préparation, impression, découpe, poinçonnage et contrôle, conditionnement, avec stocks et déplacements). Sur l'état futur, trois éclairs kaizen (SMED à l'impression, FIFO entre découpe et poinçonnage, rythme client au conditionnement) deviennent chacun une ligne du plan d'action avec un responsable et une échéance."
+  },
+  {
+    "id": "4-convention-de-temps",
+    "section": "Exemple chiffré : un flux de bout en bout",
+    "apres": "Sur le flux décrit dans cet article, la pièce passe cinq minutes en machine",
+    "role": "Montre le calcul puis le piège : 300 pièces devant un poste qui en consomme 100 par jour deviennent 3 jours d'attente, rangée par rangée ; puis les mêmes 3 jours comptés en calendaire (4 320 min, 0,12 %) et en temps ouvré (1 440 min, 0,35 %) : les nuits disparaissent, les 5 minutes ne bougent pas, le ratio triple sans rien changer.",
+    "alt": "En haut, 300 pièces devant un poste qui en consomme 100 par jour : chaque rangée de 100 pièces devient un jour, soit 3 jours d'attente. En bas, le même flux de 5 minutes en machine et 3 jours de traversée : 4 320 minutes et 0,12 % en temps calendaire, 1 440 minutes et 0,35 % en temps ouvré sur 8 heures. Comparer un état actuel en calendaire à un état futur en temps ouvré multiplie le ratio par trois sans rien changer."
+  },
+  {
+    "id": "5-les-plus-longs-pas-les-plus-gros",
+    "section": "État futur : ce qu'on change, et dans quel ordre",
+    "apres": "L'ordre d'attaque est presque toujours le même",
+    "role": "Rend visible le deuxième point de l'ordre d'attaque : classés par quantité, trois stocks donnent A en tête ; convertis en jours d'attente, le classement s'inverse et c'est C, le plus petit, qu'on attaque.",
+    "alt": "Trois stocks classés par quantité (A 600 pièces, B 300, C 120) puis convertis en jours d'attente en divisant par la consommation du poste suivant (A 1 jour, B 3 jours, C 6 jours) : le classement s'inverse et C devient le premier chantier. En bas, l'ordre d'attaque de l'état futur : poste qui donne le rythme, stocks les plus longs, changements de série, flux d'information."
+  }
+]

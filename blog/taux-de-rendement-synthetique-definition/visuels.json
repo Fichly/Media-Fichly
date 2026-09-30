@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-convention-temps-requis",
+    "section": "Quelle est la formule du temps requis du TRS ?",
+    "apres": "Requalifier une panne récurrente en maintenance planifiée la fait sortir du dénominateur",
+    "role": "Met en mouvement l'encadré « Le point qui décide de tout » : une heure de panne change de case, le temps requis passe de 14 h à 13 h, le TRS de 77 % à 83 %, alors que la machine reste arrêtée 4 h et livre toujours 650 pièces conformes.",
+    "alt": "La journée de référence en 16 cases d'une heure : une heure de panne récurrente est requalifiée en maintenance planifiée. Le temps requis passe de 14 h à 13 h et le TRS de 77 % à 83 %, alors que la machine reste arrêtée 4 h et livre toujours 650 pièces conformes."
+  },
+  {
+    "id": "2-calcul-pas-a-pas",
+    "section": "Comment calculer le TRS pas à pas ?",
+    "apres": "Sur 14 heures requises, la ligne a produit",
+    "role": "Montre pourquoi on multiplie : chaque taux retire une tranche de la même barre de 14 h (2 h d'arrêts subis, 40 pièces de cadence, 30 rebuts) ; il reste 10 h 50, soit 77 %. La plus grosse tranche, la disponibilité, désigne le chantier.",
+    "alt": "Calcul du TRS pas à pas sur une seule barre de temps : 16 h moins 2 h planifiées donnent 14 h requises ; la disponibilité retire 2 h d'arrêts subis (85,7 %), la performance 40 pièces (94,4 %), la qualité 30 rebuts (95,6 %). Il reste 10 h 50, soit un TRS de 77 %, et la disponibilité, à 14,3 points, est le premier chantier."
+  },
+  {
+    "id": "3-micro-arrets-invisibles",
+    "section": "Les six grandes pertes derrière un TRS",
+    "apres": "Les micro-arrêts durent quelques secondes et se règlent au poste",
+    "role": "Une équipe se déroule : seule la panne entre au rapport d'arrêts ; les micro-arrêts et les rebuts de démarrage n'y figurent pas, mais le TRS les compte, et les micro-arrêts cumulés dépassent la panne.",
+    "alt": "Une équipe de 8 h : la panne de 25 minutes part au rapport d'arrêts, les 40 micro-arrêts de 45 secondes et les 12 pièces rebutées au démarrage n'y figurent pas. Le TRS les compte : cumulés, les micro-arrêts pèsent 30 minutes, plus que la panne."
+  },
+  {
+    "id": "4-meme-trs-trois-chantiers",
+    "section": "Ce qu'un TRS autorise à décider",
+    "apres": "Un TRS ne se contemple pas.",
+    "role": "Trois lignes affichent 77 % : le chiffre seul ne dit pas où agir. Ouvert en trois taux, chaque TRS montre sa plus grosse perte à un endroit différent, qui appelle une décision différente (maintenance, poste, réglage).",
+    "alt": "Trois lignes au même TRS de 77 %. Ouvert en disponibilité, performance et qualité, chacun révèle une perte principale différente : disponibilité pour la ligne A (maintenance et approvisionnement), performance pour la ligne B (micro-arrêts, décision de poste), qualité pour la ligne C (réglage et standard de démarrage)."
+  }
+]

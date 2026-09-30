@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-temps-disponible",
+    "section": "Comment calculer le takt time ?",
+    "apres": "Le calcul paresseux prend les 16 heures brutes",
+    "role": "Applique la règle du numérateur à l'exemple : les arrêts planifiés sortent de la journée, les arrêts subis essaient de sortir et retombent ; la barre se resserre à 12 h 40 = 45 600 s, d'où 95 s par pièce contre 120 s pour le calcul paresseux.",
+    "alt": "La journée de 16 heures en barre : pauses, prise de poste et maintenance planifiée (3 h 20) sont retirées, la panne, les micro-arrêts et le changement de série restent dans le calcul. Il reste 12 h 40, soit 45 600 secondes : 45 600 ÷ 480 = 95 secondes par pièce, contre 120 secondes avec les 16 heures brutes, 25 secondes d'écart par pièce."
+  },
+  {
+    "id": "2-plus-vite-moins-vite",
+    "section": "Takt time et temps de cycle : la comparaison qui décide",
+    "apres": "Le takt time ne produit une décision qu'en face d'une seconde durée",
+    "role": "Anime les trois situations du tableau avec un seul métronome : même takt de 95 s, trois temps de cycle ; plus rapide, les pièces sortent avant le battement et s'accumulent ; calé, chaque pièce tombe sur le battement ; plus lent, l'écart grandit de 13 s à chaque pièce.",
+    "alt": "Un métronome à 95 secondes et trois postes : à 70 secondes de cycle, les pièces sortent avant le client et le stock grossit (171 pièces de trop sur la journée) ; à 95 secondes, chaque pièce sort sur le battement ; à 108 secondes, chaque pièce sort plus tard que la précédente, 13, 26, 39 secondes, jusqu'à 1 h 44 de retard sur 480 pièces."
+  },
+  {
+    "id": "3-le-goulot-pas-la-moyenne",
+    "section": "Takt time et temps de cycle : la comparaison qui décide",
+    "apres": "Trois voies, par coût croissant.",
+    "role": "Montre pourquoi on lit le poste le plus lent et pas la moyenne (89,5 s passe sous le takt, le poste 3 à 108 s ne passe pas), puis la première voie en action : une tâche quitte le goulot pour un poste en avance et toute la ligne passe sous 95 s.",
+    "alt": "Quatre postes empilés par tâches face à la ligne du takt à 95 secondes : la moyenne de 89,5 secondes passe sous le takt, mais le poste 3 à 108 secondes dépasse de 13 secondes et fixe la cadence. Une tâche de 14 secondes passe du poste 3 au poste 4 : 94 et 92 secondes, tout passe sous le takt. À droite, les trois voies par coût croissant : équilibrer, réduire le cycle, ouvrir du temps."
+  }
+]

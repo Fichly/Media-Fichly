@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-frise-mtbf-mttr",
+    "section": "Quelle est la différence entre MTBF et MTTR ?",
+    "apres": "Il répond à une tout autre question",
+    "role": "Remplace les images MTBF et MTTR : sur la même frise de 14 h, les périodes de marche s'alignent et se partagent en 3 (MTBF 4 h, combien de temps ça tient), les arrêts s'alignent et se partagent en 3 (MTTR 40 min, combien de temps on reste à l'arrêt).",
+    "alt": "Une journée de 14 h requises avec 3 pannes : les périodes de marche mises bout à bout font 12 h, divisées par 3 pannes, soit un MTBF de 4 h (fiabilité, le plus haut possible) ; les arrêts font 2 h, divisés par 3 réparations, soit un MTTR de 40 min (maintenabilité, le plus bas possible)."
+  },
+  {
+    "id": "2-disponibilite-cycle",
+    "section": "Pourquoi MTBF et MTTR donnent-ils ensemble la disponibilité ?",
+    "apres": "Ce dernier chiffre est exactement le rapport entre les 12 heures produites et les 14 heures requises",
+    "role": "Remplace l'image de la disponibilité : le cycle moyen (4 h de marche + 40 min de remise en service) donne 85,7 % ; recopié trois fois, il reconstruit exactement les 14 h requises, et 12 h / 14 h redonne 85,7 %. Les deux chemins se contrôlent.",
+    "alt": "Chemin 1 : un cycle moyen de 4 h de marche (MTBF) et 40 min de remise en service (MTTR) donne une disponibilité de 4 / (4 + 0,67) = 85,7 %. Chemin 2 : trois cycles reconstruisent les 14 h requises, avec 12 h de fonctionnement, soit 12 / 14 = 85,7 %. Même résultat : le relevé est cohérent."
+  },
+  {
+    "id": "3-courbe-en-baignoire",
+    "section": "Le seuil universel n'existe pas",
+    "apres": "C'est la courbe en baignoire.",
+    "role": "Remplace l'image de la courbe en baignoire : le curseur parcourt la vie d'un même équipement, la courbe se trace, les pannes tombent serrées puis espacées puis serrées, et le MTBF de chaque période s'allonge ou se raccourcit d'autant.",
+    "alt": "La courbe en baignoire : le taux de défaillance d'un même équipement est élevé en jeunesse, bas et stable en vie utile, puis remonte à l'usure. Les pannes sont serrées, espacées puis de nouveau serrées : MTBF court, long, puis court."
+  },
+  {
+    "id": "4-quatre-horodatages",
+    "section": "Comment calculer MTBF et MTTR ?",
+    "apres": "le temps d'intervention proprement dit est le plus petit des trois",
+    "role": "Un arrêt de 40 minutes relevé d'un seul bloc ne dit rien ; les quatre horodatages le découpent en détection et appel, attente, intervention. Côte à côte, l'intervention, premier réflexe d'action, est le plus petit des trois morceaux.",
+    "alt": "Un arrêt de 40 minutes découpé par quatre horodatages (arrêt 10 h 12, appel 10 h 25, prise en charge 10 h 42, remise en service 10 h 52) en trois morceaux : détection et appel 13 min, attente 17 min, intervention 10 min, le plus petit des trois."
+  },
+  {
+    "id": "5-quadrants-mtbf-mttr",
+    "section": "Lequel suivre : le croisement MTBF et MTTR en quatre cas",
+    "apres": "Le premier, qui tombe toutes les 4 heures et repart en 20 minutes",
+    "role": "Remplace l'image « MTBF ou MTTR : sur quoi agir » : deux machines aux frises opposées ont presque la même disponibilité (92 % et 91 %), puis chacune rejoint son quadrant (fiabilité, remise en service) et le service qui doit s'en saisir.",
+    "alt": "Matrice MTBF et MTTR en quatre quadrants. La machine 1, qui tombe toutes les 4 h et repart en 20 min (disponibilité 92 %), se place en fiabilité, pour les méthodes. La machine 2, qui tient 3 semaines et reste bloquée 2 jours (91 %), se place en remise en service, pour la maintenance et les achats."
+  }
+]
