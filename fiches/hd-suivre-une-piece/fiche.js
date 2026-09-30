@@ -4,101 +4,9 @@
 // Mécanique : le parcours de la pièce (4 attentes, une transformation), puis le temps passé dans l'usine.
 // Rendu déterministe : window.FICHE.draw(t), t en secondes, boucle de 12 s.
 (() => {
-  const W = 1080, H = 1350;
-  const DURATION = 12;
+  const G = window.Gabarit;
+  const { C, el, text, measure, fit, prog, easeInOut, back, clamp, invEaseInOut, FADE_END, fading, fadeOut, pop, slide, rise } = G;
 
-  // Palette de la charte (valeurs de C) + bandeau six couleurs du gabarit LinkedIn
-  const C = {
-    blue: '#4a4aa0', green: '#8cc978', yellow: '#e6b839', red: '#f16969',
-    lightBlue: '#74a3d6', teal: '#75bec0', violet: '#aa76b2',
-    pGreen: '#e6f3df', pRed: '#fde6e6', pLav: '#ececf5',
-    tGreen: '#2f5a1f', tRed: '#a83434',
-    ink: '#23235a', card: '#fdfdfb', line: '#e2e2ee', white: '#ffffff',
-  };
-  const RIBBON = ['#f16969', '#75bec0', '#aa76b2', '#8cc978', '#e0cf35', '#74a3d6'];
-  const ENCART_BLACK = '#000000'; // première ligne des encarts Fichly
-
-  const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.getElementById('stage');
-
-  function el(tag, attrs = {}, parent = svg) {
-    const n = document.createElementNS(NS, tag);
-    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
-    parent.appendChild(n);
-    return n;
-  }
-  function text(parent, x, y, str, { size = 26, weight = 500, fill = C.ink, anchor = 'start' } = {}) {
-    const t = el('text', { x, y, 'font-family': 'Poppins', 'font-size': size, 'font-weight': weight, fill, 'text-anchor': anchor }, parent);
-    t.textContent = str;
-    return t;
-  }
-  const measure = node => node.getBBox();
-  const checks = [];
-  const fit = (node, maxRight, label, minLeft = 0) => checks.push({ node, maxRight, minLeft, label });
-
-  // ---------- Easing ----------
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const prog = (t, s, d) => clamp((t - s) / d);
-  const easeOut = p => 1 - Math.pow(1 - p, 3);
-  const easeInOut = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-  const back = p => { const c = 1.3; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
-
-  // Image complète jusqu'à 1,2 s, effacement du contenu en 0,4 s, puis reconstruction.
-  const FADE_START = 1.2, FADE_END = 1.6;
-  const fading = t => t >= FADE_START && t < FADE_END;
-  const fadeOut = t => 1 - prog(t, FADE_START, FADE_END - FADE_START);
-
-  function pop(g, t, start, cx, cy, dur = 0.35) {
-    let s = 1, o = 1;
-    if (fading(t)) o = fadeOut(t);
-    else if (t >= FADE_END) {
-      const p = prog(t, start, dur);
-      s = p <= 0 ? 0.001 : p >= 1 ? 1 : 0.6 + 0.4 * back(p);
-      o = clamp(p / 0.4);
-    }
-    g.setAttribute('transform', s === 1 ? '' : `translate(${cx} ${cy}) scale(${s}) translate(${-cx} ${-cy})`);
-    g.setAttribute('opacity', o);
-  }
-  function slide(g, t, start, dur = 0.45, dx = -140) {
-    let x = 0, o = 1;
-    if (fading(t)) o = fadeOut(t);
-    else if (t >= FADE_END) {
-      const p = prog(t, start, dur);
-      x = p >= 1 ? 0 : dx * (1 - easeOut(p));
-      o = clamp(p / 0.5);
-    }
-    g.setAttribute('transform', x === 0 ? '' : `translate(${x} 0)`);
-    g.setAttribute('opacity', o);
-  }
-  function rise(g, t, start, dur = 0.4, dy = 18) {
-    let y = 0, o = 1;
-    if (fading(t)) o = fadeOut(t);
-    else if (t >= FADE_END) {
-      const p = prog(t, start, dur);
-      y = p >= 1 ? 0 : dy * (1 - easeOut(p));
-      o = clamp(p / 0.6);
-    }
-    g.setAttribute('transform', y === 0 ? '' : `translate(0 ${y})`);
-    g.setAttribute('opacity', o);
-  }
-
-  // ---------- Pictos ----------
-  function check(parent, cx, cy, r, bg) {
-    el('circle', { cx, cy, r, fill: bg }, parent);
-    const k = r / 26;
-    el('path', {
-      d: `M ${cx - 10 * k} ${cy + 1 * k} L ${cx - 3 * k} ${cy + 8 * k} L ${cx + 11 * k} ${cy - 7 * k}`,
-      fill: 'none', stroke: C.white, 'stroke-width': 5 * k, 'stroke-linecap': 'round', 'stroke-linejoin': 'round',
-    }, parent);
-  }
-  function cross(parent, cx, cy, r, bg) {
-    el('circle', { cx, cy, r, fill: bg }, parent);
-    const d = 8.5 * r / 26;
-    el('path', {
-      d: `M ${cx - d} ${cy - d} L ${cx + d} ${cy + d} M ${cx + d} ${cy - d} L ${cx - d} ${cy + d}`,
-      fill: 'none', stroke: C.white, 'stroke-width': 5 * r / 26, 'stroke-linecap': 'round',
-    }, parent);
-  }
   // Chronomètre : renvoie l'aiguille pour l'animer
   function stopwatch(parent, cx, cy, k = 1) {
     const g = el('g', { transform: `translate(${cx} ${cy}) scale(${k})` }, parent);
@@ -110,63 +18,16 @@
     el('circle', { cx: 0, cy: 2, r: 1.8, fill: C.tRed }, g);
     return { hand };
   }
-  function pill(parent, x, cy, label, { size = 21, bg = C.pLav, fg = C.blue, h = 36, pad = 16 } = {}) {
-    const g = el('g', {}, parent);
-    const r = el('rect', { x, y: cy - h / 2, height: h, rx: h / 2, fill: bg }, g);
-    const tx = text(g, x + pad, cy + size * 0.36, label, { size, weight: 700, fill: fg });
-    const w = measure(tx).width + pad * 2;
-    r.setAttribute('width', w);
-    return { g, w, tx };
-  }
 
-  // ---------- Gabarit LinkedIn : fond, bandeau, logo, badge auteur (Hugo Duc par défaut) ----------
-  function template() {
-    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#f3f3f3' });
-    el('image', { href: '../../assets/paper.png', x: 0, y: 0, width: W, height: H });
-    RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: 1332, width: 180, height: 18, fill: c }));
-    el('image', { href: '../../assets/fichly-logo.png', x: 884, y: 1228, width: 178, height: 94 });
-    el('image', { href: '../../assets/auteurs/hugo-duc.png', x: 891, y: 43, width: 125, height: 125 });
-    text(svg, 952, 210, 'Hugo', { size: 23, weight: 400, fill: C.blue, anchor: 'middle' });
-    text(svg, 952, 243, 'Duc', { size: 23, weight: 700, fill: C.blue, anchor: 'middle' });
-  }
-
-  // Encart bas gauche : visuel des guides + appel vers le premier commentaire du post
-  function encart(lines) {
-    const g = el('g');
-    el('image', { href: '../../assets/encarts/guides-fichly.png', x: 14, y: 1215, width: 262, height: 117 }, g);
-    el('path', { d: 'M 268 1318 C 300 1319, 332 1304, 351 1277', fill: 'none', stroke: C.blue, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, g);
-    el('path', { d: 'M 337 1286 L 352 1275 L 354 1293', fill: 'none', stroke: C.blue, 'stroke-width': 3.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
-    const CX = 512;
-    const a = text(g, CX, 1204, lines[0], { size: 26, weight: 700, fill: ENCART_BLACK, anchor: 'middle' });
-    const b = text(g, CX, 1235, lines[1], { size: 26, weight: 700, fill: C.blue, anchor: 'middle' });
-    const c = text(g, CX, 1270, lines[2], { size: 26, weight: 700, fill: C.blue, anchor: 'middle' });
-    const cb = measure(c);
-    const x0 = cb.x + 26, x1 = cb.x + cb.width - 6;
-    el('path', { d: `M ${x0} 1290 C ${x0 + 44} 1283, ${x0 + 134} 1280, ${x1} 1281`, fill: 'none', stroke: C.green, 'stroke-width': 3.4, 'stroke-linecap': 'round' }, g);
-    el('path', { d: `M ${x0 + 36} 1295 C ${x0 + 82} 1291, ${x0 + 152} 1290, ${x1 - 48} 1291`, fill: 'none', stroke: C.green, 'stroke-width': 3.4, 'stroke-linecap': 'round' }, g);
-    [a, b, c].forEach((n, i) => fit(n, 870, `encart ligne ${i + 1}`, 290));
-  }
-
-  // ---------- Scène ----------
   const S = {};
 
   function build() {
-    template();
-
-    // Titre : ligne 1 bleue, ligne 2 blanche dans le cadre bleu (keyTitle). 840 px max (badge).
-    const t1 = text(svg, 62, 122, 'Suivez une pièce,', { size: 72, weight: 800, fill: C.blue });
-    fit(t1, 900, 'titre ligne 1');
-    const kb = el('rect', { x: 44, y: 157, height: 82, rx: 12, fill: C.blue });
-    const t2 = text(svg, 68, 216, 'elle attend.', { size: 72, weight: 800, fill: C.white });
-    kb.setAttribute('width', measure(t2).width + 48);
-    fit(kb, 900, 'cadre keyTitle');
-
-    // Chapeau
-    const chap = text(svg, 62, 304, 'Du quai de réception jusqu’à l’expédition, chronomètre en main.', { size: 26, weight: 500, fill: C.blue });
-    fit(chap, 1020, 'chapeau');
+    G.template({ author: 'hugo' });
+    G.title('Suivez une pièce,', 'elle attend.');
+    G.chapeau('Du quai de réception jusqu’à l’expédition, chronomètre en main.');
 
     // ----- Carte 1 : le parcours de la pièce -----
-    el('rect', { x: 60, y: 330, width: 960, height: 386, rx: 24, fill: C.card, stroke: C.line, 'stroke-width': 2 });
+    G.card(60, 330, 960, 386);
     const RAIL_X = 108;
     const Y = [372, 422, 472, 522, 572, 622, 672]; // départ, 4 attentes, transformation, arrivée
     S.Y = Y;
@@ -177,7 +38,7 @@
     S.rows = [];
     {
       const g = el('g');
-      const p = pill(g, 140, Y[0], 'Quai de réception');
+      const p = G.pill(g, 140, Y[0], 'Quai de réception');
       S.rows.push({ g, cx: 140 + p.w / 2, cy: Y[0] });
     }
     const waits = [
@@ -190,24 +51,21 @@
     waits.forEach((label, i) => {
       const cy = Y[i + 1];
       const g = el('g');
-      el('circle', { cx: 160, cy, r: 20, fill: C.blue }, g);
-      text(g, 160, cy + 7.5, String(i + 1), { size: 21, weight: 700, fill: C.white, anchor: 'middle' });
-      const tx = text(g, 194, cy + 9, label, { size: 26, weight: 700, fill: C.ink });
-      fit(tx, 935, `attente ${i + 1}`);
+      G.badgeNum(g, 160, cy, i + 1);
+      fit(text(g, 194, cy + 9, label, { size: 26, weight: 700, fill: C.ink }), 935, `attente ${i + 1}`);
       S.watches.push(stopwatch(g, 974, cy, 0.92));
       S.rows.push({ g, cx: 560, cy });
     });
     {
       const cy = Y[5];
       const g = el('g');
-      check(g, 160, cy, 20, C.green);
-      const tx = text(g, 194, cy + 9, 'De temps en temps, quelqu’un la transforme.', { size: 26, weight: 700, fill: C.tGreen });
-      fit(tx, 995, 'transformation');
+      G.check(g, 160, cy, 20);
+      fit(text(g, 194, cy + 9, 'De temps en temps, quelqu’un la transforme.', { size: 26, weight: 700, fill: C.tGreen }), 995, 'transformation');
       S.rows.push({ g, cx: 560, cy });
     }
     {
       const g = el('g');
-      const p = pill(g, 140, Y[6], 'Expédition');
+      const p = G.pill(g, 140, Y[6], 'Expédition');
       S.rows.push({ g, cx: 140 + p.w / 2, cy: Y[6] });
     }
     // La pièce
@@ -216,10 +74,9 @@
     el('circle', { cx: 0, cy: 0, r: 4.5, fill: C.white }, S.token);
 
     // ----- Carte 2 : le temps passé dans l'usine -----
-    el('rect', { x: 60, y: 730, width: 960, height: 166, rx: 24, fill: C.card, stroke: C.line, 'stroke-width': 2 });
+    G.card(60, 730, 960, 166);
     S.head = el('g');
-    const hd = text(S.head, 100, 772, 'Le temps passé dans l’usine', { size: 26, weight: 700, fill: C.ink });
-    fit(hd, 980, 'titre carte 2');
+    fit(text(S.head, 100, 772, 'Le temps passé dans l’usine', { size: 26, weight: 700, fill: C.ink }), 980, 'titre carte 2');
 
     const BAR = { x: 100, y: 788, w: 880, h: 36 };
     S.BAR = BAR;
@@ -248,38 +105,21 @@
     el('circle', { cx: l2x + 9, cy: 858, r: 9, fill: C.green }, S.legend);
     const l2 = text(S.legend, l2x + 26, 866, 'Elle est transformée', { size: 22, weight: 500, fill: C.ink });
     const l3 = text(S.legend, 980, 866, 'Un total presque dérisoire', { size: 22, weight: 700, fill: C.tGreen, anchor: 'end' });
-    const b2 = measure(l2), b3 = measure(l3);
-    if (b2.x + b2.width + 24 > b3.x) console.error(`Chevauchement : légende (${Math.round(b2.x + b2.width)} > ${Math.round(b3.x - 24)})`);
+    G.noOverlap(l2, l3, 'légende carte 2', 24);
 
     // ----- Bandeaux : bonne et mauvaise lecture -----
     S.good = el('g');
     el('rect', { x: 60, y: 910, width: 960, height: 64, rx: 20, fill: C.pGreen }, S.good);
-    check(S.good, 110, 942, 22, C.green);
-    const g1 = text(S.good, 150, 951.5, 'Un chronomètre, oui. Sur la pièce.', { size: 26, weight: 700, fill: C.tGreen });
-    fit(g1, 1000, 'bandeau ✓');
+    G.check(S.good, 110, 942, 22);
+    fit(text(S.good, 150, 951.5, 'Un chronomètre, oui. Sur la pièce.', { size: 26, weight: 700, fill: C.tGreen }), 1000, 'bandeau ✓');
 
     S.bad = el('g');
     el('rect', { x: 60, y: 986, width: 960, height: 64, rx: 20, fill: C.pRed }, S.bad);
-    cross(S.bad, 110, 1018, 22, C.red);
-    const r1 = text(S.bad, 150, 1027.5, 'Pas sur les personnes.', { size: 26, weight: 700, fill: C.tRed });
-    fit(r1, 1000, 'bandeau ✗');
+    G.cross(S.bad, 110, 1018, 22);
+    fit(text(S.bad, 150, 1027.5, 'Pas sur les personnes.', { size: 26, weight: 700, fill: C.tRed }), 1000, 'bandeau ✗');
 
-    // ----- Chute -----
-    S.chute = el('g');
-    const c1 = text(S.chute, 62, 1108, 'Avant d’aller plus vite sur les opérations,', { size: 30, weight: 700, fill: C.blue });
-    const c2 = text(S.chute, 62, 1148, 'il faut regarder tout le temps qui les sépare.', { size: 30, weight: 700, fill: C.blue });
-    fit(c1, 1020, 'chute ligne 1');
-    fit(c2, 1020, 'chute ligne 2');
-
-    // ----- Encart (fixe) : premier commentaire = article VSM -----
-    encart(['Cartographier ses flux', 'Notre article sur la VSM', '(lien en commentaire)']);
-
-    // Contrôle des débordements
-    for (const { node, maxRight, minLeft, label } of checks) {
-      const b = measure(node);
-      if (b.x + b.width > maxRight + 0.5 || b.x < minLeft - 0.5)
-        console.error(`Débordement : ${label} (${Math.round(b.x)} → ${Math.round(b.x + b.width)}, bornes ${minLeft} → ${maxRight})`);
-    }
+    S.chute = G.chute('Avant d’aller plus vite sur les opérations,', 'il faut regarder tout le temps qui les sépare.');
+    G.encart(['Cartographier ses flux', 'Notre article sur la VSM', '(lien en commentaire)']);
   }
 
   // ---------- Chronologie ----------
@@ -300,7 +140,6 @@
   }
 
   function draw(t) {
-    t = ((t % DURATION) + DURATION) % DURATION;
     const Y = S.Y;
 
     // Étapes du parcours, dans l'ordre du post
@@ -355,22 +194,5 @@
     rise(S.chute, t, 7.85, 0.45);
   }
 
-  function invEaseInOut(y) {
-    let lo = 0, hi = 1;
-    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (easeInOut(m) < y) lo = m; else hi = m; }
-    return (lo + hi) / 2;
-  }
-
-  const ready = (async () => {
-    await Promise.all([400, 500, 700, 800].map(w => document.fonts.load(`${w} 30px Poppins`)));
-    await document.fonts.ready;
-    build();
-    const imgs = [...svg.querySelectorAll('image')];
-    await Promise.all(imgs.map(i => new Promise(res => {
-      const im = new Image(); im.onload = im.onerror = res; im.src = new URL(i.getAttribute('href'), location.href).href;
-    })));
-    draw(0);
-  })();
-
-  window.FICHE = { width: W, height: H, duration: DURATION, draw, ready };
+  G.start({ duration: 12, build, draw });
 })();

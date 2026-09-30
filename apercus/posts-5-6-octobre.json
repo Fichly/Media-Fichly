@@ -1,0 +1,20 @@
+[
+  {
+    "auteur": "Clément Raymond",
+    "photo": "assets/auteurs/clement-raymond.png",
+    "quand": "Programmé mardi 6 octobre, 7 h 45",
+    "visuel": "livrables/cr-occupee-a-100.gif",
+    "alt": "Deux postes occupés à 100 % et le stock qui grossit entre les deux",
+    "texte": "Une machine occupée à 100 % n'est pas forcément une bonne nouvelle.\nSurtout si la machine suivante ne suit pas.\n\nDans beaucoup d'ateliers, on pilote encore le taux d'occupation poste par poste.\n\nChaque machine doit tourner.\nChaque arrêt est vu comme une perte.\n\nLe résultat est prévisible.\n\nLes postes rapides produisent à leur rythme.\nLes postes lents ne peuvent pas absorber.\nEt entre les deux, le stock grossit.\n\n❌ Plus d'encours.\n❌ Un délai de traversée qui s'allonge.\n❌ Des défauts découverts des jours après leur fabrication.\n\nSur l'indicateur, tout va bien : les machines sont occupées.\n\nDans le flux, rien ne va plus vite.\n\nLa règle à garder en tête : un atelier ne produit jamais plus vite que son poste le plus lent.\n\nTout ce qu'on fabrique au-delà finit en stock.\n\n👉 Avant de juger une machine sur son occupation, regardez l'encours qui s'accumule juste après elle.",
+    "commentaire": "Retrouvez notre article sur la cartographie des flux (VSM) sur ce lien 👉 https://bit.ly/VSM-Fichly"
+  },
+  {
+    "auteur": "Hugo Duc",
+    "photo": "assets/auteurs/hugo-duc.png",
+    "quand": "Programmé lundi 5 octobre, 8 h 30",
+    "visuel": "livrables/hd-suivre-une-piece.gif",
+    "alt": "Le parcours d'une pièce : quatre attentes et une transformation",
+    "texte": "Quand je découvre un atelier, je commence rarement par les indicateurs.\n\nJe choisis une pièce.\nEt je la suis, du quai de réception jusqu'à l'expédition.\n\nC'est l'exercice le plus simple que je connaisse.\nC'est aussi celui qui dérange le plus.\n\nParce que très vite, on voit que la pièce passe l'essentiel de son temps à ne rien faire 👇\n\n1️⃣ Elle attend dans un stock.\n2️⃣ Elle attend un chariot.\n3️⃣ Elle attend qu'une machine se libère.\n4️⃣ Elle attend un contrôle.\n\nEt, de temps en temps, quelqu'un la transforme.\n\nSur le papier, tout le monde connaît la différence entre valeur ajoutée et non-valeur ajoutée.\n\nSur le terrain, la voir est une autre histoire.\n\nQuand on additionne les minutes où la pièce est réellement transformée, le total paraît presque dérisoire à côté du temps qu'elle a passé dans l'usine.\n\nPour moi, c'est le vrai point de départ d'une démarche Lean.\n\nPas un outil.\nPas un plan d'action.\n\nUne pièce, un chronomètre, et l'honnêteté de noter tout ce qu'elle vit.\n\nUn chronomètre, oui. Mais sur la pièce, pas sur les personnes.\n\n👉 Avant de vouloir aller plus vite sur les opérations, il faut regarder tout le temps qui les sépare.",
+    "commentaire": "Retrouvez notre article sur la cartographie des flux (VSM) sur ce lien 👉 https://bit.ly/VSM-Fichly"
+  }
+]
