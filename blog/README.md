@@ -1,6 +1,6 @@
 # Visuels animés du blog Fichly
 
-26 articles sur 27 ont leurs visuels, 103 visuels au total.
+26 articles sur 27 ont leurs visuels, 104 visuels au total.
 Méthode et conventions : [GUIDE-VISUELS.md](GUIDE-VISUELS.md). Inventaire Shopify : [inventaire.json](inventaire.json).
 
 Pour chaque article :
@@ -20,7 +20,7 @@ Vue d'ensemble avec les vignettes : [apercus/blog/index.html](../apercus/blog/in
 | [Les MUDA : Les 8 Gaspillages Du Lean - Guide complet](https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet) | publié | 4 | [dossier](les-muda-les-8-gaspillages-du-lean-guide-complet/) · [fichiers](../livrables/blog/les-muda-les-8-gaspillages-du-lean-guide-complet/) | [aperçu](../apercus/blog/les-muda-les-8-gaspillages-du-lean-guide-complet.html) |
 | [MTBF et MTTR : les deux indicateurs qui expliquent votre disponibilité](https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite) | publié | 5 | [dossier](mtbf-mttr-indicateurs-disponibilite/) · [fichiers](../livrables/blog/mtbf-mttr-indicateurs-disponibilite/) | [aperçu](../apercus/blog/mtbf-mttr-indicateurs-disponibilite.html) |
 | [Méthode des 5 pourquoi : exemple, étapes et cause racine](https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine) | publié | 4 | [dossier](methode-5-pourquoi-cause-racine/) · [fichiers](../livrables/blog/methode-5-pourquoi-cause-racine/) | [aperçu](../apercus/blog/methode-5-pourquoi-cause-racine.html) |
-| [Méthode DMAIC : les 5 étapes expliquées (guide 2026)](https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes) | publié | 3 | [dossier](methode-dmaic-5-etapes/) · [fichiers](../livrables/blog/methode-dmaic-5-etapes/) | [aperçu](../apercus/blog/methode-dmaic-5-etapes.html) |
+| [Méthode DMAIC : les 5 étapes expliquées (guide 2026)](https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes) | publié | 4 | [dossier](methode-dmaic-5-etapes/) · [fichiers](../livrables/blog/methode-dmaic-5-etapes/) | [aperçu](../apercus/blog/methode-dmaic-5-etapes.html) |
 | [Méthode SMED : les 5 étapes expliquées (guide 2026)](https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes) | publié | 5 | [dossier](methode-smed-5-etapes/) · [fichiers](../livrables/blog/methode-smed-5-etapes/) | [aperçu](../apercus/blog/methode-smed-5-etapes.html) |
 | [QUALIOPI formation Lean : ce que le label change | Fichly](https://www.fichly.com/blogs/nos-articles/formation-lean-qualiopi-ce-que-le-label-change) | publié | 3 | [dossier](formation-lean-qualiopi-ce-que-le-label-change/) · [fichiers](../livrables/blog/formation-lean-qualiopi-ce-que-le-label-change/) | [aperçu](../apercus/blog/formation-lean-qualiopi-ce-que-le-label-change.html) |
 | [Quelle formation Lean Management choisir ?](https://www.fichly.com/blogs/nos-articles/quelle-formation-lean-management-certifiante-choisir) | publié | 3 | [dossier](quelle-formation-lean-management-certifiante-choisir/) · [fichiers](../livrables/blog/quelle-formation-lean-management-certifiante-choisir/) | [aperçu](../apercus/blog/quelle-formation-lean-management-certifiante-choisir.html) |
