@@ -1,13 +1,13 @@
 """Aperçu d'un article de blog avec ses visuels animés placés dans le texte.
 
-    python3 outils/apercu_article.py blog/lean-manufacturing
+    python3 outils/apercu_article.py blog/<article>
 
-Lit <dossier>/article.html (le texte de l'article) et <dossier>/visuels.json
+Lit blog/<article>/article.html (le texte de l'article) et blog/<article>/visuels.json
 (pour chaque visuel : id, phrase après laquelle il se place, rôle, texte alt),
-et écrit apercus/apercu-<nom>.html, autonome (vidéos MP4 intégrées).
+et écrit apercus/blog/<article>.html. Les vidéos sont liées en relatif vers
+livrables/blog/<article>/ (page légère, à ouvrir depuis le dépôt cloné).
 Sous chaque visuel, une note rappelle à quoi il sert dans l'article.
 """
-import base64
 import html
 import json
 import sys
@@ -16,16 +16,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def data_uri(p, mime):
-    return f"data:{mime};base64,{base64.b64encode(p.read_bytes()).decode()}"
-
-
-def figure(v, n, livrables):
-    mp4 = livrables / f"{v['id']}.mp4"
+def figure(v, n, rel):
     esc = lambda s: html.escape(s, quote=True)
     return f"""
 <figure class="visuel">
-  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="{esc(v['alt'])}" src="{data_uri(mp4, 'video/mp4')}"></video>
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="{esc(v['alt'])}" poster="{rel}/{v['id']}.png" src="{rel}/{v['id']}.mp4"></video>
   <figcaption><span class="num">Visuel {n}</span> <code>{esc(v['id'])}</code><br>{esc(v['role'])}</figcaption>
 </figure>
 """
@@ -34,7 +29,7 @@ def figure(v, n, livrables):
 def main(folder):
     folder = ROOT / folder
     name = folder.name
-    livrables = ROOT / 'livrables' / folder.relative_to(ROOT)
+    rel = f"../../livrables/blog/{name}"
     body = (folder / 'article.html').read_text(encoding='utf-8')
     visuels = json.loads((folder / 'visuels.json').read_text(encoding='utf-8'))
     # Insertion du dernier au premier pour garder les positions valables
@@ -46,7 +41,7 @@ def main(folder):
         end = body.find('</p>', i) + len('</p>')
         placed.append((end, n, v))
     for end, n, v in sorted(placed, key=lambda x: -x[0]):
-        body = body[:end] + figure(v, n, livrables) + body[end:]
+        body = body[:end] + figure(v, n, rel) + body[end:]
 
     page = f"""<!doctype html>
 <html lang="fr">
@@ -77,13 +72,14 @@ def main(folder):
 </head>
 <body>
 <main>
-  <p class="bandeau">Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
+  <p class="bandeau"><a href="index.html">← Tous les articles</a> · Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
 {body}
 </main>
 </body>
 </html>
 """
-    out = ROOT / 'apercus' / f'apercu-{name}.html'
+    out = ROOT / 'apercus' / 'blog' / f'{name}.html'
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(page, encoding='utf-8')
     print('→', out.relative_to(ROOT), f"{out.stat().st_size / 1e6:.2f} Mo")
 

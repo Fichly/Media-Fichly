@@ -16,7 +16,8 @@ const si = argv.indexOf('--scenario');
 const scenario = si >= 0 ? argv.splice(si, 2)[1] : null;
 const [id, mode = 'stills', ...rest] = argv;
 const name = scenario ? `${id}--${scenario}` : id;
-const base = path.basename(name);
+// Nom de fichier unique pour les images de contrôle (blog/<article>/<visuel> → blog__<article>__<visuel>)
+const base = name.replace(/\//g, '__');
 if (!id) { console.error('Usage : node outils/rendu.js <id> stills [t…] | gif [fps]'); process.exit(1); }
 const FFMPEG = process.env.FFMPEG || 'ffmpeg';
 

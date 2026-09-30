@@ -1,0 +1,991 @@
+[
+  {
+    "handle": "matrice-raci-definition-exemple-methode",
+    "titre": "Matrice RACI : définition, exemple et méthode de construction en une réunion",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Gestion de projet",
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/matrice-raci-definition-exemple-methode",
+    "image_couverture": null,
+    "mots": 4952,
+    "sections": [
+      "Qu'est-ce que la matrice RACI ?",
+      "Les quatre lettres de RACI, et celle qui est presque toujours mal traduite",
+      "À quoi sert une matrice RACI en production et en amélioration continue ?",
+      "Comment faire une matrice RACI en une réunion d'une heure",
+      "Deux personnes se déclarent A sur la même tâche : comment trancher ?",
+      "Quelle est la différence entre RASCI et RACI ?",
+      "Les cinq erreurs qui rendent une matrice RACI inutile",
+      "Les outils qui complètent une matrice RACI",
+      "Le vocabulaire du RACI en anglais",
+      "FAQ : vos questions sur la matrice RACI"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "VISUEL-A-CREER",
+        "url": "VISUEL-A-CREER",
+        "alt": "Matrice RACI d'un plan d'action après un arrêt subi, six tâches en lignes et cinq fonctions en colonnes, avec une seule case A mise en évidence par ligne",
+        "section": "Un exemple : le plan d'action après un arrêt subi"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "diagramme-ishikawa-6m-methode-exemple",
+    "titre": "Diagramme d'Ishikawa : les 6 M, la méthode et un exemple rempli",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Résolution de problèmes"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/diagramme-ishikawa-6m-methode-exemple",
+    "image_couverture": null,
+    "mots": 4895,
+    "sections": [
+      "Diagramme d'Ishikawa : définition et principe",
+      "5 M, 6 M ou 7 M : quelle variante utiliser chez vous",
+      "Quand utiliser le diagramme d'Ishikawa",
+      "Mener une séance d'Ishikawa en 6 étapes",
+      "Un diagramme d'Ishikawa rempli, branche par branche",
+      "Ce qu'on fait du diagramme le lendemain",
+      "Les erreurs qui vident une séance d'Ishikawa",
+      "Les outils qui prennent le relais",
+      "Le vocabulaire de l'Ishikawa en anglais",
+      "FAQ : vos questions sur le diagramme d'Ishikawa"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "VISUEL-A-CREER",
+        "url": "VISUEL-A-CREER",
+        "alt": "Diagramme d'Ishikawa rempli à six branches, Main d'œuvre, Matière, Matériel, Méthode, Milieu et Mesure, avec les causes candidates retenues en rouge et la liste de vérifications datées en dessous",
+        "section": "Un diagramme d'Ishikawa rempli, branche par branche"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "qqoqccp-methode-cadrer-un-probleme",
+    "titre": "QQOQCCP (ou QQOQCP) : cadrer un problème en sept questions",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Résolution de problèmes"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/qqoqccp-methode-cadrer-un-probleme",
+    "image_couverture": null,
+    "mots": 3457,
+    "sections": [
+      "QQOQCCP : définition et les sept questions",
+      "QQOQCP ou QQOQCCP : pourquoi deux graphies",
+      "Quelles sont les 7 questions du Quintilien ?",
+      "Dans quelles situations appliquer cette méthode ?",
+      "Comment cadrer un problème en vingt minutes",
+      "Les erreurs qui rendent un QQOQCCP inutile",
+      "Où s'arrête le QQOQCCP et quels outils prennent le relais",
+      "Le vocabulaire du QQOQCCP en anglais",
+      "FAQ : vos questions sur le QQOQCCP"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "VISUEL-A-CREER",
+        "url": "VISUEL-A-CREER",
+        "alt": "Passage d'un problème vague à une phrase de problème exploitable : les sept questions du QQOQCCP reliées chacune au morceau de phrase qu'elle produit",
+        "section": "Comment cadrer un problème en vingt minutes"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "amdec-methode-cotation-criticite",
+    "titre": "AMDEC : méthode, cotation de la criticité et plan d'action en atelier",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Maintenance",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/amdec-methode-cotation-criticite",
+    "image_couverture": null,
+    "mots": 5696,
+    "sections": [
+      "AMDEC : définition, sigle et norme de référence",
+      "Quels sont les différents types d'AMDEC ?",
+      "À quoi sert l'AMDEC moyen en maintenance ?",
+      "Comment coter la fréquence, la gravité et la détection",
+      "À partir de quelle criticité faut-il agir ?",
+      "Conduire la séance et sortir trois actions datées",
+      "Les erreurs qui vident une AMDEC de son intérêt",
+      "Les outils qui prolongent une AMDEC",
+      "Le vocabulaire de l'AMDEC en anglais",
+      "FAQ : vos questions sur l'AMDEC"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "VISUEL-A-CREER",
+        "url": "VISUEL-A-CREER",
+        "alt": "Les trois notes de la criticité AMDEC en trois colonnes, fréquence gravité et non-détection, chacune graduée de 1 à 4 du vert au rouge, multipliées entre elles pour donner la criticité",
+        "section": "Quelle échelle retenir, et pourquoi elle se fige avant la séance"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "kanban-de-production-boucle-dimensionnement",
+    "titre": "Kanban de production : dimensionner la boucle et calculer le nombre de cartes",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Kanban",
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/kanban-de-production-boucle-dimensionnement",
+    "image_couverture": null,
+    "mots": 2621,
+    "sections": [
+      "Qu'est-ce qu'un kanban de production ?",
+      "Kanban de production ou tableau kanban de projet ?",
+      "Comment fonctionne une boucle kanban en atelier ?",
+      "Comment calculer le nombre de cartes d'un kanban de production ?",
+      "Exemple de dimensionnement, pas à pas",
+      "Les erreurs qui font dérailler un kanban de production",
+      "Les outils qui font tenir un kanban de production",
+      "FAQ : vos questions sur le kanban"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "takt-time-calcul-definition",
+    "titre": "Takt time : calculer le rythme imposé par la demande",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/takt-time-calcul-definition",
+    "image_couverture": null,
+    "mots": 2058,
+    "sections": [
+      "Qu'est-ce que le takt time ?",
+      "Comment calculer le takt time ?",
+      "Takt time et temps de cycle : la comparaison qui décide",
+      "Takt time, cycle time, lead time : le lexique",
+      "FAQ : vos questions sur le takt time"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "obeya-salle-pilotage-visuel",
+    "titre": "Obeya : à quoi sert vraiment une salle de pilotage visuel",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Management visuel",
+      "Obeya",
+      "Pilotage"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/obeya-salle-pilotage-visuel",
+    "image_couverture": null,
+    "mots": 2686,
+    "sections": [
+      "Qu'est-ce qu'une Obeya, et que veut dire le mot ?",
+      "Quelles zones afficher dans une Obeya ?",
+      "À quelle fréquence se tenir devant, et combien de temps ?",
+      "Comment savoir qu'une Obeya est morte ?",
+      "Comment installer une salle Obeya en quatre temps",
+      "Obeya, oobeya, war room : le tableau de correspondance",
+      "Les outils qui font tenir une Obeya",
+      "FAQ : vos questions sur l'Obeya"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "gemba-walk-tournee-atelier-methode",
+    "titre": "Gemba et gemba walk : ce qu'on regarde vraiment quand on descend en atelier",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Pilotage"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/gemba-walk-tournee-atelier-methode",
+    "image_couverture": null,
+    "mots": 2322,
+    "sections": [
+      "Qu'est-ce que le gemba, et le gemba walk ?",
+      "Gemba, genba, genchi genbutsu : les correspondances",
+      "Les trois raisons de faire un gemba walk",
+      "Ce qu'une tournée doit produire",
+      "La trame d'une tournée de trente minutes",
+      "L'effet observateur",
+      "FAQ : vos questions sur le gemba"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "diagramme-de-pareto-methode-exemple",
+    "titre": "Diagramme de Pareto : construire un classement de causes qui tient",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management",
+      "Résolution de problèmes"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/diagramme-de-pareto-methode-exemple",
+    "image_couverture": null,
+    "mots": 2787,
+    "sections": [
+      "Qu’est-ce qu’un diagramme de Pareto ?",
+      "Comment construire un diagramme de Pareto : l’exemple de calcul",
+      "Occurrences, temps d’arrêt ou coût : l’unité qui change tout",
+      "La qualité du relevé décide de la qualité du classement",
+      "Quand la règle des 80/20 ne s’applique pas",
+      "Les erreurs qui faussent un diagramme de Pareto",
+      "Quels outils prendre après le diagramme de Pareto",
+      "FAQ : vos questions sur le diagramme de Pareto"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "lean-manufacturing-definition-principes-outils",
+    "titre": "Lean Manufacturing : définition, principes et outils pour l'atelier",
+    "publie": false,
+    "date": null,
+    "tags": [
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/lean-manufacturing-definition-principes-outils",
+    "image_couverture": null,
+    "mots": 4735,
+    "sections": [
+      "Qu'est-ce que le Lean Manufacturing ? Définition",
+      "Lean Manufacturing, Lean Management, Lean : quelle différence ?",
+      "D'où vient le Lean Manufacturing ? Du système Toyota au Lean",
+      "Les 5 principes du Lean Manufacturing",
+      "Juste-à-temps et jidoka : les deux piliers du système Toyota",
+      "Les gaspillages : ce que le Lean cherche à supprimer",
+      "Les outils du Lean Manufacturing, et quand les utiliser",
+      "Par où commencer : une démarche en 5 étapes",
+      "Exemple chiffré : diviser le délai sans toucher aux machines",
+      "Les erreurs qui font échouer une démarche Lean Manufacturing",
+      "Limites et critiques : ce que le Lean ne doit pas devenir",
+      "FAQ : vos questions sur le Lean Manufacturing"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "blog-lm-2-valeur.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-2-valeur.gif",
+        "alt": "Tri Lean : usiner, assembler et emballer ont de la valeur pour le client ; déplacer une palette, attendre ou reprendre une pièce n’en ont pas.",
+        "section": "Qu'est-ce que le Lean Manufacturing ? Définition"
+      },
+      {
+        "fichier": "blog-lm-3-principes.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-3-principes.gif",
+        "alt": "Les 5 principes du Lean en escalier : valeur, chaîne de valeur, flux, flux tiré, perfection, qui renvoie au flux, sur un socle du respect des personnes.",
+        "section": "Les 5 principes du Lean Manufacturing"
+      },
+      {
+        "fichier": "blog-lm-4-maison.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-4-maison.gif",
+        "alt": "Maison Toyota : fondations stabilité et standards, piliers juste-à-temps et jidoka avec leurs outils, toit satisfaction du client.",
+        "section": "Juste-à-temps et jidoka : les deux piliers du système Toyota"
+      },
+      {
+        "fichier": "blog-lm-5-surproduction.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-5-surproduction.gif",
+        "alt": "Schéma Lean : la surproduction au centre fait naître les 7 autres gaspillages ; une pièce produite trop tôt est transportée, stockée, reprise.",
+        "section": "Les gaspillages : ce que le Lean cherche à supprimer"
+      },
+      {
+        "fichier": "blog-lm-6-outils.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-6-outils.gif",
+        "alt": "Tableau Lean : à chaque problème observé en atelier son outil. Stocks entre les postes : VSM. Postes encombrés : 5S. Changements de série longs : SMED. Pannes répétées : TPM et TRS. Erreurs d’oubli : poka-yoke. Problème récurrent : 5 Pourquoi puis PDCA.",
+        "section": "Les outils du Lean Manufacturing, et quand les utiliser"
+      },
+      {
+        "fichier": "blog-lm-7-demarche.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-7-demarche.gif",
+        "alt": "Démarche Lean en 5 étapes : flux pilote, relevé du point de départ, stabiliser, faire circuler, installer la routine.",
+        "section": "Par où commencer : une démarche en 5 étapes"
+      },
+      {
+        "fichier": "blog-lm-1-traversee.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-1-traversee.gif",
+        "alt": "Une pièce traverse 4 postes d’usinage : 42 min de transformation contre 4 278 min d’attente sur 4 320 min. Moins de 1 % crée de la valeur.",
+        "section": "Exemple chiffré : diviser le délai sans toucher aux machines"
+      },
+      {
+        "fichier": "blog-lm-8-little.gif",
+        "url": "URL-FICHIERS-SHOPIFY/blog-lm-8-little.gif",
+        "alt": "Loi de Little : 4 machines à même vitesse, l’encours entre elles passe de 450 à 200 pièces et le délai de 9 à 4 jours.",
+        "section": "Exemple chiffré : diviser le délai sans toucher aux machines"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "la-methode-5s-definition-et-exemples",
+    "titre": "La méthode 5S : Définition et exemples",
+    "publie": true,
+    "date": "2025-03-01T23:00:00Z",
+    "tags": [
+      "5S"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_5S_-_FICHLY.png?v=1772622958",
+    "mots": 4776,
+    "sections": [
+      "C'est quoi les 5S ? Définition et origine",
+      "Le 5S n'est pas du rangement : le malentendu du ménage",
+      "À quoi sert le 5S, et pourquoi vient-il en premier ?",
+      "Quel est l'ordre des 5S ? Les cinq étapes une par une",
+      "Un exemple de méthode 5S sur une zone d'atelier",
+      "La grille d'audit 5S : noter une zone sur vingt points",
+      "Pourquoi un 5S retombe-t-il au sixième mois ?",
+      "Les erreurs qui font échouer un 5S",
+      "Le vocabulaire du 5S en anglais",
+      "Les outils qui prolongent le 5S",
+      "FAQ : vos questions sur les 5S"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "taux-de-rendement-synthetique-definition",
+    "titre": "TRS (Taux de Rendement Synthétique) : Définition, exemples et calculs",
+    "publie": true,
+    "date": "2025-03-16T23:00:00Z",
+    "tags": [
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Qu_est-ce_que_le_TRS_-_Fichly.png?v=1772623652",
+    "mots": 4514,
+    "sections": [
+      "Le TRS : ce que le calcul mesure vraiment",
+      "Quelle est la formule du temps requis du TRS ?",
+      "Pourquoi calculer son TRS ?",
+      "Comment calculer le TRS pas à pas ?",
+      "La méthode rapide de calcul du TRS, et ce qu'elle masque",
+      "Les six grandes pertes derrière un TRS",
+      "Quel est un bon TRS ?",
+      "OEE, OOE, TEEP : les équivalents anglais",
+      "Ce qu'un TRS autorise à décider",
+      "Relever les données de TRS sans fausser le calcul",
+      "Les erreurs qui faussent un calcul de TRS",
+      "Les outils qui prennent le relais après le TRS",
+      "FAQ : vos questions sur le calcul du TRS"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "value-stream-mapping-definition-et-etapes",
+    "titre": "Value Stream Mapping : Définition et étapes",
+    "publie": true,
+    "date": "2025-03-22T23:00:00Z",
+    "tags": [
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Qu_est-ce_que_la_VSM_-_Fichly.png?v=1772623828",
+    "mots": 3947,
+    "sections": [
+      "Une VSM, ou cartographie des flux, c'est quoi exactement",
+      "VSM ou cartographie de processus : ce n'est pas le même outil",
+      "Les six notions à maîtriser avant de dessiner",
+      "Les symboles de la VSM : le tableau complet",
+      "Les 7 étapes pour cartographier un flux réel",
+      "Exemple chiffré : un flux de bout en bout",
+      "La faire sur une feuille A3, sans logiciel ni modèle",
+      "État futur : ce qu'on change, et dans quel ordre",
+      "Les pièges qui transforment une VSM en joli dessin",
+      "Les cas où la VSM ne sert à rien",
+      "FAQ : vos questions sur la Value Stream Mapping"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "fichly-symboles-vsm.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-symboles-vsm.png?v=1786983142",
+        "alt": "Les symboles de la VSM : fournisseur et client, processus, boîte de données, stock, flux poussé, flux tiré, flux d'information papier et électronique, kanban, lissage, opérateur et éclair kaizen",
+        "section": "Les symboles de la VSM : le tableau complet"
+      },
+      {
+        "fichier": "fichly-vsm-simplifiee.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-vsm-simplifiee.png?v=1786983141",
+        "alt": "Cartographie de flux simplifiée d'une ligne de fabrication : préparation, impression, découpe, poinçonnage et contrôle, conditionnement, avec les icônes de stock et de déplacement",
+        "section": "Étape 7 : concevoir l'état futur et le plan d'action"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "quelle-formation-lean-management-certifiante-choisir",
+    "titre": "Quelle formation Lean Management choisir ?",
+    "publie": true,
+    "date": "2026-03-06T23:00:00Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/quelle-formation-lean-management-certifiante-choisir",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/article_quelle_formation-lean-management-choisir.png?v=1774344786",
+    "mots": 2647,
+    "sections": [
+      "L'essentiel à retenir",
+      "Pourquoi faire une formation Lean Management ?",
+      "Qu'est-ce que le lean management concrètement ?",
+      "Formation Lean management vs Formation Lean Six Sigma : Les différences",
+      "",
+      "Les 5 principes fondamentaux du lean management expliqués simplement",
+      "Les outils essentiels que vous maîtriserez en formation Lean Management",
+      "Quels types de formations lean certifiantes choisir ?",
+      "",
+      "Comment identifier la formation lean qui vous correspond ?",
+      "Les formations Lean Management chez Fichly",
+      "Les solutions de financement pour vos formation Lean management certifiantes",
+      "En résumé : votre feuille de route vers l'amélioration continue",
+      "Questions fréquentes sur la formation lean management"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "formations-lean-management---fichly_1000x.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/formations-lean-management---fichly_1000x.png?v=1772898157",
+        "alt": "Les formations Lean management Fichly",
+        "section": "Pourquoi faire une formation Lean Management ?"
+      },
+      {
+        "fichier": "la-maison-du-lean_1000x.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/la-maison-du-lean_1000x.png?v=1772898599",
+        "alt": "Maison du Lean - Fichly",
+        "section": "Qu'est-ce que le lean management concrètement ?"
+      },
+      {
+        "fichier": "formation-yellow-belt---lean-management---fichly_1000x.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/formation-yellow-belt---lean-management---fichly_1000x.png?v=1772899059",
+        "alt": "Formation Lean Management Yellow Belt - Fichly",
+        "section": "Formation Lean Management niveau Yellow Belt"
+      },
+      {
+        "fichier": "formation-green-belt---lean-management---fichly_1000x.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/formation-green-belt---lean-management---fichly_1000x.png?v=1772899187",
+        "alt": "Formation Lean Green Belt Fichly -  Lean Management",
+        "section": "Formation Lean Management niveau Green Belt"
+      },
+      {
+        "fichier": "formation-black-belt---lean-management---fichly_1000x.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/formation-black-belt---lean-management---fichly_1000x.png?v=1772899299",
+        "alt": "Formation Black Belt - Fichly",
+        "section": ""
+      },
+      {
+        "fichier": "solutions-de-financement-formation-lean-management-fichly.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/solutions-de-financement-formation-lean-management-fichly.png?v=1772899530",
+        "alt": "Solutions de financement formation Lean Management fichly",
+        "section": "Les solutions de financement pour vos formation Lean management certifiantes"
+      }
+    ],
+    "embeds": [
+      "https://www.youtube.com/embed/bB_NPOikh4w"
+    ]
+  },
+  {
+    "handle": "les-muda-les-8-gaspillages-du-lean-guide-complet",
+    "titre": "Les MUDA : Les 8 Gaspillages Du Lean - Guide complet",
+    "publie": true,
+    "date": "2026-03-06T23:00:00Z",
+    "tags": [
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Les_8_MUDA_-_Gaspillages_Lean_ecc726a8-8746-40d8-abaa-8331e8138fc9.png?v=1774344695",
+    "mots": 5348,
+    "sections": [
+      "Que veut dire Muda ? Définition et origine du mot",
+      "Pourquoi connaître les 8 MUDA ne suffit-il pas à les voir ?",
+      "Muda, Mura, Muri : trois pertes à ne pas confondre",
+      "Quels sont les 8 MUDA ? La liste, un par un",
+      "Quel est le 8e MUDA, et pourquoi manque-t-il presque partout ?",
+      "Les 8 wastes en anglais : TIMWOOD, TIMWOODS, DOWNTIME",
+      "Repérer trois MUDA dans votre atelier aujourd'hui",
+      "Où chaque MUDA se cache dans vos indicateurs",
+      "Les erreurs qui vident une chasse aux MUDA",
+      "Les outils Lean qui prolongent la chasse aux MUDA",
+      "FAQ : vos questions sur les MUDA"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "formation-lean-qualiopi-ce-que-le-label-change",
+    "titre": "QUALIOPI formation Lean : ce que le label change | Fichly",
+    "publie": true,
+    "date": "2026-05-22T14:19:14Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/formation-lean-qualiopi-ce-que-le-label-change",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_QUALIOPI_formation_Lean_-_Fichly_-_Formation_Lean_9e5e0d23-9d70-4980-9a47-8204ff943c93.png?v=1779464068",
+    "mots": 2955,
+    "sections": [
+      "Qu'est-ce que la certification QUALIOPI ?",
+      "Pourquoi QUALIOPI est obligatoire pour financer une formation Lean",
+      "Les 7 critères du référentiel QUALIOPI",
+      "Ce que QUALIOPI garantit, et ce qu'il ne garantit pas",
+      "Comment vérifier qu'un organisme est vraiment certifié QUALIOPI",
+      "5 questions à poser avant d'engager une formation Lean",
+      "Les pièges des formations \"QUALIOPI\" mal calibrées",
+      "Ce qui change pour QUALIOPI en 2026",
+      "FAQ : QUALIOPI et formation Lean",
+      "Choisir la bonne formation Lean après avoir vérifié QUALIOPI"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "",
+        "url": "",
+        "alt": "Hugo Duc, fondateur de Fichly et formateur Lean QUALIOPI",
+        "section": "Choisir la bonne formation Lean après avoir vérifié QUALIOPI"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "financement-formation-lean-tous-les-dispositifs-2026",
+    "titre": "Financement formation Lean : tous les dispositifs 2026",
+    "publie": true,
+    "date": "2026-05-22T14:19:22Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/financement-formation-lean-tous-les-dispositifs-2026",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_Financements_CPF_OPCO_France_Travail_-_Fichly_-_Formation_Lean_02a44dbb-fe6d-470e-b24b-1c2e67e17cd2.png?v=1785146364",
+    "mots": 3510,
+    "sections": [
+      "Combien coûte une formation Lean ?",
+      "Les 4 dispositifs pour financer votre formation Lean en 2026",
+      "Quel financement selon votre situation ?",
+      "Quel dispositif selon votre belt (White, Yellow, Green, Black) ?",
+      "Exemple : comment un chef d'équipe a financé sa Green Belt",
+      "Les erreurs à éviter quand on monte un dossier de financement",
+      "FAQ : financement d'une formation Lean",
+      "Choisir et financer la bonne formation Lean"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "Z",
+        "url": "data:image/jpeg;base64,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",
+        "alt": "Hugo Duc, fondateur de Fichly et formateur Lean QUALIOPI",
+        "section": "Choisir et financer la bonne formation Lean"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "responsable-amelioration-continue-fiche-metier",
+    "titre": "Responsable amélioration continue : métier, salaire 2026",
+    "publie": true,
+    "date": "2026-06-07T22:21:30Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/responsable-amelioration-continue-fiche-metier",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article._Blog_Fiche_metier_responsable_amelioration_continue_Lean_Salaire_-_Fichly_-_Formation_Lean_1_a93ab6df-cfc6-4c9b-a42c-38786de5a47b.png?v=1780870893",
+    "mots": 3013,
+    "sections": [
+      "Qu'est-ce qu'un responsable amélioration continue ?",
+      "Les missions au quotidien",
+      "Quelles compétences pour ce métier ?",
+      "Quelle formation pour accéder au poste ?",
+      "Combien gagne un responsable amélioration continue ?",
+      "Comment devenir responsable amélioration continue ?",
+      "Les pièges à éviter quand on vise ce poste",
+      "Les outils Lean qu'il doit maîtriser",
+      "FAQ"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "green-belt-lean-six-sigma",
+    "titre": "Green Belt Lean Six Sigma : programme, prix et CPF 2026",
+    "publie": true,
+    "date": "2026-07-27T11:03:44Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/green-belt-lean-six-sigma",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Articles_Green_Belt_Six_Sigma_-_Fichly_-_Hugo_Duc_a5c2cd5a-837a-45e0-9141-0135ad97f793.png?v=1785150227",
+    "mots": 3067,
+    "sections": [
+      "Qu'est-ce que la certification Green Belt Lean Six Sigma ?",
+      "Six Sigma ou Lean Management : quelle Green Belt choisir ?",
+      "Que fait concrètement un Green Belt au quotidien ?",
+      "Le programme et le déroulé de la formation Green Belt",
+      "Débouchés, métiers et salaire après une Green Belt",
+      "Combien coûte une Green Belt et comment la financer ?",
+      "Questions fréquentes"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "methode-pdca-roue-de-deming-cycle",
+    "titre": "La méthode PDCA (roue de Deming) : le cycle expliqué avec un exemple concret",
+    "publie": true,
+    "date": "2026-07-28T08:42:12Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_PDCA_-_FIchly_-_Lean_Management_2_690bc790-c613-4817-be15-fe8b2769bce2.png?v=1785228136",
+    "mots": 4024,
+    "sections": [
+      "Qu'est-ce que la méthode PDCA ?",
+      "Pourquoi utiliser le PDCA en amélioration continue ?",
+      "Quand utiliser le PDCA (et quand l'éviter) ?",
+      "Les 4 étapes du cycle PDCA",
+      "Un exemple concret de PDCA en atelier",
+      "PDCA et roue de Deming : quelle différence ?",
+      "PDCA ou DMAIC : lequel choisir ?",
+      "Les erreurs courantes à éviter",
+      "Les outils du PDCA, étape par étape",
+      "FAQ"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "PDCA_et_DMAIC_-_Clement_Raymond.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/PDCA_et_DMAIC_-_Clement_Raymond.png?v=1785226024",
+        "alt": "",
+        "section": "PDCA ou DMAIC : lequel choisir ?"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "methode-dmaic-5-etapes",
+    "titre": "Méthode DMAIC : les 5 étapes expliquées (guide 2026)",
+    "publie": true,
+    "date": "2026-07-31T12:12:09Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_DMAIC_-_FIchly_-_Lean_Management_14a9219b-845c-49e1-9439-ce8535340809.png?v=1785500061",
+    "mots": 4136,
+    "sections": [
+      "C'est quoi la méthode DMAIC ? Définition et acronyme",
+      "DMAIC, Six Sigma et Lean : qui appartient à qui",
+      "Quand le DMAIC est-il le bon outil ?",
+      "Pourquoi DMAIC et pas PDCA ?",
+      "Les 5 étapes du DMAIC et ce que chaque phase doit produire",
+      "Exemple concret : un projet DMAIC en atelier d'usinage",
+      "Qui pilote un projet DMAIC, et avec quelle équipe ?",
+      "DMAIC, PDCA, 8D, QRQC, A3 : la carte des méthodes",
+      "DMAIC en anglais : les 5 phases et les sigles",
+      "Les erreurs qui font échouer un projet DMAIC",
+      "Se former au DMAIC : quel niveau pour quel rôle",
+      "FAQ : vos questions sur le DMAIC"
+    ],
+    "images_existantes": [],
+    "embeds": []
+  },
+  {
+    "handle": "trs-trg-tre-lequel-piloter",
+    "titre": "TRS, TRG, TRE : lequel piloter et pourquoi",
+    "publie": true,
+    "date": "2026-08-31T09:24:42Z",
+    "tags": [
+      "Lean Management",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/trs-trg-tre-lequel-piloter",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/article-trs-trg-tre-fichly.png?v=1788173673",
+    "mots": 3582,
+    "sections": [
+      "La cascade des temps d'état : d'où viennent les trois taux (TRS, TRE, TRG)",
+      "Une seule machine, trois résultats",
+      "Le TRS : ce que l'atelier maîtrise",
+      "Le TRG : ce que l'organisation décide",
+      "Le TRE : ce que l'investissement rend",
+      "OEE, OOE, TEEP : les équivalents anglais",
+      "Le piège de la comparaison entre sites",
+      "Pourquoi nous ne donnons pas de seuil cible",
+      "Alors, lequel piloter ?",
+      "Les erreurs qui faussent vos taux",
+      "Les outils Lean qui prennent le relais",
+      "FAQ : vos questions sur le TRS, le TRG et le TRE"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "trs-trg-tre-temps-etat-fichly.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/trs-trg-tre-temps-etat-fichly.png?v=1786974468",
+        "alt": "Les temps d'état du TRS : temps total, temps d'ouverture, temps requis, temps de fonctionnement, temps net et temps utile, avec les formules TRS, TRG et TRE",
+        "section": "La cascade des temps d'état : d'où viennent les trois taux (TRS, TRE, TRG)"
+      },
+      {
+        "fichier": "",
+        "url": "",
+        "alt": "Hugo Duc, formateur Lean Management et fondateur de Fichly",
+        "section": "FAQ : vos questions sur le TRS, le TRG et le TRE"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "methode-5-pourquoi-cause-racine",
+    "titre": "Méthode des 5 pourquoi : exemple, étapes et cause racine",
+    "publie": true,
+    "date": "2026-08-31T09:49:33Z",
+    "tags": [
+      "Lean Management"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/article-5-pourquoi-fichly.png?v=1788173671",
+    "mots": 3177,
+    "sections": [
+      "Deux exemples de 5 pourquoi : l'un aboutit, l'autre s'arrête",
+      "Qu'est-ce que la méthode des 5 pourquoi ?",
+      "Pourquoi la chaîne des 5 pourquoi s'arrête-t-elle au troisième niveau ?",
+      "Le test qui distingue une cause racine d'une cause-personne",
+      "Quand une réponse en contient deux : brancher l'analyse",
+      "Comment savoir qu'un 5 pourquoi est terminé ?",
+      "Contre-mesure ou action corrective : les deux mots ne sont pas synonymes",
+      "Le vocabulaire du 5 Why en anglais",
+      "FAQ : vos questions sur les 5 pourquoi"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "Qu_est-ce_que_le_5_Pourquoi_-_CTA_Audit_-_Fichly.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Qu_est-ce_que_le_5_Pourquoi_-_CTA_Audit_-_Fichly.png?v=1788169738",
+        "alt": "",
+        "section": "Qu'est-ce que la méthode des 5 pourquoi ?"
+      },
+      {
+        "fichier": "5_pourquoi_-_Chaine_causale.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/5_pourquoi_-_Chaine_causale.png?v=1788169738",
+        "alt": "",
+        "section": "Quand une réponse en contient deux : brancher l'analyse"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "methode-smed-5-etapes",
+    "titre": "Méthode SMED : les 5 étapes expliquées (guide 2026)",
+    "publie": true,
+    "date": "2026-08-31T10:14:27Z",
+    "tags": [],
+    "url": "https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/article-smed-fichly.png?v=1788173669",
+    "mots": 3981,
+    "sections": [
+      "Qu'est-ce que la méthode SMED ?",
+      "Pourquoi réduire vos temps de changement de série ?",
+      "Opérations internes et externes : la distinction clé",
+      "Les 5 étapes de la méthode SMED",
+      "Comment lancer un premier chantier SMED dans votre atelier",
+      "Exemple : la presse de 1 000 tonnes de Toyota",
+      "Les 6 erreurs qui plombent un chantier SMED",
+      "SMED, 5S, TRS, VSM, DMAIC : les outils complémentaires",
+      "FAQ : vos questions sur la méthode SMED"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "fichly-smed-etape-2-separer-interne-externe.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-smed-etape-2-separer-interne-externe.png?v=1787612375",
+        "alt": "Séparer les opérations internes qui exigent la machine arrêtée des opérations externes qui peuvent se faire machine en marche",
+        "section": "Opérations internes et externes : la distinction clé"
+      },
+      {
+        "fichier": "fichly-smed-5-etapes-diminution.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-smed-5-etapes-diminution.png?v=1787612375",
+        "alt": "Les 5 étapes de la méthode SMED : la durée du changement de série qui raccourcit étape par étape, de 52 à 13 minutes",
+        "section": "Les 5 étapes de la méthode SMED"
+      },
+      {
+        "fichier": "7_SMED_etape_1.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/7_SMED_etape_1.png?v=1788171475",
+        "alt": "",
+        "section": "Étape 1 : Mesurer le changement de série et classer les opérations"
+      },
+      {
+        "fichier": "2_SMED_etape_2.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_SMED_etape_2.png?v=1788171475",
+        "alt": "",
+        "section": "Étape 2 : Regrouper les opérations internes"
+      },
+      {
+        "fichier": "5_SMED_etape_3.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/5_SMED_etape_3.png?v=1788171476",
+        "alt": "",
+        "section": "Étape 3 : Convertir les opérations internes en externes"
+      },
+      {
+        "fichier": "6_SMED_etape_4.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/6_SMED_etape_4.png?v=1788171475",
+        "alt": "",
+        "section": "Étape 4 : Réduire les opérations internes restantes"
+      },
+      {
+        "fichier": "1_SMED_5_etapes.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_SMED_5_etapes.png?v=1788171476",
+        "alt": "",
+        "section": "Étape 5 : Réduire les opérations externes"
+      },
+      {
+        "fichier": "9_SMED_6_erreurs.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/9_SMED_6_erreurs.png?v=1788171475",
+        "alt": "",
+        "section": "Les 6 erreurs qui plombent un chantier SMED"
+      }
+    ],
+    "embeds": [
+      "https://giphy.com/embed/sA50TO4Ew7QXu"
+    ]
+  },
+  {
+    "handle": "types-de-maintenance-comment-choisir",
+    "titre": "Types de maintenance : laquelle choisir pour quel équipement",
+    "publie": true,
+    "date": "2026-08-31T10:50:52Z",
+    "tags": [
+      "Lean Management",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_les_Types_de_maintenance_-_Fichly_-_Lean_Management.png?v=1788173457",
+    "mots": 3354,
+    "sections": [
+      "Comment choisir un type de maintenance ? Arbitrer surveillance contre arrêt",
+      "Quels sont les différents types de maintenance ? Les deux familles de la norme NF EN 13306",
+      "Maintenance corrective, ou curative : quand ne rien anticiper est le bon calcul",
+      "Maintenance préventive systématique : le calendrier, et ce qu'il coûte",
+      "Maintenance conditionnelle : le seuil, et ce qu'il faut pouvoir mesurer",
+      "Quels sont les 3 types de maintenance préventive ? Conditionnelle, prévisionnelle, prédictive",
+      "La maintenance améliorative est-elle un type de maintenance ?",
+      "Choisir équipement par équipement : criticité, mesurabilité, coût d'arrêt",
+      "Ce qu'un plan de maintenance change sur la disponibilité",
+      "FAQ : vos questions sur les types de maintenance"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "3_Types_de_maintenance.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/3_Types_de_maintenance.png?v=1788173396",
+        "alt": "",
+        "section": "Comment choisir un type de maintenance ? Arbitrer surveillance contre arrêt"
+      },
+      {
+        "fichier": "1_Analyses_conditionnelles.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_Analyses_conditionnelles.png?v=1788173396",
+        "alt": "",
+        "section": "Maintenance conditionnelle : le seuil, et ce qu'il faut pouvoir mesurer"
+      },
+      {
+        "fichier": "2_5_niveaux_de_maintenance.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_5_niveaux_de_maintenance.png?v=1788173397",
+        "alt": "",
+        "section": "Ce qu'un plan de maintenance change sur la disponibilité"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "mtbf-mttr-indicateurs-disponibilite",
+    "titre": "MTBF et MTTR : les deux indicateurs qui expliquent votre disponibilité",
+    "publie": true,
+    "date": "2026-08-31T11:01:47Z",
+    "tags": [
+      "Lean Management",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_qu_est-ce_que_le_MTBF_et_MTTR_-_FIchly_-_Lean_Management.png?v=1788174249",
+    "mots": 4225,
+    "sections": [
+      "Quelle est la différence entre MTBF et MTTR ?",
+      "Pourquoi MTBF et MTTR donnent-ils ensemble la disponibilité ?",
+      "Comment calculer MTBF et MTTR ?",
+      "Lequel suivre : le croisement MTBF et MTTR en quatre cas",
+      "Ce qui fausse un MTBF ou un MTTR",
+      "Le vocabulaire MTBF, MTTR et MTTF en anglais",
+      "Les outils qui prennent le relais après le MTBF et le MTTR",
+      "FAQ : vos questions sur le MTBF et le MTTR"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "3_MTBF.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/3_MTBF.png?v=1788173911",
+        "alt": "",
+        "section": "Le MTBF, ou temps moyen entre deux pannes"
+      },
+      {
+        "fichier": "1_MTTR.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_MTTR.png?v=1788173911",
+        "alt": "",
+        "section": "Le MTTR, ou temps moyen de remise en état"
+      },
+      {
+        "fichier": "2_MTBF_MTTR_disponibilite.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_MTBF_MTTR_disponibilite.png?v=1788173911",
+        "alt": "",
+        "section": "Pourquoi MTBF et MTTR donnent-ils ensemble la disponibilité ?"
+      },
+      {
+        "fichier": "Courbe_en_baignoire.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Courbe_en_baignoire.png?v=1788174077",
+        "alt": "",
+        "section": "Le seuil universel n'existe pas"
+      },
+      {
+        "fichier": "4_MTBF_ou_MTTR_sur_quoi_agir.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/4_MTBF_ou_MTTR_sur_quoi_agir.png?v=1788173911",
+        "alt": "",
+        "section": "Lequel suivre : le croisement MTBF et MTTR en quatre cas"
+      }
+    ],
+    "embeds": []
+  },
+  {
+    "handle": "tpm-total-productive-maintenance",
+    "titre": "TPM (Total Productive Maintenance) : par quoi commencer et ce qui la fait tenir",
+    "publie": true,
+    "date": "2026-08-31T11:12:24Z",
+    "tags": [
+      "Lean Management",
+      "Maintenance",
+      "TRS"
+    ],
+    "url": "https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance",
+    "image_couverture": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_TPM_-_FIchly_-_Lean_Management.png?v=1788174747",
+    "mots": 4419,
+    "sections": [
+      "Qu'est-ce que la TPM (Total Productive Maintenance) ?",
+      "Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?",
+      "Comment mesurer la TPM ? Ce qu'elle change sur votre TRS",
+      "Votre atelier est-il prêt pour la TPM ? Le test en cinq questions",
+      "Les 7 étapes de la maintenance autonome",
+      "Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?",
+      "Les outils qui font tenir une TPM",
+      "Le vocabulaire de la TPM en anglais",
+      "FAQ : vos questions sur la TPM"
+    ],
+    "images_existantes": [
+      {
+        "fichier": "2_8_piliers_TPM.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_8_piliers_TPM.png?v=1788174571",
+        "alt": "",
+        "section": "Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?"
+      },
+      {
+        "fichier": "1_16_pertes_TPM.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_16_pertes_TPM.png?v=1788174571",
+        "alt": "",
+        "section": "Comment mesurer la TPM ? Ce qu'elle change sur votre TRS"
+      },
+      {
+        "fichier": "Courbe_des_six_mois.png",
+        "url": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Courbe_des_six_mois.png?v=1788174642",
+        "alt": "",
+        "section": "Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?"
+      }
+    ],
+    "embeds": []
+  }
+]

@@ -1,0 +1,447 @@
+<h1>MTBF et MTTR : les deux indicateurs qui expliquent votre disponibilité</h1>
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-article img{width:100%;height:auto;display:block;border-radius:10px;margin:1.8em 0;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;margin:0;border-radius:0;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article">
+<p>Deux ateliers, deux plaintes. Dans le premier, la ligne tombe trois fois par jour et repart en dix minutes. Dans le second, elle ne tombe qu'une fois par mois, mais reste à l'arrêt une journée entière. Les deux ont la même disponibilité. Ils n'ont pas du tout le même problème, et ce n'est pas le même service qui doit s'en occuper. Le <strong>MTBF</strong> et le <strong>MTTR</strong> servent exactement à cela : séparer la fréquence des pannes de la durée des remises en service. Cet article donne les deux formules, ce qu'il faut relever pour qu'elles veuillent dire quelque chose, et une matrice qui désigne lequel des deux traiter en premier.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Le MTBF (Mean Time Between Failures) mesure la fiabilité d'un équipement, le MTTR (Mean Time To Repair) la vitesse de remise en service. Les deux indicateurs se combinent en disponibilité, premier facteur du TRS. Suivre un seul des deux laisse la moitié du problème hors champ.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Le MTBF mesure la fiabilité, le MTTR mesure la maintenabilité.</li>
+<li>La disponibilité vaut MTBF divisé par la somme MTBF plus MTTR.</li>
+<li>Un MTTR juste suppose quatre heures relevées par arrêt, pas une.</li>
+<li>Aucun bon MTBF universel n'existe : la comparaison se fait par équipement.</li>
+<li>Le croisement des deux en quatre cas dit qui doit s'en saisir.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definitions">Quelle est la différence entre MTBF et MTTR ?</a></li>
+<li><a href="#disponibilite">Pourquoi MTBF et MTTR donnent-ils ensemble la disponibilité ?</a></li>
+<li><a href="#calcul">Comment calculer MTBF et MTTR ?</a></li>
+<li><a href="#matrice">Lequel suivre : le croisement MTBF et MTTR en quatre cas</a></li>
+<li><a href="#erreurs">Ce qui fausse un MTBF ou un MTTR</a></li>
+<li><a href="#anglais">Le vocabulaire MTBF, MTTR et MTTF en anglais</a></li>
+<li><a href="#outils">Les outils qui prennent le relais après le MTBF et le MTTR</a></li>
+<li><a href="#faq">FAQ : vos questions sur le MTBF et le MTTR</a></li>
+</ol>
+</div>
+<h2 id="definitions">Quelle est la différence entre MTBF et MTTR ?</h2>
+<p>Les deux sigles se ressemblent et arrivent souvent dans la même phrase. Ils répondent pourtant à deux questions opposées.</p>
+<h3>Le MTBF, ou temps moyen entre deux pannes</h3>
+<p>MTBF est l'abréviation de <strong>Mean Time Between Failures</strong>, temps moyen entre défaillances. Il mesure la durée moyenne pendant laquelle un équipement fonctionne sans tomber en panne.</p>
+<p>C'est un indicateur de <strong>fiabilité</strong>. Il répond à la question : combien de temps ça tient ?</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/3_MTBF.png?v=1788173911" alt=""></p>
+<p>Un MTBF qui monte veut dire que la machine tombe moins souvent. Un MTBF qui descend annonce une dérive, souvent bien avant que la disponibilité ne bouge de façon visible.</p>
+<h3>Le MTTR, ou temps moyen de remise en état</h3>
+<p>MTTR est l'abréviation de <strong>Mean Time To Repair</strong>, temps moyen de réparation. Il mesure la durée moyenne qui sépare la panne du redémarrage.</p>
+<p>C'est un indicateur de <strong>maintenabilité</strong>. Il répond à une tout autre question : quand ça tombe, combien de temps on reste dehors ?</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_MTTR.png?v=1788173911" alt=""></p>
+<p>Une précision qui change tout. En anglais, MTTR désigne selon les auteurs <em>Mean Time To Repair</em> ou <em>Mean Time To Recovery</em>, parfois <em>Mean Time To Restore</em>. Le premier ne compte que le temps de la main dans la machine. Les deux autres comptent tout, du moment où la panne est détectée jusqu'au moment où la production repart.</p>
+<p>Sur un même arrêt, l'écart entre les deux lectures va couramment du simple au double, parce que l'attente d'un technicien ou d'une pièce pèse souvent plus lourd que l'intervention elle-même. Choisissez une définition, écrivez-la, et ne changez plus.</p>
+<h3>Le MTTF, le troisième sigle qu'on confond avec les deux autres</h3>
+<p>Le MTTF, <strong>Mean Time To Failure</strong>, s'applique aux composants qu'on ne répare pas et qu'on remplace : un roulement, une lampe, une carte électronique. Il n'y a pas de « entre deux pannes » pour un objet qui n'a qu'une seule panne dans sa vie.</p>
+<p>Retenez la règle simple : réparable, on parle de MTBF. Jetable, on parle de MTTF.</p>
+<table>
+<tbody>
+<tr>
+<th>Critère</th>
+<th>MTBF</th>
+<th>MTTR</th>
+</tr>
+<tr>
+<td>Ce qu'il mesure</td>
+<td>La fiabilité</td>
+<td>La maintenabilité</td>
+</tr>
+<tr>
+<td>La question posée</td>
+<td>Combien de temps ça tient ?</td>
+<td>Combien de temps on reste à l'arrêt ?</td>
+</tr>
+<tr>
+<td>Sens souhaité</td>
+<td>Le plus haut possible</td>
+<td>Le plus bas possible</td>
+</tr>
+<tr>
+<td>Ce qu'on active pour l'améliorer</td>
+<td>Conception, préventif, conditions d'usage, réglages</td>
+<td>Organisation de l'intervention, pièces, compétences, accès machine</td>
+</tr>
+<tr>
+<td>Qui pilote en général</td>
+<td>Méthodes et fiabilité</td>
+<td>Maintenance curative et production</td>
+</tr>
+</tbody>
+</table>
+<p>La terminologie officielle de ces notions est fixée par la norme <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" rel="noopener" target="_blank">NF EN 13306 sur la terminologie de la maintenance</a>. C'est la référence à citer quand deux services d'un même site ne comptent pas les arrêts de la même façon.</p>
+<h2 id="disponibilite">Pourquoi MTBF et MTTR donnent-ils ensemble la disponibilité ?</h2>
+<p>Pris séparément, aucun des deux ne dit si la machine est disponible. Un MTBF de 40 heures ne vaut rien tant qu'on ignore si la remise en service prend dix minutes ou deux jours.</p>
+<p>La disponibilité opérationnelle se calcule à partir des deux :</p>
+<p><strong>Disponibilité = MTBF / (MTBF + MTTR)</strong></p>
+<p>La lecture est directe. Au dénominateur, vous avez la durée d'un cycle complet : le temps où ça tourne, plus le temps où on répare. Au numérateur, la seule partie qui produit.</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_MTBF_MTTR_disponibilite.png?v=1788173911" alt=""></p>
+<h3>Le raccord avec le TRS</h3>
+<p>Cette disponibilité n'est pas un indicateur isolé. C'est le premier des trois facteurs du <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique (TRS)</a>, aux côtés de la performance et de la qualité.</p>
+<p>Autrement dit, quand votre TRS baisse et que la cause est logée dans la disponibilité, le MTBF et le MTTR sont les deux seuls chiffres qui vous diront lequel des deux mécanismes a lâché. Le TRS constate. Le couple MTBF et MTTR explique.</p>
+<p>Reprenons l'exemple de référence utilisé sur ce blog pour le calcul du TRS. Un poste ouvert <strong>16 heures</strong>, dont <strong>2 heures de maintenance planifiée</strong>. Le temps requis est donc de 14 heures. Sur ces 14 heures, la machine subit <strong>2 heures d'arrêts non planifiés</strong>, réparties sur <strong>3 pannes</strong>. Elle tourne donc 12 heures.</p>
+<ul>
+<li>MTBF = 12 heures de fonctionnement divisées par 3 pannes = <strong>4 heures</strong>
+</li>
+<li>MTTR = 2 heures d'arrêt divisées par 3 réparations = <strong>0,67 heure, soit 40 minutes</strong>
+</li>
+<li>Disponibilité = 4 / (4 + 0,67) = <strong>85,7 %</strong>
+</li>
+</ul>
+<p>Ce dernier chiffre est exactement le rapport entre les 12 heures produites et les 14 heures requises. Les deux chemins donnent le même résultat, ce qui est le meilleur contrôle de cohérence dont vous disposez. Si vos deux calculs ne tombent pas sur la même disponibilité, ce n'est pas la formule qui est fausse, c'est le relevé.</p>
+<h3>Le seuil universel n'existe pas</h3>
+<p>Beaucoup de pages avancent des valeurs cibles, du type un MTTR sous cinq heures ou une disponibilité à 99 %. Ces chiffres ne veulent rien dire hors contexte.</p>
+<p>Une presse à injecter, un four continu et une ligne de conditionnement n'ont ni les mêmes durées de cycle, ni les mêmes conséquences en cas d'arrêt. Un MTBF de 4 heures peut être excellent sur un équipement soumis à rude épreuve et catastrophique sur un autre.</p>
+<p>Le même équipement ne donne pas non plus le même MTBF selon son âge. Le taux de défaillance est élevé pendant les premières semaines, bas pendant la vie utile, puis remonte avec l'usure. C'est la courbe en baignoire.</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Courbe_en_baignoire.png?v=1788174077" alt=""></p>
+<p>La seule comparaison qui a du sens est celle d'un équipement avec lui-même, sur une base de calcul qui n'a pas changé. Votre référence, c'est votre relevé du mois dernier.</p>
+<h2 id="calcul">Comment calculer MTBF et MTTR ?</h2>
+<p>Les formules tiennent en deux lignes. La difficulté n'est jamais là. Elle est dans ce qu'on met dedans, et c'est ce que la plupart des ateliers découvrent après trois mois de suivi inexploitable.</p>
+<h3>Étape 1 : délimiter la fenêtre et le périmètre</h3>
+<p>Fixez une période et un équipement. Un MTBF calculé sur une ligne entière mélange des machines qui n'ont rien à voir et ne pilote plus rien.</p>
+<p>Une fenêtre trop courte donne un chiffre qui saute à chaque panne. Une fenêtre trop longue lisse les dérives que vous cherchez justement à voir. Le mois glissant est un bon point de départ pour un équipement qui tombe plusieurs fois par mois.</p>
+<h3>Étape 2 : écrire la règle qui définit une panne</h3>
+<p>C'est l'étape que tout le monde saute, et celle qui décide de tout. Un arrêt de 40 secondes pour dégager un carton coincé compte-t-il comme une panne ?</p>
+<p>Si vous répondez oui, votre nombre de pannes explose et votre MTBF s'effondre. Si vous répondez non, vous rendez invisibles les micro-arrêts, qui sont souvent la vraie perte.</p>
+<p>Les deux réponses se défendent. Une seule chose est interdite : que la règle change d'un mois à l'autre, ou d'une équipe à l'autre. Écrivez le seuil, affichez-le au poste, et traitez les micro-arrêts dans un indicateur séparé.</p>
+<h3>Étape 3 : relever quatre heures par arrêt, pas une</h3>
+<p>Un arrêt qui ne porte qu'une durée totale ne permet aucun diagnostic. Notez quatre horodatages :</p>
+<ol>
+<li>
+<strong>L'heure de l'arrêt</strong>, quand la machine s'immobilise.</li>
+<li>
+<strong>L'heure de l'appel</strong>, quand la maintenance est prévenue.</li>
+<li>
+<strong>L'heure de la prise en charge</strong>, quand le technicien est devant la machine.</li>
+<li>
+<strong>L'heure de la remise en service</strong>, quand la production repart et non quand la réparation est finie.</li>
+</ol>
+<p>Ces quatre points découpent le MTTR en trois morceaux : le temps de détection et d'appel, le temps d'attente, le temps d'intervention. Sans ce découpage, vous constatez que le MTTR est élevé sans savoir si le problème est un manque de techniciens, un magasin mal tenu ou une machine difficile d'accès.</p>
+<p>Dans la plupart des ateliers que nous accompagnons, le temps d'intervention proprement dit est le plus petit des trois. Agir dessus est pourtant le premier réflexe.</p>
+<h3>Étape 4 : poser les deux divisions</h3>
+<p>Le reste est de l'arithmétique.</p>
+<ul>
+<li>
+<strong>MTBF</strong> = temps de fonctionnement sur la période / nombre de pannes</li>
+<li>
+<strong>MTTR</strong> = temps d'arrêt total sur la période / nombre de réparations</li>
+</ul>
+<p>Attention au numérateur du MTBF. C'est le temps où la machine <em>tourne</em>, pas le temps d'ouverture. Compter les heures d'ouverture au lieu des heures de fonctionnement gonfle le MTBF, d'autant plus que la machine tombe souvent.</p>
+<h3>Étape 5 : remonter à la disponibilité, puis au TRS</h3>
+<p>Appliquez la formule de disponibilité, puis vérifiez qu'elle correspond à celle que vous lisez dans votre TRS. L'écart entre les deux, quand il existe, révèle une différence de périmètre : arrêts planifiés comptés d'un côté et pas de l'autre, changements de série classés en panne, ou pauses comptées en fonctionnement.</p>
+<div class="fichly-note">
+<p><strong>Le standard de relevé avant l'outil.</strong> Un logiciel de GMAO ou de suivi de production ne fabrique pas la donnée, il l'agrège. Si la règle de comptage n'est pas écrite avant, l'outil ne fera que produire plus vite un chiffre faux. Les fiches de calcul du MTBF, du MTTR et du TRS sont regroupées dans notre <a href="https://www.fichly.com/products/fiches-lean">jeu de fiches Lean sur les indicateurs de production et de maintenance</a>, avec le tableau de relevé à poser au poste.</p>
+</div>
+<h2 id="matrice">Lequel suivre : le croisement MTBF et MTTR en quatre cas</h2>
+<p>Voilà la partie que les définitions ne donnent jamais. Un MTBF et un MTTR ne se lisent pas l'un après l'autre, ils se lisent <strong>ensemble</strong>. Croisés, ils forment quatre situations, et chacune désigne un problème différent.</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/4_MTBF_ou_MTTR_sur_quoi_agir.png?v=1788173911" alt=""></p>
+<table>
+<tbody>
+<tr>
+<th>Situation</th>
+<th>Ce que ça veut dire</th>
+<th>Ce qu'on traite en premier</th>
+<th>Qui s'en saisit</th>
+</tr>
+<tr>
+<td><strong>MTBF haut, MTTR bas</strong></td>
+<td>La machine tient et repart vite. Situation saine.</td>
+<td>Rien à corriger. On protège l'existant et on vérifie que le relevé n'est pas trop indulgent.</td>
+<td>Production, en autonomie</td>
+</tr>
+<tr>
+<td><strong>MTBF bas, MTTR bas</strong></td>
+<td>Ça tombe souvent mais ça repart vite. Le symptôme est masqué par la réactivité de l'équipe.</td>
+<td>La cause racine des pannes répétées. C'est un problème de fiabilité, pas de rapidité.</td>
+<td>Méthodes et fiabilité</td>
+</tr>
+<tr>
+<td><strong>MTBF haut, MTTR haut</strong></td>
+<td>Ça tombe rarement, mais chaque arrêt coûte cher. Souvent une pièce longue à obtenir ou une compétence rare.</td>
+<td>La chaîne de remise en service : stock de pièces critiques, astreinte, procédure d'intervention.</td>
+<td>Maintenance et achats</td>
+</tr>
+<tr>
+<td><strong>MTBF bas, MTTR haut</strong></td>
+<td>Ça tombe souvent et ça repart lentement. L'équipement est en fin de vie ou mal adapté à son usage.</td>
+<td>La décision d'investissement, pas le plan d'action. Aucun chantier ne rattrape ce quadrant.</td>
+<td>Direction industrielle</td>
+</tr>
+</tbody>
+</table>
+<p>Ce tableau règle une confusion fréquente. Deux équipements peuvent afficher la même disponibilité et relever de deux quadrants opposés.</p>
+<p>Le premier, qui tombe toutes les 4 heures et repart en 20 minutes, occupe le quadrant fiabilité. Le second, qui tient trois semaines et reste bloqué deux jours, occupe le quadrant remise en service. Lancer un chantier de fiabilisation sur le second est une perte de temps, et améliorer le stock de pièces sur le premier n'y changera rien non plus.</p>
+<p>La question utile n'est pas « quel est notre taux de disponibilité ». C'est « dans quel quadrant sommes-nous, et depuis quand ».</p>
+<h2 id="erreurs">Ce qui fausse un MTBF ou un MTTR</h2>
+<p>Un indicateur de maintenance faux est pire qu'un indicateur absent, parce qu'il déclenche des décisions.</p>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">Erreur</span> Compter le temps d'ouverture au lieu du temps de fonctionnement au numérateur du MTBF.<br><span class="fichly-ok">À faire</span> Retirer les arrêts, les pauses et les périodes sans production. Le MTBF ne parle que du temps où la machine tourne.</p>
+<p><span class="fichly-ko">Erreur</span> Ranger les arrêts planifiés, les changements de série et les réglages dans les pannes.<br><span class="fichly-ok">À faire</span> Les sortir du calcul. Un changement de série n'est pas une défaillance, il relève du <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">travail de réduction des gaspillages</a> et se traite ailleurs.</p>
+<p><span class="fichly-ko">Erreur</span> Arrêter le chronomètre du MTTR quand la réparation est finie.<br><span class="fichly-ok">À faire</span> L'arrêter quand la production a repris à cadence. Les redémarrages, les purges et les premiers rebuts font partie de l'arrêt vécu par le client.</p>
+<p><span class="fichly-ko">Erreur</span> Suivre une moyenne seule, sans regarder la dispersion.<br><span class="fichly-ok">À faire</span> Regarder aussi l'arrêt le plus long de la période. Une moyenne de 40 minutes peut cacher neuf arrêts de 10 minutes et un de 5 heures, et c'est ce dernier qui a coûté la journée.</p>
+<p><span class="fichly-ko">Erreur</span> Changer la règle de comptage des micro-arrêts en cours d'année.<br><span class="fichly-ok">À faire</span> Figer le seuil et le dater. Toute évolution de la règle rend la comparaison avec l'historique impossible, et le gain constaté devient un artefact.</p>
+<p><span class="fichly-ko">Erreur</span> Piloter le MTBF sans tenir le préventif ni les vérifications réglementaires.<br><span class="fichly-ok">À faire</span> Tenir le plan de maintenance et les <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000018489757/" rel="noopener" target="_blank">vérifications périodiques des équipements de travail</a> prévues par le code du travail. Un MTBF qui monte parce que le préventif a été sauté est un chiffre qui vous rattrape.</p>
+</div>
+<h2 id="anglais">Le vocabulaire MTBF, MTTR et MTTF en anglais</h2>
+<p>Les sigles sont anglais et vous les croiserez sous leur forme d'origine dans les documentations machines, les GMAO et les rapports de groupe. Voici les équivalences utiles.</p>
+<table>
+<tbody>
+<tr>
+<th>Sigle</th>
+<th>Terme anglais</th>
+<th>Terme français</th>
+<th>Ce qu'il faut savoir</th>
+</tr>
+<tr>
+<td>MTBF</td>
+<td>Mean Time Between Failures</td>
+<td>Temps moyen entre défaillances</td>
+<td>Réservé aux équipements réparables</td>
+</tr>
+<tr>
+<td>MTTR</td>
+<td>Mean Time To Repair</td>
+<td>Temps moyen de réparation</td>
+<td>Ne compte que l'intervention</td>
+</tr>
+<tr>
+<td>MTTR</td>
+<td>Mean Time To Recovery ou To Restore</td>
+<td>Temps moyen de remise en service</td>
+<td>Compte l'attente et le redémarrage. Le plus honnête des deux</td>
+</tr>
+<tr>
+<td>MTTF</td>
+<td>Mean Time To Failure</td>
+<td>Temps moyen avant défaillance</td>
+<td>Pour les composants non réparables</td>
+</tr>
+<tr>
+<td>MTTA</td>
+<td>Mean Time To Acknowledge</td>
+<td>Temps moyen de prise en charge</td>
+<td>Isole le délai d'appel et d'arrivée</td>
+</tr>
+<tr>
+<td>MTTD</td>
+<td>Mean Time To Detect</td>
+<td>Temps moyen de détection</td>
+<td>Utile quand la panne n'est pas visible tout de suite</td>
+</tr>
+<tr>
+<td>Uptime</td>
+<td>Uptime</td>
+<td>Temps de fonctionnement</td>
+<td>Le numérateur du MTBF</td>
+</tr>
+<tr>
+<td>Downtime</td>
+<td>Downtime</td>
+<td>Temps d'arrêt</td>
+<td>Le numérateur du MTTR</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>Availability</td>
+<td>Disponibilité</td>
+<td>Le premier facteur du TRS, appelé OEE en anglais</td>
+</tr>
+</tbody>
+</table>
+<p>Un point de vigilance sur les fiches techniques fournisseur. Un MTBF annoncé par un constructeur est une valeur de conception, calculée en laboratoire dans des conditions théoriques. Le vôtre intègre votre environnement, vos cadences et vos réglages. L'écart entre les deux n'est pas une anomalie, c'est la réalité de votre site.</p>
+<h2 id="outils">Les outils qui prennent le relais après le MTBF et le MTTR</h2>
+<p>Le MTBF et le MTTR ne corrigent rien par eux-mêmes. Ils vous disent où regarder. La suite se joue avec les outils de résolution.</p>
+<ul>
+<li>
+<strong>Quand le MTBF est bas</strong>, le problème est une cause qui revient. C'est le terrain de la <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">méthode DMAIC</a>, qui impose de prouver la cause par des données avant de proposer une contre-mesure.</li>
+<li>
+<strong>Quand le MTTR est haut</strong>, le problème est un processus d'intervention. Le <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a> convient mieux, avec des boucles courtes sur l'organisation de l'astreinte, du magasin et de l'accès machine.</li>
+<li>
+<strong>Quand les arrêts sont dispersés sur toute une ligne</strong>, remontez d'un cran avec une <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">cartographie de la chaîne de valeur (VSM)</a> avant de choisir un équipement à traiter.</li>
+<li>
+<strong>Quand l'accès machine et l'état du poste rallongent chaque intervention</strong>, un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a> sur la zone technique produit souvent plus de minutes gagnées qu'un renfort d'effectif.</li>
+</ul>
+<p>Le bon ordre est toujours le même. On mesure, on situe le quadrant, on choisit l'outil. L'erreur classique consiste à lancer l'outil d'abord, parce qu'il était au catalogue de l'année.</p>
+<h2 id="faq">FAQ : vos questions sur le MTBF et le MTTR</h2>
+<div class="fichly-faq">
+<details>
+<summary>Quelle est la différence entre MTTR et MTBF ?</summary>
+<div class="answer">
+<p>Le MTBF mesure le temps moyen pendant lequel l'équipement fonctionne entre deux pannes, donc sa fiabilité. Le MTTR mesure le temps moyen nécessaire pour le remettre en service après une panne, donc sa maintenabilité. Le premier se travaille par la conception, le préventif et les conditions d'usage. Le second se travaille par l'organisation de l'intervention, la disponibilité des pièces et les compétences. On veut un MTBF le plus haut possible et un MTTR le plus bas possible.</p>
+</div>
+</details>
+<details>
+<summary>Comment calculer MTBF MTTR ?</summary>
+<div class="answer">
+<p>Le MTBF est le temps de fonctionnement de la période divisé par le nombre de pannes. Le MTTR est le temps d'arrêt total divisé par le nombre de réparations. Sur un poste ouvert 16 heures dont 2 heures de maintenance planifiée, qui subit 2 heures d'arrêts répartis sur 3 pannes, le MTBF vaut 12 divisé par 3, soit 4 heures, et le MTTR vaut 2 divisé par 3, soit 40 minutes. La disponibilité en découle : 4 divisé par 4,67, soit 85,7 %.</p>
+</div>
+</details>
+<details>
+<summary>Qu'est-ce que le MTBF ?</summary>
+<div class="answer">
+<p>Le MTBF, pour Mean Time Between Failures, est le temps moyen qui s'écoule entre deux pannes successives d'un équipement réparable. Il s'exprime en heures de fonctionnement et sert d'indicateur de fiabilité. Plus il est élevé, plus l'équipement tient longtemps sans défaillance. Pour un composant qu'on remplace au lieu de le réparer, on parle de MTTF, Mean Time To Failure.</p>
+</div>
+</details>
+<details>
+<summary>Que signifie MTTR ?</summary>
+<div class="answer">
+<p>MTTR signifie Mean Time To Repair, temps moyen de réparation. Le sigle recouvre aussi Mean Time To Recovery ou Mean Time To Restore selon les sources, et la nuance compte : la première lecture ne compte que l'intervention, les deux autres comptent l'ensemble de l'immobilisation, détection et attente comprises. Choisissez une définition, écrivez-la dans votre standard de relevé, et gardez la même d'un mois sur l'autre.</p>
+</div>
+</details>
+<details>
+<summary>Quel est un bon MTBF ?</summary>
+<div class="answer">
+<p>Il n'existe pas de valeur cible universelle. Un MTBF de quelques heures peut être correct sur un équipement très sollicité et inacceptable sur un autre. La seule référence utile est votre propre historique, sur le même équipement et avec une règle de comptage inchangée. Méfiez-vous des seuils tout faits que l'on trouve en ligne : ils comparent des machines qui n'ont rien en commun.</p>
+</div>
+</details>
+<details>
+<summary>Le MTTR inclut-il le temps d'attente des pièces ?</summary>
+<div class="answer">
+<p>Cela dépend de la définition que vous retenez, et c'est pour cette raison qu'il faut l'écrire. Le Mean Time To Repair strict exclut l'attente et ne compte que l'intervention. Le Mean Time To Recovery l'inclut. En pratique, l'attente de pièce ou de technicien pèse souvent plus lourd que la réparation, donc l'exclure revient à masquer la principale marge de progrès. Relevez les deux si vous le pouvez, en découpant l'arrêt en temps de détection, temps d'attente et temps d'intervention.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Un indicateur de maintenance ne vaut que par le relevé qui l'alimente.</strong></p>
+<p>Avant de choisir un outil, il faut savoir quelle donnée vous voulez sortir, à quelle maille, et qui la saisit. C'est le travail que nous menons avec les sites que nous accompagnons sur leur mesure de performance.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels pour la mesure du TRS et de la disponibilité</a> : suivi des arrêts, remontée automatique des temps et calcul des indicateurs de maintenance sans double saisie.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le taux de rendement synthétique (TRS) : définition et calcul</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes et leurs livrables</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "MTBF et MTTR : les deux indicateurs qui expliquent votre disponibilité",
+  "description": "Le MTBF mesure la fiabilité, le MTTR la remise en service. Formules, standard de relevé et matrice en quatre cas pour savoir lequel des deux traiter en premier.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-mtbf-mttr-disponibilite.png?v=1787607202",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-03",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre MTTR et MTBF ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le MTBF mesure le temps moyen pendant lequel l'équipement fonctionne entre deux pannes, donc sa fiabilité. Le MTTR mesure le temps moyen nécessaire pour le remettre en service après une panne, donc sa maintenabilité. Le premier se travaille par la conception, le préventif et les conditions d'usage. Le second se travaille par l'organisation de l'intervention, la disponibilité des pièces et les compétences. On veut un MTBF le plus haut possible et un MTTR le plus bas possible." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer MTBF MTTR ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le MTBF est le temps de fonctionnement de la période divisé par le nombre de pannes. Le MTTR est le temps d'arrêt total divisé par le nombre de réparations. Sur un poste ouvert 16 heures dont 2 heures de maintenance planifiée, qui subit 2 heures d'arrêts répartis sur 3 pannes, le MTBF vaut 12 divisé par 3, soit 4 heures, et le MTTR vaut 2 divisé par 3, soit 40 minutes. La disponibilité en découle : 4 divisé par 4,67, soit 85,7 %." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le MTBF ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le MTBF, pour Mean Time Between Failures, est le temps moyen qui s'écoule entre deux pannes successives d'un équipement réparable. Il s'exprime en heures de fonctionnement et sert d'indicateur de fiabilité. Plus il est élevé, plus l'équipement tient longtemps sans défaillance. Pour un composant qu'on remplace au lieu de le réparer, on parle de MTTF, Mean Time To Failure." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que signifie MTTR ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "MTTR signifie Mean Time To Repair, temps moyen de réparation. Le sigle recouvre aussi Mean Time To Recovery ou Mean Time To Restore selon les sources, et la nuance compte : la première lecture ne compte que l'intervention, les deux autres comptent l'ensemble de l'immobilisation, détection et attente comprises. Choisissez une définition, écrivez-la dans votre standard de relevé, et gardez la même d'un mois sur l'autre." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est un bon MTBF ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il n'existe pas de valeur cible universelle. Un MTBF de quelques heures peut être correct sur un équipement très sollicité et inacceptable sur un autre. La seule référence utile est votre propre historique, sur le même équipement et avec une règle de comptage inchangée. Méfiez-vous des seuils tout faits que l'on trouve en ligne : ils comparent des machines qui n'ont rien en commun." }
+    },
+    {
+      "@type": "Question",
+      "name": "Le MTTR inclut-il le temps d'attente des pièces ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cela dépend de la définition que vous retenez, et c'est pour cette raison qu'il faut l'écrire. Le Mean Time To Repair strict exclut l'attente et ne compte que l'intervention. Le Mean Time To Recovery l'inclut. En pratique, l'attente de pièce ou de technicien pèse souvent plus lourd que la réparation, donc l'exclure revient à masquer la principale marge de progrès. Relevez les deux si vous le pouvez, en découpant l'arrêt en temps de détection, temps d'attente et temps d'intervention." }
+    }
+  ]
+}
+</script></p>

@@ -1,0 +1,398 @@
+<h1>Diagramme de Pareto : construire un classement de causes qui tient</h1>
+
+<!--
+ARTICLE FICHLY - FICHE DE PRODUCTION
+Mot-cle vise      : diagramme de pareto
+Volume France     : 1 400 recherches / mois (releve Ahrefs du 11/09/2026)
+Difficulte (KD)   : 1
+Potentiel trafic  : 800
+Sujet parent      : identique au mot-cle, aucune variante a viser
+Page 1            : Wikipedia DR 97, blog-gestion-de-projet DR 55, qualiteperformance DR 45,
+                    support Microsoft DR 96, editeur qualite DR 31, numiqo DR 18, bdc DR 83
+DR minimum        : 18
+VERDICT           : GO. Population mixte mais avec de vrais specialistes qualite,
+                    deux sites sous DR 35 en page 1. Un DR 18 tient la page 1, donc fichly.com (DR 7) peut jouer.
+Objectif du brief : Notoriete, satellite du cluster Resolution
+Lien montant      : methode-dmaic-5-etapes (page mere du cluster), obligatoire
+Title tag         : Diagramme de Pareto : methode, exemple et calcul complet
+Meta description  : 200 arrets releves, trois unites de mesure, trois classements differents. La methode du diagramme de Pareto, avec exemple de calcul et pourcentages cumules.
+Handle            : diagramme-de-pareto-methode-exemple
+Longueur          : 1 806 mots redactionnels, 2 090 mots avec tableaux, sommaire, bio et footer
+
+DECISIONS PRISES
+1. Contre-angle assume : la page 1 explique le 80/20 puis bascule sur le trace dans Excel.
+   Personne ne traite la qualite du releve qui alimente le diagramme, ni le choix de l'unite de mesure,
+   ni le cas ou le 80/20 ne s'applique pas. Ces trois blocs sont notre place sur ce SERP.
+2. L'exemple de calcul est un jeu de donnees construit pour la demonstration, annonce comme tel
+   dans un encart. Aucun client, aucune usine, aucun resultat reel n'est cite.
+3. Le meme jeu de donnees produit trois classements differents selon l'unite retenue
+   (occurrences, temps d'arret, cout). C'est la demonstration centrale de l'article.
+4. Filiation Pareto / Juran traitee explicitement : le 80/20 est une analogie de qualiticien,
+   pas une loi. Cela fonde la section sur la distribution plate.
+5. Aucun seuil de performance chiffre, conformement aux regles Fichly.
+6. Aucun code promotionnel, aucun pourcentage de remise, aucune date d'offre.
+7. Gabarit et bloc style repris a l'identique de l'article TPM (gid 1004916867417),
+   dont la bio Hugo integre la carte auteur avec photo. Aucune classe inventee.
+8. Article deposé en isPublished: false. Hugo publie.
+
+PLACEHOLDERS RESTANTS : aucun.
+-->
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article" lang="fr">
+<p>Le <strong>diagramme de Pareto</strong> est l’outil que tout le monde connaît et que peu de gens construisent correctement. La règle des 80/20 s’apprend en une minute, le tracé se fait en cinq minutes dans un tableur. <strong>Le vrai problème se joue avant le graphique.</strong> Un diagramme bâti sur des catégories mal découpées, ou sur une mauvaise unité de mesure, donne un classement faux et parfaitement convaincant. Voici l’exemple de calcul complet, et la preuve qu’un même relevé produit trois classements.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Dans un atelier, les pannes ne se valent pas. Quelques-unes reviennent tout le temps, les autres presque jamais. Le diagramme de Pareto les range de la plus fréquente à la plus rare, puis additionne au fur et à mesure. On voit alors les deux ou trois causes qui font le gros du problème. Vous savez par laquelle commencer.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Le diagramme de Pareto classe des causes par poids décroissant et affiche leur cumul.</li>
+<li>Le 80/20 est une analogie de qualiticien, jamais une loi.</li>
+<li>
+<strong>Le même relevé donne trois classements différents</strong> selon que vous comptez les occurrences, les minutes d’arrêt ou l’argent.</li>
+<li>Un découpage de catégories bancal fausse le classement, sans que rien ne le signale.</li>
+<li>Une courbe plate est un résultat : le problème n’est pas là où vous le cherchez.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu’est-ce qu’un diagramme de Pareto ?</a></li>
+<li><a href="#construire">Comment construire un diagramme de Pareto : l’exemple de calcul</a></li>
+<li><a href="#unite">Occurrences, temps d’arrêt ou coût : l’unité qui change tout</a></li>
+<li><a href="#releve">La qualité du relevé décide de la qualité du classement</a></li>
+<li><a href="#plate">Quand la règle des 80/20 ne s’applique pas</a></li>
+<li><a href="#pieges">Les erreurs qui faussent un diagramme de Pareto</a></li>
+<li><a href="#outils">Quels outils prendre après le diagramme de Pareto</a></li>
+<li><a href="#faq">FAQ : vos questions sur le diagramme de Pareto</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu’est-ce qu’un diagramme de Pareto ?</h2>
+<p><strong>Le diagramme de Pareto est un graphique qui classe des causes de la plus lourde à la plus légère et qui affiche, en parallèle, le cumul de leur poids.</strong> Des barres décroissantes, une courbe qui additionne les pourcentages : rien d’autre.</p>
+<p>Il répond à une seule question : combien de causes faut-il traiter pour couvrir la plus grande part du problème ? <strong>La courbe cumulée y répond en un coup d’œil, ce que la liste brute des relevés ne fait jamais.</strong></p>
+<p>L’outil porte le nom de Vilfredo Pareto, économiste italien qui observe une répartition des revenus très inégale dans son <a href="https://gallica.bnf.fr/ark:/12148/bpt6k5518153f.texteImage" rel="noopener" target="_blank">Manuel d’économie politique numérisé par la Bibliothèque nationale de France</a>. <strong>Pareto n’a jamais tracé de diagramme de Pareto ni parlé de qualité industrielle.</strong> La formule « 80 % des effets viennent de 20 % des causes » revient à Joseph Juran, qualiticien américain, dans les années 1950. <strong>Le 80/20 est une analogie, pas une loi.</strong></p>
+<h2 id="construire">Comment construire un diagramme de Pareto : l’exemple de calcul</h2>
+<p>Cinq gestes, dont un seul est graphique. <strong>Les quatre premiers décident du résultat, le cinquième le dessine.</strong></p>
+<div class="fichly-note">
+<p><strong>Sur les chiffres qui suivent.</strong> Ce jeu de données est construit pour la démonstration. Il ne provient d’aucun client réel.</p>
+</div>
+<h3>Étape 1 : poser la question et la période</h3>
+<p>Un diagramme répond à une question, pas à un thème. « Pourquoi la ligne de conditionnement s’arrête-t-elle ? » est une question, « la performance de la ligne » n’en est pas une. <strong>Fixez la période avant de regarder les données</strong> : ici, vingt jours.</p>
+<h3>Étape 2 : choisir les catégories</h3>
+<p>Les catégories sont les barres du futur graphique. Six suffisent ici, et <strong>chaque arrêt doit tomber dans une seule d’entre elles</strong>.</p>
+<h3>Étape 3 : choisir l’unité de mesure</h3>
+<p>Occurrences, minutes, pièces rebutées ou euros ? <strong>C’est la décision la plus lourde, et celle qu’on prend le plus vite.</strong> Pour ce premier tracé, on compte les occurrences.</p>
+<h3>Étape 4 : trier, additionner, cumuler</h3>
+<p>Rangez par valeur décroissante, calculez la part de chacune, puis additionnez ligne après ligne.</p>
+<table>
+<thead>
+<tr>
+<th>Cause d’arrêt</th>
+<th>Occurrences</th>
+<th>Part</th>
+<th>Cumul</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bourrage en sortie d’étiqueteuse</td>
+<td>88</td>
+<td>44,0 %</td>
+<td>44,0 %</td>
+</tr>
+<tr>
+<td>Changement de bobine film</td>
+<td>46</td>
+<td>23,0 %</td>
+<td>67,0 %</td>
+</tr>
+<tr>
+<td>Réglage de la dateuse</td>
+<td>30</td>
+<td>15,0 %</td>
+<td>82,0 %</td>
+</tr>
+<tr>
+<td>Manque de cartons au poste</td>
+<td>18</td>
+<td>9,0 %</td>
+<td>91,0 %</td>
+</tr>
+<tr>
+<td>Arrêt sur capteur de sécurité</td>
+<td>12</td>
+<td>6,0 %</td>
+<td>97,0 %</td>
+</tr>
+<tr>
+<td>Panne du convoyeur</td>
+<td>6</td>
+<td>3,0 %</td>
+<td>100,0 %</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>200</strong></td>
+<td><strong>100,0 %</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Deux opérations par ligne. <strong>La part vaut la valeur divisée par le total</strong> : 88 sur 200 donne 44,0 %. <strong>Le cumul vaut la part de la ligne plus le cumul précédent</strong> : 15,0 % plus 67,0 % donne 82,0 %.</p>
+<h3>Étape 5 : lire le classement, pas le dessin</h3>
+<p><strong>Trois causes sur six couvrent 82 % des arrêts.</strong> Le rapport réel est donc 50 % des causes pour 82 % des effets, et <strong>ce n’est pas un défaut du relevé</strong> : vingt pour cent de six catégories font 1,2 catégorie. Pour vos propres relevés, <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">Le guide de la résolution de problèmes en 20 fiches</a> donne les trames de collecte et de tri.</p>
+<h2 id="unite">Occurrences, temps d’arrêt ou coût : l’unité qui change tout</h2>
+<p>Un même relevé donne autant de classements que d’unités de mesure. <strong>C’est le point le plus utile du sujet, et celui que les pages sur le 80/20 laissent de côté.</strong> Voici les six mêmes causes mesurées de trois façons : un arrêt de convoyeur dure 95 minutes en moyenne, un bourrage 2 minutes, et le réglage de la dateuse envoie des étuis au rebut.</p>
+<table>
+<thead>
+<tr>
+<th>Cause d’arrêt</th>
+<th>Rang par occurrences</th>
+<th>Rang par minutes d’arrêt</th>
+<th>Rang par coût</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bourrage en sortie d’étiqueteuse</td>
+<td class="col-oui">1er (44,0 %)</td>
+<td>4e (14,2 %)</td>
+<td>4e (10,3 %)</td>
+</tr>
+<tr>
+<td>Changement de bobine film</td>
+<td>2e (23,0 %)</td>
+<td>2e (14,9 %)</td>
+<td>3e (10,7 %)</td>
+</tr>
+<tr>
+<td>Réglage de la dateuse</td>
+<td>3e (15,0 %)</td>
+<td>3e (14,6 %)</td>
+<td class="col-oui">1er (38,5 %)</td>
+</tr>
+<tr>
+<td>Manque de cartons au poste</td>
+<td>4e (9,0 %)</td>
+<td>5e (7,3 %)</td>
+<td>5e (5,2 %)</td>
+</tr>
+<tr>
+<td>Arrêt sur capteur de sécurité</td>
+<td>5e (6,0 %)</td>
+<td>6e (2,9 %)</td>
+<td>6e (2,1 %)</td>
+</tr>
+<tr>
+<td>Panne du convoyeur</td>
+<td>6e (3,0 %)</td>
+<td class="col-oui">1er (46,1 %)</td>
+<td>2e (33,2 %)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Trois unités, trois causes différentes en tête.</strong> Le bourrage domine les occurrences parce qu’il survient 88 fois. La panne de convoyeur domine le temps d’arrêt : ses 6 occurrences pèsent 570 minutes sur 1 236. Le réglage de la dateuse domine le coût parce qu’il ajoute des rebuts.</p>
+<ul>
+<li>
+<strong>Les occurrences</strong> disent ce qui perturbe le plus l’opérateur.</li>
+<li>
+<strong>Les minutes d’arrêt</strong> disent ce qui coûte le plus de capacité, unité à retenir quand le sujet est le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>.</li>
+<li>
+<strong>Le coût</strong> est la seule unité qui intègre les rebuts.</li>
+</ul>
+<p><strong>Décidez de l’unité avant de regarder les résultats</strong>, sans quoi vous choisissez votre conclusion. Et quand deux unités désignent deux causes différentes, ne tranchez pas : il y a deux chantiers.</p>
+<h2 id="releve">La qualité du relevé décide de la qualité du classement</h2>
+<p>Un diagramme de Pareto ne vaut pas plus que le relevé qui l’alimente, et un mauvais relevé ne se voit pas sur le graphique. <strong>Le tracé est toujours propre, même quand les données ne le sont pas.</strong> Quatre contrôles écartent l’essentiel du risque.</p>
+<p><strong>Des catégories exclusives.</strong> Un arrêt qui peut entrer dans deux cases y entrera selon l’humeur de celui qui remplit. Le vocabulaire de la norme <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" rel="noopener" target="_blank">NF EN 13306, terminologie de la maintenance</a>, règle une bonne partie de ces recouvrements.</p>
+<p><strong>Un même niveau de détail.</strong> Mettre « défaut qualité » à côté de « vis de réglage desserrée » garantit que la première arrivera en tête, parce qu’elle est plus large. <strong>Une catégorie n’est pas grosse parce qu’elle pèse lourd, mais parce qu’elle contient plusieurs sujets.</strong></p>
+<p><strong>Une case « Autres » surveillée.</strong> Marginale, elle est le prix de la simplicité. Dans les premières barres, elle signale un découpage qui a manqué quelque chose.</p>
+<p><strong>Une période représentative.</strong> Vingt jours couvrant plusieurs équipes valent mieux que trois jours choisis après coup.</p>
+<h2 id="plate">Quand la règle des 80/20 ne s’applique pas</h2>
+<p>Il arrive qu’un relevé donne dix causes pesant chacune environ 10 % du total. La courbe cumulée monte en ligne droite, sans coude. <strong>Ce n’est pas un échec du diagramme, c’est un résultat.</strong> Trois lectures, dans cet ordre.</p>
+<p><strong>Les catégories sont trop fines.</strong> Vingt cases précises répartissent mécaniquement le poids. Regroupez d’un cran, par organe de machine plutôt que par symptôme.</p>
+<p><strong>L’unité de mesure est mal choisie.</strong> Une courbe plate en occurrences peut devenir très concentrée en minutes d’arrêt ou en euros.</p>
+<p><strong>Le problème n’est pas là où vous le cherchez.</strong> Quand aucune cause ne se détache, quelle que soit la maille et quelle que soit l’unité, la variabilité vient du système. <strong>Il n’y a alors aucune cause prioritaire, il y a une condition commune à corriger</strong> : un standard absent, un réglage général, une matière hors spécification. Cherchez aussi du côté des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">huit gaspillages du Lean</a>, que le comptage d’arrêts ne capte pas.</p>
+<h2 id="pieges">Les erreurs qui faussent un diagramme de Pareto</h2>
+<p>Quatre erreurs reviennent en atelier, et aucune n’est une erreur de tracé.</p>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Choisir l’unité de mesure après avoir vu les résultats.</span><br><span class="fichly-ok">✅ Fixer l’unité à partir de la question posée.</span> Retenir celle qui désigne la cause qu’on avait en tête est une justification, pas une analyse.</p>
+<p><span class="fichly-ko">❌ Mélanger les niveaux de détail entre catégories.</span><br><span class="fichly-ok">✅ Un seul niveau de découpage, vérifié avant le comptage.</span> Une catégorie large arrive toujours en tête, et le chantier qui en sort n’a pas de périmètre.</p>
+<p><span class="fichly-ko">❌ S’arrêter au classement.</span><br><span class="fichly-ok">✅ Enchaîner sur une recherche de cause, sur la première barre.</span> Le diagramme dit où chercher, jamais pourquoi.</p>
+<p><span class="fichly-ko">❌ Ne jamais retracer le diagramme après les actions.</span><br><span class="fichly-ok">✅ Un second Pareto, même unité, même durée.</span> C’est la seule preuve que la première barre a baissé.</p>
+</div>
+<p><strong>Un diagramme de Pareto n’a de valeur que comparé à lui-même.</strong> Le second tracé transforme un graphique de réunion en boucle d’amélioration : c’est le rôle du Check dans le <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a>.</p>
+<h2 id="outils">Quels outils prendre après le diagramme de Pareto</h2>
+<p>Le diagramme de Pareto désigne une cible et s’arrête là. <strong>Il hiérarchise, il n’explique rien.</strong> Voici les outils qui prennent le relais.</p>
+<ul>
+<li>
+<strong>Les 5 pourquoi</strong>, pour remonter de la première barre à sa cause racine en <a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">creusant la chaîne de causes</a>.</li>
+<li>
+<strong>Le diagramme causes-effets, dit d’Ishikawa</strong>, si la cause dominante est multifactorielle.</li>
+<li>
+<strong>Le DMAIC</strong>, pour encadrer l’ensemble : le Pareto est un outil de la phase Mesure, à l’intérieur d’une <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">démarche de résolution de problèmes en cinq étapes</a>.</li>
+<li>
+<strong>Le MTBF et le MTTR</strong> quand le classement porte sur des pannes : ces <a href="https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite">deux indicateurs de disponibilité</a> séparent ce qui tombe souvent de ce qui est long à réparer.</li>
+<li>
+<strong>L’arbre des causes</strong> pour les accidents du travail, dont l’<a href="https://www.inrs.fr/media.html?refINRS=ED+6163" rel="noopener" target="_blank">INRS publie la méthode</a>.</li>
+</ul>
+<p>Un Pareto des presque-accidents alimente aussi la hiérarchisation du document unique, dont le <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000023795562" rel="noopener" target="_blank">code du travail impose la tenue à tout employeur</a>. <strong>Le classement devient alors un argument opposable.</strong></p>
+<h2 id="faq">FAQ : vos questions sur le diagramme de Pareto</h2>
+<div class="fichly-faq">
+<details>
+<summary>Qu’est-ce que la loi des 80/20 ?</summary>
+<div class="answer">
+<p>La loi des 80/20, ou principe de Pareto, énonce qu’une minorité de causes produit la majorité des effets. Elle a été formulée par Joseph Juran dans les années 1950, à partir des travaux de Vilfredo Pareto. Ce n’est pas une loi mathématique : le rapport réel varie d’un relevé à l’autre.</p>
+</div>
+</details>
+<details>
+<summary>Comment calculer les pourcentages cumulés d’un diagramme de Pareto ?</summary>
+<div class="answer">
+<p>Triez les catégories par valeur décroissante, puis divisez la valeur de chacune par le total : 88 sur 200 donnent 44,0 %. Ajoutez enfin la part de chaque ligne au cumul précédent : 15,0 % après 67,0 % donne 82,0 %. Le dernier cumul vaut toujours 100 %.</p>
+</div>
+</details>
+<details>
+<summary>Quelle différence entre un diagramme de Pareto et un diagramme d’Ishikawa ?</summary>
+<div class="answer">
+<p>Le diagramme de Pareto hiérarchise des causes déjà comptées, à partir de données chiffrées. Le diagramme d’Ishikawa explore les causes possibles d’un effet, à partir de l’expérience d’un groupe. Le premier dit par quoi commencer, le second pourquoi cela se produit.</p>
+</div>
+</details>
+<details>
+<summary>Que faire si le diagramme de Pareto est plat ?</summary>
+<div class="answer">
+<p>Regroupez d’abord les catégories d’un cran, puis retracez avec une autre unité de mesure. Si la courbe reste plate dans tous les cas, la variabilité vient du système : cherchez un standard absent ou un réglage général plutôt qu’un coupable.</p>
+</div>
+</details>
+<details>
+<summary>Peut-on faire un diagramme de Pareto sans logiciel ?</summary>
+<div class="answer">
+<p>Oui, et c’est recommandé pour un premier relevé. Un tableau à quatre colonnes suffit : catégorie, valeur, part, cumul. Le tri décroissant et deux divisions donnent tout le contenu du graphique. Le tracé sert à présenter le résultat, pas à l’obtenir.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Un classement de causes ne vaut que par ce qui vient après.</strong></p>
+<p>Le diagramme de Pareto désigne la barre à traiter. Il ne dit ni pourquoi elle est haute, ni comment la faire baisser.</p>
+<p>👉 <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">Le guide de la résolution de problèmes en 20 fiches</a> : le relevé, le tri, la cause racine et le contrôle, avec les trames à remplir.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c’est Hugo.</strong></p>
+<p>Après un parcours d’ingénieur industriel, j’ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j’ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l’apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">Méthode DMAIC : les 5 étapes expliquées</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">Méthode des 5 pourquoi : exemple, étapes et cause racine</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">La méthode PDCA (roue de Deming) : le cycle expliqué</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Diagramme de Pareto : construire un classement de causes qui tient",
+  "description": "La méthode complète du diagramme de Pareto : exemple de calcul, pourcentages cumulés, choix de l'unité de mesure et lecture d'une distribution plate.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/diagramme-de-pareto-methode-exemple",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la loi des 80/20 ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La loi des 80/20, ou principe de Pareto, énonce qu'une minorité de causes produit la majorité des effets. Elle a été formulée par Joseph Juran dans les années 1950, à partir des travaux de Vilfredo Pareto. Ce n'est pas une loi mathématique : le rapport réel varie d'un relevé à l'autre." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer les pourcentages cumulés d'un diagramme de Pareto ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Triez les catégories par valeur décroissante, puis divisez la valeur de chacune par le total : 88 sur 200 donnent 44,0 %. Ajoutez enfin la part de chaque ligne au cumul précédent : 15,0 % après 67,0 % donne 82,0 %. Le dernier cumul vaut toujours 100 %." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle différence entre un diagramme de Pareto et un diagramme d'Ishikawa ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le diagramme de Pareto hiérarchise des causes déjà comptées, à partir de données chiffrées. Le diagramme d'Ishikawa explore les causes possibles d'un effet, à partir de l'expérience d'un groupe. Le premier dit par quoi commencer, le second pourquoi cela se produit." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire si le diagramme de Pareto est plat ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Regroupez d'abord les catégories d'un cran, puis retracez avec une autre unité de mesure. Si la courbe reste plate dans tous les cas, la variabilité vient du système : cherchez un standard absent ou un réglage général plutôt qu'un coupable." }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on faire un diagramme de Pareto sans logiciel ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui, et c'est recommandé pour un premier relevé. Un tableau à quatre colonnes suffit : catégorie, valeur, part, cumul. Le tri décroissant et deux divisions donnent tout le contenu du graphique. Le tracé sert à présenter le résultat, pas à l'obtenir." }
+    }
+  ]
+}
+</script></p>

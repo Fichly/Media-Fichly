@@ -1,0 +1,432 @@
+<h1>TPM (Total Productive Maintenance) : par quoi commencer et ce qui la fait tenir</h1>
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article">
+<p>La <strong>TPM</strong>, ou <strong>T</strong>otal <strong>P</strong>roductive <strong>M</strong>aintenance, se présente presque toujours de la même façon : une définition, huit piliers, une liste de bénéfices. Sur le terrain, le scénario est plus monotone. Le lancement est réussi, les machines sont nettoyées, les fiches sont affichées et signées. Six mois plus tard, les fiches ont jauni et personne ne les remplit. Le problème n'est presque jamais la méthode. Il est dans ce qui se passe après le lancement. Cet article prend le sujet par cet angle : ce que la TPM demande réellement, par quel pilier commencer, et les cinq questions à se poser avant de lancer une maintenance autonome dans son atelier.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>La TPM (Total Productive Maintenance) est une organisation qui transfère les gestes simples d'entretien vers la production. La TPM se lance par un seul pilier, la maintenance autonome, adossé au socle 5S. La TPM meurt toujours au même endroit : le jour où plus personne ne relit les fiches remplies.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>La TPM est un programme d'organisation, pas un type de maintenance.</li>
+<li>Les huit piliers ne se lancent pas ensemble, les 5S d'abord.</li>
+<li>La maintenance autonome est la porte d'entrée, en sept étapes.</li>
+<li>Les trois premières étapes de la maintenance autonome sont du nettoyage.</li>
+<li>L'indicateur utile est la part des arrêts subis, pas les fiches remplies.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce que la TPM (Total Productive Maintenance) ?</a></li>
+<li><a href="#piliers">Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?</a></li>
+<li><a href="#trs">Comment mesurer la TPM ? Ce qu'elle change sur votre TRS</a></li>
+<li><a href="#test">Votre atelier est-il prêt pour la TPM ? Le test en cinq questions</a></li>
+<li><a href="#etapes">Les 7 étapes de la maintenance autonome</a></li>
+<li><a href="#pieges">Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?</a></li>
+<li><a href="#outils">Les outils qui font tenir une TPM</a></li>
+<li><a href="#anglais">Le vocabulaire de la TPM en anglais</a></li>
+<li><a href="#faq">FAQ : vos questions sur la TPM</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu'est-ce que la TPM (Total Productive Maintenance) ?</h2>
+<p>La Total Productive Maintenance se traduit en français par maintenance productive totale. Les trois mots comptent, et c'est le seul endroit où la définition devient utile.</p>
+<ul>
+<li>
+<strong>Totale</strong> : tout le monde y participe, la production comme la maintenance, l'atelier comme les services support.</li>
+<li>
+<strong>Productive</strong> : la maintenance se fait avec la production et non contre elle. Elle vise la disponibilité de l'équipement, pas la propreté du dossier technique.</li>
+<li>
+<strong>Maintenance</strong> : maintenir en état, ce qui n'est pas réparer. On agit avant, sur des gestes simples et répétés.</li>
+</ul>
+<p>La démarche naît chez Nippondenso, équipementier du groupe Toyota, à la fin des années 1960. Elle est formalisée en 1971 par le JIPM, l'institut japonais de la maintenance des usines, sous l'impulsion de Seiichi Nakajima. Son point de départ était très concret : les opérateurs voyaient les premiers signes de dégradation, et personne ne leur demandait rien.</p>
+<div class="fichly-note">
+<p><strong>La TPM n'est pas un type de maintenance.</strong> C'est le contresens le plus courant du sujet. Les types de maintenance sont définis par la norme <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" rel="noopener" target="_blank">NF EN 13306, terminologie de la maintenance</a>, et décrivent ce qui déclenche une intervention. La TPM ne répond pas à cette question. Elle répond à une autre : qui fait le geste, avec quelle compétence, et dans quel temps. Vous pouvez donc conduire une TPM quelle que soit la stratégie de maintenance retenue sur vos équipements.</p>
+</div>
+<p>Cette distinction a une conséquence directe sur le périmètre. Une TPM ne remplace pas votre service de maintenance et ne réduit pas son effectif. Elle déplace les gestes de premier niveau vers ceux qui sont devant la machine toute la journée, pour que le service de maintenance puisse consacrer son temps à ce que lui seul sait faire.</p>
+<p>Un point de droit mérite d'être posé tout de suite, parce qu'il revient dans toutes les réunions de lancement. Confier des gestes de maintenance à un opérateur ne dilue pas la responsabilité de l'employeur : le <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019761378" rel="noopener" target="_blank">code du travail impose le maintien en état de conformité des équipements de travail</a>, quelle que soit l'organisation choisie. Le transfert porte sur les gestes, jamais sur l'obligation.</p>
+<h2 id="piliers">Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?</h2>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_8_piliers_TPM.png?v=1788174571" alt=""></p>
+<p>Les huit piliers sont la présentation canonique de la TPM. Elle est juste, et elle induit en erreur : présentée à plat, la liste laisse croire à huit chantiers à mener de front.</p>
+<table>
+<thead>
+<tr>
+<th>Pilier</th>
+<th>Nom d'origine ou anglais</th>
+<th>Ce qu'il produit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maintenance autonome</td>
+<td>Jishu hozen</td>
+<td>Les gestes de premier niveau passent à la production</td>
+</tr>
+<tr>
+<td>Amélioration ciblée</td>
+<td>Kobetsu kaizen</td>
+<td>Des chantiers courts sur les pertes les plus lourdes</td>
+</tr>
+<tr>
+<td>Maintenance planifiée</td>
+<td>Planned maintenance</td>
+<td>Un plan tenu par le service de maintenance</td>
+</tr>
+<tr>
+<td>Formation et compétences</td>
+<td>Education and training</td>
+<td>Des opérateurs capables d'inspecter, pas seulement de nettoyer</td>
+</tr>
+<tr>
+<td>Maîtrise de la conception</td>
+<td>Early equipment management</td>
+<td>Des équipements neufs plus faciles à entretenir</td>
+</tr>
+<tr>
+<td>Maintenance de la qualité</td>
+<td>Hinshitsu hozen</td>
+<td>Le réglage machine qui garantit la conformité</td>
+</tr>
+<tr>
+<td>TPM dans les services</td>
+<td>Office TPM</td>
+<td>Les flux administratifs qui bloquent l'atelier</td>
+</tr>
+<tr>
+<td>Sécurité, santé, environnement</td>
+<td>Safety, health, environment</td>
+<td>Zéro accident pendant les interventions</td>
+</tr>
+</tbody>
+</table>
+<p>Trois précisions permettent de lire ce tableau correctement.</p>
+<p>D'abord, <strong>les 5S ne sont pas un neuvième pilier</strong>. Ils sont le socle sur lequel les huit reposent. Vous verrez parfois l'expression « les 5S de la TPM », qui laisse croire à un outil interne à la démarche. Le 5S existait avant et s'utilise ailleurs. Il est simplement la condition d'entrée, pour une raison mécanique : sur une machine sale, une fuite ne se voit pas.</p>
+<p>Ensuite, <strong>l'ordre n'est pas libre</strong>. Un site qui démarre prend la maintenance autonome et l'amélioration ciblée, sur un périmètre restreint. Les piliers conception et services arrivent des années plus tard, quand il y a quelque chose à protéger.</p>
+<p>Enfin, un pilier n'est pas un projet avec une date de fin. C'est une activité permanente. Un site qui annonce « le pilier maintenance autonome est terminé » a en réalité terminé son déploiement, ce qui est le début et non la fin.</p>
+<h2 id="trs">Comment mesurer la TPM ? Ce qu'elle change sur votre TRS</h2>
+<p>La TPM ne se juge pas au nombre de machines nettoyées. Elle se juge sur les pertes qu'elle fait disparaître, et ces pertes sont nommées.</p>
+<p>Le JIPM en recense seize, réparties en trois familles : les pertes liées aux équipements, les pertes liées à la main d'œuvre et à l'organisation, les pertes de matière et d'énergie. Cette liste est le vrai plan de travail d'une TPM, bien plus que les huit piliers.</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_16_pertes_TPM.png?v=1788174571" alt=""></p>
+<p>La plupart de ces pertes sont exactement ce que mesure le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>, en anglais OEE pour Overall Equipment Effectiveness. Les pannes et les changements d'outils pèsent sur la disponibilité. Les micro-arrêts et la sous-vitesse pèsent sur la performance. Les défauts et les rebuts pèsent sur la qualité. Une TPM qui avance se lit donc sur le TRS, sans qu'il soit besoin d'inventer un indicateur maison.</p>
+<p>Une précaution s'impose ici, parce qu'elle est la source de la moitié des démarches abandonnées. <strong>Il n'existe aucun seuil de TRS qu'une usine devrait atteindre.</strong> Un taux se compare à lui même, sur le même équipement et sur la même période, jamais à une valeur de référence lue quelque part. Fixer une cible chiffrée en ouverture de démarche revient à promettre un résultat que la démarche ne contrôle pas, et à la discréditer le jour où le chiffre n'y est pas.</p>
+<p>La grandeur de suivi la plus honnête, au démarrage, est plus modeste : la <strong>part des arrêts subis dans le temps d'ouverture</strong>, relevée avant et après. Relevez-la sur un seul équipement, avant le lancement puis à trois mois. Elle a l'avantage de bouger vite et de ne dépendre d'aucune convention de calcul.</p>
+<p>Reste une catégorie de pertes que le TRS ne voit pas : les attentes, les déplacements, les stocks intermédiaires et les retouches. Elles relèvent des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">huit gaspillages du Lean</a>, et une TPM seule ne les traite pas.</p>
+<h2 id="test">Votre atelier est-il prêt pour la TPM ? Le test en cinq questions</h2>
+<p>C'est la question que les présentations de TPM ne posent jamais, et c'est pourtant la première. Une maintenance autonome lancée dans un atelier qui n'est pas prêt ne produit pas un demi-résultat : elle produit un échec, et un échec rend le second essai beaucoup plus difficile.</p>
+<p>Répondez aux cinq questions ci-dessous sur une ligne précise, pas sur l'usine entière.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Ce que bloque une réponse négative</th>
+<th>Par quoi commencer à la place</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Les machines sont-elles assez propres et accessibles pour qu'une fuite se voie ?</td>
+<td class="col-non">L'inspection ne peut pas exister. On nettoie sans jamais rien détecter.</td>
+<td>Un chantier 5S sur la ligne, avant toute autre chose</td>
+</tr>
+<tr>
+<td>Le temps de l'auto-maintenance est-il inscrit dans le temps d'ouverture ?</td>
+<td class="col-non">Le geste sera fait quand il reste du temps, donc jamais en période chargée.</td>
+<td>Poser le créneau d'auto-maintenance au planning, à horaire fixe</td>
+</tr>
+<tr>
+<td>Le service de maintenance est-il d'accord sur les gestes transférés ?</td>
+<td class="col-non">Le transfert sera vécu comme une dépossession, et repris en silence.</td>
+<td>Une liste de gestes négociée geste par geste, écrite et signée</td>
+</tr>
+<tr>
+<td>Existe-t-il un standard écrit pour chacun de ces gestes ?</td>
+<td class="col-non">Chaque opérateur fera à sa façon. Rien ne sera comparable d'une équipe à l'autre.</td>
+<td>Écrire la gamme de nettoyage, lubrification et serrage</td>
+</tr>
+<tr>
+<td>Quelqu'un relit-il les fiches remplies, chaque semaine, à date fixe ?</td>
+<td class="col-non">La démarche s'éteindra en quelques mois, sans que personne ne décide de l'arrêter.</td>
+<td>Nommer la personne et poser le rendez vous avant le lancement</td>
+</tr>
+</tbody>
+</table>
+<p>La lecture du résultat tient en deux règles.</p>
+<p><strong>Quatre réponses positives sur cinq permettent de lancer</strong>, sur une ligne pilote et une seule. En dessous, le manque se traite d'abord : ce n'est pas un retard, c'est l'économie d'un échec.</p>
+<p><strong>La cinquième question ne se compense pas.</strong> Un atelier qui répond oui aux quatre premières et non à la dernière n'est pas prêt à 80 %, il est en train de préparer exactement la démarche qui s'arrêtera à six mois. C'est le point sur lequel tout se joue, et c'est aussi celui qui coûte le moins cher à mettre en place.</p>
+<h2 id="etapes">Les 7 étapes de la maintenance autonome</h2>
+<p>La maintenance autonome, jishu hozen en japonais, est le pilier par lequel toute TPM commence. Le JIPM la décrit en sept étapes, franchies dans l'ordre. Les trois premières surprennent souvent : ce n'est que du nettoyage, et c'est voulu.</p>
+<h3>Étape 1 : le nettoyage initial</h3>
+<p>La ligne est nettoyée en profondeur, par ceux qui y travaillent, pas par un prestataire. L'objectif n'est pas la propreté. Il est de mettre la main sur la machine et de découvrir ce qu'on ne voyait plus : jeu anormal, boulon manquant, fuite ancienne. Chaque anomalie trouvée est étiquetée sur place et enregistrée.</p>
+<h3>Étape 2 : supprimer les sources de salissure et les zones inaccessibles</h3>
+<p>Nettoyer un équipement qui se resalit en deux heures ne tiendra pas. On traite donc la source : un carter, une goulotte, un déflecteur. On traite aussi les points qu'on n'atteint pas sans démontage, en ouvrant une trappe ou en déplaçant un point de graissage. Cette étape est celle qui réduit réellement le temps de nettoyage, et donc celle qui rend la suite soutenable.</p>
+<h3>Étape 3 : écrire le standard provisoire</h3>
+<p>Une gamme écrite fixe les gestes de nettoyage, de lubrification et de serrage : quoi, où, avec quoi, à quelle fréquence, en combien de temps. Le mot provisoire est important, elle sera révisée. Elle est écrite par les opérateurs avec la maintenance, jamais pour eux. Si vous cherchez un point de départ pour formaliser vos gammes, nos <a href="https://www.fichly.com/products/fiches-lean">fiches Lean sur les outils de production et de maintenance</a> donnent les trames et les rubriques attendues.</p>
+<h3>Étape 4 : la formation à l'inspection générale</h3>
+<p>C'est la marche la plus haute, et celle qu'on saute le plus souvent. On passe du nettoyage à l'inspection, ce qui suppose de comprendre la fonction des organes : transmission, pneumatique, hydraulique, électrique. Sans cette formation, l'opérateur nettoie correctement et ne détecte rien, parce qu'il ne sait pas à quoi ressemble un fonctionnement normal.</p>
+<p>Cette étape n'est pas seulement une bonne pratique. Confier de nouveaux gestes sur un équipement modifie le poste, et le <a href="https://code.travail.gouv.fr/code-du-travail/r4141-2" rel="noopener" target="_blank">code du travail prévoit une formation à la sécurité chaque fois que nécessaire</a>, pas uniquement à l'embauche. Formaliser la formation de l'étape 4 règle donc deux sujets à la fois.</p>
+<h3>Étape 5 : l'inspection autonome</h3>
+<p>La gamme provisoire devient une gamme d'inspection. L'opérateur ne signale plus seulement ce qui est cassé, il signale ce qui dérive. C'est à partir de cette étape que la démarche produit un effet mesurable sur les arrêts, et pas avant.</p>
+<h3>Étape 6 : standardiser le poste et son environnement</h3>
+<p>On étend la logique au delà de la machine : approvisionnement du poste, outillage, gestion des consommables, circulation. L'objectif est que le standard tienne quel que soit l'opérateur et quelle que soit l'équipe.</p>
+<h3>Étape 7 : la gestion autonome</h3>
+<p>L'équipe pilote elle même son périmètre, propose ses améliorations et suit ses propres indicateurs. C'est l'étape que très peu de sites atteignent, et il n'y a aucune honte à s'arrêter durablement à la cinquième : la cinquième bien tenue vaut mieux que la septième affichée.</p>
+<div class="fichly-note">
+<p><strong>Combien de temps par étape ?</strong> Il n'existe pas de durée standard, et méfiez vous de qui vous en annonce une. La règle utile est ailleurs : on ne franchit une étape que lorsque la précédente tient sans rappel. Un site qui déroule les sept étapes en trois mois n'a pas été rapide, il a fait une visite guidée.</p>
+</div>
+<h2 id="pieges">Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?</h2>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Courbe_des_six_mois.png?v=1788174642" alt=""><br>Voici les cinq causes d'arrêt que l'on retrouve le plus souvent. Aucune n'est une question de méthode. Toutes concernent ce qui se passe après le lancement.</p>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Les huit piliers sont lancés en même temps.</span><br><span class="fichly-ok">✅ Un pilier, une ligne, un périmètre.</span> Une TPM d'usine entière donne huit chantiers à demi faits et aucune référence à montrer. Une ligne pilote qui tient devient l'argument qui convainc les suivantes.</p>
+<p><span class="fichly-ko">❌ Le nettoyage est demandé sans que le temps soit donné.</span><br><span class="fichly-ok">✅ Le créneau est au planning, à horaire fixe, et il survit à la semaine chargée.</span> Un temps non planifié est un temps qui disparaît au premier aléa. La démarche ne meurt pas d'un refus, elle meurt d'un arbitrage tacite, répété chaque jour.</p>
+<p><span class="fichly-ko">❌ Le service de maintenance vit le transfert comme une perte de métier.</span><br><span class="fichly-ok">✅ Le transfert se négocie geste par geste, et la maintenance garde ce qui demande sa compétence.</span> Un technicien qui n'a pas participé au choix des gestes reprendra en silence ceux qu'il juge mal faits. Le transfert doit lui rendre du temps sur des sujets plus intéressants, sinon il n'a aucune raison de le soutenir.</p>
+<p><span class="fichly-ko">❌ Les fiches sont remplies et personne ne les lit.</span><br><span class="fichly-ok">✅ Un passage hebdomadaire, à date fixe, par quelqu'un qui peut décider.</span> C'est la cause d'arrêt numéro un, et de loin. Une anomalie signalée trois fois sans réponse enseigne à l'opérateur que signaler ne sert à rien. Il ne se plaindra pas, il arrêtera de remplir.</p>
+<p><span class="fichly-ko">❌ On mesure l'activité au lieu du résultat.</span><br><span class="fichly-ok">✅ On suit la part des arrêts subis, pas le nombre de fiches remplies.</span> Compter les fiches produit exactement ce qu'on compte : des fiches. Le nombre monte pendant que les pannes restent au même niveau, et la démarche perd sa crédibilité auprès de ceux qui la financent.</p>
+</div>
+<p>Ces cinq causes ont un air de famille. Elles décrivent toutes le même moment, celui où la démarche cesse d'être regardée. C'est la règle générale du Lean, bien au delà de la TPM : la méthode se déroule correctement, puis le contrôle n'a pas lieu. Le <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">Check du cycle PDCA</a> est l'étape que tout le monde connaît et que presque personne ne tient, parce que c'est la seule qui n'a pas d'échéance imposée par le terrain.</p>
+<p>Une conséquence pratique en découle. Avant de lancer, écrivez qui relit, quand, et ce qui se passe quand une anomalie reste ouverte plus de deux semaines. Cela prend une heure, et c'est ce qui distingue une démarche qui tient d'une démarche qui a bien démarré. Le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">suivi du TRS</a> vous dira ensuite si l'effort produit quelque chose, à condition d'avoir relevé un point de départ avant le premier nettoyage.</p>
+<h2 id="outils">Les outils qui font tenir une TPM</h2>
+<p>Une TPM n'est pas un outil, c'est une organisation qui en assemble plusieurs. Voici ceux qui reviennent, et ce que chacun règle.</p>
+<ul>
+<li>
+<strong>Le 5S</strong>, socle et condition d'entrée. Sans un poste rangé et une machine propre, l'inspection n'a pas de support. C'est l'objet d'un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a>, où l'on nettoie pour inspecter et non pour faire propre.</li>
+<li>
+<strong>Le TRS</strong>, indicateur de résultat. Il traduit les pertes de la TPM en un chiffre discutable en réunion de production.</li>
+<li>
+<strong>Le DMAIC</strong>, pour les pannes qui reviennent malgré tout. Une défaillance récurrente ne se traite pas par plus de nettoyage, elle se traite par une <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">recherche de cause structurée</a>.</li>
+<li>
+<strong>Le PDCA</strong>, pour la boucle de relecture hebdomadaire décrite plus haut.</li>
+<li>
+<strong>La stratégie de maintenance</strong>, en amont. Décider quel équipement mérite du préventif et lequel n'en mérite pas est une question distincte de la TPM, et elle se tranche sur un critère économique.</li>
+</ul>
+<p>Un dernier point de méthode, souvent négligé. La TPM produit une matière précieuse et périssable : les anomalies étiquetées lors de l'étape 1. Elles constituent le meilleur inventaire de l'état réel de votre parc, et elles n'ont aucune valeur si elles ne sont pas centralisées le jour même. Un tableau simple, tenu à la main, vaut mieux qu'un outil sophistiqué renseigné une semaine plus tard.</p>
+<h2 id="anglais">Le vocabulaire de la TPM en anglais</h2>
+<p>Dans un groupe international, les standards de TPM sont rédigés en anglais et empruntent au japonais. Voici les correspondances que vous croiserez.</p>
+<table>
+<thead>
+<tr>
+<th>Anglais ou japonais</th>
+<th>Français</th>
+<th>Ce qu'il faut savoir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Productive Maintenance, TPM</td>
+<td>Maintenance productive totale</td>
+<td>Le sigle anglais est employé tel quel en France</td>
+</tr>
+<tr>
+<td>Jishu hozen</td>
+<td>Maintenance autonome</td>
+<td>Le pilier de démarrage, en sept étapes</td>
+</tr>
+<tr>
+<td>Kobetsu kaizen</td>
+<td>Amélioration ciblée</td>
+<td>Chantiers courts sur les pertes majeures</td>
+</tr>
+<tr>
+<td>Hinshitsu hozen</td>
+<td>Maintenance de la qualité</td>
+<td>Régler la machine pour que le défaut n'apparaisse pas</td>
+</tr>
+<tr>
+<td>Planned maintenance</td>
+<td>Maintenance planifiée</td>
+<td>Le pilier tenu par le service de maintenance</td>
+</tr>
+<tr>
+<td>Early equipment management</td>
+<td>Maîtrise de la conception</td>
+<td>Rendre le futur équipement entretenable</td>
+</tr>
+<tr>
+<td>OEE, Overall Equipment Effectiveness</td>
+<td>TRS</td>
+<td>L'indicateur de résultat de la TPM</td>
+</tr>
+<tr>
+<td>CLIT : Cleaning, Lubrication, Inspection, Tightening</td>
+<td>Nettoyage, lubrification, inspection, serrage</td>
+<td>Le contenu exact d'une gamme d'auto-maintenance</td>
+</tr>
+<tr>
+<td>Tag, tagging</td>
+<td>Étiquetage des anomalies</td>
+<td>La pratique de l'étape 1, souvent gardée en anglais</td>
+</tr>
+</tbody>
+</table>
+<h2 id="faq">FAQ : vos questions sur la TPM</h2>
+<div class="fichly-faq">
+<details>
+<summary>Qu'est-ce que la maintenance productive totale ?</summary>
+<div class="answer">
+<p>C'est la traduction française de Total Productive Maintenance. Il s'agit d'une organisation, née chez Nippondenso dans le groupe Toyota et formalisée par le JIPM en 1971, qui associe la production à l'entretien des équipements. Les gestes simples et répétés, nettoyage, lubrification, inspection et serrage, passent aux opérateurs, pendant que le service de maintenance se concentre sur ce qui demande sa compétence.</p>
+</div>
+</details>
+<details>
+<summary>Quel est le rôle de la Total Productive Maintenance (TPM) ?</summary>
+<div class="answer">
+<p>Son rôle est de supprimer les pertes qui empêchent un équipement de produire, et non d'améliorer le service maintenance. Le JIPM en recense seize, réparties entre les équipements, la main d'œuvre et les matières. La TPM agit en amont de la panne, en faisant détecter les dérives par ceux qui sont devant la machine toute la journée.</p>
+</div>
+</details>
+<details>
+<summary>Que sont les 8 piliers de la Total productive maintenance ?</summary>
+<div class="answer">
+<p>Maintenance autonome, amélioration ciblée, maintenance planifiée, formation et compétences, maîtrise de la conception, maintenance de la qualité, TPM dans les services et sécurité santé environnement. Les 5S ne sont pas un neuvième pilier mais le socle des huit. Ils ne se lancent pas ensemble : un site qui démarre prend la maintenance autonome et l'amélioration ciblée, sur un périmètre restreint.</p>
+</div>
+</details>
+<details>
+<summary>Quel est le lien entre la TPM et le Lean Management ?</summary>
+<div class="answer">
+<p>Les deux viennent du même terrain, le système de production Toyota, et partagent la même cible, les pertes. Le Lean traite les gaspillages du flux, attentes, stocks, déplacements et retouches. La TPM traite les pertes de l'équipement. Elles se complètent sans se recouvrir : un flux tiré parfaitement conçu ne résiste pas à une machine qui tombe en panne deux fois par semaine.</p>
+</div>
+</details>
+<details>
+<summary>Comment mettre en pratique la TPM sur le terrain ?</summary>
+<div class="answer">
+<p>En commençant par une ligne unique et par un seul pilier, la maintenance autonome. Vérifiez d'abord cinq conditions : machines assez propres pour qu'une fuite se voie, créneau inscrit au planning, gestes négociés avec la maintenance, standard écrit, et relecture hebdomadaire des fiches par quelqu'un qui peut décider. Si l'une de ces conditions manque, traitez la avant de lancer.</p>
+</div>
+</details>
+<details>
+<summary>Combien de temps faut-il pour qu'une maintenance autonome tienne ?</summary>
+<div class="answer">
+<p>Il n'existe pas de durée standard, et la question de la durée est moins utile qu'il n'y paraît. Le critère de passage n'est pas le calendrier, c'est la stabilité : on ne franchit une étape que lorsque la précédente tient sans rappel. Le vrai marqueur de solidité se lit ailleurs, dans le fait qu'une semaine chargée ne supprime pas le créneau d'auto-maintenance.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Une TPM se pilote sur des données d'arrêt, pas sur des impressions.</strong></p>
+<p>Tant que les arrêts sont notés à la main sur un cahier, la part des arrêts subis reste une estimation, et la démarche se discute au lieu de se mesurer. Un relevé automatique des temps d'arrêt change cette conversation.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels de pilotage du TRS</a> : mesure des arrêts au poste, motifs de perte et suivi de la disponibilité, sur vos propres équipements.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le TRS : définition, exemples et calculs</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "TPM (Total Productive Maintenance) : par quoi commencer et ce qui la fait tenir",
+  "description": "Les 8 piliers de la TPM, les 7 étapes de la maintenance autonome et le test en cinq questions pour savoir si votre atelier est prêt à démarrer.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-tpm-16-pertes.png?v=1787541947",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-04",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la maintenance productive totale ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "C'est la traduction française de Total Productive Maintenance. Il s'agit d'une organisation, née chez Nippondenso dans le groupe Toyota et formalisée par le JIPM en 1971, qui associe la production à l'entretien des équipements. Les gestes simples et répétés, nettoyage, lubrification, inspection et serrage, passent aux opérateurs, pendant que le service de maintenance se concentre sur ce qui demande sa compétence." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le rôle de la Total Productive Maintenance (TPM) ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Son rôle est de supprimer les pertes qui empêchent un équipement de produire, et non d'améliorer le service maintenance. Le JIPM en recense seize, réparties entre les équipements, la main d'œuvre et les matières. La TPM agit en amont de la panne, en faisant détecter les dérives par ceux qui sont devant la machine toute la journée." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que sont les 8 piliers de la Total productive maintenance ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Maintenance autonome, amélioration ciblée, maintenance planifiée, formation et compétences, maîtrise de la conception, maintenance de la qualité, TPM dans les services et sécurité santé environnement. Les 5S ne sont pas un neuvième pilier mais le socle des huit. Ils ne se lancent pas ensemble : un site qui démarre prend la maintenance autonome et l'amélioration ciblée, sur un périmètre restreint." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le lien entre la TPM et le Lean Management ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les deux viennent du même terrain, le système de production Toyota, et partagent la même cible, les pertes. Le Lean traite les gaspillages du flux, attentes, stocks, déplacements et retouches. La TPM traite les pertes de l'équipement. Elles se complètent sans se recouvrir : un flux tiré parfaitement conçu ne résiste pas à une machine qui tombe en panne deux fois par semaine." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment mettre en pratique la TPM sur le terrain ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En commençant par une ligne unique et par un seul pilier, la maintenance autonome. Vérifiez d'abord cinq conditions : machines assez propres pour qu'une fuite se voie, créneau inscrit au planning, gestes négociés avec la maintenance, standard écrit, et relecture hebdomadaire des fiches par quelqu'un qui peut décider. Si l'une de ces conditions manque, traitez la avant de lancer." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps faut-il pour qu'une maintenance autonome tienne ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il n'existe pas de durée standard, et la question de la durée est moins utile qu'il n'y paraît. Le critère de passage n'est pas le calendrier, c'est la stabilité : on ne franchit une étape que lorsque la précédente tient sans rappel. Le vrai marqueur de solidité se lit ailleurs, dans le fait qu'une semaine chargée ne supprime pas le créneau d'auto-maintenance." }
+    }
+  ]
+}
+</script></p>

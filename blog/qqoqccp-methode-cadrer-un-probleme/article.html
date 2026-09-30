@@ -1,0 +1,483 @@
+<h1>QQOQCCP (ou QQOQCP) : cadrer un problème en sept questions</h1>
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article > p{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+.fichly-author{display:flex;gap:1.2em;align-items:flex-start;background:#fff;border:1px solid #dde2e8;border-top:5px solid #3b3a9e;border-radius:10px;padding:1.5em 1.7em;margin:2.4em 0;}
+.fichly-author-photo{flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:#3b3a9e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;font-weight:700;overflow:hidden;}
+.fichly-author-photo img{width:100%;height:100%;object-fit:cover;}
+.fichly-author-body{flex:1;}
+.fichly-author-body .role{font-size:.92em;color:#6b7280;margin:.1em 0 .5em;}
+.fichly-author-body strong{color:#1a1a1a;font-size:1.1em;}
+.fichly-author-link{display:inline-block;margin-top:.4em;font-weight:600;}
+</style>
+
+<div class="fichly-article" lang="fr">
+
+<p>« On a un problème qualité sur la ligne de conditionnement. » Cette phrase revient dans toutes les réunions de production, et elle ne dit rien. Quel défaut, sur quel produit, depuis quand, sur combien de pièces, constaté par qui. Tant que ces réponses manquent, chacun défend son hypothèse. La méthode <strong>QQOQCCP</strong>, que l'on écrit aussi <strong>QQOQCP</strong>, sert à cela : sept questions simples, vingt minutes, et une phrase de problème que tout le monde lit de la même façon. Cet article donne les sept questions, explique pourquoi le sigle existe en deux versions, et déroule le passage du problème vague à la phrase exploitable.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Deux personnes décrivent la même panne et ne parlent pas de la même chose. Le QQOQCCP arrête ça. Sept questions : quoi, qui, où, quand, comment, combien, pourquoi. Vous répondez avec des faits, pas avec des opinions. Ce qui sort est une phrase de problème que personne ne peut interpréter à sa façon.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>QQOQCCP et QQOQCP désignent <strong>le même outil</strong>. Le second C est celui de Combien.</li>
+<li>Les sept questions sont <strong>quoi, qui, où, quand, comment, combien, pourquoi</strong>.</li>
+<li>Le <strong>P se pose à chaque question</strong>, pas seulement à la fin.</li>
+<li>Le livrable n'est pas le tableau, c'est <strong>une phrase de problème</strong> de deux lignes.</li>
+<li>Le QQOQCCP décrit, <strong>il n'explique pas</strong>. La recherche de cause commence après.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">QQOQCCP : définition et les sept questions</a></li>
+<li><a href="#graphies">QQOQCP ou QQOQCCP : pourquoi deux graphies</a></li>
+<li><a href="#quintilien">Quelles sont les 7 questions du Quintilien ?</a></li>
+<li><a href="#situations">Dans quelles situations appliquer cette méthode ?</a></li>
+<li><a href="#methode">Comment cadrer un problème en vingt minutes</a></li>
+<li><a href="#pieges">Les erreurs qui rendent un QQOQCCP inutile</a></li>
+<li><a href="#outils">Où s'arrête le QQOQCCP et quels outils prennent le relais</a></li>
+<li><a href="#anglais">Le vocabulaire du QQOQCCP en anglais</a></li>
+<li><a href="#faq">FAQ : vos questions sur le QQOQCCP</a></li>
+</ol>
+</div>
+
+<h2 id="definition">QQOQCCP : définition et les sept questions</h2>
+
+<p>Le QQOQCCP est une <strong>méthode de questionnement qui décrit une situation avec des faits</strong>, avant toute recherche de cause et avant toute décision. Le sigle est l'initiale de sept questions : Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi.</p>
+
+<p>Ces lettres ne parlent à personne la première fois. Voici donc chaque question et, surtout, <strong>ce qu'elle doit produire comme réponse</strong>. C'est la troisième colonne qui compte : une réponse qui ne lui ressemble pas est une réponse à réécrire.</p>
+
+<table>
+<thead><tr>
+<th>Question</th>
+<th>Ce qu'elle cherche</th>
+<th>Ce qu'elle doit produire</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Quoi</strong></td>
+<td>Le fait observé, le défaut, l'écart</td>
+<td>Une description sans jugement</td>
+</tr>
+<tr>
+<td><strong>Qui</strong></td>
+<td>Qui constate, qui subit, qui intervient</td>
+<td>Des fonctions, jamais des noms</td>
+</tr>
+<tr>
+<td><strong>Où</strong></td>
+<td>Atelier, poste, machine, étape du flux</td>
+<td>Un point unique, pas « en production »</td>
+</tr>
+<tr>
+<td><strong>Quand</strong></td>
+<td>Le moment, la fréquence, depuis quand</td>
+<td>Une date et un rythme</td>
+</tr>
+<tr>
+<td><strong>Comment</strong></td>
+<td>Les circonstances au moment du fait</td>
+<td>Un déroulé, jamais une cause</td>
+</tr>
+<tr>
+<td><strong>Combien</strong></td>
+<td>L'ampleur : quantité, durée, coût</td>
+<td>Un chiffre relevé, pas une estimation</td>
+</tr>
+<tr>
+<td><strong>Pourquoi</strong></td>
+<td>La raison d'être des six réponses</td>
+<td>Une justification, ligne par ligne</td>
+</tr>
+</tbody>
+</table>
+
+<p>Une seule règle fait fonctionner ce tableau : <strong>une réponse invérifiable n'est pas une réponse</strong>. « Souvent » se remplace par une fréquence, « beaucoup » par un nombre.</p>
+
+<h2 id="graphies">QQOQCP ou QQOQCCP : pourquoi deux graphies</h2>
+
+<p>Les deux orthographes circulent, souvent dans la même entreprise, et <strong>elles désignent le même outil</strong>. La différence tient à une seule lettre, le second C, qui est celui de <strong>Combien</strong>.</p>
+
+<table>
+<thead><tr>
+<th>Graphie</th>
+<th>Questions couvertes</th>
+<th>Quand cette forme se justifie</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>QQOQCP</strong>, six questions</td>
+<td>Quoi, Qui, Où, Quand, Comment, Pourquoi</td>
+<td>Situations qualitatives, où l'ampleur n'est ni mesurable ni décisive : cadrage d'un entretien, d'une réunion, d'une procédure</td>
+</tr>
+<tr>
+<td>
+<strong>QQOQCCP</strong>, sept questions</td>
+<td>Les six précédentes, plus <strong>Combien</strong>
+</td>
+<td>Qualité, sécurité, résolution de problèmes : tout ce qui doit être priorisé ou comparé à un avant</td>
+</tr>
+</tbody>
+</table>
+
+<p>L'absence du second C n'est donc pas une faute d'orthographe, c'est un choix de périmètre. En contexte industriel, <strong>la forme à sept questions est la seule utilisable</strong> : sans Combien, rien ne permet de trancher entre deux problèmes, ni de dire six mois plus tard si la situation s'est améliorée.</p>
+
+<div class="fichly-note">
+<p><strong>Le P ne se pose pas à la fin, il se pose sept fois.</strong> La présentation courante en fait la septième case du tableau, ce qui laisse croire que Pourquoi livrerait la cause. Ce n'est pas son rôle. Le Pourquoi du QQOQCCP interroge chacune des six autres réponses : pourquoi ce périmètre, pourquoi cette date de départ, pourquoi cette grandeur de mesure. Il vérifie que la description tient, il ne l'explique pas.</p>
+</div>
+
+<h2 id="quintilien">Quelles sont les 7 questions du Quintilien ?</h2>
+
+<p>Les sept questions du QQOQCCP viennent de la rhétorique romaine et ont près de deux mille ans. <strong>Quintilien, professeur de rhétorique à Rome au premier siècle, énumère les circonstances qu'un orateur doit établir avant de plaider</strong> : la personne, le fait, le lieu, le moment, la manière, les moyens, le motif.</p>
+
+<p>La formule latine se retient en un vers : <em>quis, quid, ubi, quibus auxiliis, cur, quomodo, quando</em>. Soit qui, quoi, où, par quels moyens, pourquoi, comment, quand. On l'appelle l'hexamètre de Quintilien, ou les sept circonstances.</p>
+
+<p>La transposition industrielle est directe, à un ajustement près. <strong>Le « par quels moyens » latin est devenu le Combien</strong>, parce qu'une démarche d'amélioration a besoin d'une grandeur mesurable là où un orateur avait besoin d'un instrument.</p>
+
+<p>Cette origine explique pourquoi l'outil fonctionne sur des sujets aussi éloignés qu'un défaut d'usinage, un accident du travail ou une réclamation client : <strong>il ne décrit pas un problème industriel, il décrit une situation</strong>.</p>
+
+<h2 id="situations">Dans quelles situations appliquer cette méthode ?</h2>
+
+<p>Le QQOQCCP s'emploie chaque fois qu'une situation doit être décrite avant d'être traitée. Quatre familles de cas reviennent en production.</p>
+
+<ul>
+<li>
+<strong>Un problème qualité récurrent</strong>, dont chacun parle depuis des mois sans que personne l'ait jamais écrit.</li>
+<li>
+<strong>Un incident de sécurité ou un presque-accident.</strong> La description factuelle alimente directement l'<a href="https://code.travail.gouv.fr/code-du-travail/r4121-1" target="_blank" rel="noopener">évaluation des risques que le code du travail impose de transcrire</a>.</li>
+<li>
+<strong>Une réclamation client ou une non-conformité.</strong> La norme <a href="https://norminfo.afnor.org/norme/NF%20EN%20ISO%209000/systemes-de-management-de-la-qualite-principes-essentiels-et-vocabulaire/84767" target="_blank" rel="noopener">NF EN ISO 9000, qui fixe le vocabulaire de la qualité</a>, distingue la correction, qui traite l'effet, et l'action corrective, qui traite la cause. Le QQOQCCP dit de quoi on parle avant de choisir.</li>
+<li>
+<strong>Le lancement d'un projet.</strong> Périmètre, acteurs, lieu, échéance, moyens, ampleur attendue : les sept questions font un cadrage en une page.</li>
+</ul>
+
+<p>Une cinquième situation est la plus rentable et la moins pratiquée : <strong>cadrer un problème que l'on va confier à quelqu'un d'autre</strong>. Un sujet transmis oralement se déforme, une phrase écrite ne se déforme pas. C'est le premier réflexe travaillé en <a href="https://www.fichly.com/blogs/nos-articles/green-belt-lean-six-sigma">formation Green Belt Lean Six Sigma</a>, avant tout outil statistique, dans le parcours certifiant enregistré sous la référence <a href="https://www.francecompetences.fr/recherche/rs/7114" target="_blank" rel="noopener">RS7114 APILEAN au répertoire spécifique de France Compétences</a>.</p>
+
+<p>Deux cas, à l'inverse, ne relèvent pas de cet outil : une urgence, qui se traite d'abord et se cadre ensuite, et un problème dont la cause est déjà démontrée.</p>
+
+<h2 id="methode">Comment cadrer un problème en vingt minutes</h2>
+
+<p>Voici le déroulé qui produit le seul livrable réellement utile de la méthode : <strong>une phrase de problème de deux lignes</strong>, écrite, datée, chiffrée, compréhensible par quelqu'un qui n'était pas dans la pièce. Le tableau rempli n'est qu'un brouillon. C'est la phrase qui circule ensuite.</p>
+
+<p><img src="VISUEL-A-CREER" alt="Passage d'un problème vague à une phrase de problème exploitable : les sept questions du QQOQCCP reliées chacune au morceau de phrase qu'elle produit"></p>
+
+<h3>Étape 1 : réunir les bonnes personnes, et pas plus</h3>
+
+<p><strong>Trois à cinq personnes qui ont vu la situation</strong>, jamais un comité. Posez [durée de la réunion de cadrage] au planning, à une heure où l'atelier tourne, pour que les faits soient vérifiables sur le moment. Un cadrage fait loin du terrain produit des réponses de mémoire.</p>
+
+<h3>Étape 2 : répondre aux six premières questions, dans l'ordre</h3>
+
+<p><strong>Écrivez au tableau, à la vue de tous.</strong> L'ordre compte : Quoi et Où avant Qui, pour que la discussion porte sur le fait avant de porter sur les personnes.</p>
+
+<p>Deux garde-fous tiennent cette étape. Toute réponse imprécise se reformule sur le champ : « depuis un moment » devient une date. Et <strong>toute tentative d'explication est notée à part</strong>, sans être discutée. Ces hypothèses serviront plus tard.</p>
+
+<h3>Étape 3 : passer le Pourquoi sur chaque ligne</h3>
+
+<p>Reprenez les six réponses une à une et demandez pourquoi celle-là. <strong>C'est l'étape que tout le monde saute et c'est celle qui fait le tri.</strong> Elle révèle presque toujours un périmètre choisi par habitude, et une grandeur de mesure retenue parce qu'elle était disponible.</p>
+
+<h3>Étape 4 : écrire la phrase de problème</h3>
+
+<p>Assemblez les réponses en une phrase unique, sur ce gabarit : <strong>quoi, où, depuis quand, sur combien, constaté par qui</strong>. Ce qui donne, avec les champs à remplir par vos soins :</p>
+
+<div class="fichly-note">
+<p><strong>Depuis [date de première observation], le défaut [type de défaut] apparaît sur [part des pièces concernées] des pièces de la référence [référence], au poste de conditionnement, en équipe [équipe]. Il est constaté par [fonction qui constate] au contrôle final.</strong></p>
+</div>
+
+<p>Relisez-la à voix haute devant le groupe. Si quelqu'un demande une précision, elle est incomplète. Pour garder les mêmes rubriques d'un sujet à l'autre, notre <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">guide de la résolution de problèmes en 20 fiches</a> donne les trames de QQOQCCP et de phrase de problème prêtes à remplir.</p>
+
+<h3>Étape 5 : décider qui la porte, et vers quoi</h3>
+
+<p>Une phrase de problème sans destinataire ne survit pas à la semaine. <strong>Nommez la personne qui la porte et le rendez-vous où elle sera reprise</strong>, avant de quitter la salle. Cette étape prend deux minutes et décide si le cadrage servira à quelque chose.</p>
+
+<h2 id="pieges">Les erreurs qui rendent un QQOQCCP inutile</h2>
+
+<p>Un QQOQCCP raté ne se voit pas : le tableau est rempli, les sept lignes sont là, et rien n'avance. Voici les cinq écarts qui produisent ce résultat.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Les réponses sont des opinions.</span><br><span class="fichly-ok">✅ Chaque réponse est vérifiable par quelqu'un qui n'était pas là.</span> Si deux personnes peuvent remplir la même case différemment sans que l'une ait tort, la réponse est à réécrire.</p>
+<p><span class="fichly-ko">❌ Le Combien est renseigné au jugé.</span><br><span class="fichly-ok">✅ Le chiffre vient d'un relevé, ou la case reste vide.</span> Une ampleur inventée ferme la discussion et fausse la priorisation. Une case vide, elle, désigne une mesure à aller chercher.</p>
+<p><span class="fichly-ko">❌ Le Qui désigne des personnes.</span><br><span class="fichly-ok">✅ Le Qui désigne des fonctions et des postes.</span> Un nom propre transforme un problème d'organisation en problème de personne, et la réunion suivante se passe en justifications.</p>
+<p><span class="fichly-ko">❌ Le Pourquoi sert à chercher la cause.</span><br><span class="fichly-ok">✅ Le Pourquoi valide les six autres réponses.</span> C'est la confusion la plus répandue du sujet, et elle fait repartir le groupe avec la première hypothèse formulée à voix haute. Pour remonter à la cause, c'est <a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">la méthode des 5 pourquoi</a> qui prend le relais.</p>
+<p><span class="fichly-ko">❌ Le tableau est archivé et personne ne relit la phrase.</span><br><span class="fichly-ok">✅ La phrase est portée par quelqu'un et reprise à date fixe.</span> Un cadrage sans suite coûte plus cher qu'une absence de cadrage : le groupe en garde le souvenir d'un exercice sans effet, et refusera le suivant.</p>
+</div>
+
+<h2 id="outils">Où s'arrête le QQOQCCP et quels outils prennent le relais</h2>
+
+<p><strong>Le QQOQCCP décrit une situation, il n'en explique aucune.</strong> Cette frontière est la chose la plus utile à retenir, et celle que les présentations passent sous silence. Un problème parfaitement cadré reste un problème dont la cause est inconnue.</p>
+
+<ul>
+<li>
+<strong>La recherche de cause</strong> commence là où le cadrage s'arrête. <a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">La méthode des 5 pourquoi remonte d'un effet constaté à sa cause racine</a>, à condition que l'effet ait été décrit avant.</li>
+<li>
+<strong>La démarche structurée</strong> encadre l'ensemble. Dans <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">la méthode DMAIC</a>, le QQOQCCP est l'un des outils de la première phase, Définir.</li>
+<li>
+<strong>Le cycle d'amélioration</strong> lui donne sa place dans le temps. Dans <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">la roue de Deming</a>, le cadrage appartient au Plan.</li>
+<li>
+<strong>La priorisation</strong> exploite le Combien. Plusieurs problèmes cadrés ont des ampleurs comparables, et l'arbitrage cesse de dépendre de qui parle le plus fort.</li>
+</ul>
+
+<p>La valeur du QQOQCCP ne vient pas de sa difficulté, il n'y en a aucune. <strong>Elle vient du fait que presque personne ne prend les vingt minutes.</strong></p>
+
+<h2 id="anglais">Le vocabulaire du QQOQCCP en anglais</h2>
+
+<p>Dans un groupe international, les documents d'analyse sont rédigés en anglais et le sigle français n'y figure pas. Voici les correspondances à connaître.</p>
+
+<table>
+<thead><tr>
+<th>Anglais</th>
+<th>Français</th>
+<th>Ce qu'il faut savoir</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>5W1H</strong> : Who, What, Where, When, Why, How</td>
+<td>QQOQCP, six questions</td>
+<td>L'équivalent exact de la forme courte</td>
+</tr>
+<tr>
+<td>
+<strong>5W2H</strong> : les six précédents plus How much</td>
+<td>QQOQCCP, sept questions</td>
+<td>Le second H est le Combien. C'est la forme de l'usage industriel français</td>
+</tr>
+<tr>
+<td><strong>Five Ws</strong></td>
+<td>Les cinq questions</td>
+<td>Formulation journalistique, la plus proche de l'origine latine</td>
+</tr>
+<tr>
+<td><strong>Problem statement</strong></td>
+<td>Phrase de problème, énoncé de problème</td>
+<td>Le livrable attendu en fin de cadrage, souvent gardé en anglais en Six Sigma</td>
+</tr>
+<tr>
+<td><strong>Is / Is not analysis</strong></td>
+<td>Analyse est / n'est pas</td>
+<td>Variante qui ajoute une colonne : où le problème n'apparaît pas</td>
+</tr>
+<tr>
+<td><strong>Root cause</strong></td>
+<td>Cause racine</td>
+<td>Ce que le QQOQCCP ne donne pas</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="faq">FAQ : vos questions sur le QQOQCCP</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>Quelles sont les 7 questions du Quintilien ?</summary>
+<div class="answer">
+<p>Ce sont les sept circonstances qu'un orateur romain devait établir avant de plaider, énoncées par Quintilien, professeur de rhétorique à Rome au premier siècle : qui, quoi, où, par quels moyens, pourquoi, comment, quand. La formule latine est quis, quid, ubi, quibus auxiliis, cur, quomodo, quando. Le QQOQCCP en est la transposition industrielle, le « par quels moyens » devenant le Combien.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelles sont les 5 questions ?</summary>
+<div class="answer">
+<p>Les cinq questions désignent le noyau anglo-saxon appelé Five Ws : Who, What, Where, When, Why, soit qui, quoi, où, quand, pourquoi. C'est la version employée en journalisme pour vérifier qu'une information est complète. Le QQOQCP y ajoute le Comment, et le QQOQCCP ajoute encore le Combien.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les outils de qualité utilisés par la méthode QQOQCCP ?</summary>
+<div class="answer">
+<p>Le QQOQCCP n'utilise pas d'autre outil, il en précède plusieurs. Il produit une phrase de problème que reprennent ensuite les 5 pourquoi pour la cause racine, le diagramme d'Ishikawa pour classer les causes par famille, le diagramme de Pareto pour hiérarchiser, et l'AMDEC pour évaluer les risques. Dans une démarche DMAIC, il figure parmi les outils de la phase Définir.</p>
+</div>
+</details>
+
+<details>
+<summary>Qu'est-ce que la méthode des 7 questions ?</summary>
+<div class="answer">
+<p>C'est un autre nom du QQOQCCP, et non un outil différent. Les sept questions sont quoi, qui, où, quand, comment, combien et pourquoi. L'appellation insiste sur le mécanisme plutôt que sur le sigle, ce qui la rend plus lisible pour qui découvre. Vous rencontrerez aussi les termes hexamètre de Quintilien, 5W1H et 5W2H.</p>
+</div>
+</details>
+
+<details>
+<summary>Dans quelles situations appliquer cette méthode ?</summary>
+<div class="answer">
+<p>Chaque fois qu'une situation doit être décrite avant d'être traitée : un problème qualité récurrent, un incident de sécurité, une réclamation client, ou le cadrage d'un projet. Elle sert aussi à transmettre un sujet à quelqu'un d'autre sans qu'il se déforme en route. Deux cas l'excluent : une urgence, et un problème dont la cause est déjà démontrée.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre QQOQCP et QQOQCCP ?</summary>
+<div class="answer">
+<p>Une seule lettre, le second C, qui est celui de Combien. Le QQOQCP couvre six questions : quoi, qui, où, quand, comment, pourquoi. Le QQOQCCP en couvre sept, en ajoutant l'ampleur chiffrée. Les deux graphies désignent le même outil et aucune n'est fautive. En contexte industriel, la forme à sept questions s'impose : sans Combien, deux problèmes ne peuvent être ni comparés ni suivis dans le temps.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Un problème bien écrit est déjà à moitié traité.</strong></p>
+<p>Le QQOQCCP donne le cadrage. Ce qui vient après, recherche de cause, plan d'action, vérification de l'effet, demande les mêmes trames, tenues de la même façon d'un sujet à l'autre.</p>
+<p>👉 Découvrez <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">le guide de la résolution de problèmes en 20 fiches</a> : QQOQCCP, phrase de problème, 5 pourquoi, Ishikawa et plan d'action, prêts à remplir sur vos propres sujets.</p>
+</div>
+
+<div class="fichly-bio">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+
+<div class="fichly-author">
+<div class="fichly-author-photo"><img src="REMPLACER-PAR-PHOTO-HUGO" alt="Hugo Duc, formateur Lean Management et fondateur de Fichly"></div>
+<div class="fichly-author-body">
+<strong>Hugo Duc</strong>
+<p class="role">Fondateur de Fichly · Formateur Lean Management</p>
+<p>Ingénieur industriel de formation, Hugo a accompagné plus de 70 sites industriels en France dans leurs démarches d'amélioration continue.</p>
+<a class="fichly-author-link" href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Suivre Hugo sur LinkedIn</a>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">La méthode des 5 pourquoi : remonter à la cause racine</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">La méthode PDCA : la roue de Deming</a></li>
+</ul>
+</div>
+
+</div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "QQOQCCP (ou QQOQCP) : cadrer un problème en sept questions",
+  "description": "Les 7 questions du QQOQCCP, la différence avec le QQOQCP et la méthode en 20 minutes pour passer d'un problème vague à une phrase de problème exploitable.",
+  "image": "VISUEL-A-CREER",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-09",
+  "dateModified": "2026-09-09",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/qqoqccp-methode-cadrer-un-probleme",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelles sont les 7 questions du Quintilien ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ce sont les sept circonstances qu'un orateur romain devait établir avant de plaider, énoncées par Quintilien, professeur de rhétorique à Rome au premier siècle : qui, quoi, où, par quels moyens, pourquoi, comment, quand. La formule latine est quis, quid, ubi, quibus auxiliis, cur, quomodo, quando. Le QQOQCCP en est la transposition industrielle, le « par quels moyens » devenant le Combien."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelles sont les 5 questions ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les cinq questions désignent le noyau anglo-saxon appelé Five Ws : Who, What, Where, When, Why, soit qui, quoi, où, quand, pourquoi. C'est la version employée en journalisme pour vérifier qu'une information est complète. Le QQOQCP y ajoute le Comment, et le QQOQCCP ajoute encore le Combien."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les outils de qualité utilisés par la méthode QQOQCCP ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le QQOQCCP n'utilise pas d'autre outil, il en précède plusieurs. Il produit une phrase de problème que reprennent ensuite les 5 pourquoi pour la cause racine, le diagramme d'Ishikawa pour classer les causes par famille, le diagramme de Pareto pour hiérarchiser, et l'AMDEC pour évaluer les risques. Dans une démarche DMAIC, il figure parmi les outils de la phase Définir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la méthode des 7 questions ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est un autre nom du QQOQCCP, et non un outil différent. Les sept questions sont quoi, qui, où, quand, comment, combien et pourquoi. L'appellation insiste sur le mécanisme plutôt que sur le sigle, ce qui la rend plus lisible pour qui découvre. Vous rencontrerez aussi les termes hexamètre de Quintilien, 5W1H et 5W2H."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dans quelles situations appliquer cette méthode ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chaque fois qu'une situation doit être décrite avant d'être traitée : un problème qualité récurrent, un incident de sécurité, une réclamation client, ou le cadrage d'un projet. Elle sert aussi à transmettre un sujet à quelqu'un d'autre sans qu'il se déforme en route. Deux cas l'excluent : une urgence, et un problème dont la cause est déjà démontrée."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre QQOQCP et QQOQCCP ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Une seule lettre, le second C, qui est celui de Combien. Le QQOQCP couvre six questions : quoi, qui, où, quand, comment, pourquoi. Le QQOQCCP en couvre sept, en ajoutant l'ampleur chiffrée. Les deux graphies désignent le même outil et aucune n'est fautive. En contexte industriel, la forme à sept questions s'impose : sans Combien, deux problèmes ne peuvent être ni comparés ni suivis dans le temps."
+      }
+    }
+  ]
+}
+</script>

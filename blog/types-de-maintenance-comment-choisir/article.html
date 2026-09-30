@@ -1,0 +1,384 @@
+<h1>Types de maintenance : laquelle choisir pour quel équipement</h1>
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article">
+<p>Trois types de maintenance chez l'un, cinq chez l'autre, neuf chez un troisième. Les classifications qui circulent ne s'accordent pas, et le lecteur qui compare trois pages en ressort moins sûr qu'avant. Le désaccord n'est pourtant pas sur le fond : il vient de ce que chacun mélange les familles et les sous-types. Cet article remet l'arbre en ordre, puis répond à la seule question qui vous concerne : quelle stratégie pour quel équipement, et sur quel critère décider.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Les différents types de maintenance se ramènent à deux familles selon la norme NF EN 13306 : corrective, après la panne, et préventive, avant. La préventive se décline ensuite en systématique, conditionnelle et prévisionnelle, selon le déclencheur retenu. Le choix entre ces déclencheurs est économique : le coût de la surveillance se compare à celui de l'arrêt.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>La norme NF EN 13306 ne reconnaît que corrective et préventive.</li>
+<li>La préventive se décline en systématique, conditionnelle et prévisionnelle.</li>
+<li>La prévisionnelle est un sous-ensemble de la conditionnelle, pas une catégorie sœur.</li>
+<li>« Prédictive » est l'anglicisme de « prévisionnelle », même chose sous deux noms.</li>
+<li>Sur un équipement peu critique, ne rien anticiper reste souvent rentable.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#arbitrage">Comment choisir un type de maintenance ? Arbitrer surveillance contre arrêt</a></li>
+<li><a href="#norme">Quels sont les différents types de maintenance ? Les deux familles de la norme NF EN 13306</a></li>
+<li><a href="#corrective">Maintenance corrective, ou curative : quand ne rien anticiper est le bon calcul</a></li>
+<li><a href="#systematique">Maintenance préventive systématique : le calendrier, et ce qu'il coûte</a></li>
+<li><a href="#conditionnelle">Maintenance conditionnelle : le seuil, et ce qu'il faut pouvoir mesurer</a></li>
+<li><a href="#previsionnelle">Quels sont les 3 types de maintenance préventive ? Conditionnelle, prévisionnelle, prédictive</a></li>
+<li><a href="#ameliorative">La maintenance améliorative est-elle un type de maintenance ?</a></li>
+<li><a href="#grille">Choisir équipement par équipement : criticité, mesurabilité, coût d'arrêt</a></li>
+<li><a href="#disponibilite">Ce qu'un plan de maintenance change sur la disponibilité</a></li>
+<li><a href="#faq">FAQ : vos questions sur les types de maintenance</a></li>
+</ol>
+</div>
+<h2 id="arbitrage">Comment choisir un type de maintenance ? Arbitrer surveillance contre arrêt</h2>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/3_Types_de_maintenance.png?v=1788173396" alt=""></p>
+<p>Avant la liste, le critère. Sans lui, la liste ne sert à rien : elle vous dira ce qui existe, jamais ce qu'il faut faire.</p>
+<p>Choisir un type de maintenance revient à arbitrer entre trois grandeurs, et trois seulement.</p>
+<ol>
+<li>
+<strong>Ce que coûte une heure d'arrêt non planifié</strong> sur cet équipement. Production perdue, retard client, redémarrage, main d'œuvre immobilisée.</li>
+<li>
+<strong>Ce que coûte la surveillance</strong>, ou le préventif. Capteurs, rondes, analyses, temps de préparation, arrêts programmés.</li>
+<li>
+<strong>Ce que coûte le sur-entretien</strong>, c'est-à-dire une pièce remplacée alors qu'elle avait encore de la durée de vie.</li>
+</ol>
+<p>La règle qui en découle tient en une phrase, et elle est contre-intuitive pour qui aime la technique : <strong>on ne choisit pas une méthode de maintenance par sophistication, on la choisit par ce que coûte un arrêt sur cet équipement là</strong>. Une analyse vibratoire sur un convoyeur redondant est une dépense, pas un progrès.</p>
+<p>La première grandeur est celle que les ateliers connaissent le moins bien, et c'est celle qui commande tout le reste. Elle se chiffre équipement par équipement, et personne d'autre que vous ne peut la poser. Si vous ne l'avez pas, elle se reconstruit à partir de la production perdue pendant l'arrêt, ce qui vous ramène à la disponibilité, <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">premier facteur du taux de rendement synthétique</a>.</p>
+<h2 id="norme">Quels sont les différents types de maintenance ? Les deux familles de la norme NF EN 13306</h2>
+<p>La terminologie de la maintenance est normalisée. La référence en vigueur en France est la norme NF EN 13306, disponible auprès de l'<a href="https://www.boutique.afnor.org/" rel="noopener" target="_blank">AFNOR</a>. Elle a remplacé l'ancienne NF X 60-000, encore citée çà et là.</p>
+<p>Son arborescence tient en deux branches.</p>
+<table>
+<thead>
+<tr>
+<th>Famille</th>
+<th>Déclencheur</th>
+<th>Sous-types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maintenance corrective</td>
+<td>Après détection d'une panne</td>
+<td>Immédiate, ou différée</td>
+</tr>
+<tr>
+<td>Maintenance préventive</td>
+<td>Avant la panne</td>
+<td>Systématique, ou conditionnelle</td>
+</tr>
+<tr>
+<td>dont conditionnelle</td>
+<td>Franchissement d'un seuil surveillé</td>
+<td>dont prévisionnelle</td>
+</tr>
+</tbody>
+</table>
+<p>Deux conséquences pratiques, et elles expliquent l'essentiel des contradictions que vous avez lues ailleurs.</p>
+<p>D'abord, <strong>« maintenance curative » et « maintenance corrective » ne s'opposent pas</strong> : la curative est une modalité de la corrective, celle où l'on répare durablement plutôt que de dépanner provisoirement. Le terme d'atelier et le terme normatif désignent la même famille.</p>
+<p>Ensuite, et c'est l'erreur la plus répandue, <strong>la prévisionnelle n'est pas une troisième catégorie à côté de la conditionnelle : elle en est un sous-ensemble</strong>. Une page très bien classée sur ce sujet les met pourtant sur le même plan et les distingue par la technologie employée. C'est faux au sens de la norme, et cela conduit à comparer deux choses qui ne sont pas au même niveau.</p>
+<h2 id="corrective">Maintenance corrective, ou curative : quand ne rien anticiper est le bon calcul</h2>
+<p>Personne ne défend la maintenance corrective, et c'est une erreur d'analyse. Elle reste le choix rationnel sur une part importante d'un parc.</p>
+<p>Elle consiste à intervenir après la défaillance. Deux modalités : <strong>palliative</strong>, on dépanne pour repartir, et <strong>curative</strong>, on répare durablement. La première est une décision de court terme parfaitement légitime si la seconde est programmée derrière.</p>
+<p>Elle est le bon calcul quand trois conditions se cumulent.</p>
+<ul>
+<li>
+<strong>L'équipement est redondant</strong>, ou son arrêt n'arrête pas la production.</li>
+<li>
+<strong>La réparation est courte et peu coûteuse</strong>, et la pièce est disponible.</li>
+<li>
+<strong>La défaillance ne présente aucun risque</strong> pour les personnes ni pour le produit.</li>
+</ul>
+<p>Si ces trois conditions sont remplies, tout préventif installé sur cet équipement est une dépense sans contrepartie. Les <a href="https://www.inrs.fr/" rel="noopener" target="_blank">travaux de l'INRS</a> rappellent en revanche que la maintenance est elle-même une activité à risque : la troisième condition n'est pas une formalité, et elle disqualifie à elle seule le correctif sur tout ce qui touche à la sécurité.</p>
+<h2 id="systematique">Maintenance préventive systématique : le calendrier, et ce qu'il coûte</h2>
+<p>C'est la forme la plus ancienne et la plus simple : on intervient à échéance fixe, selon un calendrier, un compteur d'heures ou un nombre de cycles. La vidange tous les 40 000 kilomètres en est l'exemple universel.</p>
+<p>Sa force est qu'elle ne demande aucune instrumentation. Elle se planifie, se sous-traite et se contrôle facilement, ce qui la rend adaptée aux équipements nombreux et peu instrumentés.</p>
+<p>Son coût, en revanche, est celui que personne ne publie. <strong>Une part des pièces remplacées à échéance avait encore de la durée de vie utile</strong>, et cette part est payée deux fois : le prix de la pièce, et le temps d'arrêt de l'intervention.</p>
+<p>La règle de bon sens : le systématique se justifie quand la dégradation est liée au temps ou à l'usage de façon prévisible. Il se justifie mal quand la durée de vie varie fortement d'un exemplaire à l'autre, parce qu'il faut alors caler l'échéance sur le plus faible, donc jeter beaucoup.</p>
+<h2 id="conditionnelle">Maintenance conditionnelle : le seuil, et ce qu'il faut pouvoir mesurer</h2>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_Analyses_conditionnelles.png?v=1788173396" alt=""></p>
+<p>Ici, ce n'est plus une date qui déclenche l'intervention, c'est une mesure. On surveille un paramètre significatif, et on intervient au franchissement d'un seuil.</p>
+<p>Les paramètres surveillés sont généralement les vibrations, la température, la composition de l'huile, le bruit, la consommation électrique ou la pression. La technique importe moins que la condition d'entrée, qui est absolue : <strong>il faut que la dégradation se manifeste par une grandeur mesurable, et qu'elle le fasse suffisamment tôt</strong> pour laisser le temps d'intervenir.</p>
+<p>C'est ce dernier point qui disqualifie la conditionnelle sur certains équipements. Une défaillance qui survient sans signe précurseur, ou dont le signe apparaît quinze minutes avant la panne, ne se traite pas ainsi.</p>
+<p>Le coût d'entrée est l'instrumentation. Comparez-le au coût d'arrêt de la section 1. Le calcul est direct : <strong>si le coût annuel de la surveillance dépasse le coût annuel des arrêts subis, l'instrumentation n'est pas rentable</strong>.</p>
+<h2 id="previsionnelle">Quels sont les 3 types de maintenance préventive ? Conditionnelle, prévisionnelle, prédictive</h2>
+<p>Trois mots pour deux réalités, et une source de confusion permanente. Voici la mise au point, avec les équivalents anglais que vous croiserez dans les procédures de groupe.</p>
+<table>
+<thead>
+<tr>
+<th>Français</th>
+<th>Anglais</th>
+<th>Sigle</th>
+<th>Ce qui déclenche l'intervention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maintenance corrective</td>
+<td>Corrective maintenance</td>
+<td></td>
+<td>La panne, déjà survenue</td>
+</tr>
+<tr>
+<td>Maintenance préventive</td>
+<td>Preventive maintenance</td>
+<td>PM</td>
+<td>Une règle décidée à l'avance</td>
+</tr>
+<tr>
+<td>Préventive systématique</td>
+<td>Time-based maintenance</td>
+<td>TBM</td>
+<td>Une date ou un compteur</td>
+</tr>
+<tr>
+<td>Préventive conditionnelle</td>
+<td>Condition-based maintenance</td>
+<td>CBM</td>
+<td>Le franchissement d'un seuil mesuré</td>
+</tr>
+<tr>
+<td>Préventive prévisionnelle</td>
+<td>Predictive maintenance</td>
+<td>PdM</td>
+<td>L'extrapolation d'une tendance</td>
+</tr>
+</tbody>
+</table>
+<p>Deux points à retenir de ce tableau.</p>
+<p>Premièrement, <strong>« maintenance prédictive » est simplement l'anglicisme de « maintenance prévisionnelle »</strong>. Ce ne sont pas deux méthodes, c'est un mot dans deux langues. La confusion est entretenue par les offres logicielles, qui présentent volontiers la prédictive comme une catégorie nouvelle rendue possible par la donnée.</p>
+<p>Deuxièmement, ce qui distingue réellement la conditionnelle de la prévisionnelle n'est pas la technologie, c'est <strong>le moment de la décision</strong>. La conditionnelle attend le seuil. La prévisionnelle observe la pente de la dégradation et en déduit une date d'intervention avant que le seuil ne soit atteint. La seconde demande donc un historique, ce qui la rend inaccessible sur un équipement neuf ou peu suivi.</p>
+<h2 id="ameliorative">La maintenance améliorative est-elle un type de maintenance ?</h2>
+<p>La question mérite une réponse franche, parce que vous verrez les deux présentations, y compris chez nous.</p>
+<p><strong>Non, au sens des types de la norme.</strong> L'arborescence de NF EN 13306 comporte deux branches, préventive et corrective. L'amélioration y est traitée comme une activité connexe, pas comme une branche : elle consiste à modifier un bien pour en changer les caractéristiques, ce qui n'est pas de l'entretien mais de la transformation.</p>
+<p><strong>Oui, dans la pratique TPM et Lean</strong>, qui en font volontiers un troisième pilier. La logique est défendable : une réparation qui supprime la cause de la panne plutôt que de remettre l'équipement dans son état initial n'est plus tout à fait de la maintenance corrective, et elle produit un résultat durable que les deux autres familles ne produisent pas.</p>
+<p>Concrètement, l'améliorative se reconnaît à une question : après l'intervention, la panne peut-elle se reproduire à l'identique ? Si oui, vous avez réparé. Si non, vous avez amélioré. Quand la cause n'est pas évidente et que la panne revient, cette recherche relève d'un <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">projet DMAIC</a> plutôt que d'une intervention de maintenance.</p>
+<h2 id="grille">Choisir équipement par équipement : criticité, mesurabilité, coût d'arrêt</h2>
+<p>Voici la grille. Elle se remplit équipement par équipement, ou famille par famille si votre parc est important.</p>
+<table>
+<thead>
+<tr>
+<th>Coût d'arrêt</th>
+<th>Dégradation mesurable ?</th>
+<th>Stratégie recommandée</th>
+<th>Ce qui déclenche le passage au niveau supérieur</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Faible</td>
+<td>Peu importe</td>
+<td>Corrective</td>
+<td>Le coût d'arrêt augmente, ou un risque apparaît</td>
+</tr>
+<tr>
+<td>Moyen</td>
+<td>Non</td>
+<td>Préventive systématique</td>
+<td>La part de pièces jetées en bon état devient visible</td>
+</tr>
+<tr>
+<td>Moyen</td>
+<td>Oui</td>
+<td>Conditionnelle</td>
+<td>Les seuils se franchissent trop tard pour intervenir</td>
+</tr>
+<tr>
+<td>Élevé</td>
+<td>Non</td>
+<td>Systématique resserrée, plus redondance</td>
+<td>La redondance devient moins chère que le préventif</td>
+</tr>
+<tr>
+<td>Élevé</td>
+<td>Oui, avec historique</td>
+<td>Prévisionnelle</td>
+<td>La collecte coûte plus que les arrêts évités</td>
+</tr>
+<tr>
+<td>Toute valeur</td>
+<td>Risque sécurité</td>
+<td>Préventive, sans arbitrage économique</td>
+<td>Sans objet, la sécurité ne s'arbitre pas</td>
+</tr>
+</tbody>
+</table>
+<p>Trois remarques pour utiliser cette grille sans se tromper.</p>
+<p>La dernière ligne n'est pas une exception de politesse. <strong>Dès qu'une défaillance présente un risque pour les personnes, l'arbitrage économique ne s'applique plus.</strong> On traite en préventif, point.</p>
+<p>La colonne de droite est aussi importante que la recommandation elle-même : une stratégie de maintenance n'est pas un choix définitif, c'est une position qui se révise quand une des trois grandeurs bouge. Un équipement qui devient goulot change de ligne dans ce tableau.</p>
+<p>Enfin, un parc entier ne se traite jamais dans une seule stratégie. <strong>La bonne réponse à « quelle maintenance choisir » est presque toujours « les quatre, selon l'équipement »</strong>, et l'exercice consiste à savoir laquelle où.</p>
+<h2 id="disponibilite">Ce qu'un plan de maintenance change sur la disponibilité</h2>
+<p>Un bon plan de maintenance ne réduit pas le nombre d'interventions. Il déplace les arrêts subis vers des arrêts choisis, et c'est cette bascule qui produit le gain.</p>
+<p>L'arrêt subi coûte davantage que l'arrêt programmé, à durée égale, pour des raisons qui n'ont rien à voir avec la maintenance elle-même : il tombe au mauvais moment, il désorganise l'aval, il mobilise dans l'urgence, et il produit souvent de la non-qualité au redémarrage. C'est pourquoi la maintenance est le levier direct du premier facteur du <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>, la disponibilité.</p>
+<p>Ce qui se mesure, en pratique, est la <strong>part des arrêts non planifiés dans le temps d'ouverture</strong>, relevée avant et après. C'est un indicateur d'écart, pas un objectif absolu : il n'existe pas de valeur cible universelle, et une comparaison entre deux ateliers différents n'a aucun sens.<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_5_niveaux_de_maintenance.png?v=1788173397" alt=""><br>Deux compléments méritent d'être connus, sans être développés ici. Les <strong>cinq niveaux de maintenance</strong>, définis par la norme X60-010, décrivent qui intervient et avec quels moyens, du premier niveau réalisé par l'opérateur au cinquième confié à un atelier spécialisé. C'est une question distincte de celle des types, et elle mérite un article à part. Quant au premier niveau, celui de l'opérateur, il commence par une chose très simple : une machine propre, sur laquelle une fuite se voit. C'est exactement l'objet du troisième S d'un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a>, où l'on nettoie pour inspecter et non pour faire propre. Si vous voulez situer ces outils les uns par rapport aux autres, les <a href="https://www.fichly.com/products/fiches-lean">fiches des 40 outils du Lean</a> en résument chacun l'essentiel sur une page.</p>
+<h2 id="faq">FAQ : vos questions sur les types de maintenance</h2>
+<div class="fichly-faq">
+<details>
+<summary>Quels sont les 5 types de maintenance ?</summary>
+<div class="answer">
+<p>La réponse dépend de la classification employée, et c'est la source de la confusion. La norme NF EN 13306 ne reconnaît que deux familles, la préventive et la corrective. Les cinq types souvent cités sont en réalité deux familles et trois sous-types : corrective, préventive systématique, préventive conditionnelle, préventive prévisionnelle, auxquelles s'ajoute parfois l'améliorative.</p>
+</div>
+</details>
+<details>
+<summary>Quels sont les 5 niveaux de maintenance ?</summary>
+<div class="answer">
+<p>Les niveaux ne sont pas des types. Ils relèvent d'une autre norme, la X60-010, et décrivent qui intervient et avec quels moyens, du premier niveau réalisé par l'opérateur au cinquième confié à un atelier spécialisé ou à un constructeur. Un même type de maintenance peut se pratiquer à plusieurs niveaux.</p>
+</div>
+</details>
+<details>
+<summary>Quels sont les 3 types de maintenance préventive ?</summary>
+<div class="answer">
+<p>La systématique, déclenchée par un calendrier ou un compteur. La conditionnelle, déclenchée par le franchissement d'un seuil mesuré. La prévisionnelle, déclenchée par l'extrapolation d'une dégradation observée. Les deux dernières ne sont pas des catégories sœurs : la prévisionnelle est un sous-ensemble de la conditionnelle.</p>
+</div>
+</details>
+<details>
+<summary>Quels sont les différents modes de maintenance ?</summary>
+<div class="answer">
+<p>Deux, si l'on s'en tient à ce qui déclenche l'intervention : soit on agit après la défaillance, c'est la maintenance corrective, soit on agit avant, c'est la maintenance préventive. Tout le reste est une question de ce qui déclenche l'action préventive, une date, un seuil ou une tendance.</p>
+</div>
+</details>
+<details>
+<summary>Faut-il tout mettre en maintenance prédictive ?</summary>
+<div class="answer">
+<p>Non, et c'est le principal contresens du sujet. La prédictive suppose une instrumentation, une collecte et une compétence d'analyse, dont le coût ne se justifie que si l'arrêt de l'équipement coûte davantage. Sur un équipement redondant, dont la panne se répare en une heure, la maintenance corrective reste le calcul le plus rationnel.</p>
+</div>
+</details>
+<details>
+<summary>Comment savoir si mon plan de maintenance est efficace ?</summary>
+<div class="answer">
+<p>En regardant la part des arrêts non planifiés dans le temps d'ouverture, avant et après. Un plan efficace ne supprime pas les interventions, il déplace les arrêts subis vers des arrêts choisis. C'est cette bascule qui se lit sur le taux de disponibilité, et non le nombre d'interventions réalisées.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Arbitrer un plan de maintenance, c'est du pilotage avant d'être de la technique.</strong></p>
+<p>Chiffrer un coût d'arrêt, construire une grille de décision et la faire tenir dans le temps sont des compétences de conduite de projet, pas de mécanique.</p>
+<p>👉 Découvrez la <a href="https://www.fichly.com/pages/formation-lean-green-belt-cpf">formation Green Belt Lean Management</a> : 6 jours, 42 h, certification RS7114, organisme QUALIOPI, sessions en distanciel et en présentiel à Massy. Code promo FICHLY5 (-5 %).</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le taux de rendement synthétique (TRS) : définition et calcul</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes et leurs livrables</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Types de maintenance : laquelle choisir pour quel équipement",
+  "description": "Les deux familles de la norme NF EN 13306, les trois déclencheurs du préventif et une grille de décision pour choisir équipement par équipement.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-08-27",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quels sont les 5 types de maintenance ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La réponse dépend de la classification employée. La norme NF EN 13306 ne reconnaît que deux familles, la préventive et la corrective. Les cinq types souvent cités sont en réalité deux familles et trois sous-types : corrective, préventive systématique, préventive conditionnelle, préventive prévisionnelle, auxquelles s'ajoute parfois l'améliorative." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 5 niveaux de maintenance ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les niveaux ne sont pas des types. Ils relèvent d'une autre norme, la X60-010, et décrivent qui intervient et avec quels moyens, du premier niveau réalisé par l'opérateur au cinquième confié à un atelier spécialisé ou à un constructeur. Un même type de maintenance peut se pratiquer à plusieurs niveaux." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 3 types de maintenance préventive ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La systématique, déclenchée par un calendrier ou un compteur. La conditionnelle, déclenchée par le franchissement d'un seuil mesuré. La prévisionnelle, déclenchée par l'extrapolation d'une dégradation observée. Les deux dernières ne sont pas des catégories sœurs : la prévisionnelle est un sous-ensemble de la conditionnelle." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les différents modes de maintenance ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Deux, si l'on s'en tient à ce qui déclenche l'intervention : soit on agit après la défaillance, c'est la maintenance corrective, soit on agit avant, c'est la maintenance préventive. Tout le reste est une question de ce qui déclenche l'action préventive, une date, un seuil ou une tendance." }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il tout mettre en maintenance prédictive ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non, et c'est le principal contresens du sujet. La prédictive suppose une instrumentation, une collecte et une compétence d'analyse, dont le coût ne se justifie que si l'arrêt de l'équipement coûte davantage. Sur un équipement redondant, dont la panne se répare en une heure, la maintenance corrective reste le calcul le plus rationnel." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment savoir si mon plan de maintenance est efficace ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En regardant la part des arrêts non planifiés dans le temps d'ouverture, avant et après. Un plan efficace ne supprime pas les interventions, il déplace les arrêts subis vers des arrêts choisis. C'est cette bascule qui se lit sur le taux de disponibilité, et non le nombre d'interventions réalisées." }
+    }
+  ]
+}
+</script></p>

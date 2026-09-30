@@ -5,7 +5,7 @@ papier, bandeau six couleurs, Poppins, palette Fichly. Chaque visuel démarre et
 complète, et la boucle se referme sans saut. Le mouvement porte le fond : on voit le mécanisme se produire,
 on ne se contente pas de faire apparaître des blocs.
 
-Fichiers dans `livrables/blog/lean-manufacturing/` : `<id>.mp4` (à privilégier), `<id>.gif` (repli)
+Fichiers dans `livrables/blog/lean-manufacturing-definition-principes-outils/` : `<id>.mp4` (à privilégier), `<id>.gif` (repli)
 et `<id>.png` (image fixe, sert d'affiche pour la vidéo).
 
 | # | Fichier | Où le placer | Ce que le mouvement fait comprendre |
@@ -42,15 +42,15 @@ Les MP4 pèsent 0,5 à 1 Mo, les GIF 0,8 à 2,5 Mo.
 
 ## Aperçu
 
-`apercus/apercu-lean-manufacturing.html` : l'article complet avec chaque visuel à sa place et, dessous,
+`apercus/blog/lean-manufacturing-definition-principes-outils.html` : l'article complet avec chaque visuel à sa place et, dessous,
 une note (à ne pas publier) sur ce qu'il doit faire comprendre. Régénérer avec
-`python3 outils/apercu_article.py blog/lean-manufacturing`.
+`python3 outils/apercu_article.py blog/lean-manufacturing-definition-principes-outils`.
 
 ## Re-rendre un visuel
 
 ```
-node outils/rendu.js blog/lean-manufacturing/<id> stills 0 4.5   # images de contrôle dans controle/
-node outils/rendu.js blog/lean-manufacturing/<id> gif 20        # GIF, MP4 et PNG dans livrables/
+node outils/rendu.js blog/lean-manufacturing-definition-principes-outils/<id> stills 0 4.5   # images de contrôle dans controle/
+node outils/rendu.js blog/lean-manufacturing-definition-principes-outils/<id> gif 20        # GIF, MP4 et PNG dans livrables/
 ```
 
 ## Hypothèses à connaître
