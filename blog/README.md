@@ -1,6 +1,6 @@
 # Visuels animés du blog Fichly
 
-26 articles sur 27 ont leurs visuels, 104 visuels au total.
+27 articles sur 27 ont leurs visuels, 109 visuels au total.
 Méthode et conventions : [GUIDE-VISUELS.md](GUIDE-VISUELS.md). Inventaire Shopify : [inventaire.json](inventaire.json).
 Incohérences relevées dans les textes et images à retirer : [POINTS-A-VERIFIER.md](POINTS-A-VERIFIER.md).
 
@@ -37,7 +37,7 @@ Vue d'ensemble avec les vignettes : [apercus/blog/index.html](../apercus/blog/in
 | [Gemba et gemba walk : ce qu'on regarde vraiment quand on descend en atelier](https://www.fichly.com/blogs/nos-articles/gemba-walk-tournee-atelier-methode) | brouillon | 4 | [dossier](gemba-walk-tournee-atelier-methode/) · [fichiers](../livrables/blog/gemba-walk-tournee-atelier-methode/) | [aperçu](../apercus/blog/gemba-walk-tournee-atelier-methode.html) |
 | [Kanban de production : dimensionner la boucle et calculer le nombre de cartes](https://www.fichly.com/blogs/nos-articles/kanban-de-production-boucle-dimensionnement) | brouillon | 3 | [dossier](kanban-de-production-boucle-dimensionnement/) · [fichiers](../livrables/blog/kanban-de-production-boucle-dimensionnement/) | [aperçu](../apercus/blog/kanban-de-production-boucle-dimensionnement.html) |
 | [Lean Manufacturing : définition, principes et outils pour l'atelier](https://www.fichly.com/blogs/nos-articles/lean-manufacturing-definition-principes-outils) | brouillon | 10 | [dossier](lean-manufacturing-definition-principes-outils/) · [fichiers](../livrables/blog/lean-manufacturing-definition-principes-outils/) | [aperçu](../apercus/blog/lean-manufacturing-definition-principes-outils.html) |
-| [Matrice RACI : définition, exemple et méthode de construction en une réunion](https://www.fichly.com/blogs/nos-articles/matrice-raci-definition-exemple-methode) | brouillon | — | [dossier](matrice-raci-definition-exemple-methode/) · [fichiers](../livrables/blog/matrice-raci-definition-exemple-methode/) |  |
+| [Matrice RACI : définition, exemple et méthode de construction en une réunion](https://www.fichly.com/blogs/nos-articles/matrice-raci-definition-exemple-methode) | brouillon | 5 | [dossier](matrice-raci-definition-exemple-methode/) · [fichiers](../livrables/blog/matrice-raci-definition-exemple-methode/) | [aperçu](../apercus/blog/matrice-raci-definition-exemple-methode.html) |
 | [Obeya : à quoi sert vraiment une salle de pilotage visuel](https://www.fichly.com/blogs/nos-articles/obeya-salle-pilotage-visuel) | brouillon | 3 | [dossier](obeya-salle-pilotage-visuel/) · [fichiers](../livrables/blog/obeya-salle-pilotage-visuel/) | [aperçu](../apercus/blog/obeya-salle-pilotage-visuel.html) |
 | [QQOQCCP (ou QQOQCP) : cadrer un problème en sept questions](https://www.fichly.com/blogs/nos-articles/qqoqccp-methode-cadrer-un-probleme) | brouillon | 3 | [dossier](qqoqccp-methode-cadrer-un-probleme/) · [fichiers](../livrables/blog/qqoqccp-methode-cadrer-un-probleme/) | [aperçu](../apercus/blog/qqoqccp-methode-cadrer-un-probleme.html) |
 | [Takt time : calculer le rythme imposé par la demande](https://www.fichly.com/blogs/nos-articles/takt-time-calcul-definition) | brouillon | 3 | [dossier](takt-time-calcul-definition/) · [fichiers](../livrables/blog/takt-time-calcul-definition/) | [aperçu](../apercus/blog/takt-time-calcul-definition.html) |

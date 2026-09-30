@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-un-seul-a",
+    "section": "Introduction",
+    "apres": "Trois semaines plus tard, plusieurs actions n'ont pas bougé",
+    "role": "Met en mouvement le « je croyais que c'était l'autre » : trois actions de la même réunion, trois semaines passent ; sans A et avec deux A, rien ne bouge ; avec un seul A, la barre avance jusqu'à « faite ».",
+    "alt": "Trois actions sorties de la même réunion, suivies sur trois semaines : la ligne sans A n'avance pas, c'est une intention ; la ligne à deux A n'avance pas non plus, chacun croyait que c'était l'autre ; la ligne à un seul A est faite."
+  },
+  {
+    "id": "2-garant-pas-approbateur",
+    "section": "Les quatre lettres de RACI, et celle qui est presque toujours mal traduite",
+    "apres": "Approuver, c'est signer à la fin.",
+    "role": "Même tâche, même blocage en semaine 2 : l'approbateur attend au bout pour signer et la tâche reste bloquée ; le garant accompagne la tâche, relance, arbitre, débloque et rend compte.",
+    "alt": "Deux lectures du A sur la même tâche : lu comme approbateur, il attend le livrable au bout de la ligne, la tâche se bloque en semaine 2 et il n'y a rien à signer ; lu comme garant, il relance, arbitre, débloque le blocage et rend compte d'une tâche faite."
+  },
+  {
+    "id": "3-lire-les-colonnes",
+    "section": "Comment faire une matrice RACI en une réunion d'une heure",
+    "apres": "Le contrôle final se fait à la verticale, et c'est celui que presque personne ne fait.",
+    "role": "La même matrice passe le contrôle des lignes (un A par ligne), puis la lecture bascule à la verticale : une colonne pleine de A, une colonne de I, une colonne vide apparaissent.",
+    "alt": "Une matrice de fonctionnement courant où chaque ligne a bien un seul A ; lue par colonnes, elle révèle une fonction qui porte cinq A sur sept et ne tiendra pas, une fonction qui n'a que des I et rien à faire en réunion, et une colonne vide, fonction oubliée ou inutile."
+  },
+  {
+    "id": "4-plan-action-arret",
+    "section": "Un exemple : le plan d'action après un arrêt subi",
+    "apres": "src=\"VISUEL-A-CREER\" alt=\"Matrice RACI",
+    "role": "Remplace le visuel prévu par l'article : la matrice de l'exemple se remplit dans l'ordre de la méthode, un A par ligne en premier, puis les R, puis les C et les I ; un trait relie les A, qui changent de colonne selon la tâche.",
+    "alt": "Matrice RACI d'un plan d'action après un arrêt subi, six tâches en lignes et cinq fonctions en colonnes : les A sont posés en premier, un par ligne, puis les R, les C et les I ; le A passe au responsable qualité pour le standard et au chef d'équipe pour la formation."
+  },
+  {
+    "id": "5-double-a",
+    "section": "Deux personnes se déclarent A sur la même tâche : comment trancher ?",
+    "apres": "Deux responsables estiment tous les deux que le sujet relève de leur périmètre.",
+    "role": "Trois fois la même ligne à deux A, trois sorties : la ligne se coupe en deux et chaque A trouve sa ligne ; la question de contrôle retourne un A en C ; en désaccord hiérarchique, la case reste vide avec deux noms et une date, et le sujet remonte.",
+    "alt": "Une ligne « Modifier le standard » avec deux A, production et qualité, tranchée de trois façons : coupée en « écrire le nouveau standard » et « valider qu'il est applicable », chacune avec son A ; un des deux A devient C après la question de contrôle ; case A laissée vide avec les deux prétendants et une date de décision, sujet remonté."
+  }
+]
