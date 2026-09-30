@@ -150,9 +150,10 @@
 
   // ---------- Gabarit LinkedIn ----------
   function template({ author = 'hugo' } = {}) {
-    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#f3f3f3' });
-    el('image', { href: ASSETS + 'paper.png', x: 0, y: 0, width: W, height: H });
-    RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: 1332, width: 180, height: 18, fill: c }));
+    // Cadre fixe (data-frame) : fond papier et bandeau ne bougent jamais, même avec la caméra
+    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#f3f3f3', 'data-frame': 1 });
+    el('image', { href: ASSETS + 'paper.png', x: 0, y: 0, width: W, height: H, 'data-frame': 1 });
+    RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: 1332, width: 180, height: 18, fill: c, 'data-frame': 1 }));
     el('image', { href: ASSETS + 'fichly-logo.png', x: 884, y: 1228, width: 178, height: 94 });
     const a = AUTHORS[author];
     el('image', { href: ASSETS + a.photo, x: a.x, y: a.y, width: a.size, height: a.size });
@@ -168,6 +169,7 @@
     const t2 = text(svg, 68, 216, line2, { size: 72, weight: 800, fill: C.white });
     kb.setAttribute('width', measure(t2).width + 48);
     fit(kb, maxRight, 'cadre keyTitle');
+    return { t1, kb, t2 };
   }
   function chapeau(str) {
     fit(text(svg, 62, 304, str, { size: 26, weight: 500, fill: C.blue }), 1020, 'chapeau');
@@ -198,8 +200,67 @@
     return g;
   }
 
+  // ---------- Caméra ----------
+  // Le contenu passe dans un calque « monde » que la caméra zoome ; le cadre fixe reste en place,
+  // ce qui garde le GIF léger (le papier ne change pas d'une image à l'autre).
+  let world = null;
+  function cameraLayer() {
+    if (world) return world;
+    const holder = el('g', { 'clip-path': clipRect(0, 0, W, 1332).url });
+    world = el('g', {}, holder);
+    [...svg.children].forEach(n => {
+      if (n === holder || n.tagName === 'defs' || n.hasAttribute('data-frame')) return;
+      world.appendChild(n);
+    });
+    return world;
+  }
+  // Plans : [{ t, cx, cy, w, cut? }]. Entre deux plans, travelling en easeInOut ; cut: true = coupe franche.
+  function camera(t, shots) {
+    let v = shots[0];
+    for (let i = 0; i < shots.length - 1; i++) {
+      const a = shots[i], b = shots[i + 1];
+      if (t < a.t) break;
+      if (t >= b.t) { v = b; continue; }
+      if (b.cut) { v = a; break; }
+      const e = easeInOut(prog(t, a.t, b.t - a.t));
+      v = { cx: a.cx + (b.cx - a.cx) * e, cy: a.cy + (b.cy - a.cy) * e, w: a.w + (b.w - a.w) * e };
+      break;
+    }
+    const w = v.w, h = w * H / W;
+    const x = clamp(v.cx - w / 2, 0, W - w), y = clamp(v.cy - h / 2, 0, H - h);
+    const k = W / w;
+    cameraLayer().setAttribute('transform', w >= W ? '' : `translate(${-x * k} ${-y * k}) scale(${k})`);
+  }
+  // Contour qui se dessine autour d'un élément (stroke-dashoffset)
+  function outline(x, y, w, h, parent = svg) {
+    const r = el('rect', { x, y, width: w, height: h, rx: 20, fill: 'none', stroke: C.blue, 'stroke-width': 4, opacity: 0 }, parent);
+    const len = 2 * (w + h);
+    r.setAttribute('stroke-dasharray', len);
+    return (t, t0, t1) => {
+      const p = easeOut(prog(t, t0, 0.45));
+      r.setAttribute('stroke-dashoffset', len * (1 - p));
+      r.setAttribute('opacity', t >= t0 && t < t1 ? 1 : 0);
+    };
+  }
+  // Zone de découpe animable (volet) : renvoie l'id à mettre en clip-path et le rectangle
+  let clipN = 0;
+  function clipRect(x = 0, y = 0, w = W, h = H) {
+    const id = `clip${++clipN}`;
+    const defs = svg.querySelector('defs') || el('defs');
+    const cp = el('clipPath', { id }, defs);
+    const r = el('rect', { x, y, width: w, height: h }, cp);
+    return { url: `url(#${id})`, rect: r };
+  }
+
   // Démarrage : polices chargées, scène construite, images décodées, draw(0).
-  function start({ duration, build, draw }) {
+  // scenarios : { nom: draw } ; le scénario vient de l'URL (?scenario=camera), sinon le premier.
+  function start({ duration, build, draw, scenarios }) {
+    if (scenarios) {
+      const wanted = new URLSearchParams(location.search).get('scenario');
+      const name = wanted || Object.keys(scenarios)[0];
+      if (!scenarios[name]) console.error(`Scénario inconnu : ${name} (${Object.keys(scenarios).join(', ')})`);
+      draw = scenarios[name] || Object.values(scenarios)[0];
+    }
     const ready = (async () => {
       await Promise.all([400, 500, 700, 800].map(w => document.fonts.load(`${w} 30px Poppins`)));
       await document.fonts.ready;
@@ -220,5 +281,6 @@
     clamp, prog, easeOut, easeInOut, back, invEaseInOut,
     FADE_START, FADE_END, fading, fadeOut, pop, slide, rise,
     check, cross, badgeNum, pill, card, template, title, chapeau, chute, encart, start,
+    camera, outline, clipRect,
   };
 })();
