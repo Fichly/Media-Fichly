@@ -1,5 +1,12 @@
 [
   {
+    "id": "9-valeur",
+    "section": "Qu'est-ce que le Lean Manufacturing ? Définition",
+    "apres": "En français, on parle aussi de production au plus juste.",
+    "role": "Fait voir le tri du point de vue du client : la commande passe par six opérations, le client se demande s'il paierait chacune ; déplacer, attendre et reprendre tombent dans la zone rouge et laissent un trou dans le parcours.",
+    "alt": "La commande passe par six opérations sous le regard du client : usiner, assembler et emballer ont de la valeur ; déplacer une palette, attendre une validation et reprendre une pièce ratée consomment des ressources que le client ne paierait pas."
+  },
+  {
     "id": "1-outils-sans-routine",
     "section": "Lean Manufacturing, Lean Management, Lean : quelle différence ?",
     "apres": "En pratique, les deux premiers sont indissociables.",
@@ -33,6 +40,13 @@
     "apres": "Les deux piliers ne fonctionnent qu'ensemble.",
     "role": "Illustre la phrase qui clôt la section : le juste-à-temps baisse le stock et fait apparaître les problèmes, le jidoka arrête et les traite avec l'outil qui répond.",
     "alt": "La rivière des stocks : quand le juste-à-temps baisse le niveau, les pannes, les changements de série longs et les défauts récurrents apparaissent ; le jidoka arrête la production et les traite avec la TPM, le SMED et le poka-yoke."
+  },
+  {
+    "id": "10-surproduction",
+    "section": "Les gaspillages : ce que le Lean cherche à supprimer",
+    "apres": "Une charge irrégulière oblige à surcharger les postes aux pics",
+    "role": "Montre la surproduction comme cause : la pile grossit, chaque conséquence (transportée, stockée, reprise, masque les problèmes) allume des gaspillages jusqu'aux sept autres ; dessous, la charge irrégulière dépasse la capacité aux pics, surcharge le poste et produit défauts et attentes.",
+    "alt": "Une machine produit des pièces avant qu'elles soient demandées : transportées, stockées, reprises si le besoin change, elles masquent les problèmes et allument les sept autres gaspillages. Dessous, le Mura (charge irrégulière) dépasse la capacité aux pics, crée du Muri (surcharge), qui produit défauts et attentes."
   },
   {
     "id": "6-partir-du-probleme",

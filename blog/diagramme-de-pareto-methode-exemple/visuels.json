@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-trier-et-cumuler",
+    "section": "Comment construire un diagramme de Pareto : l’exemple de calcul",
+    "apres": "Trois causes sur six couvrent",
+    "role": "Met le calcul en mouvement : les barres arrivent dans l'ordre du relevé, se trient, puis chacune s'empile sur le cumul précédent jusqu'à 100 % ; lecture : trois causes sur six font 82 %, soit 50 % des causes et non 20 %.",
+    "alt": "Diagramme de Pareto des 200 arrêts de la ligne de conditionnement en vingt jours : six causes triées par occurrences, de 88 à 6, et la courbe cumulée qui passe par 44, 67, 82, 91, 97 et 100 %. Trois causes sur six couvrent 82 % des arrêts, soit 50 % des causes."
+  },
+  {
+    "id": "2-trois-unites",
+    "section": "Occurrences, temps d’arrêt ou coût : l’unité qui change tout",
+    "apres": "Trois unités, trois causes différentes en tête.",
+    "role": "Fait voir que les mêmes barres, d'une unité à l'autre, changent de hauteur puis se reclassent : trois unités, trois causes différentes en tête.",
+    "alt": "Les six mêmes causes mesurées de trois façons : en occurrences, le bourrage en sortie d'étiqueteuse est en tête avec 44,0 % ; en minutes d'arrêt, la panne du convoyeur avec 46,1 % ; en coût, le réglage de la dateuse avec 38,5 %."
+  },
+  {
+    "id": "3-categorie-trop-large",
+    "section": "La qualité du relevé décide de la qualité du classement",
+    "apres": "Un même niveau de détail.",
+    "role": "Montre pourquoi une catégorie large arrive en tête : « défaut qualité » contient quatre sujets ; ramenés au niveau de détail des autres causes, ils se rangent parmi elles et la vis de réglage desserrée passe en tête.",
+    "alt": "Exemple illustratif : à gauche, « défaut qualité » arrive en tête parce qu'il regroupe quatre sujets ; à droite, au même niveau de détail que les autres causes, ses quatre sujets se rangent parmi elles et la vis de réglage desserrée devient la première cause."
+  },
+  {
+    "id": "4-second-pareto",
+    "section": "Les erreurs qui faussent un diagramme de Pareto",
+    "apres": "Un diagramme de Pareto n’a de valeur que comparé à lui-même.",
+    "role": "Déroule la boucle PDCA autour du Pareto : on cible la première barre, on agit, on retrace avec la même unité et la même durée, l'ancien tracé reste en pointillés, puis le nouveau classement désigne la cible suivante.",
+    "alt": "Boucle PDCA sur un Pareto : après les actions sur le bourrage, un second relevé de vingt jours en occurrences montre sa barre passée de 88 à 24, l'ancienne restant en pointillés ; le classement se refait et le changement de bobine film devient la cible suivante."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-travail-reel",
+    "section": "Qu'est-ce que le gemba, et le gemba walk ?",
+    "apres": "L'opérateur fait autrement que la procédure, et pour une bonne raison.",
+    "role": "Superpose le travail prescrit et le travail réel : la fiche décrit un trajet droit, l'opérateur contourne un chariot à chaque carton ; le tableau de bord ne voit que l'arrêt machine, l'observateur compte les détours, demande pourquoi et écrit l'écart avec sa raison.",
+    "alt": "À gauche, le tableau de bord n'affiche que deux heures d'arrêt machine. À droite, vu de dessus, l'opérateur contourne un chariot garé dans l'allée à chaque carton, alors que la fiche décrit un trajet droit ; l'observateur demande pourquoi, apprend que le chariot n'a pas d'autre place et écrit l'écart avec sa raison."
+  },
+  {
+    "id": "2-constat-ecrit",
+    "section": "Ce qu'une tournée doit produire",
+    "apres": "et c'est une limite haute, pas un objectif.",
+    "role": "Construit un constat élément par élément : ce qu'on écrit souvent est barré et remplacé par le fait, le lieu exact, la date et l'heure, un porteur nommé, une échéance. Dessous, trois constats relus au passage suivant se referment, la liste de quinze lignes n'est jamais relue.",
+    "alt": "Un constat en cinq éléments : « le poste est mal tenu » devient « le bac de rebuts déborde », « en production » devient ligne 2, poste 4, l'heure, un porteur nommé et une échéance sont ajoutés. Trois constats relus à la tournée suivante sont refermés ; une liste de quinze lignes n'est jamais relue."
+  },
+  {
+    "id": "3-trame-30-minutes",
+    "section": "La trame d'une tournée de trente minutes",
+    "apres": "Trente minutes sur le terrain suffisent, si les questions sont préparées.",
+    "role": "La frise minutée pilote la scène : l'observateur relit ses constats, reste à un endroit fixe le temps d'un cycle, suit une pièce de poste en poste, pose ses questions, restitue et se fait corriger, puis remonte écrire ses constats.",
+    "alt": "Trame d'une tournée : 5 minutes au bureau pour relire les constats, 30 minutes sur le terrain (observer sans parler, suivre le flux, poser les questions, restituer sur place), puis 10 minutes pour écrire les constats. L'observateur se déplace dans l'atelier au rythme de la frise."
+  },
+  {
+    "id": "4-effet-observateur",
+    "section": "L'effet observateur",
+    "apres": "Vous ne le supprimerez pas, vous le réduirez.",
+    "role": "Le responsable entre, l'atelier bascule (cadence ajustée, protections remises, fiche officielle), il ressort, tout revient à l'habitude. Dessous, une visite par trimestre crée un grand écart, un passage par semaine voit l'écart fondre : l'effet se réduit, il ne se supprime pas.",
+    "alt": "Quand le responsable entre, la cadence s'ajuste, les protections sont remises et l'opérateur abandonne son raccourci pour la fiche officielle ; quand il sort, tout revient à l'habitude. Une visite par trimestre produit un grand écart entre ce qu'on voit et l'habitude, un passage par semaine le réduit de semaine en semaine."
+  }
+]

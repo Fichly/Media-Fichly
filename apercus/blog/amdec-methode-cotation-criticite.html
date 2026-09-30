@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperçu · amdec-methode-cotation-criticite</title>
+<style>
+  :root { --ink: #23235a; --blue: #4a4aa0; --muted: #6b6b8a; --line: #e2e2ee; --bg: #fbfbf9; --note: #ececf5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  .bandeau { background: var(--note); border-radius: 12px; padding: 12px 16px; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  h1 { font-size: 34px; line-height: 1.2; color: var(--blue); }
+  h2 { font-size: 26px; line-height: 1.25; margin-top: 48px; color: var(--blue); }
+  h3 { font-size: 20px; margin-top: 28px; }
+  a { color: var(--blue); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 16px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--note); }
+  div[role=region] { overflow-x: auto; }
+  .visuel { margin: 28px 0; }
+  .visuel video { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #f3f3f3; }
+  .visuel figcaption { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--blue); padding-left: 10px; }
+  .visuel .num { font-weight: 700; color: var(--blue); }
+  .visuel code { font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="bandeau"><a href="index.html">← Tous les articles</a> · Aperçu de travail : l'article tel qu'il sera lu, avec chaque visuel animé à l'endroit prévu. La note sous chaque visuel (à ne pas publier) rappelle ce qu'il doit faire comprendre.</p>
+<h1>AMDEC : méthode, cotation de la criticité et plan d&#x27;action en atelier</h1>
+
+<!--
+TITRE (H1 Shopify) : AMDEC : méthode, cotation de la criticité et plan d'action en atelier
+HANDLE : amdec-methode-cotation-criticite
+TITLE TAG (55 car.) : AMDEC moyen : coter un équipement et agir sans logiciel
+META DESCRIPTION (156 car.) : Trois notes et une multiplication : la criticité AMDEC se cote en séance, sans logiciel. Échelles, origine des notes, seuil de coupure et trois actions datées.
+SUMMARY : Une usine a cent machines et de quoi en suivre dix. L'AMDEC sert à choisir lesquelles. Chaque panne possible reçoit trois notes : à quelle fréquence, avec quelle gravité, et voit-on venir le problème. On multiplie. Le classement obtenu dit par quel équipement commencer, et ce qu'on peut laisser de côté.
+TAGS : Lean Management, TRS, Maintenance
+
+MOT-CLE PRINCIPAL : « amdec ». Relevé Ahrefs France du 20/08 repris du brief, NON REJOUE ce jour :
+  6 800 recherches/mois, difficulté 0, potentiel de trafic 800.
+  L'outil Keywords Explorer est en panne ce jour (erreur 500 sur tous les appels) : la variante
+  « amdec moyen » n'a PAS pu être chiffrée. AUCUN appel Ahrefs n'a été passé, conformément au brief.
+  CONSEQUENCE A SAVOIR : la cible réelle de l'article est une variante dont le volume est inconnu.
+  A CHIFFRER AU PROCHAIN RUN, dès que Keywords Explorer répond : « amdec moyen », « amdec machine »,
+  « amdec maintenance ». Si ces trois variantes sont sous 20 rech./mois, l'article est un satellite
+  interne au cluster maintenance et non une porte d'entrée, et sa mesure doit se lire ainsi.
+
+VERDICT FAISABILITE : PRUDENCE. Relevé Ahrefs France du 04/09 fourni par le brief, non rejoué.
+  Population du top 10 organique de « amdec » : ansys.synopsys.com DR 84, manager-go.com DR 72,
+  Wikipédia DR 97, kaizen.com DR 73, blog-gestion-de-projet.com DR 56, ptc.com DR 83,
+  carl-software.fr DR 37, pipedrive.com DR 90.
+  DR MINIMUM DE LA PAGE 1, Wikipédia écarté : 37, carl-software.fr, position 9, éditeur de GMAO.
+  Test 1 PARTIELLEMENT FAVORABLE : trois spécialistes industriels sérieux, Ansys, PTC et Carl Software.
+  Mais deux généralistes lourds, Pipedrive DR 90 et manager-go DR 72. La page est mixte.
+  Test 2 DEFAVORABLE : rien sous DR 25, contre un DR 7 pour fichly.com.
+  Test 3 non joué : fichly.com n'a aucune page sur ce territoire.
+  CONDUITE IMPOSEE PAR LE VERDICT PRUDENCE, appliquée : satellite longue traîne uniquement,
+  jamais une tête de cluster générique.
+
+BASCULE D'ANGLE, imposée par le verdict et écrite ici pour ne pas être oubliée à la mesure :
+  L'article NE JOUE PAS l'AMDEC produit ni la DFMEA de conception, terrain tenu par Ansys et PTC
+  avec des budgets sans commune mesure. Il joue l'AMDEC MOYEN, aussi appelée AMDEC machine, celle
+  qui se conduit en atelier pour décider quel équipement mérite du préventif.
+  C'est l'intention servie par un seul résultat de la page 1, Carl Software à DR 37, et c'est le
+  prolongement direct du cluster maintenance déjà construit sur le blog.
+  Le TITLE TAG porte ce différenciateur (« AMDEC moyen »), le H1 garde « AMDEC » pour rester
+  intelligible et pour ne pas fermer la requête de tête.
+  CIBLE REALISTE ANNONCEE : zone 6 à 20 sur la requête de tête, meilleure sur les variantes moyen
+  et machine. Le top 3 de « amdec » n'est pas atteignable à DR 7 contre cette page 1.
+
+LONGUEUR DES 3 PREMIERS LUS, et un échec à signaler :
+  ECHEC : carl-software.fr / carl-software.com est INACCESSIBLE en lecture automatisée.
+  Deux tentatives de web_fetch sur https://www.carl-software.com/fmea-method-improving-your-maintenance-efficiency/
+  Message exact tentative 1 : ROBOTS_DISALLOWED, « robots.txt fetch failed: [SSL: CERTIFICATE_VERIFY_FAILED]
+  certificate verify failed: unable to get local issuer certificate ».
+  Message exact tentative 2 : ROBOTS_DISALLOWED, « Failed to fetch or parse robots.txt ».
+  SUBSTITUTION DECIDEE SEUL : manager-go.com, position 2 du relevé, lu à sa place. C'est le
+  concurrent le plus complet de la page 1 sur l'angle méthode et cotation, et c'est celui qui sert
+  le mieux la question du seuil. Il n'est JAMAIS lié, c'est un interdit de la charte.
+  RELEVE :
+   - blog-gestion-de-projet.com  ~4 750 mots. 11 H2, 22 H3. Echelles 1 à 4 sur les trois notes,
+     formule C = G x F x N, exemple coté à 24 (G4 x F2 x N3). Plan d'action avec responsable,
+     délai et budget. Traite l'AMDEC Moyen en un H3 sur six.
+   - manager-go.com             ~3 500 mots. 6 H2, 8 H3 (méthode en huit étapes). Echelle
+     d'occurrence 1 à 4, SEUILS DE CRITICITE PUBLIES : 1-9 faible, 10-27 mineure, 28-36 importante,
+     37-64 majeure. Formule C = G x O x D. Nomme « AMDEC Moyens de Production (AMDEC Machine) ».
+   - ptc.com/fr                 ~1 250 mots. 3 H2, aucun H3. AUCUN chiffre, aucune échelle.
+     Produit et process uniquement, aucune mention de moyen, machine ni maintenance.
+  MEDIANE DES TROIS : 3 500 mots. CIBLE ANNONCEE AVANT REDACTION : environ 3 000 mots, soit un
+  ECART VOLONTAIRE VERS LE BAS, un satellite se defendant par l'angle et non par le volume.
+  LONGUEUR REELLE APRES REDACTION ET APRES UNE PASSE DE COUPE : 4 506 mots de corps, hors bio,
+  carte auteur et pied. LA CIBLE ANNONCEE N'A PAS ETE TENUE, ET L'ECART VA DANS L'AUTRE SENS :
+  mediane plus 29 %, cible annoncee plus 50 %. C'est un ecart de pilotage, il est ecrit ici pour
+  ne pas etre decouvert a la mesure. Une passe de coupe a ete passee, elle n'a rendu que 70 mots.
+  CE QUI PRODUIT L'ECART, dans l'ordre de poids, et chaque bloc renvoie a un trou releve :
+   - la section cotation avec un H3 par note et le critere de choix d'echelle       trous 1 et 4
+   - la section entiere sur la construction du seuil de criticite                   trou 2
+   - la section seance, avant / pendant / apres, et le tableau action contre note   trou 3
+   - le tableau anglais-francais de 11 lignes                                       trou 6
+  AUCUN DE CES QUATRE BLOCS N'A ETE COUPE : les retirer ramenerait l'article sous la mediane et
+  lui ferait perdre exactement ce qui justifie son existence sur cette page 1.
+  CE QUI A ETE COUPE : la note sur l'analyse de risques, le paragraphe sur l'absence d'historique,
+  la contre-mesure de fin de section pieges, et le raccord analyse fonctionnelle.
+  A SURVEILLER A 30 JOURS : si la page ne decolle pas, la premiere hypothese a tester n'est pas la
+  longueur mais le title, la page 1 etant tenue par des pages generiques et definitionnelles.
+
+  DECISION DE PERIMETRE, elle, TENUE : les six types d'AMDEC sont donnes en UN TABLEAU et non en
+  six sections. Deux des trois concurrents lus en font six sections. Couvrir les six types a leur
+  profondeur aurait recree la tete de cluster generique que le verdict Prudence interdit.
+
+TROUS IDENTIFIES chez les trois lus, et une hypothèse du brief qui est FAUSSE :
+  1. HYPOTHESE DU BRIEF PARTIELLEMENT INVALIDEE, à dire : le brief supposait qu'AUCUN ne dit d'où
+     viennent les notes. C'est vrai de ptc.com et de blog-gestion-de-projet.com, qui ne parle que
+     d'« expérience » du groupe. C'est FAUX de manager-go, qui cite « historiques de pannes, fiches
+     de non-conformité, remontées du terrain ». Le trou existe donc, mais il est à deux tiers.
+     Conséquence appliquée : la section cotation ne se contente pas de nommer la source, elle dit
+     COMMENT on lit une fréquence dans un historique et pourquoi c'est la note MTBF lue à l'envers.
+     C'est ce que personne ne fait.
+  2. LE SEUIL DE CRITICITE EST TRAITE A L'ENVERS PAR LA PAGE 1. manager-go publie une grille de
+     seuils fixes (1-9, 10-27, 28-36, 37-64) présentée comme universelle. Elle ne vaut QUE sur une
+     échelle 1 à 4. Sur une échelle 1 à 10, la même criticité 30 est un incident négligeable.
+     C'est le meilleur angle du corpus : ils couvrent MAL, donc notre existence sur la page se
+     justifie. Section entière consacrée à la construction du seuil.
+  3. AUCUN NE SERT LE JOB A FAIRE. Le brief demande de sortir trois actions datées sans logiciel.
+     blog-gestion-de-projet mentionne un plan d'action générique, manager-go une étape 8 « suivre
+     les actions » sans échéance. Personne ne dit qu'une action attaque UNE des trois notes.
+  4. AUCUN NE DIT QUE L'ECHELLE SE FIGE AVANT LA SEANCE. Trou entier.
+  5. AUCUN NE RELIE L'AMDEC A LA DECISION DE STRATEGIE DE MAINTENANCE. manager-go dit
+     « maintenance préventive » en une ligne. C'est le raccord naturel avec notre cluster.
+  6. AUCUN TABLEAU ANGLAIS-FRANCAIS. ptc.com emploie RPN sans le traduire. C'est le gisement
+     lexical validé du site, meilleure position hors marque à 6,7 sur « trs en anglais ».
+
+CONTRE-ANGLE : les trois répondent « qu'est-ce que l'AMDEC ». Nous répondons « comment coter un
+  équipement d'atelier, où couper la liste, et qu'est-ce qui sort de la séance ». La thèse maison,
+  le Lean échoue sur l'après et non sur la méthode, porte la section pièges et la section séance :
+  un tableau coté qui ne produit ni nom ni date est le cas type de la méthode bien déroulée et
+  jamais refermée.
+
+QUESTIONS SERP RETENUES EN FAQ :
+  1 à 4 : bloc People Also Ask relevé le 04/09, REPRISES VERBATIM comme demandé par le brief.
+   - C'est quoi la méthode AMDEC ?
+   - Quelle est la différence entre AMDEC et FMEA ?  (appelle le tableau anglais-français)
+   - Quels sont les différents types d'AMDEC ?
+   - Qu'est-ce que la méthode AMDEC et comment peut-elle être utilisée pour la maintenance ?
+     C'EST EXACTEMENT NOTRE ANGLE, traitée en profondeur, réponse la plus longue de la FAQ.
+  5 et 6 : construites depuis des questions REELLEMENT SERVIES par les pages de la page 1 lues.
+   - Faut-il coter de 1 à 10 ou de 1 à 4 ?           servie par blog-gestion-de-projet et manager-go
+   - A partir de quelle criticité faut-il lancer une action ?  servie par manager-go, et mal
+
+CANNIBALISATION, contrôle mené sur les six pages du périmètre, bloquant :
+  1. types-de-maintenance-comment-choisir : intention TAXONOMIQUE et DECISIONNELLE.
+     L'AMDEC est l'outil qui ALIMENTE cette décision, c'est dit et lié en H2 3.
+     AUCUNE reprise de l'arborescence corrective, préventive, systématique, conditionnelle,
+     prévisionnelle. Le mot « type de maintenance » n'apparaît que pour renvoyer à cette page.
+  2. mtbf-mttr-indicateurs-disponibilite : porte les indicateurs. C'EST LA QUE SE TROUVE LA
+     FREQUENCE DE DEFAILLANCE, donc la note F. Lien obligatoire posé en H2 4, ancre sur le MTBF.
+     C'est le lien le plus utile de l'article et il est placé au point exact où le lecteur en a besoin.
+  3. tpm-total-productive-maintenance : porte l'organisation. Lien posé en H2 3 et H2 8.
+     Aucune reprise des huit piliers ni des sept étapes de la maintenance autonome.
+  4. taux-de-rendement-synthetique-definition : le TRS est NOMME et LIE, jamais défini ni calculé
+     ici. AUCUN seuil de TRS cité. Aucune reprise de l'exemple 16 h / 680 / 650 / 77 %.
+  5. methode-5-pourquoi-cause-racine et methode-dmaic-5-etapes : l'AMDEC est PREVENTIVE, la
+     recherche de cause est CURATIVE. Les deux temps sont distingués en une phrase et liés, en H2 8.
+  6. methode-pdca-roue-de-deming-cycle : lié une fois sur la relecture du plan d'action. Le cycle
+     n'est ni déroulé ni défini.
+
+MAILLAGE INTERNE POSE : 7 liens internes dans le corps, tous sur des handles PUBLIES au 04/09.
+  mtbf-mttr-indicateurs-disponibilite (H2 4, lien le plus utile)
+  types-de-maintenance-comment-choisir (H2 3 et H2 8)
+  tpm-total-productive-maintenance (H2 3 et H2 8)
+  taux-de-rendement-synthetique-definition (H2 3)
+  methode-5-pourquoi-cause-racine (H2 8)
+  methode-dmaic-5-etapes (H2 8)
+  methode-pdca-roue-de-deming-cycle (H2 7)
+  AUCUN lien vers les trois autres articles écrits ce jour (RACI, Ishikawa, QQOQCCP) : non publiés,
+  ce serait un lien mort. Interdiction respectée.
+  MAILLAGE DESCENDANT A EXECUTER, NON FAIT PAR CE RUN, à poser le jour de la publication :
+   - depuis types-de-maintenance-comment-choisir vers cette page, ancre « coter la criticité de vos
+     équipements avec une AMDEC »
+   - depuis mtbf-mttr-indicateurs-disponibilite vers cette page, ancre « la note de fréquence d'une AMDEC »
+   - depuis tpm-total-productive-maintenance vers cette page, ancre « choisir l'équipement pilote »
+
+LIENS EXTERNES D'AUTORITE : 3, tous en target=_blank rel=noopener, aucun concurrent, aucun
+  éditeur de logiciel, aucune page de la page 1.
+  norminfo.afnor.org, NF EN IEC 60812, la norme de l'AMDE et de l'AMDEC (H2 1)
+  norminfo.afnor.org, NF EN 13306, terminologie de la maintenance, pour « défaillance » (H2 3)
+  legifrance.gouv.fr, maintien en état de conformité des équipements de travail (H2 5, sur la
+  règle de dépassement « une gravité au maximum passe en action quelle que soit la criticité »)
+
+PRODUIT CITE : fiches-lean (49,90 EUR), UNE SEULE mention, en contexte en H2 4, à l'endroit exact
+  où l'on prépare la grille de cotation avant la séance.
+  DECISION DOCUMENTEE : le tableau de correspondance de la charte offre deux entrées possibles.
+  40-outils-qse pour l'axe qualité, sécurité, environnement, audit et norme, qui capte « analyse de
+  risques ». fiches-lean pour l'axe TRS, maintenance et outils de production.
+  L'ANGLE RETENU ETANT L'AMDEC MOYEN EN ATELIER, et « maintenance » figurant explicitement dans la
+  ligne fiches-lean du catalogue, c'est fiches-lean qui est retenue. Si l'angle avait été l'AMDEC
+  procédé ou l'analyse de risques qualité, 40-outils-qse aurait gagné.
+
+CTA : page partenaires-logiciels. Objectif TRS, routage imposé par la charte pour les sujets de
+  mesure et d'indicateurs. L'accroche est celle du corps et non une accroche plaquée : coter la
+  fréquence suppose un historique d'arrêts, et tant que les arrêts sont notés à la main la note F
+  reste une impression. AUCUN code promo, le CTA ne vise pas un produit.
+
+VISUEL : AUCUN VISUEL PRODUIT NI CHERCHE PAR CE RUN, conformément au brief. Aucun appel Canva.
+  Placeholder VISUEL-A-CREER posé une fois dans le corps (H2 4, juste après les trois échelles) et
+  repris à l'identique dans le champ image du JSON-LD Article.
+  VISUEL ATTENDU, description précise pour la file de production :
+  Format 1080 x 1350. Titre en deux temps : « La criticité AMDEC » en bleu marine gras, puis
+  « trois notes, une multiplication » dans l'encadré bleu plein à texte blanc.
+  Corps : trois colonnes verticales côte à côte, une par note. Colonne 1 FREQUENCE, sous-titre
+  « d'où vient la note : l'historique de pannes ». Colonne 2 GRAVITE, sous-titre « d'où vient la
+  note : l'effet sur l'aval ». Colonne 3 DETECTION, sous-titre « d'où vient la note : voit-on venir
+  le problème ». Chaque colonne porte une échelle de 1 à 4 en quatre paliers empilés, du vert
+  #8cc978 en bas (note 1) au rouge #f16969 en haut (note 4), le jaune #e6b839 aux paliers 2 et 3.
+  ATTENTION AU PIEGE A REPRESENTER : sur la colonne DETECTION, le vert est en BAS pour la note 1
+  (on voit venir) comme sur les deux autres, et une pastille doit rappeler « note haute = on ne
+  voit rien venir ». C'est l'inversion que les lecteurs se trompent à lire.
+  Sous les trois colonnes, un signe de multiplication entre chaque colonne, puis une flèche vers un
+  bandeau unique « = criticité », avec la mention « 1 à 64 sur une échelle de 1 à 4, 1 à 1 000 sur
+  une échelle de 1 à 10 ». Phrase de synthèse : « Le chiffre ne veut rien dire seul, il ne sert
+  qu'à classer. » Encart d'appel à l'action en déclinaison Audit Lean. Bandeau de pied six segments.
+
+PLACEHOLDERS RESTANTS :
+  VISUEL-A-CREER            : 2 occurrences, le corps en H2 4 et le champ image du JSON-LD Article
+  REMPLACER-PAR-PHOTO-HUGO  : carte auteur, comportement habituel du blog
+  [famille d'équipement]    : H2 4 et H2 6, l'équipement de référence de l'article
+  [secteur]                 : H2 4, à fixer une seule fois ici puis à reprendre tel quel dans les
+                              dérivations LinkedIn
+  [nombre d'arrêts relevés] : H2 4, le comptage lu dans l'historique, jamais inventé
+  [capacité d'action]       : H2 5, le nombre d'actions que l'équipe tient réellement sur un trimestre
+
+DECISIONS PRISES SEUL :
+  1. Substitution de carl-software par manager-go à la lecture des concurrents, cause technique
+     documentée ci-dessus avec les deux messages d'erreur exacts. manager-go est lu, jamais lié.
+  2. La cible de longueur annoncée avant rédaction, 3 000 mots, N'A PAS ETE TENUE : l'article
+     mesure 4 506 mots, soit la médiane plus 29 %. L'écart est constaté après coup et non décidé,
+     et il est écrit dans le bloc LONGUEUR plutôt que masqué. Une passe de coupe a été passée et
+     n'a rendu que 70 mots : les quatre blocs qui portent l'écart sont les quatre trous relevés
+     sur la page 1, les couper aurait vidé l'article de sa différence. Point à trancher par Hugo
+     s'il juge l'article trop long pour un satellite.
+  3. Les six types d'AMDEC sont donnés en un tableau et non en six sections. Deux des trois
+     concurrents en font six sections. Les recopier aurait produit la copie mieux tournée que la
+     charte interdit explicitement.
+  4. AUCUNE échelle n'est présentée comme la bonne. Les deux familles, 1 à 10 automobile et
+     1 à 4 ou 1 à 5 maintenance, sont données côte à côte avec le critère de choix.
+  5. Les seuils de criticité publiés par manager-go ne sont ni repris ni cités comme référence.
+     Ils sont contredits sur le fond, sans nommer le concurrent, par l'argument arithmétique :
+     une même valeur n'a pas le même sens selon l'échelle. C'est le contre-angle de l'article.
+  6. Les notes chiffrées de l'exemple ne sont PAS inventées : elles sont DERIVEES de l'échelle
+     donnée juste au dessus, sous condition (« si l'historique montre une occurrence mensuelle,
+     alors F vaut 3 »). L'équipement et le secteur restent en placeholders.
+  7. La mention de l'Action Priority du référentiel AIAG-VDA 2019, qui remplace le RPN, est
+     conservée dans le tableau anglais : aucun des trois concurrents ne la donne, et c'est un fait
+     de référentiel, pas un chiffre maison.
+  8. Aucun seuil de TRS, aucune valeur cible, aucun pourcentage de gain, conformément à la charte.
+
+AHREFS : AUCUN APPEL PASSE, 0 unité consommée. Instruction explicite du brief, l'outil Keywords
+  Explorer étant en panne et le relevé de SERP étant fourni. Aucun relevé n'a été rejoué.
+-->
+
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article > p{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+.fichly-author{display:flex;gap:1.2em;align-items:flex-start;background:#fff;border:1px solid #dde2e8;border-top:5px solid #3b3a9e;border-radius:10px;padding:1.5em 1.7em;margin:2.4em 0;}
+.fichly-author-photo{flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:#3b3a9e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;font-weight:700;overflow:hidden;}
+.fichly-author-photo img{width:100%;height:100%;object-fit:cover;}
+.fichly-author-body{flex:1;}
+.fichly-author-body .role{font-size:.92em;color:#6b7280;margin:.1em 0 .5em;}
+.fichly-author-body strong{color:#1a1a1a;font-size:1.1em;}
+.fichly-author-link{display:inline-block;margin-top:.4em;font-weight:600;}
+</style>
+
+<div class="fichly-article" lang="fr">
+
+<p>Une usine compte des dizaines d'équipements et une équipe de maintenance qui ne peut pas tous les suivre de la même façon. La question n'est donc jamais « faut-il faire du préventif », mais « sur quelles machines, et sur quelles pannes ». L'<strong>AMDEC</strong> est la méthode qui répond à cette question avec un tableau plutôt qu'avec une intuition. Elle note chaque défaillance possible sur trois critères, en fait un produit, et vous rend une liste classée. Cet article traite l'<strong>AMDEC moyen</strong>, celle qui se conduit en atelier sur un équipement de production. Vous y trouverez comment coter, d'où viennent réellement les notes, où couper la liste, et comment sortir de la séance avec trois actions datées, sans logiciel.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Une usine a cent machines et de quoi en suivre dix. L'AMDEC sert à choisir lesquelles. On note chaque panne possible sur trois points : sa fréquence, sa gravité, et la chance de la voir venir. On multiplie les trois. Le résultat classe les pannes, et vous savez par où commencer.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>La criticité est un <strong>produit de trois notes</strong> : fréquence, gravité, détection. Elle ne se compare qu'à l'intérieur d'une même grille.</li>
+<li>Les notes se lisent dans <strong>l'historique de pannes</strong>, pas dans une impression de réunion.</li>
+<li>L'échelle se <strong>fige avant la séance</strong> et ne se rediscute plus. Une échelle qui bouge en cours de route rend tout le tableau incomparable.</li>
+<li>
+<strong>Aucun seuil de criticité n'est universel.</strong> Il se construit sur la capacité d'action réelle de l'équipe.</li>
+<li>Une AMDEC qui ne produit pas <strong>trois actions avec un nom et une date</strong> est un tableau, pas une analyse.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">AMDEC : définition, sigle et norme de référence</a></li>
+<li><a href="#types">Quels sont les différents types d'AMDEC ?</a></li>
+<li><a href="#maintenance">À quoi sert l'AMDEC moyen en maintenance ?</a></li>
+<li><a href="#cotation">Comment coter la fréquence, la gravité et la détection</a></li>
+<li><a href="#criticite">À partir de quelle criticité faut-il agir ?</a></li>
+<li><a href="#seance">Conduire la séance et sortir trois actions datées</a></li>
+<li><a href="#pieges">Les erreurs qui vident une AMDEC de son intérêt</a></li>
+<li><a href="#outils">Les outils qui prolongent une AMDEC</a></li>
+<li><a href="#anglais">Le vocabulaire de l'AMDEC en anglais</a></li>
+<li><a href="#faq">FAQ : vos questions sur l'AMDEC</a></li>
+</ol>
+</div>
+
+<h2 id="definition">AMDEC : définition, sigle et norme de référence</h2>
+
+<p>AMDEC signifie <strong>Analyse des Modes de Défaillance, de leurs Effets et de leur Criticité</strong>. C'est une méthode d'analyse préventive : elle recense les façons dont un système peut cesser de remplir sa fonction, avant que cela n'arrive, puis les classe pour décider où agir en premier.</p>
+
+<p>La méthode est encadrée par la norme <a href="https://norminfo.afnor.org/norme/pr-nf-en-60812/analyse-des-modes-de-defaillance-et-de-leurs-effets-amde/112525" target="_blank" rel="noopener">NF EN IEC 60812, analyse des modes de défaillance et de leurs effets</a>. Elle est <strong>née dans l'aéronautique militaire américaine des années 1940</strong>, puis s'est diffusée dans l'automobile, où elle est devenue une exigence de référentiel client.</p>
+
+<p>Trois mots du sigle sont souvent confondus, et cette confusion est la première cause de tableau inexploitable. Ils désignent trois objets distincts.</p>
+
+<table>
+<thead><tr>
+<th>Notion</th>
+<th>Ce que c'est</th>
+<th>Exemple sur un organe mécanique</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Mode de défaillance</strong></td>
+<td>La manière dont la fonction cesse d'être remplie. Ce qui se constate sur la machine.</td>
+<td>Le roulement se bloque</td>
+</tr>
+<tr>
+<td><strong>Cause</strong></td>
+<td>Ce qui a produit le mode de défaillance. Ce qu'on traitera.</td>
+<td>Absence de graissage, pollution du carter</td>
+</tr>
+<tr>
+<td><strong>Effet</strong></td>
+<td>Ce que subit l'aval, l'opérateur ou le client. Ce qui donne la gravité.</td>
+<td>Arrêt de la ligne, casse d'un organe voisin</td>
+</tr>
+</tbody>
+</table>
+
+<p>Retenez la règle de lecture, elle sert pendant toute la séance : <strong>une cause explique, un mode se constate, un effet se subit</strong>. Un tableau qui mélange les trois colonnes ne se cote pas, parce qu'on ne sait plus ce que la gravité mesure.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Trois colonnes distinctes sur l&#x27;exemple du roulement : la cause, absence de graissage et pollution du carter, est ce qu&#x27;on traitera ; le mode de défaillance, le roulement se bloque, est ce qui se constate ; l&#x27;effet, arrêt de la ligne et casse d&#x27;un organe voisin, est ce qui donne la gravité." poster="../../livrables/blog/amdec-methode-cotation-criticite/1-cause-mode-effet.png" src="../../livrables/blog/amdec-methode-cotation-criticite/1-cause-mode-effet.mp4"></video>
+  <figcaption><span class="num">Visuel 1</span> <code>1-cause-mode-effet</code><br>Déroule l&#x27;exemple de l&#x27;article dans l&#x27;ordre où il se produit : la graisse disparaît du carter (cause, ce qu&#x27;on traitera), le roulement se bloque (mode, ce qui se constate), la ligne s&#x27;arrête (effet, ce qui donne la gravité).</figcaption>
+</figure>
+
+
+<div class="fichly-note">
+<p><strong>AMDEC n'est pas un synonyme d'analyse de risques.</strong> Une analyse de risques couvre tout ce qui menace une activité, fournisseurs et réglementation compris. L'AMDEC est plus étroite : elle porte sur les défaillances d'un système technique, ligne par ligne, avec une cotation chiffrée. C'est cette étroitesse qui la rend utilisable en atelier en deux heures.</p>
+</div>
+
+<h2 id="types">Quels sont les différents types d'AMDEC ?</h2>
+
+<p>La méthode ne change pas d'un type à l'autre. Ce qui change, c'est <strong>l'objet analysé, et donc les personnes qu'il faut réunir</strong>. Réunir un bureau d'études pour analyser une panne de convoyeur est aussi inefficace que réunir des opérateurs pour arbitrer une cote de conception.</p>
+
+<table>
+<thead><tr>
+<th>Type d'AMDEC</th>
+<th>Objet analysé</th>
+<th>Qui participe</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>Produit</strong> ou conception</td>
+<td>Les fonctions du produit fini et de ses composants</td>
+<td>Bureau d'études, qualité, méthodes</td>
+</tr>
+<tr>
+<td>
+<strong>Procédé</strong> ou process</td>
+<td>Les étapes de fabrication et leurs paramètres</td>
+<td>Méthodes, qualité, production</td>
+</tr>
+<tr>
+<td>
+<strong>Moyen</strong> ou machine</td>
+<td>Les organes d'un équipement de production</td>
+<td>Maintenance, production, opérateurs</td>
+</tr>
+<tr>
+<td><strong>Sécurité</strong></td>
+<td>Les situations dangereuses d'un poste ou d'une installation</td>
+<td>QHSE, maintenance, encadrement de proximité</td>
+</tr>
+<tr>
+<td>
+<strong>Flux</strong> ou organisation</td>
+<td>Les ruptures d'une chaîne logistique ou d'un processus support</td>
+<td>Supply chain, ordonnancement</td>
+</tr>
+</tbody>
+</table>
+
+<p>Cet article traite <strong>l'AMDEC moyen</strong>, également appelée AMDEC machine. C'est celle qui répond à une question de maintenance : sur cet équipement, quelles pannes justifient qu'on y consacre du temps et de l'argent avant qu'elles ne surviennent.</p>
+
+<p>Deux différences pratiques la distinguent des autres. La donnée d'entrée existe déjà, sous forme d'<strong>historique d'interventions</strong>, ce qui n'est pas le cas d'une AMDEC de conception où tout est hypothétique. Et le groupe qui la conduit contient nécessairement <strong>quelqu'un qui a la main dans la machine</strong>, parce que les modes de défaillance réels ne figurent dans aucune documentation constructeur.</p>
+
+<h2 id="maintenance">À quoi sert l'AMDEC moyen en maintenance ?</h2>
+
+<p><strong>L'AMDEC moyen sert à décider quel équipement, et quel organe, mérite un traitement préventif.</strong> C'est un outil de tri, placé en amont de la décision de stratégie, et non un outil de diagnostic.</p>
+
+<p><strong>La distinction fixe le moment où on l'utilise.</strong> Une équipe qui cherche pourquoi une panne est arrivée ne fait pas une AMDEC. Une équipe qui se demande ce qui pourrait casser dans les douze mois, machine à l'arrêt planifié, en fait une.</p>
+
+<p>La sortie de l'analyse alimente directement le choix de la stratégie. Une défaillance fréquente, grave et invisible appelle une surveillance ou une intervention systématique. Une défaillance rare et sans effet peut rester en correctif assumé. Ce raisonnement, et le critère économique qui l'accompagne, sont détaillés dans notre article sur <a href="https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir">les types de maintenance et comment choisir entre eux</a>. <strong>L'AMDEC produit la matière de cette décision, elle ne la remplace pas.</strong></p>
+
+<p>Un point de vocabulaire évite un malentendu courant en réunion. Le mot défaillance a une définition normalisée, donnée par la <a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" target="_blank" rel="noopener">norme NF EN 13306 de terminologie de la maintenance</a> : c'est la cessation de l'aptitude d'un bien à accomplir une fonction requise. Une machine qui produit lentement mais produit n'est donc pas en défaillance au sens strict, alors qu'elle vous coûte des pièces. <strong>Ces pertes de cadence relèvent du <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a> et non de l'AMDEC</strong>, et il vaut mieux le dire au début de la séance qu'au milieu.</p>
+
+<p>Enfin, l'AMDEC ne s'oppose pas à une démarche d'ensemble, elle l'alimente. Un site engagé en <a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">TPM, ou Total Productive Maintenance</a>, <strong>s'en sert pour choisir la ligne pilote</strong> et pour décider quels gestes valent d'être transférés aux opérateurs. Sans ce tri, le périmètre de départ se choisit sur la disponibilité de l'équipe plutôt que sur le risque.</p>
+
+<h2 id="cotation">Comment coter la fréquence, la gravité et la détection</h2>
+
+<p>La cotation AMDEC repose sur trois notes attribuées à chaque ligne du tableau, puis multipliées entre elles. La formule est constante, quelle que soit l'échelle retenue.</p>
+
+<p><strong>Criticité = Fréquence × Gravité × Détection</strong>, souvent écrite C = F × G × D. Les mêmes trois notes apparaissent sous d'autres lettres selon les référentiels, ce qui n'en change ni le sens ni le calcul.</p>
+
+<h3>La note F, ou fréquence : elle se lit, elle ne s'estime pas</h3>
+
+<p>La fréquence mesure à quel rythme le mode de défaillance survient. <strong>C'est la seule des trois notes qui existe déjà quelque part dans votre entreprise</strong>, et c'est pour cela qu'elle doit être traitée en premier.</p>
+
+<p>Elle se lit dans l'historique des interventions : <strong>la GMAO si vous en avez une, le cahier d'atelier sinon</strong>. Comptez [nombre d'arrêts relevés] occurrences du mode sur les douze derniers mois, et la note tombe d'elle même.</p>
+
+<p>Cette fréquence est l'inverse d'une grandeur que vous connaissez peut être déjà. <strong>Un temps moyen entre défaillances élevé donne une note F basse</strong>, et réciproquement. Si vous suivez déjà ces indicateurs, notre article sur <a href="https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite">le MTBF et le MTTR, les indicateurs de disponibilité</a>, vous donne la matière directement exploitable : le MTBF par organe est votre colonne F, à convertir en note.</p>
+
+<p>Quand l'historique n'existe pas, ne renoncez pas à la note et ne l'inventez pas non plus. Écrivez « estimation » dans une colonne dédiée, cotez, et faites du relevé la première action du plan. <strong>Une AMDEC dont la moitié des F sont estimées reste utile pour classer</strong>, à condition que chacun sache lesquelles.</p>
+
+<h3>La note G, ou gravité : une seule dimension à la fois</h3>
+
+<p><strong>La gravité mesure l'effet subi, jamais la cause.</strong> Elle s'apprécie sur une dimension et une seule, choisie avant la séance : le temps d'arrêt, l'impact qualité, l'impact sécurité, ou le coût de remise en état.</p>
+
+<p><strong>Mélanger deux dimensions dans une même colonne rend le classement final impossible à défendre.</strong> Une panne cotée 4 pour un risque de blessure et une panne cotée 4 pour une semaine d'arrêt n'ont rien de comparable, et le tableau finit par se discuter au lieu de trancher. Si vous devez couvrir la sécurité, ouvrez une seconde colonne de gravité plutôt que d'élargir la première.</p>
+
+<h3>La note D, ou détection : la note qu'on lit à l'envers</h3>
+
+<p>La détection mesure la probabilité de <strong>ne pas</strong> voir venir la défaillance avant qu'elle ne produise son effet. C'est le point qui se trompe le plus souvent, y compris par des groupes expérimentés.</p>
+
+<p>Une note de détection élevée signifie une mauvaise détection. Un organe surveillé par un capteur avec alarme prend une note basse, un organe qui casse sans prévenir prend la note maximale. La logique est cohérente avec les deux autres notes, où le grand chiffre désigne toujours le mauvais cas, mais la formulation courante, « détection », suggère l'inverse. <strong>Écrivez « non-détection » en tête de colonne</strong>, cela règle le problème pour toute la séance.</p>
+
+<h3>Quelle échelle retenir, et pourquoi elle se fige avant la séance</h3>
+
+<p>Deux familles d'échelles coexistent, et aucune des deux n'est la bonne dans l'absolu.</p>
+
+<table>
+<thead><tr>
+<th>Échelle</th>
+<th>Origine et usage</th>
+<th>Ce qu'elle suppose</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>1 à 10</strong></td>
+<td>Usage de l'automobile et des référentiels client</td>
+<td>Des données assez fines pour distinguer dix niveaux. Sans cela, les notes se tassent entre 3 et 7</td>
+</tr>
+<tr>
+<td><strong>1 à 4 ou 1 à 5</strong></td>
+<td>Usage courant en maintenance industrielle</td>
+<td>Un groupe qui doit trancher vite. Le nombre pair force le choix, il n'y a pas de note médiane confortable</td>
+</tr>
+</tbody>
+</table>
+
+<p>Le critère de choix tient en une phrase : <strong>retenez le nombre de niveaux que vos données savent réellement distinguer</strong>. Une échelle de 1 à 10 alimentée par des impressions produit une fausse précision, plus difficile à contester qu'une échelle grossière.</p>
+
+<p><strong>Chaque niveau doit être défini par un fait observable et non par un adjectif.</strong> Pour la fréquence, des paliers du type moins d'une fois par an, une fois par trimestre, une fois par mois, une fois par semaine se vérifient dans l'historique. « Rare », « occasionnel » et « fréquent » se discutent pendant vingt minutes.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Les trois notes de la criticité AMDEC en trois colonnes, fréquence, gravité et non-détection, chacune graduée de 1 à 4 du vert au rouge avec des paliers définis par des faits ; une ligne cotée F = 3, G = 3, D = 2 donne une criticité de 18 sur 64. Sur la colonne D, une note haute signifie qu&#x27;on ne voit rien venir." poster="../../livrables/blog/amdec-methode-cotation-criticite/2-trois-notes-une-multiplication.png" src="../../livrables/blog/amdec-methode-cotation-criticite/2-trois-notes-une-multiplication.mp4"></video>
+  <figcaption><span class="num">Visuel 2</span> <code>2-trois-notes-une-multiplication</code><br>Visuel demandé à l&#x27;emplacement VISUEL-A-CREER : trois échelles de 1 à 4 du vert au rouge ; une ligne se cote palier par palier sur des faits (F = 3, G = 3, D = 2, l&#x27;exemple de l&#x27;article), les trois notes se multiplient : 18 sur 64. Rappel du piège : note D haute = on ne voit rien venir.</figcaption>
+</figure>
+
+
+<p><img src="VISUEL-A-CREER" alt="Les trois notes de la criticité AMDEC en trois colonnes, fréquence gravité et non-détection, chacune graduée de 1 à 4 du vert au rouge, multipliées entre elles pour donner la criticité"></p>
+
+<p>Reste la règle qui ne figure presque nulle part et qui décide de la qualité du résultat. <strong>L'échelle se fige avant la séance et ne se rediscute plus pendant.</strong> Un groupe qui modifie sa grille à la quinzième ligne rend les quatorze premières incomparables aux suivantes, et personne ne s'en souvient trois semaines plus tard. Si la grille se révèle inadaptée, on termine la séance avec, on la corrige, et on recote tout d'un bloc.</p>
+
+<p>Préparer cette grille prend une heure la première fois et <strong>se réutilise ensuite sur tout le parc</strong>. Si vous cherchez des trames prêtes à adapter pour la cotation et pour le plan d'action, nos <a href="https://www.fichly.com/products/fiches-lean">fiches Lean sur les outils de production et de maintenance</a> donnent les rubriques attendues et les colonnes à prévoir.</p>
+
+<p>Un dernier repère de lecture, sur un exemple volontairement conditionnel. Sur un [famille d'équipement] en [secteur], si l'historique montre une occurrence mensuelle du mode, F vaut 3 sur l'échelle de 1 à 4 ci-dessus. Si l'arrêt qui en résulte dépasse la journée, G vaut 3. Si l'organe donne un signe audible avant de casser, D vaut 2. La criticité de cette ligne vaut donc 18, sur un maximum de 64. <strong>Ce chiffre ne veut rien dire seul.</strong> Il ne prend son sens qu'à côté des autres lignes du même tableau.</p>
+
+<h2 id="criticite">À partir de quelle criticité faut-il agir ?</h2>
+
+<p><strong>Il n'existe aucun seuil de criticité universel</strong>, et toute valeur présentée comme telle doit vous faire vérifier sur quelle échelle elle a été calculée. C'est une question d'arithmétique, pas de posture.</p>
+
+<p>Sur une échelle de 1 à 4, la criticité varie de <strong>1 à 64</strong>. Sur une échelle de 1 à 10, elle varie de <strong>1 à 1 000</strong>. Une criticité de 30 est donc une alerte sérieuse dans le premier cas et une valeur basse dans le second. Reprendre un seuil lu quelque part sans reprendre l'échelle qui va avec revient à choisir une pointure sur le pied de quelqu'un d'autre.</p>
+
+<p>La question du lecteur reste légitime, et elle mérite mieux qu'un refus. Voici le critère de construction, qui donne un seuil défendable en une demi-heure.</p>
+
+<ol>
+<li>
+<strong>Cotez l'ensemble du périmètre</strong> avant de fixer quoi que ce soit. Un seuil décidé avant la cotation oriente les notes, c'est mécanique.</li>
+<li>
+<strong>Triez les lignes par criticité décroissante.</strong> Vous obtenez une courbe, presque toujours très inégale : quelques lignes détachées, puis un long plateau.</li>
+<li>
+<strong>Coupez là où la liste dépasse votre capacité d'action.</strong> Si votre équipe traite [capacité d'action] actions par trimestre, le seuil est la criticité de la dernière ligne que vous pouvez réellement prendre. Pas une de plus.</li>
+<li>
+<strong>Écrivez le seuil et l'échelle ensemble</strong>, dans l'en-tête du tableau. Sans l'échelle, le seuil devient faux à la première réutilisation.</li>
+</ol>
+
+<p>Ce critère a une conséquence qui surprend et qui est saine : <strong>le seuil n'est pas une propriété de la machine, c'est une propriété de votre équipe.</strong> Deux ateliers identiques avec des effectifs différents n'ont pas le même seuil, et c'est cohérent. Un seuil qui produit une liste de quarante actions pour une équipe qui en tient six ne protège rien, il fabrique un arriéré.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Douze lignes cotées puis triées par criticité décroissante sur une échelle de 1 à 4 : une équipe qui tient 3 actions par trimestre coupe à 32, une équipe qui en tient 6 coupe à 12 ; une ligne à gravité maximale et une ligne à non-détection maximale passent en action malgré une criticité basse." poster="../../livrables/blog/amdec-methode-cotation-criticite/3-seuil-capacite-action.png" src="../../livrables/blog/amdec-methode-cotation-criticite/3-seuil-capacite-action.mp4"></video>
+  <figcaption><span class="num">Visuel 3</span> <code>3-seuil-capacite-action</code><br>Applique le critère de construction : on cote tout, on trie (quelques lignes détachées, un long plateau), on coupe à la capacité d&#x27;action ; la même liste donne un seuil 32 pour une équipe qui tient 3 actions, 12 pour une équipe qui en tient 6. Gravité et non-détection maximales passent quand même.</figcaption>
+</figure>
+
+
+<p>Deux règles de dépassement complètent le seuil, et elles priment sur le produit.</p>
+
+<ul>
+<li>
+<strong>Une gravité au maximum passe en action, quelle que soit la criticité.</strong> Une défaillance rare et bien détectée mais qui blesse quelqu'un ne se laisse pas absorber par une multiplication. Le <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019761378" target="_blank" rel="noopener">code du travail impose le maintien en état de conformité des équipements de travail</a>, et cette obligation ne se pondère par aucune fréquence.</li>
+<li>
+<strong>Une non-détection au maximum se traite en priorité</strong>, parce que c'est presque toujours la note la moins chère à faire baisser. Un point de contrôle ajouté à une ronde coûte moins qu'un changement d'organe.</li>
+</ul>
+
+<div class="fichly-note">
+<p><strong>Le référentiel automobile a abandonné le seuil chiffré.</strong> Le manuel AMDEC commun AIAG et VDA publié en 2019 a remplacé l'indice de priorité du risque par une priorité d'action, qui se lit dans une table croisant les trois notes plutôt que dans leur produit. La raison est celle exposée ici : deux combinaisons très différentes donnent le même produit, et une gravité maximale ne doit jamais pouvoir être compensée. Si votre client vous impose ce référentiel, la logique de seuil décrite plus haut ne s'applique pas, sa table le remplace.</p>
+</div>
+
+<h2 id="seance">Conduire la séance et sortir trois actions datées</h2>
+
+<p>Une AMDEC moyen se conduit en séance de groupe, sur un périmètre restreint, en deux heures. Ce qui la fait réussir ou échouer se joue pour moitié avant la réunion.</p>
+
+<h3>Avant la séance</h3>
+
+<p>Quatre éléments doivent être prêts et posés sur la table. Le <strong>périmètre écrit</strong>, un équipement ou une ligne, jamais l'atelier entier. Le <strong>découpage fonctionnel</strong> de cet équipement en organes, une dizaine au maximum pour tenir dans le temps imparti. L'<strong>historique des interventions imprimé</strong> sur les douze derniers mois. Et la <strong>grille de cotation figée</strong>, avec ses paliers définis en faits observables.</p>
+
+<p>Le groupe compte quatre à six personnes, dont au moins un opérateur de la machine et un technicien de maintenance qui y intervient. Un groupe plus large ne cote pas mieux, il cote plus lentement.</p>
+
+<h3>Pendant la séance</h3>
+
+<p>Le tableau se remplit ligne par ligne, une ligne par mode de défaillance, avec les colonnes suivantes : organe, fonction, mode de défaillance, cause probable, effet, F, G, D, criticité. <strong>Aucun débat sur l'échelle n'est autorisé</strong>, seul le fait est discutable. Quand un désaccord porte sur une note, notez la valeur la plus élevée et passez : l'écart se résoudra au tri, et il ne mérite pas dix minutes.</p>
+
+<p>Un tableur suffit, une feuille imprimée aussi. <strong>Aucun logiciel n'est nécessaire pour conduire une AMDEC</strong>, et l'outil n'a jamais été le point de blocage. Le point de blocage est l'historique de pannes, qui est une question de relevé et non de licence.</p>
+
+<h3>Après la séance : les trois actions</h3>
+
+<p>C'est l'étape que la plupart des démarches perdent, et c'est la seule qui produise un effet. Une AMDEC se referme sur un petit nombre d'actions, trois est un bon ordre de grandeur pour un premier périmètre, chacune portant quatre éléments obligatoires : <strong>un verbe, un responsable nommé, une date, et la note qu'elle attaque</strong>.</p>
+
+<p>Ce dernier point est le plus utile et le plus souvent oublié. Une action ne fait pas baisser la criticité en général, elle fait baisser une note précise, et le moyen n'est pas le même.</p>
+
+<table>
+<thead><tr>
+<th>Note attaquée</th>
+<th>Ce que l'action doit changer</th>
+<th>Exemple de nature d'action</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>F, fréquence</strong></td>
+<td>La probabilité que le mode survienne</td>
+<td>Ajouter un graissage au plan, remplacer un composant sous-dimensionné, corriger un réglage</td>
+</tr>
+<tr>
+<td><strong>G, gravité</strong></td>
+<td>L'effet subi si le mode survient quand même</td>
+<td>Tenir une pièce de rechange en stock, prévoir un mode dégradé, protéger l'organe voisin</td>
+</tr>
+<tr>
+<td><strong>D, non-détection</strong></td>
+<td>La capacité à voir venir la dérive</td>
+<td>Ajouter un point à la ronde, poser un capteur, rendre un indicateur visible au poste</td>
+</tr>
+</tbody>
+</table>
+
+<p>Une fois les actions réalisées, <strong>recotez les lignes concernées avec la même grille</strong>. C'est ce qui transforme le tableau en boucle : la baisse de criticité mesurée est le seul résultat opposable de la démarche, et c'est aussi ce qui justifie la séance suivante auprès de ceux qui la financent.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Trois lignes d&#x27;AMDEC et leurs actions datées et nommées : ajouter un graissage au plan fait baisser la fréquence, tenir une courroie en stock la gravité, ajouter un point à la ronde la non-détection ; recotées avec la même grille, les criticités passent de 48 à 16, de 36 à 18 et de 32 à 16." poster="../../livrables/blog/amdec-methode-cotation-criticite/4-une-action-une-note.png" src="../../livrables/blog/amdec-methode-cotation-criticite/4-une-action-une-note.mp4"></video>
+  <figcaption><span class="num">Visuel 4</span> <code>4-une-action-une-note</code><br>Chaque action porte un verbe, un nom, une date et la note qu&#x27;elle attaque ; à la recotation avec la même grille, seule cette note baisse et la criticité suit (48 puis 16, 36 puis 18, 32 puis 16). La date de recotation est posée avant de quitter la salle.</figcaption>
+</figure>
+
+
+<h2 id="pieges">Les erreurs qui vident une AMDEC de son intérêt</h2>
+
+<p>Voici les cinq erreurs qui reviennent le plus souvent sur une AMDEC moyen. Aucune ne porte sur la formule, qui est simple et rarement fautive. Toutes portent sur la préparation ou sur la suite.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Coter au ressenti, en séance, sans document.</span><br><span class="fichly-ok">✅ Sortir l'historique des douze derniers mois avant d'ouvrir le tableau.</span> Un groupe qui cote de mémoire surévalue les pannes récentes et oublie les anciennes. La fréquence est la seule note qui se vérifie, ne pas la vérifier revient à jeter le seul point d'appui objectif de la méthode.</p>
+<p><span class="fichly-ko">❌ Modifier l'échelle en cours de séance parce qu'elle « ne colle pas ».</span><br><span class="fichly-ok">✅ Terminer avec la grille figée, la corriger ensuite, recoter d'un bloc.</span> Un tableau coté avec deux grilles différentes ne se trie plus. Le défaut est invisible à la relecture, ce qui le rend plus dangereux qu'une erreur franche.</p>
+<figure class="visuel">
+  <video autoplay muted loop playsinline preload="auto" width="1200" height="860" aria-label="Deux pannes identiques, relevées une fois par mois, cotées aux lignes 3 et 16 : quand la grille est modifiée à la ligne 15, elles obtiennent 18 et 12 et le tableau ne se trie plus ; quand la grille reste figée pendant la séance puis est corrigée et tout recoté d&#x27;un bloc, elles obtiennent 12 et 12." poster="../../livrables/blog/amdec-methode-cotation-criticite/5-echelle-figee.png" src="../../livrables/blog/amdec-methode-cotation-criticite/5-echelle-figee.mp4"></video>
+  <figcaption><span class="num">Visuel 5</span> <code>5-echelle-figee</code><br>Rend visible un défaut qui ne se voit pas à la relecture : deux pannes identiques cotées aux lignes 3 et 16 ; si la grille change à la ligne 15, le même fait tombe un palier plus bas (18 contre 12) ; grille figée puis corrigée et tout recoté d&#x27;un bloc, 12 et 12.</figcaption>
+</figure>
+
+<p><span class="fichly-ko">❌ Reprendre un seuil de criticité lu ailleurs.</span><br><span class="fichly-ok">✅ Couper la liste triée là où votre capacité d'action s'arrête.</span> Un seuil importé arrive avec une échelle qui n'est pas la vôtre. Il produit soit une liste que personne ne traitera, soit un tableau qui ne déclenche rien.</p>
+<p><span class="fichly-ko">❌ Lancer l'analyse sur l'atelier entier.</span><br><span class="fichly-ok">✅ Un équipement, dix organes, deux heures.</span> Une AMDEC d'usine produit deux cents lignes dont aucune n'est traitée. Un périmètre restreint mené jusqu'aux actions devient la référence qui convainc de recommencer ailleurs.</p>
+<p><span class="fichly-ko">❌ Refermer la séance sur le tableau lui même.</span><br><span class="fichly-ok">✅ Trois actions, un nom et une date sur chacune, avant de quitter la salle.</span> C'est l'erreur la plus coûteuse, parce que tout le travail a déjà été fait quand elle se produit. Un tableau sans action est un document d'archive.</p>
+</div>
+
+<p>Ces cinq erreurs décrivent le même moment, <strong>celui où la méthode s'est déroulée correctement et où plus personne ne revient dessus</strong>. C'est la règle générale du Lean, bien au delà de l'AMDEC : l'analyse est faite, les actions sont écrites, et l'étape de vérification n'a jamais lieu faute d'échéance imposée par le terrain. Le <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">Check du cycle PDCA</a> est exactement cette étape, et la recotation en est la forme concrète pour une AMDEC.</p>
+
+<p>La contre-mesure tient en une ligne. <strong>Avant de quitter la salle, posez la date de la recotation au calendrier</strong>, avec les mêmes participants. Une réunion déjà inscrite dans un agenda se tient bien plus souvent qu'une intention notée en bas d'un compte rendu.</p>
+
+<h2 id="outils">Les outils qui prolongent une AMDEC</h2>
+
+<p>Une AMDEC ne se suffit pas à elle même. Elle produit un classement, et ce classement appelle d'autres outils selon ce qu'on en fait. Voici les cinq raccords utiles, et ce que chacun règle.</p>
+
+<ul>
+<li>
+<strong>Les 5 pourquoi et le DMAIC</strong>, pour le temps curatif. L'AMDEC est préventive : elle traite ce qui n'est pas encore arrivé. Quand une panne est survenue et qu'il faut remonter à son origine, l'outil change et devient la <a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">méthode des 5 pourquoi</a> pour un cas simple, ou une <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">démarche DMAIC structurée</a> pour un problème récurrent et coûteux. Les deux temps ne se confondent pas et ne se remplacent pas.</li>
+<li>
+<strong>Le MTBF et le MTTR</strong>, en entrée. Ils alimentent la note F et donnent la mesure de l'effet des actions. Sans relevé d'arrêts, la moitié du tableau reste une estimation.</li>
+<li>
+<strong>La stratégie de maintenance</strong>, en sortie. Le classement obtenu se traduit en décisions par organe, et ce choix se tranche aussi sur un critère économique, détaillé dans notre article sur <a href="https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir">le choix entre les types de maintenance</a>.</li>
+<li>
+<strong>La TPM</strong>, pour l'organisation qui fait tenir les actions dans la durée. Une <a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">démarche de Total Productive Maintenance</a> donne le cadre dans lequel les gestes issus de l'AMDEC deviennent des habitudes de poste plutôt que des consignes affichées.</li>
+</ul>
+
+<h2 id="anglais">Le vocabulaire de l'AMDEC en anglais</h2>
+
+<p>Dans un groupe international, les grilles d'AMDEC circulent en anglais et <strong>les sigles ne se traduisent pas ligne à ligne</strong>. Voici les correspondances que vous croiserez, et les deux pièges qu'elles contiennent.</p>
+
+<table>
+<thead><tr>
+<th>Anglais</th>
+<th>Français</th>
+<th>Ce qu'il faut savoir</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>FMEA, Failure Mode and Effects Analysis</td>
+<td>AMDE, analyse des modes de défaillance et de leurs effets</td>
+<td>Sans le C : l'analyse sans cotation de criticité</td>
+</tr>
+<tr>
+<td>FMECA, Failure Mode, Effects and Criticality Analysis</td>
+<td>AMDEC</td>
+<td>C'est l'équivalent exact du sigle français, criticité comprise</td>
+</tr>
+<tr>
+<td>Failure mode</td>
+<td>Mode de défaillance</td>
+<td>La manière dont la fonction cesse d'être remplie</td>
+</tr>
+<tr>
+<td>Severity, S</td>
+<td>Gravité, G</td>
+<td>Se cote sur une seule dimension à la fois</td>
+</tr>
+<tr>
+<td>Occurrence, O</td>
+<td>Fréquence, F</td>
+<td>Se lit dans l'historique, pas en séance</td>
+</tr>
+<tr>
+<td>Detection, D</td>
+<td>Détection ou non-détection, D</td>
+<td>Note haute égale mauvaise détection, dans les deux langues</td>
+</tr>
+<tr>
+<td>RPN, Risk Priority Number</td>
+<td>Criticité, ou indice de priorité du risque</td>
+<td>Le produit des trois notes</td>
+</tr>
+<tr>
+<td>AP, Action Priority</td>
+<td>Priorité d'action</td>
+<td>Remplace le RPN dans le référentiel AIAG-VDA depuis 2019</td>
+</tr>
+<tr>
+<td>DFMEA, Design FMEA</td>
+<td>AMDEC produit ou conception</td>
+<td>Portée par le bureau d'études</td>
+</tr>
+<tr>
+<td>PFMEA, Process FMEA</td>
+<td>AMDEC procédé</td>
+<td>Portée par les méthodes et la qualité</td>
+</tr>
+<tr>
+<td>Machinery FMEA, MFMEA</td>
+<td>AMDEC moyen ou machine</td>
+<td>L'objet de cet article, portée par la maintenance</td>
+</tr>
+</tbody>
+</table>
+
+<p>Les deux pièges sont là. <strong>FMEA n'est pas la traduction d'AMDEC mais d'AMDE</strong>, et un document intitulé FMEA peut donc arriver sans colonne de criticité. Et <strong>le RPN n'est plus la référence du secteur automobile</strong> depuis le manuel commun de 2019, ce qui explique que deux grilles récentes puissent ne pas se comparer.</p>
+
+<h2 id="faq">FAQ : vos questions sur l'AMDEC</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>C'est quoi la méthode AMDEC ?</summary>
+<div class="answer">
+<p>L'AMDEC, pour Analyse des Modes de Défaillance, de leurs Effets et de leur Criticité, est une méthode d'analyse préventive encadrée par la norme NF EN IEC 60812. Elle recense les façons dont un système peut cesser de remplir sa fonction, puis note chacune sur trois critères : la fréquence, la gravité de l'effet et la difficulté à la détecter. Le produit des trois notes donne la criticité, qui sert à classer les défaillances et à décider où agir en premier.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre AMDEC et FMEA ?</summary>
+<div class="answer">
+<p>FMEA signifie Failure Mode and Effects Analysis, ce qui correspond en français à AMDE, sans cotation de criticité. Le sigle anglais équivalent à AMDEC est FMECA, Failure Mode, Effects and Criticality Analysis, avec le C de Criticality. Dans l'usage courant, FMEA désigne souvent les deux, mais la distinction compte quand un document arrive d'un groupe international : un FMEA peut ne contenir aucune colonne de criticité.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les différents types d'AMDEC ?</summary>
+<div class="answer">
+<p>Les principaux sont l'AMDEC produit ou conception, qui porte sur les fonctions du produit fini, l'AMDEC procédé, qui porte sur les étapes de fabrication, et l'AMDEC moyen, aussi appelée AMDEC machine, qui porte sur les organes d'un équipement de production. S'y ajoutent l'AMDEC sécurité et l'AMDEC flux ou organisation. La méthode de cotation est identique dans tous les cas. Ce qui change, c'est l'objet analysé et donc les personnes à réunir.</p>
+</div>
+</details>
+
+<details>
+<summary>Qu'est-ce que la méthode AMDEC et comment peut-elle être utilisée pour la maintenance ?</summary>
+<div class="answer">
+<p>En maintenance, on utilise l'AMDEC moyen pour décider quels équipements et quels organes méritent un traitement préventif. La séance se conduit sur un périmètre restreint, un équipement découpé en une dizaine d'organes, avec un opérateur et un technicien de maintenance. La note de fréquence se lit dans l'historique des interventions ou dans le MTBF par organe, la gravité s'apprécie sur le temps d'arrêt ou l'impact sécurité, la détection sur la capacité à voir venir la dérive. Le classement obtenu alimente le choix de la stratégie de maintenance et le périmètre de départ d'une démarche TPM. Il se referme sur un petit nombre d'actions datées, chacune attaquant une note précise, puis sur une recotation.</p>
+</div>
+</details>
+
+<details>
+<summary>Faut-il coter de 1 à 10 ou de 1 à 4 ?</summary>
+<div class="answer">
+<p>Les deux échelles sont valides et aucune n'est la bonne dans l'absolu. L'échelle de 1 à 10 vient de l'automobile et suppose des données assez fines pour distinguer dix niveaux. L'échelle de 1 à 4 ou de 1 à 5 est courante en maintenance industrielle et force le groupe à trancher. Le critère de choix est le nombre de niveaux que vos données savent réellement distinguer. Une échelle fine alimentée par des impressions produit une fausse précision. Quelle que soit l'échelle retenue, elle se fige avant la séance et ne se rediscute plus pendant.</p>
+</div>
+</details>
+
+<details>
+<summary>À partir de quelle criticité faut-il lancer une action ?</summary>
+<div class="answer">
+<p>Aucun seuil universel n'existe, et toute valeur donnée comme telle doit être rapportée à son échelle : la criticité varie de 1 à 64 sur une échelle de 1 à 4, et de 1 à 1 000 sur une échelle de 1 à 10. Le seuil se construit après la cotation. Cotez tout le périmètre, triez par criticité décroissante, puis coupez là où la liste dépasse le nombre d'actions que votre équipe tient réellement sur un trimestre. Deux cas passent en action quel que soit le produit : une gravité au maximum, et une non-détection au maximum, qui est presque toujours la note la moins chère à faire baisser.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Une AMDEC vaut ce que vaut votre historique d'arrêts.</strong></p>
+<p>Coter la fréquence suppose de savoir combien de fois un mode de défaillance est survenu sur douze mois. Tant que les arrêts sont notés à la main sur un cahier, cette note reste une impression, et le classement se discute au lieu de trancher.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels de pilotage du TRS</a> : relevé automatique des temps d'arrêt, motifs de perte et historique par équipement, sur vos propres machines.</p>
+</div>
+
+<div class="fichly-bio">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+
+<div class="fichly-author">
+<div class="fichly-author-photo"><img src="REMPLACER-PAR-PHOTO-HUGO" alt="Hugo Duc, formateur Lean Management et fondateur de Fichly"></div>
+<div class="fichly-author-body">
+<strong>Hugo Duc</strong>
+<p class="role">Fondateur de Fichly · Formateur Lean Management</p>
+<p>Ingénieur industriel de formation, Hugo a accompagné plus de 70 sites industriels en France dans leurs démarches d'amélioration continue.</p>
+<a class="fichly-author-link" href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Suivre Hugo sur LinkedIn</a>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite">MTBF et MTTR : les indicateurs de disponibilité</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir">Les types de maintenance : comment choisir</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">La TPM : par quoi commencer et ce qui la fait tenir</a></li>
+</ul>
+</div>
+
+</div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AMDEC : méthode, cotation de la criticité et plan d'action en atelier",
+  "description": "Trois notes et une multiplication : la criticité AMDEC se cote en séance, sans logiciel. Échelles, origine des notes, seuil de coupure et trois actions datées.",
+  "image": "VISUEL-A-CREER",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-10",
+  "dateModified": "2026-09-10",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/amdec-methode-cotation-criticite",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "C'est quoi la méthode AMDEC ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "L'AMDEC, pour Analyse des Modes de Défaillance, de leurs Effets et de leur Criticité, est une méthode d'analyse préventive encadrée par la norme NF EN IEC 60812. Elle recense les façons dont un système peut cesser de remplir sa fonction, puis note chacune sur trois critères : la fréquence, la gravité de l'effet et la difficulté à la détecter. Le produit des trois notes donne la criticité, qui sert à classer les défaillances et à décider où agir en premier." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre AMDEC et FMEA ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FMEA signifie Failure Mode and Effects Analysis, ce qui correspond en français à AMDE, sans cotation de criticité. Le sigle anglais équivalent à AMDEC est FMECA, Failure Mode, Effects and Criticality Analysis, avec le C de Criticality. Dans l'usage courant, FMEA désigne souvent les deux, mais la distinction compte quand un document arrive d'un groupe international : un FMEA peut ne contenir aucune colonne de criticité." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les différents types d'AMDEC ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les principaux sont l'AMDEC produit ou conception, qui porte sur les fonctions du produit fini, l'AMDEC procédé, qui porte sur les étapes de fabrication, et l'AMDEC moyen, aussi appelée AMDEC machine, qui porte sur les organes d'un équipement de production. S'y ajoutent l'AMDEC sécurité et l'AMDEC flux ou organisation. La méthode de cotation est identique dans tous les cas. Ce qui change, c'est l'objet analysé et donc les personnes à réunir." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la méthode AMDEC et comment peut-elle être utilisée pour la maintenance ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En maintenance, on utilise l'AMDEC moyen pour décider quels équipements et quels organes méritent un traitement préventif. La séance se conduit sur un périmètre restreint, un équipement découpé en une dizaine d'organes, avec un opérateur et un technicien de maintenance. La note de fréquence se lit dans l'historique des interventions ou dans le MTBF par organe, la gravité s'apprécie sur le temps d'arrêt ou l'impact sécurité, la détection sur la capacité à voir venir la dérive. Le classement obtenu alimente le choix de la stratégie de maintenance et le périmètre de départ d'une démarche TPM. Il se referme sur un petit nombre d'actions datées, chacune attaquant une note précise, puis sur une recotation." }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il coter de 1 à 10 ou de 1 à 4 ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les deux échelles sont valides et aucune n'est la bonne dans l'absolu. L'échelle de 1 à 10 vient de l'automobile et suppose des données assez fines pour distinguer dix niveaux. L'échelle de 1 à 4 ou de 1 à 5 est courante en maintenance industrielle et force le groupe à trancher. Le critère de choix est le nombre de niveaux que vos données savent réellement distinguer. Une échelle fine alimentée par des impressions produit une fausse précision. Quelle que soit l'échelle retenue, elle se fige avant la séance et ne se rediscute plus pendant." }
+    },
+    {
+      "@type": "Question",
+      "name": "À partir de quelle criticité faut-il lancer une action ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aucun seuil universel n'existe, et toute valeur donnée comme telle doit être rapportée à son échelle : la criticité varie de 1 à 64 sur une échelle de 1 à 4, et de 1 à 1 000 sur une échelle de 1 à 10. Le seuil se construit après la cotation. Cotez tout le périmètre, triez par criticité décroissante, puis coupez là où la liste dépasse le nombre d'actions que votre équipe tient réellement sur un trimestre. Deux cas passent en action quel que soit le produit : une gravité au maximum, et une non-détection au maximum, qui est presque toujours la note la moins chère à faire baisser." }
+    }
+  ]
+}
+</script>
+
+</main>
+</body>
+</html>

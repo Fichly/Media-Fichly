@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-deux-chaines",
+    "section": "Deux exemples de 5 pourquoi : l'un aboutit, l'autre s'arrête",
+    "apres": "Les deux chaînes sont identiques jusqu'au deuxième niveau.",
+    "role": "Montre ce que le tableau ne montre pas : un tronc commun jusqu'au niveau 2, une bifurcation sur un seul mot (un qui, un quoi), les niveaux 4 et 5 jamais creusés à gauche, et les deux conclusions côte à côte.",
+    "alt": "Deux chaînes de pourquoi sur le même défaut : identiques jusqu'au niveau 2, elles divergent au niveau 3. À gauche, « L'opérateur ne l'a pas fait » : arrêt, les niveaux 4 et 5 restent vides, conclusion « rappeler l'opérateur à ses obligations ». À droite, « Le contrôle ne figure pas dans le mode opératoire » mène jusqu'au niveau 5 et à « déclencher une revue de mode opératoire à chaque changement de gamme »."
+  },
+  {
+    "id": "2-arret-au-troisieme-niveau",
+    "section": "Pourquoi la chaîne des 5 pourquoi s'arrête-t-elle au troisième niveau ?",
+    "apres": "Le premier niveau reste dans la technique",
+    "role": "Fait voir le mécanisme de l'arrêt : chaque pourquoi élargit le périmètre (technique, poste, salle) ; le quatrième bute sur le mur de la salle, parce que la réponse désigne une décision prise ailleurs.",
+    "alt": "Trois zones emboîtées : la technique, le poste, la salle où se trouvent les personnes présentes. Les pourquoi 1, 2 et 3 restent à l'intérieur ; le 4e bute sur le mur de la salle, derrière lequel se trouvent le responsable et le service voisin. Les analyses s'arrêtent alors sur « manque de rigueur », « oubli », « inattention »."
+  },
+  {
+    "id": "3-test-de-la-releve",
+    "section": "Le test qui distingue une cause racine d'une cause-personne",
+    "apres": "Le test fonctionne parce qu'il déplace la question sans accuser personne.",
+    "role": "Joue le test sur l'exemple : on remplace l'opérateur par un collègue équivalent, il suit le mode opératoire à la lettre, le contrôle n'y figure pas, le défaut revient ; la réponse est raturée et la chaîne redémarre.",
+    "alt": "Test de la relève : l'opérateur A est remplacé par l'opérateur B, de même compétence et de bonne volonté. B suit les trois étapes du mode opératoire, où le contrôle de début de série n'est écrit nulle part, et la pièce sort hors tolérance. « L'opérateur ne l'a pas fait » est raturé, remplacé par « Le contrôle ne figure pas dans le mode opératoire », et la chaîne repart vers un 4e pourquoi."
+  },
+  {
+    "id": "4-brancher-l-analyse",
+    "section": "Quand une réponse en contient deux : brancher l'analyse",
+    "apres": "La règle tient en trois points.",
+    "role": "Déroule la règle en trois points dans l'ordre : le « et » ouvre deux chaînes sans arbitrer, chacune descend jusqu'à son propre arrêt (3 et 6 niveaux), on arbitre à la fin sur la part des occurrences et la branche B est notée, pas effacée.",
+    "alt": "Une réponse « cause A et cause B » ouvre deux branches. La branche A atteint un mécanisme en 3 niveaux, la branche B en 6. À la fin, A explique 70 % des occurrences et B 30 % : on traite A d'abord, B est notée et reste visible au lieu d'être effacée."
+  }
+]

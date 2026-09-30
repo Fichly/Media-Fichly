@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-sans-combien",
+    "section": "QQOQCP ou QQOQCCP : pourquoi deux graphies",
+    "apres": "L'absence du second C n'est donc pas une faute d'orthographe",
+    "role": "Montre ce que change le second C : sans Combien, deux problèmes cadrés ne se comparent pas et la balance suit la voix la plus forte ; avec Combien, les chiffres tranchent, et six mois plus tard le même chiffre dit si c'est mieux.",
+    "alt": "Deux problèmes cadrés en QQOQCP ne se départagent pas : la balance penche du côté de la voix la plus forte. Le second C, Combien, s'ajoute au sigle et aux deux fiches : 2 % contre 7 % des pièces, la balance bascule, et six mois plus tard le Combien du problème B montre qu'il a baissé."
+  },
+  {
+    "id": "2-du-vague-a-la-phrase",
+    "section": "Comment cadrer un problème en vingt minutes",
+    "apres": "Voici le déroulé qui produit le seul livrable réellement utile de la méthode",
+    "role": "Remplace l'image à créer : chaque question, posée dans l'ordre de l'article, envoie son morceau à sa place dans la phrase de problème ; le Pourquoi repasse sur chaque réponse ; la phrase vague du départ est barrée.",
+    "alt": "Passage du problème vague « On a un problème qualité sur la ligne de conditionnement » à la phrase de problème de l'article : chacune des questions Quoi, Qui, Où, Quand, Comment et Combien produit un morceau souligné de sa couleur, et le Pourquoi coche chacune d'elles."
+  },
+  {
+    "id": "3-le-pourquoi-sur-chaque-ligne",
+    "section": "Comment cadrer un problème en vingt minutes",
+    "apres": "Reprenez les six réponses une à une et demandez pourquoi celle-là.",
+    "role": "Défait le contresens : la septième ligne « Pourquoi : la cause ? » est refusée, elle devient une colonne qui repasse sur chaque réponse ; le périmètre choisi par habitude et la grandeur retenue parce que disponible sont réécrits.",
+    "alt": "Tableau QQOQCCP : le Pourquoi n'est pas une septième ligne qui donnerait la cause, c'est une colonne qui interroge chacune des six réponses. Quatre tiennent ; le périmètre « toute la ligne » et la grandeur « nombre d'arrêts » sont réécrits en « poste de conditionnement » et « part des pièces concernées »."
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-transfert-des-gestes",
+    "section": "Qu'est-ce que la TPM (Total Productive Maintenance) ?",
+    "apres": "Cette distinction a une conséquence directe sur le périmètre.",
+    "role": "Montre ce que la TPM déplace et ce qu'elle ne déplace pas : les quatre gestes de premier niveau passent à la production (créneau au planning), le service maintenance garde son effectif et récupère le temps pour ce que lui seul sait faire, l'obligation de l'employeur ne bouge pas.",
+    "alt": "Les gestes de nettoyage, lubrification, inspection et serrage passent du service maintenance aux opérateurs, avec un créneau au planning ; le service garde le même effectif et consacre le temps libéré à ce que lui seul sait faire ; l'obligation de maintien en conformité reste à l'employeur."
+  },
+  {
+    "id": "2-piliers-dans-l-ordre",
+    "section": "Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?",
+    "apres": "Les huit piliers sont la présentation canonique de la TPM.",
+    "role": "Défait la liste à plat (huit chantiers de front) et reconstruit la maison dans l'ordre : les 5S comme socle, pas comme neuvième pilier, puis maintenance autonome et amélioration ciblée, les autres ensuite, conception et services des années plus tard.",
+    "alt": "Les huit piliers de la TPM sur le socle des 5S, construits dans l'ordre : au démarrage, maintenance autonome et amélioration ciblée sur un périmètre restreint ; ensuite maintenance planifiée, formation, maintenance de la qualité et sécurité ; des années plus tard, maîtrise de la conception et TPM dans les services."
+  },
+  {
+    "id": "3-pertes-sur-le-trs",
+    "section": "Comment mesurer la TPM ? Ce qu'elle change sur votre TRS",
+    "apres": "La plupart de ces pertes sont exactement ce que mesure le ",
+    "role": "Chaque perte va peser sur le facteur du TRS qui la voit et fait baisser sa jauge ; attentes, déplacements, stocks intermédiaires et retouches rebondissent sur le TRS. En fin de boucle, les deux règles de lecture de la section.",
+    "alt": "Les pannes et changements d'outils pèsent sur la disponibilité, les micro-arrêts et la sous-vitesse sur la performance, les défauts et rebuts sur la qualité ; attentes, déplacements, stocks intermédiaires et retouches échappent au TRS. Un TRS se compare à lui-même ; au démarrage, on suit la part des arrêts subis."
+  },
+  {
+    "id": "4-sept-etapes",
+    "section": "Les 7 étapes de la maintenance autonome",
+    "apres": "est le pilier par lequel toute TPM commence.",
+    "role": "L'équipe monte marche par marche, chaque marche validée quand elle tient sans rappel : trois marches de nettoyage, la quatrième la plus haute, et la courbe des arrêts subis ne bouge qu'à la cinquième, où l'équipe s'arrête, bien tenue.",
+    "alt": "L'escalier des sept étapes de la maintenance autonome : les trois premières sont du nettoyage, la quatrième, formation à l'inspection, est la plus haute ; l'effet sur les arrêts subis n'apparaît qu'à partir de l'étape 5, et la cinquième bien tenue vaut mieux que la septième affichée."
+  },
+  {
+    "id": "5-courbe-des-six-mois",
+    "section": "Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?",
+    "apres": "Voici les cinq causes d",
+    "role": "Remplace la courbe des six mois par son mécanisme : même lancement, mais à gauche la même anomalie est signalée trois fois sans réponse et l'opérateur arrête de remplir ; à droite, le passage hebdomadaire répond et la courbe tient.",
+    "alt": "Deux lignes lancées de la même façon : sans relecture, une anomalie signalée trois fois reste sans réponse, l'opérateur conclut que signaler ne sert à rien et les fiches remplies s'effondrent vers six mois ; avec un passage chaque semaine à date fixe, chaque anomalie est traitée et la courbe tient."
+  }
+]

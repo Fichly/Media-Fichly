@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1-roue-qui-monte",
+    "section": "Qu'est-ce que la méthode PDCA ?",
+    "apres": "Imaginez une roue qui monte une pente.",
+    "role": "Met en mouvement l'image de la roue : un tour complet (Plan, Do, Check, Act) par cran ; sans standard elle redescend au premier coup de mou, avec une cale posée à chaque Act elle tient et chaque cale laisse un nouveau niveau de référence.",
+    "alt": "La roue de Deming monte une pente, un tour Plan, Do, Check, Act par cran. Au premier essai, sans standard, l'effort s'arrête et la roue redescend à son point de départ. Au second, une cale « Standard » est posée à la fin de chaque tour : la roue tient, et deux nouveaux niveaux de référence restent tracés."
+  },
+  {
+    "id": "2-tester-avant-de-generaliser",
+    "section": "Pourquoi utiliser le PDCA en amélioration continue ?",
+    "apres": "La méthode PDCA impose deux disciplines qui manquent presque toujours.",
+    "role": "Montre pourquoi tester petit et mesurer : la même fausse bonne idée touche six postes quand on la déploie d'un coup, un seul quand on la teste, la mesure, la corrige puis la généralise.",
+    "alt": "Deux lignes de six postes reçoivent la même idée, qui se révèle mauvaise. Déployée partout d'un coup, elle crée trois mois plus tard un autre problème sur les six postes. Avec le PDCA, testée sur un seul poste et mesurée après une semaine, elle est corrigée puis généralisée : un seul poste touché."
+  },
+  {
+    "id": "3-sauter-le-check",
+    "section": "Les 4 étapes du cycle PDCA",
+    "apres": "C'est l'étape que tout le monde saute, et c'est la plus importante.",
+    "role": "Rend visible ce que le Check apporte : sans mesure, quatre actions s'empilent et leur effet reste inconnu ; avec mesure, chaque action est gardée ou abandonnée selon ce que fait l'indicateur.",
+    "alt": "Deux équipes lancent les mêmes quatre actions. Sans Check, l'indicateur n'est pas mesuré : quatre actions en place, on ne sait pas lesquelles servent. Avec Check, l'indicateur de temps perdu baisse après les actions 1 et 3, gardées, ne bouge pas après la 2 et monte après la 4, abandonnées ; l'objectif est atteint."
+  },
+  {
+    "id": "4-exemple-panneau-d-ombres",
+    "section": "Un exemple concret de PDCA en atelier",
+    "apres": "Le test étant concluant",
+    "role": "Déroule l'exemple sur un tour de roue : 8 min mesurées et objectif sous 3 min, panneau d'ombres sur le seul poste pilote, 2 min environ au Check, généralisation et standardisation, puis la roue repart sur le réglage machine.",
+    "alt": "Exemple du panneau d'ombres sur une ligne d'assemblage : chaque poste perd 8 minutes à chercher ses outils, objectif moins de 3 minutes. Le panneau est testé sur le poste pilote, dont le temps tombe à 2 minutes environ, puis généralisé aux autres postes et écrit dans la fiche de poste. La roue repart sur le temps de réglage machine."
+  }
+]

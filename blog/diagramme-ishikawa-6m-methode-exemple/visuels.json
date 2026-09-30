@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-regards-meme-feuille",
+    "section": "Diagramme d'Ishikawa : définition et principe",
+    "apres": "Le diagramme est le support qui met ces regards sur la même feuille.",
+    "role": "Trace l'arête de poisson dans son sens de lecture (flèche vers l'effet, une branche par famille), puis montre le principe : chaque métier ne voit que deux familles sur six, la feuille réunit les six regards.",
+    "alt": "Diagramme d'Ishikawa qui se remplit : le régleur, le contrôleur et l'opérateur de nuit apportent chacun des causes sur deux familles différentes ; ensemble, ils couvrent les six familles, Main d'œuvre, Matière, Matériel, Méthode, Milieu et Mesure, qui restent des hypothèses à vérifier."
+  },
+  {
+    "id": "2-seance-six-etapes",
+    "section": "Mener une séance d'Ishikawa en 6 étapes",
+    "apres": "Une séance d'Ishikawa se conduit en six étapes, dans l'ordre",
+    "role": "Fait voir la séance ouvrir large puis resserrer : notes en vrac sans classement, rangement sur les branches (une cause posée sur deux familles), une cause creusée d'un cran, vote à trois voix, trois candidates en rouge.",
+    "alt": "Séance d'Ishikawa en six étapes : l'effet est écrit et les branches tracées, le groupe écrit ses causes en vrac, les range sur les six familles, reformule « le réglage n'est pas bon » en « réglage repris sans repère physique », puis vote ; trois causes candidates ressortent en rouge."
+  },
+  {
+    "id": "3-diagramme-rempli",
+    "section": "Un diagramme d'Ishikawa rempli, branche par branche",
+    "apres": "le taux de rebut de la ligne [famille d'équipement]",
+    "role": "Remplace l'image à créer : le diagramme rempli avec les causes du tableau, les trois candidates en rouge, puis chacune descend dans la liste de vérifications avec un nom et une date.",
+    "alt": "Diagramme d'Ishikawa rempli à six branches sur un taux de rebut en hausse, douze causes relevées en séance dont trois candidates en rouge : critère d'acceptation interprété différemment, deux versions de la gamme, changement de lot fournisseur. Dessous, la liste de vérifications avec qui et pour quand."
+  },
+  {
+    "id": "4-trois-controleurs",
+    "section": "Un diagramme d'Ishikawa rempli, branche par branche",
+    "apres": "La branche Mesure illustre ce que la sixième famille apporte.",
+    "role": "Met en mouvement la vérification de la branche Mesure : trois contrôleurs, les trois mêmes pièces, vingt minutes ; les verdicts divergent, la branche Mesure s'allume et les cinq autres deviennent inutiles à explorer.",
+    "alt": "Trois contrôleurs mesurent les trois mêmes pièces sans concertation : pour chaque pièce, les verdicts bonne ou rebut diffèrent. Le problème est dans le jugement, pas dans la production : sur le diagramme, seule la branche Mesure reste à explorer."
+  },
+  {
+    "id": "5-ouvrir-puis-refermer",
+    "section": "Ce qu'on fait du diagramme le lendemain",
+    "apres": "Une fois une vérification positive, la cause candidate devient une cause avérée",
+    "role": "Montre la largeur du champ qui se referme : douze causes possibles, trois candidates, une seule avérée après vérification, puis les 5 pourquoi descendent sur cette branche seule jusqu'à la cause racine.",
+    "alt": "L'Ishikawa ouvre le champ avec douze causes possibles, le vote en garde trois, la vérification sur le terrain en écarte deux ; la cause avérée quitte le diagramme et les 5 pourquoi descendent sur elle seule jusqu'à la cause racine, où l'action corrective tient."
+  }
+]

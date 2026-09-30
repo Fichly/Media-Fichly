@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1-cause-mode-effet",
+    "section": "AMDEC : définition, sigle et norme de référence",
+    "apres": "Retenez la règle de lecture, elle sert pendant toute la séance",
+    "role": "Déroule l'exemple de l'article dans l'ordre où il se produit : la graisse disparaît du carter (cause, ce qu'on traitera), le roulement se bloque (mode, ce qui se constate), la ligne s'arrête (effet, ce qui donne la gravité).",
+    "alt": "Trois colonnes distinctes sur l'exemple du roulement : la cause, absence de graissage et pollution du carter, est ce qu'on traitera ; le mode de défaillance, le roulement se bloque, est ce qui se constate ; l'effet, arrêt de la ligne et casse d'un organe voisin, est ce qui donne la gravité."
+  },
+  {
+    "id": "2-trois-notes-une-multiplication",
+    "section": "Quelle échelle retenir, et pourquoi elle se fige avant la séance",
+    "apres": "Chaque niveau doit être défini par un fait observable et non par un adjectif.",
+    "role": "Visuel demandé à l'emplacement VISUEL-A-CREER : trois échelles de 1 à 4 du vert au rouge ; une ligne se cote palier par palier sur des faits (F = 3, G = 3, D = 2, l'exemple de l'article), les trois notes se multiplient : 18 sur 64. Rappel du piège : note D haute = on ne voit rien venir.",
+    "alt": "Les trois notes de la criticité AMDEC en trois colonnes, fréquence, gravité et non-détection, chacune graduée de 1 à 4 du vert au rouge avec des paliers définis par des faits ; une ligne cotée F = 3, G = 3, D = 2 donne une criticité de 18 sur 64. Sur la colonne D, une note haute signifie qu'on ne voit rien venir."
+  },
+  {
+    "id": "3-seuil-capacite-action",
+    "section": "À partir de quelle criticité faut-il agir ?",
+    "apres": "Ce critère a une conséquence qui surprend et qui est saine",
+    "role": "Applique le critère de construction : on cote tout, on trie (quelques lignes détachées, un long plateau), on coupe à la capacité d'action ; la même liste donne un seuil 32 pour une équipe qui tient 3 actions, 12 pour une équipe qui en tient 6. Gravité et non-détection maximales passent quand même.",
+    "alt": "Douze lignes cotées puis triées par criticité décroissante sur une échelle de 1 à 4 : une équipe qui tient 3 actions par trimestre coupe à 32, une équipe qui en tient 6 coupe à 12 ; une ligne à gravité maximale et une ligne à non-détection maximale passent en action malgré une criticité basse."
+  },
+  {
+    "id": "4-une-action-une-note",
+    "section": "Après la séance : les trois actions",
+    "apres": "Une fois les actions réalisées, ",
+    "role": "Chaque action porte un verbe, un nom, une date et la note qu'elle attaque ; à la recotation avec la même grille, seule cette note baisse et la criticité suit (48 puis 16, 36 puis 18, 32 puis 16). La date de recotation est posée avant de quitter la salle.",
+    "alt": "Trois lignes d'AMDEC et leurs actions datées et nommées : ajouter un graissage au plan fait baisser la fréquence, tenir une courroie en stock la gravité, ajouter un point à la ronde la non-détection ; recotées avec la même grille, les criticités passent de 48 à 16, de 36 à 18 et de 32 à 16."
+  },
+  {
+    "id": "5-echelle-figee",
+    "section": "Les erreurs qui vident une AMDEC de son intérêt",
+    "apres": "Un tableau coté avec deux grilles différentes ne se trie plus.",
+    "role": "Rend visible un défaut qui ne se voit pas à la relecture : deux pannes identiques cotées aux lignes 3 et 16 ; si la grille change à la ligne 15, le même fait tombe un palier plus bas (18 contre 12) ; grille figée puis corrigée et tout recoté d'un bloc, 12 et 12.",
+    "alt": "Deux pannes identiques, relevées une fois par mois, cotées aux lignes 3 et 16 : quand la grille est modifiée à la ligne 15, elles obtiennent 18 et 12 et le tableau ne se trie plus ; quand la grille reste figée pendant la séance puis est corrigée et tout recoté d'un bloc, elles obtiennent 12 et 12."
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1-cinq-zones",
+    "section": "Quelles zones afficher dans une Obeya ?",
+    "apres": "L'ordre n'est pas décoratif.",
+    "role": "Montre que l'ordre des zones est l'ordre de la réunion : l'équipe, debout, avance devant le mur de la zone 1 à la zone 5, la barre des 15 minutes avance au même pas, et la séance se termine sur une décision écrite en zone 5.",
+    "alt": "Un mur Obeya à cinq zones (objectif et écart, plan et avancement, problèmes ouverts, indicateurs, décisions à prendre) lu de gauche à droite par l'équipe debout, en 15 minutes ; la séance se termine par une décision écrite au mur en zone 5."
+  },
+  {
+    "id": "2-sans-rituel",
+    "section": "À quelle fréquence se tenir devant, et combien de temps ?",
+    "apres": "Une salle parfaitement composée devant laquelle personne ne se tient à heure fixe ne produit aucune décision.",
+    "role": "Même mur des deux côtés, douze semaines passent : sans créneau, la date vieillit, les échéances sont dépassées, l'indicateur sort du seuil sans réaction et aucune décision n'est prise ; avec un créneau fixe, tout bouge chaque semaine.",
+    "alt": "Deux salles Obeya identiques sur douze semaines : sans créneau fixe, après l'inauguration, la mise à jour reste à la semaine 1, les échéances sont dépassées, l'indicateur passe sous le seuil sans réaction et aucune décision n'est prise ; avec une séance chaque semaine, la date suit, les échéances bougent, le seuil franchi déclenche une réaction et douze décisions sont écrites."
+  },
+  {
+    "id": "3-war-room-obeya",
+    "section": "Obeya, oobeya, war room : le tableau de correspondance",
+    "apres": "Une war room se dissout quand la crise est réglée, et c'est sa réussite.",
+    "role": "Oppose les deux salles dans le temps : la war room naît avec l'incident et se dissout quand il est réglé (réussite) ; l'Obeya reste du premier au dernier mois, ses rythmes quotidien, hebdomadaire et mensuel continuent, crise ou pas.",
+    "alt": "Sur six mois, la war room s'installe pendant un incident et se dissout une fois la crise réglée, ce qui est sa réussite ; l'Obeya reste en place du début à la fin, avec ses points quotidiens, hebdomadaires et mensuels. Une Obeya qui se dissout est un échec."
+  }
+]
