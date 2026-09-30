@@ -7,18 +7,18 @@
     "alt": "Deux balances avec la même analyse vibratoire d'un côté : face au faible coût d'arrêt d'un convoyeur redondant, la surveillance pèse plus lourd et la corrective reste le bon calcul ; face au coût d'arrêt élevé d'une machine goulot, la balance bascule et la surveillance conditionnelle se paie."
   },
   {
-    "id": "2-quatre-declencheurs",
-    "section": "Quels sont les 3 types de maintenance préventive ? Conditionnelle, prévisionnelle, prédictive",
-    "apres": "Deuxièmement, ce qui distingue réellement la conditionnelle de la prévisionnelle",
-    "role": "Montre que les types se distinguent par le moment de la décision : sur une même courbe d'usure, la systématique intervient à l'échéance (l'organe est encore bon), la prévisionnelle à la date déduite de la pente, la conditionnelle au seuil, la corrective à la panne.",
-    "alt": "Une même courbe d'usure et quatre couloirs : la maintenance systématique intervient à échéance fixe alors que l'organe a encore de la durée de vie, la prévisionnelle à une date déduite de la pente des relevés, la conditionnelle au franchissement du seuil d'alerte, la corrective après la panne."
-  },
-  {
-    "id": "3-systematique-duree-de-vie",
+    "id": "2-systematique-duree-de-vie",
     "section": "Maintenance préventive systématique : le calendrier, et ce qu'il coûte",
     "apres": "La règle de bon sens : le systématique se justifie",
     "role": "Fait voir le coût caché du calendrier : huit exemplaires s'usent, l'échéance se cale sur le plus faible ; avec une durée de vie régulière on jette peu, avec une durée de vie dispersée (même moyenne) on jette près de la moitié.",
     "alt": "Huit exemplaires d'une même pièce remplacés à la même échéance, calée sur le plus faible : quand la durée de vie est régulière, 7 % de la durée de vie est jetée ; quand elle est dispersée, avec la même moyenne, 45 % est jetée en bon état, et cette part est payée deux fois."
+  },
+  {
+    "id": "3-quatre-declencheurs",
+    "section": "Quels sont les 3 types de maintenance préventive ? Conditionnelle, prévisionnelle, prédictive",
+    "apres": "Deuxièmement, ce qui distingue réellement la conditionnelle de la prévisionnelle",
+    "role": "Montre que les types se distinguent par le moment de la décision : sur une même courbe d'usure, la systématique intervient à l'échéance (l'organe est encore bon), la prévisionnelle à la date déduite de la pente, la conditionnelle au seuil, la corrective à la panne.",
+    "alt": "Une même courbe d'usure et quatre couloirs : la maintenance systématique intervient à échéance fixe alors que l'organe a encore de la durée de vie, la prévisionnelle à une date déduite de la pente des relevés, la conditionnelle au franchissement du seuil d'alerte, la corrective après la panne."
   },
   {
     "id": "4-arrets-subis-arrets-choisis",

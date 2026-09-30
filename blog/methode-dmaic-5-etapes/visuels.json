@@ -1,30 +1,30 @@
 [
   {
-    "id": "1-phases-et-livrables",
-    "section": "Les 5 étapes du DMAIC et ce que chaque phase doit produire",
-    "apres": "Voici la vue d'ensemble. Le tableau se lit comme un contrat",
-    "role": "Fait voir le « contrat » : une solution déguisée bute sur la première porte ; ensuite chaque phase produit son livrable, le sponsor valide, la porte s'ouvre et le projet passe à la suivante.",
-    "alt": "Les cinq phases du DMAIC séparées par des portes fermées. Une solution déguisée en problème, « Il manque un contrôle », bute sur la première porte et est refusée. Puis chaque phase produit son livrable (charte d'une page, relevé daté, cause prouvée par les données, action testée et mesurée, standard avec indicateur et fréquence de revue), le sponsor valide le passage, la porte s'ouvre et le projet avance jusqu'à Contrôler."
-  },
-  {
-    "id": "2-pdca-ou-dmaic",
+    "id": "1-pdca-ou-dmaic",
     "section": "Pourquoi DMAIC et pas PDCA ?",
     "apres": "La règle de lecture est simple",
     "role": "Transforme la grille en cinq interrupteurs : chaque réponse bascule vers PDCA ou DMAIC, les compteurs montent, et la méthode est choisie dès que trois réponses tombent du même côté.",
     "alt": "Les cinq questions de la grille appliquées à deux problèmes. Outils cherchés en début de poste : hypothèse sérieuse, une équipe suffit, à régler cette semaine, soit trois réponses côté PDCA contre deux : prenez un PDCA. Rebut à 7 % au lieu de 2 % : cause inconnue, problème régulier, enjeu en euros, plusieurs services, le sujet justifie trois mois, soit cinq réponses côté DMAIC : le DMAIC est justifié."
   },
   {
-    "id": "3-exemple-rebut",
-    "section": "Exemple concret : un projet DMAIC en atelier d'usinage",
-    "apres": "Un atelier d'usinage, une famille de pièces",
-    "role": "Met l'exemple en entonnoir : l'écart 7 % contre 2 %, les rebuts triés par défaut (un seul fait 80 %), puis par machine et par moment (deux machines, début de poste), la fausse piste écartée, la cause, le standard qui fait disparaître ces rebuts et le taux qui repasse sous 2 % pendant les audits.",
-    "alt": "Projet DMAIC sur un rebut de 7 % pour 2 % visés. Mesurer : un défaut dimensionnel fait 80 % des rebuts. Analyser : ces rebuts se concentrent sur deux machines en début de poste ; « les deux machines dérivent » est écarté, la cause est une mise en chauffe non standardisée avant le premier lot. Innover : le standard de mise en chauffe les fait disparaître. Contrôler : audit chaque semaine pendant deux mois, le rebut repasse sous 2 %."
+    "id": "2-phases-et-livrables",
+    "section": "Les 5 étapes du DMAIC et ce que chaque phase doit produire",
+    "apres": "Voici la vue d'ensemble. Le tableau se lit comme un contrat",
+    "role": "Fait voir le « contrat » : une solution déguisée bute sur la première porte ; ensuite chaque phase produit son livrable, le sponsor valide, la porte s'ouvre et le projet passe à la suivante.",
+    "alt": "Les cinq phases du DMAIC séparées par des portes fermées. Une solution déguisée en problème, « Il manque un contrôle », bute sur la première porte et est refusée. Puis chaque phase produit son livrable (charte d'une page, relevé daté, cause prouvée par les données, action testée et mesurée, standard avec indicateur et fréquence de revue), le sponsor valide le passage, la porte s'ouvre et le projet avance jusqu'à Contrôler."
   },
   {
-    "id": "4-prouver-que-ca-tient",
+    "id": "3-prouver-que-ca-tient",
     "section": "Les 5 étapes du DMAIC et ce que chaque phase doit produire",
     "apres": "Un standard écrit, un indicateur suivi",
     "role": "Montre pourquoi Contrôler est la seule phase qui prouve le gain : même projet, même gain au départ ; sans rien en place le taux dérive (effet de projet), avec standard, indicateur et revue la dérive est vue en revue, corrigée, et le gain tient.",
     "alt": "Le même projet fait passer le rebut de 7 % à 2 %, puis on suit six mois après la fin du projet. Sans phase Contrôler, le taux remonte vers 6 % : effet de projet. Avec un standard écrit, un indicateur suivi, une revue chaque semaine et une date de fin de surveillance, un écart apparaît, la revue suivante le voit, il est corrigé, et le rebut reste sous 2 % à six mois."
+  },
+  {
+    "id": "4-exemple-rebut",
+    "section": "Exemple concret : un projet DMAIC en atelier d'usinage",
+    "apres": "Un atelier d'usinage, une famille de pièces",
+    "role": "Met l'exemple en entonnoir : l'écart 7 % contre 2 %, les rebuts triés par défaut (un seul fait 80 %), puis par machine et par moment (deux machines, début de poste), la fausse piste écartée, la cause, le standard qui fait disparaître ces rebuts et le taux qui repasse sous 2 % pendant les audits.",
+    "alt": "Projet DMAIC sur un rebut de 7 % pour 2 % visés. Mesurer : un défaut dimensionnel fait 80 % des rebuts. Analyser : ces rebuts se concentrent sur deux machines en début de poste ; « les deux machines dérivent » est écarté, la cause est une mise en chauffe non standardisée avant le premier lot. Innover : le standard de mise en chauffe les fait disparaître. Contrôler : audit chaque semaine pendant deux mois, le rebut repasse sous 2 %."
   }
 ]

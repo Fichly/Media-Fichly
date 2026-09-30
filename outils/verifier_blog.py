@@ -58,6 +58,17 @@ def check(handle):
             s = seam(g)
             if s > 1500:
                 issues.append(f'{i} : raccord de boucle ({s} px changent)')
+    # Ordre de lecture et numérotation
+    pos = [body.find(v.get('apres', '\0')) for v in vis]
+    if pos != sorted(pos):
+        issues.append('visuels.json n\'est pas dans l\'ordre de lecture de l\'article')
+    nums = [v['id'].split('-')[0] for v in vis]
+    if nums != sorted(nums, key=lambda n: int(n) if n.isdigit() else 0):
+        issues.append('numéros des visuels hors de l\'ordre de lecture : ' + ', '.join(v['id'] for v in vis))
+    readme = (d / 'README.md').read_text(encoding='utf-8') if (d / 'README.md').exists() else ''
+    for v in vis:
+        if readme and v['id'] not in readme:
+            issues.append(f"{v['id']} : absent du README")
     if not (ROOT / 'apercus' / 'blog' / f'{handle}.html').exists():
         issues.append('aperçu absent (python3 outils/apercu_article.py)')
     if not (d / 'README.md').exists():
