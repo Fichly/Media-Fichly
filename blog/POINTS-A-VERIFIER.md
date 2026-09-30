@@ -23,8 +23,9 @@ l'exemple, répartitions, cadences) sont dans la section « Hypothèses » du RE
 - **Kanban de production** : « ligne d'assemblage en [secteur] ».
 - **VSM** : l'exemple chiffré contient encore des champs à remplir ([secteur], [C/T poste 1]…) ;
   le visuel n'utilise que les chiffres rédigés.
-- **Ishikawa** et **QQOQCCP** : un paragraphe `<p><img src="VISUEL-A-CREER">` à supprimer ; les visuels
-  `3-diagramme-rempli` (Ishikawa) et `2-du-vague-a-la-phrase` (QQOQCCP) le remplacent.
+- **Ishikawa**, **QQOQCCP** et **RACI** : un paragraphe `<p><img src="VISUEL-A-CREER">` à remplacer par
+  le visuel prévu : `3-diagramme-rempli` (Ishikawa), `2-du-vague-a-la-phrase` (QQOQCCP),
+  `4-plan-action-arret` (RACI ; mettre aussi l'URL du PNG dans le champ image du JSON-LD).
 - **Fiche métier responsable amélioration continue** : une infographie avec un texte alt vide.
 
 ## Images existantes à retirer si les visuels sont intégrés
