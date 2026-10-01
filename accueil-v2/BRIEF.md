@@ -7,6 +7,17 @@ Demande d'Hugo Duc (fondateur, propriétaire de la marque) :
 
 Langue : français. Le visiteur est vouvoyé, la marque dit « nous ».
 
+### Retour d'Hugo (prioritaire sur le reste du brief)
+
+> « Je trouve que notre proposition n'est pas assez claire. On présente que les fiches aujourd'hui en home page, mais on mérite de présenter les deux offres dès le départ. »
+
+Critères d'acceptation, vérifiés par capture du premier écran sans défiler :
+- À 1440 × 900 **et** à 390 × 844, le visiteur voit sans défiler les **deux** offres nommées (« Les fiches », « Les formations »), chacune avec une promesse d'une ligne et son bouton. Les annotations de maquette sont désactivées pour ce contrôle, et la barre de maquette ne compte pas.
+- Les deux offres ont le **même poids visuel** (taille, contraste, position) : aucune ne passe pour secondaire. Le H1 annonce les deux.
+- La vidéo ne doit **pas** repousser les offres sous la ligne de flottaison : sur ordinateur, offres à côté de la vidéo ou superposées proprement ; sur mobile, une version compacte des deux offres (par exemple deux cartes côte à côte ou un sélecteur à deux onglets) avant ou juste sous une vidéo de hauteur limitée.
+- Le menu présente aussi les deux offres au même niveau.
+- La vidéo elle-même consacre un temps équivalent aux fiches et aux formations.
+
 ## Règles d'écriture (non négociables)
 
 - Aucun tiret cadratin (—) ni demi-cadratin utilisé comme tiret. Virgules, parenthèses, deux-points.
