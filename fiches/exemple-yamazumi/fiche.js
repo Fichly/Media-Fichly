@@ -1,4 +1,4 @@
-// Fiche d'exemple · Yamazumi (aucun post programmé : titre, chute et encart provisoires).
+// Fiche d'exemple · Yamazumi (aucun post programmé : titre, explication et encart provisoires).
 // Style propre : la gravité. Les tâches tombent et s'empilent poste par poste (« yamazumi » = empiler),
 // la ligne du takt révèle le goulot, le gaspillage saute et la pile se tasse, puis deux tâches
 // changent de poste et la ligne s'équilibre sous le takt. La pastille d'étape suit la méthode.
@@ -151,12 +151,23 @@
   }
 
   const S = {};
+  const DY = 82; // le graphique, la légende et les indicateurs sous l'explication
   const halo = n => { [['stroke', C.card], ['stroke-width', 7], ['stroke-linejoin', 'round'], ['paint-order', 'stroke']].forEach(([k, v]) => n.setAttribute(k, v)); return n; };
 
   function build() {
     D.template({ author: 'hugo' });
     D.title('Empilez le travail,', 'voyez le goulot.');
     D.chapeau(`En japonais, «${NB}yamazumi${NB}» veut dire «${NB}empiler${NB}».`);
+
+    // Explication courte au-dessus du visuel : comment le lire
+    const line = (y, parts) => {
+      const t = el('text', { x: 62, y, 'font-family': 'Poppins', 'font-size': 22, 'font-weight': 500, fill: C.ink });
+      parts.forEach(([str, bold]) => { const sp = el('tspan', bold ? { 'font-weight': 700, fill: C.blue } : {}, t); sp.textContent = str; });
+      fit(t, 1020, `explication ${y}`);
+    };
+    line(352, [['Une ', 0], ['colonne', 1], [' par poste, un ', 0], ['bloc', 1], [' par tâche : sa hauteur, c’est sa durée.', 0]]);
+    line(384, [['Le ', 0], ['takt', 1], [', c’est le rythme de la demande : aucun poste ne doit le dépasser.', 0]]);
+    const head = new Set(D.svg.children);
     simulate();
 
     const defs = el('defs');
@@ -261,8 +272,8 @@
       return text(D.svg, x + 22, 1002, '', { size: 42, weight: 800, fill: C.ink });
     });
 
-    fit(text(D.svg, 62, 1100, 'Le Yamazumi ne fait pas aller plus vite.', { size: 30, weight: 700, fill: C.blue }), 1020, 'chute 1');
-    fit(text(D.svg, 62, 1140, 'Il montre où le travail s’empile.', { size: 30, weight: 700, fill: C.blue }), 1020, 'chute 2');
+    const body = el('g', { transform: `translate(0 ${DY})` });
+    [...D.svg.children].forEach(n => { if (!head.has(n) && n !== body && n.tagName !== 'defs') body.appendChild(n); });
 
     D.encart(['Équilibrer ses postes', 'Notre article Yamazumi', '(lien en commentaire)']);
   }
