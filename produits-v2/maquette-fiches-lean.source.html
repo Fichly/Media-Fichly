@@ -1,0 +1,800 @@
+<title>Fiche produit 40 outils V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap">
+<style>
+/* Maquette de la page produit fichly.com/products/fiches-lean.
+   Bloc d'achat en haut (galerie + achat côte à côte), puis le contenu du deck rangé dans ses six familles,
+   une famille par couleur du liseré, puis preuve (expert, avis), questions et ventes croisées.
+   Page volontairement claire, comme la maquette articles V2 : elle montre le site tel qu'il s'affiche. */
+:root {
+  --bg: #ffffff; --surface: #f7f7f7; --chrome: #eceef5;
+  --ink: #2c2c2c; --ink-700: #4a4a4a; --ink-500: #6b6b6b; --line: #e5e5e5;
+  --indigo: #3c4499; --indigo-700: #2e3576; --indigo-100: #e4e5f3; --indigo-050: #f3f4fb;
+  --navy: #151b43; --navy-2: #1d2456; --navy-line: #2c346c; --on-navy: #ffffff; --on-navy-2: #c7cbea;
+  --cat: #74a3d6; --cat-soft: #e3ecf6;
+  --green: #8cc978; --green-soft: #e8f4e3; --ok: #2f5a1f;
+  --coral: #f16969; --coral-soft: #fce5e5; --ko: #a83434;
+  --yellow: #e6b839; --yellow-soft: #faf0d7;
+  --rust: #b35a23; --rust-soft: #f2e2d5;
+  --star: #e6b839;
+  --note: #c2410c; --note-soft: #fff1e8; --white: #ffffff;
+  --ring: conic-gradient(var(--indigo) 0 60deg, var(--green) 0 120deg, var(--coral) 0 180deg, var(--yellow) 0 240deg, var(--cat) 0 300deg, var(--rust) 0 360deg);
+  --ribbon: linear-gradient(90deg, var(--indigo) 0 16.667%, var(--green) 0 33.333%, var(--coral) 0 50%, var(--yellow) 0 66.667%, var(--cat) 0 83.333%, var(--rust) 0 100%);
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(44,44,44,.04), 0 1px 1px rgba(44,44,44,.03);
+  --shadow-2: 0 4px 12px rgba(44,44,44,.06), 0 2px 4px rgba(44,44,44,.04);
+  --shadow-card: 0 10px 24px rgba(21,27,67,.14), 0 2px 6px rgba(21,27,67,.08);
+  --focus: 0 0 0 3px rgba(60,68,153,.35);
+  --bar-h: 58px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { background: var(--chrome); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 0 48px; }
+a { color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p, ul, ol, dl, figure, blockquote { margin: 0; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ribbon { height: 10px; background: var(--ribbon); }
+/* Une couleur par famille d'outils, dans l'ordre du liseré */
+.c1 { --sec: var(--indigo); --sec-soft: var(--indigo-100); --sec-on: var(--white); }
+.c2 { --sec: var(--green); --sec-soft: var(--green-soft); --sec-on: var(--ink); }
+.c3 { --sec: var(--coral); --sec-soft: var(--coral-soft); --sec-on: var(--ink); }
+.c4 { --sec: var(--yellow); --sec-soft: var(--yellow-soft); --sec-on: var(--ink); }
+.c5 { --sec: var(--cat); --sec-soft: var(--cat-soft); --sec-on: var(--ink); }
+.c6 { --sec: var(--rust); --sec-soft: var(--rust-soft); --sec-on: var(--white); }
+.avatar { border-radius: var(--r-pill); border: 3px solid transparent; padding: 2px; background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--ring) border-box; display: block; }
+
+/* ---------- Barre de la maquette ---------- */
+.proto-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; margin-inline: -16px; padding: 10px 16px; background: var(--bg); border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.proto-bar__name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.proto-bar__name .dot { width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--indigo); }
+.proto-bar__controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 3px; gap: 2px; }
+.seg button { font: 600 13px/1 var(--font); color: var(--ink-700); background: transparent; border: 0; border-radius: 7px; padding: 8px 12px; cursor: pointer; transition: background-color .12s, color .12s; }
+.seg button[aria-pressed="true"] { background: var(--bg); color: var(--indigo); box-shadow: var(--shadow-1); }
+.seg button.is-anno[aria-pressed="true"] { color: var(--note); }
+
+.proto-intro { max-width: 1240px; margin: 28px auto 0; display: grid; gap: 14px; }
+.proto-intro h1 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 500; line-height: 1.2; }
+.proto-intro h1 em { font-style: italic; color: var(--indigo); }
+.proto-intro > p { max-width: 72ch; color: var(--ink-700); font-size: 15px; }
+.shifts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; padding: 0; list-style: none; }
+.shifts li { background: var(--bg); border-radius: var(--r-lg); padding: 14px 16px; font-size: 14px; color: var(--ink-700); box-shadow: var(--shadow-1); }
+.shifts strong { display: block; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+.shifts .n { color: var(--note); font-weight: 700; }
+
+/* ---------- Cadre du site ---------- */
+.frame { container: site / inline-size; max-width: 1240px; margin: 24px auto 0; background: var(--bg); border-radius: var(--r-xl); box-shadow: var(--shadow-2); overflow: clip; transition: max-width .25s ease; position: relative; }
+.frame.is-mobile { max-width: 400px; }
+.site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--line); }
+.site-nav img { height: 30px; width: auto; display: block; }
+.site-nav ul { display: none; list-style: none; padding: 0; gap: 26px; align-items: center; font-weight: 600; font-size: 14px; }
+.site-nav ul a { color: var(--ink); text-decoration: none; }
+.site-nav ul a[aria-current] { color: var(--indigo); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.cart { position: relative; display: grid; place-items: center; width: 34px; height: 34px; color: var(--ink); }
+.cart svg { width: 22px; height: 22px; }
+.cart b { position: absolute; top: -2px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--r-pill); background: var(--indigo); color: var(--white); font-size: 11px; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.cart b[data-n="0"] { display: none; }
+.burger { width: 22px; display: grid; gap: 4px; }
+.burger i { height: 2px; background: var(--ink); border-radius: 2px; }
+@container site (min-width: 820px) { .site-nav ul { display: flex; } .burger { display: none; } }
+
+.page { max-width: 1160px; margin-inline: auto; padding: 24px 24px 72px; display: flex; flex-direction: column; gap: 64px; }
+@container site (max-width: 520px) { .page { padding: 16px 16px 96px; gap: 48px; } .site-nav { padding: 12px 16px; } }
+
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--ink-500); }
+.crumbs a { color: var(--ink-500); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { color: var(--indigo); }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); display: flex; align-items: center; gap: 8px; }
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: var(--sec, currentColor); }
+.zone-title { display: grid; gap: 8px; max-width: 72ch; }
+.zone-title h2 { font-size: clamp(23px, 3cqi, 30px); font-weight: 500; line-height: 1.25; }
+.zone-title h2 em { font-style: italic; color: var(--indigo); }
+.zone-title p { font-size: 16px; color: var(--ink-700); }
+
+.btn { font: 600 15px/1 var(--font); display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--indigo); color: var(--white); border: 0; border-radius: var(--r-md); padding: 15px 20px; text-decoration: none; cursor: pointer; transition: background-color .12s; }
+.btn:hover { background: var(--indigo-700); }
+.btn:active { transform: translateY(1px); }
+.btn--line { background: var(--bg); color: var(--indigo); border: 1px solid var(--indigo); }
+.btn--line:hover { background: var(--indigo-050); }
+.btn--light { background: var(--white); color: var(--navy); }
+.btn--light:hover { background: var(--indigo-100); }
+.btn--ghost { background: transparent; color: var(--on-navy); border: 1px solid var(--on-navy-2); }
+.btn--ghost:hover { background: var(--navy-2); }
+.stars { --v: 4.79; display: inline-block; width: 86px; height: 16px; flex: none;
+  background: linear-gradient(90deg, var(--star) calc(var(--v) / 5 * 100%), var(--line) 0);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 86 16'%3E%3Cg%3E%3Cpath id='s' d='M8 0l2.4 5 5.4.6-4 3.7 1.1 5.4L8 12 3.1 14.7l1.1-5.4-4-3.7L5.6 5z'/%3E%3Cuse href='%23s' x='17.5'/%3E%3Cuse href='%23s' x='35'/%3E%3Cuse href='%23s' x='52.5'/%3E%3Cuse href='%23s' x='70'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 86 16'%3E%3Cg%3E%3Cpath id='s' d='M8 0l2.4 5 5.4.6-4 3.7 1.1 5.4L8 12 3.1 14.7l1.1-5.4-4-3.7L5.6 5z'/%3E%3Cuse href='%23s' x='17.5'/%3E%3Cuse href='%23s' x='35'/%3E%3Cuse href='%23s' x='52.5'/%3E%3Cuse href='%23s' x='70'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat; }
+.todo { color: var(--note); background: var(--note-soft); border-radius: 4px; padding: 0 5px; font-weight: 600; font-style: normal; }
+
+/* ---------- 1-2. Haut de page : galerie + achat ---------- */
+.hero { display: grid; gap: 28px; }
+@container site (min-width: 860px) { .hero { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 52px; align-items: start; } .gallery { position: sticky; top: calc(var(--bar-h) + 20px); } }
+.gallery { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; aspect-ratio: 1 / 1; max-width: 100%; border-radius: var(--r-xl); overflow: hidden; background: var(--indigo-050); }
+.stage > .ribbon { position: absolute; inset: 0 0 auto 0; height: 8px; z-index: 2; }
+.stage__view { position: absolute; inset: 0; display: grid; place-items: center; }
+.stage__view[hidden] { display: none !important; }
+.stage__badge { position: absolute; left: 16px; bottom: 16px; z-index: 3; display: flex; flex-wrap: wrap; gap: 6px; }
+.stage__badge span { font-size: 12px; font-weight: 600; background: var(--bg); color: var(--ink); padding: 6px 10px; border-radius: var(--r-pill); box-shadow: var(--shadow-1); }
+/* Le deck en éventail : six fiches, une par famille */
+.fan { position: relative; width: 72%; aspect-ratio: 1 / 1; margin-top: -6%; }
+@container site (max-width: 520px) { .fan { width: 84%; margin-top: -14%; } .stage__badge { left: 12px; bottom: 12px; } .stage__badge span { font-size: 11px; padding: 5px 8px; } .stage__badge span:nth-child(3) { display: none; } .add-total { display: none; } }
+.card { position: absolute; left: 50%; top: 50%; width: 46%; aspect-ratio: 63 / 88; margin: -32% 0 0 -23%; background: var(--bg); border-radius: 9px; box-shadow: var(--shadow-card); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; transform-origin: 50% 120%; transform: rotate(var(--a, 0deg)); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.card__top { background: var(--sec); color: var(--sec-on); font-size: clamp(6px, 1.05cqi, 10px); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 7% 9%; }
+.card__mid { padding: 9%; display: grid; gap: 7%; align-content: start; }
+.card__mid b { font-size: clamp(10px, 1.9cqi, 18px); font-weight: 700; line-height: 1.15; color: var(--ink); }
+.card__mid i { display: block; height: 4px; border-radius: 2px; background: var(--line); }
+.card__mid i:nth-of-type(2) { width: 80%; } .card__mid i:nth-of-type(3) { width: 62%; }
+.card__mid .sk { margin-top: 6%; aspect-ratio: 16 / 10; border-radius: 6px; background: var(--sec-soft); }
+.card__foot { display: flex; justify-content: space-between; padding: 6% 9%; font-size: clamp(6px, .9cqi, 9px); font-weight: 600; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.fan .card:nth-child(1) { --a: -30deg; } .fan .card:nth-child(2) { --a: -18deg; } .fan .card:nth-child(3) { --a: -6deg; }
+.fan .card:nth-child(4) { --a: 6deg; } .fan .card:nth-child(5) { --a: 18deg; } .fan .card:nth-child(6) { --a: 30deg; }
+@media (prefers-reduced-motion: no-preference) {
+  .fan.is-closed .card { --a: 0deg; }
+  .fan:hover .card:nth-child(1) { --a: -34deg; } .fan:hover .card:nth-child(6) { --a: 34deg; }
+}
+.photo-slot { width: calc(100% - 48px); height: calc(100% - 64px); border: 2px dashed var(--indigo); border-radius: var(--r-lg); display: grid; place-content: center; gap: 8px; text-align: center; padding: 20px; color: var(--indigo); }
+.photo-slot b { font-size: 16px; }
+.photo-slot span { font-size: 13px; color: var(--ink-700); }
+.photo-slot code { font-size: 12px; background: var(--bg); padding: 2px 6px; border-radius: 4px; word-break: break-all; }
+.thumbs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; list-style: none; padding: 0; }
+.thumbs button { width: 100%; aspect-ratio: 1 / 1; border: 2px solid transparent; border-radius: var(--r-md); background: var(--surface); cursor: pointer; padding: 0; display: grid; place-items: center; font: 700 13px/1 var(--font); color: var(--ink-500); position: relative; overflow: hidden; }
+.thumbs button::before { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: var(--sec, var(--line)); }
+.thumbs button[aria-current="true"] { border-color: var(--indigo); color: var(--indigo); background: var(--indigo-050); }
+.thumbs .t-fan { background: var(--indigo-050); }
+.thumbs .t-fan::before { background: var(--ribbon); }
+
+.buy { display: grid; gap: 18px; min-width: 0; align-content: start; }
+.buy h1 { font-size: clamp(28px, 4cqi, 42px); font-weight: 500; line-height: 1.12; letter-spacing: -.01em; }
+.buy h1 em { font-style: italic; color: var(--indigo); }
+.buy__sub { font-size: 17px; color: var(--ink-700); }
+.rating { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; color: var(--ink-700); text-decoration: none; }
+.rating b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.rating u { text-decoration-color: var(--line); }
+.price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.price strong { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.price small { font-size: 13px; color: var(--ink-500); }
+.gains { list-style: none; padding: 0; display: grid; gap: 10px; }
+.gains li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; font-size: 15px; line-height: 1.45; }
+.gains li::before { content: ""; width: 22px; height: 22px; border-radius: var(--r-pill); background: var(--sec) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat; margin-top: 1px; }
+.gains li.c2::before, .gains li.c4::before, .gains li.c3::before, .gains li.c5::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c2c2c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E"); }
+.buy__row { display: grid; grid-template-columns: auto 1fr; gap: 10px; }
+.qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--r-md); }
+.qty button { width: 42px; height: 48px; border: 0; background: transparent; font: 600 18px/1 var(--font); color: var(--ink); cursor: pointer; border-radius: var(--r-md); }
+.qty input { width: 36px; border: 0; text-align: center; font: 600 16px/1 var(--font); color: var(--ink); background: transparent; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.team { font-size: 14px; color: var(--ink-700); background: var(--surface); border-radius: var(--r-md); padding: 12px 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; }
+.team a { font-weight: 600; }
+.reassure { list-style: none; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 16px; font-size: 13px; color: var(--ink-700); }
+.reassure li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: start; }
+.reassure svg { width: 20px; height: 20px; color: var(--indigo); }
+.reassure b { display: block; color: var(--ink); font-size: 13px; }
+
+/* Pack sous l'achat */
+.pack { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; border: 1px solid var(--indigo-100); background: var(--indigo-050); border-radius: var(--r-lg); padding: 12px 14px; text-decoration: none; color: var(--ink); }
+.pack__img { width: 64px; height: 64px; border-radius: var(--r-md); background: var(--bg); display: grid; place-items: center; position: relative; overflow: hidden; }
+.pack__img i { position: absolute; width: 30px; height: 40px; border-radius: 4px; background: var(--bg); box-shadow: var(--shadow-2); border-top: 6px solid var(--sec); }
+.pack__img i:nth-child(1) { transform: translateX(-12px) rotate(-10deg); } .pack__img i:nth-child(3) { transform: translateX(12px) rotate(10deg); }
+.pack small { display: block; font-size: 12px; font-weight: 600; color: var(--indigo); }
+.pack b { font-size: 14px; line-height: 1.35; display: block; }
+.pack span { font-size: 13px; color: var(--ink-700); }
+.pack__price { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 16px; }
+.pack__price em { display: block; font-style: normal; font-size: 12px; color: var(--indigo); font-weight: 600; }
+@container site (max-width: 520px) { .pack { grid-template-columns: 52px 1fr; } .pack__img { width: 52px; height: 52px; } .pack__price { grid-column: 2; text-align: left; } }
+
+/* ---------- 3. Les six familles ---------- */
+.tools { display: grid; gap: 24px; }
+.tools__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; }
+.counter { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
+.counter b { font-size: 44px; font-weight: 700; line-height: 1; color: var(--indigo); }
+.counter span { font-size: 14px; color: var(--ink-700); max-width: 16ch; line-height: 1.3; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { font: 600 13px/1 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 9px 14px 9px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background-color .12s, border-color .12s; }
+.filters button i { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--sec, var(--ribbon)); }
+.filters button[data-f="all"] i { background: var(--ribbon); width: 18px; }
+.filters button small { font-size: 12px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.filters button[aria-pressed="true"] { background: var(--sec-soft, var(--indigo-050)); border-color: var(--sec, var(--indigo)); }
+.families { display: grid; gap: 14px; }
+@container site (min-width: 760px) { .families { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container site (min-width: 1060px) { .families { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.fam { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; display: grid; grid-template-rows: auto 1fr; transition: opacity .2s; }
+.fam[hidden] { display: none !important; }
+.fam__head { background: var(--sec-soft); padding: 14px 16px 12px; display: grid; gap: 4px; border-top: 6px solid var(--sec); }
+.fam__head small { font-size: 12px; font-weight: 600; color: var(--ink-700); font-variant-numeric: tabular-nums; }
+.fam__head h3 { font-size: 17px; font-weight: 600; }
+.fam ul { list-style: none; padding: 12px 16px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-content: start; }
+.fam li > * { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 6px 10px; border-radius: var(--r-md); background: var(--surface); color: var(--ink); text-decoration: none; }
+.fam li > a { background: var(--bg); border: 1px solid var(--sec); }
+.fam li > a::after { content: "→"; color: var(--indigo); }
+.fam li > a:hover { background: var(--sec-soft); }
+.fam li .soon { color: var(--ink-700); }
+.fam li .soon::after { content: "article à paraître"; font-size: 10px; font-weight: 600; color: var(--ink-500); }
+.fam li .missing { border: 1.5px dashed var(--note); background: var(--note-soft); color: var(--note); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--ink-700); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 18px; height: 14px; border-radius: 4px; display: inline-block; }
+.legend .l-a { border: 1px solid var(--indigo); } .legend .l-s { background: var(--surface); } .legend .l-m { border: 1.5px dashed var(--note); background: var(--note-soft); }
+
+/* ---------- 4. Pour qui, pour quoi ---------- */
+.uses { display: grid; gap: 24px; }
+.uses__grid { display: grid; gap: 14px; }
+@container site (min-width: 760px) { .uses__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.use { background: var(--surface); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 10px; align-content: start; }
+.use__verb { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-700); display: flex; align-items: center; gap: 8px; }
+.use__verb::before { content: ""; width: 26px; height: 6px; border-radius: 3px; background: var(--sec); }
+.use h3 { font-size: 18px; font-weight: 600; line-height: 1.3; }
+.use p { font-size: 15px; color: var(--ink-700); }
+.seo-text { max-width: 72ch; display: grid; gap: 12px; font-size: 16px; line-height: 1.7; color: var(--ink-700); }
+.seo-text h2 { font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+.seo-text details summary { cursor: pointer; font-weight: 600; color: var(--indigo); font-size: 15px; list-style: none; }
+.seo-text details summary::-webkit-details-marker { display: none; }
+.seo-text details[open] summary { margin-bottom: 10px; }
+
+/* ---------- 5. L'expert ---------- */
+.expert { display: grid; gap: 0; border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line); }
+.expert__inner { display: grid; gap: 22px; padding: 28px 26px; }
+@container site (min-width: 760px) { .expert__inner { grid-template-columns: 160px 1fr; gap: 36px; padding: 36px 40px; align-items: center; } }
+.expert img { width: 120px; height: 120px; }
+@container site (min-width: 760px) { .expert img { width: 156px; height: 156px; } }
+.expert__text { display: grid; gap: 14px; min-width: 0; }
+.expert h2 { font-size: clamp(24px, 3cqi, 30px); font-weight: 500; }
+.expert h2 em { font-style: italic; color: var(--indigo); }
+.expert blockquote { font-size: 18px; line-height: 1.6; color: var(--ink); max-width: 62ch; }
+.expert__who strong { display: block; font-size: 15px; }
+.expert__who span { font-size: 14px; color: var(--ink-500); }
+
+/* ---------- 6. Avis ---------- */
+.reviews { display: grid; gap: 24px; }
+.reviews__top { display: grid; gap: 24px; }
+@container site (min-width: 860px) { .reviews__top { grid-template-columns: 300px 1fr; gap: 40px; align-items: start; } }
+.score { display: grid; gap: 10px; background: var(--surface); border-radius: var(--r-lg); padding: 20px; }
+.score__n { display: flex; align-items: baseline; gap: 6px; }
+.score__n b { font-size: 44px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.score__n span { color: var(--ink-500); font-size: 15px; }
+.hist { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.hist li { display: grid; grid-template-columns: 30px 1fr 34px; gap: 8px; align-items: center; color: var(--ink-700); }
+.hist i { height: 8px; border-radius: 4px; background: var(--line); position: relative; overflow: hidden; }
+.hist i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--star); border-radius: 4px; }
+.hist li span:last-child { text-align: right; }
+.rev-list { display: grid; gap: 14px; }
+@container site (min-width: 760px) { .rev-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rev { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 8px; align-content: start; }
+.rev__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; }
+.rev h3 { font-size: 15px; font-weight: 600; }
+.rev p { font-size: 15px; color: var(--ink-700); }
+.rev footer { font-size: 13px; color: var(--ink-500); display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.rev footer .v { color: var(--ok); font-weight: 600; }
+.rev .stars { width: 72px; height: 13px; }
+
+/* ---------- 7. Questions ---------- */
+.faq { display: grid; gap: 20px; }
+.faq__list { border-top: 1px solid var(--line); max-width: 820px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; font-weight: 600; font-size: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--indigo); font-size: 22px; line-height: 1; font-weight: 500; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { padding: 0 0 18px; color: var(--ink-700); font-size: 15px; max-width: 70ch; }
+
+/* ---------- 8. Pour aller plus loin ---------- */
+.more { display: grid; gap: 22px; }
+.more__grid { display: grid; gap: 16px; }
+@container site (min-width: 760px) { .more__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pcard { border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); text-decoration: none; color: var(--ink); display: grid; grid-template-columns: 120px 1fr; transition: box-shadow .12s; overflow: hidden; }
+.pcard:hover { box-shadow: var(--shadow-2); }
+.pcard__img { background: var(--sec-soft); display: grid; place-items: center; position: relative; min-height: 130px; }
+.pcard__img i { position: absolute; width: 44px; height: 60px; border-radius: 5px; background: var(--bg); box-shadow: var(--shadow-2); border-top: 8px solid var(--sec); }
+.pcard__img i:nth-child(1) { transform: translateX(-16px) rotate(-9deg); } .pcard__img i:nth-child(3) { transform: translateX(16px) rotate(9deg); }
+.pcard__body { padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.pcard__body small { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); }
+.pcard__body b { font-size: 16px; line-height: 1.35; }
+.pcard__body p { font-size: 14px; color: var(--ink-700); }
+.pcard__foot { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 4px; }
+.pcard__foot .p { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pcard__foot .m { font-size: 13px; font-weight: 600; color: var(--indigo); }
+
+.f-formation { position: relative; background: var(--navy); color: var(--on-navy); border: 1px solid var(--navy-line); border-radius: var(--r-xl); display: grid; overflow: hidden; }
+.f-formation > .ribbon { height: 12px; }
+.f-formation__inner { display: grid; gap: 22px; padding: 28px 26px 30px; }
+@container site (min-width: 860px) { .f-formation__inner { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; padding: 36px 40px; align-items: center; } }
+.f-formation .eyebrow { color: var(--on-navy-2); }
+.f-formation h2 { font-size: clamp(24px, 3cqi, 30px); font-weight: 500; line-height: 1.2; }
+.f-formation h2 em { font-style: italic; color: var(--yellow); }
+.f-formation p { color: var(--on-navy-2); font-size: 16px; line-height: 1.6; }
+.f-formation__text { display: grid; gap: 14px; }
+.gb-facts { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.gb-facts li { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: var(--r-pill); background: var(--navy-2); border: 1px solid var(--navy-line); color: var(--on-navy); }
+.gb-side { display: grid; gap: 14px; background: var(--navy-2); border: 1px solid var(--navy-line); border-radius: var(--r-lg); padding: 22px 20px; }
+.gb-side strong { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gb-side strong span { font-size: 15px; font-weight: 500; color: var(--on-navy-2); }
+.gb-side small { font-size: 12px; color: var(--on-navy-2); }
+.gb-side .gift { font-size: 14px; color: var(--on-navy); background: var(--navy); border-radius: var(--r-md); padding: 10px 12px; border-left: 4px solid var(--green); }
+.gb-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- 9. Lu sur le blog ---------- */
+.blog { display: grid; gap: 22px; }
+.blog__grid { display: grid; gap: 14px; }
+@container site (min-width: 760px) { .blog__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.post { display: grid; gap: 8px; text-decoration: none; color: var(--ink); border-top: 6px solid var(--sec); padding-top: 14px; }
+.post small { font-size: 12px; font-weight: 600; color: var(--ink-500); }
+.post b { font-size: 16px; line-height: 1.4; }
+.post:hover b { color: var(--indigo); text-decoration: underline; text-underline-offset: 3px; }
+.post span { font-size: 13px; color: var(--ink-700); }
+
+/* ---------- Barre d'achat collante (mobile et défilement) ---------- */
+.sticky-buy { position: sticky; bottom: 0; z-index: 7; background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -6px 16px rgba(44,44,44,.06); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; justify-content: space-between; gap: 12px; transform: translateY(100%); transition: transform .25s ease; }
+.sticky-buy.is-on { transform: none; }
+.sticky-buy__t { display: grid; min-width: 0; }
+.sticky-buy__t b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sticky-buy__t span { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sticky-buy .btn { padding: 12px 16px; flex: none; }
+@media (prefers-reduced-motion: reduce) { .sticky-buy, .card, .frame { transition: none; } }
+
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; z-index: 40; background: var(--navy); color: var(--on-navy); padding: 12px 16px; border-radius: var(--r-md); font-size: 14px; font-weight: 600; box-shadow: var(--shadow-2); transition: opacity .2s, transform .2s; pointer-events: none; max-width: calc(100% - 32px); }
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Annotations ---------- */
+.show-anno [data-anno] { position: relative; outline: 2px solid var(--note); outline-offset: 6px; }
+.show-anno [data-anno]::after { content: attr(data-anno) "  " attr(data-label); position: absolute; top: -6px; left: 12px; transform: translateY(-50%); background: var(--note); color: var(--white); font: 600 12px/1 var(--font); padding: 5px 9px; border-radius: var(--r-pill); z-index: 8; white-space: nowrap; pointer-events: none; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis; }
+.show-anno .page { gap: 76px; }
+.frame:not(.show-anno) .todo { color: inherit; background: none; padding: 0; font-weight: inherit; }
+.frame:not(.show-anno) .fam li .missing { display: none; }
+
+/* ---------- Plan sous la maquette ---------- */
+.proto-plan { container: plan / inline-size; max-width: 1240px; margin: 32px auto 0; background: var(--bg); border-radius: var(--r-xl); padding: 32px clamp(18px, 4vw, 40px) 36px; display: grid; gap: 22px; box-shadow: var(--shadow-1); }
+.proto-plan h2 { font-size: 26px; font-weight: 500; }
+.proto-plan h2 em { font-style: italic; color: var(--indigo); }
+.proto-plan > p { color: var(--ink-700); max-width: 72ch; }
+.plan-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
+.plan { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.plan th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); padding: 12px 14px; background: var(--surface); }
+.plan td { padding: 12px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+.plan td:first-child { width: 44px; }
+.plan .n { display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 6px; border-radius: var(--r-pill); background: var(--note); color: var(--white); font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.plan td:nth-child(2) { font-weight: 600; }
+.plan td:nth-child(4) { color: var(--ink-500); }
+.plan code, .fixes code { font-size: 12.5px; background: var(--surface); padding: 1px 5px; border-radius: 4px; }
+.fixes { list-style: none; padding: 0; display: grid; gap: 10px; }
+@container plan (min-width: 760px) { .fixes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fixes li { border: 1px solid var(--line); border-left: 4px solid var(--sec); border-radius: var(--r-md); padding: 12px 14px; font-size: 14px; color: var(--ink-700); }
+.fixes li strong { display: block; color: var(--ink); margin-bottom: 2px; }
+.fixes li small { display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--sec-ink, var(--ink-500)); }
+</style>
+
+<div class="proto-bar" id="protoBar">
+  <div class="proto-bar__name"><span class="dot"></span>Fiche produit · 40 outils du Lean · Proposition V2</div>
+  <div class="proto-bar__controls">
+    <div class="seg" role="group" aria-label="Annotations">
+      <button type="button" id="btnAnnoOn" class="is-anno" aria-pressed="true">Structure affichée</button>
+      <button type="button" id="btnAnnoOff" aria-pressed="false">Page seule</button>
+    </div>
+    <div class="seg" role="group" aria-label="Largeur d'affichage">
+      <button type="button" id="btnDesk" aria-pressed="true">Ordinateur</button>
+      <button type="button" id="btnMob" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
+</div>
+
+<section class="proto-intro">
+  <h1>La page du deck, <em>rangée comme le deck</em></h1>
+  <p>Proposition V2 de <code>/products/fiches-lean</code>, dans la même famille visuelle que les articles V2. Les textes, le prix, les avis et les produits liés viennent de la boutique au 1<sup>er</sup> octobre 2026. Ce qui manque est surligné en orange : je ne l'ai pas inventé. Les pastilles numérotent les blocs, le plan en bas de page les détaille.</p>
+  <ul class="shifts">
+    <li><strong>Six familles, six couleurs</strong>Le deck compte six familles d'outils, comme notre liseré a six couleurs. Chaque famille garde sa couleur partout : galerie, liste, pack <span class="n">(bloc 3)</span>.</li>
+    <li><strong>Chaque outil mène à son article</strong>Les articles du blog renvoient déjà vers le deck. La page renvoie maintenant vers les articles : le maillage marche dans les deux sens <span class="n">(3, 9)</span>.</li>
+    <li><strong>La preuve avant les questions</strong>Le mot d'Hugo, puis les 28 avis et la note de 4,79 sur 5, remontés du widget Judge.me <span class="n">(5, 6)</span>.</li>
+    <li><strong>Le panier moyen</strong>Le pack à −22 % sous le bouton, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
+  </ul>
+</section>
+
+<div class="frame show-anno" id="frame">
+  <nav class="site-nav" aria-label="Navigation du site (thème actuel)">
+    <img src="{{LOGO}}" alt="Fichly" width="178" height="94">
+    <ul>
+      <li><a href="#top">Formations</a></li>
+      <li><a href="#top" aria-current="page">Fiches</a></li>
+      <li><a href="#top">Entreprises</a></li>
+      <li><a href="#top">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="cart" href="#top" aria-label="Panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b id="cartN" data-n="0">0</b></a>
+      <div class="burger" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </nav>
+
+  <main class="page" id="top">
+    <!-- 1-2 : haut de page -->
+    <section class="hero" aria-label="Le produit">
+      <div class="gallery" data-anno="1" data-label="Galerie · 6 visuels">
+        <div class="stage">
+          <div class="ribbon" aria-hidden="true"></div>
+          <div class="stage__view" id="view0">
+            <div class="fan is-closed" id="fan" role="img" aria-label="Six fiches du deck en éventail, une par famille d'outils">
+              <div class="card c1"><div class="card__top">Résolution de problèmes</div><div class="card__mid"><b>5 Pourquoi</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>1</span></div></div>
+              <div class="card c2"><div class="card__top">Engagement et visualisation</div><div class="card__mid"><b>Obeya</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>2</span></div></div>
+              <div class="card c3"><div class="card__top">Planification et stratégie</div><div class="card__mid"><b>Hoshin Kanri</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>3</span></div></div>
+              <div class="card c4"><div class="card__top">Optimisation des flux</div><div class="card__mid"><b>VSM</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>4</span></div></div>
+              <div class="card c5"><div class="card__top">Efficacité de production</div><div class="card__mid"><b>SMED</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>5</span></div></div>
+              <div class="card c6"><div class="card__top">Amélioration de la production</div><div class="card__mid"><b>Poka-Yoke</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>6</span></div></div>
+            </div>
+          </div>
+          <div class="stage__view" id="view1" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-3.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
+          <div class="stage__view" id="view2" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-4.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
+          <div class="stage__view" id="view3" hidden><div class="photo-slot"><b>Visuel « Lean, you know »</b><span>Visuel actuel de la boutique</span><code>Lean_YouKnow_Carrousel.png</code><span class="todo">texte alternatif à rédiger</span></div></div>
+          <div class="stage__view" id="view4" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-5.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
+          <div class="stage__view" id="view5" hidden><div class="photo-slot"><b>Vidéo de la fiche produit</b><span>Déjà dans le métachamp <code>custom.video_fiche_produit</code>, lue sans le son en boucle</span></div></div>
+          <div class="stage__badge"><span>40 fiches</span><span>Imprimé en France</span><span>6 familles</span></div>
+        </div>
+        <ul class="thumbs" aria-label="Choisir un visuel">
+          <li><button type="button" class="t-fan" data-v="0" aria-current="true" aria-label="Le deck en éventail">1</button></li>
+          <li><button type="button" class="c1" data-v="1" aria-current="false" aria-label="Visuel 2">2</button></li>
+          <li><button type="button" class="c2" data-v="2" aria-current="false" aria-label="Visuel 3">3</button></li>
+          <li><button type="button" class="c3" data-v="3" aria-current="false" aria-label="Visuel 4">4</button></li>
+          <li><button type="button" class="c4" data-v="4" aria-current="false" aria-label="Visuel 5">5</button></li>
+          <li><button type="button" class="c5" data-v="5" aria-current="false" aria-label="Vidéo">▶</button></li>
+        </ul>
+      </div>
+
+      <div class="buy" data-anno="2" data-label="Bloc d'achat">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="#top">Accueil</a><span class="sep">•</span><a href="#top">Fiches</a><span class="sep">•</span><a href="#top">Lean Management</a></nav>
+        <h1>40 outils du Lean <em>à portée de main</em></h1>
+        <p class="buy__sub">Les outils clés pour structurer, animer et améliorer. Un deck de 40 fiches imprimées en France, à garder sur le terrain.</p>
+        <a class="rating" href="#avis"><span class="stars" style="--v: 4.79" aria-hidden="true"></span><b>4,79/5</b><u>28 avis vérifiés</u></a>
+        <div class="price"><strong id="unitPrice">49,90 €</strong><small>TTC · prix lu dans la boutique</small></div>
+        <ul class="gains">
+          <li class="c1">Comprendre les principes du Lean et ses outils</li>
+          <li class="c2">Identifier et éliminer les gaspillages facilement</li>
+          <li class="c3">Adopter une culture d'amélioration continue au quotidien</li>
+        </ul>
+        <form class="buy__row" id="buyForm">
+          <div class="qty"><button type="button" id="qMinus" aria-label="Retirer un deck">−</button><label class="vh" for="qty">Quantité</label><input id="qty" type="number" min="1" max="99" value="1" inputmode="numeric"><button type="button" id="qPlus" aria-label="Ajouter un deck">+</button></div>
+          <button class="btn" type="submit" id="addBtn">Ajouter au panier<span class="add-total"> · <span id="addTotal">49,90 €</span></span></button>
+        </form>
+        <div class="team"><span>Pour équiper une équipe ou une promotion</span><a href="#top">Demander un devis <span class="todo">tarif dégressif à définir</span></a></div>
+        <a class="pack" href="#top" data-anno="2b" data-label="Pack · produit complémentaire">
+          <div class="pack__img" aria-hidden="true"><i class="c1"></i><i class="c4"></i><i class="c6"></i></div>
+          <div><small>Économisez 22 %</small><b>Pack Lean Management</b><span>VSM, 5S et résolution de problèmes <i class="todo">contenu exact à confirmer</i></span></div>
+          <div class="pack__price">109,90 €<em>Voir le pack →</em></div>
+        </a>
+        <ul class="reassure">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg><div><b>Imprimé en France</b>Un deck de 40 fiches</div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><div><b>Livraison</b><span class="todo">délai et prix à fournir</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Paiement sécurisé</b>Par la boutique Shopify</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3 : les six familles -->
+    <section class="tools" aria-labelledby="outils" data-anno="3" data-label="Les outils du deck, par famille">
+      <div class="tools__head">
+        <div class="zone-title">
+          <div class="eyebrow">Ce qu'il y a dans la boîte</div>
+          <h2 id="outils">Quarante outils, <em>rangés en six familles</em></h2>
+          <p>Du problème à résoudre à la production à fiabiliser, chaque famille a sa couleur. Les outils fléchés ont un article complet sur notre blog.</p>
+        </div>
+        <div class="counter" aria-live="polite"><b id="toolCount">37</b><span id="toolLabel">outils listés sur la fiche actuelle</span></div>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer par famille">
+        <button type="button" data-f="all" aria-pressed="true"><i></i>Toutes <small>37</small></button>
+        <button type="button" class="c1" data-f="1" aria-pressed="false"><i></i>Résolution de problèmes <small>9</small></button>
+        <button type="button" class="c2" data-f="2" aria-pressed="false"><i></i>Engagement et visualisation <small>6</small></button>
+        <button type="button" class="c3" data-f="3" aria-pressed="false"><i></i>Planification et stratégie <small>6</small></button>
+        <button type="button" class="c4" data-f="4" aria-pressed="false"><i></i>Optimisation des flux <small>7</small></button>
+        <button type="button" class="c5" data-f="5" aria-pressed="false"><i></i>Efficacité de production <small>5</small></button>
+        <button type="button" class="c6" data-f="6" aria-pressed="false"><i></i>Amélioration de la production <small>4</small></button>
+      </div>
+      <div class="families" id="families">
+        <article class="fam c1" data-f="1">
+          <div class="fam__head"><small>Famille 1 · 9 outils</small><h3>Résolution de problèmes</h3></div>
+          <ul>
+            <li><span class="soon">QQOQCCP</span></li>
+            <li><span class="soon">Ishikawa</span></li>
+            <li><a href="#top">5 Pourquoi</a></li>
+            <li><a href="#top">DMAIC</a></li>
+            <li><span>8D</span></li>
+            <li><span>A3</span></li>
+            <li><a href="#top">PDCA</a></li>
+            <li><span>Chantier Kaizen</span></li>
+            <li><span>QQQC</span></li>
+          </ul>
+        </article>
+        <article class="fam c2" data-f="2">
+          <div class="fam__head"><small>Famille 2 · 6 outils</small><h3>Engagement et visualisation</h3></div>
+          <ul>
+            <li><span class="soon">Obeya</span></li>
+            <li><span>Visual Management</span></li>
+            <li><span>SQCDP</span></li>
+            <li><span>DILO</span></li>
+            <li><span>Réunion à forte VA</span></li>
+            <li><span>AIC</span></li>
+          </ul>
+        </article>
+        <article class="fam c3" data-f="3">
+          <div class="fam__head"><small>Famille 3 · 6 outils</small><h3>Planification et stratégie</h3></div>
+          <ul>
+            <li><span class="soon">Analyse de Pareto</span></li>
+            <li><span>Gain/Effort</span></li>
+            <li><span>SMART</span></li>
+            <li><span>OKR</span></li>
+            <li><span>Diagramme de Gantt</span></li>
+            <li><span>Hoshin Kanri</span></li>
+          </ul>
+        </article>
+        <article class="fam c4" data-f="4">
+          <div class="fam__head"><small>Famille 4 · 7 outils</small><h3>Optimisation des flux</h3></div>
+          <ul>
+            <li><span>Diagramme spaghetti</span></li>
+            <li><span>Swimlane</span></li>
+            <li><span>SIPOC</span></li>
+            <li><a href="#top">VSM</a></li>
+            <li><span>Flux tiré</span></li>
+            <li><span>Heijunka</span></li>
+            <li><span class="soon">Takt Time</span></li>
+          </ul>
+        </article>
+        <article class="fam c5" data-f="5">
+          <div class="fam__head"><small>Famille 5 · 5 outils</small><h3>Efficacité de production</h3></div>
+          <ul>
+            <li><span>Yamazumi</span></li>
+            <li><span class="soon">AMDEC</span></li>
+            <li><a href="#top">TRS</a></li>
+            <li><a href="#top">Muda, Muri, Mura</a></li>
+            <li><a href="#top">SMED</a></li>
+          </ul>
+        </article>
+        <article class="fam c6" data-f="6">
+          <div class="fam__head"><small>Famille 6 · 4 outils</small><h3>Amélioration de la production</h3></div>
+          <ul>
+            <li><span>Poka-Yoke</span></li>
+            <li><span>Jidoka</span></li>
+            <li><span>Andon</span></li>
+            <li><span>Cartes de contrôle</span></li>
+            <li><span class="missing">3 outils manquants dans la liste</span></li>
+          </ul>
+        </article>
+      </div>
+      <div class="legend" aria-hidden="true"><span><i class="l-a"></i>Article publié sur le blog</span><span><i class="l-s"></i>Fiche du deck</span><span><i class="l-m"></i>À compléter (maquette)</span></div>
+    </section>
+
+    <!-- 4 : pour qui -->
+    <section class="uses" aria-labelledby="usages" data-anno="4" data-label="Pour qui, pour quoi · texte SEO">
+      <div class="zone-title">
+        <div class="eyebrow">Sur le terrain, en salle, au bureau</div>
+        <h2 id="usages">Apprendre, consolider, <em>transmettre</em></h2>
+      </div>
+      <div class="uses__grid">
+        <div class="use c1"><div class="use__verb">Apprendre</div><h3>Vous entrez dans le monde de l'industrie</h3><p>Étudiant ou nouvel arrivant, vous découvrez le 5S, les 5 Pourquoi ou le SMED sans jargon inutile ni complexité superflue.</p></div>
+        <div class="use c4"><div class="use__verb">Consolider</div><h3>Vous montez en compétence</h3><p>Vous connaissez déjà les outils. Le deck devient votre aide-mémoire avant un chantier, une revue ou une formation.</p></div>
+        <div class="use c6"><div class="use__verb">Transmettre</div><h3>Vous animez une équipe</h3><p>Manager ou formateur, vous posez la fiche sur la table et vous expliquez l'outil à votre équipe en cinq minutes.</p></div>
+      </div>
+      <div class="seo-text">
+        <h2>40 outils Lean Management pour apprendre, transmettre et agir.</h2>
+        <p>Se former au Lean peut sembler intimidant. Les concepts sont denses, les outils nombreux, et les méthodes parfois complexes à appliquer concrètement. Pourtant, maîtriser ces notions est essentiel pour qui veut exceller dans l'industrie, améliorer ses compétences, ou accompagner une équipe vers l'excellence opérationnelle.</p>
+        <details><summary>Lire la suite</summary><p>C'est en partant de ce constat que nous avons créé un deck de 40 fiches dédié aux outils du Lean management et manufacturing. Pensées pour être simples, pédagogiques et accessibles, ces fiches sont bien plus qu'un support de formation. Elles sont une véritable boîte à outils pour le terrain, la salle de formation ou même le bureau.</p></details>
+      </div>
+    </section>
+
+    <!-- 5 : l'expert -->
+    <section class="expert" aria-labelledby="expert" data-anno="5" data-label="Le mot de l'expert · métaobjet experts">
+      <div class="ribbon" aria-hidden="true"></div>
+      <div class="expert__inner">
+        <img class="avatar" src="{{HUGO}}" alt="Hugo Duc" width="156" height="156">
+        <div class="expert__text">
+          <div class="eyebrow">Pourquoi ce deck</div>
+          <h2 id="expert">Simple. Clair. <em>Essentiel.</em></h2>
+          <blockquote><p>« On n'a pas voulu impressionner. On a voulu transmettre. Chaque fiche traduit un concept parfois flou en une idée concrète, applicable, et surtout compréhensible. Ce deck, c'est comme avoir un formateur patient, posé, et ultra clair… toujours à portée de main. »</p></blockquote>
+          <div class="expert__who"><strong>Hugo Duc</strong><span>Co-fondateur de Fichly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 : avis -->
+    <section class="reviews" aria-labelledby="avis" data-anno="6" data-label="Avis clients · Judge.me">
+      <div class="zone-title">
+        <div class="eyebrow">Ils l'utilisent</div>
+        <h2 id="avis">Ce qu'en disent <em>nos clients</em></h2>
+      </div>
+      <div class="reviews__top">
+        <div class="score">
+          <div class="score__n"><b>4,79</b><span>sur 5</span></div>
+          <span class="stars" style="--v: 4.79" aria-hidden="true"></span>
+          <p style="font-size:14px;color:var(--ink-700)">28 avis d'acheteurs vérifiés</p>
+          <ul class="hist" aria-label="Répartition des notes">
+            <li><span>5 ★</span><i style="--w: 79%"></i><span>22</span></li>
+            <li><span>4 ★</span><i style="--w: 21%"></i><span>6</span></li>
+            <li><span>3 ★</span><i style="--w: 0%"></i><span>0</span></li>
+            <li><span>2 ★</span><i style="--w: 0%"></i><span>0</span></li>
+            <li><span>1 ★</span><i style="--w: 0%"></i><span>0</span></li>
+          </ul>
+          <a class="btn btn--line" href="#top">Laisser un avis</a>
+        </div>
+        <div class="rev-list">
+          <article class="rev"><div class="rev__head"><h3>Une référence !</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>La meilleure synthèse pratico-pratique que je déploie au sein de mes équipes…</p><footer><span>Anonyme</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
+          <article class="rev"><div class="rev__head"><h3>Très bon outil</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ce deck est un très bon outil pédagogique de second temps. Il permet d'avoir un aide-mémoire de qualité, complet mais synthétique pour engager une démarche d'amélioration.</p><footer><span>Erwan</span><span class="v">Achat vérifié</span><span>mai 2025</span></footer></article>
+          <article class="rev"><div class="rev__head"><h3>Ces fiches sont au top</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ces fiches sont au top de leur design à leur format et pour le contenu c'est d'une clarté… Rien à dire… Bravo !!</p><footer><span>Lara</span><span class="v">Achat vérifié</span><span>juillet 2025</span></footer></article>
+          <article class="rev"><div class="rev__head"><h3>Excellentes fiches pédagogiques</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Excellentes fiches pédagogiques ^^</p><footer><span>Guillaume Gaston</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 : questions -->
+    <section class="faq" aria-labelledby="questions" data-anno="7" data-label="Questions fréquentes">
+      <div class="zone-title"><div class="eyebrow">Avant de commander</div><h2 id="questions">Vos questions <em>sur le deck</em></h2></div>
+      <div class="faq__list">
+        <details open><summary>Quels outils contient le deck ?</summary><p>Quarante outils du Lean management et manufacturing, rangés en six familles : résolution de problèmes, engagement et visualisation, planification et stratégie, optimisation des flux, efficacité de production, amélioration de la production. La liste complète est plus haut sur cette page.</p></details>
+        <details><summary>À qui s'adresse-t-il ?</summary><p>Aux managers qui veulent transmettre les outils à leur équipe, aux étudiants qui entrent dans l'industrie et aux professionnels qui veulent monter en compétence.</p></details>
+        <details><summary>Où les fiches sont-elles imprimées ?</summary><p>En France.</p></details>
+        <details><summary>Quel est le format des fiches ?</summary><p><span class="todo">Dimensions, papier, boîte : à fournir par Hugo.</span></p></details>
+        <details><summary>Sous combien de temps vais-je le recevoir ?</summary><p><span class="todo">Délai et frais de livraison : à fournir par Hugo.</span></p></details>
+        <details><summary>Puis-je en commander pour toute mon équipe ?</summary><p><span class="todo">Conditions de commande en volume et facture entreprise : à fournir par Hugo.</span></p></details>
+      </div>
+    </section>
+
+    <!-- 8 : pour aller plus loin -->
+    <section class="more" aria-labelledby="loin" data-anno="8" data-label="Produits liés · recommandations Shopify">
+      <div class="zone-title"><div class="eyebrow">Pour aller plus loin</div><h2 id="loin">Complétez <em>votre boîte à outils</em></h2></div>
+      <div class="more__grid">
+        <a class="pcard c1" href="#top"><div class="pcard__img" aria-hidden="true"><i class="c1"></i><i class="c4"></i><i class="c6"></i></div><div class="pcard__body"><small>Pack expert</small><b>Pack Lean Management (−22 %)</b><p>Nos guides VSM, 5S et résolution de problèmes réunis. <i class="todo">Contenu exact à confirmer</i></p><div class="pcard__foot"><span class="p">109,90 €</span><span class="m">Voir le pack →</span></div></div></a>
+        <a class="pcard c4" href="#top"><div class="pcard__img" aria-hidden="true"><i class="c4"></i><i class="c4"></i><i class="c4"></i></div><div class="pcard__body"><small>Guide</small><b>Le guide de la VSM en 20 fiches</b><p>Pour aller au bout de la famille « Optimisation des flux ».</p><div class="pcard__foot"><span class="p">29,90 €</span><span class="m">Voir le guide →</span></div></div></a>
+      </div>
+    </section>
+
+    <section class="f-formation" aria-labelledby="formations" data-anno="9" data-label="Formation Green Belt CPF · repris des articles V2">
+      <div class="ribbon" aria-hidden="true"></div>
+      <div class="f-formation__inner">
+        <div class="f-formation__text">
+          <div class="eyebrow">Passer des fiches au projet</div>
+          <h2 id="formations">Mettez les outils en pratique avec la <em>Green Belt</em></h2>
+          <p>La certification Green Belt Lean Management (RS7114) : 6 jours pour mener un projet réel de bout en bout, avec la démarche DMAIC.</p>
+          <ul class="gb-facts"><li>Certification RS7114</li><li>Éligible CPF</li><li>6 jours · 42 h</li><li>80 % de pratique</li></ul>
+          <div class="gb-actions"><a class="btn btn--light" href="#top">Découvrir la Green Belt <span aria-hidden="true">→</span></a><a class="btn btn--ghost" href="#top">Réserver 30 min d'échange</a></div>
+        </div>
+        <div class="gb-side">
+          <strong>1 500 € <span>en distanciel, finançable via votre CPF</span></strong>
+          <small>Sous conditions d'éligibilité et de droits disponibles.</small>
+          <p class="gift">Pack Lean offert avec la formation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 : lu sur le blog -->
+    <section class="blog" aria-labelledby="blog" data-anno="10" data-label="Le deck dans nos articles">
+      <div class="zone-title"><div class="eyebrow">Sur le blog</div><h2 id="blog">Trois outils du deck, <em>expliqués en détail</em></h2></div>
+      <div class="blog__grid">
+        <a class="post c1" href="#top"><small>Résolution de problèmes</small><b>La méthode des 5 Pourquoi : remonter à la cause racine</b><span>Lire l'article →</span></a>
+        <a class="post c4" href="#top"><small>Optimisation des flux</small><b>Value Stream Mapping : définition et étapes</b><span>Lire l'article →</span></a>
+        <a class="post c5" href="#top"><small>Efficacité de production</small><b>La méthode SMED en 5 étapes</b><span>Lire l'article →</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-buy" id="stickyBuy" data-anno="11" data-label="Barre d'achat qui suit">
+    <div class="sticky-buy__t"><b>40 outils du Lean</b><span>49,90 €</span></div>
+    <button class="btn" type="button" id="stickyAdd">Ajouter au panier</button>
+  </div>
+</div>
+
+<section class="proto-plan" id="plan">
+  <h2>Plan de la page V2, <em>bloc par bloc</em></h2>
+  <p>Tout le contenu existe déjà dans Shopify, sauf ce qui est marqué « à fournir ». La page se construit dans le thème copié, comme pour les articles, sans toucher au gabarit produit actuel.</p>
+  <div class="plan-wrap">
+    <table class="plan">
+      <thead><tr><th>#</th><th>Bloc</th><th>Contenu et source</th><th>État actuel</th></tr></thead>
+      <tbody>
+        <tr><td><span class="n">1</span></td><td>Galerie</td><td>6 médias du produit (5 images, 1 vidéo <code>custom.video_fiche_produit</code>). Premier visuel : le deck ouvert, avec le liseré en tête. Pastilles sous les vignettes : la couleur de la famille montrée.</td><td>6 images sans texte alternatif</td></tr>
+        <tr><td><span class="n">2</span></td><td>Bloc d'achat</td><td>Titre (sans le point final), <code>custom.sous_titre</code>, note <code>reviews.rating</code> et <code>reviews.rating_count</code>, prix lu dans la boutique, <code>custom.avantage_1</code> à <code>_3</code>, quantité, devis équipe, réassurance.</td><td>Avantages et sous-titre déjà remplis</td></tr>
+        <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack.</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
+        <tr><td><span class="n">3</span></td><td>Les outils par famille</td><td><code>custom.les_outils_abordes</code>, découpé par paragraphe : une famille par paragraphe, une couleur par famille. Lien vers l'article quand l'outil en a un (nouveau métachamp <code>fichly.articles_outils</code>, ou correspondance par tag).</td><td>37 outils listés sur 40, fautes de saisie</td></tr>
+        <tr><td><span class="n">4</span></td><td>Pour qui, pour quoi</td><td>Trois usages tirés de la description (apprendre, consolider, transmettre), puis <code>custom.texte_seo</code> replié après le premier paragraphe.</td><td>Texte SEO déjà rédigé</td></tr>
+        <tr><td><span class="n">5</span></td><td>Le mot de l'expert</td><td>Métaobjet <code>custom.expert</code> (type <code>experts</code>) : titre, citation, photo, nom, poste. Anneau six couleurs autour de la photo, comme l'auteur des articles.</td><td>Rempli</td></tr>
+        <tr><td><span class="n">6</span></td><td>Avis</td><td>Widget Judge.me restylé aux couleurs Fichly : note, répartition, quatre avis, puis « Charger plus ».</td><td>28 avis, 4,79/5</td></tr>
+        <tr><td><span class="n">7</span></td><td>Questions</td><td>Trois réponses tirées de la fiche, trois à rédiger. Nouveau métachamp <code>fichly.faq</code> pour qu'elles soient modifiables sans toucher au thème.</td><td>Aucune FAQ aujourd'hui</td></tr>
+        <tr><td><span class="n">8</span></td><td>Produits liés</td><td><code>related_products</code> : pack et guide VSM, avec la famille du guide rappelée.</td><td>Rempli</td></tr>
+        <tr><td><span class="n">9</span></td><td>Formation Green Belt</td><td>Le bloc des articles V2, avec un message adapté : le pack Lean est offert avec la formation.</td><td>Textes déjà validés pour les articles</td></tr>
+        <tr><td><span class="n">10</span></td><td>Le deck dans nos articles</td><td>Trois articles publiés dont l'outil est dans le deck, choisis par tag. Six autres arrivent avec la publication des brouillons (QQOQCCP, Ishikawa, Obeya, Pareto, Takt Time, AMDEC).</td><td>Nouveau</td></tr>
+        <tr><td><span class="n">11</span></td><td>Barre d'achat qui suit</td><td>Apparaît quand le bouton principal sort de l'écran. Titre court, prix, bouton.</td><td>Nouveau</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>À corriger dans la fiche, <em>avant la V2</em></h2>
+  <ul class="fixes">
+    <li class="c3"><strong>37 outils listés pour un deck de 40</strong>La liste <code>les_outils_abordes</code> compte 9 + 6 + 6 + 7 + 5 + 4 outils. Il manque trois fiches : lesquelles ?<br><small>Question pour Hugo</small></li>
+    <li class="c3"><strong>Fautes dans la liste des outils</strong>« QQQOQCCP » pour QQOQCCP, « Cartes de contrôles1. », « Mes OKR ». Le 5S n'apparaît nulle part alors que le texte SEO le cite.<br><small>Correction simple</small></li>
+    <li class="c4"><strong>Textes alternatifs vides</strong>Les six médias n'ont pas d'alt. Bon pour Google Images et l'accessibilité.<br><small>À rédiger avec les photos sous les yeux</small></li>
+    <li class="c4"><strong>GTIN dans la description</strong>Le code 3760451390019 est écrit dans le texte, avec une balise <code>&lt;meta&gt;</code> collée. Sa place est le champ code-barres de la variante, lu par Google Shopping.<br><small>Correction simple</small></li>
+    <li class="c5"><strong>Stock à −67</strong>Le suivi de stock est actif et le stock est négatif : la vente continue, mais le chiffre ne sert plus à rien. Soit on le remet à jour, soit on coupe le suivi.<br><small>Décision d'Hugo</small></li>
+    <li class="c5"><strong>Vendeur « Ma boutique »</strong>Valeur par défaut de Shopify, reprise dans les données produit envoyées à Google. À remplacer par Fichly.<br><small>Correction simple</small></li>
+    <li class="c1"><strong>Données structurées</strong>Un seul JSON-LD <code>Product</code> avec <code>gtin13</code>, <code>brand</code> Fichly, <code>offers</code> et <code>aggregateRating</code> (4,79 sur 28). Les étoiles peuvent alors s'afficher dans Google.<br><small>Dans le gabarit V2</small></li>
+    <li class="c1"><strong>Titre SEO</strong>« 40 outils du Lean management - des fiches à emporter partout. » : pas de point final, tiret long ou deux-points, et le mot « deck » que les acheteurs emploient dans leurs avis.<br><small>Proposition à valider</small></li>
+  </ul>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const frame = document.getElementById('frame');
+  const bar = document.getElementById('protoBar');
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const setBarH = () => root.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  setBarH();
+  new ResizeObserver(setBarH).observe(bar);
+
+  // Boutons de la barre de maquette
+  const pair = (a, b, on) => { a.setAttribute('aria-pressed', on); b.setAttribute('aria-pressed', !on); };
+  const annoOn = document.getElementById('btnAnnoOn'), annoOff = document.getElementById('btnAnnoOff');
+  annoOn.addEventListener('click', () => { frame.classList.add('show-anno'); pair(annoOn, annoOff, true); count(); });
+  annoOff.addEventListener('click', () => { frame.classList.remove('show-anno'); pair(annoOn, annoOff, false); count(); });
+  const desk = document.getElementById('btnDesk'), mob = document.getElementById('btnMob');
+  desk.addEventListener('click', () => { frame.classList.remove('is-mobile'); pair(desk, mob, true); });
+  mob.addEventListener('click', () => { frame.classList.add('is-mobile'); pair(desk, mob, false); });
+
+  // Le deck s'ouvre en éventail au chargement
+  const fan = document.getElementById('fan');
+  if (reduce) fan.classList.remove('is-closed'); else setTimeout(() => fan.classList.remove('is-closed'), 350);
+
+  // Galerie
+  const thumbs = [...document.querySelectorAll('.thumbs button')];
+  thumbs.forEach(t => t.addEventListener('click', () => {
+    thumbs.forEach(x => x.setAttribute('aria-current', x === t));
+    document.querySelectorAll('.stage__view').forEach((v, i) => { v.hidden = String(i) !== t.dataset.v; });
+  }));
+
+  // Prix et quantité
+  const UNIT = 49.90;
+  const eur = n => n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  const qty = document.getElementById('qty'), total = document.getElementById('addTotal');
+  const clamp = v => Math.min(99, Math.max(1, parseInt(v, 10) || 1));
+  const setQ = v => { qty.value = clamp(v); total.textContent = eur(UNIT * qty.value); };
+  document.getElementById('qMinus').addEventListener('click', () => setQ(+qty.value - 1));
+  document.getElementById('qPlus').addEventListener('click', () => setQ(+qty.value + 1));
+  qty.addEventListener('change', () => setQ(qty.value));
+
+  // Panier (maquette : rien n'est envoyé)
+  const cartN = document.getElementById('cartN'), toast = document.getElementById('toast');
+  let inCart = 0, tTimer;
+  const add = n => {
+    inCart += n; cartN.textContent = inCart; cartN.dataset.n = inCart;
+    toast.textContent = n + (n > 1 ? ' decks ajoutés' : ' deck ajouté') + ' au panier (maquette, rien n\'est commandé)';
+    toast.classList.add('is-on'); clearTimeout(tTimer); tTimer = setTimeout(() => toast.classList.remove('is-on'), 2600);
+  };
+  document.getElementById('buyForm').addEventListener('submit', e => { e.preventDefault(); add(+qty.value); });
+  document.getElementById('stickyAdd').addEventListener('click', () => add(1));
+
+  // Barre d'achat : visible quand le bouton principal est sorti de l'écran
+  const sticky = document.getElementById('stickyBuy'), addBtn = document.getElementById('addBtn');
+  new IntersectionObserver(([e]) => {
+    sticky.classList.toggle('is-on', !e.isIntersecting && e.boundingClientRect.top < 0);
+  }, { rootMargin: '-' + 80 + 'px 0px 0px 0px' }).observe(addBtn);
+
+  // Filtres par famille
+  const filters = [...document.querySelectorAll('.filters button')];
+  const fams = [...document.querySelectorAll('.fam')];
+  const counter = document.getElementById('toolCount'), label = document.getElementById('toolLabel');
+  const names = { 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et stratégie', 4: 'Optimisation des flux', 5: 'Efficacité de production', 6: 'Amélioration de la production' };
+  let current = 'all';
+  function count() {
+    const shown = fams.filter(f => !f.hidden);
+    const n = shown.reduce((s, f) => s + f.querySelectorAll('li > :not(.missing)').length, 0);
+    counter.textContent = current === 'all' && !frame.classList.contains('show-anno') ? 40 : n;
+    label.textContent = current === 'all'
+      ? (frame.classList.contains('show-anno') ? 'outils listés sur la fiche actuelle' : 'outils, une fiche chacun')
+      : 'outils en ' + names[current].toLowerCase();
+  }
+  filters.forEach(b => b.addEventListener('click', () => {
+    current = b.dataset.f;
+    filters.forEach(x => x.setAttribute('aria-pressed', x === b));
+    fams.forEach(f => { f.hidden = current !== 'all' && f.dataset.f !== current; });
+    count();
+  }));
+  count();
+})();
+</script>
