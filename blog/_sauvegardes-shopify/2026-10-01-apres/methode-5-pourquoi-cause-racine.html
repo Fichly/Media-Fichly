@@ -1,0 +1,400 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}
+.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}
+.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.fichly-bio-body{flex:1;min-width:240px;}
+.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article">
+<p>Même panne, même équipe, deux analyses. La première s'arrête au bout de trois questions sur « l'opérateur n'a pas fait le contrôle ». La seconde continue et découvre que le contrôle n'est prévu nulle part dans le mode opératoire. Les deux ont utilisé la méthode des 5 pourquoi. Une seule a produit quelque chose. Cet article explique pourquoi l'arrêt se produit toujours à peu près au même endroit, et donne trois règles pour aller plus loin.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Les 5 pourquoi (5 Whys) remontent d'un effet à sa cause en enchaînant la question « pourquoi » sur chaque réponse. La chaîne s'interrompt en pratique vers le troisième niveau, au dernier endroit où la réponse tient dans le périmètre des personnes présentes. Aller au delà demande trois règles précises.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Les 5 pourquoi enchaînent la question sur chaque réponse, jusqu'au mécanisme.</li>
+<li>Le troisième niveau est le dernier qui reste dans le périmètre du répondant.</li>
+<li>Remplacer la personne ferait disparaître le problème : l'analyse n'est pas finie.</li>
+<li>Une réponse qui en contient deux impose de brancher, pas de choisir.</li>
+<li>Une action corrective répare, une contre-mesure empêche le retour.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#deux-chaines">Deux exemples de 5 pourquoi : l'un aboutit, l'autre s'arrête</a></li>
+<li><a href="#methode">Qu'est-ce que la méthode des 5 pourquoi ?</a></li>
+<li><a href="#troisieme">Pourquoi la chaîne des 5 pourquoi s'arrête-t-elle au troisième niveau ?</a></li>
+<li><a href="#test">Le test qui distingue une cause racine d'une cause-personne</a></li>
+<li><a href="#branches">Quand une réponse en contient deux : brancher l'analyse</a></li>
+<li><a href="#arret">Comment savoir qu'un 5 pourquoi est terminé ?</a></li>
+<li><a href="#contre-mesure">Contre-mesure ou action corrective : les deux mots ne sont pas synonymes</a></li>
+<li><a href="#anglais">Le vocabulaire du 5 Why en anglais</a></li>
+<li><a href="#faq">FAQ : vos questions sur les 5 pourquoi</a></li>
+</ol>
+</div>
+<h2 id="deux-chaines">Deux exemples de 5 pourquoi : l'un aboutit, l'autre s'arrête</h2>
+<p>Prenons un défaut qui revient régulièrement sur un même équipement. Voici les deux chaînes, côte à côte.</p>
+<table>
+<thead>
+<tr>
+<th>Niveau</th>
+<th>Chaîne qui s'arrête</th>
+<th>Chaîne qui continue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Pourquoi le défaut ? Le réglage était hors tolérance.</td>
+<td>Pourquoi le défaut ? Le réglage était hors tolérance.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pourquoi ? Le contrôle de début de série n'a pas été fait.</td>
+<td>Pourquoi ? Le contrôle de début de série n'a pas été fait.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pourquoi ? L'opérateur ne l'a pas fait. <strong>Arrêt.</strong>
+</td>
+<td>Pourquoi ? Le contrôle ne figure pas dans le mode opératoire.</td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td>Pourquoi ? Le mode opératoire n'a pas été revu au changement de gamme.</td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td>Pourquoi ? Aucune revue de mode opératoire n'est déclenchée par un changement de gamme.</td>
+</tr>
+<tr>
+<td>Conclusion</td>
+<td class="col-non">Rappeler l'opérateur à ses obligations</td>
+<td class="col-oui">Déclencher une revue de mode opératoire à chaque changement de gamme</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux chaînes sont identiques jusqu'au deuxième niveau. Elles divergent au troisième, sur un seul mot : la première met un <strong>qui</strong> là où la seconde met un <strong>quoi</strong>. À partir de ce mot, tout est joué.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-5-pourquoi-cause-racine-1-deux-chaines.gif" alt="Deux chaînes de pourquoi sur le même défaut : identiques jusqu'au niveau 2, elles divergent au niveau 3. À gauche, « L'opérateur ne l'a pas fait » : arrêt, les niveaux 4 et 5 restent vides, conclusion « rappeler l'opérateur à ses obligations ». À droite, « Le contrôle ne figure pas dans le mode opératoire » mène jusqu'au niveau 5 et à « déclencher une revue de mode opératoire à chaque changement de gamme »." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+<p>Un 5 pourquoi qui s'arrête au troisième, c'est un puits qu'on cesse de creuser dès que la terre devient humide. On a bien senti qu'il y avait de l'eau. On n'en a pas.</p>
+<h2 id="methode">Qu'est-ce que la méthode des 5 pourquoi ?</h2>
+
+<p>La technique est attribuée à Sakichi Toyoda et a été formalisée dans le système de production Toyota. Elle consiste à poser la question « pourquoi » de façon répétée, chaque réponse devenant le sujet de la question suivante, jusqu'à atteindre une cause sur laquelle on peut agir.</p>
+<p>Trois précisions suffisent, et elles sont partout ailleurs.</p>
+<ul>
+<li>
+<strong>Cinq est un ordre de grandeur</strong>, pas une règle. Trois suffisent parfois, sept ou plus sont parfois nécessaires. Le tout est d'arriver à la cause racine du problème. </li>
+<li>
+<strong>Elle se pratique devant le problème</strong>, avec ceux qui l'ont vécu, et non en salle.</li>
+<li>
+<strong>Elle ne demande aucun outil</strong>, ce qui explique sa diffusion et, comme on va le voir, une partie de ses ratés.</li>
+</ul>
+<p>Voilà pour le socle. Le reste de cet article porte sur ce qui se passe réellement quand on l'utilise.</p>
+<h2 id="troisieme">Pourquoi la chaîne des 5 pourquoi s'arrête-t-elle au troisième niveau ?</h2>
+<p>L'idée reçue veut que le 5 pourquoi corrige notre tendance à nous arrêter à la première cause trouvée. C'est inexact, et cette inexactitude explique la moitié des analyses ratées. <strong>L'outil ne supprime pas ce réflexe, il le déplace d'un cran ou deux.</strong> On ne s'arrête plus au premier pourquoi, on s'arrête au troisième.</p>
+<p>Le mécanisme est le suivant, et il n'a rien à voir avec la rigueur de l'équipe.</p>
+<p>Le premier niveau reste dans la technique : un réglage, une pièce, une machine. Le deuxième reste dans le poste : un contrôle, une procédure appliquée ou non. <strong>Le troisième est le dernier niveau où la réponse tient encore à l'intérieur du périmètre des gens présents dans la salle.</strong> Au quatrième, la réponse commence à désigner une décision qui a été prise ailleurs, par quelqu'un d'autre, souvent plus haut.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-5-pourquoi-cause-racine-2-arret-au-troisieme-niveau.gif" alt="Trois zones emboîtées : la technique, le poste, la salle où se trouvent les personnes présentes. Les pourquoi 1, 2 et 3 restent à l'intérieur ; le 4e bute sur le mur de la salle, derrière lequel se trouvent le responsable et le service voisin. Les analyses s'arrêtent alors sur « manque de rigueur », « oubli », « inattention »." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+<p>Or personne n'aime écrire une cause qui met en cause une décision de son responsable, ou d'un service voisin. La chaîne s'arrête donc là, non par paresse, mais parce que continuer suppose une autorisation implicite que personne n'a donnée.</p>
+<p>Cette lecture a une conséquence directe et vérifiable : <strong>si vos analyses de causes s'achèvent presque toujours sur un manque de rigueur, un oubli ou une inattention, ce n'est pas votre atelier qui est en cause, c'est le niveau auquel vous vous arrêtez.</strong></p>
+<h2 id="test">Le test qui distingue une cause racine d'une cause-personne</h2>
+<p>Tous les guides recommandent de ne pas chercher de coupable. Aucun ne donne le moyen de vérifier qu'on vient de le faire. Voici ce moyen, à appliquer à chaque niveau.</p>
+<div class="fichly-note">
+<p><strong>Le test de la relève.</strong> Posez-vous la question suivante sur la réponse que vous venez d'écrire : si la personne concernée était remplacée demain par quelqu'un d'autre, de compétence équivalente et de bonne volonté, le problème disparaîtrait-il ? Si la réponse est non, vous tenez une cause système et vous pouvez avancer. Si la réponse est oui, vous n'avez pas trouvé une cause, vous avez trouvé une personne, et il faut poser un pourquoi de plus.</p>
+</div>
+<p>Le test fonctionne parce qu'il déplace la question sans accuser personne. « L'opérateur ne l'a pas fait » ne résiste pas : un autre opérateur ne l'aurait pas fait non plus, puisque le contrôle n'est écrit nulle part. La chaîne redémarre d'elle-même.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-5-pourquoi-cause-racine-3-test-de-la-releve.gif" alt="Test de la relève : l'opérateur A est remplacé par l'opérateur B, de même compétence et de bonne volonté. B suit les trois étapes du mode opératoire, où le contrôle de début de série n'est écrit nulle part, et la pièce sort hors tolérance. « L'opérateur ne l'a pas fait » est raturé, remplacé par « Le contrôle ne figure pas dans le mode opératoire », et la chaîne repart vers un 4e pourquoi." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+<p>Deux formulations doivent déclencher ce test automatiquement, parce qu'elles sont presque toujours des arrêts déguisés.</p>
+<ul>
+<li>
+<strong>« Manque de rigueur », « manque de vigilance », « oubli ».</strong> Ce sont des constats, pas des causes. Ils décrivent le symptôme au niveau humain.</li>
+<li>
+<strong>« Pas assez formé ».</strong> Souvent vraie et presque toujours incomplète : pourquoi la formation n'a-t-elle pas eu lieu, ou pourquoi n'a-t-elle pas suffi ?</li>
+</ul>
+<h2 id="branches">Quand une réponse en contient deux : brancher l'analyse</h2>
+
+<p>Un problème réel a rarement une chaîne causale unique. La plupart des guides le reconnaissent, puis concluent qu'il faut alors changer d'outil. C'est renoncer un peu vite : <strong>le 5 pourquoi sait brancher, à condition de le décider</strong>.</p>
+<p>La règle tient en trois points.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-5-pourquoi-cause-racine-4-brancher-l-analyse.gif" alt="Une réponse « cause A et cause B » ouvre deux branches. La branche A atteint un mécanisme en 3 niveaux, la branche B en 6. À la fin, A explique 70 % des occurrences et B 30 % : on traite A d'abord, B est notée et reste visible au lieu d'être effacée." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+<ol>
+<li>
+<strong>Si une réponse contient un « et », ouvrez deux chaînes.</strong> N'arbitrez pas à ce moment-là, vous n'avez pas encore l'information pour le faire.</li>
+<li>
+<strong>Suivez chaque branche jusqu'à son propre critère d'arrêt.</strong> Une branche peut se terminer en trois niveaux et l'autre en six.</li>
+<li>
+<strong>Arbitrez à la fin, sur la part des occurrences expliquée</strong>, et notez l'autre branche au lieu de l'effacer. Une branche abandonnée sans trace revient six mois plus tard sous forme de nouveau problème.</li>
+</ol>
+<p>Un signe pratique vous indique quand brancher plutôt que continuer : si deux personnes de l'équipe donnent deux réponses différentes au même pourquoi, et que les deux vous semblent vraies, vous avez une bifurcation, pas un désaccord.</p>
+<p>Quand les branches deviennent nombreuses, un diagramme de causes en arêtes de poisson aide à les organiser visuellement, sans remplacer l'enchaînement des pourquoi qui reste l'outil de descente.</p>
+<p>Pour dérouler ces analyses de bout en bout, du problème posé jusqu'à la contre-mesure vérifiée, notre <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">guide de la résolution de problèmes DMAIC</a> réunit la trame complète et les fiches à remplir.</p>
+<h2 id="arret">Comment savoir qu'un 5 pourquoi est terminé ?</h2>
+<p>La question symétrique de celle de l'arrêt prématuré, et elle est tout aussi peu traitée : à quoi reconnaît-on qu'on peut s'arrêter ?</p>
+<p>Pas au nombre de niveaux, qui ne veut rien dire. Pas au sentiment que la réponse « fait sens », qui est précisément ce qui produit l'arrêt au troisième. Le critère est le suivant.</p>
+<p><strong>On s'arrête quand la cause est un mécanisme sur lequel une contre-mesure durable est possible, et que cette contre-mesure ne dépend de la vigilance de personne.</strong></p>
+<p>Trois vérifications concrètes découlent de ce critère.</p>
+<table>
+<thead>
+<tr>
+<th>Vérification</th>
+<th>Si la réponse est non</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Puis-je décrire une action qui empêche le mécanisme de se reproduire ?</td>
+<td>Posez un pourquoi de plus</td>
+</tr>
+<tr>
+<td>Cette action tient-elle sans qu'on rappelle quiconque à l'ordre ?</td>
+<td>Vous êtes encore sur une cause-personne</td>
+</tr>
+<tr>
+<td>Ai-je le pouvoir de la décider, ou de la faire décider ?</td>
+<td>Vous êtes allé trop loin, remontez d'un niveau</td>
+</tr>
+</tbody>
+</table>
+<p>La troisième vérification surprend, et elle est importante. Une chaîne poussée jusqu'à une cause hors de portée, du type « la politique d'investissement du groupe », est aussi inutile qu'une chaîne trop courte. <strong>La bonne profondeur est le dernier niveau sur lequel votre organisation peut encore agir.</strong> Ce niveau n'est pas le même pour un chef d'équipe et pour un directeur de site, et c'est normal.</p>
+<h2 id="contre-mesure">Contre-mesure ou action corrective : les deux mots ne sont pas synonymes</h2>
+<p>Beaucoup d'analyses correctes se terminent par une action qui ne change rien, faute d'avoir distingué deux choses que le vocabulaire courant confond.</p>
+<ul>
+<li>
+<strong>Une action corrective</strong> remet la situation dans son état normal. Elle traite l'occurrence.</li>
+<li>
+<strong>Une contre-mesure</strong> agit sur le mécanisme qui a produit l'écart. Elle traite la récurrence.</li>
+</ul>
+<p>Remplacer une pièce cassée est une action corrective. Modifier ce qui a fait casser la pièce est une contre-mesure. Les deux sont souvent nécessaires, dans cet ordre, et la première ne dispense jamais de la seconde.</p>
+<p>Reste une limite que le 5 pourquoi ne peut pas franchir seul, et il faut la dire : <strong>l'outil ne vérifie pas que la contre-mesure a fonctionné</strong>. Il s'arrête à la cause. Or la seule preuve qu'une analyse était juste est que le problème ne revient pas, ce qui se constate des semaines plus tard, sur une mesure.</p>
+<p>Cette vérification n'appartient pas à la technique d'analyse, elle appartient au cadre de projet qui l'entoure. C'est exactement le rôle des phases Analyser et Contrôler d'une <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">démarche DMAIC</a>, où la cause doit être prouvée par les données et le gain remesuré après coup. Sur un problème plus simple, un tour de <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a> suffit à fermer la boucle.</p>
+<p>Si votre problème relève de gaspillages plus que d'un défaut ponctuel, la grille des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 MUDA</a> donne un vocabulaire pour nommer ce que vous observez avant d'en chercher la cause. Pour les analyses d'accident du travail, la démarche de référence en France est l'arbre des causes, documentée par l'<a href="https://www.inrs.fr/" rel="noopener" target="_blank">INRS</a> : la logique de descente est voisine, le cadre et les obligations ne sont pas les mêmes.</p>
+<h2 id="anglais">Le vocabulaire du 5 Why en anglais</h2>
+<p>Dans un groupe international, les procédures d'analyse de cause sont presque toujours rédigées en anglais, et le vocabulaire ne se traduit pas terme à terme. Voici les correspondances utiles.</p>
+<table>
+<thead>
+<tr>
+<th>Anglais</th>
+<th>Français</th>
+<th>Ce qu'il faut savoir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 Why, Five Whys</td>
+<td>Les 5 pourquoi</td>
+<td>Même méthode, même origine</td>
+</tr>
+<tr>
+<td>Root cause</td>
+<td>Cause racine</td>
+<td>La cause au bout de la chaîne</td>
+</tr>
+<tr>
+<td>Root cause analysis, RCA</td>
+<td>Analyse de cause racine</td>
+<td>La famille de méthodes, dont les 5 pourquoi</td>
+</tr>
+<tr>
+<td>Corrective action</td>
+<td>Action corrective</td>
+<td>Traite l'occurrence</td>
+</tr>
+<tr>
+<td>Countermeasure</td>
+<td>Contre-mesure</td>
+<td>Traite la récurrence. Pas un synonyme du précédent</td>
+</tr>
+<tr>
+<td>Containment action</td>
+<td>Action de sécurisation</td>
+<td>Protège le client en attendant la contre-mesure</td>
+</tr>
+<tr>
+<td>5W1H</td>
+<td>QQOQCP</td>
+<td>Outil de description du problème, en amont des pourquoi</td>
+</tr>
+<tr>
+<td>Fishbone, Ishikawa</td>
+<td>Diagramme de causes</td>
+<td>Organise les branches, ne les descend pas</td>
+</tr>
+</tbody>
+</table>
+<p>La distinction entre <em>corrective action</em> et <em>countermeasure</em> est celle de la section précédente. Elle est mieux tenue en anglais qu'en français, où le mot « action corrective » sert souvent aux deux, ce qui explique une partie des malentendus dans les rapports d'analyse bilingues.</p>
+<h2 id="faq">FAQ : vos questions sur les 5 pourquoi</h2>
+<div class="fichly-faq">
+<details>
+<summary>Qu'est-ce que la méthode des 5 pourquoi ?</summary>
+<div class="answer">
+<p>C'est une technique d'analyse qui consiste à demander pourquoi de façon répétée, chaque réponse devenant la question suivante, jusqu'à atteindre une cause sur laquelle on peut agir durablement. Elle ne demande aucun outil et se pratique debout, devant le problème. Le nombre cinq est un ordre de grandeur, pas une règle.</p>
+</div>
+</details>
+<details>
+<summary>Comment utiliser la méthode des 5 pourquoi ?</summary>
+<div class="answer">
+<p>Décrivez d'abord le problème par un fait observable, pas par une opinion. Posez ensuite la première question et notez la réponse. Reprenez cette réponse mot pour mot comme sujet de la question suivante. Vérifiez à chaque niveau que la réponse n'accuse personne, et arrêtez-vous quand la cause désigne un mécanisme sur lequel une contre-mesure durable est possible.</p>
+</div>
+</details>
+<details>
+<summary>Qui a inventé la méthode des 5 pourquoi ?</summary>
+<div class="answer">
+<p>Elle est attribuée à Sakichi Toyoda, fondateur du groupe Toyota, et a été formalisée dans le système de production Toyota. Elle y était pratiquée oralement, sur le lieu du problème, et non dans un formulaire. Cette origine explique sa forme : c'est une discipline de conversation avant d'être un outil.</p>
+</div>
+</details>
+<details>
+<summary>Combien de pourquoi faut-il poser exactement ?</summary>
+<div class="answer">
+<p>Autant qu'il en faut pour atteindre un mécanisme sur lequel vous pouvez agir. Ce n'est pas cinq. En pratique, le problème n'est presque jamais d'aller trop loin : c'est de s'arrêter trop tôt, généralement au troisième niveau, quand la réponse a l'air satisfaisante mais désigne encore une personne.</p>
+</div>
+</details>
+<details>
+<summary>Que faire quand une réponse contient deux causes ?</summary>
+<div class="answer">
+<p>Faites brancher l'analyse plutôt que d'en choisir une. Ouvrez deux chaînes en parallèle et suivez-les séparément. Si vous devez prioriser, suivez d'abord la branche qui explique la plus grande part des occurrences, mais notez l'autre : elle réapparaîtra.</p>
+</div>
+</details>
+<details>
+<summary>Quelle différence entre une action corrective et une contre-mesure ?</summary>
+<div class="answer">
+<p>Une action corrective remet la situation dans son état normal. Une contre-mesure agit sur le mécanisme qui a produit l'écart, pour que celui-ci ne se reproduise pas. Remplacer une pièce cassée est une action corrective. Changer ce qui a fait casser la pièce est une contre-mesure.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Descendre jusqu'à la cause système s'apprend en le faisant, sur ses propres pannes.</strong></p>
+<p>Dans nos formations, chaque participant mène ses analyses sur un problème réel de son atelier, puis doit prouver la cause par des données avant de proposer quoi que ce soit.</p>
+<p>👉 Découvrez la <a href="https://www.fichly.com/pages/formation-lean-green-belt-cpf">formation Green Belt Lean Management</a> : 6 jours, 42 h, certification RS7114, organisme QUALIOPI, sessions en distanciel et en présentiel à Massy. Code promo FICHLY5 (-5 %).</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes et leurs livrables</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">La méthode PDCA : le cycle de Deming expliqué</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Les 5 pourquoi : pourquoi on s'arrête au troisième",
+  "description": "Un 5 pourquoi s'arrête souvent au troisième niveau et désigne une personne. Voici comment aller jusqu'à la cause système et poser une vraie contre-mesure.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que la méthode des 5 pourquoi ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "C'est une technique d'analyse qui consiste à demander pourquoi de façon répétée, chaque réponse devenant la question suivante, jusqu'à atteindre une cause sur laquelle on peut agir durablement. Elle ne demande aucun outil et se pratique debout, devant le problème. Le nombre cinq est un ordre de grandeur, pas une règle." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment utiliser la méthode des 5 pourquoi ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Décrivez d'abord le problème par un fait observable, pas par une opinion. Posez ensuite la première question et notez la réponse. Reprenez cette réponse mot pour mot comme sujet de la question suivante. Vérifiez à chaque niveau que la réponse n'accuse personne, et arrêtez-vous quand la cause désigne un mécanisme sur lequel une contre-mesure durable est possible." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qui a inventé la méthode des 5 pourquoi ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Elle est attribuée à Sakichi Toyoda, fondateur du groupe Toyota, et a été formalisée dans le système de production Toyota. Elle y était pratiquée oralement, sur le lieu du problème, et non dans un formulaire. Cette origine explique sa forme : c'est une discipline de conversation avant d'être un outil." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de pourquoi faut-il poser exactement ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Autant qu'il en faut pour atteindre un mécanisme sur lequel vous pouvez agir. Ce n'est pas cinq. En pratique, le problème n'est presque jamais d'aller trop loin : c'est de s'arrêter trop tôt, généralement au troisième niveau, quand la réponse a l'air satisfaisante mais désigne encore une personne." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire quand une réponse contient deux causes ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Faites brancher l'analyse plutôt que d'en choisir une. Ouvrez deux chaînes en parallèle et suivez-les séparément. Si vous devez prioriser, suivez d'abord la branche qui explique la plus grande part des occurrences, mais notez l'autre : elle réapparaîtra." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle différence entre une action corrective et une contre-mesure ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Une action corrective remet la situation dans son état normal. Une contre-mesure agit sur le mécanisme qui a produit l'écart, pour que celui-ci ne se reproduise pas. Remplacer une pièce cassée est une action corrective. Changer ce qui a fait casser la pièce est une contre-mesure." }
+    }
+  ]
+}
+</script></p>

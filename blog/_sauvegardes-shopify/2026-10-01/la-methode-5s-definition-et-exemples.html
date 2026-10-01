@@ -1,0 +1,614 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+
+<div class="fichly-article">
+
+<p>Une zone rangée un vendredi après-midi n'est pas un 5S. Les <strong>5S</strong>, ou <strong>méthode 5S</strong>, sont une démarche d'organisation du poste de travail en cinq étapes, née dans le système de production Toyota. Sa définition tient en une phrase. Sa difficulté est ailleurs : la plupart des zones se dégradent dans les mois qui suivent le chantier. Cet article donne la définition des 5S, ce que chaque étape doit réellement produire, et la grille qui permet de noter une zone au lieu de la regarder. À la fin, vous saurez nommer les cinq S, dire ce qui distingue un 5S d'un grand ménage, et évaluer une zone sur vingt points.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Les 5S (méthode 5S) organisent un poste de travail en cinq étapes, dans cet ordre : supprimer, ranger, nettoyer, standardiser, suivre. Les quatre premières se voient le jour du chantier, la cinquième seulement après. Un 5S se juge donc au sixième mois, pas le jour de la photo.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>L'ordre des 5S : supprimer, ranger, nettoyer, standardiser, suivre.</li>
+<li>Seiri, Seiton, Seiso, Seiketsu, Shitsuke sont les cinq mots japonais d'origine.</li>
+<li>Les trois premiers S se font, les deux derniers se tiennent.</li>
+<li>Une grille de cinq lignes notées de 0 à 4 suffit au suivi.</li>
+<li>Un chantier 5S se juge au sixième mois, pas le jour même.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">C'est quoi les 5S ? Définition et origine</a></li>
+<li><a href="#pas-menage">Le 5S n'est pas du rangement : le malentendu du ménage</a></li>
+<li><a href="#pourquoi">À quoi sert le 5S, et pourquoi vient-il en premier ?</a></li>
+<li><a href="#cinq-etapes">Quel est l'ordre des 5S ? Les cinq étapes une par une</a></li>
+<li><a href="#exemple">Un exemple de méthode 5S sur une zone d'atelier</a></li>
+<li><a href="#audit">La grille d'audit 5S : noter une zone sur vingt points</a></li>
+<li><a href="#sixieme-mois">Pourquoi un 5S retombe-t-il au sixième mois ?</a></li>
+<li><a href="#erreurs">Les erreurs qui font échouer un 5S</a></li>
+<li><a href="#anglais">Le vocabulaire du 5S en anglais</a></li>
+<li><a href="#outils">Les outils qui prolongent le 5S</a></li>
+<li><a href="#faq">FAQ : vos questions sur les 5S</a></li>
+</ol>
+</div>
+
+<h2 id="definition">C'est quoi les 5S ? Définition et origine</h2>
+
+<p>La <strong>définition des 5S</strong> est simple. C'est une méthode d'organisation d'un espace de travail, structurée en cinq étapes qui se suivent dans l'ordre, et dont chacune porte le nom d'un mot japonais commençant par S.</p>
+
+<p>Elle a été formalisée dans l'industrie automobile japonaise après la Seconde Guerre mondiale, dans l'environnement qui a produit le système de production Toyota. Elle y servait un objectif précis : rendre visible, d'un seul coup d'oeil, l'écart entre l'état normal d'un poste et son état réel. Un poste conforme se reconnaît sans rien demander à personne. Un poste dérivé aussi.</p>
+
+<p>Voici les cinq termes, leur traduction et ce que chacun produit.</p>
+
+<table>
+<thead><tr>
+<th>Japonais</th>
+<th>Français</th>
+<th>Ce que l'étape produit</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Seiri</td>
+<td>Supprimer</td>
+<td>Une zone qui ne contient plus que ce qui sert</td>
+</tr>
+<tr>
+<td>Seiton</td>
+<td>Ranger</td>
+<td>Une place définie et repérée pour chaque objet restant</td>
+</tr>
+<tr>
+<td>Seiso</td>
+<td>Nettoyer</td>
+<td>Un état de propreté qui sert de détecteur d'anomalie</td>
+</tr>
+<tr>
+<td>Seiketsu</td>
+<td>Standardiser</td>
+<td>Une règle écrite qui fixe l'état attendu de la zone</td>
+</tr>
+<tr>
+<td>Shitsuke</td>
+<td>Suivre</td>
+<td>Un rythme de vérification qui empêche la dérive</td>
+</tr>
+</tbody>
+</table>
+
+<p>Retenez la logique de l'enchaînement. Les trois premiers S transforment la zone. Le quatrième écrit ce qui vient d'être obtenu. Le cinquième vérifie que l'écrit tient. Les sauter dans le désordre revient à standardiser un état que personne n'a encore atteint.</p>
+
+<div class="fichly-note">
+<p><strong>Une précision de vocabulaire.</strong> Vous lirez parfois 6S, avec un S de sécurité, ou 7S. Ces variantes ajoutent un thème, elles ne changent pas la mécanique. Si les cinq premiers ne tiennent pas, un sixième ne tiendra pas davantage.</p>
+</div>
+
+<h2 id="pas-menage">Le 5S n'est pas du rangement : le malentendu du ménage</h2>
+
+<p>C'est le point où la démarche se perd le plus souvent, et il vaut la peine de s'y arrêter avant de parler d'étapes.</p>
+
+<p>Un grand ménage traite le désordre visible. Il produit un effet immédiat, réel, et il retombe. Le 5S traite autre chose : <strong>ce qui a produit ce désordre</strong>. Pourquoi cet outil traîne ici plutôt que dans son emplacement. Pourquoi ce carton est stocké devant l'armoire électrique. Pourquoi cette pièce est là depuis des mois sans que personne sache à qui elle appartient.</p>
+
+<p>La différence se voit à une question. Après un ménage, la zone est propre. Après un 5S, la zone est propre <strong>et l'on sait dire, sans hésiter, où va chaque objet et qui vérifie</strong>. Si vous ne savez pas répondre à la seconde partie, vous avez fait un ménage.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">Ce qu'on entend :</span> « on a fait le 5S de la zone samedi matin, elle est nickel ».</p>
+<p><span class="fichly-ok">Ce qui manque :</span> qui décide de ce qui reste, où c'est écrit, et quand on repasse voir.</p>
+</div>
+
+<p>Ce malentendu a une conséquence pratique. Quand le 5S est vécu comme du ménage, il est confié à l'équipe la moins concernée par les décisions de la zone. Or supprimer un objet, c'est décider. Le tri de la première étape suppose une autorité sur la zone, pas un balai.</p>
+
+<h2 id="pourquoi">À quoi sert le 5S, et pourquoi vient-il en premier ?</h2>
+
+<p>Le 5S est presque toujours le premier chantier d'un déploiement Lean. Ce n'est pas parce qu'il serait le plus facile. C'est parce qu'il rend possible tout ce qui vient ensuite.</p>
+
+<h3>Il rend les écarts visibles</h3>
+
+<p>Un poste chargé cache ses propres anomalies. Une fuite passe inaperçue sur un sol déjà taché. Une pièce manquante ne se remarque pas dans un bac qui déborde. Une fois la zone dégagée et les emplacements repérés, l'anomalie devient une évidence, et non plus une enquête.</p>
+
+<h3>Il supprime des déplacements et des recherches</h3>
+
+<p>Chercher un outil, contourner une palette, se déplacer vers une armoire mal placée : ce sont des gaspillages au sens strict du Lean. Le 5S en supprime plusieurs familles d'un coup. Si le vocabulaire ne vous est pas familier, la liste complète est détaillée dans notre article sur <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">les 8 MUDA, les gaspillages du Lean</a>.</p>
+
+<h3>Il crée le premier standard que l'équipe écrit elle-même</h3>
+
+<p>C'est l'effet le moins mesuré et le plus utile. Le 5S produit un standard court, visuel, écrit par ceux qui tiennent la zone. Une équipe qui a écrit son premier standard sur une armoire à outils comprend, sans qu'on le lui explique, ce qu'on lui demandera plus tard sur un mode opératoire.</p>
+
+<h3>Il touche à la sécurité, et cela n'est pas optionnel</h3>
+
+<p>Les dégagements encombrés, les sols glissants, l'accès aux organes de coupure font l'objet d'obligations précises. L'article R4224-18 du Code du travail impose ainsi que les locaux de travail et leurs annexes soient régulièrement entretenus et nettoyés, et vous pouvez le lire directement sur <a href="https://code.travail.gouv.fr/code-du-travail/r4224-18" target="_blank" rel="noopener">le portail du Code du travail</a>. L'<a href="https://www.inrs.fr/" target="_blank" rel="noopener">INRS</a> publie aussi des repères utiles sur l'aménagement des postes. Un 5S bien mené sert ces obligations, il ne les remplace pas.</p>
+
+<h2 id="cinq-etapes">Quel est l'ordre des 5S ? Les cinq étapes une par une</h2>
+
+<p>Chaque étape a un objet, un critère de sortie et une erreur type. Le critère de sortie est la partie que l'on oublie. Sans lui, on ne sait jamais si l'étape est finie, et l'on passe à la suivante par fatigue plutôt que par décision.</p>
+
+<h3>Seiri, supprimer : décider de ce qui reste</h3>
+
+<p>Première étape, et la seule qui soit une décision plutôt qu'un geste. Il s'agit de séparer ce qui sert de ce qui ne sert plus, puis de sortir le second de la zone.</p>
+
+<p>Le tri se fait sur un critère explicite, pas au jugé. Deux critères simples suffisent dans la plupart des ateliers : la fréquence d'usage et le titulaire. Un objet utilisé chaque jour reste à portée. Un objet utilisé une fois par trimestre sort de la zone. Un objet dont personne ne se déclare responsable est traité comme un objet à sortir.</p>
+
+<p>La difficulté est humaine, jamais technique. Personne n'aime jeter un outil qui pourrait servir. La parade classique est la zone d'attente : les objets douteux y sont déposés, datés, et ce qui n'a pas été repris au bout d'un délai fixé à l'avance quitte définitivement la zone.</p>
+
+<p><strong>Critère de sortie :</strong> tout ce qui reste dans la zone a un titulaire et un usage identifié.</p>
+
+<p><strong>Erreur type :</strong> trier sans autorité de décision, ce qui produit un tas de matériel déplacé de trois mètres.</p>
+
+<h3>Seiton, ranger : une place, un repère, un retour</h3>
+
+<p>Deuxième étape. Elle ne consiste pas à ranger mieux, mais à définir une place pour chaque objet restant, puis à la rendre visible.</p>
+
+<p>Trois questions guident le placement. À quelle fréquence l'objet sert-il ? Qui l'utilise ? Combien faut-il en avoir sur place ? La réponse dicte la distance : le quotidien à portée de main, l'hebdomadaire à quelques pas, le reste hors zone.</p>
+
+<p>Le repérage est la moitié du travail. Un emplacement marqué au sol, une silhouette découpée sur un panneau, une étiquette lisible depuis le poste : le principe est qu'un objet manquant se voie sans inventaire. C'est là que le management visuel commence réellement.</p>
+
+<p><strong>Critère de sortie :</strong> une personne qui ne travaille pas dans la zone range un objet au bon endroit sans demander.</p>
+
+<p><strong>Erreur type :</strong> ranger avant d'avoir supprimé, donc organiser proprement de l'inutile.</p>
+
+<h3>Seiso, nettoyer : nettoyer pour inspecter</h3>
+
+<p>Troisième étape, et la plus mal comprise. Le nettoyage n'est pas ici une fin, c'est un moyen d'inspection.</p>
+
+<p>Quand un opérateur nettoie lui-même sa machine, il passe la main sur des surfaces qu'il ne touche jamais autrement. Il trouve une fuite naissante, un flexible usé, une vis desserrée, un capot qui ne ferme plus. Ce sont des informations de maintenance que personne d'autre n'aurait vues à ce stade.</p>
+
+<p>D'où la règle qui donne sa valeur à l'étape : chaque anomalie trouvée pendant le nettoyage est notée, pas seulement essuyée. La liste qui en sort alimente directement le plan de maintenance.</p>
+
+<p><strong>Critère de sortie :</strong> l'état propre de la zone est défini par une référence visible, et les anomalies trouvées sont tracées quelque part.</p>
+
+<p><strong>Erreur type :</strong> sous-traiter le nettoyage à un prestataire, ce qui produit une zone propre et zéro information.</p>
+
+<h3>Seiketsu, standardiser : écrire l'état attendu</h3>
+
+<p>Quatrième étape. Elle fige ce que les trois premières ont produit, sous une forme que l'on peut comparer à la réalité.</p>
+
+<p>Un standard 5S utile est court et visuel. Une photo de la zone à l'état attendu, affichée dans la zone, vaut mieux qu'une procédure de quatre pages. On y ajoute les quelques règles qui ne se voient pas sur une photo : qui range quoi, à quelle fréquence, avec quel consommable.</p>
+
+<p>Le standard précise aussi qui fait quoi. Un standard sans nom en face de chaque tâche est une intention, pas une règle.</p>
+
+<p><strong>Critère de sortie :</strong> deux personnes différentes, en regardant le standard, décrivent le même état attendu.</p>
+
+<p><strong>Erreur type :</strong> un standard rédigé au bureau et jamais affiché dans la zone qu'il décrit.</p>
+
+<h3>Shitsuke, suivre : la seule étape qui n'a pas de fin</h3>
+
+<p>Cinquième étape. C'est celle qu'on saute, et c'est celle qui décide de tout.</p>
+
+<p>Les quatre premières étapes se terminent. Celle-ci ne se termine jamais : elle installe un rythme de vérification, une note, et une revue de l'écart. Sans elle, la zone revient à son état d'origine, en général plus vite qu'elle n'a mis à s'organiser.</p>
+
+<p>Le suivi suppose trois choses. Un rythme fixé à l'avance, hebdomadaire au démarrage puis mensuel une fois la zone stable. Une grille identique d'une fois sur l'autre, sinon la comparaison n'a aucun sens. Et une personne nommée qui passe, même quand la semaine est chargée.</p>
+
+<p><strong>Critère de sortie :</strong> il n'y en a pas. C'est le point.</p>
+
+<p><strong>Erreur type :</strong> confondre le suivi avec un rappel à l'ordre. Un audit 5S mesure une zone, il ne note pas une personne.</p>
+
+<h2 id="exemple">Un exemple de méthode 5S sur une zone d'atelier</h2>
+
+<p>Prenons une zone de préparation de commandes, tenue par une équipe qui n'a jamais mené de 5S. L'exemple ci-dessous est une reconstitution destinée à montrer ce qui se passe étape par étape, pas le résultat d'un chantier particulier. Ce qui compte ici n'est pas l'ampleur du changement, c'est sa nature.</p>
+
+<table>
+<thead><tr>
+<th>Étape</th>
+<th>Ce que l'équipe fait</th>
+<th>Ce qui change dans la zone</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Supprimer</td>
+<td>Tri sur deux critères, fréquence d'usage et titulaire. Zone d'attente pour les objets douteux.</td>
+<td>Une table entière d'objets sortis de la zone, dont plusieurs sans propriétaire identifié.</td>
+</tr>
+<tr>
+<td>Ranger</td>
+<td>Emplacements marqués au sol, panneau à silhouettes pour l'outillage courant.</td>
+<td>Un outil manquant se voit depuis le poste, sans ouvrir de tiroir.</td>
+</tr>
+<tr>
+<td>Nettoyer</td>
+<td>Nettoyage par l'équipe elle-même, avec relevé des anomalies trouvées.</td>
+<td>Une liste d'anomalies techniques qui part en maintenance le jour même.</td>
+</tr>
+<tr>
+<td>Standardiser</td>
+<td>Photo de référence affichée dans la zone, tableau des responsabilités.</td>
+<td>L'état attendu ne dépend plus de qui est présent.</td>
+</tr>
+<tr>
+<td>Suivre</td>
+<td>Passage hebdomadaire avec la même grille, note affichée dans la zone.</td>
+<td>La dérive se voit sur une courbe, avant de se voir dans la zone.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Deux remarques sur cet exemple. La première étape produit presque toujours le plus gros effet visible, ce qui explique qu'on s'y arrête. La cinquième ne produit aucun effet visible le jour même, ce qui explique qu'on la saute. Les gains dépendent entièrement de la zone de départ, et nous n'en publions pas de moyenne : un gain se mesure chez vous, pas dans un article.</p>
+
+<div class="fichly-note">
+<p><strong>Le 5S ne se limite pas à l'atelier.</strong> La même mécanique s'applique à un bureau, à un serveur de fichiers ou à une salle de réunion. Le tri devient une purge d'arborescence, le repérage devient une convention de nommage, et le suivi reste exactement le même problème.</p>
+</div>
+
+<h2 id="audit">La grille d'audit 5S : noter une zone sur vingt points</h2>
+
+<p>Un <strong>audit 5S</strong> n'est pas une inspection surprise. C'est une mesure répétée, avec la même grille, par une personne désignée, à un rythme connu de tous. Sa fonction est de transformer une impression en note, parce qu'une impression ne se compare pas d'un mois sur l'autre.</p>
+
+<p>La grille la plus utile est aussi la plus courte. Cinq lignes, une par S, chacune notée de 0 à 4, pour un total de vingt points. Elle tient sur une feuille et se remplit en quelques minutes, ce qui est la condition pour qu'elle soit réellement remplie.</p>
+
+<table>
+<thead><tr>
+<th>Ligne</th>
+<th>La question posée</th>
+<th class="th-non">0 point</th>
+<th>2 points</th>
+<th class="th-oui">4 points</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Supprimer</td>
+<td>La zone contient-elle autre chose que ce qui sert ?</td>
+<td class="col-non">Objets sans usage ni titulaire, en nombre</td>
+<td>Quelques objets douteux, en zone d'attente datée</td>
+<td class="col-oui">Tout objet présent a un usage et un titulaire</td>
+</tr>
+<tr>
+<td>Ranger</td>
+<td>Un objet manquant se voit-il sans chercher ?</td>
+<td class="col-non">Aucun emplacement défini</td>
+<td>Emplacements définis, repérage partiel</td>
+<td class="col-oui">Une personne extérieure range au bon endroit sans demander</td>
+</tr>
+<tr>
+<td>Nettoyer</td>
+<td>La propreté sert-elle de détecteur d'anomalie ?</td>
+<td class="col-non">Salissures anciennes, aucune anomalie tracée</td>
+<td>Zone propre, anomalies non relevées</td>
+<td class="col-oui">Nettoyage par l'équipe, anomalies tracées et transmises</td>
+</tr>
+<tr>
+<td>Standardiser</td>
+<td>L'état attendu est-il écrit et affiché dans la zone ?</td>
+<td class="col-non">Rien d'écrit</td>
+<td>Standard existant mais hors de la zone</td>
+<td class="col-oui">Standard visuel affiché, responsabilités nommées</td>
+</tr>
+<tr>
+<td>Suivre</td>
+<td>Le passage précédent a-t-il produit une action ?</td>
+<td class="col-non">Aucun passage depuis le chantier</td>
+<td>Passages irréguliers, sans suite</td>
+<td class="col-oui">Rythme tenu, écarts convertis en actions datées</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trois règles d'usage rendent cette grille exploitable.</p>
+
+<ul>
+<li>
+<strong>La même grille à chaque passage.</strong> Une grille qu'on améliore tous les mois interdit toute comparaison.</li>
+<li>
+<strong>La note s'affiche dans la zone</strong>, pas dans un tableur de service. Une note que l'équipe ne voit pas ne produit aucun comportement.</li>
+<li>
+<strong>Un écart se convertit en action datée, avec un nom.</strong> Un audit qui produit une note et rien d'autre devient vite un rituel vide.</li>
+</ul>
+
+<p>La cinquième ligne est celle qui pèse le plus, et c'est volontaire. Elle est la seule qui regarde le passé plutôt que l'instant. Une zone peut être impeccable le jour de l'audit et marquer 0 sur cette ligne, parce que personne n'était repassé depuis le chantier. C'est exactement l'information que l'on cherche.</p>
+
+<p>Si vous voulez une trame déjà construite, avec la grille, les critères de tri et les standards types, nous les avons rassemblés dans <a href="https://www.fichly.com/products/le-guide-du-5s-en-20-fiches">le guide du 5S en 20 fiches</a>, pensé pour être utilisé debout dans la zone plutôt que lu à un bureau.</p>
+
+<h2 id="sixieme-mois">Pourquoi un 5S retombe-t-il au sixième mois ?</h2>
+
+<p>C'est le scénario le plus fréquent, et il est remarquablement régulier. Un chantier bien mené, une zone transformée, des photos avant et après, une équipe satisfaite. Puis un retour progressif à l'état antérieur, sans qu'aucune décision n'ait été prise pour cela.</p>
+
+<p>La cause n'est presque jamais la méthode. Les cinq étapes sont justes et personne ne les conteste. La cause est que le dispositif de la cinquième étape n'a pas été installé avant que l'attention retombe.</p>
+
+<p>Trois mécanismes se cumulent.</p>
+
+<p><strong>L'effet du chantier est immédiat, l'effet du suivi ne l'est pas.</strong> Le premier jour produit une transformation spectaculaire. Un passage d'audit produit une note et deux actions. À intensité d'effort comparable, le second paraît inutile. Il est pourtant le seul qui protège le premier.</p>
+
+<p><strong>Le standard vieillit sans que personne le rouvre.</strong> Les produits changent, une machine est déplacée, un poste est ajouté. Le standard décrit alors une zone qui n'existe plus. Il devient faux, puis ignoré, et l'on conclut que le 5S ne marche pas.</p>
+
+<p><strong>Le rythme d'audit dépend d'une seule personne.</strong> Tant que cette personne passe, la zone tient. Le jour où elle change de poste, plus rien ne se passe. Un rythme qui repose sur une bonne volonté individuelle n'est pas un standard, c'est une habitude.</p>
+
+<p>La parade tient en une phrase : décidez du rythme d'audit et du nom de la personne qui passe <strong>avant</strong> de lancer le chantier, pas après. Ce point d'organisation relève de la même logique que le Check du cycle de Deming, détaillé dans notre article sur <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">la méthode PDCA et la roue de Deming</a>. Le Check est l'étape que l'on saute partout, pas seulement en 5S.</p>
+
+<h2 id="erreurs">Les erreurs qui font échouer un 5S</h2>
+
+<p>Ces erreurs se ressemblent d'un site à l'autre. Aucune n'est une faute de méthode, toutes sont des raccourcis de mise en oeuvre.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Lancer le 5S sur toute l'usine en même temps.</span></p>
+<p><span class="fichly-ok">✅ Commencer par une zone unique, visible, et la tenir six mois avant d'en ouvrir une deuxième.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Confier le tri à quelqu'un qui n'a pas autorité pour jeter.</span></p>
+<p><span class="fichly-ok">✅ Faire le tri avec la personne qui décide de la zone, avec un critère écrit à l'avance.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Nettoyer par un prestataire pour aller plus vite.</span></p>
+<p><span class="fichly-ok">✅ Faire nettoyer par l'équipe, parce que l'information trouvée vaut plus que le temps gagné.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Écrire un standard de plusieurs pages, rangé dans un classeur.</span></p>
+<p><span class="fichly-ok">✅ Afficher une photo de référence dans la zone, avec les responsabilités en face des tâches.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Changer la grille d'audit à chaque passage pour l'améliorer.</span></p>
+<p><span class="fichly-ok">✅ Geler la grille sur une période longue, quitte à la trouver imparfaite.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Utiliser la note d'audit pour comparer des équipes entre elles.</span></p>
+<p><span class="fichly-ok">✅ Comparer une zone à elle-même dans le temps. Une note d'audit mesure une zone, pas des personnes.</span></p>
+</div>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Prendre les photos avant et après, puis considérer le chantier terminé.</span></p>
+<p><span class="fichly-ok">✅ Considérer que le chantier commence le jour du premier audit, pas le jour de la photo.</span></p>
+</div>
+
+<h2 id="anglais">Le vocabulaire du 5S en anglais</h2>
+
+<p>Dans un groupe international, les standards et les grilles d'audit circulent en anglais. Les termes ne se traduisent pas toujours de façon évidente, et deux d'entre eux prêtent à confusion.</p>
+
+<table>
+<thead><tr>
+<th>Anglais</th>
+<th>Japonais</th>
+<th>Français</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Sort</td>
+<td>Seiri</td>
+<td>Supprimer</td>
+</tr>
+<tr>
+<td>Set in order</td>
+<td>Seiton</td>
+<td>Ranger</td>
+</tr>
+<tr>
+<td>Shine</td>
+<td>Seiso</td>
+<td>Nettoyer</td>
+</tr>
+<tr>
+<td>Standardize</td>
+<td>Seiketsu</td>
+<td>Standardiser</td>
+</tr>
+<tr>
+<td>Sustain</td>
+<td>Shitsuke</td>
+<td>Suivre</td>
+</tr>
+<tr>
+<td>Red tag area</td>
+<td>Aucun</td>
+<td>Zone d'attente des objets triés</td>
+</tr>
+<tr>
+<td>Shadow board</td>
+<td>Aucun</td>
+<td>Panneau à silhouettes</td>
+</tr>
+<tr>
+<td>5S audit score</td>
+<td>Aucun</td>
+<td>Note d'audit 5S</td>
+</tr>
+</tbody>
+</table>
+
+<p>Deux pièges de traduction méritent attention. <em>Shine</em> ne veut pas dire faire briller, mais nettoyer pour inspecter, ce qui est un tout autre objectif. Et <em>Sustain</em> ne veut pas dire discipline au sens de l'obéissance, mais maintien dans la durée, qui est une affaire d'organisation avant d'être une affaire de comportement.</p>
+
+<h2 id="outils">Les outils qui prolongent le 5S</h2>
+
+<p>Le 5S n'est pas une fin. Il prépare le terrain d'autres démarches, qui deviennent beaucoup plus simples une fois la zone lisible.</p>
+
+<ul>
+<li>
+<strong>La chasse aux gaspillages.</strong> Une fois les déplacements et les recherches supprimés, les autres familles de gaspillage deviennent visibles. Le détail est dans notre guide des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 MUDA du Lean</a>.</li>
+<li>
+<strong>Le cycle PDCA.</strong> L'audit 5S est un Check, et le plan d'actions qui en sort est un Act. Voir <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">la roue de Deming</a>.</li>
+<li>
+<strong>La mesure de la performance machine.</strong> Les micro-arrêts liés à l'environnement du poste apparaissent dans les relevés une fois la zone stabilisée. Le calcul est expliqué dans notre article sur <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">le taux de rendement synthétique</a>.</li>
+<li>
+<strong>La résolution de problèmes structurée.</strong> Les anomalies relevées pendant l'étape de nettoyage alimentent souvent un premier chantier de résolution, mené selon <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">la méthode DMAIC</a>.</li>
+</ul>
+
+<p>Sur le plan normatif, les référentiels de management de la qualité et de la sécurité demandent la maîtrise des conditions de réalisation, sans jamais imposer le 5S comme tel. Vous trouverez les textes applicables sur <a href="https://norminfo.afnor.org/" target="_blank" rel="noopener">le portail des normes de l'AFNOR</a> et les repères réglementaires sur le site du <a href="https://travail-emploi.gouv.fr/" target="_blank" rel="noopener">ministère du Travail</a>. Le 5S est un moyen d'y répondre, jamais une obligation en soi.</p>
+
+<h2 id="faq">FAQ : vos questions sur les 5S</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>C'est quoi les 5S ?</summary>
+<div class="answer">
+<p>C'est une méthode d'organisation d'un espace de travail en cinq étapes ordonnées : supprimer ce qui ne sert pas, ranger ce qui reste à une place définie, nettoyer pour détecter les anomalies, écrire l'état attendu, puis vérifier à un rythme fixé. Elle vient du système de production Toyota. Son but n'est pas la propreté, mais la visibilité des écarts.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les cinq S ?</summary>
+<div class="answer">
+<p>Les cinq S sont Seiri, Seiton, Seiso, Seiketsu et Shitsuke. En français : supprimer, ranger, nettoyer, standardiser, suivre. En anglais : Sort, Set in order, Shine, Standardize, Sustain. Le sigle ne vient donc pas d'un acronyme construit, mais de l'initiale commune de ces cinq mots.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle différence entre un 5S et un grand rangement ?</summary>
+<div class="answer">
+<p>Un rangement traite le désordre visible, un 5S traite ce qui produit ce désordre. Le test est simple : après un rangement, la zone est propre. Après un 5S, la zone est propre et vous savez dire où va chaque objet, qui l'a décidé, et quand quelqu'un repasse vérifier. Sans cette seconde partie, il s'agit d'un rangement.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment fonctionne un audit 5S ?</summary>
+<div class="answer">
+<p>Une grille de cinq lignes, une par S, chacune notée de 0 à 4, pour un total de vingt points. La même grille est utilisée à chaque passage, par une personne désignée, à un rythme connu d'avance. La note est affichée dans la zone et chaque écart devient une action datée avec un nom. Une grille qui change à chaque passage interdit toute comparaison.</p>
+</div>
+</details>
+
+<details>
+<summary>Quel est l'ordre des 5S, et peut-on le changer ?</summary>
+<div class="answer">
+<p>Non, l'ordre ne se change pas, et c'est la partie la moins intuitive de la méthode. Supprimer vient en premier parce que ranger avant d'avoir trié revient à organiser proprement de l'inutile. Nettoyer vient après le rangement parce qu'une zone dégagée se nettoie en une fraction du temps. Standardiser vient en quatrième parce qu'on ne peut écrire que l'état qu'on a atteint. Suivre vient en dernier et ne se termine jamais.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels outils Lean prolongent le 5S ?</summary>
+<div class="answer">
+<p>Le 5S précède la plupart des autres outils. Il alimente la chasse aux gaspillages, sert de premier Check dans un cycle PDCA, révèle des anomalies techniques qui rejoignent le plan de maintenance, et rend lisibles les micro-arrêts que l'on mesure ensuite avec le taux de rendement synthétique. C'est la raison pour laquelle il est presque toujours le premier chantier d'un déploiement.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Une zone tient quand quelqu'un repasse, pas quand elle est belle sur une photo.</strong></p>
+<p>Nous avons rassemblé la grille d'audit, les critères de tri, les standards types et les repères de chaque étape dans un format à utiliser debout dans la zone.</p>
+<p>👉 Découvrez <a href="https://www.fichly.com/products/le-guide-du-5s-en-20-fiches">le guide du 5S en 20 fiches</a> : 20 fiches prêtes à l'emploi, 29,90 €. Code promo FICHLY5 (-5 %).</p>
+</div>
+
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La méthode DMAIC : les 5 étapes et leurs livrables</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">La méthode PDCA : le cycle de Deming expliqué</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+</ul>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "La méthode 5S : définition, les 5 étapes et la grille d'audit",
+  "description": "Cinq lignes notées de 0 à 4, vingt points au total : la grille d'audit 5S. Plus la définition des 5S et ce que chaque étape doit produire en atelier.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Article_5S_-_FICHLY.png?v=1772622958",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2025-03-01",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "C'est quoi les 5S ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "C'est une méthode d'organisation d'un espace de travail en cinq étapes ordonnées : supprimer ce qui ne sert pas, ranger ce qui reste à une place définie, nettoyer pour détecter les anomalies, écrire l'état attendu, puis vérifier à un rythme fixé. Elle vient du système de production Toyota. Son but n'est pas la propreté, mais la visibilité des écarts." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les cinq S ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les cinq S sont Seiri, Seiton, Seiso, Seiketsu et Shitsuke. En français : supprimer, ranger, nettoyer, standardiser, suivre. En anglais : Sort, Set in order, Shine, Standardize, Sustain. Le sigle ne vient donc pas d'un acronyme construit, mais de l'initiale commune de ces cinq mots." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle différence entre un 5S et un grand rangement ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un rangement traite le désordre visible, un 5S traite ce qui produit ce désordre. Le test est simple : après un rangement, la zone est propre. Après un 5S, la zone est propre et vous savez dire où va chaque objet, qui l'a décidé, et quand quelqu'un repasse vérifier. Sans cette seconde partie, il s'agit d'un rangement." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment fonctionne un audit 5S ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Une grille de cinq lignes, une par S, chacune notée de 0 à 4, pour un total de vingt points. La même grille est utilisée à chaque passage, par une personne désignée, à un rythme connu d'avance. La note est affichée dans la zone et chaque écart devient une action datée avec un nom. Une grille qui change à chaque passage interdit toute comparaison." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est l'ordre des 5S, et peut-on le changer ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non, l'ordre ne se change pas, et c'est la partie la moins intuitive de la méthode. Supprimer vient en premier parce que ranger avant d'avoir trié revient à organiser proprement de l'inutile. Nettoyer vient après le rangement parce qu'une zone dégagée se nettoie en une fraction du temps. Standardiser vient en quatrième parce qu'on ne peut écrire que l'état qu'on a atteint. Suivre vient en dernier et ne se termine jamais." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels outils Lean prolongent le 5S ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le 5S précède la plupart des autres outils. Il alimente la chasse aux gaspillages, sert de premier Check dans un cycle PDCA, révèle des anomalies techniques qui rejoignent le plan de maintenance, et rend lisibles les micro-arrêts que l'on mesure ensuite avec le taux de rendement synthétique. C'est la raison pour laquelle il est presque toujours le premier chantier d'un déploiement." }
+    }
+  ]
+}
+</script>

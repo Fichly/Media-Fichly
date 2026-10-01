@@ -1,0 +1,643 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+.fichly-author{display:flex;gap:1.2em;align-items:flex-start;background:#fff;border:1px solid #dde2e8;border-top:5px solid #3b3a9e;border-radius:10px;padding:1.5em 1.7em;margin:2.4em 0;}
+.fichly-author-photo{flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:#3b3a9e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;font-weight:700;overflow:hidden;}
+.fichly-author-photo img{width:100%;height:100%;object-fit:cover;}
+.fichly-author-body{flex:1;}
+.fichly-author-body .role{font-size:.92em;color:#6b7280;margin:.1em 0 .5em;}
+.fichly-author-body strong{color:#1a1a1a;font-size:1.1em;}
+.fichly-author-link{display:inline-block;margin-top:.4em;font-weight:600;}
+</style>
+
+<div class="fichly-article">
+
+<p>Votre pièce passe cinq minutes en machine, et trois jours à attendre. Personne dans l'atelier ne conteste ce chiffre, et pourtant personne ne le voit. La Value Stream Mapping sert exactement à cela : rendre visible le temps où il ne se passe rien. Cet article vous donne les symboles, les sept étapes, un exemple chiffré complet, et la façon de le faire sur une feuille de papier plutôt que dans un logiciel.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>La VSM cartographie le trajet complet d'un produit, du fournisseur au client, en superposant le flux physique et le flux d'information. Elle chiffre le temps de traitement et le temps d'attente, puis compare les deux. C'est cette comparaison, et elle seule, qui désigne où agir.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Une VSM suit <strong>un produit</strong>, pas un service ni un département. On choisit une famille de produits avant de dessiner quoi que ce soit.</li>
+<li>Elle se dessine <strong>à la main, sur le terrain</strong>, en remontant le flux depuis l'expédition vers la matière première.</li>
+<li>Le chiffre qui compte n'est pas le temps de cycle, c'est le <strong>ratio entre le temps de valeur ajoutée et le délai de traversée</strong>.</li>
+<li>Deux cartes, jamais une : l'état actuel constate, l'état futur décide.</li>
+<li>La VSM ne sert à rien sur un flux unique sans stock intermédiaire, ni sur un problème dont la cause est déjà connue.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Une VSM, ou cartographie des flux, c'est quoi exactement</a></li>
+<li><a href="#process-mapping">VSM ou cartographie de processus : ce n'est pas le même outil</a></li>
+<li><a href="#notions">Les six notions à maîtriser avant de dessiner</a></li>
+<li><a href="#symboles">Les symboles de la VSM : le tableau complet</a></li>
+<li><a href="#etapes">Les 7 étapes pour cartographier un flux réel</a></li>
+<li><a href="#exemple">Exemple chiffré : un flux de bout en bout</a></li>
+<li><a href="#a3">La faire sur une feuille A3, sans logiciel ni modèle</a></li>
+<li><a href="#etat-futur">État futur : ce qu'on change, et dans quel ordre</a></li>
+<li><a href="#pieges">Les pièges qui transforment une VSM en joli dessin</a></li>
+<li><a href="#inutile">Les cas où la VSM ne sert à rien</a></li>
+<li><a href="#faq">FAQ : vos questions sur la Value Stream Mapping</a></li>
+</ol>
+</div>
+
+<h2 id="definition">Une VSM, ou cartographie des flux, c'est quoi exactement</h2>
+
+<p>La Value Stream Mapping, en français cartographie de la chaîne de valeur ou cartographie des flux, est une représentation sur une seule feuille du trajet complet d'un produit. Elle part du fournisseur, traverse tous les postes, et s'arrête chez le client.</p>
+
+<p>Sa particularité tient en un mot : <strong>elle superpose deux flux</strong>. Le flux physique, celui de la matière, se lit de gauche à droite en bas de la feuille. Le flux d'information, celui des commandes, des prévisions et des ordres de fabrication, se lit de droite à gauche en haut. Entre les deux, une ligne de temps.</p>
+
+<p>Cette ligne de temps est l'objet de l'exercice. Elle alterne des segments hauts, où la pièce est transformée, et des segments bas, où elle attend. Sur la plupart des flux industriels, les segments bas sont dix à mille fois plus longs que les segments hauts. La VSM ne fait rien d'autre que rendre ce rapport lisible d'un coup d'œil.</p>
+
+<p>C'est pour cela qu'on la dessine sur une feuille et non dans un tableur. Un tableur additionne, une carte fait voir une proportion.</p>
+
+<h2 id="process-mapping">VSM ou cartographie de processus : ce n'est pas le même outil</h2>
+
+<p>La confusion est fréquente, et elle fait perdre des semaines. Les deux outils dessinent des boîtes reliées par des flèches, et s'arrêtent là dans leur ressemblance.</p>
+
+<table>
+<thead><tr>
+<th> </th>
+<th>Cartographie de processus</th>
+<th>Value Stream Mapping</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Ce qu'on suit</td>
+<td>Une activité, un enchaînement de tâches</td>
+<td>Un produit, du fournisseur au client</td>
+</tr>
+<tr>
+<td>Périmètre</td>
+<td>Souvent un service ou un département</td>
+<td>Toujours transverse, plusieurs services</td>
+</tr>
+<tr>
+<td>Flux d'information</td>
+<td>Absent ou accessoire</td>
+<td>Représenté, au même niveau que la matière</td>
+</tr>
+<tr>
+<td>Temps d'attente</td>
+<td>Rarement chiffré</td>
+<td>Chiffré, et c'est le sujet principal</td>
+</tr>
+<tr>
+<td>Question à laquelle il répond</td>
+<td>Comment travaille-t-on ?</td>
+<td>Où le temps se perd-il ?</td>
+</tr>
+</tbody>
+</table>
+
+<p>La règle de choix est simple. Si votre problème est un enchaînement de tâches confus à l'intérieur d'une équipe, prenez une cartographie de processus. <strong>Si votre problème est un délai client trop long alors que chaque poste est efficace, prenez une VSM.</strong> Le second cas est celui où les indicateurs de poste sont bons et où le client se plaint quand même.</p>
+
+<h2 id="notions">Les six notions à maîtriser avant de dessiner</h2>
+
+<table>
+<thead><tr>
+<th>Notion</th>
+<th>Ce qu'elle mesure</th>
+<th>Où on la relève</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Temps de cycle</td>
+<td>Le temps qui sépare deux pièces sortant du même poste</td>
+<td>Chronomètre, au poste, sur plusieurs pièces</td>
+</tr>
+<tr>
+<td>Temps de traitement</td>
+<td>Le temps pendant lequel la pièce est réellement transformée</td>
+<td>Observation, souvent inférieur au temps de cycle</td>
+</tr>
+<tr>
+<td>Délai de traversée</td>
+<td>Le temps total entre l'entrée de la matière et la livraison</td>
+<td>Calcul, à partir des encours et du débit</td>
+</tr>
+<tr>
+<td>Temps de changement de série</td>
+<td>Le temps entre la dernière bonne pièce A et la première bonne pièce B</td>
+<td>Chronomètre, sur un changement réel</td>
+</tr>
+<tr>
+<td>Encours</td>
+<td>Le nombre de pièces en attente entre deux postes</td>
+<td>Comptage physique, un jour donné</td>
+</tr>
+<tr>
+<td>Takt time</td>
+<td>Le rythme imposé par la demande client</td>
+<td>Calcul, temps d'ouverture divisé par la demande</td>
+</tr>
+</tbody>
+</table>
+
+<p>Le takt time est le seul de ces six chiffres qui ne se relève pas sur le terrain : il se calcule. <strong>Si le client demande 480 pièces et que vous ouvrez 8 heures, le takt est d'une pièce toutes les 60 secondes.</strong> C'est le rythme auquel la ligne devrait produire, ni plus vite ni moins vite.</p>
+
+<p>Produire plus vite que le takt fabrique du stock. Produire moins vite fabrique du retard. Les deux se voient sur une VSM, et nulle part ailleurs aussi clairement.</p>
+
+<h2 id="symboles">Les symboles de la VSM : le tableau complet</h2>
+
+<p>Les symboles ne sont pas décoratifs. Ils portent une convention de lecture partagée, ce qui permet à quelqu'un qui n'a pas participé au chantier de comprendre la carte sans explication.</p>
+
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-symboles-vsm.png?v=1786983142" alt="Les symboles de la VSM : fournisseur et client, processus, boîte de données, stock, flux poussé, flux tiré, flux d'information papier et électronique, kanban, lissage, opérateur et éclair kaizen"></p>
+
+<table>
+<thead><tr>
+<th>Symbole</th>
+<th>Nom français</th>
+<th>Nom anglais</th>
+<th>Ce qu'on écrit dedans</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Usine crénelée</td>
+<td>Fournisseur ou client</td>
+<td>Supplier / Customer</td>
+<td>Le nom, et la fréquence de livraison</td>
+</tr>
+<tr>
+<td>Rectangle</td>
+<td>Processus</td>
+<td>Process box</td>
+<td>Le nom du poste, et le nombre d'opérateurs</td>
+</tr>
+<tr>
+<td>Rectangle sous le processus</td>
+<td>Boîte de données</td>
+<td>Data box</td>
+<td>Temps de cycle, changement de série, disponibilité</td>
+</tr>
+<tr>
+<td>Triangle</td>
+<td>Stock</td>
+<td>Inventory</td>
+<td>La quantité, et sa conversion en jours</td>
+</tr>
+<tr>
+<td>Flèche rayée</td>
+<td>Flux poussé</td>
+<td>Push arrow</td>
+<td>Rien, c'est un constat</td>
+</tr>
+<tr>
+<td>Rouleau</td>
+<td>Stock géré</td>
+<td>Supermarket</td>
+<td>La quantité maximale autorisée</td>
+</tr>
+<tr>
+<td>Flèche fine</td>
+<td>Information manuelle</td>
+<td>Manual information flow</td>
+<td>La nature et la fréquence</td>
+</tr>
+<tr>
+<td>Flèche brisée</td>
+<td>Information électronique</td>
+<td>Electronic information flow</td>
+<td>Le système émetteur</td>
+</tr>
+<tr>
+<td>Carte</td>
+<td>Kanban</td>
+<td>Kanban</td>
+<td>La quantité par carte</td>
+</tr>
+<tr>
+<td>Grille barrée</td>
+<td>Lissage</td>
+<td>Load levelling, heijunka</td>
+<td>La séquence de mélange</td>
+</tr>
+<tr>
+<td>Éclair</td>
+<td>Chantier d'amélioration</td>
+<td>Kaizen burst</td>
+<td>L'action visée, sur l'état futur</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Les abréviations de la boîte de données, en français et en anglais</h3>
+
+<p>La boîte de données est le seul endroit de la carte où l'on écrit des chiffres. Les abréviations y sont presque toujours anglaises, y compris dans les ateliers français, ce qui bloque beaucoup de lecteurs.</p>
+
+<table>
+<thead><tr>
+<th>Sigle</th>
+<th>Anglais</th>
+<th>Français</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>C/T</td>
+<td>Cycle time</td>
+<td>Temps de cycle</td>
+</tr>
+<tr>
+<td>P/T</td>
+<td>Process time</td>
+<td>Temps de traitement</td>
+</tr>
+<tr>
+<td>C/O</td>
+<td>Changeover time</td>
+<td>Temps de changement de série</td>
+</tr>
+<tr>
+<td>L/T</td>
+<td>Lead time</td>
+<td>Délai de traversée</td>
+</tr>
+<tr>
+<td>WIP</td>
+<td>Work in progress</td>
+<td>Encours</td>
+</tr>
+<tr>
+<td>Uptime</td>
+<td>Uptime</td>
+<td>Taux de disponibilité</td>
+</tr>
+<tr>
+<td>EPE</td>
+<td>Every part every</td>
+<td>Fréquence de passage d'une référence</td>
+</tr>
+<tr>
+<td>VA / NVA</td>
+<td>Value added / Non value added</td>
+<td>Valeur ajoutée / sans valeur ajoutée</td>
+</tr>
+<tr>
+<td> </td>
+<td>Pacemaker</td>
+<td>Processus régulateur</td>
+</tr>
+<tr>
+<td>FIFO</td>
+<td>First in, first out</td>
+<td>File d'attente ordonnée</td>
+</tr>
+</tbody>
+</table>
+
+<p>Le taux de disponibilité mérite une note. C'est le premier des trois facteurs du <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>, et c'est le seul chiffre de la boîte de données qui relie directement votre carte à votre indicateur de performance machine.</p>
+
+<h2 id="etapes">Les 7 étapes pour cartographier un flux réel</h2>
+
+<h3>Étape 1 : sélectionner la famille de produits</h3>
+
+<p>Une VSM cartographie une famille, jamais un catalogue. Une famille regroupe des références qui passent par les mêmes postes, dans le même ordre. Si vos produits divergent au troisième poste, vous avez deux familles et il en faut deux cartes.</p>
+
+<p>Choisissez celle qui pèse le plus en volume, ou celle qui pose le plus de problèmes de délai. Pas les deux à la fois.</p>
+
+<h3>Étape 2 : constituer l'équipe</h3>
+
+<p>Quatre à six personnes, dont au moins un opérateur de chaque zone traversée. Une VSM construite sans les gens du terrain se trompe sur les temps d'attente, systématiquement, et toujours dans le même sens : elle les sous-estime.</p>
+
+<h3>Étape 3 : remonter le flux à pied</h3>
+
+<p>Partez de l'expédition et remontez vers la matière première. Ce sens est contre-intuitif et il est essentiel : <strong>en remontant, vous voyez ce qui alimente chaque poste, donc ce qui contraint le poste suivant</strong>. En descendant, vous voyez ce que chaque poste produit, ce qui est la vision de l'atelier et non celle du client.</p>
+
+<h3>Étape 4 : relever les données poste par poste</h3>
+
+<p>Sur chaque poste : temps de cycle, temps de changement de série, nombre d'opérateurs, taux de disponibilité. Entre chaque poste : la quantité en attente. Comptez les pièces, ne demandez pas le chiffre du système. L'écart entre le stock théorique et le stock physique fait souvent partie des découvertes du chantier.</p>
+
+<h3>Étape 5 : dessiner l'état actuel</h3>
+
+<p>Flux physique en bas, flux d'information en haut, ligne de temps tout en bas. Rien de ce qui est dessiné ne doit être une intention : la carte de l'état actuel décrit ce qui se passe, y compris ce qui est gênant.</p>
+
+<h3>Étape 6 : identifier les gaspillages</h3>
+
+<p>La carte terminée, relisez-la avec la grille des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 MUDA</a>. Les stocks intermédiaires sautent aux yeux, mais les attentes, les transports et les traitements superflus se lisent aussi, à condition de chercher.</p>
+
+<h3>Étape 7 : concevoir l'état futur et le plan d'action</h3>
+
+<p>Une seconde carte, avec des éclairs kaizen qui marquent les chantiers à mener. Chaque éclair devient une ligne du plan d'action, avec un responsable et une date. Sans cette seconde carte, la VSM reste un diagnostic.</p>
+
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-vsm-simplifiee.png?v=1786983141" alt="Cartographie de flux simplifiée d'une ligne de fabrication : préparation, impression, découpe, poinçonnage et contrôle, conditionnement, avec les icônes de stock et de déplacement"></p>
+
+<h2 id="exemple">Exemple chiffré : un flux de bout en bout</h2>
+
+<p>Voici la mécanique complète, sur un flux de [secteur] à cinq postes. Les temps sont à relever sur votre propre ligne : ce qui compte ici est le calcul, pas les valeurs.</p>
+
+<table>
+<thead><tr>
+<th>Poste</th>
+<th>Temps de cycle</th>
+<th>Encours en sortie</th>
+<th>Attente convertie</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1. Préparation</td>
+<td>[C/T poste 1]</td>
+<td>[encours 1]</td>
+<td>[attente 1]</td>
+</tr>
+<tr>
+<td>2. Usinage</td>
+<td>[C/T poste 2]</td>
+<td>[encours 2]</td>
+<td>[attente 2]</td>
+</tr>
+<tr>
+<td>3. Contrôle</td>
+<td>[C/T poste 3]</td>
+<td>[encours 3]</td>
+<td>[attente 3]</td>
+</tr>
+<tr>
+<td>4. Assemblage</td>
+<td>[C/T poste 4]</td>
+<td>[encours 4]</td>
+<td>[attente 4]</td>
+</tr>
+<tr>
+<td>5. Conditionnement</td>
+<td>[C/T poste 5]</td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+<p>La conversion d'un encours en jours d'attente est le seul calcul un peu technique de la VSM, et il est élémentaire : <strong>divisez la quantité en attente par la consommation quotidienne du poste suivant</strong>. Trois cents pièces devant un poste qui en consomme cent par jour font trois jours d'attente.</p>
+
+<p>Une fois la ligne de temps complète, additionnez séparément les segments hauts et les segments bas. Le premier total est le temps de valeur ajoutée. Le second, augmenté du premier, est le délai de traversée.</p>
+
+<div class="fichly-note">
+<p><strong>Le chiffre qui déclenche les réactions.</strong> Sur le flux décrit dans cet article, la pièce passe cinq minutes en machine et trois jours à traverser l'atelier. Le ratio de valeur ajoutée dépend alors de la convention retenue, et l'écart est important. En temps calendaire, trois jours font 4 320 minutes, et le ratio tombe à 0,12 %. En temps ouvré sur des journées de 8 heures, trois jours font 1 440 minutes, et le ratio est de 0,35 %. Choisissez une convention, écrivez-la sur la carte, et gardez la même avant et après. Comparer un état actuel en calendaire à un état futur en temps ouvré fabrique une amélioration qui n'existe pas.</p>
+</div>
+
+<p>Quelle que soit la convention, le message est le même et il est rarement contesté : plus de 99 % du temps passé dans votre atelier n'apporte rien au client. C'est ce chiffre, et non la liste des gaspillages, qui débloque les discussions de direction.</p>
+
+<h2 id="a3">La faire sur une feuille A3, sans logiciel ni modèle</h2>
+
+<p>La plupart des ressources sur la VSM finissent par un logiciel, un modèle à télécharger ou une formation. C'est dommage, parce que le matériel réel tient dans une main.</p>
+
+<ul>
+<li>
+<strong>Une feuille A3</strong>, soit 297 par 420 millimètres, format défini par la norme <a href="https://www.boutique.afnor.org/" target="_blank" rel="noopener">NF EN ISO 216</a>. Deux A4 côte à côte suffisent si vous n'avez pas d'A3.</li>
+<li>
+<strong>Un crayon à papier et une gomme.</strong> Pas de stylo : la première carte est fausse à trois endroits, et vous le découvrirez en marchant.</li>
+<li>
+<strong>Des notes repositionnables</strong> pour les postes, tant que l'ordre n'est pas figé.</li>
+<li>
+<strong>Un chronomètre</strong>, celui de votre téléphone convient.</li>
+</ul>
+
+<p>Le format contraint, et c'est voulu. Une feuille A3 n'accepte pas quinze postes. Elle vous force à choisir un périmètre que l'équipe peut tenir dans sa tête, ce qu'aucun logiciel ne fera jamais à votre place. C'est la même logique que celle de la <a href="https://www.fichly.com/blogs/nos-articles/methode-a3-lean-resolution-probleme">méthode A3</a>, qui doit également son nom à un format de papier.</p>
+
+<p>Comptez une demi-journée pour une première carte sur un flux simple, une journée si vous devez relever les temps vous-même. La durée constatée sur les chantiers Fichly est de [durée du chantier].</p>
+
+<h2 id="etat-futur">État futur : ce qu'on change, et dans quel ordre</h2>
+
+<p>L'état futur n'est pas une carte idéale. C'est la carte de ce que vous saurez faire dans trois à six mois.</p>
+
+<p>L'ordre d'attaque est presque toujours le même, et il est contre-intuitif pour qui vient de la performance machine.</p>
+
+<ol>
+<li>
+<strong>Le poste qui donne le rythme.</strong> Un seul point du flux doit être piloté par le client. Les autres suivent.</li>
+<li>
+<strong>Les stocks les plus longs.</strong> Pas les plus gros en quantité, les plus longs en jours d'attente. Ce n'est pas la même liste.</li>
+<li>
+<strong>Les temps de changement de série.</strong> Ce sont eux qui justifient les gros lots, donc les stocks. Un chantier <a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">SMED</a> attaque la cause plutôt que l'effet.</li>
+<li>
+<strong>Le flux d'information.</strong> Souvent le dernier traité, et souvent le plus rentable : un ordre lancé trop tôt fabrique du stock aussi sûrement qu'une machine trop rapide.</li>
+</ol>
+
+<p>Chaque point devient un éclair kaizen sur la carte, puis une ligne de plan d'action. Si un chantier demande une analyse plus poussée que le bon sens de l'équipe, il bascule en <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">projet DMAIC</a>.</p>
+
+<h2 id="pieges">Les pièges qui transforment une VSM en joli dessin</h2>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Dessiner la carte dans un bureau, à partir des données du système.</span><br><span class="fichly-ok">✅ Remontez le flux à pied, comptez les pièces vous-même.</span> L'écart entre le stock théorique et le stock physique est souvent la première découverte du chantier.</p>
+<p><span class="fichly-ko">❌ Cartographier tout l'atelier d'un coup.</span><br><span class="fichly-ok">✅ Une famille de produits, un flux, une feuille.</span> Une carte illisible ne sert à personne, et surtout pas à ceux qui devront agir.</p>
+<p><span class="fichly-ko">❌ S'arrêter à l'état actuel.</span><br><span class="fichly-ok">✅ La carte de l'état futur est la moitié du travail.</span> Un état actuel seul est un constat, et un constat ne change rien.</p>
+<p><span class="fichly-ko">❌ Mettre la carte au propre dans un logiciel.</span><br><span class="fichly-ok">✅ Gardez-la manuscrite tant qu'elle vit.</span> Un document mis au propre n'est plus corrigé, donc plus utilisé.</p>
+<p><span class="fichly-ko">❌ Confondre temps de cycle et temps de traitement.</span><br><span class="fichly-ok">✅ Relevez les deux, ils sont rarement égaux.</span> L'écart entre les deux est déjà un gisement, avant même de regarder les stocks.</p>
+<p><span class="fichly-ko">❌ Changer de convention de temps entre l'état actuel et l'état futur.</span><br><span class="fichly-ok">✅ Écrivez la convention sur la carte, une fois pour toutes.</span> Sinon vous mesurerez un progrès qui n'a pas eu lieu.</p>
+</div>
+
+<h2 id="inutile">Les cas où la VSM ne sert à rien</h2>
+
+<p>Aucun outil ne convient à tout, et la VSM a des limites précises. Les connaître évite d'y passer une journée pour rien.</p>
+
+<ul>
+<li>
+<strong>Un flux sans stock intermédiaire.</strong> Si vos postes sont enchaînés sans encours, la ligne de temps est plate et la carte n'apprend rien. Regardez plutôt l'équilibrage des postes.</li>
+<li>
+<strong>Un problème de qualité localisé.</strong> Un défaut sur un poste identifié relève d'une analyse de causes, pas d'une cartographie de flux.</li>
+<li>
+<strong>Une cause déjà connue de tous.</strong> Si l'atelier sait exactement où est le goulot et pourquoi, la VSM ne fera que documenter ce que tout le monde sait. Agissez.</li>
+<li>
+<strong>Un flux qui change tous les mois.</strong> Sur un atelier très variable, la carte est périmée avant d'être finie. Cartographiez une famille stable, ou renoncez.</li>
+<li>
+<strong>Un périmètre sans autorité transverse.</strong> La VSM traverse les services. Si personne ne peut arbitrer entre eux, le plan d'action ne sera pas exécuté.</li>
+</ul>
+
+<p>Ces cinq cas ont un point commun : la VSM y répond à une question que personne ne se pose. Un outil de diagnostic n'a d'intérêt que face à une incertitude réelle.</p>
+
+<h2 id="faq">FAQ : vos questions sur la Value Stream Mapping</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>Comment faire une VSM ?</summary>
+<div class="answer">
+<p>En sept étapes : choisir la famille de produits, constituer l'équipe, remonter le flux à pied depuis l'expédition, relever les temps et les encours poste par poste, dessiner l'état actuel, identifier les gaspillages, puis concevoir l'état futur et le plan d'action. La cartographie se fait sur une feuille, au crayon, sur le terrain.</p>
+</div>
+</details>
+
+<details>
+<summary>Value stream mapping ou cartographie de processus, quelle différence ?</summary>
+<div class="answer">
+<p>La cartographie de processus décrit l'enchaînement des tâches à l'intérieur d'un périmètre. La VSM suit un produit du fournisseur au client, superpose le flux d'information au flux physique et chiffre les temps d'attente. Une cartographie de processus dit comment on travaille, une VSM dit où le temps se perd.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment adapter le VSM aux processus non manufacturiers ?</summary>
+<div class="answer">
+<p>Le principe ne change pas : on suit une unité de travail, on relève les temps de traitement et les temps d'attente. En administratif, l'unité est un dossier ou une demande. Les encours ne sont plus des palettes mais des dossiers en attente de validation, et ils se comptent de la même façon.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les prérequis pour réussir un projet VSM ?</summary>
+<div class="answer">
+<p>Trois seulement : une famille de produits identifiée, une équipe qui connaît le terrain, et l'autorisation d'aller relever les temps sur place. Aucun logiciel n'est nécessaire. Ce qui manque le plus souvent n'est pas l'outil, c'est le temps accordé pour remonter le flux à pied.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment mesurer le retour d'un projet VSM ?</summary>
+<div class="answer">
+<p>En comparant le délai de traversée avant et après. C'est la grandeur que la VSM cherche à réduire, et la seule qui se lit directement sur les deux cartes. Le ratio de valeur ajoutée sert de second indicateur : il montre quelle part du délai est réellement du travail.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment impliquer durablement les équipes dans le VSM ?</summary>
+<div class="answer">
+<p>En construisant la carte avec elles, sur le terrain, et pas en la leur présentant terminée. Une VSM dessinée par une seule personne dans un bureau devient un document d'audit. Une VSM dessinée à plusieurs devant la ligne devient un objet de travail que les équipes corrigent d'elles-mêmes.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Une carte se dessine mieux à plusieurs, sur un vrai flux.</strong></p>
+<p>Dans nos formations, chaque participant cartographie un flux réel de son atelier, relève ses propres temps et repart avec une carte utilisable dès le lundi.</p>
+<p>👉 Découvrez la <a href="https://www.fichly.com/pages/formation-yellow-belt-lean-management-fichly">formation Yellow Belt Lean Management</a>, conçue pour les fondamentaux du terrain : VSM, 5S, MUDA et SMED. Organisme QUALIOPI. Code promo FICHLY5 (-5 %).</p>
+</div>
+
+<div class="fichly-bio">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+
+<div class="fichly-author">
+<div class="fichly-author-photo"><img src="REMPLACER-PAR-PHOTO-HUGO" alt="Hugo Duc, formateur Lean Management et fondateur de Fichly"></div>
+<div class="fichly-author-body">
+<strong>Hugo Duc</strong>
+<p class="role">Fondateur de Fichly · Formateur Lean Management</p>
+<p>Ingénieur industriel de formation, Hugo a accompagné plus de 70 sites industriels en France dans leurs démarches d'amélioration continue.</p>
+<a class="fichly-author-link" href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Suivre Hugo sur LinkedIn</a>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean, guide complet</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le TRS : définition, exemples et calculs</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+</ul>
+</div>
+
+</div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Value Stream Mapping : définition et étapes",
+  "description": "Le guide VSM pour cartographier un flux réel : les symboles VSM, les 7 étapes, un exemple chiffré complet et le calcul du ratio VA/NVA. Sur une feuille A3.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-symboles-vsm.png?v=1786983142",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-08-24",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment faire une VSM ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En sept étapes : choisir la famille de produits, constituer l'équipe, remonter le flux à pied depuis l'expédition, relever les temps et les encours poste par poste, dessiner l'état actuel, identifier les gaspillages, puis concevoir l'état futur et le plan d'action. La cartographie se fait sur une feuille, au crayon, sur le terrain." }
+    },
+    {
+      "@type": "Question",
+      "name": "Value stream mapping ou cartographie de processus, quelle différence ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La cartographie de processus décrit l'enchaînement des tâches à l'intérieur d'un périmètre. La VSM suit un produit du fournisseur au client, superpose le flux d'information au flux physique et chiffre les temps d'attente. Une cartographie de processus dit comment on travaille, une VSM dit où le temps se perd." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment adapter le VSM aux processus non manufacturiers ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le principe ne change pas : on suit une unité de travail, on relève les temps de traitement et les temps d'attente. En administratif, l'unité est un dossier ou une demande. Les encours ne sont plus des palettes mais des dossiers en attente de validation, et ils se comptent de la même façon." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les prérequis pour réussir un projet VSM ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Trois seulement : une famille de produits identifiée, une équipe qui connaît le terrain, et l'autorisation d'aller relever les temps sur place. Aucun logiciel n'est nécessaire. Ce qui manque le plus souvent n'est pas l'outil, c'est le temps accordé pour remonter le flux à pied." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment mesurer le retour d'un projet VSM ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En comparant le délai de traversée avant et après. C'est la grandeur que la VSM cherche à réduire, et la seule qui se lit directement sur les deux cartes. Le ratio de valeur ajoutée sert de second indicateur : il montre quelle part du délai est réellement du travail." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment impliquer durablement les équipes dans le VSM ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "En construisant la carte avec elles, sur le terrain, et pas en la leur présentant terminée. Une VSM dessinée par une seule personne dans un bureau devient un document d'audit. Une VSM dessinée à plusieurs devant la ligne devient un objet de travail que les équipes corrigent d'elles-mêmes." }
+    }
+  ]
+}
+</script>

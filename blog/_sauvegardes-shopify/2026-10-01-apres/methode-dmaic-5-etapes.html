@@ -1,0 +1,700 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+
+<div class="fichly-article">
+
+<p>Un projet DMAIC ne se juge pas à son plan, il se juge à ce que chaque phase produit. C'est ce que la plupart des présentations omettent : elles décrivent cinq étapes, sans jamais dire ce qu'il faut avoir en main pour passer à la suivante. Cet article donne les cinq phases, le livrable de chacune, le critère qui autorise le passage, un exemple chiffré complet, et la règle pour trancher entre un DMAIC et un PDCA avant de démarrer.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Le DMAIC (Define, Measure, Analyze, Improve, Control) structure la résolution d'un problème en cinq phases, de la définition au verrouillage des gains. Chaque phase produit un livrable qui conditionne l'ouverture de la suivante. La contrainte principale du DMAIC n'est pas la statistique, c'est l'interdiction de proposer une solution avant d'avoir prouvé la cause.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Le DMAIC compte cinq phases : Définir, Mesurer, Analyser, Innover, Contrôler.</li>
+<li>Chaque phase produit un livrable, sans lequel la suivante ne s'ouvre pas.</li>
+<li>Le DMAIC vise un problème récurrent, de cause inconnue et d'enjeu chiffrable.</li>
+<li>Un projet DMAIC dure de trois à six mois, jamais en crise.</li>
+<li>La phase Contrôler est la plus abandonnée et la seule qui prouve le gain.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">C'est quoi la méthode DMAIC ? Définition et acronyme</a></li>
+<li><a href="#six-sigma">DMAIC, Six Sigma et Lean : qui appartient à qui</a></li>
+<li><a href="#quand">Quand le DMAIC est-il le bon outil ?</a></li>
+<li><a href="#dmaic-ou-pdca">Pourquoi DMAIC et pas PDCA ?</a></li>
+<li><a href="#etapes">Les 5 étapes du DMAIC et ce que chaque phase doit produire</a></li>
+<li><a href="#exemple">Exemple concret : un projet DMAIC en atelier d'usinage</a></li>
+<li><a href="#qui-pilote">Qui pilote un projet DMAIC, et avec quelle équipe ?</a></li>
+<li><a href="#carte-methodes">DMAIC, PDCA, 8D, QRQC, A3 : la carte des méthodes</a></li>
+<li><a href="#dmaic-anglais">DMAIC en anglais : les 5 phases et les sigles</a></li>
+<li><a href="#erreurs">Les erreurs qui font échouer un projet DMAIC</a></li>
+<li><a href="#formation">Se former au DMAIC : quel niveau pour quel rôle</a></li>
+<li><a href="#faq">FAQ : vos questions sur le DMAIC</a></li>
+</ol>
+</div>
+
+<h2 id="definition">C'est quoi la méthode DMAIC ? Définition et acronyme</h2>
+
+<p>Le DMAIC est une démarche de résolution de problème en cinq phases, Définir, Mesurer, Analyser, Innover, Contrôler, où chaque phase produit un livrable qui conditionne l'ouverture de la suivante. Elle interdit de proposer une solution avant que la cause ne soit établie par des données.</p>
+
+<p>L'acronyme se lit dans les deux langues, et les deux circulent en atelier français.</p>
+
+<table>
+<thead><tr>
+<th>Lettre</th>
+<th>Français</th>
+<th>Anglais</th>
+<th>La question de la phase</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>D</td>
+<td>Définir</td>
+<td>Define</td>
+<td>Quel est exactement le problème, et pour qui ?</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Mesurer</td>
+<td>Measure</td>
+<td>Quelle est la situation réelle, chiffrée ?</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Analyser</td>
+<td>Analyze</td>
+<td>Quelle cause explique cet écart, et comment le prouver ?</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Innover</td>
+<td>Improve</td>
+<td>Quelle action supprime cette cause ?</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Contrôler</td>
+<td>Control</td>
+<td>Comment garantir que le gain tient dans six mois ?</td>
+</tr>
+</tbody>
+</table>
+
+<p>La meilleure image reste celle de l'enquête. Un enquêteur ne désigne pas un coupable en arrivant sur les lieux : il relève, il recoupe, il élimine, et il ne conclut que lorsque les faits ne laissent qu'une explication. <strong>Le DMAIC applique cette discipline à un problème industriel</strong>, et sa difficulté est exactement la même : résister à la conviction du début.</p>
+
+<h2 id="six-sigma">DMAIC, Six Sigma et Lean : qui appartient à qui</h2>
+
+<p>La question revient à chaque session de formation, et l'imprécision qui l'entoure décourage beaucoup de gens d'utiliser une démarche qui leur serait pourtant utile.</p>
+
+<p><strong>Six Sigma est né chez Motorola dans les années 1980</strong>, autour d'un objectif de maîtrise de la variabilité des procédés. Le DMAIC en est la démarche projet. Le Lean, lui, vient de Toyota et cible l'élimination des gaspillages et la réduction des délais. Ce sont deux origines distinctes, deux vocabulaires, et une convergence pratique évidente : les deux cherchent à faire mieux avec moins d'aléas.</p>
+
+<p>La démarche a d'ailleurs été normalisée. La méthodologie DMAIC fait l'objet de la norme NF ISO 13053, consultable auprès de l'<a href="https://www.boutique.afnor.org/" target="_blank" rel="noopener">AFNOR</a>. C'est utile à savoir quand un client ou un donneur d'ordre demande sur quoi votre démarche s'appuie.</p>
+
+<div class="fichly-note">
+<p><strong>Transparence.</strong> On peut mener un DMAIC complet sans faire de statistiques avancées, et c'est le cas de la grande majorité des projets industriels. Un relevé propre, un tri par fréquence et un graphique suffisent à prouver la plupart des causes. Les outils statistiques lourds deviennent nécessaires quand plusieurs facteurs interagissent, ce qui est plus rare qu'on ne le dit. Chez Fichly, l'enseignement est ancré côté Lean et terrain, avec les outils de mesure qui vont avec, sans faire de la statistique une barrière d'entrée.</p>
+</div>
+
+<p>Un dernier point, presque toujours absent des présentations françaises : <strong>le DMAIC améliore un processus qui existe</strong>. Pour en concevoir un qui n'existe pas encore, la démarche s'appelle DMADV, pour Définir, Mesurer, Analyser, Concevoir, Vérifier. La question qui les sépare tient en une ligne, et il vaut mieux se la poser avant de démarrer : le processus que vous voulez améliorer tourne-t-il déjà ?</p>
+
+<h2 id="quand">Quand le DMAIC est-il le bon outil ?</h2>
+
+<p>Quatre conditions, à vérifier avant de lancer quoi que ce soit.</p>
+
+<ol>
+<li>
+<strong>Le problème revient.</strong> Un incident isolé ne justifie pas un projet de plusieurs mois.</li>
+<li>
+<strong>Sa cause n'est pas établie.</strong> Si tout le monde sait pourquoi, la démarche ne fera que documenter ce qui est su.</li>
+<li>
+<strong>Son enjeu se chiffre.</strong> Rebut, retard, retouche, réclamation. Sans grandeur mesurable, la phase Mesurer n'a pas d'objet.</li>
+<li>
+<strong>Vous avez plusieurs semaines.</strong> Un DMAIC dure généralement de trois à six mois.</li>
+</ol>
+
+<p>La contrepartie est plus utile encore, et personne ne la publie. <strong>Trois situations où le DMAIC n'est pas le bon outil.</strong></p>
+
+<ul>
+<li>
+<strong>Un risque de sécurité immédiat.</strong> On sécurise d'abord, on analyse ensuite. Aucune démarche ne passe avant la mise en sécurité.</li>
+<li>
+<strong>Une réclamation client à traiter sous 48 heures.</strong> Le format adapté est un 8D ou un QRQC, conçus pour la réaction rapide et la protection du client.</li>
+<li>
+<strong>Une cause déjà connue et une solution évidente.</strong> Faites-la, et vérifiez qu'elle tient. Un cycle PDCA suffit.</li>
+</ul>
+
+<p>Lancer un DMAIC dans ces trois cas ne produit pas un mauvais projet : cela produit un projet qui arrive après la bataille, et qui décrédibilise la démarche pour les suivants.</p>
+
+<h2 id="dmaic-ou-pdca">Pourquoi DMAIC et pas PDCA ?</h2>
+
+<p>C'est la question la plus fréquente, et elle mérite une grille plutôt qu'un principe. Répondez aux cinq questions sur votre propre problème.</p>
+
+<table>
+<thead><tr>
+<th>Question</th>
+<th>Réponse qui oriente vers le PDCA</th>
+<th>Réponse qui oriente vers le DMAIC</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>La cause est-elle connue ou plausible ?</td>
+<td class="col-oui">Oui, on a une hypothèse sérieuse</td>
+<td class="col-non">Non, personne ne sait</td>
+</tr>
+<tr>
+<td>Le problème est-il déjà revenu plusieurs fois ?</td>
+<td class="col-oui">Non, ou une fois</td>
+<td class="col-non">Oui, régulièrement</td>
+</tr>
+<tr>
+<td>L'enjeu se chiffre-t-il ?</td>
+<td class="col-oui">Difficilement</td>
+<td class="col-non">Oui, en pièces, en heures ou en euros</td>
+</tr>
+<tr>
+<td>Faut-il embarquer plusieurs services ?</td>
+<td class="col-oui">Non, une équipe suffit</td>
+<td class="col-non">Oui, production, qualité, méthodes</td>
+</tr>
+<tr>
+<td>Disposez-vous de trois mois ?</td>
+<td class="col-oui">Non, il faut agir cette semaine</td>
+<td class="col-non">Oui, le sujet le justifie</td>
+</tr>
+</tbody>
+</table>
+
+<p>La règle de lecture est simple : <strong>trois réponses ou plus dans la colonne de gauche, prenez un cycle PDCA</strong>. Vous irez plus vite et vous apprendrez autant. Trois réponses ou plus à droite, le DMAIC est justifié.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-dmaic-5-etapes-1-pdca-ou-dmaic.gif" alt="Les cinq questions de la grille appliquées à deux problèmes. Outils cherchés en début de poste : hypothèse sérieuse, une équipe suffit, à régler cette semaine, soit trois réponses côté PDCA contre deux : prenez un PDCA. Rebut à 7 % au lieu de 2 % : cause inconnue, problème régulier, enjeu en euros, plusieurs services, le sujet justifie trois mois, soit cinq réponses côté DMAIC : le DMAIC est justifié." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<p>Le cas mixte est fréquent et se traite bien : commencez par un tour de <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a> pour tester l'hypothèse évidente. Si elle tombe, vous avez éliminé une piste en deux semaines et vous démarrez le DMAIC avec un terrain déjà déblayé.</p>
+
+<h2 id="etapes">Les 5 étapes du DMAIC et ce que chaque phase doit produire</h2>
+
+<p>Voici la vue d'ensemble. Le tableau se lit comme un contrat : tant que la colonne de droite n'est pas remplie, la phase suivante ne s'ouvre pas.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-dmaic-5-etapes-2-phases-et-livrables.gif" alt="Les cinq phases du DMAIC séparées par des portes fermées. Une solution déguisée en problème, « Il manque un contrôle », bute sur la première porte et est refusée. Puis chaque phase produit son livrable (charte d'une page, relevé daté, cause prouvée par les données, action testée et mesurée, standard avec indicateur et fréquence de revue), le sponsor valide le passage, la porte s'ouvre et le projet avance jusqu'à Contrôler." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<p>Pour appliquer ces cinq phases à votre propre problème, nous avons rassemblé la démarche complète dans notre <a href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic">guide de la résolution de problèmes DMAIC</a>.</p>
+
+<table>
+<thead><tr>
+<th>Phase</th>
+<th>Objectif</th>
+<th>Livrable de sortie</th>
+<th>Critère de passage</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Définir</td>
+<td>Cadrer le problème et son périmètre</td>
+<td>Une charte de projet d'une page</td>
+<td>L'écart est écrit en une phrase mesurable</td>
+</tr>
+<tr>
+<td>Mesurer</td>
+<td>Établir la situation réelle</td>
+<td>Un relevé daté, sur une période représentative</td>
+<td>La mesure est fiable et reproductible</td>
+</tr>
+<tr>
+<td>Analyser</td>
+<td>Établir la cause</td>
+<td>Une cause prouvée par les données</td>
+<td>La cause explique la majorité de l'écart</td>
+</tr>
+<tr>
+<td>Innover</td>
+<td>Supprimer la cause</td>
+<td>Une action testée, avec son résultat mesuré</td>
+<td>L'écart a diminué sur la même mesure</td>
+</tr>
+<tr>
+<td>Contrôler</td>
+<td>Verrouiller le gain</td>
+<td>Un standard, un indicateur, une fréquence de revue</td>
+<td>Le gain tient après plusieurs semaines</td>
+</tr>
+</tbody>
+</table>
+
+<h3>1. Définir : écrire l'écart, pas la solution</h3>
+
+<p>La charte tient sur une page : le problème, le périmètre, la grandeur mesurée, l'objectif, l'équipe, le calendrier. L'erreur classique consiste à écrire le problème sous forme de solution manquante. « Il manque un contrôle en fin de ligne » n'est pas un problème, c'est une réponse déguisée qui ferme l'analyse avant de l'ouvrir.</p>
+
+<p>Le test de qualité de cette phase est brutal : <strong>l'écart doit s'écrire en une phrase avec un chiffre dedans</strong>.</p>
+
+<h3>2. Mesurer : relever avant d'expliquer</h3>
+
+<p>On mesure la situation réelle, sur une période représentative, avec une méthode de relevé que deux personnes différentes appliqueraient de la même façon. C'est le point le plus souvent bâclé : un relevé dont la définition varie d'un opérateur à l'autre produit une analyse fausse et personne ne s'en aperçoit.</p>
+
+<p>Si le problème porte sur un délai plutôt que sur un défaut, la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">cartographie des flux</a> est l'outil de mesure adapté : elle chiffre les temps d'attente que les indicateurs de poste ne voient pas.</p>
+
+<h3 id="analyser">3. Analyser : prouver la cause avant de proposer</h3>
+
+<p>La phase la plus exigeante, et celle où le projet se gagne ou se perd. Il ne s'agit pas de trouver une explication plausible mais de <strong>prouver qu'une cause explique la majorité de l'écart mesuré</strong>.</p>
+
+<p>Les outils habituels sont le tri par fréquence, le diagramme de causes, la comparaison entre situations où le problème apparaît et situations où il n'apparaît pas, et l'interrogation successive des causes par la méthode des cinq pourquoi. Cette dernière est simple à mener et facile à interrompre trop tôt, ce qui en fait un sujet à part entière.</p>
+
+<p>La grille des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 MUDA</a> est utile ici comme lecture de départ : elle donne un vocabulaire commun pour nommer ce qui se passe avant d'en chercher la cause.</p>
+
+<p>Le critère de sortie est vérifiable : si vous supprimiez cette cause, quelle part de l'écart disparaîtrait ? Si la réponse est « une petite part », vous n'avez pas fini.</p>
+
+<h3>4. Innover : agir sur la cause, pas sur le symptôme</h3>
+
+<p>L'action se teste avant d'être généralisée, sur un périmètre réduit, avec la même mesure qu'en phase 2. Une solution qui n'est pas mesurée avec le même instrument que le problème ne peut pas être comparée à l'état initial.</p>
+
+<h3>5. Contrôler : prouver que ça tient</h3>
+
+<p>Un standard écrit, un indicateur suivi, une fréquence de revue et une date de fin de surveillance. C'est la phase la plus abandonnée, et la seule qui distingue une amélioration d'un effet de projet.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-dmaic-5-etapes-3-prouver-que-ca-tient.gif" alt="Le même projet fait passer le rebut de 7 % à 2 %, puis on suit six mois après la fin du projet. Sans phase Contrôler, le taux remonte vers 6 % : effet de projet. Avec un standard écrit, un indicateur suivi, une revue chaque semaine et une date de fin de surveillance, un écart apparaît, la revue suivante le voit, il est corrigé, et le rebut reste sous 2 % à six mois." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<h2 id="exemple">Exemple concret : un projet DMAIC en atelier d'usinage</h2>
+
+<p>Un atelier d'usinage, une famille de pièces, un taux de rebut à 7 % pour un objectif interne de 2 %.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-methode-dmaic-5-etapes-4-exemple-rebut.gif" alt="Projet DMAIC sur un rebut de 7 % pour 2 % visés. Mesurer : un défaut dimensionnel fait 80 % des rebuts. Analyser : ces rebuts se concentrent sur deux machines en début de poste ; « les deux machines dérivent » est écarté, la cause est une mise en chauffe non standardisée avant le premier lot. Innover : le standard de mise en chauffe les fait disparaître. Contrôler : audit chaque semaine pendant deux mois, le rebut repasse sous 2 %." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<table>
+<thead><tr>
+<th>Phase</th>
+<th>Ce qui a été fait</th>
+<th>Ce qui en est sorti</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Définir</td>
+<td>Périmètre limité à une famille de pièces</td>
+<td>Écart écrit : 7 % de rebut contre 2 % visés</td>
+</tr>
+<tr>
+<td>Mesurer</td>
+<td>Quatre semaines de relevés, défaut par défaut</td>
+<td>80 % des rebuts portent sur un seul défaut dimensionnel</td>
+</tr>
+<tr>
+<td>Analyser</td>
+<td>Tri par machine et par moment de la journée</td>
+<td>Rebuts concentrés sur deux machines, en début de poste</td>
+</tr>
+<tr>
+<td>Analyser</td>
+<td>Recherche de la cause de cette concentration</td>
+<td>Mise en chauffe non standardisée avant le premier lot</td>
+</tr>
+<tr>
+<td>Innover</td>
+<td>Standard de mise en chauffe écrit et testé</td>
+<td>Le défaut recule sur les deux machines</td>
+</tr>
+<tr>
+<td>Contrôler</td>
+<td>Audit du standard chaque semaine pendant deux mois</td>
+<td>Retour du rebut sous 2 %</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trois enseignements de ce projet, plus utiles que le résultat lui-même.</p>
+
+<p>D'abord, <strong>la phase Mesurer a divisé le problème par cinq</strong> : passer de « on a du rebut » à « 80 % du rebut est un seul défaut » réduit le champ d'investigation avant même de commencer à analyser.</p>
+
+<p>Ensuite, la cause finale n'était ni une machine ni un opérateur, mais une absence de standard. C'est le cas le plus fréquent, et c'est aussi celui que les analyses interrompues trop tôt manquent systématiquement : elles s'arrêtent sur « les deux machines dérivent » et changent un réglage.</p>
+
+<p>Enfin, le coût annuel de ce rebut avait été chiffré avant le lancement. Sans ce chiffre, le projet n'aurait pas obtenu de temps.</p>
+
+<h2 id="qui-pilote">Qui pilote un projet DMAIC, et avec quelle équipe ?</h2>
+
+<p>La question du pilote est traitée partout en termes de ceinture, et presque jamais en termes de temps disponible. C'est pourtant le second qui fait échouer les projets.</p>
+
+<table>
+<thead><tr>
+<th>Rôle</th>
+<th>Qui</th>
+<th>Ce qu'il fait</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Pilote</td>
+<td>Un certifié Green Belt, ou en cours de certification</td>
+<td>Tient la méthode, anime, produit les livrables</td>
+</tr>
+<tr>
+<td>Sponsor</td>
+<td>Le responsable du périmètre</td>
+<td>Arbitre, dégage le temps, valide les passages de phase</td>
+</tr>
+<tr>
+<td>Contributeurs terrain</td>
+<td>Opérateurs et régleurs de la zone</td>
+<td>Relèvent, testent, corrigent les hypothèses fausses</td>
+</tr>
+<tr>
+<td>Expert</td>
+<td>Méthodes, qualité ou maintenance selon le sujet</td>
+<td>Intervient ponctuellement, ne pilote pas</td>
+</tr>
+</tbody>
+</table>
+
+<p>La charge du pilote se répartit de façon très inégale : elle se concentre sur le cadrage, la campagne de relevés et la préparation de la revue finale.</p>
+
+<p>Un point de gouvernance vaut d'être posé explicitement : <strong>c'est le sponsor qui valide le passage d'une phase à la suivante</strong>, pas le pilote. Sans cette validation, la démarche glisse vers la solution dès la première réunion où quelqu'un est pressé. Quand ce rôle de pilotage devient un poste à part entière, il porte souvent le titre de <a href="https://www.fichly.com/blogs/nos-articles/responsable-amelioration-continue-fiche-metier">responsable amélioration continue</a>.</p>
+
+<h2 id="carte-methodes">DMAIC, PDCA, 8D, QRQC, A3 : la carte des méthodes</h2>
+
+<table>
+<thead><tr>
+<th>Méthode</th>
+<th>Origine</th>
+<th>Durée typique</th>
+<th>Situation adaptée</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>PDCA</td>
+<td>Amélioration continue</td>
+<td>Quelques jours à quelques semaines</td>
+<td>Cause plausible, test rapide possible</td>
+</tr>
+<tr>
+<td>DMAIC</td>
+<td>Six Sigma</td>
+<td>Trois à six mois</td>
+<td>Problème récurrent, cause inconnue, enjeu chiffré</td>
+</tr>
+<tr>
+<td>8D</td>
+<td>Industrie automobile</td>
+<td>Quelques semaines</td>
+<td>Réclamation client, protection immédiate nécessaire</td>
+</tr>
+<tr>
+<td>QRQC</td>
+<td>Terrain, réaction rapide</td>
+<td>Quelques heures à quelques jours</td>
+<td>Anomalie du jour, traitée au poste</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>Toyota</td>
+<td>Variable</td>
+<td>Support de raisonnement, compatible avec les autres</td>
+</tr>
+</tbody>
+</table>
+
+<p>L'A3 mérite une précision, parce qu'il est souvent placé sur la même ligne que les autres à tort : ce n'est pas une démarche concurrente mais <strong>un format de restitution sur une page</strong>, qui peut porter un PDCA comme un DMAIC. Le détail des huit cases est traité dans notre article sur la méthode A3.</p>
+
+<h2 id="dmaic-anglais">DMAIC en anglais : les 5 phases et les sigles</h2>
+
+<p>Le vocabulaire du DMAIC est majoritairement anglais, y compris dans les groupes français, et cette barrière lexicale bloque plus de gens que la méthode elle-même. Voici la correspondance complète.</p>
+
+<table>
+<thead><tr>
+<th>Sigle</th>
+<th>Anglais</th>
+<th>Français</th>
+<th>Ce que c'est</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>D</td>
+<td>Define</td>
+<td>Définir</td>
+<td>La phase de cadrage</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Measure</td>
+<td>Mesurer</td>
+<td>La phase de relevé</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Analyze</td>
+<td>Analyser</td>
+<td>La phase de preuve de la cause</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Improve</td>
+<td>Innover, ou améliorer</td>
+<td>La phase d'action</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Control</td>
+<td>Contrôler</td>
+<td>La phase de verrouillage</td>
+</tr>
+<tr>
+<td>SIPOC</td>
+<td>Supplier, Input, Process, Output, Customer</td>
+<td>Cartographie de cadrage</td>
+<td>Outil de la phase Définir</td>
+</tr>
+<tr>
+<td>VOC</td>
+<td>Voice of the customer</td>
+<td>Voix du client</td>
+<td>Ce que le client attend, en ses termes</td>
+</tr>
+<tr>
+<td>CTQ</td>
+<td>Critical to quality</td>
+<td>Caractéristique critique</td>
+<td>Ce qui rend un produit conforme ou non</td>
+</tr>
+<tr>
+<td>MSA</td>
+<td>Measurement system analysis</td>
+<td>Analyse du système de mesure</td>
+<td>Vérifier que l'instrument est fiable</td>
+</tr>
+<tr>
+<td>SPC</td>
+<td>Statistical process control</td>
+<td>Maîtrise statistique des procédés</td>
+<td>Suivi de la stabilité d'un procédé</td>
+</tr>
+<tr>
+<td>DPMO</td>
+<td>Defects per million opportunities</td>
+<td>Défauts par million d'occasions</td>
+<td>Unité de comparaison de procédés</td>
+</tr>
+<tr>
+<td>DMADV</td>
+<td>Define, Measure, Analyze, Design, Verify</td>
+<td>Conception d'un processus neuf</td>
+<td>La variante conception du DMAIC</td>
+</tr>
+<tr>
+<td>Tollgate</td>
+<td>Tollgate review</td>
+<td>Revue de passage de phase</td>
+<td>Le point de validation par le sponsor</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="erreurs">Les erreurs qui font échouer un projet DMAIC</h2>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Écrire la solution dans la charte de projet.</span><br><span class="fichly-ok">✅ Décrivez un écart mesurable, sans hypothèse.</span> Une charte qui contient déjà la réponse produit une analyse qui la confirme.</p>
+<p><span class="fichly-ko">❌ Prendre un périmètre large pour maximiser le gain.</span><br><span class="fichly-ok">✅ Une famille de pièces, une ligne, un défaut.</span> Le gain d'un projet large est théorique, celui d'un projet étroit est réel.</p>
+<p><span class="fichly-ko">❌ Sauter la vérification de la mesure.</span><br><span class="fichly-ok">✅ Vérifiez que deux personnes comptent la même chose.</span> Une définition de défaut qui varie fausse toute la phase Analyser.</p>
+<p><span class="fichly-ko">❌ S'arrêter sur une cause qui désigne quelqu'un.</span><br><span class="fichly-ok">✅ Descendez jusqu'à un mécanisme sur lequel on peut agir.</span> Un manque de rigueur n'est pas une cause, c'est un constat.</p>
+<p><span class="fichly-ko">❌ Généraliser une solution sans l'avoir testée.</span><br><span class="fichly-ok">✅ Testez sur un périmètre réduit, avec la mesure de départ.</span> Sinon vous ne saurez jamais si c'est l'action qui a produit l'effet.</p>
+<p><span class="fichly-ko">❌ Clore le projet sans avoir remesuré.</span><br><span class="fichly-ok">✅ Chiffrez l'écart avant et après, dans la même unité que la charte.</span> Un projet clos sans remesure est un projet dont personne ne saura s'il a marché.</p>
+</div>
+
+<h2 id="formation">Se former au DMAIC : quel niveau pour quel rôle</h2>
+
+<p>Trois niveaux de certification circulent, et le choix se fait par le rôle que vous tiendrez, pas par ambition.</p>
+
+<ul>
+<li>
+<strong>Yellow Belt</strong> : contribuer à un projet mené par quelqu'un d'autre, et mener des chantiers courts sur son périmètre.</li>
+<li>
+<strong>Green Belt</strong> : piloter un projet DMAIC complet sur son propre périmètre, du cadrage au verrouillage. C'est le niveau du pilote décrit plus haut.</li>
+<li>
+<strong>Black Belt</strong> : mener des projets transverses complexes, encadrer des Green Belts, et traiter les cas où plusieurs facteurs interagissent.</li>
+</ul>
+
+<p>La certification Green Belt de Fichly est enregistrée au Répertoire spécifique sous le numéro RS7114, portée par APILEAN, et consultable sur <a href="https://www.francecompetences.fr/recherche/rs/7114/" target="_blank" rel="noopener">France Compétences</a>. Elle représente 6 jours et 42 heures, en deux blocs séparés d'un mois, dont un jour de jury, et se conclut par la soutenance d'un projet réel.</p>
+
+<p>Côté financement : la formation est éligible au CPF, aux financements OPCO et France Travail. <strong>Depuis avril 2026, un reste à charge forfaitaire de 150 euros s'applique</strong> aux dossiers financés par le compte personnel de formation, quel que soit le prix de la formation. Les conditions sont détaillées sur <a href="https://www.moncompteformation.gouv.fr/" target="_blank" rel="noopener">Mon Compte Formation</a>. Les tarifs Fichly sont de 1 500 euros en distanciel et de 2 500 euros en présentiel à Massy.</p>
+
+<h2 id="faq">FAQ : vos questions sur le DMAIC</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>C'est quoi la méthode DMAIC ?</summary>
+<div class="answer">
+<p>Le DMAIC est une démarche de résolution de problème en cinq phases : Définir, Mesurer, Analyser, Innover, Contrôler. Chaque phase produit un livrable précis et ne s'ouvre que si la précédente a livré le sien. Sa particularité est d'interdire toute solution avant que la cause ne soit prouvée par des données.</p>
+</div>
+</details>
+
+<details>
+<summary>Pourquoi DMAIC et pas PDCA ?</summary>
+<div class="answer">
+<p>Le PDCA est une boucle d'amélioration courte, adaptée quand la cause est connue ou plausible et que l'on peut tester vite. Le DMAIC est un cadre de projet, adapté quand la cause est inconnue, que le problème est récurrent et que plusieurs services sont concernés. Si vous pouvez tester une solution cette semaine, prenez le PDCA.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les 6 sigma ?</summary>
+<div class="answer">
+<p>Six Sigma n'est pas une liste de six éléments. Le nom vient d'un objectif statistique de maîtrise de la variabilité d'un procédé, formulé chez Motorola dans les années 1980. Le DMAIC en est la démarche projet. On peut mener un DMAIC sans faire de statistiques avancées, et c'est le cas de la plupart des projets industriels.</p>
+</div>
+</details>
+
+<details>
+<summary>Quand utiliser la méthode DMAIC ?</summary>
+<div class="answer">
+<p>Quand quatre conditions sont réunies : le problème revient, sa cause n'est pas établie, son enjeu se chiffre, et vous disposez de plusieurs semaines. Si l'une de ces quatre conditions manque, un autre outil sera plus rapide et donnera un meilleur résultat.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre DMAIC et DMADV ?</summary>
+<div class="answer">
+<p>Le DMAIC améliore un processus qui existe déjà. Le DMADV, pour Définir, Mesurer, Analyser, Concevoir, Vérifier, sert à en concevoir un nouveau. La question qui les sépare tient en une ligne : est-ce que le processus que vous voulez améliorer existe aujourd'hui ?</p>
+</div>
+</details>
+
+<details>
+<summary>Que veulent dire Define, Measure, Analyze, Improve, Control ?</summary>
+<div class="answer">
+<p>Ce sont les cinq phases du DMAIC en anglais : Define pour définir, Measure pour mesurer, Analyze pour analyser, Improve pour améliorer, Control pour contrôler. La traduction française la plus courante remplace Improve par Innover, ce qui conserve l'acronyme mais durcit un peu le sens du mot d'origine.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Un DMAIC s'apprend en le menant, pas en l'écoutant.</strong></p>
+<p>Chaque participant conduit un projet complet sur un problème réel de son atelier, avec ses propres données, et le soutient devant un jury.</p>
+<p>👉 Découvrez la <a href="https://www.fichly.com/pages/formation-lean-green-belt-cpf">formation Green Belt Lean Management</a> : 6 jours, 42 h, certification RS7114, organisme QUALIOPI, sessions en distanciel et en présentiel à Massy. Code promo FICHLY5 (-5 %).</p>
+</div>
+
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">La méthode PDCA : le cycle de Deming expliqué</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/green-belt-lean-six-sigma">Green Belt Lean Six Sigma : programme, prix et CPF 2026</a></li>
+</ul>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DMAIC : les 5 étapes, leurs livrables et quand ne pas l'utiliser",
+  "description": "Définir, Mesurer, Analyser, Innover, Contrôler : les 5 phases du DMAIC, le livrable de chacune, un exemple chiffré et la règle pour trancher DMAIC ou PDCA.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "C'est quoi la méthode DMAIC ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le DMAIC est une démarche de résolution de problème en cinq phases : Définir, Mesurer, Analyser, Innover, Contrôler. Chaque phase produit un livrable précis et ne s'ouvre que si la précédente a livré le sien. Sa particularité est d'interdire toute solution avant que la cause ne soit prouvée par des données." }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi DMAIC et pas PDCA ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le PDCA est une boucle d'amélioration courte, adaptée quand la cause est connue ou plausible et que l'on peut tester vite. Le DMAIC est un cadre de projet, adapté quand la cause est inconnue, que le problème est récurrent et que plusieurs services sont concernés. Si vous pouvez tester une solution cette semaine, prenez le PDCA." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 6 sigma ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Six Sigma n'est pas une liste de six éléments. Le nom vient d'un objectif statistique de maîtrise de la variabilité d'un procédé, formulé chez Motorola dans les années 1980. Le DMAIC en est la démarche projet. On peut mener un DMAIC sans faire de statistiques avancées, et c'est le cas de la plupart des projets industriels." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quand utiliser la méthode DMAIC ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Quand quatre conditions sont réunies : le problème revient, sa cause n'est pas établie, son enjeu se chiffre, et vous disposez de plusieurs semaines. Si l'une de ces quatre conditions manque, un autre outil sera plus rapide et donnera un meilleur résultat." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre DMAIC et DMADV ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le DMAIC améliore un processus qui existe déjà. Le DMADV, pour Définir, Mesurer, Analyser, Concevoir, Vérifier, sert à en concevoir un nouveau. La question qui les sépare tient en une ligne : est-ce que le processus que vous voulez améliorer existe aujourd'hui ?" }
+    },
+    {
+      "@type": "Question",
+      "name": "Que veulent dire Define, Measure, Analyze, Improve, Control ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ce sont les cinq phases du DMAIC en anglais : Define pour définir, Measure pour mesurer, Analyze pour analyser, Improve pour améliorer, Control pour contrôler. La traduction française la plus courante remplace Improve par Innover, ce qui conserve l'acronyme mais durcit un peu le sens du mot d'origine." }
+    }
+  ]
+}
+</script>

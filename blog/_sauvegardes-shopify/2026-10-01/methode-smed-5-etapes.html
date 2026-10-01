@@ -1,0 +1,336 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;text-align:justify !important;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;}
+.fichly-article .fichly-toc p,.fichly-article .fichly-cta p,.fichly-article .fichly-bio p,.fichly-article .fichly-author p,.fichly-article .fichly-readmore p,.fichly-article .fichly-faq p,.fichly-article .fichly-legende,.fichly-article li,.fichly-article td,.fichly-article th{text-align:left !important;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-article img{width:100%;height:auto;display:block;border-radius:10px;margin:1.8em 0;}
+.fichly-embed{width:100%;height:0;padding-bottom:54%;position:relative;border-radius:10px;overflow:hidden;margin:1.8em 0 .4em;}
+.fichly-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+.fichly-legende{font-size:.9em;color:#6b7280;margin:0 0 1.8em;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-resume ul{margin:.8em 0 0;}
+.fichly-resume li{margin:.45em 0;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+.fichly-author{display:flex;gap:1.2em;align-items:flex-start;background:#fff;border:1px solid #dde2e8;border-top:5px solid #3b3a9e;border-radius:10px;padding:1.5em 1.7em;margin:2.4em 0;}
+.fichly-author-photo{flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:#3b3a9e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;font-weight:700;overflow:hidden;}
+.fichly-author-photo img{width:100%;height:100%;object-fit:cover;display:block;margin:0;border-radius:0;}
+.fichly-author-body{flex:1;}
+.fichly-author-body .role{font-size:.92em;color:#6b7280;margin:.1em 0 .5em;}
+.fichly-author-body strong{color:#1a1a1a;font-size:1.1em;}
+.fichly-author-link{display:inline-block;margin-top:.4em;font-weight:600;}
+</style>
+<div class="fichly-article" lang="fr">
+<p>Deux heures de machine à l'arrêt pour passer d'une référence à l'autre. Pendant ce temps, la ligne ne sort rien, les encours gonflent et le planning glisse. Ce scénario se répète à chaque changement de série dans beaucoup d'ateliers. La méthode SMED s'attaque exactement à ce problème : <strong>réduire le temps de changement de série sans acheter de machine neuve</strong>. Dans cet article, vous allez découvrir d'où vient le SMED, la différence entre opérations internes et externes, les 5 étapes de la méthode illustrées en schémas, un exemple chiffré resté célèbre chez Toyota, et les 6 erreurs qui plombent la plupart des chantiers.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p><strong>Interne = machine arrêtée. Externe = machine en marche. Tout le SMED est là.</strong> Changer de série immobilise une machine. La méthode consiste à faire un maximum de choses pendant qu'elle tourne encore.</p>
+<ul>
+<li>
+<strong>Ce qui compte, c'est le temps d'arrêt</strong>, mesuré de la dernière pièce bonne d'une série à la première pièce bonne de la suivante. Essais et rebuts de démarrage compris.</li>
+<li>
+<strong>Une opération interne oblige à arrêter la machine</strong> : démonter, régler, essayer. Une opération externe se fait pendant qu'elle produit : préparer, préchauffer, approvisionner.</li>
+<li>
+<strong>Le gain vient de la conversion</strong> des unes en les autres, en cinq étapes. Les trois premières ne coûtent presque rien et livrent l'essentiel.</li>
+</ul>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>SMED signifie Single Minute Exchange of Die : <strong>un temps de changement qui s'écrit avec un seul chiffre</strong>, donc sous les 10 minutes.</li>
+<li>Les 5 étapes : mesurer, regrouper, convertir les internes en externes, réduire les internes, réduire les externes.</li>
+<li>Un premier chantier réduit couramment le temps de changement de <strong>30 à 50 %</strong>, sans investissement lourd.</li>
+<li>
+<strong>N'achetez pas de serrages rapides en premier.</strong> Accélérer une tâche qui n'aurait jamais dû se faire machine arrêtée est un investissement gâché.</li>
+<li>L'erreur la plus fréquente : <strong>mener le chantier sans les opérateurs</strong> qui réalisent le changement.</li>
+<li><strong>Sans standard écrit, le gain s'efface en quelques semaines.</strong></li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce que la méthode SMED ?</a></li>
+<li><a href="#pourquoi">Pourquoi réduire vos temps de changement de série ?</a></li>
+<li><a href="#internes-externes">Opérations internes et externes : la distinction clé</a></li>
+<li><a href="#etapes">Les 5 étapes de la méthode SMED</a></li>
+<li><a href="#demarrer">Comment lancer un premier chantier SMED dans votre atelier</a></li>
+<li><a href="#exemple">Exemple : la presse de 1 000 tonnes de Toyota</a></li>
+<li><a href="#erreurs">Les 6 erreurs qui plombent un chantier SMED</a></li>
+<li><a href="#outils-complementaires">SMED, 5S, TRS, VSM, DMAIC : les outils complémentaires</a></li>
+<li><a href="#faq">FAQ : vos questions sur la méthode SMED</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu'est-ce que la méthode SMED ?</h2>
+<p>Le SMED, pour Single Minute Exchange of Die (« changement d'outil en une minute »), est une méthode Lean qui vise à <strong>réduire les temps de changement de série</strong>. L'objectif : passer sous la barre des <strong>10 minutes</strong>, un temps qui s'écrit avec un seul chiffre. D'où le « single minute ».</p>
+<p>Le temps de changement de série se mesure <strong>de la dernière pièce bonne de la série A à la première pièce bonne de la série B</strong>. Réglages, essais et rebuts de démarrage compris. Cette définition évite de se raconter des histoires sur la durée réelle.</p>
+<p>La méthode a été formalisée par <a href="https://fr.wikipedia.org/wiki/Shigeo_Shing%C5%8D" rel="noopener" target="_blank">Shigeo Shingo</a>, ingénieur japonais, à partir de 1969 lors de ses missions chez Toyota, dans le cadre du <a href="https://global.toyota/en/company/vision-and-philosophy/production-system/" rel="noopener" target="_blank">Toyota Production System</a>. À l'époque, changer l'outillage d'une grosse presse prend plusieurs heures. Shingo démontre que <strong>l'essentiel de ce temps vient de l'organisation, pas de la technique</strong>.</p>
+<div class="fichly-embed"><iframe src="https://giphy.com/embed/sA50TO4Ew7QXu" width="100%" height="100%" class="giphy-embed" title="Arrêt au stand en Formule 1" loading="lazy"></iframe></div>
+<p class="fichly-legende">Un arrêt au stand : même travail qu'en 1950, préparation complètement différente. <a href="https://giphy.com/gifs/f1-fast-sA50TO4Ew7QXu" rel="noopener" target="_blank">via GIPHY</a></p>
+<p>Pensez à un arrêt au stand en Formule 1. Dans les années 1950, changer les roues prenait plus d'une minute. Aujourd'hui, les meilleures écuries le font en <strong>moins de 2 secondes</strong>. Le travail n'a pas changé : quatre roues à remplacer. <strong>La préparation, si.</strong> Chaque outil est prêt, chaque geste est répété, chaque équipier a un rôle précis. La méthode SMED applique cette logique à vos machines.</p>
+<h2 id="pourquoi">Pourquoi réduire vos temps de changement de série ?</h2>
+<p>Longtemps, la réponse aux changements de série coûteux a été simple : produire de grandes séries pour « amortir » le réglage. Résultat : des stocks, des encours, et un atelier qui <strong>produit ce qui arrange la machine plutôt que ce que demande le client</strong>.</p>
+<p>Réduire le temps de changement de série change trois choses concrètes :</p>
+<ul>
+<li>
+<strong>De la flexibilité</strong> : vous pouvez produire des séries plus courtes et coller à la demande réelle, au lieu de produire pour le stock.</li>
+<li>
+<strong>Du TRS en plus</strong> : chaque changement ampute la disponibilité de vos machines. Moins de temps d'arrêt, c'est un <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Taux de Rendement Synthétique</a> qui remonte.</li>
+<li>
+<strong>De la capacité récupérée</strong> : le temps machine regagné se transforme en production, sans investir dans un équipement supplémentaire.</li>
+</ul>
+<p>👉 <strong>Le SMED ne sert pas à produire plus vite. Il sert à produire plus souvent ce que le client attend</strong>, au moment où il l'attend.</p>
+<h2 id="internes-externes">Opérations internes et externes : la distinction clé</h2>
+<p>Tout le SMED repose sur une distinction simple. <strong>Les opérations internes exigent que la machine soit à l'arrêt.</strong> Les opérations externes, elles, <strong>peuvent se réaliser pendant que la machine produit encore</strong>.</p>
+<table>
+<tbody>
+<tr>
+<th>Opérations internes (machine à l'arrêt)</th>
+<th>Opérations externes (machine en marche)</th>
+</tr>
+<tr>
+<td>Démonter et monter l'outillage</td>
+<td>Préparer et contrôler l'outillage suivant</td>
+</tr>
+<tr>
+<td>Régler les paramètres sur la machine</td>
+<td>Préchauffer le moule ou l'outil</td>
+</tr>
+<tr>
+<td>Purger, nettoyer l'intérieur de la machine</td>
+<td>Approvisionner la matière et les composants</td>
+</tr>
+<tr>
+<td>Réaliser les premiers essais</td>
+<td>Ranger l'outillage de la série précédente</td>
+</tr>
+</tbody>
+</table>
+<p>Sur le terrain, la question à se poser pour chaque tâche tient en une phrase : <strong>cette opération exige-t-elle vraiment que la machine soit arrêtée ?</strong> Dans la plupart des ateliers, une grande partie des tâches réalisées machine à l'arrêt pourraient se faire machine en marche. <strong>C'est là que dort le gain.</strong></p>
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-smed-etape-2-separer-interne-externe.png?v=1787612375" alt="Séparer les opérations internes qui exigent la machine arrêtée des opérations externes qui peuvent se faire machine en marche" loading="lazy">
+<h2 id="etapes">Les 5 étapes de la méthode SMED</h2>
+<p>Dans ses écrits, Shigeo Shingo décrit trois phases conceptuelles : séparer l'interne de l'externe, convertir l'interne en externe, puis rationaliser toutes les opérations. Sur le terrain, nous les déclinons en <strong>5 étapes opérationnelles</strong>, plus faciles à animer avec une équipe. Le schéma ci-dessous montre la transformation : les blocs internes se regroupent, sortent de l'arrêt, puis rétrécissent. <strong>La durée du changement se contracte à chaque étape.</strong></p>
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-smed-5-etapes-diminution.png?v=1787612375" alt="Les 5 étapes de la méthode SMED : la durée du changement de série qui raccourcit étape par étape, de 52 à 13 minutes" loading="lazy">
+<h3>Étape 1 : Mesurer le changement de série et classer les opérations</h3>
+<p><strong><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/7_SMED_etape_1.png?v=1788171475" alt=""><br><br>Chronométrez un changement de série réel</strong>, de la dernière pièce bonne à la première pièce bonne suivante. Pas un changement « de démonstration », préparé parce que tout le monde se sait observé : un changement représentatif, avec ses aléas. Listez chaque tâche sur une grille d'observation : durée, personne qui la réalise, classement interne ou externe, et incidents rencontrés. <strong>Ces aléas font partie du temps réel, ne les gommez pas.</strong></p>
+<p>Astuce terrain : <strong>filmez l'opération</strong>, puis analysez la vidéo en équipe, opérateurs et régleur autour de la table. La vidéo coupe court aux débats de mémoire et révèle les déplacements. Sur un premier chantier, c'est souvent le choc : <strong>une part importante du temps part en allers-retours et en recherches d'outils</strong>, pas en travail sur la machine.</p>
+<h3>Étape 2 : Regrouper les opérations internes</h3>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/2_SMED_etape_2.png?v=1788171475" alt=""><br>Au départ, opérations internes et externes se mélangent au fil du changement. On prépare un outil ici, on règle la machine là, on repart chercher une clé. <strong>Regroupez toutes les opérations internes en un seul bloc</strong> : tout ce qui peut se faire machine en marche se fait avant l'arrêt ou après le redémarrage. Vous ne changez encore rien au contenu des tâches : <strong>vous les réordonnez</strong>.</p>
+<p>L'outil de cette étape, c'est la <strong>checklist de préparation</strong> : outillages, paramètres, consommables, moyens de manutention, contrôles à réaliser avant l'arrêt. Instaurez un point de contrôle simple : <strong>on n'arrête pas la machine tant que la checklist n'est pas complète</strong>. C'est l'étape la moins coûteuse du chantier, et elle livre déjà une part visible du gain.</p>
+<h3>Étape 3 : Convertir les opérations internes en externes</h3>
+<p><strong><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/5_SMED_etape_3.png?v=1788171476" alt=""><br>Le cœur de la méthode SMED.</strong> Passez en revue chaque opération interne et posez la question : <strong>que faudrait-il pour la réaliser machine en marche ?</strong> Les leviers classiques :</p>
+<ul>
+<li>
+<strong>Préchauffer</strong> le moule ou l'outil à l'avance, dans un four ou sur un poste dédié, au lieu de le monter froid et d'attendre la montée en température.</li>
+<li>
+<strong>Prérégler l'outillage hors machine</strong>, sur un gabarit ou un banc de préréglage, pour monter un ensemble déjà calé.</li>
+<li>
+<strong>Standardiser les hauteurs et les interfaces</strong> de montage pour supprimer les ajustements en cours de montage.</li>
+<li>
+<strong>Préparer un second porte-outil</strong> ou un kit complet pendant que le premier tourne.</li>
+</ul>
+<p>Chaque opération convertie réduit d'autant le temps d'arrêt. Évaluez chaque conversion avec un calcul simple : <strong>minutes gagnées par changement, multipliées par le nombre de changements par an</strong>, face au coût du gabarit. La décision se prend souvent en quelques lignes. <strong>C'est à cette étape que se joue la plus grosse part du gain.</strong></p>
+<h3>Étape 4 : Réduire les opérations internes restantes</h3>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/6_SMED_etape_4.png?v=1788171475" alt=""><br><br><br>Certaines tâches resteront internes. Réduisez alors leur durée, en vous attaquant d'abord aux fixations et aux réglages. Shingo l'enseignait avec une image restée célèbre : <strong>un boulon ne serre qu'au dernier tour de filet</strong>, tous les tours précédents sont du temps perdu. D'où le répertoire de solutions du SMED :</p>
+<ul>
+<li>
+<strong>Remplacer les boulons par des serrages fonctionnels</strong> : brides à came, fixations quart de tour, serrages rapides.</li>
+<li>
+<strong>Supprimer les réglages plutôt que les accélérer</strong> : butées, repères et détrompeurs transforment un réglage en simple positionnement.</li>
+<li>
+<strong>Viser la première pièce bonne du premier coup</strong>, sans série d'essais et de retouches.</li>
+<li>
+<strong>Travailler à deux en parallèle</strong> sur un changement chorégraphié, chacun son côté machine, avec un standard écrit et des règles de sécurité claires.</li>
+</ul>
+<p>Analysez chaque geste avec les opérateurs. <strong>Ce sont eux qui trouvent les solutions les plus pratiques</strong>, parce qu'ils vivent le changement à chaque série.</p>
+<h3>Étape 5 : Réduire les opérations externes</h3>
+<p>Dernière étape, souvent négligée : <strong>optimiser la préparation elle-même</strong>. Un chariot de changement dédié, avec un emplacement détouré pour chaque outil, supprime les recherches. Le contrôle systématique de l'outillage au démontage garantit qu'il repart bon pour service : <strong>l'usure se traite entre les séries, pas pendant l'arrêt</strong>.</p>
+<p>Pensez aussi à l'ordonnancement : <strong>séquencer les séries pour enchaîner des références proches</strong>, même matière et même base d'outillage, réduit l'ampleur de chaque changement. Objectif final : <strong>une préparation qui ne déborde jamais sur le temps d'arrêt</strong>, et un gain qui tient dans la durée.</p>
+<p><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/1_SMED_5_etapes.png?v=1788171476" alt=""><br><br>Un dernier conseil sur l'ordre. Beaucoup d'ateliers commencent par acheter des serrages rapides sans avoir trié ni converti leurs opérations. <strong>L'investissement accélère alors des tâches qui n'auraient jamais dû se faire machine à l'arrêt.</strong> Les étapes 1 à 3 ne coûtent presque rien et livrent l'essentiel du gain : <strong>commencez par elles</strong>.</p>
+<h2 id="demarrer">Comment lancer un premier chantier SMED dans votre atelier</h2>
+<p>Connaître les 5 étapes de la méthode SMED ne dit pas par où commencer un lundi matin. Voici le déroulé d'un premier chantier, tel que nous l'animons en atelier. <strong>Comptez trois à quatre semaines</strong> entre la première mesure et le standard écrit.</p>
+<ol>
+<li>
+<strong>Choisissez la machine goulot, pas la plus facile.</strong> Le temps gagné sur une machine qui n'est pas contrainte ne se transforme en rien.</li>
+<li>
+<strong>Constituez une équipe de quatre à six personnes</strong>, dont obligatoirement le régleur et un opérateur de chaque équipe concernée. Un chantier mené par la seule maintenance produit des solutions que personne n'appliquera.</li>
+<li>
+<strong>Filmez un changement réel avant toute réunion.</strong> Pas un changement préparé pour l'occasion. <strong>La vidéo est la seule donnée qui ne se discute pas.</strong>
+</li>
+<li>
+<strong>Dépouillez la vidéo en groupe</strong>, tâche par tâche, avec une seule question par ligne : machine arrêtée obligatoire, oui ou non ? Cette séance dure deux heures et produit l'essentiel du diagnostic.</li>
+<li>
+<strong>Traitez d'abord ce qui ne coûte rien</strong>, c'est-à-dire les étapes 2 et 3. <strong>Mesurez le nouveau temps avant d'acheter quoi que ce soit.</strong>
+</li>
+<li>
+<strong>Écrivez le standard et affichez-le au poste</strong>, avec des photos. Puis fixez la date du prochain relevé dans un agenda partagé. <strong>Sans cette date, le gain s'efface.</strong>
+</li>
+</ol>
+<p>Deux points de vigilance pour un premier chantier. <strong>Ne visez pas les 10 minutes d'emblée</strong> : visez la moitié du temps actuel, c'est atteignable et ça crée l'adhésion. Et <strong>ne lancez pas un SMED sur un poste en désordre</strong>, le chantier 5S vient avant.</p>
+<h2 id="exemple">Exemple : la presse de 1 000 tonnes de Toyota</h2>
+<p>L'exemple fondateur vient de Shigeo Shingo lui-même. En 1969, chez Toyota, le changement d'outillage d'une presse de 1 000 tonnes prend <strong>4 heures</strong>. Volkswagen, référence de l'époque, réalise la même opération en 2 heures. Première phase : en séparant strictement opérations internes et externes, <strong>l'équipe descend à 90 minutes</strong>. La direction fixe alors un objectif qui paraît absurde : passer sous les 3 minutes. En convertissant un maximum d'opérations internes en externes, l'équipe l'atteint quelques mois plus tard. <strong>De 4 heures à moins de 3 minutes</strong> : ce résultat donnera son nom à la méthode.</p>
+<p>Vous n'atteindrez pas ce ratio dès le premier chantier, et ce n'est pas l'objectif. Sur le terrain, un premier chantier SMED bien mené <strong>réduit couramment le temps de changement de 30 à 50 %</strong>. <strong>L'essentiel du gain vient de l'organisation</strong> : préparation, rangement, standardisation. Pas de la machine.</p>
+<h2 id="erreurs">Les 6 erreurs qui plombent un chantier SMED</h2>
+<p>Un chantier SMED échoue rarement sur la technique. <strong>Il échoue sur la conduite.</strong> Voici les 6 erreurs qui reviennent le plus souvent en atelier.<br><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/9_SMED_6_erreurs.png?v=1788171475" alt=""><br></p>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Mener le chantier sans les opérateurs.</span><br><span class="fichly-ok">✅ Impliquez ceux qui réalisent le changement.</span> Leurs solutions collent à la réalité du poste, et le nouveau standard sera appliqué.</p>
+<p><span class="fichly-ko">❌ Se focaliser uniquement sur les tâches internes.</span><br><span class="fichly-ok">✅ Travaillez aussi les opérations externes.</span> Une préparation désorganisée finit toujours par allonger le temps d'arrêt.</p>
+<p><span class="fichly-ko">❌ Lancer un SMED sur un poste en désordre.</span><br><span class="fichly-ok">✅ Passez d'abord par un chantier <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">5S</a>.</span> Chercher une clé pendant un changement, c'est du temps d'arrêt en plus.</p>
+<p><span class="fichly-ko">❌ Vouloir tout changer d'un coup.</span><br><span class="fichly-ok">✅ Avancez par petites itérations mesurées.</span> Les équipes suivent, et les résultats se voient.</p>
+<p><span class="fichly-ko">❌ Analyser le changement de mémoire.</span><br><span class="fichly-ok">✅ Filmez l'opération.</span> La vidéo révèle les inefficacités qui passent inaperçues à l'œil nu.</p>
+<p><span class="fichly-ko">❌ S'arrêter au gain initial, sans standard.</span><br><span class="fichly-ok">✅ Écrivez le nouveau mode opératoire et auditez-le.</span> Sans standard, le temps de changement regagne du terrain en quelques semaines.</p>
+</div>
+<h2 id="outils-complementaires">SMED, 5S, TRS, VSM, DMAIC : les outils complémentaires</h2>
+<p><strong>La méthode SMED ne vit pas seule.</strong> Quatre outils Lean l'encadrent naturellement. Pour les garder sous la main en atelier, nos <a href="https://www.fichly.com/products/fiches-lean">fiches pratiques des 40 outils du Lean</a> en résument chacun sur une page, SMED compris.</p>
+<p><strong>Le 5S d'abord</strong> : un poste ordonné est le prérequis d'un changement rapide. Nous l'avons vu dans les erreurs, c'est même la condition de départ du chantier.</p>
+<p><strong>Le TRS ensuite</strong> : c'est votre instrument de mesure. Relevez-le avant le chantier, suivez-le après. Les changements de série pèsent directement sur le taux de disponibilité, <strong>le SMED se lit donc dans la courbe</strong>.</p>
+<p><strong>La VSM</strong> révèle où les changements de série créent des stocks et des attentes : la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">cartographie des flux de valeur</a> aide à choisir la machine du premier chantier. <strong>Le goulot, pas la machine la plus simple.</strong></p>
+<p><strong>Le DMAIC enfin</strong>, pour cadrer les chantiers les plus lourds : un projet SMED mené de bout en bout, de la mesure au verrouillage du standard, est un cas d'école de la <a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">méthode DMAIC</a>.</p>
+<p>Et pour situer la méthode SMED dans la chasse aux gaspillages, notre guide des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 Muda</a> détaille les pertes que des changements trop longs alimentent : <strong>attentes machine, stocks tampons, surproduction</strong>.</p>
+<h2 id="faq">FAQ : vos questions sur la méthode SMED</h2>
+<div class="fichly-faq">
+<details>
+<summary>Que signifie SMED ?</summary>
+<div class="answer">
+<p>SMED est l'acronyme de Single Minute Exchange of Die, soit « changement d'outil en une minute ». Le terme désigne un temps à un seul chiffre : moins de 10 minutes. La méthode a été formalisée par l'ingénieur japonais Shigeo Shingo chez Toyota, à partir de 1969, pour réduire les temps de changement d'outillage des presses.</p>
+</div>
+</details>
+<details>
+<summary>Quelles sont les 5 étapes de la méthode SMED ?</summary>
+<div class="answer">
+<p>Les 5 étapes : mesurer le changement de série et classer les opérations, regrouper les opérations internes, convertir les internes en externes, réduire les internes restantes, puis réduire les externes. Les deux premières étapes ne demandent aucun investissement : elles réorganisent l'existant et livrent déjà une part du gain.</p>
+</div>
+</details>
+<details>
+<summary>Quelle est la différence entre opérations internes et externes ?</summary>
+<div class="answer">
+<p>Une opération interne exige l'arrêt de la machine : démontage, réglage sur la machine, essais de démarrage. Une opération externe se réalise pendant que la machine produit : préparation d'outillage, préchauffage, approvisionnement. Le levier principal du SMED consiste à convertir un maximum d'opérations internes en opérations externes.</p>
+</div>
+</details>
+<details>
+<summary>Comment mesure-t-on un temps de changement de série ?</summary>
+<div class="answer">
+<p>De la dernière pièce bonne de la série précédente à la première pièce bonne de la série suivante. Cette borne inclut les réglages, les essais et les rebuts de démarrage, qui sont souvent oubliés des relevés internes. C'est la seule définition qui empêche de sous-estimer la durée réelle d'un changement.</p>
+</div>
+</details>
+<details>
+<summary>Quel gain attendre d'un chantier SMED ?</summary>
+<div class="answer">
+<p>Un premier chantier bien mené réduit couramment le temps de changement de série de 30 à 50 %, essentiellement par l'organisation : tri interne/externe, préparation, standardisation. Les résultats extrêmes, comme la presse Toyota passée de 4 heures à 3 minutes, sont le fruit de plusieurs années d'itérations.</p>
+</div>
+</details>
+<details>
+<summary>Faut-il faire un 5S avant un chantier SMED ?</summary>
+<div class="answer">
+<p>C'est fortement recommandé. Un poste désordonné condamne le chantier : chaque outil cherché pendant le changement allonge le temps d'arrêt. Le 5S met chaque outil à sa place, à portée de main. Beaucoup d'entreprises enchaînent d'ailleurs les deux chantiers sur la même machine, dans cet ordre.</p>
+</div>
+</details>
+<details>
+<summary>Comment mettre en place le SMED dans son atelier ?</summary>
+<div class="answer">
+<p>Choisissez une machine goulot, dont les arrêts pénalisent toute la ligne. Constituez une équipe de quatre à six personnes incluant le régleur et un opérateur par équipe. Filmez un changement réel, dépouillez la vidéo en groupe, traitez d'abord ce qui ne coûte rien, puis écrivez le standard et fixez la date du prochain relevé. Comptez trois à quatre semaines.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Envie d'aller plus loin ?</strong></p>
+<p>Le SMED fait partie des outils que vous apprenez à déployer dans nos formations Lean, avec des mises en situation et des cas d'atelier réels.</p>
+<p>👉 Découvrez notre <a href="https://www.fichly.com/pages/formation-lean-green-belt-cpf">formation Green Belt Lean Management</a> : 6 jours (42 h), certification RS7114, organisme QUALIOPI, finançable CPF, OPCO et France Travail.</p>
+</div>
+<div class="fichly-bio">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+<div class="fichly-author">
+<div class="fichly-author-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, formateur Lean Management et fondateur de Fichly" width="84" height="84"></div>
+<div class="fichly-author-body">
+<strong>Hugo Duc</strong>
+<p class="role">Fondateur de Fichly · Formateur Lean Management</p>
+<p>Ingénieur industriel de formation, Hugo a accompagné plus de 70 sites industriels en France dans leurs démarches d'amélioration continue.</p>
+<a class="fichly-author-link" href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Suivre Hugo sur LinkedIn</a>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">TRS : définition, calcul et méthodes de suivi</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping : définition et étapes</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Méthode SMED : les 5 étapes expliquées (guide 2026)",
+  "description": "Réduisez vos temps de changement de série avec la méthode SMED : 5 étapes illustrées, exemple Toyota et erreurs à éviter. Par Hugo Duc, formateur Lean.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-smed-5-etapes-diminution.png?v=1787612375",
+  "author": { "@type": "Person", "name": "Hugo Duc", "url": "https://www.linkedin.com/in/hugo-duc/", "sameAs": ["https://www.linkedin.com/in/hugo-duc/"] },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-31",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Que signifie SMED ?", "acceptedAnswer": { "@type": "Answer", "text": "SMED est l'acronyme de Single Minute Exchange of Die, soit « changement d'outil en une minute ». Le terme désigne un temps à un seul chiffre : moins de 10 minutes. La méthode a été formalisée par l'ingénieur japonais Shigeo Shingo chez Toyota, à partir de 1969, pour réduire les temps de changement d'outillage des presses." } },
+    { "@type": "Question", "name": "Quelles sont les 5 étapes de la méthode SMED ?", "acceptedAnswer": { "@type": "Answer", "text": "Les 5 étapes : mesurer le changement de série et classer les opérations, regrouper les opérations internes, convertir les internes en externes, réduire les internes restantes, puis réduire les externes. Les deux premières étapes ne demandent aucun investissement : elles réorganisent l'existant et livrent déjà une part du gain." } },
+    { "@type": "Question", "name": "Quelle est la différence entre opérations internes et externes ?", "acceptedAnswer": { "@type": "Answer", "text": "Une opération interne exige l'arrêt de la machine : démontage, réglage sur la machine, essais de démarrage. Une opération externe se réalise pendant que la machine produit : préparation d'outillage, préchauffage, approvisionnement. Le levier principal du SMED consiste à convertir un maximum d'opérations internes en opérations externes." } },
+    { "@type": "Question", "name": "Comment mesure-t-on un temps de changement de série ?", "acceptedAnswer": { "@type": "Answer", "text": "De la dernière pièce bonne de la série précédente à la première pièce bonne de la série suivante. Cette borne inclut les réglages, les essais et les rebuts de démarrage, qui sont souvent oubliés des relevés internes. C'est la seule définition qui empêche de sous-estimer la durée réelle d'un changement." } },
+    { "@type": "Question", "name": "Quel gain attendre d'un chantier SMED ?", "acceptedAnswer": { "@type": "Answer", "text": "Un premier chantier bien mené réduit couramment le temps de changement de série de 30 à 50 %, essentiellement par l'organisation : tri interne/externe, préparation, standardisation. Les résultats extrêmes, comme la presse Toyota passée de 4 heures à 3 minutes, sont le fruit de plusieurs années d'itérations." } },
+    { "@type": "Question", "name": "Faut-il faire un 5S avant un chantier SMED ?", "acceptedAnswer": { "@type": "Answer", "text": "C'est fortement recommandé. Un poste désordonné condamne le chantier : chaque outil cherché pendant le changement allonge le temps d'arrêt. Le 5S met chaque outil à sa place, à portée de main. Beaucoup d'entreprises enchaînent d'ailleurs les deux chantiers sur la même machine, dans cet ordre." } },
+    { "@type": "Question", "name": "Comment mettre en place le SMED dans son atelier ?", "acceptedAnswer": { "@type": "Answer", "text": "Choisissez une machine goulot, dont les arrêts pénalisent toute la ligne. Constituez une équipe de quatre à six personnes incluant le régleur et un opérateur par équipe. Filmez un changement réel, dépouillez la vidéo en groupe, traitez d'abord ce qui ne coûte rien, puis écrivez le standard et fixez la date du prochain relevé. Comptez trois à quatre semaines." } }
+  ]
+}
+</script></p>

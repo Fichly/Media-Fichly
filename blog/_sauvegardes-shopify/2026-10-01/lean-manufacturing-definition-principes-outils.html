@@ -1,0 +1,642 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+
+<div class="fichly-article">
+
+<p>Le Lean Manufacturing est une façon d'organiser la production pour que le produit avance vers le client sans attendre, et pour que chaque problème se voie tôt et se traite là où il naît. On le résume souvent à une liste d'outils japonais. C'est la lecture qui fait échouer le plus de démarches. Cet article pose une définition claire, revient sur l'origine Toyota, détaille les cinq principes, montre quel outil sert à quel problème, et propose une démarche concrète pour commencer sur un périmètre pilote, avec un exemple chiffré.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Le Lean Manufacturing est né du système de production Toyota et repose sur deux piliers : le juste-à-temps et le jidoka. Ses cinq principes vont de la valeur vue par le client jusqu'à l'amélioration continue. Les outils ne viennent qu'ensuite, pour répondre à un problème observé sur le terrain. Dans la plupart des ateliers, le premier gain ne vient pas des machines, mais du temps que le produit passe à attendre entre elles.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Lean veut dire « maigre » : produire ce qui est demandé, quand c'est demandé, sans consommer de ressources qui n'apportent rien au client.</li>
+<li>Le système Toyota tient sur deux piliers : juste-à-temps et jidoka.</li>
+<li>Les cinq principes : valeur, chaîne de valeur, flux, flux tiré, amélioration continue. Le respect des personnes en est la condition.</li>
+<li>Un outil Lean répond à un problème précis. Sans problème identifié, il ne change rien.</li>
+<li>Le premier indicateur à regarder n'est pas la productivité des machines, mais le temps de traversée du produit.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce que le Lean Manufacturing ? Définition</a></li>
+<li><a href="#lean-management">Lean Manufacturing, Lean Management, Lean : quelle différence ?</a></li>
+<li><a href="#origine">D'où vient le Lean Manufacturing ? Du système Toyota au Lean</a></li>
+<li><a href="#principes">Les 5 principes du Lean Manufacturing</a></li>
+<li><a href="#toyota">Juste-à-temps et jidoka : les deux piliers du système Toyota</a></li>
+<li><a href="#gaspillages">Les gaspillages : ce que le Lean cherche à supprimer</a></li>
+<li><a href="#outils">Les outils du Lean Manufacturing, et quand les utiliser</a></li>
+<li><a href="#commencer">Par où commencer : une démarche en 5 étapes</a></li>
+<li><a href="#exemple">Exemple chiffré : diviser le délai sans toucher aux machines</a></li>
+<li><a href="#erreurs">Les erreurs qui font échouer une démarche Lean Manufacturing</a></li>
+<li><a href="#limites">Limites et critiques : ce que le Lean ne doit pas devenir</a></li>
+<li><a href="#faq">FAQ : vos questions sur le Lean Manufacturing</a></li>
+</ol>
+</div>
+
+<h2 id="definition">Qu'est-ce que le Lean Manufacturing ? Définition</h2>
+
+<p><strong>Le Lean Manufacturing est une méthode d'organisation de la production qui cherche à livrer au client ce qu'il demande, au moment où il le demande, en supprimant tout ce qui consomme des ressources sans lui apporter de valeur.</strong> Le mot anglais <em>lean</em> signifie « maigre » ou « sans gras ». En français, on parle aussi de production au plus juste.</p>
+
+<p>Cette définition contient trois idées qu'il faut garder ensemble.</p>
+
+<ul>
+<li>
+<strong>La valeur se définit du point de vue du client.</strong> Une opération a de la valeur si le client accepterait de la payer en la voyant. Usiner, assembler, emballer ce qu'il a commandé : oui. Déplacer une palette, attendre une validation, reprendre une pièce ratée : non.</li>
+<li>
+<strong>Le produit doit avancer sans s'arrêter.</strong> Dans un atelier classique, une pièce passe l'essentiel de son temps à attendre : en stock, devant une machine occupée, avant un contrôle. Le Lean s'attaque d'abord à ces attentes.</li>
+<li>
+<strong>Les problèmes doivent se voir tôt.</strong> Un stock tampon, une retouche en bout de ligne ou une réunion de crise hebdomadaire compensent souvent un problème que personne n'a traité. Le Lean cherche à rendre ces problèmes visibles pour les résoudre, pas à les absorber.</li>
+</ul>
+
+<p>C'est pour cette raison qu'une démarche Lean ne se juge pas au nombre d'outils déployés. Elle se juge à deux choses : le délai entre la commande et la livraison, et la vitesse à laquelle un problème trouve quelqu'un pour le traiter.</p>
+
+<h2 id="lean-management">Lean Manufacturing, Lean Management, Lean : quelle différence ?</h2>
+
+<p>Les trois termes circulent, souvent comme synonymes. Ils ne désignent pas exactement la même chose, et la distinction aide à savoir de quoi on parle en réunion.</p>
+
+<table>
+<thead><tr>
+<th>Terme</th>
+<th>Ce qu'il désigne</th>
+<th>Où il s'applique</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<strong>Lean Manufacturing</strong> (ou Lean Production)</td>
+<td>L'application du Lean à la fabrication : flux, stocks, changements de série, qualité au poste.</td>
+<td>Ateliers, lignes de production, logistique interne.</td>
+</tr>
+<tr>
+<td><strong>Lean Management</strong></td>
+<td>Le système de management qui fait vivre le Lean : routines, management visuel, résolution de problèmes, rôle des managers.</td>
+<td>Toute l'entreprise, production comprise.</td>
+</tr>
+<tr>
+<td>
+<strong>Lean</strong> (ou pensée Lean)</td>
+<td>La philosophie d'ensemble : valeur client, flux, amélioration continue, respect des personnes.</td>
+<td>Industrie, services, santé, administration.</td>
+</tr>
+</tbody>
+</table>
+
+<p>En pratique, les deux premiers sont indissociables. <strong>Des outils de production sans système de management durent rarement plus de quelques mois</strong> : le 5S est fait, les photos avant/après sont prises, puis l'atelier revient à son état initial faute de routine pour le faire tenir. À l'inverse, un management Lean sans action sur le flux produit des réunions, pas des résultats.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-1-outils-sans-routine.png?v=1790801615" aria-label="Deux postes après le même chantier 5S : sans routine, les outils quittent leur place et l'état du poste retombe en six mois ; avec un point régulier, un responsable par écart et des indicateurs affichés, il tient." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-1-outils-sans-routine.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-1-outils-sans-routine.gif?v=1790801615" alt="Deux postes après le même chantier 5S : sans routine, les outils quittent leur place et l'état du poste retombe en six mois ; avec un point régulier, un responsable par écart et des indicateurs affichés, il tient." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<h2 id="origine">D'où vient le Lean Manufacturing ? Du système Toyota au Lean</h2>
+
+<p>Le Lean Manufacturing vient du système de production Toyota, le Toyota Production System (TPS), développé au Japon après la Seconde Guerre mondiale. Toyota doit alors produire des volumes faibles, avec des modèles variés, peu de capitaux et peu d'espace. Impossible de copier la production de masse américaine, qui repose sur de grandes séries et de gros stocks.</p>
+
+<p>Sous l'impulsion de Taiichi Ohno, Toyota construit pendant plusieurs décennies un système inverse : produire en petites quantités, au rythme de la demande, en arrêtant la production dès qu'un défaut apparaît pour en traiter la cause.</p>
+
+<p>Le mot « lean » arrive plus tard, et il vient des États-Unis.</p>
+
+<ul>
+<li>
+<strong>1988</strong> : John Krafcik, chercheur au MIT, emploie l'expression « lean production » dans un article consacré au système Toyota.</li>
+<li>
+<strong>1990</strong> : James Womack, Daniel Jones et Daniel Roos publient <em>The Machine That Changed the World</em>, qui compare les usines automobiles du monde entier et popularise le terme.</li>
+<li>
+<strong>1996</strong> : Womack et Jones publient <em>Lean Thinking</em>, qui formalise les cinq principes encore utilisés aujourd'hui.</li>
+</ul>
+
+<p>Depuis, le Lean est sorti de l'automobile, puis de l'industrie. Mais c'est en atelier qu'il reste le plus concret, parce que les attentes, les stocks et les défauts s'y voient à l'œil nu.</p>
+
+<h2 id="principes">Les 5 principes du Lean Manufacturing</h2>
+
+<p>Les cinq principes formalisés dans <em>Lean Thinking</em> se lisent dans l'ordre. Chacun prépare le suivant. Pour chacun, voici ce qu'il veut dire sur le terrain et la question qui permet de le vérifier.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-2-cinq-principes.png?v=1790801615" aria-label="Les cinq principes du Lean dans l'ordre, chacun avec sa question : identifier la valeur, cartographier la chaîne de valeur, créer le flux, tirer le flux, viser la perfection. Une flèche ramène du cinquième au premier, sur le socle du respect des personnes." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-2-cinq-principes.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-2-cinq-principes.gif?v=1790801615" alt="Les cinq principes du Lean dans l'ordre, chacun avec sa question : identifier la valeur, cartographier la chaîne de valeur, créer le flux, tirer le flux, viser la perfection. Une flèche ramène du cinquième au premier, sur le socle du respect des personnes." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<h3>1. Identifier la valeur</h3>
+
+<p>La valeur est ce que le client est prêt à payer. Tout le reste est à questionner. Ce premier principe paraît évident ; il est pourtant souvent sauté, parce qu'il oblige à regarder son propre processus depuis l'extérieur.</p>
+
+<p><strong>La question à poser :</strong> si le client voyait cette opération, accepterait-il de la payer ?</p>
+
+<h3>2. Cartographier la chaîne de valeur</h3>
+
+<p>La chaîne de valeur regroupe toutes les étapes par lesquelles passe le produit, de la matière première à l'expédition, avec les flux d'information qui les déclenchent. La cartographier permet de voir où le produit est transformé, et surtout où il attend. C'est le rôle de la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping (VSM)</a>.</p>
+
+<p><strong>La question à poser :</strong> sur le temps total qu'un produit passe dans l'usine, combien de minutes est-il réellement transformé ?</p>
+
+<h3>3. Créer le flux</h3>
+
+<p>Une fois les attentes identifiées, l'objectif est de faire avancer le produit d'une étape à l'autre sans interruption. Cela passe par des lots plus petits, des changements de série plus courts, une implantation qui rapproche les postes et des équipements fiables.</p>
+
+<p><strong>La question à poser :</strong> où le produit s'arrête-t-il, et pourquoi ?</p>
+
+<h3>4. Tirer le flux</h3>
+
+<p>Produire à flux tiré, c'est ne fabriquer que ce que l'étape suivante, et au bout le client, a consommé. On s'oppose au flux poussé, où chaque poste produit à son rythme en espérant que la suite absorbera. Le Kanban est l'outil le plus connu pour piloter ce principe.</p>
+
+<p><strong>La question à poser :</strong> qu'est-ce qui déclenche la production à ce poste, une commande réelle ou une prévision ?</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-3-flux-pousse-flux-tire.png?v=1790801615" aria-label="Deux lignes identiques avec la même demande client : en flux poussé sur prévision, les stocks montent à 15 pièces ; en flux tiré, une carte kanban remonte à chaque consommation et l'encours ne dépasse jamais 4 pièces." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-3-flux-pousse-flux-tire.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-3-flux-pousse-flux-tire.gif?v=1790801616" alt="Deux lignes identiques avec la même demande client : en flux poussé sur prévision, les stocks montent à 15 pièces ; en flux tiré, une carte kanban remonte à chaque consommation et l'encours ne dépasse jamais 4 pièces." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<h3>5. Viser la perfection par l'amélioration continue</h3>
+
+<p>Le dernier principe ferme la boucle : chaque amélioration fait apparaître le problème suivant. Supprimer un stock tampon révèle la panne qu'il compensait ; réduire la taille de lot révèle la longueur du changement de série. L'amélioration continue, ou Kaizen, s'organise par petites boucles, par exemple avec le <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a>.</p>
+
+<p><strong>La question à poser :</strong> quand avons-nous amélioré ce poste pour la dernière fois, et qui l'a fait ?</p>
+
+<h3>Le principe qui les conditionne tous : le respect des personnes</h3>
+
+<p>Les cinq principes décrivent le fonctionnement du système. Ils ne disent pas qui le fait vivre. Toyota l'a explicité dans son référentiel <em>Toyota Way</em>, publié en 2001, qui repose sur deux piliers : l'amélioration continue et le respect des personnes.</p>
+
+<p>Le point est très concret. <strong>Ceux qui voient les gaspillages tous les jours sont ceux qui tiennent le poste.</strong> Une démarche qui ne leur demande rien, ou qui transforme chaque gain de temps en suppression de poste, se prive de sa principale source d'information. Personne ne signale un gaspillage s'il pense que ce signalement menace son emploi.</p>
+
+<h2 id="toyota">Juste-à-temps et jidoka : les deux piliers du système Toyota</h2>
+
+<p>Le système Toyota est souvent représenté sous la forme d'une maison. Les fondations sont la stabilité et les standards ; le toit, la satisfaction du client ; les deux piliers, le juste-à-temps et le jidoka.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-4-maison-toyota.png?v=1790801615" aria-label="La maison Toyota construite du bas vers le haut : fondations stabilité et standards, piliers juste-à-temps et jidoka avec leurs outils, toit satisfaction du client." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-4-maison-toyota.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-4-maison-toyota.gif?v=1790801615" alt="La maison Toyota construite du bas vers le haut : fondations stabilité et standards, piliers juste-à-temps et jidoka avec leurs outils, toit satisfaction du client." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<table>
+<thead><tr>
+<th>Pilier</th>
+<th>Ce que c'est</th>
+<th>Ce qu'on voit sur le terrain</th>
+<th>Outils associés</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Juste-à-temps</strong></td>
+<td>Produire la bonne pièce, en bonne quantité, au bon moment.</td>
+<td>Des encours faibles entre les postes, des lots courts, une production déclenchée par la consommation.</td>
+<td>Kanban, flux tiré, takt time, SMED, lissage de la charge.</td>
+</tr>
+<tr>
+<td><strong>Jidoka</strong></td>
+<td>Arrêter la production dès qu'une anomalie apparaît, pour ne pas fabriquer de défaut.</td>
+<td>Des machines qui s'arrêtent seules sur défaut, un opérateur qui peut stopper la ligne, un problème traité avant de redémarrer.</td>
+<td>Andon, détrompeurs (poka-yoke), autocontrôle, résolution de problèmes.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Le jidoka est le pilier le moins connu hors de Toyota, et pourtant le plus ancien. Il remonte aux métiers à tisser conçus par Sakichi Toyoda au début du XXe siècle, qui s'arrêtaient automatiquement lorsqu'un fil cassait. L'idée tient toujours : <strong>un défaut détecté au poste coûte une minute, un défaut découvert chez le client coûte une réclamation</strong>.</p>
+
+<p>Les deux piliers ne fonctionnent qu'ensemble. Le juste-à-temps réduit les stocks qui cachaient les problèmes ; le jidoka oblige à traiter ces problèmes au lieu de les contourner.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-5-le-stock-cache-les-problemes.png?v=1790801615" aria-label="La rivière des stocks : quand le juste-à-temps baisse le niveau, les pannes, les changements de série longs et les défauts récurrents apparaissent ; le jidoka arrête la production et les traite avec la TPM, le SMED et le poka-yoke." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-5-le-stock-cache-les-problemes.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-5-le-stock-cache-les-problemes.gif?v=1790801615" alt="La rivière des stocks : quand le juste-à-temps baisse le niveau, les pannes, les changements de série longs et les défauts récurrents apparaissent ; le jidoka arrête la production et les traite avec la TPM, le SMED et le poka-yoke." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<h2 id="gaspillages">Les gaspillages : ce que le Lean cherche à supprimer</h2>
+
+<p>Le Lean classe les pertes en huit familles de gaspillages, les MUDA : surproduction, attentes, transports, mouvements inutiles, stocks, étapes inutiles, défauts, et compétences non utilisées. Les sept premières viennent du système Toyota ; la huitième a été ajoutée plus tard.</p>
+
+<p>La surproduction occupe une place à part : <strong>elle fabrique les sept autres</strong>. Une pièce produite trop tôt doit être transportée, stockée, parfois reprise si le besoin change, et elle masque les problèmes de la ligne.</p>
+
+<p>Le système Toyota distingue aussi deux autres formes de perte : le Mura, l'irrégularité de la charge, et le Muri, la surcharge des personnes et des machines. Une charge irrégulière oblige à surcharger les postes aux pics, et un poste surchargé produit des défauts et des attentes.</p>
+
+<p>Chaque famille, son équivalent anglais, la façon de la repérer en une heure d'observation et la manière dont elle se cache dans vos indicateurs sont détaillés dans notre guide <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 gaspillages du Lean</a>.</p>
+
+<h2 id="outils">Les outils du Lean Manufacturing, et quand les utiliser</h2>
+
+<p>Les outils Lean sont nombreux, et c'est un piège. <strong>Un outil ne sert qu'à répondre à un problème précis.</strong> Déployer un 5S dans un atelier dont le vrai problème est l'irrégularité des commandes ne changera rien au délai. Le bon réflexe est de partir de ce qu'on observe, puis de choisir l'outil.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-6-partir-du-probleme.png?v=1790801615" aria-label="Chaque observation de terrain appelle son outil : stocks et attentes, VSM ; recherches d'outils, 5S ; changements de série longs, SMED ; pannes répétées, TPM ; erreurs qui reviennent, poka-yoke. Les autres outils restent dans la boîte." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-6-partir-du-probleme.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-6-partir-du-probleme.gif?v=1790801615" alt="Chaque observation de terrain appelle son outil : stocks et attentes, VSM ; recherches d'outils, 5S ; changements de série longs, SMED ; pannes répétées, TPM ; erreurs qui reviennent, poka-yoke. Les autres outils restent dans la boîte." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<table>
+<thead><tr>
+<th>Ce que vous observez</th>
+<th>L'outil qui répond</th>
+<th>Ce qu'il apporte</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Des stocks et des attentes entre les postes, un délai long sans explication</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">Value Stream Mapping (VSM)</a></td>
+<td>La chaîne complète, le délai de traversée et la part de valeur ajoutée</td>
+</tr>
+<tr>
+<td>Des recherches d'outils, des postes encombrés, des écarts invisibles</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">Méthode 5S</a></td>
+<td>Un poste où chaque chose a sa place, et où l'anomalie se voit</td>
+</tr>
+<tr>
+<td>Des changements de série longs qui imposent de grands lots</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">SMED</a></td>
+<td>Des changements plus courts, donc des lots plus petits et un flux plus fluide</td>
+</tr>
+<tr>
+<td>Des pannes répétées, un équipement qui ne tient pas sa cadence</td>
+<td>
+<a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance">TPM</a> et <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">suivi du TRS</a>
+</td>
+<td>Des équipements fiables, et une mesure des pertes de disponibilité, performance et qualité</td>
+</tr>
+<tr>
+<td>Des postes qui produisent sans lien avec la consommation réelle</td>
+<td>Kanban et flux tiré</td>
+<td>Une production déclenchée par le besoin de l'étape suivante</td>
+</tr>
+<tr>
+<td>Des erreurs d'assemblage ou d'oubli qui reviennent</td>
+<td>Poka-yoke (détrompeurs)</td>
+<td>Une erreur rendue impossible plutôt que détectée après coup</td>
+</tr>
+<tr>
+<td>Un problème simple qui revient, dont la cause n'est pas claire</td>
+<td>
+<a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">5 Pourquoi</a> puis <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">PDCA</a>
+</td>
+<td>Une cause racine, puis une boucle courte d'essai et de vérification</td>
+</tr>
+<tr>
+<td>Un défaut complexe qui résiste aux premières contre-mesures</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">DMAIC</a></td>
+<td>Une cause prouvée par les données, et un gain remesuré</td>
+</tr>
+<tr>
+<td>Des pratiques différentes d'une équipe à l'autre sur le même poste</td>
+<td>Standard de travail</td>
+<td>Une référence commune, qui sert de base pour voir les écarts et améliorer</td>
+</tr>
+</tbody>
+</table>
+
+<p>Deux repères d'enchaînement. La VSM se fait <strong>avant</strong> le reste quand le sujet dépasse un poste : elle dit où regarder. La stabilité se construit <strong>avant</strong> le flux : on ne réduit pas les stocks d'une ligne dont les machines tombent en panne chaque jour, sinon on arrête la production.</p>
+
+<h2 id="commencer">Par où commencer : une démarche en 5 étapes</h2>
+
+<p>La question revient dans toutes les usines : on veut « faire du Lean », mais par quoi commencer ? La réponse tient en un mot : un périmètre. Pas toute l'usine, pas tous les outils. Un flux, une équipe, quelques semaines.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-7-demarche-flux-pilote.png?v=1790801615" aria-label="Démarche en 5 étapes : dans l'usine, on écarte le flux le plus problématique et on choisit un flux pilote, puis on suit le produit, on stabilise, on fait circuler et on installe la routine." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-7-demarche-flux-pilote.mp4?v=1790801617" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-7-demarche-flux-pilote.gif?v=1790801615" alt="Démarche en 5 étapes : dans l'usine, on écarte le flux le plus problématique et on choisit un flux pilote, puis on suit le produit, on stabilise, on fait circuler et on installe la routine." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<h3>Étape 1 : choisir un flux pilote</h3>
+
+<p>Prenez un produit ou une famille de produits représentative, avec un volume régulier et une équipe volontaire. Évitez le flux le plus problématique de l'usine pour commencer : vous avez besoin d'un premier résultat visible, pas du chantier le plus difficile.</p>
+
+<h3>Étape 2 : suivre le produit et relever le point de départ</h3>
+
+<p>Suivez une pièce du quai de réception jusqu'à l'expédition. Notez chaque étape, sa durée, et si elle transforme le produit ou non. Relevez trois chiffres : le temps de traversée total, le temps de transformation cumulé et les encours entre les postes. <strong>Ce relevé se fait avant d'agir</strong> : sans point de départ, le gain se racontera mais ne se démontrera pas.</p>
+
+<h3>Étape 3 : stabiliser</h3>
+
+<p>Avant de chercher à aller plus vite, rendez le flux prévisible. Organisez les postes (5S), écrivez les standards des opérations clés, traitez les pannes les plus fréquentes. Un flux instable ne se réduit pas, il se subit.</p>
+
+<h3>Étape 4 : faire circuler</h3>
+
+<p>Réduisez progressivement les encours entre les postes, en commençant par ceux qui n'ont pas de raison d'être. Raccourcissez les changements de série pour pouvoir baisser la taille des lots. Chaque baisse de stock fera apparaître un problème : c'est le but, et c'est là que la résolution de problèmes entre en jeu.</p>
+
+<h3>Étape 5 : installer la routine</h3>
+
+<p>Affichez les indicateurs du flux au poste, organisez un point court et régulier avec l'équipe, et décidez qui traite chaque écart et sous quel délai. C'est cette routine, plus que les outils, qui fait tenir la démarche après le départ du consultant ou du responsable projet.</p>
+
+<h2 id="exemple">Exemple chiffré : diviser le délai sans toucher aux machines</h2>
+
+<p>Voici un exemple illustratif, construit pour montrer le raisonnement. Les chiffres sont volontairement simples.</p>
+
+<div class="fichly-note">
+<p><strong>La situation de départ.</strong> Un atelier d'usinage travaille en une équipe de 8 heures. Une pièce passe par quatre opérations : sciage (4 minutes), tournage (12 minutes), fraisage (18 minutes) et ébavurage (8 minutes). Son temps de transformation cumulé est donc de 42 minutes.</p>
+<p>L'atelier livre 50 pièces par jour. Entre les postes, on compte en moyenne 450 pièces en attente.</p>
+</div>
+
+<p><strong>Le temps de traversée.</strong> Une relation simple, la loi de Little, relie les trois grandeurs : le temps de traversée est égal à l'encours divisé par le débit. Ici, 450 pièces divisées par 50 pièces par jour donnent 9 jours ouvrés, soit 72 heures de travail, ou 4 320 minutes.</p>
+
+<p>La pièce est transformée pendant 42 minutes sur 4 320. <strong>Moins de 1 % de son temps dans l'atelier crée de la valeur.</strong> Le reste, elle attend.</p>
+
+<p><strong>Le chantier pilote.</strong> L'équipe réduit la taille des lots grâce à un changement de série plus court sur le fraisage, et supprime le stock tampon entre le tournage et le fraisage. L'encours moyen descend à 200 pièces. Le débit ne change pas : les machines tournent à la même vitesse.</p>
+
+<p><strong>Le résultat.</strong> Le temps de traversée passe à 200 divisé par 50, soit 4 jours. La part de valeur ajoutée remonte à un peu plus de 2 %. Le délai client a été divisé par plus de deux, sans investissement machine et sans augmenter la cadence.</p>
+
+<figure style="margin:1.8em 0;">
+<video autoplay muted loop playsinline preload="metadata" width="1200" height="860" poster="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-8-exemple-chiffre.png?v=1790801615" aria-label="Exemple chiffré : mêmes machines et même débit de 50 pièces par jour ; l'encours passe de 450 à 200 pièces et le temps de traversée de 9 à 4 jours, les 42 minutes de transformation restant identiques." style="width:100%;height:auto;border-radius:12px;">
+<source src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-8-exemple-chiffre.mp4?v=1790801616" type="video/mp4">
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-8-exemple-chiffre.gif?v=1790801615" alt="Exemple chiffré : mêmes machines et même débit de 50 pièces par jour ; l'encours passe de 450 à 200 pièces et le temps de traversée de 9 à 4 jours, les 42 minutes de transformation restant identiques." width="1200" height="860" loading="lazy" style="width:100%;height:auto;"></video>
+</figure>
+
+<table>
+<thead><tr>
+<th>Indicateur</th>
+<th>Avant</th>
+<th>Après le pilote</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Encours moyen</td>
+<td>450 pièces</td>
+<td>200 pièces</td>
+</tr>
+<tr>
+<td>Débit</td>
+<td>50 pièces par jour</td>
+<td>50 pièces par jour</td>
+</tr>
+<tr>
+<td>Temps de traversée</td>
+<td>9 jours</td>
+<td>4 jours</td>
+</tr>
+<tr>
+<td>Part de valeur ajoutée</td>
+<td>Moins de 1 %</td>
+<td>Un peu plus de 2 %</td>
+</tr>
+</tbody>
+</table>
+
+<p>La leçon dépasse l'exemple. Beaucoup d'ateliers pilotent le taux d'occupation de chaque machine. Or une machine qui produit plus que ce que le poste suivant peut absorber ne crée pas de production supplémentaire : elle crée du stock, et donc du délai. <strong>Le délai se gagne d'abord entre les machines, pas sur les machines.</strong></p>
+
+<h2 id="erreurs">Les erreurs qui font échouer une démarche Lean Manufacturing</h2>
+
+<p>Ces erreurs reviennent dans la plupart des démarches qui s'essoufflent. Elles ne portent presque jamais sur la technique.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Commencer par déployer des outils.</span><br><span class="fichly-ok">✅ Commencer par un problème observé et un indicateur de départ.</span> Un 5S déployé sans problème à résoudre donne de belles photos et ne tient pas six mois.</p>
+
+<p><span class="fichly-ko">❌ Présenter le Lean comme un programme de réduction des effectifs.</span><br><span class="fichly-ok">✅ Décider à l'avance ce que devient le temps libéré : plus de volume, plus d'amélioration, de la formation, de la polyvalence, et le dire.</span> Sinon, plus personne ne signale un gaspillage.</p>
+
+<p><span class="fichly-ko">❌ Lancer la démarche partout en même temps.</span><br><span class="fichly-ok">✅ Réussir sur un flux pilote, puis étendre.</span> Un périmètre qui tient devient l'argument qui convainc les suivants.</p>
+
+<p><span class="fichly-ko">❌ Réduire les stocks avant d'avoir stabilisé les équipements.</span><br><span class="fichly-ok">✅ Traiter d'abord les pannes et les défauts récurrents.</span> Un stock retiré sans traiter ce qu'il compensait arrête la ligne la semaine suivante.</p>
+
+<p><span class="fichly-ko">❌ Piloter la démarche comme un projet, avec une date de fin.</span><br><span class="fichly-ok">✅ Installer des routines de management qui continuent après le projet : un point régulier, des indicateurs affichés, un responsable pour chaque écart.</span></p>
+</div>
+
+<p>Le point commun : <strong>aucune de ces erreurs ne vient d'une mauvaise connaissance des outils</strong>. Elles viennent de la façon dont la démarche est présentée, pilotée et entretenue.</p>
+
+<h2 id="limites">Limites et critiques : ce que le Lean ne doit pas devenir</h2>
+
+<p>Le Lean a aussi ses critiques, et il serait malhonnête de les passer sous silence. Des chercheurs et des acteurs de la prévention ont documenté des cas où des démarches présentées comme Lean ont dégradé les conditions de travail : intensification des cadences, suppression de marges de manœuvre, standardisation vécue comme une perte d'autonomie. L'ANACT, l'agence nationale pour l'amélioration des conditions de travail, a par exemple consacré des travaux et des débats aux effets du lean sur la santé des salariés.</p>
+
+<p>Dans la plupart des cas décrits, le problème n'est pas le Lean tel que Toyota l'a construit, mais une version tronquée : les outils de productivité sans le respect des personnes, la chasse aux gaspillages sans la résolution de problèmes avec les équipes. Supprimer toutes les marges d'un poste n'est pas du Lean. Rendre le travail plus simple, plus sûr et moins pénible, si.</p>
+
+<p>Deux garde-fous concrets aident à rester du bon côté. Le premier : associer les équipes à l'observation et aux décisions sur leur propre poste. Le second : suivre, à côté des indicateurs de performance, des indicateurs de sécurité et de charge de travail, et les regarder avec le même sérieux.</p>
+
+<h2 id="faq">FAQ : vos questions sur le Lean Manufacturing</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>Qu'est-ce que le Lean Manufacturing en une phrase ?</summary>
+<div class="answer">
+<p>C'est une méthode d'organisation de la production qui livre au client ce qu'il demande, quand il le demande, en supprimant les étapes qui consomment des ressources sans lui apporter de valeur, et en traitant les problèmes au moment où ils apparaissent.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les 5 principes du Lean ?</summary>
+<div class="answer">
+<p>Identifier la valeur du point de vue du client, cartographier la chaîne de valeur, créer un flux continu, tirer la production depuis la demande, et viser la perfection par l'amélioration continue. Ils ont été formalisés par James Womack et Daniel Jones dans <em>Lean Thinking</em>, en 1996.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les outils du Lean Manufacturing ?</summary>
+<div class="answer">
+<p>Les plus utilisés sont la VSM, le 5S, le SMED, la TPM, le Kanban, le poka-yoke, le standard de travail, le management visuel, et les méthodes de résolution de problèmes comme les 5 Pourquoi, le PDCA et le DMAIC. Chacun répond à un problème précis : le choix se fait à partir de ce qu'on observe sur le terrain.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre Lean Manufacturing et Lean Management ?</summary>
+<div class="answer">
+<p>Le Lean Manufacturing désigne l'application du Lean à la production : flux, stocks, qualité, changements de série. Le Lean Management désigne le système de management qui fait vivre la démarche : routines, indicateurs, résolution de problèmes, rôle des managers. L'un sans l'autre dure rarement.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre Lean et Lean Six Sigma ?</summary>
+<div class="answer">
+<p>Le Lean s'attaque d'abord aux délais et aux gaspillages ; Six Sigma s'attaque à la variabilité et aux défauts, avec une démarche statistique structurée, le DMAIC. Le Lean Six Sigma combine les deux. C'est le contenu des parcours de certification comme la <a href="https://www.fichly.com/blogs/nos-articles/green-belt-lean-six-sigma">Green Belt Lean Six Sigma</a>.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les 7 gaspillages du Lean ?</summary>
+<div class="answer">
+<p>La surproduction, les attentes, les transports, les étapes inutiles, les stocks, les mouvements inutiles et les défauts. Une huitième famille, la sous-utilisation des compétences, a été ajoutée plus tard. Tous sont détaillés dans notre <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">guide des 8 gaspillages</a>.</p>
+</div>
+</details>
+
+<details>
+<summary>Le Lean Manufacturing est-il réservé aux grandes usines ?</summary>
+<div class="answer">
+<p>Non. Les principes s'appliquent à un atelier de dix personnes comme à une ligne automobile. Une petite structure a même un avantage : les décisions se prennent vite et les résultats se voient tout de suite. Ce qui change, c'est l'échelle du pilote, pas la méthode.</p>
+</div>
+</details>
+
+<details>
+<summary>Par où commencer une démarche Lean ?</summary>
+<div class="answer">
+<p>Par un flux pilote et un relevé de départ : suivre un produit de bout en bout, mesurer son temps de traversée et sa part de valeur ajoutée, puis stabiliser avant de chercher à accélérer. Les outils viennent ensuite, pour répondre aux problèmes que ce relevé a fait apparaître.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Le Lean ne se comprend pas sur un schéma. Il se comprend en suivant une pièce dans un atelier.</strong></p>
+<p>Les fiches Lean de Fichly réunissent les outils de terrain sur une page chacun : les 8 gaspillages, la VSM, le 5S, le SMED, le TRS, le Kanban. Elles sont faites pour être emportées en atelier, pas pour être relues au bureau.</p>
+<p>👉 Découvrez les <a href="https://www.fichly.com/products/fiches-lean">fiches Lean</a> (49,90 €), ou nos <a href="https://www.fichly.com/pages/templates">templates gratuits</a>.</p>
+</div>
+
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les MUDA : les 8 gaspillages du Lean</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">La Value Stream Mapping : symboles, étapes et exemple chiffré</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+</ul>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lean Manufacturing : définition, principes et outils pour l'atelier",
+  "description": "Lean Manufacturing : définition, origine Toyota, 5 principes, outils et par où commencer en atelier, avec un exemple chiffré et les erreurs à éviter.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": [
+      "https://www.linkedin.com/in/hugo-duc/"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fichly",
+    "url": "https://www.fichly.com"
+  },
+  "datePublished": "2026-10-05",
+  "dateModified": "2026-10-05",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/lean-manufacturing-definition-principes-outils",
+  "inLanguage": "fr-FR",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/lean-manufacturing-2-cinq-principes.png?v=1790801615"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le Lean Manufacturing en une phrase ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est une méthode d'organisation de la production qui livre au client ce qu'il demande, quand il le demande, en supprimant les étapes qui consomment des ressources sans lui apporter de valeur, et en traitant les problèmes au moment où ils apparaissent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 5 principes du Lean ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Identifier la valeur du point de vue du client, cartographier la chaîne de valeur, créer un flux continu, tirer la production depuis la demande, et viser la perfection par l'amélioration continue. Ils ont été formalisés par James Womack et Daniel Jones dans Lean Thinking, en 1996."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les outils du Lean Manufacturing ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les plus utilisés sont la VSM, le 5S, le SMED, la TPM, le Kanban, le poka-yoke, le standard de travail, le management visuel, et les méthodes de résolution de problèmes comme les 5 Pourquoi, le PDCA et le DMAIC. Chacun répond à un problème précis : le choix se fait à partir de ce qu'on observe sur le terrain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre Lean Manufacturing et Lean Management ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le Lean Manufacturing désigne l'application du Lean à la production : flux, stocks, qualité, changements de série. Le Lean Management désigne le système de management qui fait vivre la démarche : routines, indicateurs, résolution de problèmes, rôle des managers. L'un sans l'autre dure rarement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre Lean et Lean Six Sigma ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le Lean s'attaque d'abord aux délais et aux gaspillages ; Six Sigma s'attaque à la variabilité et aux défauts, avec une démarche statistique structurée, le DMAIC. Le Lean Six Sigma combine les deux. C'est le contenu des parcours de certification comme la Green Belt Lean Six Sigma."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 7 gaspillages du Lean ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La surproduction, les attentes, les transports, les étapes inutiles, les stocks, les mouvements inutiles et les défauts. Une huitième famille, la sous-utilisation des compétences, a été ajoutée plus tard. Tous sont détaillés dans notre guide des 8 gaspillages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le Lean Manufacturing est-il réservé aux grandes usines ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Les principes s'appliquent à un atelier de dix personnes comme à une ligne automobile. Une petite structure a même un avantage : les décisions se prennent vite et les résultats se voient tout de suite. Ce qui change, c'est l'échelle du pilote, pas la méthode."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Par où commencer une démarche Lean ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Par un flux pilote et un relevé de départ : suivre un produit de bout en bout, mesurer son temps de traversée et sa part de valeur ajoutée, puis stabiliser avant de chercher à accélérer. Les outils viennent ensuite, pour répondre aux problèmes que ce relevé a fait apparaître."
+      }
+    }
+  ]
+}
+</script>

@@ -1,0 +1,675 @@
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+
+<div class="fichly-article">
+
+<p>Un MUDA est un gaspillage : une activité qui consomme du temps, de l'espace ou de la matière sans rien apporter au client. Le Lean en compte huit. La plupart des pages qui les listent s'arrêtent à la liste, et une liste ne change rien toute seule. Un gaspillage nommé reste un gaspillage tant que personne ne l'a vu à un poste précis, un jour précis. Cet article définit les 8 MUDA un par un, donne leurs équivalents anglais, montre où chacun se retrouve dans vos indicateurs, et propose une heure d'observation pour en repérer trois chez vous aujourd'hui.</p>
+
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Les 8 MUDA (TIMWOODS en anglais) sont huit familles de gaspillage héritées du système de production Toyota, dont sept d'origine et une huitième sur les compétences non utilisées. Nommer les MUDA est facile, les voir demande une observation au poste. Trois familles n'apparaissent dans aucun indicateur de production courant.</p>
+</div>
+
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Un MUDA est une consommation de ressource sans valeur pour le client.</li>
+<li>Muri et Mura désignent autre chose et ne se traitent pas pareil.</li>
+<li>La huitième famille, les compétences non utilisées, manque encore chez beaucoup.</li>
+<li>En anglais : TIMWOOD pour sept familles, TIMWOODS ou DOWNTIME pour huit.</li>
+<li>Surproduction, stocks et transports n'apparaissent pas dans un TRS.</li>
+</ul>
+</div>
+
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Que veut dire Muda ? Définition et origine du mot</a></li>
+<li><a href="#pourquoi">Pourquoi connaître les 8 MUDA ne suffit-il pas à les voir ?</a></li>
+<li><a href="#trois-m">Muda, Mura, Muri : trois pertes à ne pas confondre</a></li>
+<li><a href="#les-huit">Quels sont les 8 MUDA ? La liste, un par un</a></li>
+<li><a href="#huitieme">Quel est le 8e MUDA, et pourquoi manque-t-il presque partout ?</a></li>
+<li><a href="#anglais">Les 8 wastes en anglais : TIMWOOD, TIMWOODS, DOWNTIME</a></li>
+<li><a href="#reperer">Repérer trois MUDA dans votre atelier aujourd'hui</a></li>
+<li><a href="#mesure">Où chaque MUDA se cache dans vos indicateurs</a></li>
+<li><a href="#erreurs">Les erreurs qui vident une chasse aux MUDA</a></li>
+<li><a href="#outils">Les outils Lean qui prolongent la chasse aux MUDA</a></li>
+<li><a href="#faq">FAQ : vos questions sur les MUDA</a></li>
+</ol>
+</div>
+
+<h2 id="definition">Que veut dire Muda ? Définition et origine du mot</h2>
+
+<p><strong>Muda est un mot japonais qui signifie inutilité, futilité, gaspillage.</strong> Dans le vocabulaire du Lean, il désigne toute activité qui consomme une ressource sans produire de valeur pour le client final. Le temps, l'espace, la matière, l'énergie et la compétence sont des ressources au même titre.</p>
+
+<p>Le mot vient du système de production Toyota, formalisé par Taiichi Ohno à partir des années 1950. Ohno classe les pertes observées en sept familles. Cette classification s'est répandue hors de l'automobile, puis hors de l'industrie, et une huitième famille lui a été ajoutée plus tard.</p>
+
+<p>Le test qui définit un MUDA tient en une question, et elle se pose du point de vue du client, jamais du vôtre.</p>
+
+<div class="fichly-note">
+<p><strong>Le test de la facture.</strong> Prenez une opération de votre processus. Demandez-vous si le client accepterait de la payer en la voyant. Il paie la découpe, l'assemblage, le contrôle final qu'il a exigé. Il ne paie pas le trajet du chariot, l'attente devant la machine, ni la reprise d'une pièce mal faite. Ce qu'il refuserait de payer est un MUDA.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-les-muda-les-8-gaspillages-du-lean-guide-complet-1-test-de-la-facture.gif" alt="Huit opérations d'un processus passées au test de la facture : le client paie la découpe, l'assemblage et le contrôle final exigé ; il refuse le trajet du chariot, l'attente devant la machine et la reprise d'une pièce mal faite, qui sont des MUDA et se suppriment ; le contrôle réglementaire et la traçabilité imposée sont des non-valeurs ajoutées nécessaires, qui se réduisent sans se supprimer." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+</div>
+
+<p>Une précision utile, parce qu'elle évite une erreur courante. Certaines activités n'apportent aucune valeur au client et restent obligatoires : un contrôle réglementaire, une traçabilité imposée, une opération de sécurité. On les appelle des non-valeurs ajoutées nécessaires. Elles se réduisent, elles ne se suppriment pas. Confondre les deux catégories fait perdre la confiance des équipes dès la première réunion.</p>
+
+<h2 id="pourquoi">Pourquoi connaître les 8 MUDA ne suffit-il pas à les voir ?</h2>
+
+<p>Les 8 MUDA sont le point d'entrée le plus facile du Lean. Ils s'expliquent en dix minutes, ils parlent à tout le monde, et chacun trouve un exemple dans son service avant la fin de la réunion. C'est leur force. C'est aussi ce qui explique pourquoi tant de démarches s'arrêtent là.</p>
+
+<p><strong>Nommer un gaspillage n'est pas le mesurer.</strong> Entre les deux, il y a un travail que la liste ne demande pas et qu'elle laisse croire inutile. Écrire "trop d'attentes sur la ligne 3" ne dit ni combien de temps, ni à quel moment de la journée, ni ce qui bloque. Aucune décision ne se prend là dessus.</p>
+
+<p>Trois conséquences pratiques en découlent, et elles structurent la suite de cet article.</p>
+
+<ul>
+<li>
+<strong>Un gaspillage se rattache à un poste et à une plage horaire</strong>, sinon il reste une impression. Une observation vaut mieux qu'un tour de table.</li>
+<li>
+<strong>Un point de départ se relève avant d'agir.</strong> Sans chiffre initial, le gain ne se démontre pas, et une démarche qui ne se démontre pas ne se refinance pas.</li>
+<li>
+<strong>Trois des huit familles échappent aux indicateurs de production les plus répandus.</strong> Elles sont donc invisibles pour ceux qui pilotent par tableau de bord. Nous y revenons plus bas.</li>
+</ul>
+
+<p>C'est le même mécanisme partout dans le Lean : la méthode se déroule correctement, puis personne ne revient vérifier. Une chasse aux MUDA lancée en janvier et jamais rouverte en juin n'a produit qu'une réunion.</p>
+
+<h2 id="trois-m">Muda, Mura, Muri : trois pertes à ne pas confondre</h2>
+
+<p>Le système Toyota distingue trois formes de perte, souvent appelées les 3M. Les traiter comme un seul sujet est l'erreur la plus fréquente, parce que les contre-mesures ne sont pas les mêmes.</p>
+
+<table>
+<thead><tr>
+<th>Terme</th>
+<th>Ce que c'est</th>
+<th>Ce qu'on voit sur le terrain</th>
+<th>Par où on agit</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Muda</strong></td>
+<td>Le gaspillage. Une consommation de ressource sans valeur pour le client.</td>
+<td>Une pièce qui attend, un opérateur qui cherche, un stock qui dort.</td>
+<td>Observation au poste, puis suppression ou réduction de l'opération.</td>
+</tr>
+<tr>
+<td><strong>Mura</strong></td>
+<td>L'irrégularité. La variation du flux dans le temps.</td>
+<td>Une semaine à moitié vide, la suivante en heures supplémentaires.</td>
+<td>Lissage de la charge, taille de lot, planification.</td>
+</tr>
+<tr>
+<td><strong>Muri</strong></td>
+<td>L'excès. La surcharge d'un homme ou d'une machine au delà de sa capacité.</td>
+<td>Un poste tenu en tension permanente, une machine jamais arrêtée.</td>
+<td>Répartition de la charge, ergonomie, capacité installée.</td>
+</tr>
+</tbody>
+</table>
+
+<p>L'ordre compte. <strong>Le Mura produit du Muri, et le Muri produit du Muda.</strong> Une charge irrégulière oblige à surcharger les postes aux pics, et un poste surchargé fabrique des défauts, des attentes et des stocks tampons. Attaquer les MUDA sans regarder la régularité de la charge revient à essuyer le sol sans fermer le robinet.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-les-muda-les-8-gaspillages-du-lean-guide-complet-2-mura-muri-muda.gif" alt="Deux ateliers, même volume sur huit semaines. Charge irrégulière : une semaine sur deux dépasse la capacité, chaque pic fait tomber des défauts, des attentes et des stocks tampons dans le bac ; supprimés à mi-parcours, ils reviennent au pic suivant. Charge lissée : toutes les semaines restent sous la capacité et le bac reste vide." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<p>C'est aussi pour cette raison qu'une chasse aux gaspillages menée uniquement en fin de chaîne déçoit. Les causes sont en amont, dans la façon dont le travail arrive.</p>
+
+<h2 id="les-huit">Quels sont les 8 MUDA ? La liste, un par un</h2>
+
+<p>Voici les huit familles, dans l'ordre où elles se repèrent le plus facilement sur le terrain. Chacune porte son nom français, son nom anglais et le signe qui la trahit.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-les-muda-les-8-gaspillages-du-lean-guide-complet-3-huit-muda-au-poste.gif" alt="Les huit MUDA avec leur nom anglais et le signe qui les trahit : surproduction (les en-cours grossissent, la commande n'a pas bougé), attentes (debout devant une machine qui tourne), transports (allers-retours), mouvements (l'opérateur quitte son poste), stocks (personne ne sait à quelle commande ils correspondent), étapes inutiles (justifiées par l'habitude), rebuts et défauts (bac de reprise attitré), compétences (boîte à idées jamais ouverte)." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<p>Un moyen mnémotechnique français permet de les retenir dans l'ordre : <strong>DSASTRES</strong>, pour Déplacements, Surproduction, Attentes, Sous-utilisation des compétences, Transports, Rebuts, Étapes inutiles, Stocks.</p>
+
+<h3>1. La surproduction (overproduction)</h3>
+
+<p>Produire plus tôt, plus vite ou en plus grande quantité que ce que le client demande. C'est la famille que le système Toyota place en tête, pour une raison précise : <strong>elle fabrique les sept autres</strong>.</p>
+
+<p>Une pièce produite en avance doit être transportée, stockée, éventuellement reprise si le besoin change. Elle occupe de la trésorerie et de la place. Elle masque les problèmes de la ligne, puisqu'un stock d'avance absorbe les pannes au lieu de les révéler.</p>
+
+<p>Le signe : des en-cours qui grossissent entre deux postes alors que la commande n'a pas bougé.</p>
+
+<h3>2. Les attentes (waiting)</h3>
+
+<p>Un opérateur, une machine ou une pièce immobilisés faute de l'élément suivant. Une matière qui n'arrive pas, une validation qui tarde, un réglage en cours, une information manquante.</p>
+
+<p>Les attentes sont le MUDA le plus facile à mesurer, parce qu'elles se chronomètrent. C'est aussi celui que les équipes signalent le plus volontiers, puisque la responsabilité est ailleurs.</p>
+
+<p>Le signe : quelqu'un debout devant une machine qui tourne, sans autre tâche à faire.</p>
+
+<h3>3. Les transports (transportation)</h3>
+
+<p>Le déplacement de matières, de pièces ou de documents d'un endroit à un autre. Un chariot qui traverse l'atelier, un dossier qui passe de bureau en bureau, une palette qui change trois fois de zone avant d'être utilisée.</p>
+
+<p>Aucun transport n'ajoute de valeur au produit. Il en ajoute au coût et au risque de casse. La contre-mesure passe par l'implantation, pas par des consignes.</p>
+
+<p>Le signe : un flux qui dessine des allers-retours sur le plan de l'atelier.</p>
+
+<h3>4. Les mouvements et déplacements (motion)</h3>
+
+<p>Le pendant humain du transport. Les gestes et pas inutiles de l'opérateur à son poste : se retourner, se baisser, chercher un outil, aller chercher une information à l'autre bout du bâtiment.</p>
+
+<p>La différence avec le transport tient à ce qui bouge. <strong>Le transport déplace le produit, le mouvement déplace la personne.</strong> Les deux se corrigent différemment.</p>
+
+<p>Cette famille a une conséquence directe sur la santé : les gestes répétitifs et les postures contraintes sont à l'origine des troubles musculosquelettiques, premier motif de maladie professionnelle reconnue en France selon l'<a href="https://www.inrs.fr/" target="_blank" rel="noopener">INRS</a>. Traiter ce MUDA sert la performance et la prévention en même temps.</p>
+
+<p>Le signe : un opérateur qui quitte son poste plusieurs fois par heure sans que ce soit prévu.</p>
+
+<h3>5. Les stocks (inventory)</h3>
+
+<p>Matières premières, en-cours et produits finis conservés au delà du nécessaire. Le stock immobilise de la trésorerie, occupe de la surface, vieillit et se démode.</p>
+
+<p>Sa fonction cachée est plus gênante que son coût : <strong>un stock masque les problèmes qu'il compense</strong>. Une machine qui tombe en panne une fois par semaine ne dérange personne tant qu'un en-cours suffisant absorbe l'arrêt. Baisser le stock fait apparaître la panne. C'est inconfortable, et c'est le but.</p>
+
+<p>Le signe : une zone de stockage dont personne ne sait dire à quelle commande elle correspond.</p>
+
+<h3>6. Les étapes inutiles ou sur-processus (overprocessing)</h3>
+
+<p>Faire plus, plus fin ou plus beau que ce que le client a demandé. Polir une surface qui restera cachée, contrôler trois fois ce qui a déjà été validé, remplir un formulaire que personne ne relit, produire un rapport que personne n'ouvre.</p>
+
+<p>Ce MUDA est le plus difficile à faire admettre, parce qu'il ressemble à de la conscience professionnelle. La question qui tranche est toujours la même : le client a-t-il demandé ce niveau, et l'a-t-il écrit quelque part ?</p>
+
+<p>Le signe : une opération que personne ne sait justifier autrement que par l'habitude.</p>
+
+<h3>7. Les rebuts et défauts (defects)</h3>
+
+<p>Les pièces non conformes, les retouches, les reprises et tout ce qu'elles entraînent : temps perdu, matière perdue, contrôle renforcé, livraison en retard, client mécontent.</p>
+
+<p>Un défaut coûte au moins deux fois : la première production et la seconde. Il coûte davantage si le client le découvre lui même. Les détrompeurs, ou poka yoke, agissent en amont en rendant l'erreur impossible plutôt qu'en la détectant après coup.</p>
+
+<p>Le signe : un bac de reprise qui a sa place attitrée depuis des années.</p>
+
+<h3>8. La sous-utilisation des compétences (skills, non-utilized talent)</h3>
+
+<p>Ne pas se servir de ce que les gens savent faire. Un opérateur qui voit le problème tous les jours et à qui personne ne demande rien. Un technicien affecté à des tâches sans rapport avec sa qualification. Une idée remontée trois fois, jamais traitée, jamais refusée non plus.</p>
+
+<p>Cette huitième famille n'est pas dans la liste d'origine de Taiichi Ohno. Elle a été ajoutée plus tard, et c'est la section suivante.</p>
+
+<p>Le signe : une boîte à idées dont personne ne connaît la date de la dernière ouverture.</p>
+
+<p>Ces huit familles se retiennent, mais elles ne se reconnaissent bien qu'après les avoir vues plusieurs fois sur des postes réels. Les <a href="https://www.fichly.com/products/fiches-lean">fiches Lean de Fichly</a> réunissent chaque outil sur une page, avec les repères de terrain, pour servir de support d'observation plutôt que de mémo à relire.</p>
+
+<h2 id="huitieme">Quel est le 8e MUDA, et pourquoi manque-t-il presque partout ?</h2>
+
+<p>Cherchez "les 7 gaspillages" et "les 8 gaspillages" : vous trouverez les deux, en nombre comparable, souvent sur des pages qui se contredisent sans le dire. La question mérite une réponse nette.</p>
+
+<p><strong>La liste d'origine du système Toyota en compte sept.</strong> Elles portent sur des flux physiques : matière, pièces, temps machine. La huitième, la sous-utilisation des compétences, a été ajoutée dans les années 1990, principalement par la diffusion nord-américaine du Lean. Les deux listes sont donc justes, à condition de dire laquelle on emploie.</p>
+
+<p>Sur le fond, la huitième n'est pas un ajout de confort. Elle est d'une autre nature que les sept autres, et c'est précisément pour cela qu'elle est oubliée.</p>
+
+<table>
+<thead><tr>
+<th></th>
+<th>Les 7 premiers MUDA</th>
+<th>Le 8e MUDA</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Objet</td>
+<td>Un flux physique ou un temps</td>
+<td>Une compétence disponible et non employée</td>
+</tr>
+<tr>
+<td>Constat</td>
+<td>Visible en observant un poste</td>
+<td>Invisible : rien ne se passe, et c'est le problème</td>
+</tr>
+<tr>
+<td>Mesure</td>
+<td class="col-oui">Se chronomètre, se compte, se pèse</td>
+<td class="col-non">Aucun indicateur de production ne le porte</td>
+</tr>
+<tr>
+<td>Responsable désigné</td>
+<td>Le processus</td>
+<td>L'encadrement, ce qui rend le sujet délicat</td>
+</tr>
+</tbody>
+</table>
+
+<p>Un gaspillage qui ne se mesure pas et qui met en cause ceux qui pilotent la démarche a peu de chances de figurer en tête de liste. C'est une explication suffisante de son absence, et elle n'a rien à voir avec la mauvaise foi.</p>
+
+<p>Trois signes le rendent pourtant repérable sans instrument.</p>
+
+<ul>
+<li>
+<strong>Le délai de réponse aux idées.</strong> Prenez les cinq dernières remontées de terrain. Combien ont reçu une réponse, favorable ou non, et en combien de temps ? Une idée refusée avec un motif entretient l'envie d'en proposer une autre. Une idée sans réponse l'éteint.</li>
+<li>
+<strong>L'écart entre la matrice de polyvalence et le planning réel.</strong> Si des compétences validées ne sont jamais mobilisées, elles disparaissent en dix-huit mois.</li>
+<li>
+<strong>La composition des groupes de résolution de problèmes.</strong> Si ceux qui tiennent le poste n'y sont pas, l'analyse se fera sans la seule personne qui a vu le phénomène.</li>
+</ul>
+
+<p>La contre-mesure ne demande pas de budget. Elle demande une date : qui répond aux idées, sous quel délai, et ce qui se passe quand le délai est dépassé. C'est le même mécanisme que le Check du <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a>, l'étape que tout le monde connaît et que presque personne ne tient, parce qu'elle est la seule sans échéance imposée par le terrain.</p>
+
+<h2 id="anglais">Les 8 wastes en anglais : TIMWOOD, TIMWOODS, DOWNTIME</h2>
+
+<p>Dans un groupe international, les standards d'amélioration continue sont rédigés en anglais et les MUDA y sont appelés <em>the 8 wastes of lean</em>. Le vocabulaire ne se traduit pas terme à terme, et deux acronymes concurrents circulent. Voici les correspondances.</p>
+
+<table>
+<thead><tr>
+<th>Français</th>
+<th>Anglais</th>
+<th>Lettre TIMWOODS</th>
+<th>Lettre DOWNTIME</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Transports</td>
+<td>Transportation</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>Stocks</td>
+<td>Inventory</td>
+<td>I</td>
+<td>I</td>
+</tr>
+<tr>
+<td>Mouvements, déplacements</td>
+<td>Motion</td>
+<td>M</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Attentes</td>
+<td>Waiting</td>
+<td>W</td>
+<td>W</td>
+</tr>
+<tr>
+<td>Surproduction</td>
+<td>Overproduction</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Étapes inutiles, sur-processus</td>
+<td>Overprocessing, extra-processing</td>
+<td>O</td>
+<td>E</td>
+</tr>
+<tr>
+<td>Rebuts et défauts</td>
+<td>Defects</td>
+<td>D</td>
+<td>D</td>
+</tr>
+<tr>
+<td>Sous-utilisation des compétences</td>
+<td>Skills, non-utilized talent</td>
+<td>S</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trois points à connaître avant de lire un standard anglophone.</p>
+
+<ul>
+<li>
+<strong>TIMWOOD couvre sept familles, TIMWOODS en couvre huit.</strong> Le S final ajoute les compétences. Un document qui écrit TIMWOOD travaille sur la liste d'origine.</li>
+<li>
+<strong>DOWNTIME couvre les huit et se retient mieux</strong>, parce que le mot veut dire quelque chose. C'est l'acronyme dominant en Amérique du Nord.</li>
+<li>
+<strong><em>Waste</em> traduit muda, pas déchet.</strong> Le faux ami coûte cher dans les rapports bilingues : un plan d'action sur les <em>wastes</em> n'est pas un plan déchets, et l'inverse est vrai aussi.</li>
+</ul>
+
+<p>Deux autres mots reviennent en permanence. <em>Value added</em> et <em>non value added</em> désignent la valeur ajoutée et la non-valeur ajoutée, souvent abrégées VA et NVA. <em>Gemba</em> reste en japonais dans les deux langues et désigne le lieu réel où le travail se fait.</p>
+
+<h2 id="reperer">Repérer trois MUDA dans votre atelier aujourd'hui</h2>
+
+<p>La liste ne sert à rien sans une observation. Voici un protocole d'une heure, à faire seul, sans réunion préalable et sans annoncer un projet. L'objectif est modeste et c'est ce qui le rend faisable : sortir avec trois gaspillages nommés, situés et chiffrés.</p>
+
+<h3>Étape 1 : choisir un poste et une plage, pas un atelier</h3>
+
+<p>Prenez un seul poste, celui où les gens se plaignent le plus souvent. Choisissez une plage de trente minutes en fonctionnement normal, ni le démarrage, ni la fin de série. Notez la date, l'heure de début et le nom du poste. Une observation sans horodatage ne se compare à rien.</p>
+
+<p>Une remarque qui évite un faux départ : prévenez l'opérateur de ce que vous faites et de ce que vous ne faites pas. Vous observez le processus, pas la personne. Sans cette phrase, vous observerez un comportement de démonstration.</p>
+
+<h3>Étape 2 : noter, sans interpréter</h3>
+
+<p>Une feuille, deux colonnes. À gauche l'heure, à droite ce qui se passe, en une phrase factuelle. "9 h 14, va chercher un chiffon au magasin." Pas "9 h 14, poste mal approvisionné". La deuxième formulation est déjà une conclusion, et elle ferme l'analyse avant qu'elle commence.</p>
+
+<p>Notez tout, y compris ce qui vous paraît normal. Les gaspillages installés depuis longtemps ont exactement l'air d'être normaux : c'est leur définition.</p>
+
+<h3>Étape 3 : classer en fin de plage</h3>
+
+<p>De retour à votre bureau, reprenez chaque ligne et attribuez-lui une des huit familles, ou la mention "valeur ajoutée". Une ligne peut relever de deux familles, laissez-les toutes les deux. Additionnez ensuite les durées par famille.</p>
+
+<p>Le résultat tient en trois chiffres : la durée totale observée, la part en valeur ajoutée, et les trois familles les plus lourdes. Sur la plupart des postes, une observation de trente minutes fait ressortir deux ou trois familles nettement plus lourdes que les autres.</p>
+
+<h3>Étape 4 : ne rien décider avant une deuxième observation</h3>
+
+<p>Une plage de trente minutes est un échantillon, pas une preuve. Refaites la même observation un autre jour, à une autre heure, sur le même poste. Si les trois familles dominantes sont les mêmes, vous tenez quelque chose. Si elles changent complètement, votre problème est ailleurs : c'est probablement du Mura, de l'irrégularité, et la contre-mesure n'est pas la même.</p>
+
+<div class="fichly-note">
+<p><strong>Le point de départ se relève avant, jamais après.</strong> Avant de toucher quoi que ce soit, notez la valeur actuelle de l'indicateur que vous espérez faire bouger : le temps de cycle, la part d'arrêts subis, le nombre de reprises. Sans cette valeur, le gain se racontera mais ne se démontrera pas. C'est la raison la plus fréquente pour laquelle une démarche qui a bien marché n'obtient pas de suite.</p>
+</div>
+
+<h2 id="mesure">Où chaque MUDA se cache dans vos indicateurs</h2>
+
+<p>C'est le point que la plupart des guides passent sous silence. Vous avez huit familles de gaspillage d'un côté, et de l'autre un tableau de bord de production. Les deux ne se recouvrent pas.</p>
+
+<p>Prenons l'indicateur le plus répandu en atelier, le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>, et un exemple chiffré complet.</p>
+
+<div class="fichly-note">
+<p><strong>L'exemple.</strong> Une ligne ouverte 16 heures, dont 2 heures de maintenance planifiée et 2 heures d'arrêts subis. Cadence nominale 60 pièces par heure. 680 pièces produites, 650 conformes. Disponibilité 12 h sur 14 h. Performance 680 pièces pour 720 possibles. Qualité 650 pièces sur 680. Le TRS ressort à 77 %.</p>
+</div>
+
+<p>Voici où les huit familles se logent dans ce calcul, et lesquelles n'y apparaissent pas.</p>
+<p class="fichly-visuel" style="text-align:center;"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/fichly-les-muda-les-8-gaspillages-du-lean-guide-complet-4-muda-dans-le-trs.gif" alt="Cascade du TRS de l'exemple (14 heures requises, 12 heures disponibles, 680 pièces sur 720, 650 conformes, TRS 77 %) : les attentes se logent dans la disponibilité, les mouvements et les étapes inutiles dans la performance, les défauts dans la qualité ; la surproduction, les stocks, les transports et les compétences non utilisées n'apparaissent nulle part, et la surproduction fait même monter le TRS." width="1200" height="860" loading="lazy" style="width:100%;height:auto;max-width:1200px;border-radius:12px;"></p>
+
+
+<table>
+<thead><tr>
+<th>MUDA</th>
+<th>Se voit dans</th>
+<th>Sur l'exemple</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Attentes</td>
+<td class="col-oui">Disponibilité</td>
+<td>Les 2 heures d'arrêts subis</td>
+</tr>
+<tr>
+<td>Mouvements, déplacements</td>
+<td class="col-oui">Performance</td>
+<td>Une part des 40 pièces manquantes</td>
+</tr>
+<tr>
+<td>Étapes inutiles</td>
+<td class="col-oui">Performance</td>
+<td>Une part des 40 pièces manquantes</td>
+</tr>
+<tr>
+<td>Rebuts et défauts</td>
+<td class="col-oui">Qualité</td>
+<td>Les 30 pièces non conformes</td>
+</tr>
+<tr>
+<td>Surproduction</td>
+<td class="col-non">Nulle part</td>
+<td>Produire 680 pièces inutiles fait monter le TRS</td>
+</tr>
+<tr>
+<td>Stocks</td>
+<td class="col-non">Nulle part</td>
+<td>Un en-cours qui double ne change pas le calcul</td>
+</tr>
+<tr>
+<td>Transports</td>
+<td class="col-non">Nulle part</td>
+<td>Hors du périmètre de la machine mesurée</td>
+</tr>
+<tr>
+<td>Compétences non utilisées</td>
+<td class="col-non">Nulle part</td>
+<td>Aucun indicateur de production ne le porte</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Quatre familles sur huit sont invisibles pour un pilotage au TRS, et ce sont les quatre premières de la liste de Toyota par ordre de gravité.</strong> Pire, la surproduction améliore mécaniquement l'indicateur : une ligne qui produit sans commande affiche un excellent TRS et remplit un magasin.</p>
+
+<p>Ce constat n'invalide pas le TRS, qui reste le meilleur outil pour ce qu'il mesure. Il dit deux choses. D'abord qu'aucun indicateur unique ne couvre les huit familles, et qu'il faut donc en associer plusieurs : rotation de stock, délai de traversée, taux de service. Ensuite, et c'est plus gênant, qu'un objectif de TRS poussé sans garde-fou sur la demande réelle produit de la surproduction, donc du gaspillage.</p>
+
+<p>Un mot sur les seuils, puisque la question vient toujours. Aucun niveau de TRS ne vaut comme référence universelle. Un atelier de série longue et un atelier de petites séries avec changements fréquents n'ont aucune raison d'afficher les mêmes valeurs, et comparer leurs taux ne renseigne sur rien. La seule comparaison qui informe est celle d'une ligne avec elle-même, sur la même définition de périmètre, dans le temps.</p>
+
+<h2 id="erreurs">Les erreurs qui vident une chasse aux MUDA</h2>
+
+<p>Ces cinq erreurs reviennent partout et ne dépendent ni du secteur ni de la taille du site. Elles ont un point commun, qui apparaît à la fin.</p>
+
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ La chasse commence par une réunion et une liste au tableau.</span><br><span class="fichly-ok">✅ Elle commence par trente minutes d'observation à un poste.</span> Un tour de table produit les gaspillages que les gens ont l'habitude de citer, pas ceux qui sont là. Les deux listes se recoupent moins qu'on ne croit.</p>
+<p><span class="fichly-ko">❌ On supprime un gaspillage sans regarder ce qu'il compensait.</span><br><span class="fichly-ok">✅ On cherche d'abord pourquoi il existe.</span> Un en-cours tampon absorbe une panne récurrente. Le retirer sans traiter la panne arrête la ligne la semaine suivante, et la démarche perd son crédit pour deux ans.</p>
+<p><span class="fichly-ko">❌ Les non-valeurs ajoutées nécessaires sont traitées comme des gaspillages.</span><br><span class="fichly-ok">✅ Elles sont nommées, isolées, et seulement réduites.</span> Attaquer un contrôle réglementaire ou une traçabilité imposée détruit la confiance des équipes à la première réunion, et personne ne dira que c'est pour cette raison.</p>
+<p><span class="fichly-ko">❌ Aucun point de départ n'a été relevé avant d'agir.</span><br><span class="fichly-ok">✅ L'indicateur visé est noté avant la première action, avec sa date.</span> Sans valeur initiale, le gain se raconte et ne se prouve pas. Une démarche qui ne se prouve pas n'obtient pas de suite, quelle que soit sa qualité.</p>
+<p><span class="fichly-ko">❌ On lance les huit familles en même temps.</span><br><span class="fichly-ok">✅ On prend les deux plus lourdes du relevé, sur un seul périmètre.</span> Huit chantiers simultanés donnent huit sujets à demi faits et aucune référence à montrer. Un périmètre qui tient devient l'argument qui convainc les suivants.</p>
+</div>
+
+<p>Le point commun : <strong>aucune de ces erreurs ne porte sur l'identification des gaspillages</strong>. Elles portent toutes sur ce qui se passe après. C'est la règle générale du Lean, et elle vaut bien au delà des MUDA. La méthode se déroule correctement, puis le contrôle n'a pas lieu, et six mois plus tard il ne reste qu'un compte rendu.</p>
+
+<p>Une conséquence pratique, à écrire avant de lancer quoi que ce soit. Qui relit le relevé, à quelle fréquence, et que se passe-t-il quand une action reste ouverte plus de trois semaines ? Cela prend une heure et cela distingue une démarche qui tient d'une démarche qui a bien démarré.</p>
+
+<h2 id="outils">Les outils Lean qui prolongent la chasse aux MUDA</h2>
+
+<p>Les 8 MUDA donnent un vocabulaire. Ils ne donnent ni la cartographie, ni la cause, ni la contre-mesure. Voici les outils qui prennent le relais, selon ce que votre relevé a fait apparaître.</p>
+
+<table>
+<thead><tr>
+<th>Ce que le relevé montre</th>
+<th>L'outil qui prend le relais</th>
+<th>Ce qu'il apporte</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Des attentes et des stocks entre les postes</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">La Value Stream Mapping</a></td>
+<td>La chaîne complète, avec le délai de traversée et la part de valeur ajoutée</td>
+</tr>
+<tr>
+<td>Des mouvements et des recherches d'outils</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S</a></td>
+<td>Un poste où chaque chose a une place, et où l'écart se voit</td>
+</tr>
+<tr>
+<td>Des arrêts et des pertes de cadence répétés</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le suivi du TRS</a></td>
+<td>La répartition des pertes entre disponibilité, performance et qualité</td>
+</tr>
+<tr>
+<td>Des défauts récurrents sans cause établie</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/methode-dmaic-5-etapes">La démarche DMAIC</a></td>
+<td>Une cause prouvée par les données, et un gain remesuré après coup</td>
+</tr>
+<tr>
+<td>Un problème simple et un besoin de boucler vite</td>
+<td><a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">Le cycle PDCA</a></td>
+<td>Une boucle courte, avec une étape de vérification datée</td>
+</tr>
+</tbody>
+</table>
+
+<p>Deux repères d'enchaînement. La VSM se pose <strong>avant</strong> la chasse aux gaspillages quand le sujet dépasse un poste : elle dit où regarder. Le DMAIC se pose <strong>après</strong>, quand un gaspillage résiste à la première contre-mesure et qu'il faut en prouver la cause.</p>
+
+<p>Sur le plan documentaire, les définitions et la terminologie qualité employées dans les référentiels français sont publiées par l'<a href="https://www.afnor.org/" target="_blank" rel="noopener">AFNOR</a>. Pour la partie conditions de travail et prévention, les obligations de l'employeur sont détaillées par le <a href="https://travail-emploi.gouv.fr/" target="_blank" rel="noopener">ministère du Travail</a>. Les certifications professionnelles reconnues en amélioration continue, dont la Green Belt, sont enregistrées au répertoire tenu par <a href="https://www.francecompetences.fr/" target="_blank" rel="noopener">France Compétences</a>.</p>
+
+<h2 id="faq">FAQ : vos questions sur les MUDA</h2>
+
+<div class="fichly-faq">
+
+<details>
+<summary>Que veut dire Muda ?</summary>
+<div class="answer">
+<p>Muda est un mot japonais qui signifie inutilité, futilité, gaspillage. Dans le Lean, il désigne toute activité qui consomme une ressource sans créer de valeur pour le client final. Le temps, l'espace, la matière et la compétence comptent comme des ressources.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la définition de muda dans le Lean ?</summary>
+<div class="answer">
+<p>Un muda est une opération que le client refuserait de payer s'il la voyait. C'est le test qui le distingue d'une opération à valeur ajoutée. Attention à une troisième catégorie : les non-valeurs ajoutées nécessaires, comme un contrôle réglementaire, qui se réduisent mais ne se suppriment pas.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les 7 mudas ?</summary>
+<div class="answer">
+<p>Les sept gaspillages de la liste d'origine de Taiichi Ohno sont la surproduction, les attentes, les transports, les étapes inutiles ou sur-processus, les stocks, les mouvements et les défauts. En anglais, l'acronyme TIMWOOD les reprend : Transportation, Inventory, Motion, Waiting, Overproduction, Overprocessing, Defects.</p>
+</div>
+</details>
+
+<details>
+<summary>Quels sont les 8 mudas et pourquoi un huitième ?</summary>
+<div class="answer">
+<p>Les huit reprennent les sept d'origine et ajoutent la sous-utilisation des compétences. Cet ajout date des années 1990 et vient de la diffusion nord-américaine du Lean. Il est d'une autre nature que les sept autres : il ne se mesure par aucun indicateur de production, ce qui explique qu'il soit souvent oublié.</p>
+</div>
+</details>
+
+<details>
+<summary>Quelle est la différence entre Muda, Mura et Muri ?</summary>
+<div class="answer">
+<p>Le Muda est le gaspillage, une ressource consommée sans valeur. Le Mura est l'irrégularité, la variation de la charge dans le temps. Le Muri est l'excès, la surcharge d'un homme ou d'une machine. L'ordre compte : le Mura produit du Muri, et le Muri produit du Muda. Traiter les gaspillages sans regarder la régularité de la charge revient à essuyer le sol sans fermer le robinet.</p>
+</div>
+</details>
+
+<details>
+<summary>Par quel muda faut-il commencer ?</summary>
+<div class="answer">
+<p>Par les deux plus lourds de votre propre relevé, jamais par une priorité générale. Si vous n'avez pas encore de relevé, la surproduction est le point de départ le plus rentable, parce qu'elle fabrique mécaniquement les sept autres. Une pièce produite trop tôt doit être transportée, stockée, et parfois reprise.</p>
+</div>
+</details>
+
+<details>
+<summary>Comment mesurer un gaspillage sans outil informatique ?</summary>
+<div class="answer">
+<p>Une feuille, une montre et trente minutes d'observation à un poste suffisent. Notez l'heure et le fait observé, sans interpréter. Classez ensuite chaque ligne dans une des huit familles et additionnez les durées. Recommencez un autre jour pour vérifier que les familles dominantes sont les mêmes.</p>
+</div>
+</details>
+
+</div>
+
+<div class="fichly-cta">
+<p><strong>Reconnaître un gaspillage sur le papier ne suffit pas. Il faut l'avoir vu à un poste.</strong></p>
+<p>Les fiches Lean de Fichly réunissent les outils de terrain sur une page chacun : les 8 MUDA, le TRS, le SMED, la maintenance, le Kanban, le takt time. Elles sont faites pour être emportées en atelier, pas pour être relues au bureau.</p>
+<p>👉 Découvrez les <a href="https://www.fichly.com/products/fiches-lean">fiches Lean</a> (49,90 €).</p>
+</div>
+
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">La Value Stream Mapping : définition et étapes</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Le taux de rendement synthétique : définition et calcul</a></li>
+</ul>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Les 8 MUDA : les gaspillages du Lean et comment les repérer en atelier",
+  "description": "8 gaspillages et non 7 : le huitième est presque toujours oublié. Définition de chaque MUDA, acronyme TIMWOODS, et la méthode pour en repérer trois.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/articles/Les_8_MUDA_-_Gaspillages_Lean_ecc726a8-8746-40d8-abaa-8331e8138fc9.png?v=1774344695",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-03-06",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet",
+  "inLanguage": "fr-FR"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Que veut dire Muda ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Muda est un mot japonais qui signifie inutilité, futilité, gaspillage. Dans le Lean, il désigne toute activité qui consomme une ressource sans créer de valeur pour le client final. Le temps, l'espace, la matière et la compétence comptent comme des ressources." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la définition de muda dans le Lean ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un muda est une opération que le client refuserait de payer s'il la voyait. C'est le test qui le distingue d'une opération à valeur ajoutée. Attention à une troisième catégorie : les non-valeurs ajoutées nécessaires, comme un contrôle réglementaire, qui se réduisent mais ne se suppriment pas." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 7 mudas ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les sept gaspillages de la liste d'origine de Taiichi Ohno sont la surproduction, les attentes, les transports, les étapes inutiles ou sur-processus, les stocks, les mouvements et les défauts. En anglais, l'acronyme TIMWOOD les reprend : Transportation, Inventory, Motion, Waiting, Overproduction, Overprocessing, Defects." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les 8 mudas et pourquoi un huitième ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les huit reprennent les sept d'origine et ajoutent la sous-utilisation des compétences. Cet ajout date des années 1990 et vient de la diffusion nord-américaine du Lean. Il est d'une autre nature que les sept autres : il ne se mesure par aucun indicateur de production, ce qui explique qu'il soit souvent oublié." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre Muda, Mura et Muri ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le Muda est le gaspillage, une ressource consommée sans valeur. Le Mura est l'irrégularité, la variation de la charge dans le temps. Le Muri est l'excès, la surcharge d'un homme ou d'une machine. L'ordre compte : le Mura produit du Muri, et le Muri produit du Muda. Traiter les gaspillages sans regarder la régularité de la charge revient à essuyer le sol sans fermer le robinet." }
+    },
+    {
+      "@type": "Question",
+      "name": "Par quel muda faut-il commencer ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Par les deux plus lourds de votre propre relevé, jamais par une priorité générale. Si vous n'avez pas encore de relevé, la surproduction est le point de départ le plus rentable, parce qu'elle fabrique mécaniquement les sept autres. Une pièce produite trop tôt doit être transportée, stockée, et parfois reprise." }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment mesurer un gaspillage sans outil informatique ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Une feuille, une montre et trente minutes d'observation à un poste suffisent. Notez l'heure et le fait observé, sans interpréter. Classez ensuite chaque ligne dans une des huit familles et additionnez les durées. Recommencez un autre jour pour vérifier que les familles dominantes sont les mêmes." }
+    }
+  ]
+}
+</script>

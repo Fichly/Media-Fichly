@@ -1,0 +1,401 @@
+<!--
+FICHLY / BLOG SEO / ARTICLE
+Brief Buffer : mercredi 16/09. Objectif Notoriete, secondaire Formation. Tete de cluster Terrain.
+Job a faire : preparer et tenir une tournee de trente minutes qui produise autre chose qu'une impression.
+
+MOT-CLE VISE : "gemba". 2 200 recherches France, difficulte 1, potentiel de trafic 450, propre sujet parent.
+BASCULEMENT DE MOT-CLE : la cible initiale du brief etait "gemba walk" (1 600 recherches, difficulte 0),
+mais son potentiel de trafic n'est que de 10 et son sujet parent est "genba walk". Cibler une variante
+quand le parent differe revient a ecrire pour une page qui n'existe pas. Le mot-cle principal bascule donc
+sur "gemba". Le title tag et le H1 portent les deux graphies, "gemba" en tete, "gemba walk" dans la foulee.
+Le sujet du brief reste traite en entier : la tournee est le coeur de l'article.
+
+PORTE DE FAISABILITE (releve Ahrefs France du 11/09, fourni par le brief, non refait) :
+Page 1 de "gemba" : Wikipedia DR 97, kaizen.com DR 73, businessmap DR 76, amalo DR 48,
+institut-lean-france DR 43, kantree DR 38, leanenligne DR 30, formation-lean DR 22.
+DR minimum : 22. Population : specialistes Lean industriels, aucun generaliste du logiciel.
+VERDICT : GO.
+
+CONTRE-ANGLE, trois trous de la page 1 :
+1. Personne ne donne la sortie attendue d'une tournee. Angle principal : sans liste ecrite de constats
+   dates et assignes, la tournee n'a produit qu'une impression.
+2. Personne ne distingue les trois raisons de descendre : probleme precis, routine de management, audit de standard.
+3. Personne ne traite l'effet observateur.
+Plus : tableau de correspondance japonais / francais / anglais, et trame minutee de 30 minutes avec les questions.
+
+TITLE TAG : Gemba et gemba walk : la tournee d'atelier en 30 min
+META DESCRIPTION : 30 minutes en atelier et 8 questions preparees : ce qu'un gemba walk doit produire d'ecrit, les 3 raisons de descendre et la trame minutee a suivre.
+HANDLE : gemba-walk-tournee-atelier-methode
+LONGUEUR : corps d'article dans la fourchette 1 400 a 1 800 mots demandee.
+
+DECISIONS :
+- CTA unique vers le produit 40 outils du Lean, objectif Notoriete, routage CTA de la skill.
+- Lien produit contextuel dans la trame, la ou l'outil est explique.
+- Aucun code promo, aucune remise, aucune date d'offre.
+- Aucun chiffre client, usine, cas ou temoignage. Les exemples sont generiques et non attribues.
+- Liens externes : ANACT, code du travail, INRS. Aucun site de la page 1, tous concurrents.
+- Aucun lien vers l'article fantome "lean management et ses avantages", ni vers le domaine you-know point shop.
+- Gabarit, bloc style, bio Hugo et blocs de fin repris a l'identique de l'article TPM, gid 1004916867417.
+- Zero tiret cadratin, verifie par grep avant depot.
+-->
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc>strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel>strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}.fichly-essentiel li strong{display:inline;font-size:inherit;margin:0;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;display:flex;gap:1.4em;align-items:flex-start;flex-wrap:wrap;}.fichly-bio-photo{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;}.fichly-bio-photo img{width:100%;height:100%;object-fit:cover;display:block;}.fichly-bio-body{flex:1;min-width:240px;}.fichly-bio-body p:first-child{margin-top:0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+</style>
+<div class="fichly-article" lang="fr">
+<p>Le <strong>gemba</strong> est un mot japonais : le lieu réel, celui où le travail se fait. Dans une usine, c'est l'atelier. Le <strong>gemba walk</strong> est la tournée qu'un responsable y mène pour voir ce que les indicateurs ne montrent pas.</p>
+<p>Tout le monde s'accorde là-dessus, et c'est bien le problème. <strong>La plupart des tournées se terminent sur une impression, pas sur un constat.</strong> Cet article prend le sujet par sa sortie : ce qu'une tournée doit produire d'écrit, les trois raisons de descendre, et une trame de trente minutes.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Un tableau de bord dit qu'une machine s'est arrêtée deux heures. Il ne dit pas que l'opérateur contourne un chariot à chaque carton qu'il attrape. Le gemba, c'est l'endroit où le travail se fait vraiment. Aller le voir s'appelle un gemba walk. Ce qui change tout : repartir avec une liste écrite, et pas avec une impression.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>Le <strong>gemba</strong> est le lieu réel où le travail se fait.</li>
+<li>Une tournée sans <strong>liste écrite de constats datés et assignés</strong> ne produit qu'une impression.</li>
+<li>Trois raisons de descendre, donc trois tournées différentes.</li>
+<li>L'atelier <strong>ne se comporte pas comme d'habitude</strong> quand vous entrez.</li>
+<li>Trente minutes suffisent, si les questions sont préparées.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#definition">Qu'est-ce que le gemba, et le gemba walk ?</a></li>
+<li><a href="#lexique">Gemba, genba, genchi genbutsu : les correspondances</a></li>
+<li><a href="#raisons">Les trois raisons de faire un gemba walk</a></li>
+<li><a href="#sortie">Ce qu'une tournée doit produire</a></li>
+<li><a href="#trame">La trame d'une tournée de trente minutes</a></li>
+<li><a href="#observateur">L'effet observateur</a></li>
+<li><a href="#faq">FAQ : vos questions sur le gemba</a></li>
+</ol>
+</div>
+<h2 id="definition">Qu'est-ce que le gemba, et le gemba walk ?</h2>
+<p><strong>Le gemba est le lieu où la valeur est créée.</strong> Le mot japonais se traduit par « le lieu réel ». Dans l'industrie, c'est l'atelier, la ligne, le poste.</p>
+<p><strong>Le gemba walk est une observation organisée du travail réel, menée sur place par un responsable.</strong> Ni un contrôle de personnes, ni une visite de courtoisie. On compare le travail tel qu'il se fait au travail tel qu'il est décrit, et on écrit l'écart.</p>
+<p>Cet écart porte un nom en dehors du Lean. Les ergonomes opposent <strong>travail prescrit</strong> et <strong>travail réel</strong>, et l'<a href="https://www.anact.fr/" rel="noopener" target="_blank">ANACT</a> en a fait un principe d'analyse. L'opérateur fait autrement que la procédure, et pour une bonne raison. <strong>Une tournée sert à trouver cette raison</strong>, pas à la rappeler.</p>
+<h2 id="lexique">Gemba, genba, genchi genbutsu : les correspondances</h2>
+<p><strong>Le vocabulaire du gemba circule en trois langues à la fois.</strong> Voici les termes d'un standard de groupe.</p>
+<table>
+<thead>
+<tr>
+<th>Terme</th>
+<th>Français</th>
+<th>Anglais</th>
+<th>Ce qu'il faut savoir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemba</td>
+<td>Le lieu réel, le terrain</td>
+<td>The real place</td>
+<td>La graphie la plus répandue en France</td>
+</tr>
+<tr>
+<td>Genba</td>
+<td>Le lieu réel, le terrain</td>
+<td>The real place</td>
+<td>Même mot, plus proche de la prononciation</td>
+</tr>
+<tr>
+<td>Genchi genbutsu</td>
+<td>La chose réelle, sur place</td>
+<td>Go and see for yourself</td>
+<td>Décider après avoir vu, pas après avoir lu</td>
+</tr>
+<tr>
+<td>Gemba walk</td>
+<td>Tournée de terrain, tournée d'atelier</td>
+<td>Gemba walk</td>
+<td>La pratique organisée, avec une sortie écrite</td>
+</tr>
+<tr>
+<td>Shop floor walk</td>
+<td>Tournée d'atelier</td>
+<td>Shop floor walk</td>
+<td>Même contenu, sans emprunt japonais</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gemba et genba sont le même mot.</strong> Fixez-en un dans vos documents : deux orthographes laissent croire à deux dispositifs.</p>
+<h2 id="raisons">Les trois raisons de faire un gemba walk</h2>
+<p><strong>On ne descend jamais en atelier « pour voir ».</strong> C'est la confusion la plus coûteuse du sujet : trois intentions se mélangent dans une même demi-heure, et aucune n'aboutit.</p>
+<table>
+<thead>
+<tr>
+<th>Raison de descendre</th>
+<th>Ce que vous cherchez</th>
+<th>Qui vient</th>
+<th>Sortie attendue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Voir un problème précis</td>
+<td>Les faits d'une situation nommée</td>
+<td>Le porteur du problème et l'opérateur</td>
+<td>Des faits, entrée d'une <a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">recherche de cause racine</a>
+</td>
+</tr>
+<tr>
+<td>Tenir une routine de management</td>
+<td>Ce qui bloque l'équipe aujourd'hui</td>
+<td>Le responsable seul, même parcours</td>
+<td>Des irritants notés, assignés, revus au passage suivant</td>
+</tr>
+<tr>
+<td>Auditer un standard</td>
+<td>L'écart entre le standard écrit et la pratique</td>
+<td>Le responsable et le porteur du standard</td>
+<td>Une grille remplie, celle d'un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La durée change avec l'intention.</strong> Un problème précis se regarde longtemps. Une routine tient en trente minutes et vaut par sa répétition. Mélanger les trois donne la tournée de l'encadrement débordé : on part pour un problème, on remonte sans rien avoir conclu.</p>
+<h2 id="sortie">Ce qu'une tournée doit produire</h2>
+<p><strong>Une tournée qui se termine sans liste écrite n'a rien produit.</strong> C'est le point que les présentations laissent de côté, et il sépare seul la pratique qui tient de l'habitude qui s'éteint.</p>
+<p>La sortie attendue est une liste de constats, portant chacun cinq éléments.</p>
+<ul>
+<li>
+<strong>Le fait observé</strong>, sans interprétation. « Le bac de rebuts déborde », pas « le poste est mal tenu ».</li>
+<li>
+<strong>Le lieu exact</strong> : la ligne, le poste, la machine. Pas « en production ».</li>
+<li>
+<strong>La date et l'heure.</strong> Sans horodatage, le constat n'est plus vérifiable.</li>
+<li>
+<strong>Un porteur nommé.</strong> Un constat confié à « la maintenance » n'est confié à personne.</li>
+<li>
+<strong>Une échéance</strong>, même approximative, sinon rien ne le referme.</li>
+</ul>
+<p><strong>Trois à cinq constats par tournée suffisent</strong>, et c'est une limite haute, pas un objectif. Une liste de quinze lignes sera abandonnée, et son abandon apprend que signaler ne sert à rien.</p>
+<p>Une exception : <strong>une situation dangereuse se traite pendant la tournée, jamais dans la liste.</strong> <a href="https://code.travail.gouv.fr/code-du-travail/l4121-1" rel="noopener" target="_blank">Le code du travail impose les mesures nécessaires</a> dès que l'employeur a connaissance du risque, et une observation vaut connaissance.</p>
+<p>Reste la question qui décide de tout : qui relit la liste, et quand. <strong>Une liste que personne ne rouvre vaut une impression</strong>, avec du travail en plus. C'est le Check du <a href="https://www.fichly.com/blogs/nos-articles/methode-pdca-roue-de-deming-cycle">cycle PDCA</a>, à fixer avant la première tournée.</p>
+<h2 id="trame">La trame d'une tournée de trente minutes</h2>
+<p><strong>Une tournée se prépare en cinq minutes et s'écrit en dix.</strong> Trente minutes sur le terrain suffisent, si les questions sont préparées.</p>
+<table>
+<thead>
+<tr>
+<th>Moment</th>
+<th>Durée</th>
+<th>Ce que vous faites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Avant de descendre</td>
+<td>5 min</td>
+<td>Relire les constats précédents, écrire son intention en une phrase</td>
+</tr>
+<tr>
+<td>Observer sans parler</td>
+<td>0 à 5 min</td>
+<td>Rester à un endroit fixe, regarder un cycle complet, ne rien corriger</td>
+</tr>
+<tr>
+<td>Suivre le flux</td>
+<td>5 à 15 min</td>
+<td>Suivre une pièce, ou un opérateur, de bout en bout</td>
+</tr>
+<tr>
+<td>Poser les questions</td>
+<td>15 à 25 min</td>
+<td>Interroger sur le travail, jamais sur la personne</td>
+</tr>
+<tr>
+<td>Restituer sur place</td>
+<td>25 à 30 min</td>
+<td>Redire ce qu'on a retenu, et faire corriger par l'équipe</td>
+</tr>
+<tr>
+<td>Après être remonté</td>
+<td>10 min</td>
+<td>Écrire les constats : lieu, heure, porteur, échéance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La restitution sur place est l'étape qu'on saute en premier, et la plus coûteuse.</strong> Elle prend trois minutes et corrige les contresens à temps.</p>
+<h3>Les huit questions à poser</h3>
+<p>Elles portent sur le travail, jamais sur celui qui le fait. <strong>Aucune ne commence par « pourquoi n'avez-vous pas »</strong>, formulation qui ferme la conversation.</p>
+<ol>
+<li>Montrez-moi comment vous faites, à votre rythme habituel.</li>
+<li>Qu'est-ce qui vous a gêné depuis ce matin ?</li>
+<li>Qu'est-ce qui vous fait perdre du temps chaque jour ?</li>
+<li>Comment savez-vous que la pièce est bonne ?</li>
+<li>Que faites-vous quand elle ne l'est pas ?</li>
+<li>À qui le signalez-vous, et que se passe-t-il ensuite ?</li>
+<li>Que faites-vous autrement que ce que dit la fiche, et pourquoi ?</li>
+<li>S'il y avait une seule chose à changer ici, ce serait quoi ?</li>
+</ol>
+<p><strong>La question 7 rapporte le plus et reste la plus difficile à poser.</strong> Elle n'obtient de réponse que si l'opérateur est certain qu'aucune sanction ne suit. Pour formaliser vos grilles, nos <a href="https://www.fichly.com/products/fiches-lean">fiches sur les 40 outils du Lean</a> en donnent les trames.</p>
+<h2 id="observateur">L'effet observateur</h2>
+<p><strong>Quand un responsable descend, l'atelier ne se comporte pas comme d'habitude.</strong> C'est le non-dit du gemba walk. Les cadences s'ajustent, les protections réapparaissent, et l'opérateur qui prenait un raccourci utile revient à la fiche officielle.</p>
+<p>Le phénomène est documenté depuis les études de l'usine Hawthorne, dans les années 1920 et 1930 : <strong>être observé modifie le comportement observé.</strong> C'est un réflexe. Vous ne le supprimerez pas, vous le réduirez.</p>
+<ul>
+<li>
+<strong>Venir souvent.</strong> Une visite trimestrielle est un événement, un passage hebdomadaire un décor.</li>
+<li>
+<strong>Varier les horaires.</strong> Descendre toujours à 10 h le mardi, c'est ne jamais voir le démarrage ni la relève.</li>
+<li>
+<strong>Ne rien corriger sur place.</strong> Reprendre un opérateur apprend à la zone que votre venue est une inspection.</li>
+</ul>
+<p><strong>Ce que vous voyez pendant une tournée est une hypothèse, pas une preuve.</strong> L'observation dit où chercher, les données disent si vous aviez raison : c'est la logique de l'<a href="https://www.inrs.fr/demarche/evaluation-risques-professionnels/ce-qu-il-faut-retenir.html" rel="noopener" target="_blank">évaluation des risques décrite par l'INRS</a>. Un constat se confronte ensuite au <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>.</p>
+<p><strong>Un gemba walk ne vaut que par sa répétition</strong>, qui dépend de ce que devient le troisième constat. S'il est resté ouvert, il n'y aura pas de dixième tournée.</p>
+<h2 id="faq">FAQ : vos questions sur le gemba</h2>
+<div class="fichly-faq">
+<details>
+<summary>Que veut dire gemba ?</summary>
+<div class="answer">
+<p>Gemba est un mot japonais qui signifie « le lieu réel », celui où le travail se fait et où la valeur est créée. Dans l'industrie, il désigne l'atelier, la ligne ou le poste, par opposition au bureau.</p>
+</div>
+</details>
+<details>
+<summary>Quelle est la différence entre gemba et genba ?</summary>
+<div class="answer">
+<p>Aucune, ce sont deux transcriptions du même mot japonais. Genba colle à la prononciation réelle, gemba est la graphie la plus répandue en France. Ni l'une ni l'autre ne recouvre une pratique différente.</p>
+</div>
+</details>
+<details>
+<summary>Que signifie genchi genbutsu ?</summary>
+<div class="answer">
+<p>Genchi genbutsu se traduit par « le lieu réel, la chose réelle », et se comprend comme « allez voir par vous-même ». C'est le principe de décision associé au gemba : on ne tranche pas sur un tableau de bord seul.</p>
+</div>
+</details>
+<details>
+<summary>Combien de temps doit durer un gemba walk ?</summary>
+<div class="answer">
+<p>Trente minutes suffisent pour une tournée de routine, si les questions sont préparées et les constats écrits ensuite. L'observation d'un problème précis prend bien plus longtemps. La durée n'est pas le bon critère, la régularité l'est.</p>
+</div>
+</details>
+<details>
+<summary>Que doit produire une tournée d'atelier ?</summary>
+<div class="answer">
+<p>Une liste écrite de trois à cinq constats. Chacun porte le fait observé, le lieu exact, la date et l'heure, un porteur nommé et une échéance. Sans cette liste, la tournée n'a produit qu'une impression.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Une tournée d'atelier ne vaut que par ce qu'on en fait ensuite.</strong></p>
+<p>Constat, cause, standard, contrôle : chaque étape appelle un outil différent, et c'est souvent là que la démarche s'arrête.</p>
+<p>👉 Découvrez <a href="https://www.fichly.com/products/fiches-lean">les 40 outils du Lean à portée de main</a> : une fiche par outil, avec le déroulé et les pièges, pour passer du constat à l'action.</p>
+</div>
+<div class="fichly-bio">
+<div class="fichly-bio-photo"><img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/Photo_Hugo_Duc.png?v=1787604628" alt="Hugo Duc, fondateur de Fichly et formateur Lean Management" width="96" height="96"></div>
+<div class="fichly-bio-body">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">La méthode 5S : définition et exemples</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-5-pourquoi-cause-racine">La méthode des 5 pourquoi : trouver la cause racine</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 MUDA : les gaspillages du Lean</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Gemba et gemba walk : ce qu'on regarde vraiment quand on descend en atelier",
+  "description": "30 minutes en atelier et 8 questions préparées : ce qu'un gemba walk doit produire d'écrit, les 3 raisons de descendre et la trame minutée à suivre.",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": { "@type": "Organization", "name": "Fichly", "url": "https://www.fichly.com" },
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/gemba-walk-tournee-atelier-methode",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Que veut dire gemba ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gemba est un mot japonais qui signifie « le lieu réel », celui où le travail se fait et où la valeur est créée. Dans l'industrie, il désigne l'atelier, la ligne ou le poste, par opposition au bureau." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre gemba et genba ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aucune, ce sont deux transcriptions du même mot japonais. Genba colle à la prononciation réelle, gemba est la graphie la plus répandue en France. Ni l'une ni l'autre ne recouvre une pratique différente." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que signifie genchi genbutsu ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Genchi genbutsu se traduit par « le lieu réel, la chose réelle », et se comprend comme « allez voir par vous-même ». C'est le principe de décision associé au gemba : on ne tranche pas sur un tableau de bord seul." }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps doit durer un gemba walk ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Trente minutes suffisent pour une tournée de routine, si les questions sont préparées et les constats écrits ensuite. L'observation d'un problème précis prend bien plus longtemps. La durée n'est pas le bon critère, la régularité l'est." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que doit produire une tournée d'atelier ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Une liste écrite de trois à cinq constats. Chacun porte le fait observé, le lieu exact, la date et l'heure, un porteur nommé et une échéance. Sans cette liste, la tournée n'a produit qu'une impression." }
+    }
+  ]
+}
+</script></p>

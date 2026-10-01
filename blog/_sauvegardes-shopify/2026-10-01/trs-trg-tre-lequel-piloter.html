@@ -1,0 +1,443 @@
+<!--
+=====================================================
+ARTICLE SHOPIFY : TRS, TRG, TRE
+=====================================================
+Title tag        : TRS, TRG, TRE : différences, calculs et lequel piloter
+Meta description : Sur la même machine : 77 % de TRS, 68 % de TRG, 45 % de TRE. Ce que mesure chaque taux, comment le calculer, et lequel votre usine doit piloter.
+Handle d'URL     : trs-trg-tre-lequel-piloter
+Titre Shopify (H1 généré, aucune balise h1 ici) : TRS, TRG, TRE : lequel piloter et pourquoi
+
+VISUELS :
+- OK : cascade des temps d'état, export Canva "TRS - Les temps d'état - Fichly" (DAGyMZzlDBQ),
+  hébergé sur le CDN Shopify le 17/08/2026.
+- EN ATTENTE : le design "TRS vs TRG - Fichly" (DAGlywm0kgs) conviendrait au chapitre TRG,
+  mais il se contredit : l'en-tête annonce machine 1 à TRG 70 %, le texte d'explication dit 93 %
+  pour la même machine. À corriger dans Canva avant intégration.
+- REMPLACER-PAR-PHOTO-HUGO (carte auteur)
+
+COHÉRENCE INTER-FORMATS :
+Exemple chiffré repris à l'identique de l'article TRS en ligne (16 h d'ouverture, 2 h de
+maintenance, 2 h d'arrêts subis, 60 pièces/h, 680 produites, 650 conformes, TRS 77 %).
+Ne pas le modifier ici sans le modifier là-bas ni dans les posts LinkedIn dérivés.
+
+ANALYSE DE SERP DU 17/08 :
+- 4 questions PAA intégrées en FAQ, dont "Comment se calcule le TRG ?"
+- Gap concurrentiel exploité n° 1 : personne ne dit QUI doit se saisir de quel indicateur.
+- Gap n° 2 : lexique anglais OEE / OOE / TEEP, absent de tout le site alors que
+  "trs en anglais" est la meilleure position hors marque (6,7).
+- Posture assumée : les concurrents publient des seuils de performance, pas nous.
+  La question est traitée de front plutôt qu'évitée.
+
+CTA : /pages/partenaires-logiciels. Objectif TRS du brief. FICHLY5 omis volontairement,
+code promo produit hors sujet sur une page logiciel.
+=====================================================
+-->
+<style>
+.fichly-article{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px;line-height:1.75;color:#222;max-width:760px;margin:0 auto;}
+.fichly-article h2{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.55em;line-height:1.3;font-weight:700;margin:2.6em 0 .6em;color:#1a1a1a;}
+.fichly-article h3{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.18em;font-weight:600;margin:1.7em 0 .4em;color:#1a1a1a;}
+.fichly-article p{margin:1em 0;}
+.fichly-article ol,.fichly-article ul{margin:1em 0;padding-left:1.4em;}
+.fichly-article li{margin:.5em 0;}
+.fichly-article a{color:#3b3a9e;text-decoration:underline;}
+.fichly-resume{background:#e6f4f4;border-left:5px solid #75bec0;border-radius:8px;padding:1.2em 1.6em;margin:1.8em 0;}
+.fichly-resume .label{display:block;font-size:.8em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#3a8a8c;margin-bottom:.35em;}
+.fichly-resume p{margin:0;font-size:1.04em;}
+.fichly-toc{background:#eef3fa;border-left:5px solid #74a3d6;border-radius:8px;padding:1.3em 1.6em;margin:2em 0;}
+.fichly-toc strong{display:block;font-size:1.1em;margin-bottom:.6em;color:#1a1a1a;}
+.fichly-toc ol{margin:.3em 0 0;}
+.fichly-toc li{margin:.35em 0;}
+.fichly-toc a{text-decoration:none;color:#3b3a9e;}
+.fichly-toc a:hover{text-decoration:underline;}
+.fichly-essentiel{background:#fdf3d6;border:1px solid #e6b839;border-radius:10px;padding:1.4em 1.7em;margin:2em 0;}
+.fichly-essentiel strong{display:block;font-size:1.15em;margin-bottom:.5em;color:#1a1a1a;}
+.fichly-essentiel ul{margin:.3em 0 0;}
+.fichly-note{background:#eef7e8;border-left:5px solid #8cc978;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-note strong{color:#1a1a1a;}
+.fichly-pieges{background:#fbeded;border-left:5px solid #f16969;border-radius:8px;padding:1.2em 1.5em;margin:1.9em 0;}
+.fichly-pieges p{margin:.9em 0;}
+.fichly-ko{color:#d63b3b;font-weight:700;}
+.fichly-ok{color:#4f9f3a;font-weight:700;}
+.fichly-cta{background:#3b3a9e;color:#fff;border-radius:10px;padding:1.8em 2em;margin:2.4em 0;}
+.fichly-cta p{margin:.7em 0;}
+.fichly-cta strong{font-size:1.18em;}
+.fichly-cta a{color:#cdd3ff;}
+.fichly-bio{background:#eef3fa;border-radius:10px;padding:1.5em 1.7em;margin:2.2em 0;}
+.fichly-bio strong{color:#1a1a1a;}
+.fichly-article table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.97em;}
+.fichly-article th{background:#3b3a9e;color:#fff;text-align:left;padding:.75em .95em;font-weight:600;}
+.fichly-article td{border:1px solid #dde2e8;padding:.75em .95em;vertical-align:top;}
+.fichly-article tr:nth-child(even) td{background:#f6f8fb;}
+.fichly-readmore{border-top:2px solid #74a3d6;margin-top:2.6em;padding-top:1.3em;}
+.fichly-readmore strong{color:#1a1a1a;}
+.fichly-faq{margin:1.4em 0;}
+.fichly-faq details{border-bottom:1px solid #dde2e8;}
+.fichly-faq details:first-of-type{border-top:1px solid #dde2e8;}
+.fichly-faq summary{list-style:none;cursor:pointer;padding:1.1em .2em;font-weight:700;font-size:1.08em;color:#3b3a9e;display:flex;justify-content:space-between;align-items:center;gap:1em;}
+.fichly-faq summary::-webkit-details-marker{display:none;}
+.fichly-faq summary::after{content:"\203A";font-size:1.5em;line-height:1;color:#74a3d6;transform:rotate(90deg);transition:transform .2s ease;flex-shrink:0;}
+.fichly-faq details[open] summary::after{transform:rotate(-90deg);}
+.fichly-faq summary:hover{color:#2a2980;}
+.fichly-faq .answer{padding:0 .2em 1.2em;}
+.fichly-faq .answer p{margin:0;}
+.fichly-article td.col-oui{background:#eef7e8 !important;border-left:4px solid #8cc978;}
+.fichly-article td.col-non{background:#fbeded !important;border-left:4px solid #f16969;}
+.fichly-article th.th-oui{background:#4f9f3a;}
+.fichly-article th.th-non{background:#d63b3b;}
+.fichly-author{display:flex;gap:1.2em;align-items:flex-start;background:#fff;border:1px solid #dde2e8;border-top:5px solid #3b3a9e;border-radius:10px;padding:1.5em 1.7em;margin:2.4em 0;}
+.fichly-author-photo{flex:0 0 84px;width:84px;height:84px;border-radius:50%;background:#3b3a9e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:2em;font-weight:700;overflow:hidden;}
+.fichly-author-photo img{width:100%;height:100%;object-fit:cover;}
+.fichly-author-body{flex:1;}
+.fichly-author-body .role{font-size:.92em;color:#6b7280;margin:.1em 0 .5em;}
+.fichly-author-body strong{color:#1a1a1a;font-size:1.1em;}
+.fichly-author-link{display:inline-block;margin-top:.4em;font-weight:600;}
+</style>
+<div class="fichly-article">
+<p>Trois sigles circulent dans les reportings de production : TRS, TRG, TRE. Ils se ressemblent, ils se calculent sur la même machine, et ils ne donnent pas le même chiffre. Sur l'exemple traité plus bas, la même ligne affiche 77 %, 68 % et 45 % sur la même journée. Aucun de ces trois résultats n'est faux. La vraie question n'est donc pas de savoir lequel est le bon, mais lequel votre usine doit piloter. Cet article vous donne les trois formules, l'écart qu'elles produisent, et une règle de décision pour choisir.</p>
+<div class="fichly-resume">
+<span class="label">En résumé</span>
+<p>Le TRS, le TRG et le TRE rapportent le même temps utile à trois durées de référence différentes : le temps requis, le temps d'ouverture et le temps total. Plus la référence est large, plus le taux baisse. Choisir l'indicateur revient à désigner qui, dans l'entreprise, doit se saisir du problème.</p>
+</div>
+<div class="fichly-essentiel">
+<strong>Essentiel à retenir</strong>
+<ul>
+<li>TRS = temps utile / temps requis. Il mesure ce que l'atelier maîtrise pendant que la machine est censée produire.</li>
+<li>TRG = temps utile / temps d'ouverture. Il réintègre les arrêts planifiés et mesure la qualité de l'organisation.</li>
+<li>TRE = temps utile / temps total (24 h). Il mesure l'utilisation d'un actif immobilisé.</li>
+<li>Le TRG est toujours inférieur ou égal au TRS. <br>Le TRE est toujours le plus bas des trois.</li>
+<li>En anglais : OEE pour le TRS, OOE pour le TRG, TEEP pour le TRE.</li>
+<li>Comparer deux sites sans vérifier leur dénominateur produit un classement qui ne veut rien dire.</li>
+</ul>
+</div>
+<div class="fichly-toc">
+<strong>Sommaire</strong>
+<ol>
+<li><a href="#cascade">La cascade des temps : d'où viennent les trois taux</a></li>
+<li><a href="#exemple">Une seule machine, trois résultats</a></li>
+<li><a href="#trs">Le TRS : ce que l'atelier maîtrise</a></li>
+<li><a href="#trg">Le TRG : ce que l'organisation décide</a></li>
+<li><a href="#tre">Le TRE : ce que l'investissement rend</a></li>
+<li><a href="#anglais">OEE, OOE, TEEP : les équivalents anglais</a></li>
+<li><a href="#piege">Le piège de la comparaison entre sites</a></li>
+<li><a href="#seuils">Pourquoi nous ne donnons pas de seuil cible</a></li>
+<li><a href="#lequel">Alors, lequel piloter ?</a></li>
+<li><a href="#erreurs">Les erreurs qui faussent vos taux</a></li>
+<li><a href="#complementaires">Les outils Lean qui prennent le relais</a></li>
+<li><a href="#faq">FAQ : vos questions sur le TRS, le TRG et le TRE</a></li>
+</ol>
+</div>
+<h2 id="cascade">La cascade des temps d'état : d'où viennent les trois taux (TRS, TRE, TRG)</h2>
+<p>Les trois indicateurs partagent le même numérateur : le <strong>temps utile</strong>. C'est la durée pendant laquelle la machine a produit des pièces conformes du premier coup, à la cadence de référence. Tout le reste est perdu, d'une manière ou d'une autre.</p>
+<p>Ce qui les sépare, c'est le dénominateur. La norme <a href="https://www.boutique.afnor.org/fr-fr/norme/nf-e60182/moyens-de-production-indicateurs-de-performances-taux-de-rendement-syntheti/fa120534/513" rel="noopener" target="_blank">NF E60-182</a> décrit la cascade des temps d'état, du plus large au plus étroit :</p>
+<ul>
+<li>
+<strong>Temps total (tt)</strong> : la période calendaire complète, 24 h par jour, 168 h par semaine.</li>
+<li>
+<strong>Temps d'ouverture (to)</strong> : la période où l'atelier tourne, selon le nombre d'équipes. On en sort les formations, les réunions et les congés.</li>
+<li>
+<strong>Temps requis (tr)</strong> : le temps d'ouverture moins les arrêts planifiés, maintenance préventive, changements de série, contrôles.</li>
+<li>
+<strong>Temps de fonctionnement (tf)</strong> : le temps requis moins les arrêts subis, pannes et réglages imprévus.</li>
+<li>
+<strong>Temps net (tn)</strong> : le temps de fonctionnement moins les micro-arrêts et les baisses de cadence.</li>
+<li>
+<strong>Temps utile (tu)</strong> : le temps net moins les rebuts, les retouches et les retours production.</li>
+</ul>
+<img src="https://cdn.shopify.com/s/files/1/0880/5515/2985/files/trs-trg-tre-temps-etat-fichly.png?v=1786974468" alt="Les temps d'état du TRS : temps total, temps d'ouverture, temps requis, temps de fonctionnement, temps net et temps utile, avec les formules TRS, TRG et TRE" width="1080" height="1350" loading="lazy" style="max-width: 100%; height: auto; display: block; margin: 1.5em auto; border-radius: 8px;">
+<p>Les trois taux se lisent directement sur ce schéma :</p>
+<ul>
+<li>
+<strong>TRS = tu / tr</strong>, le temps utile rapporté au temps requis.</li>
+<li>
+<strong>TRG = tu / to</strong>, le temps utile rapporté au temps d'ouverture.</li>
+<li>
+<strong>TRE = tu / tt</strong>, le temps utile rapporté au temps total.</li>
+</ul>
+<p><strong>Chaque marche remontée fait entrer de nouvelles pertes dans le calcul</strong>, et fait donc baisser le résultat.</p>
+<h2 id="exemple">Une seule machine, trois résultats</h2>
+<p>Reprenons l'exemple détaillé dans notre article sur le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">Taux de Rendement Synthétique</a>, pour ne pas changer de cas en cours de route.</p>
+<p>Une ligne tourne en deux équipes de 8 heures. <br><br><strong>Sur la journée :</strong></p>
+<ul>
+<li>Temps total : <strong>24 h</strong>
+</li>
+<li>Temps d'ouverture : <strong>16 h</strong>, soit deux équipes</li>
+<li>2 h de maintenance préventive, donc un temps requis de <strong>14 h</strong>
+</li>
+<li>2 h de pannes et de réglages subis, donc 12 h de fonctionnement</li>
+<li>Cadence de référence de 60 pièces/h, soit 720 pièces attendues sur 12 h</li>
+<li>Production réelle : <strong>680 pièces</strong>, dont <strong>650 conformes</strong>
+</li>
+</ul>
+<p>Les 650 pièces conformes représentent, à la cadence de référence, <strong>10 h 50 de temps utile</strong>. Ce chiffre ne bouge plus. Seule la référence à laquelle on le rapporte change.</p>
+<table>
+<tbody>
+<tr>
+<th>Indicateur</th>
+<th>Formule</th>
+<th>Durée de référence</th>
+<th>Résultat</th>
+</tr>
+<tr>
+<td>
+<strong>TRS</strong>, Taux de Rendement Synthétique</td>
+<td>tu / tr</td>
+<td>14 h, temps requis</td>
+<td><strong>77 %</strong></td>
+</tr>
+<tr>
+<td>
+<strong>TRG</strong>, Taux de Rendement Global</td>
+<td>tu / to</td>
+<td>16 h, temps d'ouverture</td>
+<td><strong>68 %</strong></td>
+</tr>
+<tr>
+<td>
+<strong>TRE</strong>, Taux de Rendement Économique</td>
+<td>tu / tt</td>
+<td>24 h, temps total</td>
+<td><strong>45 %</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Trente-deux points d'écart entre le premier et le dernier</strong>, sur une journée identique. Le choix du sigle n'est pas un débat de puriste : il change le diagnostic.</p>
+<h2 id="trs">Le TRS : ce que l'atelier maîtrise</h2>
+<p style="text-align: left;">Le TRS rapporte le temps utile au temps requis, arrêts planifiés déduits. C'est l'indicateur encadré par la norme, et le plus utilisé en production.</p>
+<p style="text-align: left;">Ce qu'il expose : les pannes, les micro-arrêts, les pertes de cadence, la non-qualité. Tout ce qui se passe pendant que la machine était censée tourner.</p>
+<p style="text-align: left;">Ce qu'il masque : les décisions prises en amont. Une maintenance préventive allongée de 2 à 6 heures sort du dénominateur et <strong>améliore mécaniquement le TRS</strong>. Car pour rappel, on ne compte pas les arrêts non-planifiés dans le calcul du TRS. Un atelier peut afficher un excellent taux tout en produisant peu, simplement parce qu'on lui a demandé de produire peu.</p>
+<p style="text-align: left;">Le TRS est aussi le seul des trois à se décomposer proprement en trois facteurs : <strong>disponibilité</strong>, <strong>performance</strong> et <strong>qualité</strong>. C'est ce qui en fait un outil de plan d'action, et pas seulement un thermomètre.</p>
+<p style="text-align: left;">👉 <strong>Son propriétaire naturel : le responsable de production et les équipes de la ligne.</strong></p>
+<h2 id="trg">Le TRG : ce que l'organisation décide</h2>
+<p>Le TRG rapporte le même temps utile au temps d'ouverture. Il réintègre donc tout ce que le TRS avait écarté : maintenance préventive, changements de série, nettoyages, pauses, inventaires, formations.</p>
+<p>Ce qu'il expose : la qualité des décisions de planification. <strong>Un TRG qui décroche alors que le TRS tient est un signal précis</strong> : le problème n'est pas sur la ligne, il est dans l'ordonnancement, la taille des lots ou la durée des changements de série.</p>
+<p>C'est l'indicateur qui rend visible le coût réel d'un changement de format long. Sur le TRS, ce temps est neutralisé. Sur le TRG, il coûte, et il se voit.</p>
+<p>👉 <strong>Son propriétaire naturel : l'ordonnancement, la supply chain et le management de site.</strong></p>
+<h2 id="tre">Le TRE : ce que l'investissement rend</h2>
+<p>Le TRE rapporte le temps utile au temps total calendaire. Rien n'est exclu : ni les nuits non travaillées, ni les week-ends, ni les fermetures d'été.</p>
+<p>Ce qu'il expose : le taux d'utilisation réel d'un actif immobilisé. Une machine qui produit 45 % du temps calendaire pose une question qui n'est ni de production ni d'ordonnancement, mais d'investissement.</p>
+<p>C'est l'indicateur du dossier d'achat, pas du pilotage quotidien. Personne ne pilote une équipe avec un TRE. Personne ne devrait acheter une ligne sans l'avoir regardé.</p>
+<p>👉 <strong>Son propriétaire naturel : la direction industrielle et le contrôle de gestion.</strong></p>
+<div class="fichly-note">
+<p><strong>Une règle de cohérence à connaître.</strong> Le temps d'ouverture est toujours supérieur ou égal au temps requis, et le temps total supérieur ou égal au temps d'ouverture. <br><br>Il en découle que TRE ≤ TRG ≤ TRS, toujours. <br><br>Si vos tableaux affichent l'inverse, ce n'est pas une performance : c'est une erreur de périmètre.</p>
+</div>
+<h2 id="anglais">OEE, OOE, TEEP : les équivalents anglais</h2>
+<p>Les trois sigles français ont chacun leur équivalent anglo-saxon. La confusion est fréquente dans les groupes internationaux, où le reporting remonte souvent en anglais alors que les ateliers parlent français.</p>
+<table>
+<tbody>
+<tr>
+<th>Français</th>
+<th>Anglais</th>
+<th>Rapporté à</th>
+</tr>
+<tr>
+<td>TRS, Taux de Rendement Synthétique</td>
+<td>
+<strong>OEE</strong>, Overall Equipment Effectiveness</td>
+<td>Temps requis</td>
+</tr>
+<tr>
+<td>TRG, Taux de Rendement Global</td>
+<td>
+<strong>OOE</strong>, Overall Operations Effectiveness</td>
+<td>Temps d'ouverture</td>
+</tr>
+<tr>
+<td>TRE, Taux de Rendement Économique</td>
+<td>
+<strong>TEEP</strong>, Total Effective Equipment Performance</td>
+<td>Temps total</td>
+</tr>
+</tbody>
+</table>
+<p>Une prudence s'impose néanmoins. <strong>Le mot OEE est souvent employé par abus pour désigner n'importe lequel des trois</strong>, en particulier dans les documentations d'éditeurs de logiciels. Avant de comparer votre TRS à un OEE annoncé par un fournisseur, demandez la durée de référence employée. La réponse vous dira lequel des trois vous avez vraiment en face.</p>
+<h2 id="piege">Le piège de la comparaison entre sites</h2>
+<p>L'erreur la plus coûteuse n'est pas de mal calculer. C'est de comparer.</p>
+<p>Deux sites du même groupe annoncent 82 % et 71 %. Le premier calcule un TRS en sortant généreusement ses arrêts planifiés du dénominateur. Le second calcule un TRG. Le classement qui en sort est un artefact de définition, et la réunion qui suit demande au mauvais site de progresser.</p>
+<p>Le même piège existe dans le temps. Une usine qui passe de 3 à 2 équipes voit son TRS s'améliorer sans avoir rien amélioré : le dénominateur a fondu. Son TRE, lui, ne bouge pas d'un point.</p>
+<p>Une règle simple règle l'essentiel du problème : <strong>écrivez le dénominateur à côté du chiffre</strong>. « 77 % sur 14 h requises » se compare. « 77 % » ne se compare pas.</p>
+<h2 id="seuils">Pourquoi nous ne donnons pas de seuil cible</h2>
+<p>Vous trouverez partout des grilles de lecture : en dessous de 50 % l'atelier serait sous-performant, entre 60 et 70 % correct, au-delà de 80 % excellent. Ces grilles circulent, elles rassurent, et elles ne veulent pas dire grand-chose.</p>
+<p>Trois raisons à cela. Un taux dépend d'abord du <strong>périmètre de calcul</strong>, et on vient de voir que le même atelier peut afficher 77 ou 45 selon la durée de référence retenue. Il dépend ensuite du <strong>type de production</strong> : une ligne dédiée qui tourne sur une seule référence n'a rien à voir avec un atelier à forte variété qui enchaîne vingt changements de série par semaine. Il dépend enfin de la <strong>cadence de référence</strong> choisie : prenez la cadence catalogue plutôt que la cadence réellement atteignable, et votre taux plonge sans qu'aucune machine n'ait changé.</p>
+<p>Ce qui a du sens, en revanche : <strong>votre propre trajectoire, à périmètre de calcul stable</strong>. Un site qui passe de 61 à 68 en six mois a fait un vrai travail. Un site qui affiche 82 sans savoir comment il le calcule n'a rien démontré du tout.</p>
+<h2 id="lequel">Alors, lequel piloter ?</h2>
+<p>La réponse dépend du levier que vous cherchez à activer, et donc de qui doit se sentir concerné.</p>
+<p><strong>Pilotez le TRS si vos pertes sont dans la machine.</strong> Pannes fréquentes, micro-arrêts non tracés, rebuts en série. C'est l'indicateur qui parle aux équipes de production, parce qu'il ne contient que ce sur quoi elles ont prise. Et parce qu'il se décompose, il débouche directement sur un plan d'action.</p>
+<p><strong>Pilotez le TRG si votre TRS est correct et que la production ne suit pas.</strong> Le symptôme est classique : les équipes tiennent leurs objectifs, et le carnet prend du retard quand même. Le temps se perd entre les productions, pas pendant. Changements de série trop longs, lots trop petits, planning fragmenté.</p>
+<p><strong>Regardez le TRE quand la question devient « faut-il investir ».</strong> Avant d'acheter une machine supplémentaire, le TRE dit combien d'heures dorment déjà dans celle que vous avez. C'est un indicateur d'arbitrage, pas de management.</p>
+<p>Pour un site qui démarre une démarche de mesure, l'ordre le plus efficace est presque toujours le même : commencer par le TRS sur une ligne pilote, parce qu'il produit un plan d'action lisible, puis ouvrir le TRG une fois les pertes machine sous contrôle.</p>
+<h2 id="erreurs">Les erreurs qui faussent vos taux</h2>
+<div class="fichly-pieges">
+<p><span class="fichly-ko">❌ Changer de périmètre sans le dire.</span><br><span class="fichly-ok">✅ Datez et documentez chaque changement de règle.</span> Requalifier un arrêt subi en arrêt planifié améliore le chiffre sans améliorer l'usine.</p>
+<p><span class="fichly-ko">❌ Afficher les trois taux côte à côte.</span><br><span class="fichly-ok">✅ Un indicateur, un propriétaire, une réunion.</span> Trois taux sur un même tableau ne donnent pas trois fois plus d'information, ils diluent la responsabilité.</p>
+<p><span class="fichly-ko">❌ Oublier les micro-arrêts.</span><br><span class="fichly-ok">✅ Tracez chaque arrêt, même de trente secondes.</span> Cumulés sur un poste, ils représentent souvent plus qu'une panne visible.</p>
+<p><span class="fichly-ko">❌ Comparer votre TRS à l'OEE d'un fournisseur.</span><br><span class="fichly-ok">✅ Demandez toujours la durée de référence.</span> Le sigle anglais est employé pour les trois indicateurs sans distinction.</p>
+<p><span class="fichly-ko">❌ Utiliser le taux comme outil de surveillance des opérateurs.</span><br><span class="fichly-ok">✅ Servez-vous-en pour localiser les pertes, pas pour désigner des coupables.</span> Un indicateur vécu comme une sanction cesse d'être renseigné honnêtement.</p>
+<p><span class="fichly-ko">❌ Confondre l'indicateur et la cause.</span><br><span class="fichly-ok">✅ Le taux localise la perte, il ne l'explique pas.</span> Le travail commence après, avec l'analyse des arrêts.</p>
+</div>
+<h2 id="complementaires">Les outils Lean qui prennent le relais</h2>
+<p>Un taux ne corrige rien par lui-même. Trois outils prennent le relais une fois la perte localisée.</p>
+<p>Si la perte vient des changements de série, c'est le <a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">SMED</a> qui s'en occupe. C'est aussi le levier le plus direct sur l'écart entre votre TRS et votre TRG, puisque les changements pèsent sur le second et pas sur le premier.</p>
+<p>Si la perte vient des arrêts et des attentes, le guide des <a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">8 Muda</a> donne la grille de lecture : attentes machine, stocks tampons, surproduction, chacun se traduit en points de taux perdus.</p>
+<p>Si vous ne savez pas encore sur quelle machine commencer, la <a href="https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes">cartographie des flux de valeur</a> désigne le goulot. Mesurer le taux d'une machine qui n'est pas contrainte ne sert à rien : vous améliorerez un maillon qui n'attendait personne.</p>
+<p>Ces trois outils, comme le TRS et le TRG, font partie des méthodes réunies dans nos <a href="https://www.fichly.com/products/fiches-lean">fiches pratiques des 40 outils du Lean</a>, à garder près de la ligne.</p>
+<h2 id="faq">FAQ : vos questions sur le TRS, le TRG et le TRE</h2>
+<div class="fichly-faq">
+<details>
+<summary>Quelle est la différence entre le TRG et le TRS ?</summary>
+<div class="answer">
+<p>Le TRS rapporte le temps utile au temps requis, arrêts planifiés exclus. Le TRG le rapporte au temps d'ouverture, arrêts planifiés inclus. Le TRG intègre donc la maintenance préventive, les changements de série et les nettoyages, que le TRS neutralise. Sur la même période, le TRG est toujours inférieur ou égal au TRS.</p>
+</div>
+</details>
+<details>
+<summary>Que signifie l'acronyme TRG ?</summary>
+<div class="answer">
+<p>TRG signifie Taux de Rendement Global. Il mesure la part du temps d'ouverture réellement transformée en production conforme. Son équivalent anglais est l'OOE, Overall Operations Effectiveness. Il est plus sévère que le TRS, puisqu'il inclut les arrêts planifiés dans son dénominateur.</p>
+</div>
+</details>
+<details>
+<summary>Comment se calcule le TRG ?</summary>
+<div class="answer">
+<p>TRG = temps utile / temps d'ouverture. Le temps utile est la durée nécessaire pour produire les pièces conformes à la cadence de référence. Le temps d'ouverture est la durée pendant laquelle l'atelier tourne, selon le nombre d'équipes. Exemple : 10 h 50 de temps utile sur 16 h d'ouverture donnent un TRG de 68 %.</p>
+</div>
+</details>
+<details>
+<summary>Que signifie TRE ?</summary>
+<div class="answer">
+<p>TRE signifie Taux de Rendement Économique. Il rapporte le temps utile au temps total calendaire, soit 24 heures par jour et 168 heures par semaine. Son équivalent anglais est le TEEP. Il mesure l'utilisation d'un actif immobilisé, et non la performance d'une équipe. C'est l'indicateur des décisions d'investissement.</p>
+</div>
+</details>
+<details>
+<summary>Le TRG peut-il être supérieur au TRS ?</summary>
+<div class="answer">
+<p>Non. Le temps d'ouverture est toujours supérieur ou égal au temps requis, donc le TRG est mécaniquement inférieur ou égal au TRS. Si l'inverse apparaît dans vos tableaux, il s'agit d'une erreur de périmètre : les deux taux ne portent probablement pas sur la même période ou sur le même équipement.</p>
+</div>
+</details>
+<details>
+<summary>Comment dit-on TRS, TRG et TRE en anglais ?</summary>
+<div class="answer">
+<p>Le TRS correspond à l'OEE, Overall Equipment Effectiveness. Le TRG correspond à l'OOE, Overall Operations Effectiveness. Le TRE correspond au TEEP, Total Effective Equipment Performance. Attention : le terme OEE est souvent employé par abus pour désigner les trois. Vérifiez toujours la durée de référence utilisée avant de comparer.</p>
+</div>
+</details>
+<details>
+<summary>Existe-t-il une valeur cible de TRS ?</summary>
+<div class="answer">
+<p>Il n'existe pas de seuil universel, malgré les grilles que l'on trouve un peu partout. Une valeur dépend du périmètre de calcul, du type de production et de la cadence de référence retenue. Ce qui compte est votre propre trajectoire, mesurée à périmètre stable dans le temps.</p>
+</div>
+</details>
+</div>
+<div class="fichly-cta">
+<p><strong>Mesurer une fois par mois ne suffit pas.</strong></p>
+<p>Un taux calculé à la main sur un tableur donne une photo du mois dernier. Le pilotage demande un relevé automatique, machine par machine, arrêt par arrêt, avec les causes attachées.</p>
+<p>👉 Découvrez nos <a href="https://www.fichly.com/pages/partenaires-logiciels">partenaires logiciels de suivi de performance</a> : mesure en temps réel, historique des arrêts, et accompagnement au déploiement par nos formateurs.</p>
+</div>
+<div class="fichly-bio">
+<p><strong>Moi, c'est Hugo.</strong></p>
+<p>Après un parcours d'ingénieur industriel, j'ai décidé de partager mes connaissances sur LinkedIn avec 1 post par jour. Puis j'ai créé <strong>Fichly</strong> : un organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+<p>Ma mission : <strong>réinventer l'apprentissage industriel</strong>, avec du jeu, du terrain, et zéro PowerPoint ronflant.</p>
+<p>👉 <a href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Me suivre sur LinkedIn</a> | <a href="https://www.fichly.com/">Découvrir Fichly</a></p>
+</div>
+<div class="fichly-author">
+<div class="fichly-author-photo"><img alt="Hugo Duc, formateur Lean Management et fondateur de Fichly"></div>
+<div class="fichly-author-body">
+<strong>Hugo Duc</strong>
+<p class="role">Fondateur de Fichly · Formateur Lean Management</p>
+<p>Ingénieur industriel de formation, Hugo a accompagné plus de 70 sites industriels en France dans leurs démarches d'amélioration continue.</p>
+<a class="fichly-author-link" href="https://www.linkedin.com/in/hugo-duc/" rel="noopener" target="_blank">Suivre Hugo sur LinkedIn</a>
+</div>
+</div>
+<div class="fichly-readmore">
+<p><strong>À lire aussi sur le blog Fichly :</strong></p>
+<ul>
+<li><a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">TRS : définition, calcul et méthodes de suivi</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/methode-smed-5-etapes">La méthode SMED : les 5 étapes expliquées</a></li>
+<li><a href="https://www.fichly.com/blogs/nos-articles/les-muda-les-8-gaspillages-du-lean-guide-complet">Les 8 Muda : les gaspillages du Lean</a></li>
+</ul>
+</div>
+</div>
+<p><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "TRS, TRG, TRE : lequel piloter et pourquoi",
+  "description": "Sur la même machine : 77 % de TRS, 68 % de TRG, 45 % de TRE. Ce que mesure chaque taux, comment le calculer, et lequel votre usine doit piloter.",
+  "image": "https://cdn.shopify.com/s/files/1/0880/5515/2985/files/trs-trg-tre-temps-etat-fichly.png?v=1786974468",
+  "author": {
+    "@type": "Person",
+    "name": "Hugo Duc",
+    "url": "https://www.linkedin.com/in/hugo-duc/",
+    "sameAs": ["https://www.linkedin.com/in/hugo-duc/"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fichly",
+    "url": "https://www.fichly.com"
+  },
+  "datePublished": "2026-08-17",
+  "dateModified": "2026-08-17",
+  "mainEntityOfPage": "https://www.fichly.com/blogs/nos-articles/trs-trg-tre-lequel-piloter",
+  "inLanguage": "fr-FR"
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre le TRG et le TRS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le TRS rapporte le temps utile au temps requis, arrêts planifiés exclus. Le TRG le rapporte au temps d'ouverture, arrêts planifiés inclus. Le TRG intègre donc la maintenance préventive, les changements de série et les nettoyages, que le TRS neutralise. Sur la même période, le TRG est toujours inférieur ou égal au TRS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que signifie l'acronyme TRG ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TRG signifie Taux de Rendement Global. Il mesure la part du temps d'ouverture réellement transformée en production conforme. Son équivalent anglais est l'OOE, Overall Operations Effectiveness. Il est plus sévère que le TRS, puisqu'il inclut les arrêts planifiés dans son dénominateur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment se calcule le TRG ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TRG = temps utile / temps d'ouverture. Le temps utile est la durée nécessaire pour produire les pièces conformes à la cadence de référence. Le temps d'ouverture est la durée pendant laquelle l'atelier tourne, selon le nombre d'équipes. Exemple : 10 h 50 de temps utile sur 16 h d'ouverture donnent un TRG de 68 %."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que signifie TRE ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TRE signifie Taux de Rendement Économique. Il rapporte le temps utile au temps total calendaire, soit 24 heures par jour et 168 heures par semaine. Son équivalent anglais est le TEEP. Il mesure l'utilisation d'un actif immobilisé, et non la performance d'une équipe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le TRG peut-il être supérieur au TRS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Le temps d'ouverture est toujours supérieur ou égal au temps requis, donc le TRG est mécaniquement inférieur ou égal au TRS. Si l'inverse apparaît dans vos tableaux, il s'agit d'une erreur de périmètre."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment dit-on TRS, TRG et TRE en anglais ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le TRS correspond à l'OEE, Overall Equipment Effectiveness. Le TRG correspond à l'OOE, Overall Operations Effectiveness. Le TRE correspond au TEEP, Total Effective Equipment Performance. Attention : le terme OEE est souvent employé par abus pour désigner les trois. Vérifiez toujours la durée de référence utilisée avant de comparer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Existe-t-il une valeur cible de TRS ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il n'existe pas de seuil universel, malgré les grilles que l'on trouve un peu partout. Une valeur dépend du périmètre de calcul, du type de production et de la cadence de référence retenue. Ce qui compte est votre propre trajectoire, mesurée à périmètre stable dans le temps."
+      }
+    }
+  ]
+}
+</script></p>

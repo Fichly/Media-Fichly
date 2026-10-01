@@ -1,0 +1,137 @@
+[
+ {
+  "id": "gid://shopify/Article/1005421232473",
+  "handle": "matrice-raci-definition-exemple-methode",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005421265241",
+  "handle": "diagramme-ishikawa-6m-methode-exemple",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005421363545",
+  "handle": "qqoqccp-methode-cadrer-un-probleme",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005421429081",
+  "handle": "amdec-methode-cotation-criticite",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005543817561",
+  "handle": "kanban-de-production-boucle-dimensionnement",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005543850329",
+  "handle": "takt-time-calcul-definition",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005543883097",
+  "handle": "obeya-salle-pilotage-visuel",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005543915865",
+  "handle": "gemba-walk-tournee-atelier-methode",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1005543948633",
+  "handle": "diagramme-de-pareto-methode-exemple",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/1006062141785",
+  "handle": "lean-manufacturing-definition-principes-outils",
+  "publie": false
+ },
+ {
+  "id": "gid://shopify/Article/998359466329",
+  "handle": "la-methode-5s-definition-et-exemples",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/998807109977",
+  "handle": "taux-de-rendement-synthetique-definition",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/998863503705",
+  "handle": "value-stream-mapping-definition-et-etapes",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1002140795225",
+  "handle": "quelle-formation-lean-management-certifiante-choisir",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1002388095321",
+  "handle": "les-muda-les-8-gaspillages-du-lean-guide-complet",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1003250286937",
+  "handle": "formation-lean-qualiopi-ce-que-le-label-change",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1003250483545",
+  "handle": "financement-formation-lean-tous-les-dispositifs-2026",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1003581866329",
+  "handle": "responsable-amelioration-continue-fiche-metier",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004388712793",
+  "handle": "green-belt-lean-six-sigma",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004401787225",
+  "handle": "methode-pdca-roue-de-deming-cycle",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004584993113",
+  "handle": "methode-dmaic-5-etapes",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004803621209",
+  "handle": "trs-trg-tre-lequel-piloter",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004806635865",
+  "handle": "methode-5-pourquoi-cause-racine",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004654330201",
+  "handle": "methode-smed-5-etapes",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004806668633",
+  "handle": "types-de-maintenance-comment-choisir",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004916834649",
+  "handle": "mtbf-mttr-indicateurs-disponibilite",
+  "publie": true
+ },
+ {
+  "id": "gid://shopify/Article/1004916867417",
+  "handle": "tpm-total-productive-maintenance",
+  "publie": true
+ }
+]
