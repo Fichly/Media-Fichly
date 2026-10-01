@@ -295,3 +295,6 @@
 @container fv2 (max-width: 520px) { .fv2-track { --d: 36px; } .fv2-stop b { font-size: 15px; } .fv2-day { min-height: 98px; } .fv2-formation__inner { padding: 26px 18px; } .fv2-motion { padding: 18px 14px; } }
 
 @media (prefers-reduced-motion: reduce) { .fv2 *, .fv2 *::before, .fv2 *::after { transition: none !important; } }
+
+/* Images pas encore produites (VISUEL-A-CREER, REMPLACER-...) : masquées plutôt que cassées */
+.fv2-content img[src*="VISUEL-A-CREER"], .fv2-content img[src*="REMPLACER"] { display: none; }
