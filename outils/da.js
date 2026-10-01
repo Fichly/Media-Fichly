@@ -24,7 +24,7 @@
   const RIBBON = ['#f16969', '#75bec0', '#aa76b2', '#8cc978', '#e0cf35', '#74a3d6'];
   const ENCART_BLACK = '#000000'; // première ligne des encarts Fichly
 
-  // Badge auteur : author: 'hugo' | 'clement'
+  // Badge auteur : author: 'hugo' | 'clement' | null (page Fichly, sans badge)
   const AUTHORS = {
     hugo: { photo: 'auteurs/hugo-duc.png', x: 892, y: 47, size: 122, first: 'Hugo', last: 'Duc' },
     clement: { photo: 'auteurs/clement-raymond.png', x: 889, y: 45, size: 124, first: 'Clément', last: 'Raymond' },
@@ -69,6 +69,8 @@
     el('image', { href: ASSETS + 'paper.png', x: 0, y: 0, width: W, height: H, 'data-frame': 1 });
     RIBBON.forEach((c, i) => el('rect', { x: i * 180, y: 1332, width: 180, height: 18, fill: c, 'data-frame': 1 }));
     el('image', { href: ASSETS + 'fichly-logo.png', x: 884, y: 1228, width: 178, height: 94 });
+    // Page Fichly : author: null, pas de badge (le titre peut alors aller jusqu'à 1020 px)
+    if (!author) return;
     const a = AUTHORS[author];
     el('image', { href: ASSETS + a.photo, x: a.x, y: a.y, width: a.size, height: a.size });
     text(svg, 952, 210, a.first, { size: 23, weight: 400, fill: C.blue, anchor: 'middle' });
@@ -77,6 +79,7 @@
 
   // ---------- Tête ----------
   // Titre deux lignes en 72 px : ligne 1 bleue, ligne 2 blanche dans le cadre bleu.
+  // maxRight : 900 avec un badge auteur, 1020 pour la page Fichly.
   function title(line1, line2, maxRight = 900) {
     const t1 = text(svg, 62, 122, line1, { size: 72, weight: 800, fill: C.blue });
     fit(t1, maxRight, 'titre ligne 1');
