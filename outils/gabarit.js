@@ -222,6 +222,14 @@
     return g;
   }
 
+  // Silhouette (client, opérateur) posée sur floor : hauteur 76 k
+  function person(parent, cx, floor, k = 1, fill = C.blue) {
+    const g = el('g', {}, parent);
+    el('circle', { cx, cy: floor - 62 * k, r: 14 * k, fill }, g);
+    el('path', { d: `M ${cx - 24 * k} ${floor} L ${cx - 24 * k} ${floor - 22 * k} Q ${cx - 24 * k} ${floor - 42 * k} ${cx} ${floor - 42 * k} Q ${cx + 24 * k} ${floor - 42 * k} ${cx + 24 * k} ${floor - 22 * k} L ${cx + 24 * k} ${floor} Z`, fill }, g);
+    return g;
+  }
+
   // ---------- Gabarit LinkedIn ----------
   function template({ author = 'hugo' } = {}) {
     // Cadre fixe (data-frame) : fond papier et bandeau ne bougent jamais, même avec la caméra
@@ -380,11 +388,14 @@
     window.FICHE = { width: W, height: H, duration, draw: loop, ready };
   }
 
+  // Image fixe (blog) : la scène construite une fois, rien ne bouge
+  const image = build => start({ duration: 1, build, draw: () => {} });
+
   window.Gabarit = {
     W, H, C, svg, el, text, measure, fit, noOverlap,
     clamp, prog, easeOut, easeInOut, back, invEaseInOut,
     FADE_START, FADE_END, fading, fadeOut, pop, slide, rise, pulse, window01,
-    check, cross, badgeNum, pill, card, para, arrow, machine, carton,
+    check, cross, badgeNum, pill, card, para, arrow, machine, carton, person, image,
     template, title, chapeau, chute, encart, templateBlog, blogTitle, blogChapeau, blogChute, start,
     camera, outline, clipRect,
   };

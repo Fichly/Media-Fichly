@@ -1,6 +1,7 @@
 // Rendu d'une fiche : node outils/rendu.js <id> stills [t…] | gif [fps] | mp4 [fps] [--scenario nom]
 // <id> : dossier sous fiches/ (LinkedIn) ou chemin depuis la racine (ex. blog/lean-manufacturing/1-routine)
 // stills : PNG de contrôle dans controle/<nom>-t<t>.png
+// png    : image fixe t = 0 : livrables/<id>.webp (pour le site, ~60 Ko) et <id>.png (palette 128 couleurs, archive)
 // gif    : livrables/<id>.gif, .mp4 et .png (image t = 0) ; mp4 : sans le GIF (mouvements de caméra)
 // Le format (largeur × hauteur) est lu sur la page (window.FICHE).
 // Dépendances : playwright (Chromium) et ffmpeg (FFMPEG=… ou ffmpeg dans le PATH).
@@ -59,6 +60,17 @@ const FFMPEG = process.env.FFMPEG || 'ffmpeg';
       await shot(t, f);
       console.log('→', path.relative(ROOT, f));
     }
+  } else if (mode === 'png') {
+    const out = path.join(ROOT, 'livrables', `${name}.png`);
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    const raw = path.join(os.tmpdir(), `${base}-brut.png`);
+    await shot(0, raw);
+    execFileSync(FFMPEG, ['-y', '-loglevel', 'error', '-i', raw,
+      '-vf', 'split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=none', out]);
+    const webp = out.replace(/\.png$/, '.webp');
+    execFileSync(FFMPEG, ['-y', '-loglevel', 'error', '-i', raw, '-c:v', 'libwebp', '-quality', '82', '-compression_level', '6', webp]);
+    fs.rmSync(raw, { force: true });
+    for (const f of [webp, out]) console.log('→', path.relative(ROOT, f), (fs.statSync(f).size / 1e3).toFixed(0), 'Ko');
   } else if (mode === 'gif' || mode === 'mp4') {
     const fps = Number(rest[0] || 20);
     const n = Math.round(duration * fps);

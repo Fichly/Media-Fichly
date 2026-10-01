@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1-valeur",
+    "section": "Qu'est-ce que le Lean Manufacturing ? Définition",
+    "apres": "En français, on parle aussi de production au plus juste.",
+    "alt": "Les six opérations du parcours d'une commande triées par la question du client : usiner, assembler et emballer ajoutent de la valeur ; déplacer une palette, attendre une validation et reprendre une pièce ratée sont des gaspillages."
+  },
+  {
+    "id": "2-cinq-principes",
+    "section": "Les 5 principes du Lean Manufacturing",
+    "apres": "Les cinq principes formalisés dans",
+    "alt": "Les cinq principes du Lean Manufacturing dans l'ordre : identifier la valeur, cartographier la chaîne de valeur, créer le flux, tirer le flux, viser la perfection ; chaque amélioration fait apparaître le problème suivant et relance la boucle."
+  },
+  {
+    "id": "3-flux-pousse-flux-tire",
+    "section": "4. Tirer le flux",
+    "apres": "qu'est-ce qui déclenche la production à ce poste",
+    "alt": "Flux poussé et flux tiré sur la même ligne : en flux poussé, la prévision lance chaque poste et le stock grossit entre eux ; en flux tiré, chaque poste remplace ce que l'étape suivante a consommé, avec un supermarché de deux places."
+  },
+  {
+    "id": "4-maison-toyota",
+    "section": "Juste-à-temps et jidoka : les deux piliers du système Toyota",
+    "apres": "Le système Toyota est souvent représenté sous la forme d'une maison.",
+    "alt": "La maison Toyota : fondations stabilité et standards, toit satisfaction du client, pilier juste-à-temps (Kanban, flux tiré, takt time, SMED, lissage de la charge) et pilier jidoka (andon, poka-yoke, autocontrôle, résolution de problèmes)."
+  },
+  {
+    "id": "5-le-stock-cache-les-problemes",
+    "section": "Juste-à-temps et jidoka : les deux piliers du système Toyota",
+    "apres": "Les deux piliers ne fonctionnent qu'ensemble.",
+    "alt": "La rivière des stocks : avec un stock élevé, les problèmes restent sous la surface ; en juste-à-temps, le stock baisse et les pannes, les changements de série et les défauts apparaissent, le jidoka oblige à les traiter."
+  },
+  {
+    "id": "6-exemple-chiffre",
+    "section": "Exemple chiffré : diviser le délai sans toucher aux machines",
+    "apres": "Le temps de traversée passe à 200 divisé par 50",
+    "alt": "Exemple chiffré : mêmes machines (sciage, tournage, fraisage, ébavurage) et même débit de 50 pièces par jour ; l'encours passe de 450 à 200 pièces et le temps de traversée de 9 à 4 jours (encours divisé par débit)."
+  }
+]
