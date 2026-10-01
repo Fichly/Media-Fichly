@@ -19,15 +19,16 @@ export const CARD = { x: 160, y: 150, w: 1600, h: 780 };
 export const IN = { x: 70, w: 1460 }; // zone utile à l'intérieur de la carte
 
 // Fond papier, ruban et logo : ils restent fixes pendant les fondus entre scènes
-export const Decor: React.FC = () => (
+// `brand` (0 → 1) fait apparaître le ruban et le logo, une fois que l'intro les a posés à leur place
+export const Decor: React.FC<{ brand?: number }> = ({ brand = 1 }) => (
   <>
     <Img src={staticFile("paper.png")} style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover" }} />
-    <div style={{ position: "absolute", left: 0, bottom: 0, width: 1920, height: 18, display: "flex" }}>
+    <div style={{ position: "absolute", left: 0, bottom: 0, width: 1920, height: 18, display: "flex", opacity: brand }}>
       {C.ribbon.map((c) => (
         <i key={c} style={{ flex: 1, background: c }} />
       ))}
     </div>
-    <Img src={staticFile("fichly-logo.png")} style={{ position: "absolute", right: 46, bottom: 36, width: 142 }} />
+    <Img src={staticFile("fichly-logo.png")} style={{ position: "absolute", right: 46, bottom: 36, width: 142, opacity: brand }} />
   </>
 );
 

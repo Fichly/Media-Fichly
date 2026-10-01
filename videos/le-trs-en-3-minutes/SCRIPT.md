@@ -6,104 +6,118 @@
 
 Les nombres entiers sont écrits en toutes lettres pour fixer la prononciation. **Les pourcentages à virgule sont écrits en chiffres** (« 85,7 % ») : test B du 1er octobre 2026, validé (« B et C très bien », `audio/tests-pourcentages/`). Repli si une prise bute : l'arrondi parlé (test C, « presque quatre-vingt-six pour cent »), l'écran gardant le chiffre exact.
 
-**Version 2 (1er octobre 2026)** : réécrite sur un ton parlé (« Ok, le texte est pas assez naturel… Je veux un texte humain du style "Dans notre cas la machine a tourné X h, ce qui nous donne, une fois enlevés les arrêts non planifiés…" ») et redécoupée en 14 cadres, un cadre = une idée (« pas trop d'animation par frame, on ne sait pas où regarder »). Elle intègre le verdict en heures (ligne 9) et le TRG / TRE (ligne 12). Environ 513 mots, soit environ 3 min 10 avec les respirations.
+**Version 3 (1er octobre 2026)** : « J'ai besoin que l'on fasse une intro avec le logo Fichly en motion. Ensuite que l'on introduise le sujet… Il y a des blancs parfois qui cassent le rythme… On va introduire aussi les différentes manières de calculer le TRS : la manière simple, pièces produites sur ce que l'on aurait dû produire au temps de cycle idéal, et ensuite introduire les temps d'états. Une fois les temps d'états présentés, on commence à décomposer. » Ordre : intro, constat, méthode simple (pièces bonnes ÷ pièces possibles au temps de cycle idéal, 650 ÷ 840 = 77 %), temps d'états, puis décomposition (les trois marches), qui retombe sur les mêmes 77 %. 16 lignes, environ 592 mots, soit environ 3 min avec le logo. **Enregistrement par blocs continus** (une prise par bloc, les cadres changent pendant que la voix parle, plus de silences entre les cadres) : bloc 1 = lignes 1 à 5 (la première minute), bloc 2 = lignes 6 à 11, bloc 3 = lignes 12 à 16.
 
 ---
 
-## Line 1 — L'affaire (Frame 1)
+## Line 1 — Intro (Frame 1)
 
-**L'idée :** Il manque 3 heures.
-**À l'écran :** La presse sur le panneau de contrôle, l'horloge de la journée qui défile, puis « Il manque 3 h » en grand.
+**L'idée :** Le TRS en 3 minutes.
+**À l'écran :** Le logo Fichly s'écrit, puis « Le TRS » et le bandeau « en 3 minutes. », sous-titre « Taux de rendement synthétique ».
 
-    Regardez cette presse. Elle a tourné toute la journée, en deux équipes : seize heures. Et pourtant, le soir, il manque plus de trois heures de production. Où sont-elles passées ?
+    Aujourd'hui, on va comprendre ce qu'est le TRS, le taux de rendement synthétique. Et tout ça, en trois minutes.
 
-## Line 2 — L'outil (Frame 2)
+## Line 2 — Le constat (Frame 2)
 
-**L'idée :** Le TRS mesure l'écart entre le possible et le bon.
-**À l'écran :** Deux barres : ce que la machine devait produire, puis les pièces bonnes. L'écart s'allume en rouge : c'est ce que mesure le TRS.
+**L'idée :** Il manque plus de 3 heures.
+**À l'écran :** La presse frappe en continu ; « 16 h d'ouverture », puis « il manque plus de 3 h » en rouge, puis « Où sont-elles passées ? ».
 
-    Pour le savoir, on a un outil : le TRS, le taux de rendement synthétique. Ce n'est pas une note des équipes. C'est le relevé de tout ce qui s'est perdu entre ce que la machine devait produire et les pièces bonnes qu'elle a sorties.
+    Pour commencer, regardez cette presse. Elle a tourné toute la journée, en deux équipes : seize heures. Et pourtant, le soir, il manque plus de trois heures de production. Où sont-elles passées ? C'est justement à ça que sert le TRS.
 
-## Line 3 — Le temps requis (Frame 3)
+## Line 3 — La formule simple (Frame 3)
 
-**L'idée :** Le temps requis : 16 h − 2 h = 14 h.
-**À l'écran :** Une barre de 16 h. Les 2 h de maintenance prévues se détachent en pointillés. Il reste 14 h.
+**L'idée :** TRS = pièces bonnes ÷ pièces possibles au temps de cycle idéal.
+**À l'écran :** La formule en mots : « pièces bonnes » sur « pièces possibles, au temps de cycle idéal ».
 
-    On commence par le temps. L'atelier est ouvert seize heures, dont deux heures de maintenance prévues, qu'on met de côté. Il reste quatorze heures : c'est le temps requis. Tout le calcul part de là.
+    La façon la plus simple de le calculer : on compare les pièces bonnes à ce que la machine aurait dû produire, à son temps de cycle idéal.
 
-## Line 4 — La disponibilité (Frame 4)
+## Line 4 — Notre cas (Frame 4)
+
+**L'idée :** 650 ÷ 840 = 77 %, mais où sont passées les 3 heures ?
+**À l'écran :** Deux barres : 840 pièces possibles, 650 pièces bonnes ; 650 ÷ 840 = 77 %. Puis l'écart rouge se marque d'un « ? ».
+
+    Notre presse est faite pour sortir une pièce par minute. Sur les quatorze heures où elle devait produire, la maintenance prévue mise à part, ça fait huit cent quarante pièces. Elle en a sorti six cent cinquante bonnes. Six cent cinquante sur huit cent quarante : son TRS est de soixante-dix-sept pour cent. C'est un bon point de départ, mais ce chiffre ne dit pas où sont passées nos trois heures.
+
+## Line 5 — Les temps d'états (Frame 5)
+
+**L'idée :** La journée se découpe en temps d'états, une famille de pertes par marche.
+**À l'écran :** L'escalier des temps d'états se construit marche par marche, chaque perte nommée à droite.
+
+    Pour le savoir, on découpe la journée en temps d'états. On part du temps total, les vingt-quatre heures de la journée. On enlève les heures où l'atelier est fermé : c'est le temps d'ouverture. Puis les arrêts prévus : il reste le temps requis. Puis les arrêts subis : c'est le temps de fonctionnement. Puis les ralentissements : le temps net. Et enfin les pièces mauvaises : il reste le temps utile. Chaque marche retire une famille de pertes.
+
+## Line 6 — Le temps requis (Frame 6)
+
+**L'idée :** Notre temps requis : 16 h − 2 h = 14 h.
+**À l'écran :** La journée de 16 h en blocs : les 2 h prévues se mettent de côté, il reste 14 h.
+
+    Appliquons ça à notre presse. Seize heures d'ouverture, moins deux heures de maintenance prévue : il reste quatorze heures de temps requis.
+
+## Line 7 — La disponibilité (Frame 7)
 
 **L'idée :** La disponibilité : 12 h sur 14 h.
-**À l'écran :** La journée de 14 h en blocs d'une heure. Deux blocs passent au rouge, puis sortent de la journée : 12 h sur 14 h, 85,7 %.
+**À l'écran :** Les 14 blocs : deux passent au rouge et sortent ; 12 h ÷ 14 h = 85,7 %.
 
-    Premier témoin : la disponibilité. Dans notre cas, la presse s'est arrêtée deux heures sans que ce soit prévu : une panne, un manque de matière, un réglage. Une fois ces arrêts non planifiés enlevés, elle a tourné douze heures sur quatorze. Ce qui nous donne une disponibilité de 85,7 %.
+    Première marche : les arrêts. Dans notre cas, la presse s'est arrêtée deux heures sans que ce soit prévu : une panne, un manque de matière, un réglage. Une fois ces arrêts non planifiés enlevés, elle a tourné douze heures sur quatorze. Ce qui nous donne une disponibilité de 85,7 %.
 
-## Line 5 — La performance (Frame 5)
+## Line 8 — La performance (Frame 8)
 
 **L'idée :** La performance : 680 pièces sur 720.
-**À l'écran :** Un compteur de pièces : il vise 720 et s'arrête à 680. 94,4 %.
+**À l'écran :** Un compteur de pièces : il vise 720 et s'arrête à 680 ; 94,4 %.
 
-    Deuxième témoin, plus discret : la performance. À soixante pièces à l'heure, la presse aurait dû en sortir sept cent vingt en douze heures. Elle en a sorti six cent quatre-vingts : des micro-arrêts, une cadence un peu lente, que personne ne note. Sa performance est donc de 94,4 %.
+    Deuxième marche : la vitesse. À une pièce par minute, en douze heures, elle aurait dû en sortir sept cent vingt. Elle en a sorti six cent quatre-vingts : des micro-arrêts, une cadence un peu lente, que personne ne note. Sa performance est donc de 94,4 %.
 
-## Line 6 — La qualité (Frame 6)
+## Line 9 — La qualité (Frame 9)
 
 **L'idée :** La qualité : 650 bonnes sur 680.
-**À l'écran :** Les 680 pièces : 30 passent au violet (rebut ou retouche). 650 bonnes, 95,6 %.
+**À l'écran :** Les 680 pièces : 30 passent au violet ; 650 bonnes, 95,6 %.
 
-    Troisième témoin : la qualité. Sur ces six cent quatre-vingts pièces, trente sont parties au rebut ou en retouche, et une retouche, c'est du temps passé deux fois. Il reste six cent cinquante pièces bonnes, soit une qualité de 95,6 %.
+    Troisième marche : la qualité. Sur ces six cent quatre-vingts pièces, trente sont parties au rebut ou en retouche. Il en reste six cent cinquante bonnes, soit une qualité de 95,6 %.
 
-## Line 7 — Le TRS (Frame 7)
+## Line 10 — Le produit (Frame 10)
 
-**L'idée :** TRS = dispo × perf × qualité = 77 %.
-**À l'écran :** La jauge « en direct » : les trois taux se remplissent un à un, puis l'arc monte à 77 %.
+**L'idée :** Dispo × perf × qualité = les mêmes 77 %.
+**À l'écran :** La jauge « en direct » : les trois taux se remplissent, l'arc monte à 77 %, et une pastille ✓ « comme la méthode simple ».
 
-    On assemble maintenant les trois témoignages : la disponibilité, fois la performance, fois la qualité. Notre TRS est de soixante-dix-sept pour cent.
+    On multiplie les trois : disponibilité, fois performance, fois qualité. Et on retombe sur nos soixante-dix-sept pour cent. Sauf que maintenant, on sait d'où ils viennent.
 
-## Line 8 — Le déclic (Frame 8)
-
-**L'idée :** 77 %, c'est 10 h 50 utiles sur 14 h.
-**À l'écran :** Une barre de 14 h : 10 h 50 en vert, les 3 h 10 qui manquaient en creux.
-
-    Autrement dit, sur ses quatorze heures, la presse a produit l'équivalent de dix heures cinquante de pièces bonnes. Les trois heures dix qui manquaient, les voilà.
-
-## Line 9 — Le verdict (Frame 9)
+## Line 11 — Le verdict (Frame 11)
 
 **L'idée :** Les 3 h 10 : d'abord des arrêts.
-**À l'écran :** « À votre avis ? », un temps de silence, puis trois barres en heures : 2 h, 40 min, 30 min. La première se cercle : premier chantier.
+**À l'écran :** Une barre de 14 h : 10 h 50 en vert ; puis les 3 h 10 en trois barres (2 h, 40 min, 30 min), la première cerclée.
 
-    Mais le plus utile, ce n'est pas le chiffre : c'est de savoir où sont parties ces trois heures dix. À votre avis ? … Deux heures en arrêts, quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : la disponibilité.
+    Sur ses quatorze heures, la presse a produit l'équivalent de dix heures cinquante de pièces bonnes. Les trois heures dix qui manquent ? Deux heures en arrêts, quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : les arrêts.
 
-## Line 10 — Fausse piste n° 1 (Frame 10)
+## Line 12 — Fausse piste n° 1 (Frame 12)
 
 **L'idée :** Pas de bon TRS universel.
 **À l'écran :** La courbe de la ligne, mois après mois, de 61 à 68 %.
 
-    Attention aux fausses pistes. Il n'existe pas de bon TRS universel, et les grilles qui circulent ne veulent rien dire. Comparez plutôt votre ligne à elle-même, mois après mois, avec les mêmes règles de calcul.
+    Attention aux fausses pistes. Il n'existe pas de bon TRS universel : comparez votre ligne à elle-même, mois après mois, avec les mêmes règles de calcul.
 
-## Line 11 — Fausse piste n° 2 (Frame 11)
+## Line 13 — Fausse piste n° 2 (Frame 13)
 
 **L'idée :** Changer le dénominateur ne change pas la machine.
-**À l'écran :** Avant / après : une heure rouge devient « planifiée » et sort du temps requis. 77 % devient 83 %.
+**À l'écran :** Une heure rouge devient « planifiée » et sort du temps requis ; 77 % devient 83 %.
 
-    Méfiez-vous aussi du tour de passe-passe. Rebaptisez une heure de panne en maintenance planifiée : le temps requis tombe à treize heures, et le TRS grimpe à quatre-vingt-trois pour cent. Pourtant, la machine n'a pas tourné une minute de plus.
+    Et méfiez-vous du tour de passe-passe. Rebaptisez une heure de panne en maintenance planifiée : le temps requis tombe à treize heures, et le TRS grimpe à quatre-vingt-trois pour cent. Sans une seule pièce de plus.
 
-## Line 12 — Les cousins (Frame 12)
+## Line 14 — Les cousins (Frame 14)
 
 **L'idée :** TRS, TRG, TRE : trois dénominateurs.
 **À l'écran :** Le même vert de 10 h 50 sur trois barres de 14 h, 16 h et 24 h : 77 %, 68 %, 45 %.
 
-    C'est d'ailleurs ce qui distingue le TRS de ses deux cousins. Divisez les mêmes dix heures cinquante par les seize heures d'ouverture : c'est le TRG, soixante-huit pour cent. Par les vingt-quatre heures de la journée : c'est le TRE, quarante-cinq pour cent.
+    C'est d'ailleurs ce qui le distingue de ses deux cousins. Rapportez les dix heures cinquante au temps d'ouverture, seize heures : c'est le TRG, soixante-huit pour cent. Au temps total, vingt-quatre heures : c'est le TRE, quarante-cinq pour cent.
 
-## Line 13 — Affaire classée (Frame 13)
+## Line 15 — À retenir (Frame 15)
 
 **L'idée :** TRS = temps utile ÷ temps requis.
-**À l'écran :** « Affaire classée. » et la règle : TRS = temps utile ÷ temps requis.
+**À l'écran :** La règle en grand, puis « il ne juge personne : il montre où chercher ».
 
-    Affaire classée. Le TRS, c'est le temps utile divisé par le temps requis. Il ne juge personne : il vous montre où chercher en premier.
+    À retenir : le TRS, c'est le temps utile divisé par le temps requis. Il ne juge personne : il vous montre où chercher en premier.
 
-## Line 14 — Se former (Frame 14)
+## Line 16 — Se former (Frame 16)
 
 **L'idée :** Se former avec Fichly.
 **À l'écran :** La formation Green Belt (éligible au CPF) et les decks de fiches.
 
-    Pour aller plus loin, notre formation Lean Green Belt est éligible au CPF. Et nos decks de fiches gardent les outils sous la main, sur le terrain. Tous les liens sont en description.
+    Pour aller plus loin, notre formation Lean Green Belt est éligible au CPF, et nos decks de fiches gardent les outils sous la main. Tous les liens sont en description.
