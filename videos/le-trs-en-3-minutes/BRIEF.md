@@ -37,7 +37,10 @@ Feuille blanche pour le motion (nouveau langage de mouvement), mais habillage da
 - Source : article Fichly « TRS (Taux de Rendement Synthétique) : Définition, exemples et calculs » (`taux-de-rendement-synthetique-definition`), lu via Shopify le 1er octobre 2026.
 - Cas de référence du site, à respecter : 2 équipes de 8 h = 16 h d'ouverture ; 2 h de maintenance préventive planifiée → 14 h requises ; 2 h d'arrêts subis → 12 h de fonctionnement ; cadence 60 pièces/h → 720 attendues, 680 produites ; 650 conformes. Disponibilité 85,7 %, performance 94,4 %, qualité 95,6 %, TRS 77 % = 10 h 50 utiles sur 14 h ; 3 h 10 perdues. Points perdus : disponibilité 14,3, performance 5,6, qualité 4,4.
 - À garder : cascade des temps (requis → fonctionnement → net → utile), les trois taux, la disponibilité est le premier chantier ici, aucun seuil universel (comparer une ligne à son propre historique), le piège de la requalification d'une panne en arrêt planifié (14 h → 13 h, TRS 77 % → 83 % sans rien changer), le TRS n'est pas une note des équipes.
-- À laisser de côté (au plus une phrase et un renvoi vers l'article) : TRG, TRE, OEE, méthodes de relevé, outils.
+- TRG et TRE : à aborder (demande du 1er octobre 2026 : « Je veux aussi que l'on aborde la notion de TRG et TRE »), cadre 10 bis : même temps utile, dénominateur temps d'ouverture (TRG, 68 %) puis temps total (TRE, 45 %, calculé sur 24 h). Équivalents anglais OEE, OOE, TEEP en simple mention.
+- À laisser de côté (au plus une phrase et un renvoi vers l'article) : méthodes de relevé, outils.
+- Moteur de rendu : Remotion (`videos/remotion/`), décision du 1er octobre 2026 (« Ok gardons remotion ») après le comparatif HyperFrames / Remotion / Higgsfield.
+- Référence de mouvement : les 16 tuiles animées Fichly (enregistrement d'écran du 1er octobre 2026) ; voir `STORYBOARD.md` § Video direction.
 - Veille YouTube (titres seulement, transcriptions inaccessibles dans l'environnement) : les vidéos existantes ouvrent par la définition et la formule A × P × Q, ou sont des démonstrations de logiciels (MES). Notre différence : l'enquête, la formule en dernier, la décomposition comme verdict.
 - Vertical (plus tard) : montage séparé de 60 s centré sur « Où sont passées les 3 h 10 ? », pas une redisposition des 3 minutes.
 - Durée : 180 s ≈ 450 mots de voix off ; c'est la durée maximale du parcours explainer.

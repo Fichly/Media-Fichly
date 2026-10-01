@@ -78,6 +78,13 @@ Les nombres sont écrits en toutes lettres dans le texte parlé pour fixer la pr
 
     Et méfiez-vous du tour de passe-passe. Requalifiez une heure de panne en maintenance planifiée : le temps requis tombe à treize heures, et le TRS grimpe à quatre-vingt-trois pour cent. La machine, elle, n'a pas tourné une minute de plus.
 
+## Line 10 bis — Les cousins : TRG et TRE (Frame 10 bis) — proposition, à valider
+
+**Time:** environ 15 s, après la ligne 10
+**Delivery:** Pédagogique et posé ; une petite pause avant chaque sigle.
+
+    Le dénominateur fait donc le chiffre. Gardez les mêmes dix heures cinquante, mais rapportez-les aux seize heures d'ouverture : c'est le TRG, soixante-huit pour cent. Aux vingt-quatre heures de la journée : le TRE, quarante-cinq pour cent. Même machine, trois questions différentes.
+
 ## Line 11 — Affaire classée (Frame 11)
 
 **Time:** 155 – 167 s

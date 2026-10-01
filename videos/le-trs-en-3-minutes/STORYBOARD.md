@@ -9,14 +9,23 @@ language: fr
 music: none
 ---
 
-# Le TRS en 3 minutes — storyboard (v2)
+# Le TRS en 3 minutes — storyboard (v3)
 
-## Changes from v1
+## Changes from v2
+
+- « Ok gardons remotion. J'aimerais que l'on travaille un peu plus les planches maintenant. Apporter une vraie touche pédagogique » (1er octobre 2026) : la planche v3 (`storyboard.html`, générée par `outils/planche.py`, image `storyboard-v3.png`) remplace le ruban des heures par un schéma unique, la **cascade des temps**, qui se construit du cadre 03 au 07. Chaque témoin a la même fiche (ce qu'il a vu, le calcul en mots puis en chiffres, la perte en temps, une astuce). Plan de l'enquête au cadre 02, fil d'enquête en haut à droite des cadres 03 à 11, déclic au 07 (les fractions se simplifient en temps utile ÷ temps requis), verdict en heures avec une question au 08, idée reçue contre bonne pratique au 09, avant / après au 10, « À retenir » en 3 points au 11. Cadres 01 et 12 inchangés. Moteur de rendu : Remotion (`videos/remotion/`).
+- Référence de mouvement envoyée le 1er octobre 2026 (« je veux des animations comme ça… quali comme ça ») : les 16 tuiles animées Fichly (Andon, SMED, 5 pourquoi, TRS en temps réel…). Le langage de mouvement en découle (voir `## Video direction`).
+
+## Changes from v1 (rappel de la v2)
 
 - « Je veux que l'on pousse à la fin des animations notre formation au lean Green Belt éligible au CPF et nos decks de fiches pour se former » (1er octobre 2026) : le cadre 12 renvoie vers la formation Green Belt (page « Formation Lean Management Green Belt CPF ») et les decks de fiches (« 40 outils du Lean à portée de main », guides en 20 fiches) ; l'article passe dans la description YouTube.
 - « je veux la DA fichly » (1er octobre 2026) : la charte bold-poster est remplacée par la direction artistique Fichly (`frame.md` réécrit depuis le gabarit des fiches). Récit, script et découpage inchangés.
 
 ## Still open
+
+- **Ligne 8 du script (recommandée)** : parler en heures plutôt qu'en points, pour coller à l'écran du cadre 08. Proposition : « Mais le verdict, ce n'est pas le chiffre. Reprenons nos trois heures dix. À votre avis, où est passée la plus grosse part ? … Deux heures en arrêts. Quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : la disponibilité. » En attente de validation ; `SCRIPT.md` garde la version actuelle.
+- **Cadre 10 bis, TRG et TRE (nouveau)** : nouvelle ligne de voix d'environ 15 s, la vidéo passe à environ 3 min 15. À valider, ou à compenser en resserrant d'autres lignes.
+- **Lignes 5 et 6 (au choix)** : dire l'astuce à voix haute (« soit quarante minutes », « encore trente minutes »).
 
 - Lancement de la voix off (une prise ≈ 2 800 crédits ElevenLabs avec la nouvelle fin) : en attente de l'accord.
 - Visuels HD des decks : `cdn.shopify.com` est bloqué dans l'environnement ; la planche utilise l'encart `guides-fichly.png` (basse définition) en attendant des packshots.
@@ -26,8 +35,10 @@ music: none
 - **Message** : le TRS retrouve le temps perdu entre ce que la machine devait produire et les pièces bonnes qu'elle a livrées, et c'est sa décomposition, pas le chiffre, qui dit où agir.
 - **Public et arc** : responsables de production, méthodes, maintenance et apprenants Lean. Arc d'enquête (story-explainer) avec, au milieu, une suite ordonnée de trois témoins sur le même décor (process).
 - **Format** : 1920×1080, environ 180 s, voix off oui (Emilie - Podcast Host, ElevenLabs), musique non en version 1, sous-titres en fichier `.srt` (rien d'incrusté, donc pas de bande réservée en bas d'image).
-- **Fil conducteur** : le **ruban des 16 heures** (16 cases d'une heure, le motif de l'article) épinglé au tableau d'enquête. Il apparaît au cadre 03, se fait annoter par chaque témoin (04 à 06), se recompose en verdict (07) et revient piégé au cadre 10. Un **fil rouge** relie la pièce à conviction au mystère (01) ; les contours bleus et pastilles ✓ / ✗ de la DA désignent ensuite les indices.
+- **Fil conducteur (v3)** : la **cascade des temps** de l'article (ouverture 16 h → requis 14 h → fonctionnement 12 h → net 11 h 20 → utile 10 h 50), sur une carte à gauche. Elle apparaît au cadre 03 avec trois lignes en pointillés qui attendent les témoins, gagne une marche par témoin (04 à 06), se lit en entier au 07 (accolade des 3 h 10), lâche ses pertes au 08 et revient simplifiée en avant / après au 10. Échelle : 1 h = 3 cqw. Les heures sont des blocs d'une heure qui se déplacent d'une ligne à l'autre.
+- **Fil d'enquête** : les quatre étapes annoncées au cadre 02 (Le temps · Les 3 témoins · Le verdict · Fausses pistes) restent en haut à droite des cadres 03 à 11 : faite ✓, en cours en bleu plein, à venir en blanc. Un **fil rouge** relie la pièce à conviction au mystère (01) ; les contours bleus et pastilles ✓ / ✗ de la DA désignent ensuite les indices.
 - **Charte** (`frame.md`, DA Fichly reprise du gabarit des fiches) : fond papier `#f3f3f3` + `paper.png`, bleu de marque `#4a4aa0`, encre `#23235a`, cartes blanches `#fdfdfb` arrondies à filet `#e2e2ee`, bandes pastel avec pastilles ✓ vertes / ✗ rouges, pastilles numérotées bleues, pictos machine et cartons, ruban six couleurs en bas et logo fichly. Poppins seule (titres 800, bandes et pilules 700, texte 500). Titre en deux temps : ligne bleue, puis ligne blanche dans le bandeau bleu. Codage des pertes : disponibilité rouge `#f16969`, performance jaune `#e6b839`, qualité violet `#aa76b2`, temps utile vert `#8cc978`.
+- **Procédés pédagogiques (v3)** : un seul schéma qui se construit ; plan annoncé puis rappelé ; une couleur par famille ; chaque formule en mots, puis en chiffres ; une seule unité, l'heure (astuce 1 pièce = 1 minute) ; question avant la réponse (08) ; idée reçue contre bonne pratique (09) ; avant / après (10) ; à retenir en 3 points (11).
 - **Interdits** : pas de diaporama (chaque cadre fait évoluer le même tableau, on n'empile pas des cartes neuves) ; pas d'économiseur d'écran (chaque mouvement montre une perte ou un chiffre nommé par la voix) ; pas de formule A × P × Q avant la reconstitution (cadre 07) ; pas d'usine en photo de banque d'images ; pas de couleur hors palette Fichly, pas d'ombre ni de dégradé ; pas de chiffres inventés (tous viennent du cas de référence de l'article).
 - **Cadre tenu** : au cadre 07, « 77 % » se pose et reste immobile pendant que la voix prononce « dix heures cinquante ».
 - **Vérité** : tous les chiffres sont ceux du cas de référence de l'article Fichly (16 h d'ouverture, 2 h planifiées, 14 h requises, 2 h d'arrêts subis, 60 pièces/h, 720 attendues, 680 produites, 650 conformes, TRS 77 %, 10 h 50 utiles ; requalification : 13 h requises, 83 %). La machine est une illustration, pas un site réel.
@@ -50,7 +61,7 @@ keyMessage: Une machine qui tourne n'est pas une machine qui produit ; il manque
 
 ## Frame 2 — L'outil d'enquête
 
-- scene: Titre « Le TRS, / l'outil d'enquête. », chapeau « Taux de rendement synthétique » ; trois bandes : ✗ « Une note des équipes », ✓ « Le relevé de ce qui s'est perdu », « Et surtout : il dit où chercher. » ; à droite, schéma « devait produire → pertes → pièces bonnes ».
+- scene: Titre « Le TRS, / l'outil d'enquête. », chapeau « Taux de rendement synthétique » ; trois bandes : ✗ « Une note des équipes », ✓ « Le relevé de ce qui s'est perdu », « Et surtout : il dit où chercher. » ; à droite, deux barres (« Ce que la machine devait produire », « Les pièces bonnes ») et l'écart hachuré ✗ « Tout ce qui s'est perdu » ; en bas, le plan de l'enquête en quatre étapes.
 - voiceover: "Pour mener l'enquête, les ateliers ont un outil : le TRS, le taux de rendement synthétique. Ce n'est pas une note. C'est le relevé de tout ce qui s'est perdu entre ce que la machine devait produire et les pièces bonnes. Et il dit où chercher."
 - duration: 17s
 - transition_in: crossfade
@@ -66,7 +77,7 @@ keyMessage: Le TRS n'est pas une note des équipes, c'est le relevé de ce qui s
 
 ## Frame 3 — Première pièce du dossier : le temps
 
-- scene: Titre « 16 h d'ouverture, / 14 h requises. » ; sur une carte blanche, le ruban de 16 cases bleues ; les cases de 6 h et 14 h (maintenance prévue) pâlissent et tombent ; chapeau « Temps requis = ouverture − arrêts planifiés ».
+- scene: Carte de gauche : la cascade des temps, barre « Temps d'ouverture · 16 h », puis « Temps requis · 14 h » et la tranche en pointillés « 2 h prévues » ; trois lignes en pointillés « Témoin n° 1, 2, 3 · ? ». Fiche de droite (bandeau bleu « Le temps requis ») : 16 h − 2 h = 14 h avec les mots sous les nombres, « Maintenance prévue : on la retire », « Le dénominateur du TRS », encadré « À suivre ».
 - voiceover: "Première pièce du dossier : le temps. Seize heures d'ouverture. On retire les deux heures de maintenance prévues : il en reste quatorze. C'est le temps requis, celui où la machine devait produire. Tout part de là."
 - duration: 17s
 - transition_in: push-slide LEFT
@@ -82,7 +93,7 @@ keyMessage: On mesure par rapport au temps requis : l'ouverture moins les arrêt
 
 ## Frame 4 — Témoin n° 1 : la disponibilité
 
-- scene: Le ruban de 14 cases : deux virent au rouge « Arrêt » ; pilules ✓ « 12 h de fonctionnement » et ✗ « 2 h d'arrêts subis » ; bande rouge pâle du témoin n° 1 « Disponibilité » avec ✗ Pannes, Manques matière, Réglages imprévus ; « 85,7 % » en rouge foncé.
+- scene: La cascade gagne la ligne « Temps de fonctionnement · 12 h » et la tranche rouge « −2 h arrêts » (ligne surlignée en rouge pâle). Fiche « 1 Disponibilité » : ✗ Pannes, Manques matière, Réglages imprévus ; fraction en mots (temps de fonctionnement ÷ temps requis) puis en chiffres (12 h ÷ 14 h) ; « = 85,7 % » en rouge foncé ; « Perte : 2 h » ; encadré « En clair ».
 - voiceover: "Premier témoin : la disponibilité. Pannes, manques matière, réglages imprévus : deux heures d'arrêts subis. La machine a tourné douze heures sur quatorze. Disponibilité : 85,7 %."
 - duration: 14s
 - transition_in: push-slide LEFT
@@ -97,7 +108,7 @@ keyMessage: La disponibilité compare le temps où la machine a tourné au temps
 
 ## Frame 5 — Témoin n° 2 : la performance
 
-- scene: Le ruban de 12 cases, celle de 11 h entourée de jaune ; la loupe bleue montre les micro-arrêts en encoches jaunes ; carte « 720 attendues / 680 produites », pilule « 40 pièces manquent » ; bande jaune pâle du témoin n° 2 « Performance » ; « 94,4 % » en jaune foncé.
+- scene: La cascade gagne « Temps net · 11 h 20 » et la tranche jaune « −40 min · lenteurs » ; des encoches jaunes (micro-arrêts) apparaissent dans la barre de 12 h. Fiche « 2 Performance » : ✗ Micro-arrêts, Cadence lente ; pièces produites ÷ pièces attendues = 680 ÷ 720 ; « = 94,4 % » ; « Perte : 40 min » ; astuce « 1 pièce = 1 minute ».
 - voiceover: "Deuxième témoin, plus discret : la performance. À soixante pièces par heure, douze heures devaient en donner sept cent vingt. La machine en a fait six cent quatre-vingts. Les quarante qui manquent ? Des micro-arrêts de quelques secondes et une cadence un peu lente. Personne ne les déclare. Performance : 94,4 %."
 - duration: 19s
 - transition_in: push-slide LEFT
@@ -113,7 +124,7 @@ keyMessage: La performance compare les pièces produites aux pièces possibles p
 
 ## Frame 6 — Témoin n° 3 : la qualité
 
-- scene: 68 cases bleues (1 case = 10 pièces) ; trois virent au violet et le tampon violet « Non conforme » s'abat ; « 650 » et pilule ✓ « pièces bonnes, sur 680 » ; bande lavande du témoin n° 3 « Qualité » ; « 95,6 % » en violet.
+- scene: La cascade gagne « Temps utile · 10 h 50 » en vert et la tranche violette « −30 min · rebuts ». Fiche « 3 Qualité » : ✗ Rebuts, Retouches ; pièces bonnes ÷ pièces produites = 650 ÷ 680 ; « = 95,6 % » en violet ; « Perte : 30 min » ; astuce « 30 pièces = 30 min ».
 - voiceover: "Troisième témoin : la qualité. Sur six cent quatre-vingts pièces, trente sont rebutées ou retouchées. Une retouche, c'est du temps consommé deux fois. Il reste six cent cinquante pièces bonnes. Qualité : 95,6 %."
 - duration: 16s
 - transition_in: push-slide LEFT
@@ -128,7 +139,7 @@ keyMessage: La qualité compare les pièces bonnes du premier coup aux pièces p
 
 ## Frame 7 — Reconstitution : 77 %
 
-- scene: Les trois taux en pilules de leur couleur, reliés par « × » ; « TRS = » puis le grand bandeau bleu « 77 % » ; dessous, la barre des 14 h recomposée (10 h 50 utiles en vert, 2 h d'arrêts, 40 min de cadence, 30 min de rebuts) et la pilule ✓ « Les 3 h 10 sont retrouvées ».
+- scene: Cascade complète : lignes 2 et 5 surlignées, guide en pointillés et accolade rouge « 3 h 10 perdues ». Fiche « On multiplie » : 85,7 % × 94,4 % × 95,6 %, puis les mêmes en temps (12 h/14 h × 11 h 20/12 h × 10 h 50/11 h 20), les termes qui se simplifient barrés ; « = 10 h 50 / 14 h » (temps utile ÷ temps requis) ; bandeau « TRS = 77 % » ; pilule ✓ « Les 3 h 10 sont retrouvées ».
 - voiceover: "Reconstitution. On multiplie les trois témoignages : disponibilité, fois performance, fois qualité. Soixante-dix-sept pour cent. Sur quatorze heures requises, la machine a produit l'équivalent de dix heures cinquante de pièces bonnes. Les trois heures dix sont retrouvées."
 - duration: 17s
 - transition_in: cut
@@ -144,7 +155,7 @@ keyMessage: TRS = disponibilité × performance × qualité = 77 % : 10 h 50 uti
 
 ## Frame 8 — Le vrai verdict : la décomposition
 
-- scene: Titre « Où partent / les points ? » ; trois cartes pastel numérotées : Disponibilité −14,3, Performance −5,6, Qualité −4,4 points ; un contour bleu se dessine autour de la première et la pilule « Premier chantier » s'y accroche.
+- scene: Titre « Où sont passées / les 3 h 10 ? » et pilule « À votre avis ? » ; carte : trois barres en heures (1 Disponibilité 2 h, 2 Performance 40 min, 3 Qualité 30 min), la première cerclée de bleu avec la pilule « Premier chantier » et les causes du témoin n° 1 ; en bas, « 2 h + 40 min + 30 min = 3 h 10 : les heures s'additionnent, les pourcentages non ».
 - voiceover: "Mais le verdict, ce n'est pas le chiffre. Regardez où partent les points : quatorze virgule trois en disponibilité, cinq virgule six en performance, quatre virgule quatre en qualité. Le premier chantier est tout trouvé : la disponibilité."
 - duration: 16s
 - transition_in: cut
@@ -160,7 +171,7 @@ keyMessage: Regardez la répartition des pertes plutôt que le 77 % : ici, le pr
 
 ## Frame 9 — Fausse piste n° 1 : le « bon TRS »
 
-- scene: Titre « Le « bon TRS » / n'existe pas. » ; bande rouge pâle « Les grilles qui circulent » avec trois lignes ✗ (< 50 % mauvais, 60 à 70 % correct, > 85 % excellent) ; carte « Votre ligne, mois après mois », courbe de 61 à 68 et pilule ✓ « À règles de calcul constantes ».
+- scene: Titre « Le « bon TRS » / n'existe pas. » ; bande rouge pâle ✗ « Idée reçue : un seuil universel » (< 50 % mauvais, 60 à 70 % correct, > 85 % excellent) et « Pourquoi ? Chaque site a ses règles de calcul : le même atelier peut afficher 68 % ou 85 % » ; carte ✓ « La bonne comparaison » : « Votre ligne, contre elle-même », courbe de 61 à 68 % en six mois, pilule ✓ « À règles de calcul constantes ».
 - voiceover: "Attention aux fausses pistes. Il n'existe pas de « bon TRS » universel : les grilles qui circulent ne veulent rien dire. Comparez une ligne à son propre historique, avec des règles de calcul qui ne bougent pas."
 - duration: 13s
 - transition_in: cut
@@ -176,7 +187,7 @@ keyMessage: Un TRS ne se compare pas à une grille : il se compare à son propre
 
 ## Frame 10 — Fausse piste n° 2 : le tour de passe-passe
 
-- scene: Titre « Le tour de / passe-passe. » ; retour du ruban de 14 cases : la case rouge de 17 h pâlit, devient « Maint. » et tombe hors du temps requis ; « 77 % » barré → bandeau « 83 % » ; pilule ✗ « Même machine, même arrêt ».
+- scene: Titre « Le tour de / passe-passe. » ; carte avant / après : « Avant », temps requis 14 h dont 1 h de panne en rouge, temps utile 10 h 50, 10 h 50 ÷ 14 h = 77 % ; « Après : la panne est requalifiée », temps requis 13 h et l'heure en pointillés « planifiée », temps utile ✓ inchangé, 10 h 50 ÷ 13 h = bandeau « 83 % » ; pilule ✗ « Même machine : 4 h d'arrêt, 650 pièces bonnes. Seul le dénominateur a bougé. »
 - voiceover: "Et méfiez-vous du tour de passe-passe. Requalifiez une heure de panne en maintenance planifiée : le temps requis tombe à treize heures, et le TRS grimpe à quatre-vingt-trois pour cent. La machine, elle, n'a pas tourné une minute de plus."
 - duration: 14s
 - transition_in: crossfade
@@ -189,9 +200,24 @@ keyMessage: Un TRS ne se compare pas à une grille : il se compare à son propre
 narrativeRole: Montre le piège qui décide de tout : la frontière entre arrêt planifié et arrêt subi est une convention, qu'on peut tordre.
 keyMessage: Requalifier une panne en arrêt planifié fait monter le TRS sans rien améliorer : écrivez la règle et ne la changez pas.
 
+## Frame 10 bis — Les cousins du TRS : TRG et TRE
+
+- scene: Titre « Même temps utile, / trois dénominateurs. » et pilule « TRE ≤ TRG ≤ TRS » ; carte en trois lignes (1 h = 2 cqw), le même vert « 10 h 50 » au départ de chaque barre : TRS (Synthétique · OEE) sur le temps requis, ÷ 14 h, bandeau « 77 % » ; TRG (Global · OOE) avec en plus les 2 h d'arrêts planifiés en pointillés, ÷ 16 h, 68 % ; TRE (Économique · TEEP) avec en plus 8 h « atelier fermé », ÷ 24 h, 45 % ; légende en bas.
+- voiceover: "Le dénominateur fait donc le chiffre. Gardez les mêmes dix heures cinquante, mais rapportez-les aux seize heures d'ouverture : c'est le TRG, soixante-huit pour cent. Aux vingt-quatre heures de la journée : le TRE, quarante-cinq pour cent. Même machine, trois questions différentes."
+- duration: 15s
+- transition_in: cut
+- status: built
+- src: compositions/frames/10b-cousins.html
+- type: comparison
+- persuasion: Same numerator, three denominators + Callback (le dénominateur du cadre 03 et le piège du cadre 10)
+- beat: Clarity
+
+narrativeRole: Demande du 1er octobre 2026 (« Je veux aussi que l'on aborde la notion de TRG et TRE ») : situe le TRS parmi ses deux cousins, juste après le piège du dénominateur.
+keyMessage: TRS, TRG et TRE ont le même numérateur, le temps utile ; seul le dénominateur change (temps requis, temps d'ouverture, temps total), donc TRE ≤ TRG ≤ TRS. Vérité : 68 % (TRG) vient de l'article ; 45 % (TRE) est calculé avec ses chiffres (10 h 50 sur 24 h).
+
 ## Frame 11 — Affaire classée
 
-- scene: Titre grand format « Affaire / classée. » ; la machine du cadre 01 reçoit une pastille ✓ ; bande lavande avec la pilule « La règle à garder en tête » : « TRS = temps utile ÷ temps requis. » et « Il ne juge pas les équipes : il dit où chercher. »
+- scene: Titre grand format « Affaire / classée. » ; la machine du cadre 01 reçoit une pastille ✓ ; le fil d'enquête est coché en entier ; carte « À retenir » en trois points : TRS = temps utile ÷ temps requis ; = Disponibilité × Performance × Qualité ; il ne juge pas les équipes, il dit où chercher.
 - voiceover: "Affaire classée. Le TRS, c'est le temps utile divisé par le temps requis. Il ne juge pas les équipes : il retrouve le temps perdu, et vous dit où chercher en premier."
 - duration: 12s
 - transition_in: cut
@@ -220,3 +246,16 @@ keyMessage: Le TRS = temps utile ÷ temps requis ; il ne juge pas les équipes, 
 
 narrativeRole: Transforme la compréhension en passage à l'action : se former au Lean (Green Belt, éligible au CPF) et garder les outils sur le terrain (decks de fiches).
 keyMessage: Pour aller plus loin : la formation Lean Green Belt éligible au CPF et les decks de fiches Fichly, liens en description.
+
+## Video direction
+
+Référence de mouvement : les 16 tuiles animées Fichly envoyées le 1er octobre 2026 (Andon, SMED, 5 pourquoi, TRS en temps réel…). Même DA (`frame.md`), même grammaire de mouvement, réalisée en Remotion.
+
+- **En direct** : les compteurs défilent jusqu'à leur valeur sur le mot de la voix ; une jauge ou une barre se remplit avec une couleur qui suit la valeur (rouge quand c'est bas, puis jaune, puis vert) ; une pastille « En direct » respire.
+- **Des blocs d'une heure** : dans la cascade, les heures sont des blocs. Ils se soulèvent, changent de couleur et glissent d'une ligne à l'autre (comme les blocs SMED), le total se décompte en même temps (14 h → 12 h).
+- **Texte à la machine** : causes et définitions s'écrivent caractère par caractère, ligne après ligne (comme les 5 pourquoi) ; la pastille de la ligne en cours est pleine, celles déjà dites passent au contour.
+- **Cases en pointillés** : les lignes à venir de la cascade attendent en pointillés ; une pilule numérotée dit l'étape en cours.
+- **Ressorts courts** : les pastilles et les pilules arrivent avec un léger dépassement (ressort amorti) ; les cartes glissent de quelques pixels en fondu ; rien ne tourne en rond sans raison.
+- **Une seule chose bouge à la fois**, sur le mot qui la nomme ; entre deux mots, de petits mouvements de vie (curseur, pastille « En direct ») évitent l'image figée.
+- **Jauge au cadre 07** : la tuile « TRS en temps réel » sert de modèle : les trois taux se remplissent un à un, puis l'arc monte jusqu'à 77 %.
+

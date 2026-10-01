@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le TRS en 3 minutes — storyboard v2</title>
+<title>Le TRS en 3 minutes — storyboard v3</title>
 <link rel="stylesheet" href="public/fonts.css">
 <style>
+
   :root {
     --canvas: #f3f3f3; --blue: #4a4aa0; --ink: #23235a; --white: #ffffff; --card: #fdfdfb; --line: #e2e2ee;
     --green: #8cc978; --yellow: #e6b839; --red: #f16969; --violet: #aa76b2; --lightBlue: #74a3d6; --teal: #75bec0;
@@ -82,26 +83,77 @@
   .info ul { list-style: none; }
   .info li { padding-left: 18px; position: relative; margin: 4px 0; }
   .info li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+
+  /* ── v3 : fil d'enquête ── */
+  .track { right: 2.4cqw; top: 3.2cqw; display: flex; gap: .45cqw; }
+  .track > span { display: inline-flex; align-items: center; gap: .45cqw; border-radius: 999px; padding: .3cqw .85cqw .3cqw .3cqw; font-weight: 700; font-size: 1.05cqw; line-height: 1; white-space: nowrap; background: var(--white); color: var(--blue); border: .1cqw solid var(--line); }
+  .track > span > i { display: inline-grid; place-items: center; width: 1.55cqw; height: 1.55cqw; border-radius: 50%; font-style: normal; font-size: .85cqw; background: var(--pLav); color: var(--blue); }
+  .track > span.done { background: var(--pGreen); color: var(--tGreen); border-color: var(--pGreen); }
+  .track > span.done > i { background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M16 27 L23 34 L37 19' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+  .track > span.now { background: var(--blue); color: var(--white); border-color: var(--blue); }
+  .track > span.now > i { background: var(--white); color: var(--blue); }
+  .track > span.todo { color: #6b6b9a; }
+  .dots { display: inline-flex; gap: .25cqw; margin-left: .2cqw; }
+  .dots b { width: .55cqw; height: .55cqw; border-radius: 50%; background: currentColor; opacity: .35; }
+  .dots b.on { opacity: 1; }
+
+  /* ── v3 : la cascade des temps ── */
+  .bar, .seg, .ghost, .hl, .loss { position: absolute; }
+  .bar { height: 4.4cqw; border-radius: .6cqw; display: flex; align-items: center; padding-left: 1.1cqw; font-weight: 700; font-size: 1.3cqw; white-space: nowrap; background: var(--blue); color: var(--white); overflow: hidden; }
+  .bar.open { background: var(--card); color: var(--blue); border: .14cqw solid var(--blue); }
+  .bar.utile { background: var(--green); color: var(--tGreen); }
+  .bar i { position: absolute; top: 0; bottom: 0; background: var(--yellow); }
+  .seg { height: 4.4cqw; border-radius: .6cqw; display: grid; place-items: center; font-weight: 700; font-size: 1.15cqw; white-space: nowrap; }
+  .seg.plan { background: var(--pLav); color: var(--blue); outline: .14cqw dashed var(--blue); outline-offset: -.14cqw; }
+  .seg.dispo { background: var(--red); color: var(--ink); }
+  .seg.perf { background: var(--yellow); }
+  .seg.qual { background: var(--violet); }
+  .loss { height: 4.4cqw; display: flex; align-items: center; font-weight: 700; font-size: 1.1cqw; white-space: nowrap; }
+  .ghost { height: 4.4cqw; border-radius: .6cqw; border: .14cqw dashed rgba(74, 74, 160, .35); color: rgba(74, 74, 160, .6); display: flex; align-items: center; padding-left: 1.1cqw; font-weight: 600; font-size: 1.2cqw; }
+  .hl { border-radius: .9cqw; }
+
+  /* ── v3 : fiches, fractions, astuces ── */
+  .hd { position: absolute; left: 0; right: 0; top: 0; height: 6cqw; display: flex; align-items: center; gap: 1cqw; padding: 0 2cqw; border-radius: 1.15cqw 1.15cqw 0 0; }
+  .sec { position: absolute; left: 2cqw; font-weight: 600; font-size: 1.05cqw; color: var(--blue); white-space: nowrap; }
+  .frac { display: inline-grid; text-align: center; line-height: 1.15; vertical-align: middle; }
+  .frac > span { display: block; white-space: nowrap; padding: 0 .25em; }
+  .frac > span:first-child { border-bottom: .1em solid currentColor; padding-bottom: .1em; }
+  .frac > span:last-child { padding-top: .1em; }
+  .strike { position: relative; display: inline-block; }
+  .strike::after { content: ""; position: absolute; left: -10%; right: -10%; top: 50%; height: .16em; border-radius: 1em; background: var(--red); transform: rotate(-18deg); }
+  .eq { font-weight: 800; color: var(--blue); }
+  .tip { position: absolute; left: 2cqw; right: 2cqw; border: .14cqw dashed var(--blue); border-radius: .9cqw; background: var(--white); padding: .8cqw 1cqw; display: flex; gap: .8cqw; align-items: flex-start; font-weight: 500; font-size: 1.15cqw; line-height: 1.4; }
+  .tip .pill { font-size: 1.05cqw; padding: .35cqw .8cqw; background: var(--blue); color: var(--white); }
+  .term { display: inline-flex; flex-direction: column; align-items: center; gap: .2cqw; }
+  .term b { font-weight: 800; color: var(--ink); line-height: 1; }
+  .term small { font-weight: 600; font-size: 1cqw; color: var(--blue); }
+  .road { display: flex; align-items: center; gap: .6cqw; }
+  .road .pill { font-size: 1.15cqw; padding: .35cqw .9cqw .35cqw .35cqw; background: var(--white); color: var(--blue); border: .1cqw solid var(--line); }
+  .road .pill .b { width: 1.7cqw; height: 1.7cqw; font-size: .95cqw; }
+  .chip.ped { background: var(--pLav); border-color: var(--pLav); }
+  .chip.same { color: #6b6b85; border-color: #c9c9d9; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .note + .note { margin-top: -4px; }
+  .vo { background: var(--pLav); border-radius: 10px; padding: 10px 12px; margin: 6px 0 10px; font-size: 13px; line-height: 1.6; }
+  .vo s { color: #6b6b85; }
+
 </style>
 </head>
 <body>
 <div class="sheet">
 <header>
   <div>
-    <h1>Le TRS en 3 minutes<br><span>storyboard v2, DA Fichly</span></h1>
-    <p>Une enquête en 12 cadres, dans la charte des fiches Fichly : titre bleu puis bandeau, cartes blanches sur papier, bandes pastel ✓ / ✗, pictos du gabarit, ruban six couleurs. Images fixes du moment clé de chaque cadre, sans mouvement.</p>
+    <h1>Le TRS en 3 minutes<br><span>storyboard v3, la pédagogie</span></h1>
+    <p>Une enquête en 12 cadres, dans la DA Fichly. Nouveauté : un seul schéma, la cascade des temps, se construit sous les yeux du spectateur du cadre 03 au 07. Images fixes du moment clé de chaque cadre, sans mouvement.</p>
   </div>
-  <div class="tag">1920×1080 · environ 3 min · 12 cadres · voix Emilie</div>
+  <div class="tag">1920×1080 · environ 3 min · 12 cadres · voix Emilie · Remotion</div>
 </header>
-<div class="changes"><b>Changements depuis la v1 :</b> « je veux la DA fichly » : la charte bold-poster est remplacée par la direction artistique Fichly (Poppins, palette du gabarit, cartes arrondies, bandes ✓ / ✗, machine et cartons, ruban, logo). Le récit et le découpage ne changent pas.<br><b>Puis :</b> « Je veux que l'on pousse à la fin des animations notre formation au lean Green Belt éligible au CPF et nos decks de fiches pour se former » : le cadre 12 renvoie vers la formation Green Belt et les decks de fiches ; l'article passe dans la description YouTube.</div>
-
+<div class="changes"><b>Changements depuis la v2 :</b> « Ok gardons remotion. J'aimerais que l'on travaille un peu plus les planches maintenant. Apporter une vraie touche pédagogique » : la cascade des temps devient le fil conducteur ; chaque témoin a la même fiche (ce qu'il a vu, le calcul en mots puis en chiffres, la perte) ; plan de l'enquête au 02 et fil d'enquête en haut à droite ; déclic au 07 ; verdict en heures et question au 08 ; à retenir au 11. Les cadres 01 et 12 ne changent pas.<br><b>Avant :</b> DA Fichly (v2), fin de vidéo sur la formation Green Belt et les decks de fiches.</div>
 <div class="act">Acte I · Le mystère</div>
 <div class="grid">
-
-  <!-- 01 -->
   <div class="cell">
     <div class="f" id="frame-01">
-      <div class="eyebrow">Dossier n° 01 · Presse, ligne 2</div>
+            <div class="eyebrow">Dossier n° 01 · Presse, ligne 2</div>
       <div class="t1" style="left:3.2cqw; top:8.6cqw;">Il manque plus de</div>
       <div class="band" style="left:2.4cqw; top:14cqw;">3 heures.</div>
       <div style="left:3.2cqw; top:23.6cqw; font-weight:700; font-size:2.6cqw; color:var(--blue);">Où sont-elles passées ?</div>
@@ -114,286 +166,154 @@
       </div>
       <div style="left:75cqw; top:6.4cqw; width:1.8cqw; height:1.8cqw; border-radius:50%; background:var(--red);"></div>
       <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080"><path d="M1458 140 C 1300 120, 1040 250, 870 320" fill="none" stroke="#f16969" stroke-width="4" stroke-linecap="round"/></svg>
+      
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>01 · L'affaire</span><span class="r">frame-01 · 0–12 s</span></div>
     <p class="note"><b>Ce qui bouge d'abord :</b> gros plan sur la machine du polaroïd, puis un seul recul découvre le tableau et la punaise rouge. « Il manque plus de » s'écrit, le bandeau « 3 heures. » s'ouvre de gauche à droite, puis le fil rouge relie la photo au bandeau. Fondu vers 02.</p>
-    <span class="chip">entrée : cut</span>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip same">inchangé</span></div>
   </div>
 
-  <!-- 02 -->
   <div class="cell">
     <div class="f" id="frame-02">
-      <div class="eyebrow">L'outil d'enquête</div>
-      <div class="t1" style="left:3.2cqw; top:8.6cqw;">Le TRS,</div>
-      <div class="band" style="left:2.4cqw; top:14cqw;">l'outil d'enquête.</div>
-      <div class="chapeau" style="left:3.2cqw; top:22.6cqw;">Taux de rendement synthétique</div>
-      <div class="bandp row" style="left:3.2cqw; top:28cqw; width:52cqw; height:6.4cqw; padding:0 1.6cqw; background:var(--pRed);"><span class="b ko"></span><span style="font-weight:700; font-size:1.9cqw; color:var(--tRed);">Une note des équipes</span></div>
-      <div class="bandp row" style="left:3.2cqw; top:35.6cqw; width:52cqw; height:6.4cqw; padding:0 1.6cqw; background:var(--pGreen);"><span class="b ok"></span><span style="font-weight:700; font-size:1.9cqw; color:var(--tGreen);">Le relevé de ce qui s'est perdu</span></div>
-      <div class="bandp row" style="left:3.2cqw; top:43.2cqw; width:52cqw; height:6.4cqw; padding:0 1.6cqw; background:var(--pLav);"><span class="pill" style="background:var(--blue); color:var(--white);">Et surtout</span><span style="font-weight:700; font-size:1.9cqw; color:var(--ink);">il dit où chercher.</span></div>
-      <div class="card" style="left:60cqw; top:22.6cqw; width:33cqw; height:27cqw;">
-        <div class="pill" style="position:absolute; left:2cqw; top:2.2cqw; background:var(--pLav); color:var(--blue); font-size:1.5cqw;">Ce que la machine devait produire</div>
-        <div style="position:absolute; left:4.6cqw; top:6.4cqw; width:.3cqw; height:11.4cqw; background:var(--red); border-radius:1cqw;"></div>
-        <div class="pill" style="position:absolute; left:6.2cqw; top:10.8cqw; background:var(--pRed); color:var(--tRed); font-size:1.5cqw;"><span class="b ko sm"></span>Tout ce qui s'est perdu</div>
-        <div class="pill" style="position:absolute; left:2cqw; top:19.8cqw; background:var(--pGreen); color:var(--tGreen); font-size:1.5cqw;"><span class="b ok sm"></span>Les pièces bonnes</div>
-      </div>
+      <div class="eyebrow">L'outil d'enquête</div><div class="t1" style="left:3.2cqw; top:8.6cqw;">Le TRS,</div><div class="band" style="left:2.4cqw; top:14cqw;">l'outil d'enquête.</div><div class="chapeau" style="left:3.2cqw; top:22.2cqw;">Taux de rendement synthétique</div><div class="bandp row" style="left:3.2cqw; top:27cqw; width:52cqw; height:5.6cqw; padding:0 1.6cqw; background:var(--pRed);"><span class="b ko"></span><span style="font-weight:700; font-size:1.8cqw; color:var(--tRed);">Une note des équipes</span></div><div class="bandp row" style="left:3.2cqw; top:33.4cqw; width:52cqw; height:5.6cqw; padding:0 1.6cqw; background:var(--pGreen);"><span class="b ok"></span><span style="font-weight:700; font-size:1.8cqw; color:var(--tGreen);">Le relevé de ce qui s'est perdu</span></div><div class="bandp row" style="left:3.2cqw; top:39.8cqw; width:52cqw; height:5.6cqw; padding:0 1.6cqw; background:var(--pLav);"><span class="pill" style="background:var(--blue); color:var(--white); ">Et surtout</span><span style="font-weight:700; font-size:1.8cqw; color:var(--ink);">il dit où chercher.</span></div><div class="card" style="left:60cqw; top:21cqw; width:33cqw; height:22.6cqw;"><div class="bar" style="left:2.4cqw; top:2.4cqw; width:28.2cqw; height:3.8cqw; font-size:1.15cqw;">Ce que la machine devait produire</div><div style="position:absolute; right:2.4cqw; top:7.4cqw;"><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.2cqw;"><span class="b ko sm"></span>Tout ce qui s'est perdu</span></div><div class="bar utile" style="left:2.4cqw; top:11.4cqw; width:18.6cqw; height:3.8cqw; font-size:1.15cqw;">Les pièces bonnes</div><div style="position:absolute; left:21.3cqw; top:11.4cqw; width:9.3cqw; height:3.8cqw; border-radius:.6cqw; background:var(--pRed); outline:.14cqw dashed var(--red); outline-offset:-.14cqw;"></div><div class="lbl" style="position:absolute; left:2.4cqw; top:17.6cqw; font-size:1.25cqw; color:var(--blue);">Le TRS mesure cet écart, et dit d'où il vient.</div></div><div class="road" style="left:3.2cqw; top:47.2cqw;"><span class="lbl" style="font-size:1.15cqw; color:var(--blue);">Le plan :</span><span class="pill"><span class="b num" style="">1</span>Le temps</span><svg viewBox="0 0 24 24" style="width:1.4cqw; height:1.4cqw; flex:none;"><path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="#4a4aa0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pill"><span class="b num" style="">2</span>Les 3 témoins</span><svg viewBox="0 0 24 24" style="width:1.4cqw; height:1.4cqw; flex:none;"><path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="#4a4aa0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pill"><span class="b num" style="">3</span>Le verdict</span><svg viewBox="0 0 24 24" style="width:1.4cqw; height:1.4cqw; flex:none;"><path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="#4a4aa0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pill"><span class="b num" style="">4</span>Fausses pistes</span><svg viewBox="0 0 24 24" style="width:1.4cqw; height:1.4cqw; flex:none;"><path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="#4a4aa0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pill"><span class="b num" style="">5</span>Les cousins</span></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>02 · L'outil</span><span class="r">frame-02 · 12–29 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> le titre et son bandeau, puis les trois bandes arrivent une à une sur leurs mots : ✗ « note » sur « Ce n'est pas une note », ✓ « relevé », puis « il dit où chercher ». À droite, le schéma se trace de haut en bas sur « entre… et ». Glissement vers 03.</p>
-    <span class="chip">entrée : crossfade</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> le titre et son bandeau, puis les trois bandes sur leurs mots (✗ « note », ✓ « relevé », « il dit où chercher »). À droite, sur « entre… et », deux barres se posent : ce que la machine devait produire, puis les pièces bonnes ; l'écart se hachure en rouge. En fin de cadre, le plan de l'enquête se pose en quatre étapes.</p>
+    <p class="note"><b>Pourquoi :</b> l'écart entre deux barres annonce la cascade avant qu'on la détaille, et le plan dit au spectateur où l'on va. Ce plan revient ensuite en haut à droite de chaque cadre (le fil d'enquête).</p>
+    <div class="chips"><span class="chip">entrée : crossfade</span><span class="chip ped">procédé : annoncer le plan</span></div>
   </div>
-
 </div>
-
 <div class="act">Acte II · Le dossier et les trois témoins</div>
 <div class="grid">
-
-  <!-- 03 -->
   <div class="cell">
     <div class="f" id="frame-03">
-      <div class="eyebrow">Pièce n° 1 · Le temps</div>
-      <div class="t1" style="left:3.2cqw; top:8.6cqw;">16 h d'ouverture,</div>
-      <div class="band" style="left:2.4cqw; top:14cqw;">14 h requises.</div>
-      <div class="card" style="left:3.2cqw; top:23.4cqw; width:88cqw; height:20.6cqw;">
-        <div class="lbl" style="position:absolute; left:2cqw; top:1.6cqw; font-size:1.3cqw;">Temps d'ouverture · 2 équipes de 8 h</div>
-        <div class="hours" style="position:absolute; left:2cqw; right:2cqw; top:4.4cqw; height:6.4cqw; grid-template-columns:repeat(16,1fr);">
-          <div data-h="6h" class="plan" style="transform:translateY(5.4cqw) rotate(-6deg);"></div><div data-h="7h"></div><div data-h="8h"></div><div data-h="9h"></div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
-          <div data-h="14h" class="plan" style="transform:translateY(5.4cqw) rotate(5deg);"></div><div data-h="15h"></div><div data-h="16h"></div><div data-h="17h"></div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
-        </div>
-        <div class="pill" style="position:absolute; left:2cqw; top:16.4cqw; background:var(--pLav); color:var(--blue);">Maintenance prévue · 2 h, retirées</div>
-      </div>
-      <div class="chapeau" style="left:3.2cqw; top:46.2cqw;">Temps requis = ouverture − arrêts planifiés</div>
+      <div class="eyebrow">Pièce n° 1 · Le temps</div><div class="track"><span class="now"><i>1</i>Le temps</span><span class="todo"><i>2</i>Les 3 témoins</span><span class="todo"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="card" style="left:3.2cqw; top:8.2cqw; width:57.0cqw; height:41.6cqw;"><div class="lbl" style="position:absolute; left:2cqw; top:1.2cqw; font-size:1.15cqw; color:var(--blue);">La cascade des temps · une journée de la presse</div><div class="bar open" style="left:2.0cqw; top:4.6cqw; width:48.00cqw;">Temps d'ouverture · 16 h</div><div class="hl" style="left:.8cqw; top:11.10cqw; width:55.4cqw; height:5.80cqw; background:var(--pLav);"></div><div class="bar " style="left:2.0cqw; top:11.8cqw; width:41.90cqw;">Temps requis · 14 h</div><div class="seg plan" style="left:44.10cqw; top:11.8cqw; width:5.80cqw;">2 h</div><div class="loss" style="left:50.70cqw; top:11.8cqw; color:var(--blue);">prévues</div><div class="ghost" style="left:2.0cqw; top:19.0cqw; width:48.00cqw;">Témoin n° 1 · ?</div><div class="ghost" style="left:2.0cqw; top:26.2cqw; width:48.00cqw;">Témoin n° 2 · ?</div><div class="ghost" style="left:2.0cqw; top:33.4cqw; width:48.00cqw;">Témoin n° 3 · ?</div></div><div class="card" style="left:63.4cqw; top:8.2cqw; width:33.4cqw; height:41.6cqw;"><div class="hd" style="background:var(--blue);"><span class="b num" style="background:var(--white);"><svg viewBox="0 0 24 24" style="width:62%;"><circle cx="12" cy="12" r="8.5" fill="none" stroke="#4a4aa0" stroke-width="2.6"/><path d="M12 7.5V12l3.2 2" fill="none" stroke="#4a4aa0" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="ttl" style="color:var(--white);">Le temps requis</span></div><div class="sec" style="top:7.4cqw;">Le calcul</div><div style="position:absolute; left:2cqw; top:9.4cqw; display:flex; align-items:center; gap:.9cqw;"><span class="term"><b style="font-size:2.6cqw;">16 h</b><small>ouverture</small></span><span class="eq" style="font-size:2.4cqw; margin-top:-1.4cqw;">−</span><span class="term"><b style="font-size:2.6cqw;">2 h</b><small>prévues</small></span><span class="eq" style="font-size:2.4cqw; margin-top:-1.4cqw;">=</span><span class="term"><b style="font-size:2.6cqw; color:var(--blue);">14 h</b><small>requises</small></span></div><div style="position:absolute; left:2cqw; top:15.4cqw; "><span class="pill" style="background:var(--pLav); color:var(--blue); font-size:1.2cqw;">Maintenance prévue : on la retire</span></div><div style="position:absolute; left:2cqw; top:19.4cqw; "><span class="ttl" style="font-size:1.8cqw;">Le dénominateur du TRS</span></div><div style="position:absolute; left:2cqw; top:22.4cqw; right:2cqw; font-weight:500; font-size:1.3cqw; line-height:1.45;">La durée où la machine devait produire. Tout part de là.</div><div class="tip" style="top:28.6cqw;"><span class="pill">À suivre</span><span>Chaque témoin va retirer sa part de temps perdu.</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>03 · Le temps requis</span><span class="r">frame-03 · 29–46 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> les 16 cases bleues s'alignent de gauche à droite sur « seize heures ». Sur « maintenance prévue », les cases de 6 h et 14 h pâlissent et tombent de la ligne. Le bandeau « 14 h requises. » s'ouvre sur « quatorze ». Glissement vers 04 : le ruban reste à sa place.</p>
-    <span class="chip">entrée : push-slide left</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la barre de 16 h se pose, la tranche de 2 h « prévues » se détache en pointillés, et la barre de 14 h se forme dessous sur « il en reste quatorze ». Les trois lignes à venir attendent en pointillés. À droite, 16 h − 2 h = 14 h s'écrit terme par terme.</p>
+    <p class="note"><b>Pourquoi :</b> un seul schéma pour toute l'enquête. Le spectateur voit dès maintenant la place des trois témoins : chacun va ajouter une marche.</p>
+    <div class="chips"><span class="chip">entrée : push-slide left</span><span class="chip ped">procédé : un schéma qui se construit</span></div>
   </div>
 
-  <!-- 04 -->
   <div class="cell">
     <div class="f" id="frame-04">
-      <div class="eyebrow">Témoin n° 1</div>
-      <div class="card" style="left:3.2cqw; top:8cqw; width:93.6cqw; height:15.6cqw;">
-        <div class="hours" style="position:absolute; left:2cqw; right:2cqw; top:1.8cqw; height:6.4cqw; grid-template-columns:repeat(14,1fr);">
-          <div data-h="7h"></div><div data-h="8h"></div><div data-h="9h" class="stop">Arrêt</div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
-          <div data-h="15h"></div><div data-h="16h"></div><div data-h="17h" class="stop">Arrêt</div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
-        </div>
-        <div class="row" style="position:absolute; left:2cqw; top:10cqw;">
-          <span class="pill" style="background:var(--pGreen); color:var(--tGreen);"><span class="b ok sm"></span>12 h de fonctionnement</span>
-          <span class="pill" style="background:var(--pRed); color:var(--tRed);"><span class="b ko sm"></span>2 h d'arrêts subis</span>
-        </div>
-      </div>
-      <div class="bandp" style="left:3.2cqw; top:27cqw; width:54cqw; height:14cqw; background:var(--pRed); padding:2cqw;">
-        <div class="row"><span class="b num">1</span><span class="ttl">Disponibilité</span></div>
-        <div class="row" style="margin-top:2cqw; flex-wrap:wrap; gap:.8cqw;">
-          <span class="pill" style="background:var(--white); color:var(--tRed);"><span class="b ko sm"></span>Pannes</span>
-          <span class="pill" style="background:var(--white); color:var(--tRed);"><span class="b ko sm"></span>Manques matière</span>
-          <span class="pill" style="background:var(--white); color:var(--tRed);"><span class="b ko sm"></span>Réglages imprévus</span>
-        </div>
-      </div>
-      <div class="stat" style="left:61cqw; top:28cqw; font-size:9.5cqw; color:var(--tRed);">85,7 %</div>
-      <div class="lbl" style="left:61.4cqw; top:39.6cqw; font-size:1.6cqw;">12 h sur 14 h</div>
+      <div class="eyebrow">Témoin n° 1</div><div class="track"><span class="done"><i></i>Le temps</span><span class="now"><i>2</i>Les 3 témoins<span class="dots"><b class="on"></b><b class=""></b><b class=""></b></span></span><span class="todo"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="card" style="left:3.2cqw; top:8.2cqw; width:57.0cqw; height:41.6cqw;"><div class="lbl" style="position:absolute; left:2cqw; top:1.2cqw; font-size:1.15cqw; color:var(--blue);">La cascade des temps · une journée de la presse</div><div class="bar open" style="left:2.0cqw; top:4.6cqw; width:48.00cqw;">Temps d'ouverture · 16 h</div><div class="bar " style="left:2.0cqw; top:11.8cqw; width:41.90cqw;">Temps requis · 14 h</div><div class="seg plan" style="left:44.10cqw; top:11.8cqw; width:5.80cqw;">2 h</div><div class="loss" style="left:50.70cqw; top:11.8cqw; color:var(--blue);">prévues</div><div class="hl" style="left:.8cqw; top:18.30cqw; width:55.4cqw; height:5.80cqw; background:var(--pRed);"></div><div class="bar " style="left:2.0cqw; top:19.0cqw; width:35.90cqw;">Temps de fonctionnement · 12 h</div><div class="seg dispo" style="left:38.10cqw; top:19.0cqw; width:5.80cqw;">−2 h</div><div class="loss" style="left:44.70cqw; top:19.0cqw; color:var(--tRed);">arrêts</div><div class="ghost" style="left:2.0cqw; top:26.2cqw; width:48.00cqw;">Témoin n° 2 · ?</div><div class="ghost" style="left:2.0cqw; top:33.4cqw; width:48.00cqw;">Témoin n° 3 · ?</div></div><div class="card" style="left:63.4cqw; top:8.2cqw; width:33.4cqw; height:41.6cqw;"><div class="hd" style="background:var(--pRed);"><span class="b num" style="">1</span><span class="ttl" style="color:var(--ink);">Disponibilité</span></div><div class="sec" style="top:7.4cqw;">Ce qu'il a vu</div><div style="position:absolute; left:2cqw; top:9.2cqw; right:2cqw; display:flex; flex-wrap:wrap; gap:.6cqw;"><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.25cqw;"><span class="b ko sm"></span>Pannes</span><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.25cqw;"><span class="b ko sm"></span>Manques matière</span><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.25cqw;"><span class="b ko sm"></span>Réglages imprévus</span></div><div class="sec" style="top:15.6cqw;">Le calcul, en mots puis en chiffres</div><div style="position:absolute; left:2cqw; top:17.2cqw; display:flex; align-items:center; gap:.8cqw;"><span class="frac" style="font-size:1.15cqw; color:var(--ink); font-weight:600;"><span>Temps de fonctionnement</span><span>Temps requis</span></span><span class="eq" style="font-size:2cqw;">=</span><span class="frac" style="font-size:2.1cqw; color:var(--ink); font-weight:700;"><span>12 h</span><span>14 h</span></span></div><div style="position:absolute; left:2cqw; top:23.2cqw; "><span class="stat" style="font-size:5.4cqw; color:var(--tRed);"><span style="font-size:.55em; color:var(--blue); vertical-align:.2em;">= </span>85,7 %</span></div><div style="position:absolute; left:2cqw; top:30.2cqw; "><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.3cqw;">Perte : 2 h</span></div><div class="tip" style="top:33.6cqw;"><span class="pill">En clair</span><span>Le temps où la machine devait tourner… et ne tournait pas.</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>04 · Disponibilité</span><span class="r">frame-04 · 46–60 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> la bande rouge pâle du témoin monte, puis les trois causes s'y posent une à une, sur leur nom. Deux cases du ruban virent au rouge « Arrêt » sur « deux heures ». Le compteur monte jusqu'à 85,7 % sur « disponibilité ». Glissement vers 05.</p>
-    <span class="chip">entrée : push-slide left</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la ligne 3 s'allume en rouge pâle. Les trois causes se posent sur leur nom, la tranche « −2 h » se détache sur « deux heures d'arrêts subis » et la barre de 12 h se forme. La fraction s'écrit en mots, puis en chiffres, et 85,7 % monte.</p>
+    <p class="note"><b>Pourquoi :</b> la formule est montrée en mots avant les chiffres. La pilule « Perte : 2 h » a la couleur de la marche dans la cascade.</p>
+    <div class="chips"><span class="chip">entrée : push-slide left</span><span class="chip ped">procédé : en mots, puis en chiffres</span></div>
   </div>
 
-  <!-- 05 -->
   <div class="cell">
     <div class="f" id="frame-05">
-      <div class="eyebrow">Témoin n° 2</div>
-      <div class="card" style="left:3.2cqw; top:8cqw; width:93.6cqw; height:10.2cqw;">
-        <div class="hours" style="position:absolute; left:2cqw; right:2cqw; top:1.9cqw; height:6.4cqw; grid-template-columns:repeat(12,1fr);">
-          <div data-h="7h"></div><div data-h="8h"></div><div data-h="10h"></div><div data-h="11h" class="hi"></div><div data-h="12h"></div><div data-h="13h"></div>
-          <div data-h="15h"></div><div data-h="16h"></div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
-        </div>
-      </div>
-      <div style="left:18cqw; top:20.4cqw; width:17cqw; height:17cqw; border-radius:50%; background:var(--white); border:.55cqw solid var(--blue); overflow:hidden;">
-        <div style="position:absolute; left:1.6cqw; right:1.6cqw; top:5.6cqw; height:4.6cqw; background:var(--blue); border-radius:.6cqw;">
-          <i style="position:absolute; left:8%; width:.35cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:19%; width:.6cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:29%; width:.3cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:41%; width:.45cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:52%; width:.7cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:63%; width:.3cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:74%; width:.4cqw; top:0; bottom:0; background:var(--yellow);"></i><i style="position:absolute; left:86%; width:.35cqw; top:0; bottom:0; background:var(--yellow);"></i>
-        </div>
-        <div class="lbl" style="position:absolute; left:0; right:0; top:11.4cqw; text-align:center; font-size:1.1cqw;">11 h, à la loupe</div>
-      </div>
-      <div style="left:32.6cqw; top:35.2cqw; width:6.4cqw; height:1.2cqw; background:var(--blue); border-radius:1cqw; transform:rotate(45deg); transform-origin:left center;"></div>
-      <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080"><path d="M560 352 C 560 370, 540 380, 510 398" fill="none" stroke="#4a4aa0" stroke-width="3.2" stroke-linecap="round"/></svg>
-      <div class="card" style="left:41cqw; top:21.4cqw; width:26cqw; height:15cqw;">
-        <div style="position:absolute; left:2cqw; top:1.6cqw;"><div class="stat" style="font-size:4.6cqw; color:var(--blue);">720</div><div class="lbl">attendues</div><div class="lbl" style="font-weight:500; margin-top:.3cqw;">60/h × 12 h</div></div>
-        <div style="position:absolute; left:14cqw; top:1.6cqw;"><div class="stat" style="font-size:4.6cqw; color:var(--blue);">680</div><div class="lbl">produites</div></div>
-        <span class="pill" style="position:absolute; left:2cqw; top:10.4cqw; background:var(--pYellow); color:var(--tYellow);">40 pièces manquent</span>
-      </div>
-      <div class="bandp row" style="left:3.2cqw; top:41.6cqw; width:64cqw; height:7.4cqw; padding:0 1.6cqw; background:var(--pYellow);"><span class="b num">2</span><span class="ttl">Performance</span><span class="pill" style="background:var(--white); color:var(--tYellow);">Micro-arrêts</span><span class="pill" style="background:var(--white); color:var(--tYellow);">Cadence lente</span></div>
-      <div class="stat" style="left:70cqw; top:24cqw; font-size:8.2cqw; color:var(--tYellow);">94,4 %</div>
-      <div class="lbl" style="left:70.4cqw; top:34.4cqw; font-size:1.6cqw;">680 sur 720</div>
+      <div class="eyebrow">Témoin n° 2</div><div class="track"><span class="done"><i></i>Le temps</span><span class="now"><i>2</i>Les 3 témoins<span class="dots"><b class="on"></b><b class="on"></b><b class=""></b></span></span><span class="todo"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="card" style="left:3.2cqw; top:8.2cqw; width:57.0cqw; height:41.6cqw;"><div class="lbl" style="position:absolute; left:2cqw; top:1.2cqw; font-size:1.15cqw; color:var(--blue);">La cascade des temps · une journée de la presse</div><div class="bar open" style="left:2.0cqw; top:4.6cqw; width:48.00cqw;">Temps d'ouverture · 16 h</div><div class="bar " style="left:2.0cqw; top:11.8cqw; width:41.90cqw;">Temps requis · 14 h</div><div class="seg plan" style="left:44.10cqw; top:11.8cqw; width:5.80cqw;">2 h</div><div class="loss" style="left:50.70cqw; top:11.8cqw; color:var(--blue);">prévues</div><div class="bar " style="left:2.0cqw; top:19.0cqw; width:35.90cqw;">Temps de fonctionnement · 12 h<i style="left:28.2cqw; width:0.3cqw;"></i><i style="left:29.5cqw; width:0.5cqw;"></i><i style="left:30.6cqw; width:0.25cqw;"></i><i style="left:31.8cqw; width:0.4cqw;"></i><i style="left:33.0cqw; width:0.3cqw;"></i><i style="left:34.1cqw; width:0.45cqw;"></i><i style="left:35.2cqw; width:0.3cqw;"></i></div><div class="seg dispo" style="left:38.10cqw; top:19.0cqw; width:5.80cqw;">−2 h</div><div class="loss" style="left:44.70cqw; top:19.0cqw; color:var(--tRed);">arrêts</div><div class="hl" style="left:.8cqw; top:25.50cqw; width:55.4cqw; height:5.80cqw; background:var(--pYellow);"></div><div class="bar " style="left:2.0cqw; top:26.2cqw; width:33.90cqw;">Temps net · 11 h 20</div><div class="seg perf" style="left:36.10cqw; top:26.2cqw; width:1.80cqw;"></div><div class="loss" style="left:38.70cqw; top:26.2cqw; color:var(--tYellow);">−40 min · lenteurs</div><div class="ghost" style="left:2.0cqw; top:33.4cqw; width:48.00cqw;">Témoin n° 3 · ?</div></div><div class="card" style="left:63.4cqw; top:8.2cqw; width:33.4cqw; height:41.6cqw;"><div class="hd" style="background:var(--pYellow);"><span class="b num" style="">2</span><span class="ttl" style="color:var(--ink);">Performance</span></div><div class="sec" style="top:7.4cqw;">Ce qu'il a vu</div><div style="position:absolute; left:2cqw; top:9.2cqw; right:2cqw; display:flex; flex-wrap:wrap; gap:.6cqw;"><span class="pill" style="background:var(--pYellow); color:var(--tYellow); font-size:1.25cqw;"><span class="b ko sm"></span>Micro-arrêts</span><span class="pill" style="background:var(--pYellow); color:var(--tYellow); font-size:1.25cqw;"><span class="b ko sm"></span>Cadence lente</span></div><div class="sec" style="top:15.6cqw;">Le calcul, en mots puis en chiffres</div><div style="position:absolute; left:2cqw; top:17.2cqw; display:flex; align-items:center; gap:.8cqw;"><span class="frac" style="font-size:1.15cqw; color:var(--ink); font-weight:600;"><span>Pièces produites</span><span>Pièces attendues</span></span><span class="eq" style="font-size:2cqw;">=</span><span class="frac" style="font-size:2.1cqw; color:var(--ink); font-weight:700;"><span>680</span><span>720</span></span></div><div style="position:absolute; left:2cqw; top:23.2cqw; "><span class="stat" style="font-size:5.4cqw; color:var(--tYellow);"><span style="font-size:.55em; color:var(--blue); vertical-align:.2em;">= </span>94,4 %</span></div><div style="position:absolute; left:2cqw; top:30.2cqw; "><span class="pill" style="background:var(--pYellow); color:var(--tYellow); font-size:1.3cqw;">Perte : 40 min</span></div><div class="tip" style="top:33.6cqw;"><span class="pill">Astuce</span><span>À 60 pièces/h, 1 pièce = 1 minute. Les 40 pièces manquantes = 40 min.</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>05 · Performance</span><span class="r">frame-05 · 60–79 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> la case de 11 h s'entoure de jaune, et la loupe descend dessus. Sur « quelques secondes », huit encoches jaunes apparaissent en cascade. Les compteurs 720 puis 680 tournent sur leurs mots, et 94,4 % se pose en dernier. Glissement vers 06.</p>
-    <span class="chip">entrée : push-slide left</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> sur « micro-arrêts de quelques secondes », des encoches jaunes apparaissent dans la barre de 12 h : la perte se cache dans le temps où la machine tourne. Puis la ligne 4 se forme, 680 pièces sur 720, 94,4 %. L'astuce arrive en dernier.</p>
+    <p class="note"><b>Pourquoi :</b> l'astuce « 1 pièce = 1 minute » convertit les pièces en temps. La cascade garde une seule unité, l'heure.</p>
+    <div class="chips"><span class="chip">entrée : push-slide left</span><span class="chip ped">procédé : une seule unité</span></div>
   </div>
 
-  <!-- 06 -->
   <div class="cell">
     <div class="f" id="frame-06">
-      <div class="eyebrow">Témoin n° 3</div>
-      <div class="card" style="left:3.2cqw; top:8cqw; width:58cqw; height:30cqw;">
-        <div class="pieces" style="position:absolute; left:2cqw; right:2cqw; top:2cqw;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="ko"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="ko"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="ko"></i><i></i><i></i><i></i><i></i></div>
-        <div class="lbl" style="position:absolute; left:2cqw; bottom:1.6cqw; font-size:1.2cqw;">1 case = 10 pièces · 30 rebutées ou retouchées</div>
-      </div>
-      <div class="stamp" style="left:20cqw; top:24.4cqw; font-size:3.4cqw; color:var(--violet); transform:rotate(-6deg);">Non conforme</div>
-      <div class="bandp row" style="left:3.2cqw; top:41.4cqw; width:58cqw; height:7.4cqw; padding:0 1.6cqw; background:var(--pLav);"><span class="b num">3</span><span class="ttl">Qualité</span><span class="txt" style="font-weight:600;">Une retouche : du temps consommé deux fois.</span></div>
-      <div style="left:65cqw; top:9cqw;"><div class="stat" style="font-size:6.4cqw; color:var(--blue);">650</div><span class="pill" style="margin-top:.8cqw; background:var(--pGreen); color:var(--tGreen);"><span class="b ok sm"></span>pièces bonnes, sur 680</span></div>
-      <div class="stat" style="left:65cqw; top:26cqw; font-size:9.5cqw; color:var(--violet);">95,6 %</div>
+      <div class="eyebrow">Témoin n° 3</div><div class="track"><span class="done"><i></i>Le temps</span><span class="now"><i>2</i>Les 3 témoins<span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span></span><span class="todo"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="card" style="left:3.2cqw; top:8.2cqw; width:57.0cqw; height:41.6cqw;"><div class="lbl" style="position:absolute; left:2cqw; top:1.2cqw; font-size:1.15cqw; color:var(--blue);">La cascade des temps · une journée de la presse</div><div class="bar open" style="left:2.0cqw; top:4.6cqw; width:48.00cqw;">Temps d'ouverture · 16 h</div><div class="bar " style="left:2.0cqw; top:11.8cqw; width:41.90cqw;">Temps requis · 14 h</div><div class="seg plan" style="left:44.10cqw; top:11.8cqw; width:5.80cqw;">2 h</div><div class="loss" style="left:50.70cqw; top:11.8cqw; color:var(--blue);">prévues</div><div class="bar " style="left:2.0cqw; top:19.0cqw; width:35.90cqw;">Temps de fonctionnement · 12 h</div><div class="seg dispo" style="left:38.10cqw; top:19.0cqw; width:5.80cqw;">−2 h</div><div class="loss" style="left:44.70cqw; top:19.0cqw; color:var(--tRed);">arrêts</div><div class="bar " style="left:2.0cqw; top:26.2cqw; width:33.90cqw;">Temps net · 11 h 20</div><div class="seg perf" style="left:36.10cqw; top:26.2cqw; width:1.80cqw;"></div><div class="loss" style="left:38.70cqw; top:26.2cqw; color:var(--tYellow);">−40 min · lenteurs</div><div class="hl" style="left:.8cqw; top:32.70cqw; width:55.4cqw; height:5.80cqw; background:var(--pLav);"></div><div class="bar utile" style="left:2.0cqw; top:33.4cqw; width:32.40cqw;">Temps utile · 10 h 50</div><div class="seg qual" style="left:34.60cqw; top:33.4cqw; width:1.30cqw;"></div><div class="loss" style="left:36.70cqw; top:33.4cqw; color:var(--ink);">−30 min · rebuts</div></div><div class="card" style="left:63.4cqw; top:8.2cqw; width:33.4cqw; height:41.6cqw;"><div class="hd" style="background:var(--pLav);"><span class="b num" style="">3</span><span class="ttl" style="color:var(--ink);">Qualité</span></div><div class="sec" style="top:7.4cqw;">Ce qu'il a vu</div><div style="position:absolute; left:2cqw; top:9.2cqw; right:2cqw; display:flex; flex-wrap:wrap; gap:.6cqw;"><span class="pill" style="background:var(--pLav); color:var(--ink); font-size:1.25cqw;"><span class="b ko sm"></span>Rebuts</span><span class="pill" style="background:var(--pLav); color:var(--ink); font-size:1.25cqw;"><span class="b ko sm"></span>Retouches</span></div><div class="sec" style="top:15.6cqw;">Le calcul, en mots puis en chiffres</div><div style="position:absolute; left:2cqw; top:17.2cqw; display:flex; align-items:center; gap:.8cqw;"><span class="frac" style="font-size:1.15cqw; color:var(--ink); font-weight:600;"><span>Pièces bonnes</span><span>Pièces produites</span></span><span class="eq" style="font-size:2cqw;">=</span><span class="frac" style="font-size:2.1cqw; color:var(--ink); font-weight:700;"><span>650</span><span>680</span></span></div><div style="position:absolute; left:2cqw; top:23.2cqw; "><span class="stat" style="font-size:5.4cqw; color:var(--violet);"><span style="font-size:.55em; color:var(--blue); vertical-align:.2em;">= </span>95,6 %</span></div><div style="position:absolute; left:2cqw; top:30.2cqw; "><span class="pill" style="background:var(--pLav); color:var(--ink); font-size:1.3cqw;">Perte : 30 min</span></div><div class="tip" style="top:33.6cqw;"><span class="pill">Astuce</span><span>Même règle : 30 pièces non conformes = 30 min. Une retouche consomme le temps deux fois.</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>06 · Qualité</span><span class="r">frame-06 · 79–95 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> les 68 cases se remplissent en cascade, ligne par ligne. Sur « trente », trois cases virent au violet et le tampon « Non conforme » s'abat avec un léger rebond. « 650 » puis 95,6 % se posent sur leurs mots. Coupe franche vers 07.</p>
-    <span class="chip">entrée : push-slide left</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la ligne 5 se forme : la tranche violette de 30 min se détache et la barre verte du temps utile se pose, seule partie qui a donné des pièces bonnes. 650 sur 680, 95,6 %.</p>
+    <p class="note"><b>Pourquoi :</b> même règle qu'au cadre 05 et même place pour chaque élément de la fiche : le spectateur sait où regarder.</p>
+    <div class="chips"><span class="chip">entrée : push-slide left</span><span class="chip ped">procédé : même fiche pour chaque témoin</span></div>
   </div>
-
 </div>
-
 <div class="act">Acte III · Le verdict</div>
 <div class="grid">
-
-  <!-- 07 -->
   <div class="cell">
     <div class="f" id="frame-07">
-      <div class="eyebrow">Reconstitution</div>
-      <div class="row" style="left:3.2cqw; top:8.6cqw; gap:1.2cqw;">
-        <span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.7cqw;">Disponibilité 85,7 %</span><span style="font-weight:800; font-size:2.6cqw; color:var(--blue);">×</span>
-        <span class="pill" style="background:var(--pYellow); color:var(--tYellow); font-size:1.7cqw;">Performance 94,4 %</span><span style="font-weight:800; font-size:2.6cqw; color:var(--blue);">×</span>
-        <span class="pill" style="background:var(--pLav); color:var(--ink); font-size:1.7cqw;">Qualité 95,6 %</span>
-      </div>
-      <div class="t1" style="left:3.2cqw; top:19cqw;">TRS =</div>
-      <div class="band" style="left:20cqw; top:14cqw; font-size:13cqw; border-radius:1.4cqw; padding:.6cqw 2.2cqw 1.6cqw;">77 %</div>
-      <div class="card" style="left:3.2cqw; top:33.6cqw; width:93.6cqw; height:15.4cqw;">
-        <div class="lbl" style="position:absolute; left:2cqw; top:1.5cqw; font-size:1.3cqw;">Sur 14 h requises</div>
-        <div style="position:absolute; left:2cqw; right:2cqw; top:4cqw; height:4.6cqw; display:flex; gap:.4cqw;">
-          <div style="flex:10.833; background:var(--green); border-radius:.6cqw; color:var(--white); font-weight:700; font-size:1.5cqw; display:flex; align-items:center; padding-left:1.2cqw;">10 h 50 utiles</div>
-          <div style="flex:2; background:var(--red); border-radius:.6cqw; color:var(--white); font-weight:700; font-size:1.2cqw; display:grid; place-items:center;">2 h</div>
-          <div style="flex:.667; background:var(--yellow); border-radius:.6cqw;"></div>
-          <div style="flex:.5; background:var(--violet); border-radius:.6cqw;"></div>
-        </div>
-        <span class="pill" style="position:absolute; right:2cqw; top:10.2cqw; background:var(--pGreen); color:var(--tGreen); font-size:1.6cqw;"><span class="b ok sm"></span>Les 3 h 10 sont retrouvées</span>
-        <div class="lbl" style="position:absolute; left:2cqw; top:11cqw; font-size:1.2cqw;">Arrêts 2 h · cadence 40 min · rebuts 30 min</div>
-      </div>
+      <div class="eyebrow">Reconstitution</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="now"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="card" style="left:3.2cqw; top:8.2cqw; width:57.0cqw; height:41.6cqw;"><div class="lbl" style="position:absolute; left:2cqw; top:1.2cqw; font-size:1.15cqw; color:var(--blue);">La cascade des temps · une journée de la presse</div><div class="bar open" style="left:2.0cqw; top:4.6cqw; width:48.00cqw;">Temps d'ouverture · 16 h</div><div class="hl" style="left:.8cqw; top:11.10cqw; width:55.4cqw; height:5.80cqw; background:var(--pLav);"></div><div class="bar " style="left:2.0cqw; top:11.8cqw; width:41.90cqw;">Temps requis · 14 h</div><div class="seg plan" style="left:44.10cqw; top:11.8cqw; width:5.80cqw;">2 h</div><div class="loss" style="left:50.70cqw; top:11.8cqw; color:var(--blue);">prévues</div><div class="bar " style="left:2.0cqw; top:19.0cqw; width:35.90cqw;">Temps de fonctionnement · 12 h</div><div class="seg dispo" style="left:38.10cqw; top:19.0cqw; width:5.80cqw;">−2 h</div><div class="loss" style="left:44.70cqw; top:19.0cqw; color:var(--tRed);">arrêts</div><div class="bar " style="left:2.0cqw; top:26.2cqw; width:33.90cqw;">Temps net · 11 h 20</div><div class="seg perf" style="left:36.10cqw; top:26.2cqw; width:1.80cqw;"></div><div class="hl" style="left:.8cqw; top:32.70cqw; width:55.4cqw; height:5.80cqw; background:var(--pGreen);"></div><div class="bar utile" style="left:2.0cqw; top:33.4cqw; width:32.40cqw;">Temps utile · 10 h 50</div><div class="seg qual" style="left:34.60cqw; top:33.4cqw; width:1.30cqw;"></div><svg style="position:absolute; left:0; top:0; width:57.0cqw; height:41.6cqw;" viewBox="0 0 570 416"><path d="M440.0 162.0 V386.0" stroke="#4a4aa0" stroke-width="2.6" stroke-dasharray="7 6" fill="none"/><path d="M345.0 378.0 V386.0 H440.0 V378.0 M392.5 386.0 v7" stroke="#a83434" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="lbl" style="position:absolute; left:34.05cqw; top:39.70cqw; font-size:1.15cqw; font-weight:700; color:var(--tRed);">3 h 10 perdues</div></div><div class="card" style="left:63.4cqw; top:8.2cqw; width:33.4cqw; height:41.6cqw;"><div class="hd" style="background:var(--blue);"><span class="b num" style="background:var(--white); color:var(--blue);">×</span><span class="ttl" style="color:var(--white);">On multiplie</span></div><div class="sec" style="top:7.4cqw;">Les 3 témoins</div><div style="position:absolute; left:2cqw; top:9.2cqw; display:flex; align-items:center; gap:.5cqw;"><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.3cqw;">85,7 %</span><span class="eq" style="font-size:1.8cqw;">×</span><span class="pill" style="background:var(--pYellow); color:var(--tYellow); font-size:1.3cqw;">94,4 %</span><span class="eq" style="font-size:1.8cqw;">×</span><span class="pill" style="background:var(--pLav); color:var(--ink); font-size:1.3cqw;">95,6 %</span></div><div class="sec" style="top:13.4cqw;">Les mêmes, en temps : ça se simplifie</div><div style="position:absolute; left:2cqw; top:15.2cqw; display:flex; align-items:center; gap:.5cqw;"><span class="frac" style="font-size:1.45cqw; color:var(--tRed); font-weight:700;"><span><span class="strike">12 h</span></span><span>14 h</span></span><span class="eq" style="font-size:1.8cqw;">×</span><span class="frac" style="font-size:1.45cqw; color:var(--tYellow); font-weight:700;"><span><span class="strike">11 h 20</span></span><span><span class="strike">12 h</span></span></span><span class="eq" style="font-size:1.8cqw;">×</span><span class="frac" style="font-size:1.45cqw; color:var(--ink); font-weight:700;"><span>10 h 50</span><span><span class="strike">11 h 20</span></span></span></div><div style="position:absolute; left:2cqw; top:21.4cqw; display:flex; align-items:center; gap:.8cqw;"><span class="eq" style="font-size:2cqw;">=</span><span class="frac" style="font-size:2.1cqw; color:var(--tGreen); font-weight:700;"><span>10 h 50</span><span>14 h</span></span><span class="frac" style="font-size:1.05cqw; color:var(--blue); font-weight:600;"><span>temps utile</span><span>temps requis</span></span></div><div style="position:absolute; left:1.6cqw; top:28.0cqw; "><span class="band" style="position:static; display:inline-block; font-size:3.6cqw;">TRS = 77 %</span></div><div style="position:absolute; left:2cqw; top:34.6cqw; "><span class="pill" style="background:var(--pGreen); color:var(--tGreen); font-size:1.3cqw;"><span class="b ok sm"></span>Les 3 h 10 sont retrouvées</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>07 · Reconstitution</span><span class="r">frame-07 · 95–112 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> les trois taux glissent sur une ligne, reliés par « × », sur « fois performance, fois qualité ». Le bandeau « 77 % » s'ouvre et le chiffre monte en grandissant. <b>Cadre tenu :</b> 77 % ne bouge plus pendant « dix heures cinquante ». La barre se recompose, puis la pilule ✓ arrive. Coupe franche vers 08.</p>
-    <span class="chip">entrée : cut</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> les trois taux glissent en ligne sur « fois performance, fois qualité », et le bandeau « TRS = 77 % » s'ouvre. <b>Cadre tenu</b> sur 77 %. Sur « quatorze heures… dix heures cinquante », les fractions s'écrivent, 12 h puis 11 h 20 se barrent : il reste 10 h 50 sur 14 h. Dans la cascade, les lignes 2 et 5 s'allument et l'accolade mesure l'écart, 3 h 10.</p>
+    <p class="note"><b>Pourquoi :</b> c'est le déclic de la vidéo. Le produit des trois taux, c'est simplement le temps utile divisé par le temps requis.</p>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip ped">procédé : le déclic</span></div>
   </div>
 
-  <!-- 08 -->
   <div class="cell">
     <div class="f" id="frame-08">
-      <div class="eyebrow">Le vrai verdict</div>
-      <div class="t1" style="left:3.2cqw; top:8.6cqw;">Où partent</div>
-      <div class="band" style="left:2.4cqw; top:14cqw;">les points ?</div>
-      <div class="bandp" style="left:3.2cqw; top:26cqw; width:29cqw; height:20cqw; background:var(--pRed); padding:2cqw;"><div class="row"><span class="b num">1</span><span class="ttl" style="font-size:1.8cqw;">Disponibilité</span></div><div class="stat" style="margin-top:1.8cqw; font-size:6.4cqw; color:var(--tRed);">−14,3</div><div class="lbl" style="font-size:1.4cqw; margin-top:.6cqw;">points</div></div>
-      <div class="bandp" style="left:35.2cqw; top:26cqw; width:29cqw; height:20cqw; background:var(--pYellow); padding:2cqw;"><div class="row"><span class="b num">2</span><span class="ttl" style="font-size:1.8cqw;">Performance</span></div><div class="stat" style="margin-top:1.8cqw; font-size:6.4cqw; color:var(--tYellow);">−5,6</div><div class="lbl" style="font-size:1.4cqw; margin-top:.6cqw;">points</div></div>
-      <div class="bandp" style="left:67.2cqw; top:26cqw; width:29cqw; height:20cqw; background:var(--pLav); padding:2cqw;"><div class="row"><span class="b num">3</span><span class="ttl" style="font-size:1.8cqw;">Qualité</span></div><div class="stat" style="margin-top:1.8cqw; font-size:6.4cqw; color:var(--violet);">−4,4</div><div class="lbl" style="font-size:1.4cqw; margin-top:.6cqw;">points</div></div>
-      <div style="left:2.4cqw; top:25.2cqw; width:30.6cqw; height:21.6cqw; border:.3cqw solid var(--blue); border-radius:1.6cqw;"></div>
-      <div class="pill" style="left:17cqw; top:23.6cqw; background:var(--blue); color:var(--white); font-size:1.5cqw;">Premier chantier</div>
+      <div class="eyebrow">Le vrai verdict</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="now"><i>3</i>Le verdict</span><span class="todo"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="t1" style="left:3.2cqw; top:8.6cqw;">Où sont passées</div><div class="band" style="left:2.4cqw; top:14cqw;">les 3 h 10 ?</div><div style="left:31cqw; top:15.7cqw;"><span class="pill" style="background:var(--pLav); color:var(--blue); font-size:1.8cqw; padding:.5cqw 1.4cqw .5cqw .5cqw;"><span class="b num" style="width:2.2cqw; height:2.2cqw; background:var(--white); color:var(--blue);">?</span>À votre avis ?</span></div><div class="card" style="left:3.2cqw; top:24cqw; width:93.6cqw; height:24.6cqw;"><div class="row" style="position:absolute; left:2cqw; top:3.3cqw;"><span class="b num" style="">1</span><span class="ttl" style="font-size:1.6cqw;">Disponibilité</span></div><div class="bar" style="left:22cqw; top:2.4cqw; width:40.00cqw; background:var(--red);"></div><div class="stat" style="position:absolute; left:63.00cqw; top:3.3cqw; font-size:2.4cqw; color:var(--tRed);">2 h</div><div class="row" style="position:absolute; left:2cqw; top:9.5cqw;"><span class="b num" style="">2</span><span class="ttl" style="font-size:1.6cqw;">Performance</span></div><div class="bar" style="left:22cqw; top:8.6cqw; width:13.33cqw; background:var(--yellow);"></div><div class="stat" style="position:absolute; left:36.33cqw; top:9.5cqw; font-size:2.4cqw; color:var(--tYellow);">40 min</div><div class="row" style="position:absolute; left:2cqw; top:15.7cqw;"><span class="b num" style="">3</span><span class="ttl" style="font-size:1.6cqw;">Qualité</span></div><div class="bar" style="left:22cqw; top:14.8cqw; width:10.00cqw; background:var(--violet);"></div><div class="stat" style="position:absolute; left:33.00cqw; top:15.7cqw; font-size:2.4cqw; color:var(--ink);">30 min</div><div style="position:absolute; left:1cqw; top:1.2cqw; width:68.4cqw; height:6.8cqw; border:.3cqw solid var(--blue); border-radius:1.1cqw;"></div><div style="position:absolute; left:71.4cqw; top:2.6cqw; "><span class="pill" style="background:var(--blue); color:var(--white); font-size:1.4cqw;">Premier chantier</span></div><div class="lbl" style="position:absolute; left:71.4cqw; top:7.4cqw; font-size:1.05cqw; color:var(--blue);">Ce qu'a vu le témoin n° 1 :</div><div style="position:absolute; left:71.4cqw; top:9.2cqw; display:flex; flex-direction:column; align-items:flex-start; gap:.5cqw;"><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.15cqw;">Pannes</span><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.15cqw;">Réglages imprévus</span><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.15cqw;">Manques matière</span></div><div class="lbl" style="position:absolute; left:2cqw; top:21.2cqw; font-size:1.3cqw; font-weight:500;">2 h + 40 min + 30 min = <b style="color:var(--blue); font-weight:800;">3 h 10</b> : les heures s'additionnent, les pourcentages non.</div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>08 · Le vrai verdict</span><span class="r">frame-08 · 112–128 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> le titre arrive en coupe franche, puis les trois cartes des familles montent une à une. Chaque chiffre se pose quand la voix le prononce. Sur « la disponibilité », un contour bleu se dessine autour de la première carte et la pilule « Premier chantier » s'y accroche. Coupe franche vers 09.</p>
-    <span class="chip">entrée : cut</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> les trois tranches de perte quittent la cascade et s'alignent en barres. Sur « À votre avis ? », la voix laisse une pause d'une seconde et demie avant la réponse. La barre de 2 h se cercle de bleu, la pilule « Premier chantier » s'y accroche et les causes du cadre 04 reviennent. La somme se pose en bas.</p>
+    <p class="note"><b>Pourquoi :</b> une question posée avant la réponse fait mieux retenir. Et les heures s'additionnent (2 h + 40 min + 30 min = 3 h 10), les points non (14,3 + 5,6 + 4,4 = 24,3, pas 23). <b>Retouche de la voix à valider</b>, voir plus bas.</p>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip ped">procédé : question avant la réponse</span></div>
   </div>
 
-  <!-- 09 -->
   <div class="cell">
     <div class="f" id="frame-09">
-      <div class="eyebrow">Fausse piste n° 1</div>
-      <div class="t1" style="left:3.2cqw; top:8.6cqw;">Le « bon TRS »</div>
-      <div class="band" style="left:2.4cqw; top:14cqw;">n'existe pas.</div>
-      <div class="bandp" style="left:3.2cqw; top:25cqw; width:42cqw; height:24cqw; background:var(--pRed); padding:1.8cqw 2cqw;">
-        <div class="lbl" style="font-size:1.3cqw; color:var(--tRed);">Les grilles qui circulent</div>
-        <div class="row" style="margin-top:1.4cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.9cqw; color:var(--tRed);">&lt; 50 % : mauvais</span></div>
-        <div class="row" style="margin-top:1.2cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.9cqw; color:var(--tRed);">60 à 70 % : correct</span></div>
-        <div class="row" style="margin-top:1.2cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.9cqw; color:var(--tRed);">&gt; 85 % : excellent</span></div>
-      </div>
-      <div class="card" style="left:48.6cqw; top:25cqw; width:44cqw; height:24cqw;">
-        <div class="ttl" style="position:absolute; left:2cqw; top:1.6cqw; font-size:1.8cqw;">Votre ligne, mois après mois</div>
-        <svg style="position:absolute; left:2cqw; top:5.4cqw; width:40cqw; height:12cqw;" viewBox="0 0 400 120" preserveAspectRatio="none"><line x1="0" y1="118" x2="400" y2="118" stroke="#e2e2ee" stroke-width="3"/><polyline points="10,100 75,92 140,86 205,70 270,58 335,40 390,22" fill="none" stroke="#4a4aa0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="100" r="8" fill="#4a4aa0"/><circle cx="390" cy="22" r="9" fill="#8cc978"/></svg>
-        <div class="stat" style="position:absolute; left:2cqw; top:16.2cqw; font-size:2.4cqw; color:var(--blue);">61</div>
-        <div class="stat" style="position:absolute; right:2cqw; top:3.8cqw; font-size:2.4cqw; color:var(--tGreen);">68</div>
-        <span class="pill" style="position:absolute; left:2cqw; bottom:1.8cqw; background:var(--pGreen); color:var(--tGreen);"><span class="b ok sm"></span>À règles de calcul constantes</span>
-      </div>
+      <div class="eyebrow">Fausse piste n° 1</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="done"><i></i>Le verdict</span><span class="now"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="t1" style="left:3.2cqw; top:8.6cqw;">Le « bon TRS »</div><div class="band" style="left:2.4cqw; top:14cqw;">n'existe pas.</div><div class="bandp" style="left:3.2cqw; top:25cqw; width:42cqw; height:24cqw; background:var(--pRed); padding:1.8cqw 2cqw;"><span class="pill" style="background:var(--white); color:var(--tRed); font-size:1.35cqw;"><span class="b ko sm"></span>Idée reçue : un seuil universel</span><div class="row" style="margin-top:1.1cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.8cqw; color:var(--tRed);">&lt; 50 % : mauvais</span></div><div class="row" style="margin-top:1.1cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.8cqw; color:var(--tRed);">60 à 70 % : correct</span></div><div class="row" style="margin-top:1.1cqw;"><span class="b ko"></span><span style="font-weight:700; font-size:1.8cqw; color:var(--tRed);">&gt; 85 % : excellent</span></div><div style="margin-top:2cqw; font-weight:500; font-size:1.35cqw; line-height:1.4;"><b style="color:var(--tRed);">Pourquoi ?</b> Chaque site a ses règles de calcul : le même atelier peut afficher 68 % ou 85 %.</div></div><div class="card" style="left:48.6cqw; top:25cqw; width:44cqw; height:24cqw;"><div style="position:absolute; left:2cqw; top:1.6cqw; "><span class="pill" style="background:var(--pGreen); color:var(--tGreen); font-size:1.35cqw;"><span class="b ok sm"></span>La bonne comparaison</span></div><div class="ttl" style="position:absolute; left:2cqw; top:4.9cqw; font-size:1.7cqw;">Votre ligne, contre elle-même</div><svg style="position:absolute; left:2cqw; top:8.2cqw; width:40cqw; height:8.6cqw;" viewBox="0 0 400 86" preserveAspectRatio="none"><line x1="0" y1="84" x2="400" y2="84" stroke="#e2e2ee" stroke-width="3"/><polyline points="12,78 75,72 140,66 205,52 270,42 335,28 388,14" fill="none" stroke="#4a4aa0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="78" r="8" fill="#4a4aa0"/><circle cx="388" cy="14" r="9" fill="#8cc978"/></svg><div class="stat" style="position:absolute; left:2cqw; top:17.3cqw; font-size:1.9cqw; color:var(--blue);">61 %</div><div class="lbl" style="position:absolute; left:18cqw; top:17.6cqw; font-size:1.1cqw; color:var(--blue);">en six mois</div><div class="stat" style="position:absolute; right:2cqw; top:4.6cqw; font-size:1.9cqw; color:var(--tGreen);">68 %</div><div style="position:absolute; left:2cqw; top:20.9cqw; "><span class="pill" style="background:var(--pGreen); color:var(--tGreen); font-size:1.3cqw;"><span class="b ok sm"></span>À règles de calcul constantes</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>09 · Le « bon TRS »</span><span class="r">frame-09 · 128–141 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> les trois lignes de la grille toute faite tombent une à une, chacune avec sa pastille ✗, sur « ne veulent rien dire ». À droite, la courbe de la ligne se trace de 61 à 68 sur « propre historique », puis la pilule ✓ se pose. Fondu vers 10.</p>
-    <span class="chip">entrée : cut</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> à gauche, l'idée reçue ✗ : ses trois seuils tombent un à un sur « ne veulent rien dire ». À droite, la bonne comparaison ✓ : la courbe de la ligne se trace de 61 à 68 % sur « propre historique », puis la pilule « À règles de calcul constantes ».</p>
+    <p class="note"><b>Pourquoi :</b> l'erreur et la bonne pratique côte à côte, avec les mêmes codes ✗ / ✓ que le reste de la vidéo. 61 et 68 % viennent de l'article (repère 1).</p>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip ped">procédé : idée reçue contre bonne pratique</span></div>
   </div>
 
-  <!-- 10 -->
   <div class="cell">
     <div class="f" id="frame-10">
-      <div class="eyebrow">Fausse piste n° 2</div>
-      <div class="t1" style="left:3.2cqw; top:8.6cqw;">Le tour de</div>
-      <div class="band" style="left:2.4cqw; top:14cqw;">passe-passe.</div>
-      <div class="card" style="left:3.2cqw; top:23.4cqw; width:93.6cqw; height:15.4cqw;">
-        <div class="hours" style="position:absolute; left:2cqw; right:2cqw; top:1.8cqw; height:6.4cqw; grid-template-columns:repeat(14,1fr);">
-          <div data-h="7h"></div><div data-h="8h"></div><div data-h="9h" class="stop">Arrêt</div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
-          <div data-h="15h"></div><div data-h="16h"></div><div data-h="17h" class="plan" style="transform:translateY(5.2cqw) rotate(-5deg);">Maint.</div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
-        </div>
-        <span class="pill" style="position:absolute; left:45cqw; top:10cqw; background:var(--pLav); color:var(--blue);">← la même panne, rebaptisée « maintenance planifiée »</span>
-      </div>
-      <div class="stat" style="left:3.2cqw; top:42.4cqw; font-size:5cqw; color:var(--ink);">77 %</div>
-      <div style="left:2.6cqw; top:45cqw; width:16cqw; height:.6cqw; background:var(--red); border-radius:1cqw; transform:rotate(-8deg);"></div>
-      <div style="left:20.6cqw; top:42.6cqw; font-weight:800; font-size:4cqw; color:var(--blue);">→</div>
-      <div class="band" style="left:27cqw; top:41.4cqw; font-size:5.4cqw;">83 %</div>
-      <span class="pill" style="left:46cqw; top:44cqw; background:var(--pRed); color:var(--tRed); font-size:1.6cqw;"><span class="b ko sm"></span>Même machine, même arrêt</span>
+      <div class="eyebrow">Fausse piste n° 2</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="done"><i></i>Le verdict</span><span class="now"><i>4</i>Fausses pistes</span><span class="todo"><i>5</i>Les cousins</span></div><div class="t1" style="left:3.2cqw; top:8.6cqw;">Le tour de</div><div class="band" style="left:2.4cqw; top:14cqw;">passe-passe.</div><div class="card" style="left:3.2cqw; top:23.4cqw; width:93.6cqw; height:25.4cqw;"><div style="position:absolute; left:2cqw; top:1.8cqw; "><span class="pill" style="background:var(--pLav); color:var(--blue); font-size:1.3cqw;">Avant</span></div><div class="bar" style="left:2cqw; top:5.4cqw; width:30.70cqw; height:3.8cqw; font-size:1.2cqw;">Temps requis · 14 h</div><div class="bar" style="left:30.70cqw; top:5.4cqw; width:2.00cqw; height:3.8cqw; background:var(--red); padding:0;"></div><div class="loss" style="left:33.30cqw; top:5.4cqw; height:3.8cqw; color:var(--tRed);">1 h de panne</div><div class="bar utile" style="left:2cqw; top:10.2cqw; width:23.83cqw; height:3.8cqw; font-size:1.2cqw;">Temps utile · 10 h 50</div><div style="position:absolute; left:2cqw; top:15.4cqw; display:flex; align-items:center; gap:1cqw;"><span class="txt" style="font-weight:700;">10 h 50 ÷ 14 h =</span><span class="stat" style="font-size:3.2cqw; color:var(--ink);">77 %</span></div><div style="position:absolute; left:44.6cqw; top:8.4cqw; "><svg viewBox="0 0 24 24" style="width:3cqw; height:3cqw; flex:none;"><path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="#4a4aa0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="position:absolute; left:50cqw; top:1.8cqw; "><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.3cqw;">Après : la panne est requalifiée</span></div><div class="bar" style="left:50cqw; top:5.4cqw; width:28.50cqw; height:3.8cqw; font-size:1.2cqw;">Temps requis · 13 h</div><div class="seg plan" style="left:78.70cqw; top:5.4cqw; width:2.00cqw; height:3.8cqw;"></div><div class="loss" style="left:81.30cqw; top:5.4cqw; height:3.8cqw; color:var(--blue);">« planifiée »</div><div class="bar utile" style="left:50cqw; top:10.2cqw; width:23.83cqw; height:3.8cqw; font-size:1.2cqw;">Temps utile · 10 h 50</div><div class="loss" style="left:74.63cqw; top:10.2cqw; height:3.8cqw; color:var(--tGreen); gap:.5cqw;"><span class="b ok sm"></span>inchangé</div><div style="position:absolute; left:50cqw; top:15.4cqw; display:flex; align-items:center; gap:1cqw;"><span class="txt" style="font-weight:700;">10 h 50 ÷ 13 h =</span><span class="band" style="position:static; display:inline-block; font-size:3.2cqw;">83 %</span></div><div style="position:absolute; left:2cqw; top:21cqw; "><span class="pill" style="background:var(--pRed); color:var(--tRed); font-size:1.35cqw;"><span class="b ko sm"></span>Même machine : 4 h d'arrêt, 650 pièces bonnes. Seul le dénominateur a bougé.</span></div></div>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>10 · Le tour de passe-passe</span><span class="r">frame-10 · 141–155 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> retour du ruban du cadre 04. Sur « requalifiez », la case rouge de 17 h pâlit, prend l'étiquette « Maint. » et tombe hors du temps requis. 77 % se barre, et le bandeau « 83 % » s'ouvre sur « grimpe ». La pilule ✗ arrive sur « pas une minute de plus ». Coupe franche vers 11.</p>
-    <span class="chip">entrée : crossfade</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la colonne « Avant » reprend la cascade en deux barres : 77 %. Sur « requalifiez », l'heure de panne rouge passe en pointillés « planifiée » et sort du temps requis : 13 h. La barre verte ne bouge pas. 77 % devient 83 %, puis la pilule ✗ arrive sur « pas une minute de plus ».</p>
+    <p class="note"><b>Pourquoi :</b> un avant / après sur le même schéma. On voit que seul le dénominateur a changé (rappel du cadre 03).</p>
+    <div class="chips"><span class="chip">entrée : crossfade</span><span class="chip ped">procédé : avant / après</span></div>
   </div>
 
-  <!-- 11 -->
+  <div class="cell">
+    <div class="f" id="frame-10b">
+      <div class="eyebrow">Les cousins du TRS</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="done"><i></i>Le verdict</span><span class="done"><i></i>Fausses pistes</span><span class="now"><i>5</i>Les cousins</span></div><div class="t1" style="left:3.2cqw; top:8.6cqw;">Même temps utile,</div><div class="band" style="left:2.4cqw; top:14cqw;">trois dénominateurs.</div><div style="left:66cqw; top:15.4cqw;"><span class="pill" style="background:var(--pLav); color:var(--blue); font-size:1.6cqw;">TRE ≤ TRG ≤ TRS</span></div><div class="card" style="left:3.2cqw; top:23.4cqw; width:93.6cqw; height:25.6cqw;"><div style="position:absolute; left:2cqw; top:2.4cqw; line-height:1.1;"><div class="stat" style="font-size:2.3cqw; color:var(--blue);">TRS</div><div class="lbl" style="font-size:1cqw; margin-top:.25cqw; color:var(--blue);">Synthétique · OEE</div></div><div class="bar open" style="left:19.0cqw; top:2.6cqw; width:28.00cqw; padding:0;"></div><div class="bar utile" style="left:19.0cqw; top:2.6cqw; width:21.67cqw; font-size:1.2cqw;">10 h 50</div><div class="loss" style="left:69.4cqw; top:2.6cqw; color:var(--ink); font-size:1.4cqw;">÷ 14 h</div><div style="position:absolute; left:77.4cqw; top:2.8000000000000003cqw; "><span class="band" style="position:static; display:inline-block; font-size:2.6cqw; padding:.3cqw .9cqw .5cqw;">77 %</span></div><div style="position:absolute; left:2cqw; top:8.6cqw; line-height:1.1;"><div class="stat" style="font-size:2.3cqw; color:var(--blue);">TRG</div><div class="lbl" style="font-size:1cqw; margin-top:.25cqw; color:var(--blue);">Global · OOE</div></div><div class="bar open" style="left:19.0cqw; top:8.8cqw; width:28.00cqw; padding:0;"></div><div class="seg plan" style="left:47.10cqw; top:8.8cqw; width:3.80cqw; font-size:1.05cqw;"></div><div class="bar utile" style="left:19.0cqw; top:8.8cqw; width:21.67cqw; font-size:1.2cqw;">10 h 50</div><div class="loss" style="left:69.4cqw; top:8.8cqw; color:var(--ink); font-size:1.4cqw;">÷ 16 h</div><div style="position:absolute; left:77.4cqw; top:9.0cqw; "><span class="stat" style="font-size:2.6cqw; color:var(--ink);">68 %</span></div><div style="position:absolute; left:2cqw; top:14.8cqw; line-height:1.1;"><div class="stat" style="font-size:2.3cqw; color:var(--blue);">TRE</div><div class="lbl" style="font-size:1cqw; margin-top:.25cqw; color:var(--blue);">Économique · TEEP</div></div><div class="bar open" style="left:19.0cqw; top:15.0cqw; width:28.00cqw; padding:0;"></div><div class="seg plan" style="left:47.10cqw; top:15.0cqw; width:3.80cqw; font-size:1.05cqw;"></div><div class="seg plan" style="left:51.10cqw; top:15.0cqw; width:15.80cqw; font-size:1.05cqw;">atelier fermé</div><div class="bar utile" style="left:19.0cqw; top:15.0cqw; width:21.67cqw; font-size:1.2cqw;">10 h 50</div><div class="loss" style="left:69.4cqw; top:15.0cqw; color:var(--ink); font-size:1.4cqw;">÷ 24 h</div><div style="position:absolute; left:77.4cqw; top:15.2cqw; "><span class="stat" style="font-size:2.6cqw; color:var(--ink);">45 %</span></div><div class="row" style="position:absolute; left:2cqw; top:21.2cqw; gap:1.4cqw; font-weight:600; font-size:1.15cqw;"><span class="row" style="gap:.5cqw;"><i style="display:inline-block; width:2.2cqw; height:1.3cqw; border-radius:.3cqw; background:var(--green);"></i>Temps utile, le même partout</span><span class="row" style="gap:.5cqw;"><i style="display:inline-block; width:2.2cqw; height:1.3cqw; border-radius:.3cqw; border:.14cqw solid var(--blue);"></i>Temps requis</span><span class="row" style="gap:.5cqw;"><i style="display:inline-block; width:2.2cqw; height:1.3cqw; border-radius:.3cqw; background:var(--pLav); outline:.14cqw dashed var(--blue); outline-offset:-.14cqw;"></i>Arrêts planifiés, puis atelier fermé</span></div></div>
+      <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
+      <img class="logo" src="public/fichly-logo.png" alt="fichly">
+    </div>
+    <div class="meta"><span>10 bis · Les cousins : TRG et TRE</span><span class="r">frame-10b · ≈ 15 s, après 10</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> les trois barres partent du même vert, 10 h 50, qui ne bouge plus. Sur « seize heures d'ouverture », la ligne TRG s'allonge des 2 h prévues et son taux descend à 68 %. Sur « vingt-quatre heures », la ligne TRE s'allonge encore de l'atelier fermé et tombe à 45 %. La pilule « TRE ≤ TRG ≤ TRS » se pose en dernier.</p>
+    <p class="note"><b>Pourquoi :</b> même numérateur, trois dénominateurs : c'est la suite logique du piège du cadre 10. 68 % vient de l'article ; 45 % est calculé avec ses chiffres (10 h 50 sur 24 h). Nouveau cadre et nouvelle ligne de voix à valider.</p>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip ped">procédé : même numérateur, trois dénominateurs</span><span class="chip same">nouveau</span></div>
+  </div>
+
   <div class="cell">
     <div class="f" id="frame-11">
-      <div class="eyebrow">Fin de l'enquête</div>
-      <div class="t1" style="left:3.2cqw; top:9cqw; font-size:6.4cqw;">Affaire</div>
-      <div class="band" style="left:2.4cqw; top:16.4cqw; font-size:6.4cqw; border-radius:1cqw;">classée.</div>
-      <div class="bandp" style="left:3.2cqw; top:30cqw; width:66cqw; height:18cqw; background:var(--pLav); padding:2cqw 2.4cqw;">
-        <span class="pill" style="background:var(--blue); color:var(--white);">La règle à garder en tête</span>
-        <div style="margin-top:1.6cqw; font-weight:700; font-size:2.5cqw; color:var(--ink);">TRS = temps utile <span style="color:var(--blue)">÷ temps requis.</span></div>
-        <div class="txt" style="margin-top:.8cqw; font-size:1.7cqw;">Il ne juge pas les équipes : il dit où chercher.</div>
-      </div>
-      <div style="left:74cqw; top:14cqw; width:20cqw;">
-        <svg viewBox="0 0 180 124" style="width:100%;"><rect width="180" height="124" rx="16" fill="#4a4aa0"/><rect x="16" y="16" width="104" height="40" rx="8" fill="#fff"/><rect x="26" y="30" width="84" height="12" rx="6" fill="#8cc978"/><circle cx="148" cy="26" r="8" fill="#74a3d6"/><circle cx="148" cy="50" r="8" fill="#8cc978"/><rect x="16" y="72" width="148" height="36" rx="8" fill="#fff" fill-opacity=".14"/><rect x="30" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="64" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="98" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="132" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/></svg>
-      </div>
-      <span class="b ok" style="left:90cqw; top:12cqw; width:5cqw; height:5cqw;"></span>
+      <div class="eyebrow">Fin de l'enquête</div><div class="track"><span class="done"><i></i>Le temps</span><span class="done"><i></i>Les 3 témoins</span><span class="done"><i></i>Le verdict</span><span class="done"><i></i>Fausses pistes</span><span class="done"><i></i>Les cousins</span></div><div class="t1" style="left:3.2cqw; top:9cqw; font-size:6.4cqw;">Affaire</div><div class="band" style="left:2.4cqw; top:16.4cqw; font-size:6.4cqw; border-radius:1cqw;">classée.</div><div class="card" style="left:3.2cqw; top:29cqw; width:66cqw; height:20cqw;"><div style="position:absolute; left:2.4cqw; top:1.8cqw; "><span class="pill" style="background:var(--blue); color:var(--white); ">À retenir</span></div><div class="row" style="position:absolute; left:2.4cqw; top:5.6cqw;"><span class="b num" style="">1</span><span style="font-weight:700; font-size:1.9cqw; color:var(--ink); white-space:nowrap;">TRS = temps utile <span style="color:var(--blue)">÷ temps requis</span></span></div><div class="row" style="position:absolute; left:2.4cqw; top:10.2cqw;"><span class="b num" style="">2</span><span style="font-weight:700; font-size:1.9cqw; color:var(--ink); white-space:nowrap;">= <span style="color:var(--tRed)">Disponibilité</span> × <span style="color:var(--tYellow)">Performance</span> × <span style="color:var(--violet)">Qualité</span></span></div><div class="row" style="position:absolute; left:2.4cqw; top:14.8cqw;"><span class="b num" style="">3</span><span style="font-weight:700; font-size:1.9cqw; color:var(--ink); white-space:nowrap;">Il ne juge pas les équipes : <span style="color:var(--blue)">il dit où chercher.</span></span></div></div><div style="left:74cqw; top:17cqw; width:20cqw;"><svg viewBox="0 0 180 124" style="width:100%;"><rect width="180" height="124" rx="16" fill="#4a4aa0"/><rect x="16" y="16" width="104" height="40" rx="8" fill="#fff"/><rect x="26" y="30" width="84" height="12" rx="6" fill="#8cc978"/><circle cx="148" cy="26" r="8" fill="#74a3d6"/><circle cx="148" cy="50" r="8" fill="#8cc978"/><rect x="16" y="72" width="148" height="36" rx="8" fill="#fff" fill-opacity=".14"/><rect x="30" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="64" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="98" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/><rect x="132" y="80" width="18" height="20" rx="4" fill="#fff" fill-opacity=".35"/></svg></div><span class="b ok" style="left:90cqw; top:15cqw; width:5cqw; height:5cqw;"></span>
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>11 · Affaire classée</span><span class="r">frame-11 · 155–167 s</span></div>
-    <p class="note"><b>Ce qui bouge d'abord :</b> « Affaire » s'écrit en coupe franche, et le bandeau « classée. » claque avec un léger rebond. La pastille ✓ se pose sur la machine (callback du polaroïd du cadre 01). La bande « La règle à garder en tête » monte, formule puis phrase. Fondu vers 12.</p>
-    <span class="chip">entrée : cut</span>
+    <p class="note"><b>Ce qui bouge d'abord :</b> « Affaire » s'écrit, le bandeau « classée. » claque, la pastille ✓ se pose sur la machine (rappel du cadre 01) et le fil d'enquête se coche en entier. La carte « À retenir » déroule ses trois points sur la voix.</p>
+    <p class="note"><b>Pourquoi :</b> un résumé en trois points, juste avant la fin, aide à garder l'essentiel.</p>
+    <div class="chips"><span class="chip">entrée : cut</span><span class="chip ped">procédé : à retenir en 3 points</span></div>
   </div>
 
-  <!-- 12 -->
   <div class="cell">
     <div class="f" id="frame-12">
-      <div class="eyebrow">Et maintenant ?</div>
+            <div class="eyebrow">Et maintenant ?</div>
       <div class="t1" style="left:3.2cqw; top:8.6cqw;">Pour aller plus loin,</div>
       <div class="band" style="left:2.4cqw; top:14cqw;">formez-vous.</div>
       <!-- carte formation -->
@@ -414,42 +334,60 @@
         <img src="public/guides-fichly.png" alt="Decks de fiches Fichly" style="position:absolute; right:1.4cqw; bottom:1.6cqw; width:17cqw;">
       </div>
       <div class="lbl" style="left:3.2cqw; top:49.6cqw; font-size:1.5cqw; color:var(--blue);">Tous les liens en description</div>
+      
       <div class="ribbon6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
       <img class="logo" src="public/fichly-logo.png" alt="fichly">
     </div>
     <div class="meta"><span>12 · Se former avec Fichly</span><span class="r">frame-12 · 167–182 s</span></div>
     <p class="note"><b>Ce qui bouge d'abord :</b> le titre et son bandeau. Sur « formation Lean Green Belt », la carte de gauche monte, puis la ceinture verte se noue et la pilule ✓ « Éligible au CPF » claque sur « CPF ». Sur « decks de fiches », la carte de droite monte et les decks glissent en éventail. « Tous les liens en description » se pose en dernier.</p>
-    <span class="chip">entrée : crossfade</span>
+    <div class="chips"><span class="chip">entrée : crossfade</span><span class="chip same">inchangé</span></div>
+  </div>
+
+  <div class="info">
+    <h3>Les procédés pédagogiques</h3>
+    <ul>
+      <li><b>Un seul schéma, la cascade des temps.</b> Elle se construit du cadre 03 au 07, une marche par témoin, au lieu d'un décor neuf à chaque cadre. Elle revient au 08 (les pertes) et au 10 (le piège).</li>
+      <li><b>Le plan annoncé</b> au cadre 02, puis rappelé en haut à droite de chaque cadre : on sait toujours où l'on en est.</li>
+      <li><b>Une couleur par famille</b>, partout la même : rouge disponibilité, jaune performance, violet qualité, vert temps utile.</li>
+      <li><b>En mots, puis en chiffres :</b> chaque fraction dit ce qu'elle compare avant le calcul.</li>
+      <li><b>Une seule unité :</b> l'astuce « 1 pièce = 1 minute » ramène les pièces en heures.</li>
+      <li><b>Le déclic</b> (07) : les fractions se simplifient, le TRS est le temps utile divisé par le temps requis.</li>
+      <li><b>Une question avant la réponse</b> (08), <b>l'idée reçue face à la bonne pratique</b> (09), <b>un avant / après</b> (10), <b>à retenir en 3 points</b> (11).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <h3>Voix : retouches proposées</h3>
+    <p><b>Ligne 8 (recommandée)</b>, pour parler en heures comme l'écran :</p>
+    <div class="vo"><s>Regardez où partent les points : quatorze virgule trois en disponibilité, cinq virgule six en performance, quatre virgule quatre en qualité.</s><br>Reprenons nos trois heures dix. À votre avis, où est passée la plus grosse part ? … Deux heures en arrêts. Quarante minutes en lenteurs, trente en rebuts.</div>
+    <p><b>Lignes 5 et 6 (au choix)</b>, pour dire l'astuce à voix haute :</p>
+    <div class="vo">5 : « Les quarante qui manquent, <b>soit quarante minutes</b> ? Des micro-arrêts… »<br>6 : « …trente sont rebutées ou retouchées : <b>encore trente minutes</b>. »</div>
+    <p><b>Ligne 10 bis (nouvelle, TRG et TRE)</b>, environ 15 s :</p>
+    <div class="vo">Le dénominateur fait donc le chiffre. Gardez les mêmes dix heures cinquante, mais rapportez-les aux seize heures d'ouverture : c'est le TRG, soixante-huit pour cent. Aux vingt-quatre heures de la journée : le TRE, quarante-cinq pour cent. Même machine, trois questions différentes.</div>
+    <p>Le reste du script ne change pas. Rien n'est enregistré tant que vous n'avez pas validé.</p>
+  </div>
+
+  <div class="info">
+    <h3>Le langage de mouvement</h3>
+    <p>D'après la référence envoyée le 1er octobre (les 16 tuiles animées : Andon, SMED, 5 pourquoi, TRS en temps réel…) :</p>
+    <ul>
+      <li><b>Tout est « en direct » :</b> les compteurs défilent, la jauge se remplit, la couleur suit la valeur (rouge quand c'est bas, jaune puis vert quand ça monte).</li>
+      <li><b>Les heures sont des blocs :</b> elles se soulèvent, changent de couleur et glissent d'une ligne à l'autre, comme les blocs du SMED.</li>
+      <li><b>Le texte s'écrit à la machine</b>, une ligne après l'autre, comme les 5 pourquoi ; la pastille de la ligne en cours est pleine.</li>
+      <li><b>Les cases en pointillés</b> attendent leur contenu ; une pilule numérotée dit l'étape en cours.</li>
+      <li><b>Au cadre 07,</b> la jauge « TRS en temps réel » : les trois taux se remplissent, puis l'aiguille monte jusqu'à 77 %.</li>
+    </ul>
   </div>
 
   <div class="info">
     <h3>Les enchaînements</h3>
-    <p>Trois types seulement : coupe franche (cut), fondu enchaîné (crossfade) et glissement vers la gauche pour la suite des témoins (push-slide left). Le sens est toujours de la droite vers la gauche.</p>
+    <p>Trois types seulement : coupe franche (cut), fondu enchaîné (crossfade) et glissement vers la gauche pour la suite des témoins (push-slide left). Pendant les glissements de 03 à 06, la cascade reste en place : seule la fiche de droite change.</p>
     <div class="seams">
       <span>01 cut</span><span>02 crossfade</span><span class="x">03 push ←</span><span class="x">04 push ←</span><span class="x">05 push ←</span><span class="x">06 push ←</span><span>07 cut</span><span>08 cut</span><span>09 cut</span><span>10 crossfade</span><span>11 cut</span><span>12 crossfade</span>
     </div>
   </div>
-
-  <div class="info">
-    <h3>La DA Fichly</h3>
-    <div class="sw">
-      <div><i style="background:#f3f3f3"></i>Papier #f3f3f3</div>
-      <div><i style="background:#4a4aa0"></i>Bleu #4a4aa0</div>
-      <div><i style="background:#23235a"></i>Encre #23235a</div>
-      <div><i style="background:#f16969"></i>Dispo #f16969</div>
-      <div><i style="background:#e6b839"></i>Perf #e6b839</div>
-      <div><i style="background:#aa76b2"></i>Qualité #aa76b2</div>
-      <div><i style="background:#8cc978"></i>Utile #8cc978</div>
-    </div>
-    <ul>
-      <li>Poppins seule : titres 800, bandes et pilules 700, chapeau et texte 500</li>
-      <li>Titre bleu, puis bandeau blanc sur fond bleu ; cartes blanches arrondies sur papier</li>
-      <li>Pastilles ✓ vertes et ✗ rouges, numéros bleus ; pictos machine et cartons du gabarit</li>
-      <li>Interdits : diaporama, formule avant le cadre 07, ombres, dégradés, couleur hors palette, chiffres inventés</li>
-    </ul>
-  </div>
-
 </div>
+
 </div>
 </body>
 </html>
