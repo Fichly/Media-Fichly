@@ -6,7 +6,7 @@
 
 Les nombres entiers sont écrits en toutes lettres pour fixer la prononciation. **Les pourcentages à virgule sont écrits en chiffres** (« 85,7 % ») : test B du 1er octobre 2026, validé (« B et C très bien », `audio/tests-pourcentages/`). Repli si une prise bute : l'arrondi parlé (test C, « presque quatre-vingt-six pour cent »), l'écran gardant le chiffre exact.
 
-**Version 3 (1er octobre 2026)** : « J'ai besoin que l'on fasse une intro avec le logo Fichly en motion. Ensuite que l'on introduise le sujet… Il y a des blancs parfois qui cassent le rythme… On va introduire aussi les différentes manières de calculer le TRS : la manière simple, pièces produites sur ce que l'on aurait dû produire au temps de cycle idéal, et ensuite introduire les temps d'états. Une fois les temps d'états présentés, on commence à décomposer. » Ordre : intro, constat, méthode simple (pièces bonnes ÷ pièces possibles au temps de cycle idéal, 650 ÷ 840 = 77 %), temps d'états, puis décomposition (les trois marches), qui retombe sur les mêmes 77 %. 16 lignes, environ 592 mots, soit environ 3 min avec le logo. **Enregistrement par blocs continus** (une prise par bloc, les cadres changent pendant que la voix parle, plus de silences entre les cadres) : bloc 1 = lignes 1 à 5 (la première minute), bloc 2 = lignes 6 à 11, bloc 3 = lignes 12 à 16.
+**Version 3 (1er octobre 2026)** : « J'ai besoin que l'on fasse une intro avec le logo Fichly en motion. Ensuite que l'on introduise le sujet… Il y a des blancs parfois qui cassent le rythme… On va introduire aussi les différentes manières de calculer le TRS : la manière simple, pièces produites sur ce que l'on aurait dû produire au temps de cycle idéal, et ensuite introduire les temps d'états. Une fois les temps d'états présentés, on commence à décomposer. » Ordre : intro, constat, méthode simple (pièces bonnes ÷ pièces possibles au temps de cycle idéal, 650 ÷ 840 = 77 %), temps d'états, puis décomposition (les trois marches), qui retombe sur les mêmes 77 %. 17 lignes, environ 755 mots, soit environ 3 min 30 avec le logo (la partie TRG / TRE prend désormais le temps d'expliquer, demande du 1er octobre 2026). **Enregistrement par blocs continus** (une prise par bloc, les cadres changent pendant que la voix parle, plus de silences entre les cadres) : bloc 1 = lignes 1 à 5 (la première minute), bloc 2 = lignes 6 à 11, bloc 3 = lignes 12 à 17.
 
 ---
 
@@ -101,23 +101,30 @@ Les nombres entiers sont écrits en toutes lettres pour fixer la prononciation. 
 
     Et méfiez-vous du tour de passe-passe. Rebaptisez une heure de panne en maintenance planifiée : le temps requis tombe à treize heures, et le TRS grimpe à quatre-vingt-trois pour cent. Sans une seule pièce de plus.
 
-## Line 14 — Les cousins (Frame 14)
+## Line 14 — Le TRG (Frame 14)
 
-**L'idée :** TRS, TRG, TRE : trois dénominateurs.
-**À l'écran :** Le même vert de 10 h 50 sur trois barres de 14 h, 16 h et 24 h : 77 %, 68 %, 45 %.
+**L'idée :** Même temps utile, autre dénominateur : le TRS divise par les 14 h requises (77 %), le TRG par les 16 h d'ouverture (68 %), parce qu'il compte aussi les arrêts prévus comme des pertes.
+**À l'écran :** Le même vert de 10 h 50 sur une barre de 14 h (TRS, 77 %), puis sur une barre de 16 h où les 2 h de maintenance prévue s'allument en perte (TRG, 68 %) ; sur « pas de tour de passe-passe », l'heure requalifiée reste perdue pour le TRG.
 
-    C'est d'ailleurs ce qui le distingue de ses deux cousins. Rapportez les dix heures cinquante au temps d'ouverture, seize heures : c'est le TRG, soixante-huit pour cent. Au temps total, vingt-quatre heures : c'est le TRE, quarante-cinq pour cent.
+    Vous l'avez vu : tout dépend du temps par lequel on divise. Et c'est exactement ce qui distingue le TRS de deux autres taux : le TRG et le TRE. Les trois partent des mêmes dix heures cinquante de pièces bonnes. Le TRS les divise par les quatorze heures où la machine devait produire : soixante-dix-sept pour cent. Il juge la machine quand on lui demande de produire. Le TRG, lui, compte aussi les arrêts prévus comme des pertes, comme nos deux heures de maintenance. On divise donc par les seize heures d'ouverture : soixante-huit pour cent. Il regarde la machine sur tout le temps où l'atelier est ouvert. Et avec lui, pas de tour de passe-passe : panne ou maintenance, l'heure est perdue quand même.
 
-## Line 15 — À retenir (Frame 15)
+## Line 15 — Le TRE (Frame 15)
+
+**L'idée :** Le TRE divise par les 24 h de la journée (45 %) : il compte aussi les heures de fermeture, la capacité encore libre.
+**À l'écran :** La barre s'allonge à 24 h, les 8 h « atelier fermé » en pointillés (TRE, 45 %) ; ces 8 h deviennent « capacité encore libre » ; enfin les trois taux côte à côte (77 %, 68 %, 45 %) et « Sur quel temps ? ».
+
+    Le TRE va encore plus loin : il compte aussi les heures où l'atelier est fermé. On divise par les vingt-quatre heures de la journée : quarante-cinq pour cent. Il regarde la machine sur toute la journée. Et il montre ce qui reste à prendre : ces huit heures de fermeture, c'est de la capacité encore libre, pour une troisième équipe par exemple. Alors, devant un taux qu'on vous annonce, demandez toujours sur quel temps il est calculé.
+
+## Line 16 — À retenir (Frame 16)
 
 **L'idée :** TRS = temps utile ÷ temps requis.
 **À l'écran :** La règle en grand, puis « il ne juge personne : il montre où chercher ».
 
     À retenir : le TRS, c'est le temps utile divisé par le temps requis. Il ne juge personne : il vous montre où chercher en premier.
 
-## Line 16 — Se former (Frame 16)
+## Line 17 — Se former (Frame 17)
 
 **L'idée :** Se former avec Fichly.
 **À l'écran :** La formation Green Belt (éligible au CPF) et les decks de fiches.
 
-    Pour aller plus loin, notre formation Lean Green Belt est éligible au CPF, et nos decks de fiches gardent les outils sous la main. Tous les liens sont en description.
+    Pour aller plus loin, notre formation Lean Green Belt est éligible au CPF. Et nos decks de fiches sur le Lean vous aident au quotidien, sur le terrain. Tous les liens sont en description.

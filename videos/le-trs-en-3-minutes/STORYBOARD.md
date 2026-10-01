@@ -30,7 +30,7 @@ music: none
 ## Still open
 
 - **Première minute v3** (1er octobre 2026, « une intro avec le logo Fichly en motion… introduire le sujet… il y a des blancs qui cassent le rythme… la manière simple, puis les temps d'états, puis on décompose ») : script v3, lignes 1 à 5 en une seule prise (`audio/v3/bloc1.mp3`, 1 324 crédits), montée en Remotion (`videos/remotion/src/trs/minute1/`). Rendu : `videos/essais/minute-1/trs-minute-1.mp4`. Logo animé à partir d'un tracé vectoriel redessiné d'après le PNG : à remplacer par le fichier vectoriel officiel.
-- Voix des lignes 6 à 16 : deux prises continues (lignes 6 à 11, puis 12 à 16), environ 1 850 crédits, après validation de la première minute.
+- Voix des lignes 6 à 16 : deux prises continues (lignes 6 à 11, puis 12 à 17), environ 1 850 crédits, après validation de la première minute.
 
 - **Ligne 8 du script (recommandée)** : parler en heures plutôt qu'en points, pour coller à l'écran du cadre 08. Proposition : « Mais le verdict, ce n'est pas le chiffre. Reprenons nos trois heures dix. À votre avis, où est passée la plus grosse part ? … Deux heures en arrêts. Quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : la disponibilité. » En attente de validation ; `SCRIPT.md` garde la version actuelle.
 - **Cadre 10 bis, TRG et TRE (nouveau)** : nouvelle ligne de voix d'environ 15 s, la vidéo passe à environ 3 min 15. À valider, ou à compenser en resserrant d'autres lignes.
