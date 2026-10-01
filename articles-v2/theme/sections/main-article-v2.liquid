@@ -1,0 +1,536 @@
+{%- comment -%}
+  Article Fichly V2.
+  Les corps d'articles existants (classes fichly-*) sont nettoyés et remis en forme à l'affichage :
+  commentaires HTML, blocs <style> et JSON-LD écrits à la main retirés ; résumé, essentiel et sommaire
+  repris dans le gabarit ; une partie colorée par H2, dans l'ordre du liseré.
+  Métachamps facultatifs (namespace fichly) : corps_v2, resume, essentiel, categorie, titre_accent, date_maj, produits.
+{%- endcomment -%}
+{{ 'fichly-article-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fichly-article-v2.js' | asset_url }}" defer="defer"></script>
+<style>
+  {{ settings.type_body_font | font_modify: 'weight', '400' | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+  {{ settings.type_body_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  .fv2 { --fv2-font: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}; }
+</style>
+
+{%- liquid
+  assign body = article.metafields.fichly.corps_v2.value | default: article.content
+  assign is_fichly = false
+  if body contains 'class="fichly-article"'
+    assign is_fichly = true
+  endif
+
+-%}
+{%- comment -%} 1. Commentaires HTML : de chaque <!-- au --> qui suit {%- endcomment -%}
+{%- liquid
+  assign segs = body | append: ' ' | split: '-->'
+  assign out = ''
+  for seg in segs
+    if forloop.last
+      assign out = out | append: seg
+    elsif seg contains '<!--'
+      assign keep = seg | split: '<!--' | first
+      assign out = out | append: keep
+    else
+      assign out = out | append: seg | append: '-->'
+    endif
+  endfor
+  assign body = out
+
+-%}
+{%- comment -%} 2. Blocs <style> recopiés dans les articles {%- endcomment -%}
+{%- liquid
+  if body contains '<style'
+    assign segs = body | append: ' ' | split: '</style>'
+    assign out = ''
+    for seg in segs
+      if forloop.last
+        assign out = out | append: seg
+      elsif seg contains '<style'
+        assign keep = seg | split: '<style' | first
+        assign out = out | append: keep
+      else
+        assign out = out | append: seg | append: '</style>'
+      endif
+    endfor
+    assign body = out
+  endif
+
+-%}
+{%- comment -%} 3. JSON-LD écrit à la main (le gabarit génère le sien) {%- endcomment -%}
+{%- liquid
+  if body contains 'application/ld+json'
+    assign segs = body | append: ' ' | split: '</script>'
+    assign out = ''
+    for seg in segs
+      if forloop.last
+        assign out = out | append: seg
+      elsif seg contains '<script type="application/ld+json">'
+        assign keep = seg | split: '<script type="application/ld+json">' | first
+        assign out = out | append: keep
+      else
+        assign out = out | append: seg | append: '</script>'
+      endif
+    endfor
+    assign body = out | replace: '<p> </p>', '' | replace: '<p></p>', ''
+  endif
+
+-%}
+{%- comment -%} 4. Enveloppe .fichly-article : ouverture et dernière fermeture {%- endcomment -%}
+{%- liquid
+  if is_fichly
+    assign body = body | replace_first: '<div class="fichly-article" lang="fr">', '' | replace_first: '<div class="fichly-article">', ''
+    assign parts = body | append: ' ' | split: '</div>'
+    assign last_i = parts.size | minus: 2
+    assign out = ''
+    for p in parts
+      assign out = out | append: p
+      if forloop.index0 < last_i
+        assign out = out | append: '</div>'
+      endif
+    endfor
+    assign body = out
+  endif
+
+-%}
+{%- comment -%} 5. Résumé, essentiel, sommaire et « à lire aussi » sortent du corps {%- endcomment -%}
+{%- liquid
+  assign resume_html = ''
+  if body contains '<div class="fichly-resume">'
+    assign inner = body | split: '<div class="fichly-resume">' | last | split: '</div>' | first
+    assign block = '<div class="fichly-resume">' | append: inner | append: '</div>'
+    assign body = body | remove_first: block
+    assign resume_html = inner | split: '</span>' | last | strip
+  endif
+  if article.metafields.fichly.resume != blank
+    assign resume_html = article.metafields.fichly.resume.value | newline_to_br | prepend: '<p>' | append: '</p>'
+  endif
+
+  assign essentiel_html = ''
+  if body contains '<div class="fichly-essentiel">'
+    assign inner = body | split: '<div class="fichly-essentiel">' | last | split: '</div>' | first
+    assign block = '<div class="fichly-essentiel">' | append: inner | append: '</div>'
+    assign body = body | remove_first: block
+    if inner contains '<ul>'
+      assign essentiel_html = inner | split: '<ul>' | last | split: '</ul>' | first | prepend: '<ul class="fv2-dots">' | append: '</ul>'
+    endif
+  endif
+  if article.metafields.fichly.essentiel != blank
+    assign essentiel_html = '<ul class="fv2-dots">'
+    for item in article.metafields.fichly.essentiel.value
+      assign essentiel_html = essentiel_html | append: '<li>' | append: item | append: '</li>'
+    endfor
+    assign essentiel_html = essentiel_html | append: '</ul>'
+  endif
+
+  if body contains '<div class="fichly-toc">'
+    assign inner = body | split: '<div class="fichly-toc">' | last | split: '</div>' | first
+    assign body = body | remove_first: inner | remove_first: '<div class="fichly-toc"></div>'
+  endif
+  if body contains '<nav class="fichly-toc">'
+    assign inner = body | split: '<nav class="fichly-toc">' | last | split: '</nav>' | first
+    assign body = body | remove_first: inner | remove_first: '<nav class="fichly-toc"></nav>'
+  endif
+  if body contains '<div class="fichly-readmore">'
+    assign inner = body | split: '<div class="fichly-readmore">' | last | split: '</div>' | first
+    assign body = body | remove_first: inner | remove_first: '<div class="fichly-readmore"></div>'
+  endif
+
+-%}
+{%- comment -%} 6. Emojis utilisés comme icônes, tableaux défilants {%- endcomment -%}
+{%- liquid
+  assign body = body | replace: '❌ ', '' | replace: '✅ ', '' | replace: '❌', '' | replace: '✅', ''
+  assign body = body | replace: '<table', '<div class="fv2-table"><table' | replace: '</table>', '</table></div>'
+
+-%}
+{%- comment -%} 7. Une partie par H2 : id garanti, couleur dans l'ordre du liseré, sommaire généré {%- endcomment -%}
+{%- liquid
+  assign chunks = body | split: '<h2'
+  assign content = ''
+  assign toc = ''
+  assign n = 0
+  for chunk in chunks
+    if forloop.first
+      if is_fichly
+        assign content = content | append: '<div class="fv2-intro">' | append: chunk | append: '</div>'
+      else
+        assign content = content | append: chunk
+      endif
+      continue
+    endif
+    assign n = n | plus: 1
+    assign tag = chunk | split: '>' | first
+    assign after = chunk | remove_first: tag | remove_first: '>'
+    assign title = after | split: '</h2>' | first | strip_html | strip
+    if tag contains 'id="'
+      assign hid = tag | split: 'id="' | last | split: '"' | first
+      assign h2open = '<h2' | append: tag | append: '>'
+    else
+      assign hid = 'partie-' | append: n
+      assign h2open = '<h2' | append: tag | append: ' id="' | append: hid | append: '">'
+    endif
+    assign c = n | minus: 1 | modulo: 6 | plus: 1
+    if is_fichly
+      assign content = content | append: '<section class="fv2-part c' | append: c | append: '">' | append: h2open | append: after | append: '</section>'
+    else
+      assign content = content | append: h2open | append: after
+    endif
+    if title != blank
+      assign toc = toc | append: '<li class="c' | append: c | append: '"><a href="#' | append: hid | append: '">' | append: title | append: '</a></li>'
+    endif
+  endfor
+
+  assign words = content | strip_html | split: ' ' | size
+  assign minutes = words | plus: 115 | divided_by: 230 | floor
+  if minutes < 1
+    assign minutes = 1
+  endif
+
+-%}
+{%- comment -%} 8. Catégorie, titre, date, auteur {%- endcomment -%}
+{%- liquid
+  assign categorie = article.metafields.fichly.categorie.value
+  if categorie == blank
+    for t in article.tags
+      if t != 'Lean Management'
+        assign categorie = t
+        break
+      endif
+    endfor
+  endif
+  if categorie == blank
+    assign categorie = article.tags.first | default: 'Lean Management'
+  endif
+
+  assign accent = article.metafields.fichly.titre_accent.value
+  if accent != blank and article.title contains accent
+    assign a_esc = accent | escape
+    assign title_html = article.title | escape | replace_first: a_esc, '<em>§</em>' | replace_first: '§', a_esc
+  elsif article.title contains ' : '
+    assign t_first = article.title | split: ' : ' | first
+    assign t_rest = article.title | remove_first: t_first | remove_first: ' : '
+    assign t_first = t_first | escape
+    assign t_rest = t_rest | escape
+    assign title_html = t_first | append: '&nbsp;: <em>' | append: t_rest | append: '</em>'
+  else
+    assign title_html = article.title | escape
+  endif
+
+  assign mois = 'janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre' | split: ','
+  assign d = article.metafields.fichly.date_maj.value | default: article.updated_at | default: article.published_at
+  assign m_i = d | date: '%-m' | minus: 1
+  assign yr = d | date: '%Y'
+  assign date_fr = d | date: '%-d' | append: ' ' | append: mois[m_i] | append: ' ' | append: yr
+
+-%}
+{%- comment -%} 9. Produits : métachamp, sinon produits cités dans l'article, sinon réglage par défaut {%- endcomment -%}
+{%- liquid
+  assign prods = article.metafields.fichly.produits.value
+  assign handles = ','
+  if prods == blank
+    assign pparts = body | split: '/products/'
+    for p in pparts offset: 1
+      assign h = p | split: '"' | first | split: '?' | first | split: '#' | first | split: '/' | first | split: "'" | first | strip
+      assign key = ',' | append: h | append: ','
+      if h != blank
+        unless handles contains key
+          assign handles = handles | append: h | append: ','
+        endunless
+      endif
+    endfor
+  endif
+-%}
+
+<div class="fv2" data-fv2>
+  <div class="fv2-progress" aria-hidden="true"><span></span></div>
+  <article class="fv2-art" itemscope itemtype="https://schema.org/Article">
+    <header class="fv2-head">
+      <div class="fv2-head__text">
+        <nav class="fv2-crumbs" aria-label="Fil d'Ariane">
+          <a href="{{ routes.root_url }}">Accueil</a><span class="fv2-sep" aria-hidden="true">•</span>
+          <a href="{{ blog.url }}">Blog</a><span class="fv2-sep" aria-hidden="true">•</span>
+          <a class="fv2-tag" href="{{ blog.url }}/tagged/{{ categorie | handleize }}">{{ categorie }}</a>
+        </nav>
+        <h1 class="fv2-title">{{ title_html }}</h1>
+        {%- if article.excerpt != blank -%}
+          <p class="fv2-lede">{{ article.excerpt | strip_html | strip }}</p>
+        {%- endif -%}
+        <div class="fv2-byline">
+          <div class="fv2-who">
+            {%- if section.settings.author_photo != blank -%}
+              {{ section.settings.author_photo | image_url: width: 120 | image_tag: class: 'fv2-avatar', width: 50, height: 50, alt: '' }}
+            {%- endif -%}
+            <div><strong>{{ article.author }}</strong><span>{{ section.settings.author_role_short }}</span></div>
+          </div>
+          <div class="fv2-meta"><span>Mis à jour le {{ date_fr }}</span><i aria-hidden="true"></i><span>{{ minutes }} min de lecture</span></div>
+          <div class="fv2-share">
+            <a class="fv2-chipbtn" href="https://www.linkedin.com/sharing/share-offsite/?url={{ canonical_url | url_encode }}" target="_blank" rel="noopener">Partager sur LinkedIn</a>
+            <button type="button" class="fv2-chipbtn" data-fv2-copy="{{ canonical_url }}"><span>Copier le lien</span></button>
+          </div>
+        </div>
+      </div>
+      {%- if article.image -%}
+        <figure class="fv2-cover">
+          {{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '400,600,800,1000,1200', sizes: '(min-width: 1000px) 400px, 100vw', alt: article.image.alt | default: article.title }}
+        </figure>
+      {%- endif -%}
+    </header>
+
+    {%- if resume_html != blank or essentiel_html != blank -%}
+      <section class="fv2-resume" aria-label="En résumé et essentiel à retenir">
+        <div class="fv2-ribbon" aria-hidden="true"></div>
+        <div class="fv2-resume__inner">
+          {%- if resume_html != blank -%}
+            <div class="fv2-resume__part"><h2 class="fv2-eyebrow">En résumé</h2><div class="fv2-resume__text">{{ resume_html }}</div></div>
+          {%- endif -%}
+          {%- if essentiel_html != blank -%}
+            <div class="fv2-resume__part"><h2 class="fv2-eyebrow">L'essentiel à retenir</h2>{{ essentiel_html }}</div>
+          {%- endif -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    <div class="fv2-body">
+      <aside class="fv2-rail">
+        {%- if toc != blank -%}
+          <div class="fv2-tocbox">
+            <div class="fv2-ribbon" aria-hidden="true"></div>
+            <details class="fv2-toc" data-fv2-toc>
+              <summary>Sommaire</summary>
+              <ol>{{ toc }}</ol>
+              <div class="fv2-toc__foot"><span data-fv2-left data-total="{{ minutes }}">{{ minutes }} min restantes</span><div class="fv2-toc__bar"><span></span></div></div>
+            </details>
+          </div>
+        {%- endif -%}
+        {%- capture rail_product -%}
+          {%- if prods != blank -%}
+            {%- assign rp = prods | first -%}
+          {%- else -%}
+            {%- assign first_h = handles | remove_first: ',' | split: ',' | first -%}
+            {%- if first_h != blank -%}{%- assign rp = all_products[first_h] -%}{%- endif -%}
+          {%- endif -%}
+          {%- if rp == blank or rp.id == blank -%}{%- assign rp = section.settings.produits_defaut | first -%}{%- endif -%}
+          {%- if rp != blank and rp.id != blank -%}
+            <a class="fv2-railprod" href="{{ rp.url }}">
+              {%- if rp.featured_image -%}{{ rp.featured_image | image_url: width: 440 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              <small>Les fiches de cet article</small>
+              <b>{{ rp.title }}</b>
+              <span class="fv2-price">{{ rp.price | money }}</span>
+              <span class="fv2-more">Voir le produit →</span>
+            </a>
+          {%- endif -%}
+        {%- endcapture -%}
+        {{ rail_product }}
+      </aside>
+
+      <div class="fv2-content{% if is_fichly %} is-legacy{% endif %}">
+        {{ content }}
+
+        <div class="fv2-author">
+          <div class="fv2-ribbon" aria-hidden="true"></div>
+          <div class="fv2-author__inner">
+            {%- if section.settings.author_photo != blank -%}
+              {{ section.settings.author_photo | image_url: width: 180 | image_tag: class: 'fv2-avatar', width: 80, height: 80, alt: article.author }}
+            {%- endif -%}
+            <div class="fv2-author__body">
+              <strong>{{ article.author }}</strong>
+              <span class="fv2-role">{{ section.settings.author_role }}</span>
+              <p>{{ section.settings.author_bio }}</p>
+              <div class="fv2-author__links">
+                {%- if section.settings.author_linkedin != blank -%}<a href="{{ section.settings.author_linkedin }}" target="_blank" rel="noopener">Suivre {{ article.author | split: ' ' | first }} sur LinkedIn ↗</a>{%- endif -%}
+                <a href="{{ blog.url }}">Tous nos articles</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Les outils de cet article {%- endcomment -%}
+    {%- capture tools -%}
+      {%- assign shown = 0 -%}
+      {%- if prods != blank -%}
+        {%- for p in prods limit: 3 -%}{%- render 'fichly-produit-carte', p: p -%}{%- assign shown = shown | plus: 1 -%}{%- endfor -%}
+      {%- else -%}
+        {%- assign hlist = handles | remove_first: ',' | split: ',' -%}
+        {%- for h in hlist -%}
+          {%- if shown < 3 and h != blank -%}
+            {%- assign p = all_products[h] -%}
+            {%- if p.id != blank and p.handle != section.settings.pack.handle -%}{%- render 'fichly-produit-carte', p: p -%}{%- assign shown = shown | plus: 1 -%}{%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for p in section.settings.produits_defaut -%}
+          {%- assign key = ',' | append: p.handle | append: ',' -%}
+          {%- if shown < 3 -%}{%- unless handles contains key -%}{%- render 'fichly-produit-carte', p: p -%}{%- assign shown = shown | plus: 1 -%}{%- endunless -%}{%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if tools != blank -%}
+      <section class="fv2-tools" aria-labelledby="fv2-outils">
+        <div class="fv2-zone-title"><h2 id="fv2-outils">Les outils de cet article</h2><p>{{ section.settings.tools_text }}</p></div>
+        <div class="fv2-tools__grid">{{ tools }}</div>
+        {%- assign pack = section.settings.pack -%}
+        {%- if pack != blank and pack.id != blank -%}
+          <div class="fv2-tools__pack"><span>Tout réunir : <strong>{{ pack.title }}</strong>, {{ pack.price | money }}</span><a class="fv2-chipbtn" href="{{ pack.url }}">Voir le pack →</a></div>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    {%- if section.settings.show_formation -%}
+      <section class="fv2-formation" aria-labelledby="fv2-formations">
+        <div class="fv2-ribbon" aria-hidden="true"></div>
+        <div class="fv2-formation__inner">
+          <div class="fv2-formation__text">
+            <div class="fv2-eyebrow is-light">{{ section.settings.f_eyebrow }}</div>
+            <h2 id="fv2-formations">{{ section.settings.f_title }} <em>{{ section.settings.f_title_accent }}</em></h2>
+            <p>{{ section.settings.f_text }}</p>
+            <ul class="fv2-facts">{%- assign facts = section.settings.f_facts | split: '|' -%}{%- for f in facts -%}<li>{{ f | strip }}</li>{%- endfor -%}</ul>
+            <div class="fv2-gbprice"><strong>{{ section.settings.f_price }} <span>{{ section.settings.f_price_note }}</span></strong><small>{{ section.settings.f_legal }}</small></div>
+            <div class="fv2-actions">
+              <a class="fv2-btn is-light" href="{{ section.settings.f_cta1_link }}">{{ section.settings.f_cta1_label }} <span aria-hidden="true">→</span></a>
+              {%- if section.settings.f_cta2_link != blank -%}<a class="fv2-btn is-ghost" href="{{ section.settings.f_cta2_link }}" target="_blank" rel="noopener">{{ section.settings.f_cta2_label }}</a>{%- endif -%}
+            </div>
+            <div class="fv2-trust">{%- assign trust = section.settings.f_trust | split: '|' -%}{%- for t in trust -%}<span>{{ t | strip }}</span>{%- endfor -%}</div>
+            <div class="fv2-path">Le parcours :
+              {%- if section.settings.f_prev_link != blank %} <a href="{{ section.settings.f_prev_link }}">{{ section.settings.f_prev_label }}</a> <span aria-hidden="true">→</span>{% endif %}
+              <span class="fv2-here">{{ section.settings.f_here_label }}</span>
+              {%- if section.settings.f_next_link != blank %} <span aria-hidden="true">→</span> <a href="{{ section.settings.f_next_link }}">{{ section.settings.f_next_label }}</a>{% endif %}
+            </div>
+          </div>
+          <div class="fv2-motion" data-fv2-motion>
+            <p class="fv2-vh">Programme en six jours : Define, Measure, Analyze, Improve, Control, puis soutenance et certification.</p>
+            <div class="fv2-motion__head" aria-hidden="true"><span>{{ section.settings.f_motion_title }}</span><b data-fv2-count>Jour 6/6</b></div>
+            <div class="fv2-track" aria-hidden="true">
+              <div class="fv2-rail-line"></div><div class="fv2-rail-on" data-fv2-railon></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-indigo);--t:#fff"><b>D</b><span>Jour 1</span></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-green)"><b>M</b><span>Jour 2</span></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-coral)"><b>A</b><span>Jour 3</span></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-yellow)"><b>I</b><span>Jour 4</span></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-blue)"><b>C</b><span>Jour 5</span></div>
+              <div class="fv2-stop is-on" style="--s:var(--fv2-rust);--t:#fff"><b>✓</b><span>Jour 6</span></div>
+              <div class="fv2-token" data-fv2-token></div>
+            </div>
+            <div class="fv2-day" aria-hidden="true"><span class="fv2-day__n" data-fv2-dayn>Jour 6 · Certification</span><p data-fv2-dayt>{{ section.settings.f_day6 }}</p></div>
+            <div class="fv2-chips" aria-hidden="true">{%- assign chips = section.settings.f_chips | split: '|' -%}{%- for ch in chips -%}<span>{{ ch | strip }}</span>{%- endfor -%}</div>
+            <script type="application/json" data-fv2-days>{{ section.settings.f_days | split: '|' | json }}</script>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- capture related -%}
+      {%- assign count = 0 -%}
+      {%- assign used = ',' | append: article.id | append: ',' -%}
+      {%- for a in blog.articles -%}
+        {%- assign key = ',' | append: a.id | append: ',' -%}
+        {%- if count < 3 -%}{%- unless used contains key -%}
+          {%- assign match = false -%}
+          {%- for t in a.tags -%}{%- if article.tags contains t and t != 'Lean Management' -%}{%- assign match = true -%}{%- endif -%}{%- endfor -%}
+          {%- if match -%}{%- render 'fichly-article-carte', a: a -%}{%- assign count = count | plus: 1 -%}{%- assign used = used | append: a.id | append: ',' -%}{%- endif -%}
+        {%- endunless -%}{%- endif -%}
+      {%- endfor -%}
+      {%- for a in blog.articles -%}
+        {%- assign key = ',' | append: a.id | append: ',' -%}
+        {%- if count < 3 -%}{%- unless used contains key -%}{%- render 'fichly-article-carte', a: a -%}{%- assign count = count | plus: 1 -%}{%- assign used = used | append: a.id | append: ',' -%}{%- endunless -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if related != blank -%}
+      <section class="fv2-related" aria-labelledby="fv2-rel">
+        <div class="fv2-zone-title"><h2 id="fv2-rel">À lire aussi</h2></div>
+        <div class="fv2-related__grid">{{ related }}</div>
+      </section>
+    {%- endif -%}
+  </article>
+</div>
+
+{%- liquid
+  assign resume_txt = resume_html | strip_html | strip_newlines | strip
+  if resume_txt == blank
+    assign resume_txt = article.excerpt | strip_html | strip_newlines | strip
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": {{ article.title | json }},
+      "description": {{ resume_txt | json }},
+      {%- if article.image %}"image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},{% endif %}
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "dateModified": {{ d | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "inLanguage": "fr-FR",
+      "mainEntityOfPage": {{ canonical_url | json }},
+      "author": {
+        "@type": "Person",
+        "name": {{ article.author | json }}
+        {%- if section.settings.author_linkedin != blank %},
+        "url": {{ section.settings.author_linkedin | json }},
+        "sameAs": [{{ section.settings.author_linkedin | json }}]{% endif %}
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | json }}
+        {%- if shop.brand.logo %},
+        "logo": {"@type": "ImageObject", "url": {{ shop.brand.logo | image_url: width: 600 | prepend: 'https:' | json }}}{% endif %}
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": {{ shop.url | json }}},
+        {"@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": {{ shop.url | append: blog.url | json }}},
+        {"@type": "ListItem", "position": 3, "name": {{ article.title | json }}, "item": {{ canonical_url | json }}}
+      ]
+    }
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Article Fichly V2",
+  "tag": "section",
+  "class": "fv2-section",
+  "settings": [
+    { "type": "header", "content": "Auteur" },
+    { "type": "image_picker", "id": "author_photo", "label": "Photo" },
+    { "type": "text", "id": "author_role_short", "label": "Rôle (en-tête)", "default": "Fondateur de Fichly, formateur Lean" },
+    { "type": "text", "id": "author_role", "label": "Rôle (encart)", "default": "Fondateur de Fichly, formateur Lean Management" },
+    { "type": "textarea", "id": "author_bio", "label": "Bio" },
+    { "type": "url", "id": "author_linkedin", "label": "LinkedIn" },
+    { "type": "header", "content": "Produits" },
+    { "type": "product_list", "id": "produits_defaut", "label": "Produits par défaut", "limit": 3 },
+    { "type": "product", "id": "pack", "label": "Pack proposé" },
+    { "type": "text", "id": "tools_text", "label": "Texte des outils", "default": "Les fiches et les guides Fichly pour passer de la lecture au terrain." },
+    { "type": "header", "content": "Formation" },
+    { "type": "checkbox", "id": "show_formation", "label": "Afficher le bloc formation", "default": true },
+    { "type": "text", "id": "f_eyebrow", "label": "Surtitre", "default": "Découvrir nos formations" },
+    { "type": "text", "id": "f_title", "label": "Titre", "default": "Pilotez vos projets d'amélioration avec la" },
+    { "type": "text", "id": "f_title_accent", "label": "Titre, partie en italique", "default": "Green Belt" },
+    { "type": "textarea", "id": "f_text", "label": "Texte" },
+    { "type": "text", "id": "f_facts", "label": "Points clés (séparés par |)" },
+    { "type": "text", "id": "f_price", "label": "Prix" },
+    { "type": "text", "id": "f_price_note", "label": "Précision du prix" },
+    { "type": "text", "id": "f_legal", "label": "Mention" },
+    { "type": "text", "id": "f_cta1_label", "label": "Bouton principal" },
+    { "type": "url", "id": "f_cta1_link", "label": "Lien du bouton principal" },
+    { "type": "text", "id": "f_cta2_label", "label": "Bouton secondaire" },
+    { "type": "url", "id": "f_cta2_link", "label": "Lien du bouton secondaire" },
+    { "type": "text", "id": "f_trust", "label": "Réassurance (séparée par |)" },
+    { "type": "text", "id": "f_prev_label", "label": "Parcours : niveau précédent" },
+    { "type": "url", "id": "f_prev_link", "label": "Lien du niveau précédent" },
+    { "type": "text", "id": "f_here_label", "label": "Parcours : niveau présenté", "default": "Green Belt" },
+    { "type": "text", "id": "f_next_label", "label": "Parcours : niveau suivant" },
+    { "type": "url", "id": "f_next_link", "label": "Lien du niveau suivant" },
+    { "type": "text", "id": "f_motion_title", "label": "Encart animé : titre", "default": "La Green Belt en 6 jours" },
+    { "type": "textarea", "id": "f_days", "label": "Encart animé : les 6 jours (Titre::Texte, séparés par |)" },
+    { "type": "text", "id": "f_day6", "label": "Encart animé : texte affiché sans animation" },
+    { "type": "text", "id": "f_chips", "label": "Encart animé : bénéfices (séparés par |)" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+<a class="fv2-pcard" href="{{ p.url }}">
+  <div class="fv2-pcard__img">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', sizes: '(min-width: 760px) 300px, 100vw', alt: '' }}{%- endif -%}</div>
+  <div class="fv2-pcard__body">
+    <small>{{ p.type }}</small>
+    <b>{{ p.title }}</b>
+    <div class="fv2-pcard__foot"><span class="fv2-price">{{ p.price | money }}</span><span class="fv2-more">Voir le produit →</span></div>
+  </div>
+</a>

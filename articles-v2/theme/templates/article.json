@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article-v2",
+      "settings": {
+        "author_photo": "shopify://shop_images/Photo_Hugo_Duc.png",
+        "author_role_short": "Fondateur de Fichly, formateur Lean",
+        "author_role": "Fondateur de Fichly, formateur Lean Management",
+        "author_bio": "Ingénieur industriel de formation, Hugo partage ses connaissances sur LinkedIn avec un post par jour. Il a créé Fichly, organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.",
+        "author_linkedin": "https://www.linkedin.com/in/hugo-duc/",
+        "produits_defaut": [
+          "fiches-lean",
+          "le-guide-du-5s-en-20-fiches",
+          "le-guide-de-la-resolution-de-problemes-dmaic"
+        ],
+        "pack": "pack-lean-management-green-belt",
+        "tools_text": "Les fiches et les guides Fichly pour passer de la lecture au terrain.",
+        "show_formation": true,
+        "f_eyebrow": "Découvrir nos formations",
+        "f_title": "Pilotez vos projets d'amélioration avec la",
+        "f_title_accent": "Green Belt",
+        "f_text": "La certification Green Belt Lean Management (RS7114) : 6 jours pour mener un projet réel de bout en bout, avec la démarche DMAIC.",
+        "f_facts": "Certification RS7114|Éligible CPF|6 jours · 42 h|80 % de pratique",
+        "f_price": "1 500€",
+        "f_price_note": "en distanciel, finançable via votre CPF",
+        "f_legal": "Sous conditions d'éligibilité et de droits disponibles. Pack Lean offert avec la formation.",
+        "f_cta1_label": "Découvrir la Green Belt",
+        "f_cta1_link": "/pages/formation-lean-green-belt-cpf",
+        "f_cta2_label": "Réserver 30 min d'échange",
+        "f_cta2_link": "https://calendar.app.google/r2FZHTjKzBM6W2Mf6",
+        "f_trust": "4,8/5 note des apprenants|9 sur 10 recommandent nos formations|Organisme certifié Qualiopi",
+        "f_prev_label": "Yellow Belt",
+        "f_prev_link": "/pages/formation-yellow-belt-lean-management-fichly",
+        "f_here_label": "Green Belt",
+        "f_next_label": "Black Belt",
+        "f_next_link": "/pages/formation-black-belt-lean-six-sigma",
+        "f_motion_title": "La Green Belt en 6 jours",
+        "f_days": "Jour 1 · Define::Cadrer le projet : charte, périmètre, SIPOC et voix du client.|Jour 2 · Measure::Mesurer le processus : VSM, collecte de données, indicateurs.|Jour 3 · Analyze::Analyser les causes : Ishikawa, 5 pourquoi, Pareto.|Jour 4 · Improve::Améliorer : 5S, SMED, Kanban, plan d'action.|Jour 5 · Control::Pérenniser : standards, A3, pilotage de la performance.|Jour 6 · Certification::Soutenance de votre projet et certification RS7114.",
+        "f_day6": "Soutenance de votre projet et certification RS7114.",
+        "f_chips": "Projet réel mené de bout en bout|Certification RS7114|Finançable CPF|Pack Lean offert"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
