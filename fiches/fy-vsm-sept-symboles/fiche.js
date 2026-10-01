@@ -80,7 +80,7 @@
     [1, 'process', PX[2], PROC_Y, 2.98], [1, 'process', PX[1], PROC_Y, 3.13], [1, 'process', PX[0], PROC_Y, 3.28],
     [2, 'stock', STOCKS[3][0], TRI_Y, 4.92], [2, 'stock', STOCKS[2][0], TRI_Y, 5.04], [2, 'stock', STOCKS[1][0], TRI_Y, 5.16], [2, 'stock', STOCKS[0][0], TRI_Y, 5.28, 0, { bow: 105 }],
     [3, 'push', 930, PUSH_Y, 6.18, 80], [3, 'push', 666, PUSH_Y, 6.28, 58], [3, 'push', 414, PUSH_Y, 6.38, 58], [3, 'push', 150, PUSH_Y, 6.48, 80],
-    [4, 'truck', CLI_X, TRUCK_Y, 7.18], [4, 'truck', SUP_X, TRUCK_Y, 7.38, 0, { bow: 125, arc: 18, yk: 2.5 }],
+    [4, 'truck', CLI_X, TRUCK_Y, 7.18, 0, { arc: 18, yk: 2.5 }], [4, 'truck', SUP_X, TRUCK_Y, 7.38, 0, { bow: 125, arc: 18, yk: 2.5 }],
   ];
   const FLY = { factory: 0.62, process: 0.62, stock: 0.58, push: 0.55, truck: 0.6 };
   const LEGEND_SCALE = { factory: 0.6, process: 0.36, stock: 1, push: 1, truck: 1 };

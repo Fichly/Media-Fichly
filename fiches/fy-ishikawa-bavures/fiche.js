@@ -173,7 +173,6 @@
     }
     travelTo(exit);
     pen.sessions.push({ segs, tIn: t0, tOut: t });
-    if (window.__DBG) console.log(segs.map(sg => `${sg.kind[0]}${sg.act ? (sg.act.kind[0]) : ''} ${sg.t0.toFixed(2)}-${sg.t1.toFixed(2)}`).join(' | '));
     return t;
   }
   function penPose(pen, t) {
@@ -463,8 +462,6 @@
     S.causeTimes = BLOCKS.map(b => b.write.act.t1).sort((a, b) => a - b);
     S.tagTimes = S.circles.map(c => c.tPop);
     S.endR = endR;
-    if (window.__DBG) BLOCKS.forEach(b => console.log(b.id, b.vg ? `vague ${b.vg.write.act.t0.toFixed(2)} strike ${b.vg.strike.act.t0.toFixed(2)}-${b.vg.strike.act.t1.toFixed(2)}` : '', `write ${b.write.act.t0.toFixed(2)}-${b.write.act.t1.toFixed(2)}`)), console.log('pills', S.T_PILL.map(x => x.toFixed(2)).join(' '), 'rules', S.T_RULE.map(x => x.toFixed(2)).join(' '), 'circles', S.circles.map(c => c.loop.act.t0.toFixed(2)).join(' '));
-    console.log(`Feutre A : ${T_NEW.toFixed(2)} → ${endA.toFixed(2)} s · B → ${endB.toFixed(2)} s · rouge → ${endR.toFixed(2)} s · pastille finale ${S.T_PILL[4].toFixed(2)} s`);
     if (S.T_PILL[4] > DURATION - 0.9 || endR > DURATION - 0.3) console.error(`Chronologie trop longue (fin ${endR.toFixed(2)} s)`);
 
     D.encart(['Creuser la cause', 'Notre article 5 Pourquoi', '(lien en commentaire)']);
@@ -564,7 +561,7 @@
       let o, dy = 0;
       if (final) o = i === last ? 1 - prog(t, T_OUT, 0.14) : 0;
       else {
-        const a = TP[i] + 0.12;
+        const a = TP[i] + 0.16;
         o = prog(t, a, 0.25) * (i === last ? 1 : 1 - prog(t, TP[i + 1], 0.14));
         dy = 8 * (1 - prog(t, a, 0.25));
       }

@@ -349,7 +349,7 @@
         fit(ex, RW - 24, `rejet ${i + 1} exemple`, 20);
         const b = measure(ex);
         slen = b.width + 8;
-        strike = el('line', { x1: b.x - 4, y1: 121.5, x2: b.x + b.width + 4, y2: 121.5, stroke: C.red, 'stroke-width': 2.6, 'stroke-linecap': 'round' }, g);
+        strike = el('line', { x1: b.x - 4, y1: 121.5, x2: b.x + b.width + 4, y2: 121.5, stroke: C.red, 'stroke-width': 2.4, 'stroke-opacity': 0.85, 'stroke-linecap': 'round' }, g);
       } else {
         // Des paragraphes : un mur de texte
         [[30, 101, 232], [30, 113, 216], [30, 125, 236], [30, 137, 168]].forEach(([x, y, w]) => el('rect', { x, y, width: w, height: 7, rx: 3.5, fill: '#d3d3e4' }, g));
@@ -420,8 +420,8 @@
       st.h = 1 - d; st.s = 1.035 - 0.035 * d;
     } else {
       const q = prog(u, CONTACT, 0.13), q2 = prog(u, CONTACT + 0.13, 0.18);
-      st.sx = 1 + 0.014 * bump(q); st.sy = 1 - 0.03 * bump(q);      // tassement
-      st.s = 1 + 0.01 * bump(q2); st.h = 0.1 * bump(q2);             // petit rebond
+      st.sx = 1 + 0.02 * bump(q); st.sy = 1 - 0.045 * bump(q);      // tassement
+      st.s = 1 + 0.014 * bump(q2); st.h = 0.12 * bump(q2);           // petit rebond
     }
     return st;
   }
@@ -478,7 +478,9 @@
       if (p.hl) {
         const c = T_LAND(p.k) + CONTACT, te = T_EXP(p.k);
         // Avant le démontage : comme l'image finale ; en vol : neutre ; à l'arrivée : jaune et badge
-        p.hl.setAttribute('opacity', f2(final ? 1 : t < c ? 1 - prog(t, te, 0.2) : prog(t, c, 0.15)));
+        const ho = final ? 1 : t < c ? 1 - prog(t, te, 0.2) : prog(t, c, 0.15);
+        p.hl.setAttribute('display', ho > 0.001 ? 'inline' : 'none');
+        p.hl.setAttribute('opacity', f2(ho));
         const pb = final ? 1 : t < c ? 1 - prog(t, te, 0.18) : prog(t, c + 0.1, 0.35);
         const kb = t < c && !final ? Math.max(0.001, pb) : popScale(pb);
         p.badge.setAttribute('display', pb > 0 ? 'inline' : 'none');
@@ -536,9 +538,11 @@
       R.div.setAttribute('fill-opacity', st.red ? 0.7 : 1);
       R.labels.forEach(n => n.setAttribute('fill', st.red ? C.tRed : C.ink));
       R.iconQ.setAttribute('display', st.red ? 'none' : 'inline');
-      R.iconX.setAttribute('display', st.red ? 'inline' : 'none');
+      R.iconX.setAttribute('display', st.red && st.icon > 0 ? 'inline' : 'none');
       R.iconX.setAttribute('transform', `translate(32 38) scale(${f2(popScale(st.icon))})`);
-      R.strike.setAttribute('stroke-dashoffset', f2(R.slen * (1 - st.strike)));
+      // Le trait se dessine ; une fois terminé, il perd son pointillé
+      if (st.strike >= 1) { R.strike.removeAttribute('stroke-dasharray'); R.strike.removeAttribute('stroke-dashoffset'); }
+      else { R.strike.setAttribute('stroke-dasharray', f2(R.slen)); R.strike.setAttribute('stroke-dashoffset', f2(R.slen * (1 - st.strike))); }
       R.strike.setAttribute('display', st.strike > 0 ? 'inline' : 'none');
       // Le bord de la page s'allume au choc
       const qf = final ? 0 : prog(t, T_REJ[R.i] + APPROACH, 0.45);

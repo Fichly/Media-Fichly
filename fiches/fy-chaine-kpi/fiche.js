@@ -446,7 +446,7 @@
     show(S.okBadge, okIn > 0.001);
     const kok = final ? okIn : popScale(okIn);
     S.okBadge.setAttribute('transform', `translate(${DSP.x + DSP.w - 2} ${DSP.y + 2}) scale(${f2(Math.max(kok, 0.001))}) translate(${-(DSP.x + DSP.w - 2)} ${-(DSP.y + 2)})`);
-    const alIn = final ? 0 : prog(t, T_UP + UP_DUR - 0.05, 0.3) * (1 - prog(t, T_DOWN + 0.15, 0.2));
+    const alIn = final || !red ? 0 : prog(t, T_UP + UP_DUR - 0.05, 0.3) * (1 - prog(t, T_DOWN + DOWN_DUR / 2 - 0.12, 0.12));
     show(S.alert, alIn > 0.001);
     const kal = popScale(alIn) * (1 + 0.1 * Math.sin((t - T_UP) * Math.PI * 2 / 0.7));
     S.alert.setAttribute('transform', `translate(${DSP.x + DSP.w - 2} ${DSP.y + 2}) scale(${f2(Math.max(kal, 0.001))})`);
