@@ -7,7 +7,9 @@ Pour chaque article ayant un blog/<handle>/visuels.json :
   - chaque visuel est inséré après le paragraphe qui contient sa phrase « apres » (GIF hébergé sur le CDN
     Shopify, fichier fichly-<handle>-<id>.gif déposé dans Contenu › Fichiers) ;
   - toutes les anciennes images sont retirées, sauf les photos de l'auteur (liste GARDER) ;
+  - un bloc <figure> d'ancienne illustration (image ou vidéo) part en entier, légende comprise ;
   - un paragraphe vidé par le retrait disparaît avec l'image.
+Les intégrations externes (<iframe> YouTube, Giphy) ne sont pas touchées.
 Écrit <sortie>/<handle>.html et affiche un rapport par article. N'envoie rien à Shopify.
 """
 import html
@@ -58,13 +60,27 @@ def integrer(article):
         j = body.find('</p>', i)
         edits.append((j + 4, j + 4, visuel_html(handle, v)))
         rapport['inseres'] += 1
+    # Blocs <figure> d'anciennes illustrations (image ou vidéo) : retirés en entier, légende comprise
+    figures = []
+    for f in re.finditer(r'<figure\b.*?</figure>', body, re.S):
+        medias = re.findall(r'<(?:img|video|source)\b[^>]*src="([^"]*)"', f.group(0))
+        if medias and not any(x.split('/')[-1].split('?')[0] in GARDER for x in medias):
+            figures.append((f.start(), f.end()))
+            edits.append((f.start(), f.end(), ''))
+            rapport['retires'].append('figure : ' + medias[0].split('/')[-1].split('?')[0])
     for m in re.finditer(r'<img\b[^>]*>', body):
+        if any(a <= m.start() < b for a, b in figures):
+            continue
         src = (re.search(r'src="([^"]*)"', m.group(0)) or [None, ''])[1]
         fn = src.split('/')[-1].split('?')[0]
         if fn in GARDER:
             rapport['gardes'].append(fn or '(src vide)')
             continue
         a, b = bloc_image(body, m)
+        # Légende seule juste après l'image (<figure> sans média) : elle part avec l'image
+        leg = re.match(r'\s*<figure>\s*<figcaption>.*?</figcaption>\s*</figure>', body[b:], re.S)
+        if leg:
+            b += leg.end()
         edits.append((a, b, ''))
         rapport['retires'].append(fn)
     # Application de la fin vers le début (insertions après un retrait au même endroit)

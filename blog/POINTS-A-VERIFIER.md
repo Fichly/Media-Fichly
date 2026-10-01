@@ -23,18 +23,23 @@ l'exemple, répartitions, cadences) sont dans la section « Hypothèses » du RE
 - **Kanban de production** : « ligne d'assemblage en [secteur] ».
 - **VSM** : l'exemple chiffré contient encore des champs à remplir ([secteur], [C/T poste 1]…) ;
   le visuel n'utilise que les chiffres rédigés.
-- **Ishikawa**, **QQOQCCP** et **RACI** : un paragraphe `<p><img src="VISUEL-A-CREER">` à remplacer par
-  le visuel prévu : `3-diagramme-rempli` (Ishikawa), `2-du-vague-a-la-phrase` (QQOQCCP),
-  `4-plan-action-arret` (RACI ; mettre aussi l'URL du PNG dans le champ image du JSON-LD).
-- **Fiche métier responsable amélioration continue** : une infographie avec un texte alt vide.
 
-## Images existantes à retirer si les visuels sont intégrés
+## Après l'intégration dans Shopify (1er octobre 2026)
 
-- **MTBF / MTTR** : les 5 images (3_MTBF, 1_MTTR, 2_MTBF_MTTR_disponibilite, Courbe_en_baignoire,
-  4_MTBF_ou_MTTR_sur_quoi_agir) sont refaites ; deux visuels se placent là où l'article donne les chiffres.
-- **VSM** : fichly-symboles-vsm et fichly-vsm-simplifiee sont refaites.
-- **SMED** : 7 des 8 images sont reprises (interne / externe, 52 → 13 min, schémas des étapes) ;
-  l'image des 6 erreurs est gardée.
-- **Lean Manufacturing** : le brouillon Shopify contient 8 GIF d'une autre série (blog-lm-1 à blog-lm-8),
-  à remplacer par les 10 visuels de ce dossier.
-- Détail article par article : section « Images existantes » ou tableau du README de chaque article.
+Les 109 visuels animés sont dans les 27 articles et les anciennes illustrations ont été retirées
+(photos de l'auteur gardées). Les emplacements `VISUEL-A-CREER` d'Ishikawa, QQOQCCP, RACI et AMDEC
+sont remplacés. Restent à trancher à la main :
+
+- **Intégrations externes gardées** : le GIF Giphy de l'article SMED et la vidéo YouTube de
+  « Quelle formation ». Ce ne sont pas des illustrations Fichly : à garder ou à retirer selon le choix éditorial.
+- **5 Pourquoi** : la bannière « Audit » (image sans lien) a été retirée avec les anciennes images.
+  À remettre sous forme de vrai bouton si elle servait d'appel à l'action.
+- **Image de partage (JSON-LD)** : le champ `image` pointe encore vers une ancienne image dans 9 articles
+  (5S, Green Belt, Lean Manufacturing, Muda, MTBF / MTTR, SMED, TPM, TRS, VSM) et vaut `VISUEL-A-CREER`
+  dans 4 brouillons (AMDEC, Ishikawa, QQOQCCP, RACI). Les anciennes images restent en ligne dans
+  Contenu › Fichiers, donc rien n'est cassé ; mettre l'URL du PNG du visuel principal quand c'est possible.
+- **Photo de l'auteur** : `src="REMPLACER-PAR-PHOTO-HUGO"` dans la carte auteur de VSM (publié) et des
+  brouillons AMDEC, Ishikawa, QQOQCCP et RACI ; la photo de l'article Financement est intégrée en base64
+  avec un en-tête qui semble abîmé (à remplacer par Photo_Hugo_Duc.png).
+- **Commentaires internes** : « A REMPLACER / VERIFIER AVANT PUBLICATION » dans le code de Financement,
+  de la fiche métier et de plusieurs brouillons. Invisibles pour le lecteur, mais à nettoyer.
