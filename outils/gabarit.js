@@ -252,15 +252,31 @@
     return { url: `url(#${id})`, rect: r };
   }
 
+  // Temps forts : [{ t, label, frame? }], un tableau commun ou un objet { scénario: [...] }.
+  // Chaque temps dure jusqu'au suivant ; frame = son image clé (planche, lecteur), par défaut sa dernière image.
+  const FPS = 60;
+  function resolveBeats(list, duration) {
+    return list.map((b, i) => {
+      const end = i + 1 < list.length ? list[i + 1].t : duration;
+      if (!(b.t < end) || b.t < 0) console.error(`Temps fort mal placé : ${b.label} (${b.t} → ${end} s)`);
+      const frame = Math.round((b.frame ?? end - 1 / FPS) * FPS) / FPS;
+      if (frame < 0 || frame >= duration) console.error(`Image clé hors de la fiche : ${b.label} (${frame} s)`);
+      return { t: b.t, end, label: b.label, frame };
+    });
+  }
+
   // Démarrage : polices chargées, scène construite, images décodées, draw(0).
   // scenarios : { nom: draw } ; le scénario vient de l'URL (?scenario=camera), sinon le premier.
-  function start({ duration, build, draw, scenarios }) {
+  function start({ duration, build, draw, scenarios, beats }) {
+    let scenario = null;
     if (scenarios) {
       const wanted = new URLSearchParams(location.search).get('scenario');
       const name = wanted || Object.keys(scenarios)[0];
       if (!scenarios[name]) console.error(`Scénario inconnu : ${name} (${Object.keys(scenarios).join(', ')})`);
-      draw = scenarios[name] || Object.values(scenarios)[0];
+      scenario = scenarios[name] ? name : Object.keys(scenarios)[0];
+      draw = scenarios[scenario];
     }
+    const list = Array.isArray(beats) ? beats : (beats && beats[scenario]) || [];
     const ready = (async () => {
       await Promise.all([400, 500, 700, 800].map(w => document.fonts.load(`${w} 30px Poppins`)));
       await document.fonts.ready;
@@ -273,7 +289,10 @@
       draw(0);
     })();
     const loop = t => draw(((t % duration) + duration) % duration);
-    window.FICHE = { width: W, height: H, duration, draw: loop, ready };
+    window.FICHE = {
+      width: W, height: H, duration, draw: loop, ready, fps: FPS,
+      beats: resolveBeats(list, duration), scenario, scenarios: scenarios ? Object.keys(scenarios) : [],
+    };
   }
 
   window.Gabarit = {

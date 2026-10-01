@@ -336,5 +336,50 @@
     rise(S.chute, t, 8.25, 0.45);
   }
 
-  G.start({ duration: 12, build, scenarios: { reconstruction, revelation, camera, 'camera-fluide': cameraFluide, simulation } });
+  // ================= Temps forts de chaque scénario (planche, repères du lecteur) =================
+  const AFFICHE = { t: 0, label: 'Affiche : l’image livrée', frame: 0 };
+  const BEATS = {
+    reconstruction: [
+      AFFICHE,
+      { t: 1.2, label: `Deux postes occupés à 100${NB}%` },
+      { t: 3.1, label: 'Le stock grossit entre les deux' },
+      { t: 5.9, label: 'Ce que ça coûte' },
+      { t: 7.4, label: 'La règle, puis la chute' },
+      { t: 8.4, label: 'Tenue finale, retour à l’affiche' },
+    ],
+    revelation: [
+      AFFICHE,
+      { t: 1.2, label: 'Sur l’indicateur, tout va bien' },
+      { t: 4.1, label: 'Le volet révèle le stock', frame: 5.3 },
+      { t: 5.3, label: 'Ce que ça coûte, puis la chute' },
+      { t: 7.3, label: 'Tenue finale, retour à l’affiche' },
+    ],
+    camera: [
+      AFFICHE,
+      { t: 1.3, label: 'Gros plan : le poste rapide', frame: 2.2 },
+      { t: 2.4, label: 'Gros plan : le stock', frame: 3.3 },
+      { t: 3.5, label: 'Gros plan : le poste lent', frame: 4.3 },
+      { t: 4.5, label: 'Gros plan : ce que ça coûte', frame: 5.7 },
+      { t: 5.8, label: 'Gros plan : la règle', frame: 6.9 },
+      { t: 7.3, label: 'Plan large, tenue finale' },
+    ],
+    'camera-fluide': [
+      AFFICHE,
+      { t: 1.2, label: 'Travelling : le poste rapide', frame: 2.5 },
+      { t: 2.6, label: 'Travelling : le stock', frame: 3.8 },
+      { t: 3.9, label: 'Travelling : le poste lent', frame: 5.0 },
+      { t: 5.1, label: 'Travelling : ce que ça coûte', frame: 6.6 },
+      { t: 6.7, label: 'Travelling : la règle', frame: 7.6 },
+      { t: 8.0, label: 'Retour au plan large, tenue finale' },
+    ],
+    simulation: [
+      AFFICHE,
+      { t: 1.2, label: 'Une journée : le poste rapide empile', frame: 3.8 },
+      { t: 3.85, label: 'Les ✗ tombent quand la pile monte' },
+      { t: 7.8, label: 'La règle, puis la chute' },
+      { t: 8.7, label: 'Tenue finale, retour à l’affiche' },
+    ],
+  };
+
+  G.start({ duration: 12, build, beats: BEATS, scenarios: { reconstruction, revelation, camera, 'camera-fluide': cameraFluide, simulation } });
 })();

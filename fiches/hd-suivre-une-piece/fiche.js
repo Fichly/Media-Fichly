@@ -3,9 +3,31 @@
 // Premier commentaire du post (Buffer) : article cartographie des flux (VSM) → encart bas gauche.
 // Mécanique : le parcours de la pièce (4 attentes, une transformation), puis le temps passé dans l'usine.
 // Rendu déterministe : window.FICHE.draw(t), t en secondes, boucle de 12 s.
+// Réglages : les textes (mot pour mot du post) sont dans TEXTES, les temps dans « Chronologie ».
 (() => {
   const G = window.Gabarit;
   const { C, el, text, measure, fit, prog, easeInOut, back, clamp, invEaseInOut, FADE_END, fading, fadeOut, pop, slide, rise } = G;
+
+  // ---------- Réglages : textes ----------
+  const TEXTES = {
+    titre: ['Suivez une pièce,', 'elle attend.'],
+    chapeau: 'Du quai de réception jusqu’à l’expédition, chronomètre en main.',
+    depart: 'Quai de réception',
+    attentes: [
+      'Elle attend dans un stock.',
+      'Elle attend un chariot.',
+      'Elle attend qu’une machine se libère.',
+      'Elle attend un contrôle.',
+    ],
+    transformation: 'De temps en temps, quelqu’un la transforme.',
+    arrivee: 'Expédition',
+    carte2: 'Le temps passé dans l’usine',
+    legende: ['Elle attend', 'Elle est transformée', 'Un total presque dérisoire'],
+    bon: 'Un chronomètre, oui. Sur la pièce.',
+    mauvais: 'Pas sur les personnes.',
+    chute: ['Avant d’aller plus vite sur les opérations,', 'il faut regarder tout le temps qui les sépare.'],
+    encart: ['Cartographier ses flux', 'Notre article sur la VSM', '(lien en commentaire)'],
+  };
 
   // Chronomètre : renvoie l'aiguille pour l'animer
   function stopwatch(parent, cx, cy, k = 1) {
@@ -23,8 +45,8 @@
 
   function build() {
     G.template({ author: 'hugo' });
-    G.title('Suivez une pièce,', 'elle attend.');
-    G.chapeau('Du quai de réception jusqu’à l’expédition, chronomètre en main.');
+    G.title(...TEXTES.titre);
+    G.chapeau(TEXTES.chapeau);
 
     // ----- Carte 1 : le parcours de la pièce -----
     G.card(60, 330, 960, 386);
@@ -38,17 +60,11 @@
     S.rows = [];
     {
       const g = el('g');
-      const p = G.pill(g, 140, Y[0], 'Quai de réception');
+      const p = G.pill(g, 140, Y[0], TEXTES.depart);
       S.rows.push({ g, cx: 140 + p.w / 2, cy: Y[0] });
     }
-    const waits = [
-      'Elle attend dans un stock.',
-      'Elle attend un chariot.',
-      'Elle attend qu’une machine se libère.',
-      'Elle attend un contrôle.',
-    ];
     S.watches = [];
-    waits.forEach((label, i) => {
+    TEXTES.attentes.forEach((label, i) => {
       const cy = Y[i + 1];
       const g = el('g');
       G.badgeNum(g, 160, cy, i + 1);
@@ -60,12 +76,12 @@
       const cy = Y[5];
       const g = el('g');
       G.check(g, 160, cy, 20);
-      fit(text(g, 194, cy + 9, 'De temps en temps, quelqu’un la transforme.', { size: 26, weight: 700, fill: C.tGreen }), 995, 'transformation');
+      fit(text(g, 194, cy + 9, TEXTES.transformation, { size: 26, weight: 700, fill: C.tGreen }), 995, 'transformation');
       S.rows.push({ g, cx: 560, cy });
     }
     {
       const g = el('g');
-      const p = G.pill(g, 140, Y[6], 'Expédition');
+      const p = G.pill(g, 140, Y[6], TEXTES.arrivee);
       S.rows.push({ g, cx: 140 + p.w / 2, cy: Y[6] });
     }
     // La pièce
@@ -76,7 +92,7 @@
     // ----- Carte 2 : le temps passé dans l'usine -----
     G.card(60, 730, 960, 166);
     S.head = el('g');
-    fit(text(S.head, 100, 772, 'Le temps passé dans l’usine', { size: 26, weight: 700, fill: C.ink }), 980, 'titre carte 2');
+    fit(text(S.head, 100, 772, TEXTES.carte2, { size: 26, weight: 700, fill: C.ink }), 980, 'titre carte 2');
 
     const BAR = { x: 100, y: 788, w: 880, h: 36 };
     S.BAR = BAR;
@@ -100,33 +116,45 @@
 
     S.legend = el('g');
     el('circle', { cx: 109, cy: 858, r: 9, fill: C.red }, S.legend);
-    const l1 = text(S.legend, 126, 866, 'Elle attend', { size: 22, weight: 500, fill: C.ink });
+    const l1 = text(S.legend, 126, 866, TEXTES.legende[0], { size: 22, weight: 500, fill: C.ink });
     const l2x = measure(l1).x + measure(l1).width + 36;
     el('circle', { cx: l2x + 9, cy: 858, r: 9, fill: C.green }, S.legend);
-    const l2 = text(S.legend, l2x + 26, 866, 'Elle est transformée', { size: 22, weight: 500, fill: C.ink });
-    const l3 = text(S.legend, 980, 866, 'Un total presque dérisoire', { size: 22, weight: 700, fill: C.tGreen, anchor: 'end' });
+    const l2 = text(S.legend, l2x + 26, 866, TEXTES.legende[1], { size: 22, weight: 500, fill: C.ink });
+    const l3 = text(S.legend, 980, 866, TEXTES.legende[2], { size: 22, weight: 700, fill: C.tGreen, anchor: 'end' });
     G.noOverlap(l2, l3, 'légende carte 2', 24);
 
     // ----- Bandeaux : bonne et mauvaise lecture -----
     S.good = el('g');
     el('rect', { x: 60, y: 910, width: 960, height: 64, rx: 20, fill: C.pGreen }, S.good);
     G.check(S.good, 110, 942, 22);
-    fit(text(S.good, 150, 951.5, 'Un chronomètre, oui. Sur la pièce.', { size: 26, weight: 700, fill: C.tGreen }), 1000, 'bandeau ✓');
+    fit(text(S.good, 150, 951.5, TEXTES.bon, { size: 26, weight: 700, fill: C.tGreen }), 1000, 'bandeau ✓');
 
     S.bad = el('g');
     el('rect', { x: 60, y: 986, width: 960, height: 64, rx: 20, fill: C.pRed }, S.bad);
     G.cross(S.bad, 110, 1018, 22);
-    fit(text(S.bad, 150, 1027.5, 'Pas sur les personnes.', { size: 26, weight: 700, fill: C.tRed }), 1000, 'bandeau ✗');
+    fit(text(S.bad, 150, 1027.5, TEXTES.mauvais, { size: 26, weight: 700, fill: C.tRed }), 1000, 'bandeau ✗');
 
-    S.chute = G.chute('Avant d’aller plus vite sur les opérations,', 'il faut regarder tout le temps qui les sépare.');
-    G.encart(['Cartographier ses flux', 'Notre article sur la VSM', '(lien en commentaire)']);
+    S.chute = G.chute(...TEXTES.chute);
+    G.encart(TEXTES.encart);
   }
 
-  // ---------- Chronologie ----------
-  // Arrivée de la pièce sur chaque étape (s). Elle attend sur les étapes 1 à 4.
+  // ---------- Chronologie (réglages des temps, en s) ----------
+  // Temps 1 · 0 → 1,2 s : l'affiche, image livrée ; effacement du contenu de 1,2 à 1,6 s (gabarit).
+  // Temps 2 · 1,2 → 5,4 s : la pièce suit son parcours. Arrivée sur chaque étape ; elle attend sur les étapes 1 à 4.
   const ARRIVE = [1.85, 2.4, 2.95, 3.5, 4.05, 4.55, 5.05];
   const MOVE = 0.28;
-  const BAR_START = 5.65, BAR_DUR = 0.9;
+  // Temps 3 · 5,4 → 7 s : le temps passé dans l'usine, la barre se remplit.
+  const HEAD_START = 5.4, BAR_START = 5.65, BAR_DUR = 0.9, LEGEND_START = 6.65;
+  // Temps 4 · 7 → 8,3 s : sur la pièce, pas sur les personnes, puis la chute.
+  const GOOD_START = 7.0, BAD_START = 7.4, CHUTE_START = 7.85;
+  // Temps 5 · 8,3 → 12 s : tenue finale sur l'image complète, qui enchaîne sur l'affiche.
+  const BEATS = [
+    { t: 0, label: 'Affiche : l’image livrée', frame: 0 },
+    { t: 1.2, label: 'La pièce attend, quatre fois', frame: 5.4 },
+    { t: 5.4, label: 'Le temps passé dans l’usine', frame: 7.0 },
+    { t: 7.0, label: 'Sur la pièce, pas sur les personnes', frame: 8.3 },
+    { t: 8.3, label: 'Tenue finale, retour à l’affiche' },
+  ];
 
   function tokenY(t) {
     const Y = S.Y;
@@ -171,7 +199,7 @@
     });
 
     // Carte 2 : titre, puis la barre se remplit de gauche à droite
-    pop(S.head, t, 5.4, 290, 764);
+    pop(S.head, t, HEAD_START, 290, 764);
     let fw = S.BAR.w, fo = 1;
     if (fading(t)) fo = fadeOut(t);
     else if (t >= FADE_END) { fw = S.BAR.w * easeInOut(prog(t, BAR_START, BAR_DUR)); fo = fw > 0 ? 1 : 0; }
@@ -186,13 +214,13 @@
       const cy = S.BAR.y + S.BAR.h / 2;
       s.g.setAttribute('transform', k === 1 ? '' : `translate(${s.x} ${cy}) scale(1 ${k}) translate(${-s.x} ${-cy})`);
     });
-    rise(S.legend, t, 6.65, 0.35, 10);
+    rise(S.legend, t, LEGEND_START, 0.35, 10);
 
     // Bandeaux qui glissent depuis la gauche, puis la chute
-    slide(S.good, t, 7.0);
-    slide(S.bad, t, 7.4);
-    rise(S.chute, t, 7.85, 0.45);
+    slide(S.good, t, GOOD_START);
+    slide(S.bad, t, BAD_START);
+    rise(S.chute, t, CHUTE_START, 0.45);
   }
 
-  G.start({ duration: 12, build, draw });
+  G.start({ duration: 12, build, draw, beats: BEATS });
 })();
