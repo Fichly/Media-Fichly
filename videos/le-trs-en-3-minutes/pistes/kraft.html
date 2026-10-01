@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piste kraft — cadre 04, v1</title>
+<link rel="stylesheet" href="../public/fonts.css">
+<style>
+  :root {
+    --blue: #4a4aa0; --ink: #23235a; --white: #ffffff; --card: #fdfdfb;
+    --green: #8cc978; --yellow: #e6b839; --red: #f16969; --violet: #aa76b2; --teal: #75bec0; --lightBlue: #74a3d6;
+    --pGreen: #e6f3df; --pRed: #fde6e6; --pLav: #ececf5; --pYellow: #f8f3d9;
+    --tGreen: #2f5a1f; --tRed: #a83434; --tYellow: #7a5806;
+    --shadow: 0 .14cqw .2cqw rgba(70,45,20,.22), 0 .5cqw 1.1cqw rgba(70,45,20,.18);
+    --shadow-sm: 0 .08cqw .12cqw rgba(70,45,20,.28), 0 .25cqw .5cqw rgba(70,45,20,.16);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e4e4ec; color: var(--ink); font-family: "Poppins", system-ui, sans-serif; padding: 36px 16px 64px; }
+  .sheet { max-width: 1400px; margin: 0 auto; }
+  header h1 { font-weight: 800; font-size: clamp(26px, 3.2vw, 42px); color: var(--blue); line-height: 1.15; }
+  header h1 span { background: var(--blue); color: var(--white); border-radius: 12px; padding: 0 12px 4px; display: inline-block; margin-top: 6px; }
+  header p { font-weight: 500; font-size: 15px; line-height: 1.6; color: var(--blue); margin: 12px 0 20px; max-width: 900px; }
+  .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+  @media (max-width: 800px) { .notes { grid-template-columns: minmax(0, 1fr); } }
+  .notes div { background: var(--white); border-radius: 16px; padding: 18px 20px; font-size: 14px; line-height: 1.6; }
+  .notes h3 { font-weight: 800; font-size: 18px; color: var(--blue); margin-bottom: 6px; }
+  .notes li { margin: 4px 0 4px 18px; }
+  .meta { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--blue); margin-top: 8px; }
+  .meta span:last-child { color: #6b6b85; font-weight: 500; }
+
+  /* ── Cadre 16:9 (1 cqw = 19,2 px en 1920) ── */
+  .f { position: relative; aspect-ratio: 16 / 9; container-type: inline-size; overflow: hidden; border-radius: 6px;
+       background: #c99f70 url("../public/kraft.jpg") center / cover; }
+  .f > * { position: absolute; }
+  /* Papier : feuille blanche légèrement grainée, coins à peine arrondis, ombre douce et chaude */
+  .paper { background: var(--card) url("../public/paper.png") center / 1920px auto; background-blend-mode: multiply; border-radius: .55cqw; box-shadow: var(--shadow); }
+  .paper.red { background-color: var(--pRed); }
+  /* Ruban adhésif (washi) : bandes translucides aux bouts dentelés */
+  .tape { height: 2.2cqw; background: rgba(248,243,217,.82);
+          background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 .5cqw, rgba(255,255,255,0) .5cqw 1cqw);
+          clip-path: polygon(2% 0, 98% 0, 100% 18%, 97.5% 36%, 100% 54%, 97.5% 72%, 99.5% 100%, 1% 100%, 3% 82%, 0 64%, 2.5% 46%, 0 28%);
+          box-shadow: 0 .06cqw .1cqw rgba(70,45,20,.12); }
+  .tape.lav { background-color: rgba(236,236,245,.8); }
+  .tape.green { background-color: rgba(230,243,223,.85); }
+  .row { display: flex; align-items: center; gap: 1cqw; }
+  /* Gommettes : pastilles et pilules avec liseré blanc et petite ombre */
+  .sticker { display: inline-flex; align-items: center; gap: .6cqw; border-radius: 999px; padding: .55cqw 1.15cqw; font-weight: 700; font-size: 1.45cqw; line-height: 1; white-space: nowrap;
+             border: .28cqw solid var(--white); box-shadow: var(--shadow-sm); }
+  .b { display: inline-grid; place-items: center; width: 2.6cqw; height: 2.6cqw; border-radius: 50%; flex: none; background-position: center; background-size: 100%; background-repeat: no-repeat; color: var(--white); font-weight: 700; font-size: 1.45cqw; }
+  .b.sm { width: 1.7cqw; height: 1.7cqw; }
+  .b.ok { background-color: var(--green); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M16 27 L23 34 L37 19' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .b.ko { background-color: var(--red); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M17.5 17.5 L34.5 34.5 M34.5 17.5 L17.5 34.5' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  .b.num { background-color: var(--blue); }
+  .b.stk { border: .28cqw solid var(--white); box-shadow: var(--shadow-sm); }
+  /* Cases d'heure découpées dans du papier coloré */
+  .hours { display: grid; gap: .55cqw; }
+  .hours > div { height: 100%; border-radius: .35cqw; background: var(--blue) url("../public/paper.png") center / 1920px auto; background-blend-mode: multiply;
+                 color: var(--white); position: relative; display: flex; align-items: flex-end; justify-content: center; padding-bottom: .6cqw; font-weight: 700; font-size: 1.05cqw;
+                 box-shadow: 0 .08cqw .1cqw rgba(30,20,60,.25), 0 .2cqw .35cqw rgba(30,20,60,.12); }
+  .hours > div::before { content: attr(data-h); position: absolute; left: .45cqw; top: .35cqw; font-size: .9cqw; font-weight: 600; opacity: .85; }
+  .hours .stop { background-color: var(--red); }
+  .hand { font-family: "Caveat", cursive; font-weight: 700; line-height: 1; white-space: nowrap; }
+  .stat { font-weight: 800; line-height: 1; white-space: nowrap; letter-spacing: -.05cqw; }
+  .ttl { font-weight: 700; font-size: 2.2cqw; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+  .washi6 { left: -1cqw; right: -1cqw; bottom: -.3cqw; height: 1.6cqw; display: flex; gap: 0; }
+  .washi6 i { flex: 1; margin: 0 -.6cqw; opacity: .9;
+              clip-path: polygon(1.5% 0, 98.5% 0, 100% 30%, 98% 60%, 100% 100%, 0 100%, 2% 66%, 0 33%); }
+</style>
+</head>
+<body>
+<div class="sheet">
+<header>
+  <h1>Piste « kraft »<br><span>cadre 04, proposition v1</span></h1>
+  <p>Même cadre, mêmes textes, même DA Fichly (Poppins, palette, pastilles ✓ / ✗), mais dans une matière : papier kraft, feuilles découpées, ruban adhésif, gommettes et annotations à la main. On ajuste ce cadre jusqu'à ce qu'il vous plaise, puis on décline la piste aux autres.</p>
+</header>
+
+<div class="f" id="kraft-04">
+  <!-- étiquette « Témoin n° 1 » : papier bleu scotché -->
+  <div class="paper" style="left:3.2cqw; top:2.6cqw; width:14.6cqw; height:3.6cqw; background-color:var(--blue); transform:rotate(-2deg); display:grid; place-items:center; color:var(--white); font-weight:700; font-size:1.45cqw;">Témoin n° 1</div>
+  <div class="tape lav" style="left:2cqw; top:2.4cqw; width:4.6cqw; transform:rotate(-38deg);"></div>
+
+  <!-- feuille du ruban des heures -->
+  <div class="paper" style="left:3cqw; top:8.2cqw; width:94cqw; height:16.4cqw; transform:rotate(-.6deg);">
+    <div class="hours" style="position:absolute; left:2cqw; right:2cqw; top:2cqw; height:6.6cqw; grid-template-columns:repeat(14,1fr);">
+      <div data-h="7h" style="transform:rotate(-1.2deg)"></div><div data-h="8h" style="transform:rotate(.8deg)"></div><div data-h="9h" class="stop" style="transform:rotate(-2.4deg) translateY(.2cqw)">Arrêt</div><div data-h="10h" style="transform:rotate(1.1deg)"></div><div data-h="11h" style="transform:rotate(-.5deg)"></div><div data-h="12h" style="transform:rotate(.9deg)"></div><div data-h="13h" style="transform:rotate(-1deg)"></div>
+      <div data-h="15h" style="transform:rotate(.6deg)"></div><div data-h="16h" style="transform:rotate(-.9deg)"></div><div data-h="17h" class="stop" style="transform:rotate(2.2deg) translateY(.15cqw)">Arrêt</div><div data-h="18h" style="transform:rotate(-.7deg)"></div><div data-h="19h" style="transform:rotate(1.2deg)"></div><div data-h="20h" style="transform:rotate(-.4deg)"></div><div data-h="21h" style="transform:rotate(.8deg)"></div>
+    </div>
+    <div class="row" style="position:absolute; left:2cqw; top:10.6cqw;">
+      <span class="sticker" style="background:var(--pGreen); color:var(--tGreen); transform:rotate(-1.5deg);"><span class="b ok sm"></span>12 h de fonctionnement</span>
+      <span class="sticker" style="background:var(--pRed); color:var(--tRed); transform:rotate(1.8deg);"><span class="b ko sm"></span>2 h d'arrêts subis</span>
+    </div>
+  </div>
+  <div class="tape" style="left:6cqw; top:7.1cqw; width:8cqw; transform:rotate(-4deg);"></div>
+  <div class="tape" style="left:86cqw; top:6.8cqw; width:8cqw; transform:rotate(5deg);"></div>
+
+  <!-- annotation à la main vers les cases rouges -->
+  <div class="hand" style="left:70cqw; top:24.4cqw; font-size:3.2cqw; color:var(--blue); transform:rotate(-4deg);">2 heures envolées !</div>
+  <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080">
+    <path d="M1336 500 C 1286 486, 1262 430, 1268 352" fill="none" stroke="#4a4aa0" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M1250 376 L 1268 346 L 1286 376" fill="none" stroke="#4a4aa0" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <!-- fiche du témoin : carte rouge pâle scotchée -->
+  <div class="paper red" style="left:3.6cqw; top:28.6cqw; width:52cqw; height:17cqw; transform:rotate(1deg); padding:2.2cqw 2.4cqw;">
+    <div class="row"><span class="b num stk">1</span><span class="ttl">Disponibilité</span></div>
+    <div class="row" style="margin-top:2.2cqw; flex-wrap:wrap; gap:.9cqw;">
+      <span class="sticker" style="background:var(--white); color:var(--tRed); border-color:var(--white); transform:rotate(-2deg);"><span class="b ko sm"></span>Pannes</span>
+      <span class="sticker" style="background:var(--white); color:var(--tRed); transform:rotate(1.4deg);"><span class="b ko sm"></span>Manques matière</span>
+      <span class="sticker" style="background:var(--white); color:var(--tRed); transform:rotate(-1deg);"><span class="b ko sm"></span>Réglages imprévus</span>
+    </div>
+  </div>
+  <div class="tape green" style="left:24cqw; top:27.4cqw; width:9cqw; transform:rotate(-3deg);"></div>
+
+  <!-- le chiffre, entouré au feutre -->
+  <div class="stat" style="left:63.4cqw; top:33.2cqw; font-size:8.6cqw; color:var(--tRed);">85,7 %</div>
+  <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080">
+    <path d="M1230 612 C 1330 580, 1600 578, 1730 616 C 1850 645, 1830 770, 1650 800 C 1480 826, 1260 818, 1180 770 C 1110 726, 1140 640, 1262 606" fill="none" stroke="#f16969" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+  </svg>
+  <div class="hand" style="left:66cqw; top:44.6cqw; font-size:2.6cqw; color:var(--ink); transform:rotate(-2deg);">12 h sur 14 h</div>
+
+  <!-- ruban Fichly en six bandes de washi -->
+  <div class="washi6"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
+  <img src="../public/fichly-logo.png" alt="fichly" style="right:2.4cqw; bottom:2.4cqw; width:7.4cqw;">
+</div>
+<div class="meta"><span>04 · Disponibilité — piste kraft v1</span><span>frame-04 · 46–60 s</span></div>
+
+<div class="notes">
+  <div>
+    <h3>Ce qui change à l'image</h3>
+    <ul>
+      <li>Fond en papier kraft (fibres, petits points), à la place du papier gris.</li>
+      <li>Les cartes deviennent des feuilles, légèrement de travers, tenues par du ruban adhésif, avec une ombre douce.</li>
+      <li>Les cases d'heure sont découpées dans du papier coloré, chacune un peu de biais.</li>
+      <li>Les pastilles ✓ / ✗ et les pilules deviennent des gommettes, avec un liseré blanc.</li>
+      <li>Une annotation à la main par cadre (police Caveat, bleu Fichly) et un trait de feutre autour du chiffre clé.</li>
+      <li>Le ruban six couleurs devient six bandes de washi ; le logo reste net.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Ce qui bougera (pour juger la piste)</h3>
+    <ul>
+      <li>Côté papier, une animation image par image à 12 i/s, avec un très léger tremblé. Côté caméra et texte, un mouvement fluide à 30 i/s. Ça donne le côté fait main sans faire vieillot.</li>
+      <li>Chaque élément arrive comme un geste : le ruban adhésif se pose, puis la feuille glisse dessous. Les gommettes claquent avec un petit rebond.</li>
+      <li>L'annotation s'écrit trait par trait, et le cercle au feutre se trace sur « disponibilité ».</li>
+      <li>Les sons iraient avec : froissement de papier, ruban qu'on déchire, gommette, feutre (en option).</li>
+    </ul>
+  </div>
+</div>
+</div>
+</body>
+</html>
