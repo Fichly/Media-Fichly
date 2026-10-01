@@ -1,0 +1,660 @@
+<title>Accueil Fichly V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap">
+<style>
+/* Maquette d'une page de boutique : une seule ambiance claire (design system Fichly), blocs pleine largeur
+   à 1200px max. Fiches = fond blanc + boîtes de couleur. Formations = fond nuit + ceintures. */
+:root{
+  color-scheme: light;
+  --indigo:#3c4499; --indigo-700:#2e3576; --indigo-100:#e4e5f3; --indigo-050:#f3f4fb;
+  --ink:#2c2c2c; --ink-700:#4a4a4a; --ink-500:#6b6b6b; --line:#e5e5e5; --surface:#f7f7f7; --bg:#ffffff;
+  --night:#151b43; --night-2:#1f2757; --night-line:#323a6e; --on-night:#ffffff; --on-night-2:#c9cce6;
+  --c-blue:#74a3d6; --c-blue-100:#e3ecf6; --c-green:#8cc978; --c-green-100:#e8f4e3;
+  --c-yellow:#e6b839; --c-yellow-100:#faf0d7; --c-purple:#aa76b2; --c-purple-100:#f0e5f2;
+  --c-teal:#75bec0; --c-teal-100:#e3f2f2; --c-coral:#f16969; --c-coral-100:#fce5e5;
+  --c-lime:#e0cf35; --c-lime-100:#f8f5d7;
+  --note:#fff4bf; --note-ink:#5a4a00; --note-line:#e6cf62;
+  --font:"Montserrat", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px;
+  --sh-1:0 1px 2px rgba(44,44,44,.04),0 1px 1px rgba(44,44,44,.03);
+  --sh-2:0 4px 12px rgba(44,44,44,.06),0 2px 4px rgba(44,44,44,.04);
+  --sh-3:0 12px 32px rgba(44,44,44,.08),0 4px 8px rgba(44,44,44,.04);
+  --gut:clamp(16px,4vw,40px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,5.2vw,58px);line-height:1.12;font-weight:500;letter-spacing:-.015em}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.15;font-weight:500;letter-spacing:-.005em}
+h3{font-size:clamp(19px,2vw,22px);line-height:1.3;font-weight:600}
+h1 em,h2 em{font-style:italic;font-weight:600;color:var(--indigo)}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:var(--gut)}
+.sec{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:14px;max-width:720px;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head p{color:var(--ink-700);font-size:17px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:var(--r-md);font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:background-color .12s}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,.chip:focus-visible,a:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(60,68,153,.35)}
+.btn-p{background:var(--indigo);color:#fff}.btn-p:hover{background:var(--indigo-700)}
+.btn-s{border-color:var(--indigo);color:var(--indigo);background:transparent}.btn-s:hover{background:var(--indigo-100)}
+.btn-w{background:#fff;color:var(--night)}.btn-w:hover{background:var(--indigo-100)}
+.btn-wo{border-color:var(--on-night-2);color:#fff;background:transparent}.btn-wo:hover{background:var(--night-2)}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--indigo);vertical-align:middle;margin:0 8px}
+.meta{font-size:13px;color:var(--ink-500);display:flex;flex-wrap:wrap;align-items:center;row-gap:4px}
+
+/* ---------- Barre de maquette (hors site) ---------- */
+.mq{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#23262e;color:#fff;font-size:13px}
+.mq .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:9px}
+.mq b{font-weight:600}
+.mq span{color:#b9bcc6}
+.mq label{margin-left:auto;display:flex;align-items:center;gap:8px;cursor:pointer}
+.mq input{accent-color:#e6cf62;width:16px;height:16px}
+
+/* Annotations */
+.an{display:flex;gap:10px;align-items:flex-start;background:var(--note);color:var(--note-ink);border:1px solid var(--note-line);border-radius:var(--r-md);padding:10px 14px;font-size:13px;line-height:1.5;max-width:760px;margin-bottom:24px}
+.an .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--note-ink);color:var(--note);font-weight:700;font-size:12px;display:grid;place-items:center}
+.an strong{font-weight:700}
+body.no-an .an{display:none}
+
+/* ---------- Bandeau + nav ---------- */
+.promo{background:var(--indigo);color:#fff;font-size:13px;text-align:center;padding:9px var(--gut)}
+.promo a{font-weight:600}
+.nav{border-bottom:1px solid var(--line);background:#fff}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.nav img{height:30px;width:auto;display:block}
+.nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.nav ul a{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;padding:8px 12px;border-radius:var(--r-sm)}
+.nav ul a:hover{background:var(--surface)}
+.nav .k{font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px}
+.k-f{background:var(--c-blue-100);color:#2c4f78}
+.k-t{background:var(--night);color:#fff}
+.nav .cart{margin-left:auto;display:flex;gap:16px;align-items:center}
+.nav .cart svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.burger{display:none}
+@media (max-width:900px){.nav ul{display:none}.burger{display:block}}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(40px,6vw,72px) clamp(48px,6vw,80px)}
+.hero-top{display:grid;gap:18px;max-width:860px;margin-bottom:clamp(28px,4vw,44px)}
+.hero-top p{font-size:clamp(16px,1.6vw,19px);color:var(--ink-700);max-width:720px}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:820px){.doors{grid-template-columns:1fr}}
+.door{position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:18px;border-radius:var(--r-xl);padding:clamp(22px,3vw,32px);min-width:0;overflow:hidden}
+.door-f{background:var(--indigo-050);border:1px solid var(--indigo-100)}
+.door-t{background:var(--night);color:var(--on-night)}
+.door .tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.door-f .tag{color:var(--indigo)}
+.door-t .tag{color:var(--on-night-2)}
+.door .tag svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+.door h2{font-size:clamp(24px,2.6vw,30px);font-weight:600;margin-top:10px}
+.door .txt{display:grid;gap:14px;align-content:start}
+.door p{font-size:15.5px}
+.door-f p{color:var(--ink-700)}
+.door-t p{color:var(--on-night-2)}
+.door ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px}
+.door li{display:flex;gap:10px;align-items:baseline}
+.door li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--indigo);transform:translateY(-1px)}
+.door-t li::before{background:var(--c-green)}
+.door .foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--indigo-100)}
+.door-t .foot{border-top-color:var(--night-line)}
+.door .price{font-size:13px}
+.door .price b{display:block;font-size:20px;font-weight:700}
+.door-f .price{color:var(--ink-500)}.door-f .price b{color:var(--ink)}
+.door-t .price{color:var(--on-night-2)}.door-t .price b{color:#fff}
+.door .vis{height:150px;position:relative}
+/* mini-boîtes de fiches */
+.fan{position:absolute;inset:0;display:flex;align-items:flex-end;gap:10px}
+.mini{width:92px;height:128px;border-radius:10px;background:#fff;box-shadow:var(--sh-2);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;flex:none}
+.mini i{display:block;height:38%;background:var(--c)}
+.mini span{padding:7px 8px;font-size:9.5px;font-weight:600;line-height:1.25;color:var(--ink)}
+.mini small{display:block;font-weight:500;color:var(--ink-500);margin-top:3px}
+.mini:nth-child(1){transform:rotate(-5deg)}.mini:nth-child(2){transform:translateY(-10px)}.mini:nth-child(3){transform:rotate(4deg)}
+.mini:nth-child(4){transform:translateY(-4px) rotate(-2deg)}
+@media (max-width:480px){.mini:nth-child(4){display:none}}
+/* ceintures en escalier */
+.ladder{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);align-items:end;gap:10px}
+.step{display:grid;gap:8px;align-content:end}
+.step .belt{height:16px;border-radius:999px;background:var(--b);position:relative}
+.step .belt::after{content:"";position:absolute;right:16%;top:-5px;width:14px;height:26px;border-radius:4px;background:var(--b);filter:brightness(.82)}
+.step .bar{border-radius:10px 10px 0 0;background:var(--night-2);display:flex;align-items:flex-end;padding:8px;font-size:11px;font-weight:600;color:var(--on-night-2)}
+.b-white{--b:#f4f4f4}.b-yellow{--b:var(--c-yellow)}.b-green{--b:var(--c-green)}.b-black{--b:#0b0e24}
+.b-black .belt{box-shadow:0 0 0 1px #4a5285}
+.trust{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:26px;font-size:14px;color:var(--ink-700)}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust b{color:var(--ink)}
+.stars{color:var(--indigo);letter-spacing:1px}
+
+/* ---------- Logos ---------- */
+.logos{border-block:1px solid var(--line);padding-block:26px}
+.logos .wrap{display:flex;align-items:center;gap:20px 44px;flex-wrap:wrap;justify-content:center}
+.logos small{font-size:13px;color:var(--ink-500);width:100%;text-align:center}
+.logos b{font-size:19px;font-weight:700;color:#9a9a9a;letter-spacing:.02em}
+
+/* ---------- Choisir ---------- */
+.choose{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:start}
+@media (max-width:900px){.choose{grid-template-columns:1fr}}
+.chips{display:grid;gap:10px}
+.chip{display:flex;gap:12px;align-items:center;text-align:left;width:100%;font:inherit;font-weight:500;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:15px 16px;cursor:pointer;color:var(--ink);box-shadow:var(--sh-1);transition:box-shadow .12s,background-color .12s}
+.chip:hover{box-shadow:var(--sh-2)}
+.chip .q{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center}
+.chip[aria-pressed="true"]{border-color:var(--indigo);background:var(--indigo-050)}
+.chip[aria-pressed="true"] .q{background:var(--indigo);border-color:var(--indigo)}
+.chip[aria-pressed="true"] .q::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.answer{border-radius:var(--r-xl);padding:clamp(22px,3vw,32px);display:grid;gap:16px;min-height:100%;align-content:start}
+.answer.is-f{background:var(--indigo-050);border:1px solid var(--indigo-100)}
+.answer.is-t{background:var(--night);color:#fff}
+.answer.is-e{background:var(--surface);border:1px solid var(--line)}
+.answer .kind{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.answer.is-f .kind{color:var(--indigo)} .answer.is-t .kind{color:var(--c-green)} .answer.is-e .kind{color:var(--ink-500)}
+.answer h3{font-size:clamp(22px,2.4vw,28px);font-weight:600}
+.answer p{font-size:15.5px}
+.answer.is-f p,.answer.is-e p{color:var(--ink-700)} .answer.is-t p{color:var(--on-night-2)}
+.answer .facts{display:flex;flex-wrap:wrap;gap:8px}
+.answer .facts span{font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.answer.is-t .facts span{background:var(--night-2);border-color:var(--night-line);color:#fff}
+.answer .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.answer .also{font-size:13.5px;padding-top:14px;border-top:1px solid var(--indigo-100)}
+.answer.is-t .also{border-top-color:var(--night-line);color:var(--on-night-2)}
+.answer.is-e .also{border-top-color:var(--line)}
+.answer .also a{font-weight:600}
+
+/* Tableau fiche / formation */
+.cmp-wrap{overflow-x:auto;margin-top:clamp(36px,5vw,56px);border:1px solid var(--line);border-radius:var(--r-lg)}
+.cmp{width:100%;min-width:640px;border-collapse:collapse;font-size:14.5px}
+.cmp th,.cmp td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{font-size:15px;font-weight:600}
+.cmp thead th:nth-child(2){background:var(--indigo-050);color:var(--indigo)}
+.cmp thead th:nth-child(3){background:var(--night);color:#fff}
+.cmp tbody th{font-weight:600;color:var(--ink-500);font-size:13px;width:20%;background:var(--surface)}
+.cmp td:nth-child(3){background:#fafafd}
+
+/* ---------- Fiches ---------- */
+.sec-f{background:var(--bg)}
+.group{display:grid;gap:16px;margin-bottom:36px}
+.group-h{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
+.group-h h3{font-size:19px}
+.group-h .meta{font-size:13.5px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.grid4.three{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:960px){.grid4,.grid4.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.grid4,.grid4.three{grid-template-columns:1fr}}
+.pc{display:grid;gap:12px;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:14px;box-shadow:var(--sh-1);transition:box-shadow .12s;min-width:0}
+.pc:hover{box-shadow:var(--sh-2)}
+.cover{aspect-ratio:4/3;max-width:100%;border-radius:10px;background:var(--cs);display:grid;place-items:center;position:relative;overflow:hidden}
+.box{width:46%;aspect-ratio:3/4;background:#fff;border-radius:8px;box-shadow:var(--sh-2);display:flex;flex-direction:column;overflow:hidden}
+.box i{height:34%;background:var(--c)}
+.box span{padding:6px 7px;font-size:8.5px;font-weight:700;line-height:1.2;color:var(--ink)}
+.box.small{width:36%}
+.cover .count{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:600;background:#fff;color:var(--ink);padding:3px 8px;border-radius:999px}
+.pc h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.3}
+.pc .sub{font-size:13px;color:var(--ink-500)}
+.pc .pr{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:700;font-size:15px}
+.pc .pr s{font-weight:500;color:var(--ink-500);font-size:13px;margin-right:6px}
+.badge-sale{font-size:11px;font-weight:600;background:var(--c-coral-100);color:#b23a3a;padding:3px 8px;border-radius:999px}
+.add{font-size:12.5px;font-weight:600;color:var(--indigo)}
+.pc.pack{grid-column:span 1;background:var(--indigo-050);border-color:var(--indigo-100)}
+.pack .cover{background:#fff}
+.pack-stack{display:flex;gap:6px;width:80%;justify-content:center;align-items:flex-end}
+.pack-stack .box{width:34%}.pack-stack .box.small{width:26%}
+.benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding:22px;border-radius:var(--r-lg);background:var(--surface);margin-top:8px}
+@media (max-width:900px){.benefits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.benefits{grid-template-columns:1fr}}
+.benefits div{display:grid;gap:4px;min-width:0}
+.benefits b{font-size:14.5px;font-weight:600}
+.benefits span{font-size:13.5px;color:var(--ink-700)}
+.howto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:700px){.howto{grid-template-columns:1fr}}
+.howto div{border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 16px;display:grid;gap:3px;font-size:13.5px;color:var(--ink-700)}
+.howto b{color:var(--ink);font-size:14.5px}
+.howto em{font-style:normal;font-size:12px;font-weight:600;color:var(--indigo)}
+.sec-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+
+/* ---------- Formations ---------- */
+.sec-t{background:var(--night);color:var(--on-night)}
+.sec-t .eyebrow{color:var(--c-green)}
+.sec-t h2 em{color:#fff;text-decoration:underline;text-decoration-color:var(--c-green);text-decoration-thickness:3px;text-underline-offset:6px}
+.sec-t .sec-head p{color:var(--on-night-2)}
+.sec-t .an{background:var(--note)}
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;position:relative}
+@media (max-width:1000px){.path{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.path{grid-template-columns:1fr}}
+.lvl{background:var(--night-2);border:1px solid var(--night-line);border-radius:var(--r-lg);padding:20px;display:grid;gap:12px;align-content:start;min-width:0;text-decoration:none;color:inherit;transition:border-color .12s}
+.lvl:hover{border-color:#5a63a8}
+.lvl .belt{height:12px;border-radius:999px;background:var(--b);position:relative;margin-bottom:6px}
+.lvl .belt::after{content:"";position:absolute;right:18%;top:-5px;width:12px;height:22px;border-radius:3px;background:var(--b);filter:brightness(.82)}
+.lvl.b-black .belt{box-shadow:0 0 0 1px #4a5285}
+.lvl .lv{font-size:12px;font-weight:600;color:var(--on-night-2);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.lvl .lv .cpf{background:var(--c-green);color:var(--night);padding:2px 8px;border-radius:999px;font-size:11px}
+.lvl h3{font-size:20px}
+.lvl p{font-size:14px;color:var(--on-night-2)}
+.lvl dl{margin:4px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px}
+.lvl dt{color:var(--on-night-2)}
+.lvl dd{margin:0;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+.lvl .go{font-size:13px;font-weight:600;color:#fff;margin-top:4px}
+.lvl.star{border-color:var(--c-green);box-shadow:0 0 0 1px var(--c-green)}
+.lvl.tbc dd{color:var(--on-night-2);font-weight:500}
+.fund{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;margin-top:28px}
+@media (max-width:900px){.fund{grid-template-columns:1fr}}
+.fund > b{align-self:center;font-size:15px}
+.fund div{border:1px solid var(--night-line);border-radius:var(--r-lg);padding:14px 16px;font-size:13.5px;color:var(--on-night-2);display:grid;gap:2px}
+.fund div strong{color:#fff;font-size:14.5px}
+.sec-t .sec-cta{align-items:center}
+.sec-t .sec-cta small{color:var(--on-night-2);font-size:13px}
+
+/* ---------- Pont ---------- */
+.bridge{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+@media (max-width:860px){.bridge{grid-template-columns:1fr}}
+.bridge .txt{display:grid;gap:16px}
+.bridge .txt > p{color:var(--ink-700);font-size:16px}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin-top:6px}
+@media (max-width:520px){.flow{grid-template-columns:1fr}.flow .arr{transform:rotate(90deg);justify-self:center}}
+.flow div{border-radius:var(--r-md);padding:12px;font-size:13px;display:grid;gap:2px;min-width:0}
+.flow div b{font-size:14px}
+.flow .f1{background:var(--indigo-050);border:1px solid var(--indigo-100)}
+.flow .f2{background:var(--night);color:#fff}
+.flow .f2 span{color:var(--on-night-2)}
+.flow .f3{background:var(--c-green-100);border:1px solid #cfe6c6}
+.flow .arr{color:var(--indigo);font-weight:700;font-size:18px}
+.bridge .vis{background:var(--indigo-050);border-radius:var(--r-xl);padding:clamp(20px,3vw,32px);display:grid;gap:18px}
+.bridge .vis img{width:100%;max-width:100%;height:auto;border-radius:var(--r-lg);background:#fff;display:block}
+.bridge .vis .gift{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:600}
+.bridge .vis .gift span{background:var(--indigo);color:#fff;font-size:11px;padding:3px 9px;border-radius:999px}
+blockquote{margin:0;border-left:3px solid var(--indigo);padding:4px 0 4px 16px;font-size:15px;color:var(--ink-700)}
+blockquote footer{margin-top:6px;font-size:13px;color:var(--ink-500)}
+
+/* ---------- Avis ---------- */
+.sec-r{background:var(--surface)}
+.reviews{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.reviews{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.reviews{grid-template-columns:1fr}}
+.rv{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.rv .k{justify-self:start;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
+.rv h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.35}
+.rv p{font-size:14px;color:var(--ink-700)}
+.rv footer{font-size:13px;color:var(--ink-500)}
+.rv footer b{color:var(--ink);font-weight:600}
+
+/* ---------- Fondateurs + entreprises ---------- */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.panel{border-radius:var(--r-xl);padding:clamp(22px,3vw,36px);display:grid;gap:14px;align-content:start}
+.panel p{color:var(--ink-700)}
+.p-team{background:var(--indigo-050)}
+.p-biz{border:1px solid var(--line)}
+.biz{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+@media (max-width:520px){.biz{grid-template-columns:1fr}}
+.biz a{border:1px solid var(--line);border-radius:var(--r-lg);padding:14px;text-decoration:none;display:grid;gap:4px;font-size:13.5px;color:var(--ink-700);transition:box-shadow .12s}
+.biz a:hover{box-shadow:var(--sh-2)}
+.biz a b{color:var(--ink);font-size:14.5px}
+.biz .k{justify-self:start;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;margin-bottom:4px}
+
+/* ---------- Pied ---------- */
+.foot-site{background:var(--ink);color:#fff;padding-block:48px 32px;font-size:14px}
+.foot-site .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:760px){.foot-site .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.foot-site h5{margin:0 0 10px;font-size:13px;font-weight:600;color:#bdbdbd;letter-spacing:.06em;text-transform:uppercase}
+.foot-site ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.foot-site a{text-decoration:none;color:#fff}
+.foot-site a:hover{text-decoration:underline}
+.foot-site .base{margin-top:32px;padding-top:18px;border-top:1px solid #4a4a4a;color:#bdbdbd;font-size:12.5px}
+
+/* ---------- Notes de maquette ---------- */
+.notes{background:#fbfaf3;border-top:4px solid var(--note-line)}
+.notes h2{font-size:clamp(24px,3vw,32px)}
+.notes .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:24px}
+@media (max-width:860px){.notes .grid{grid-template-columns:1fr}}
+.notes .card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:grid;gap:10px;align-content:start}
+.notes h3{font-size:16px}
+.notes ul,.notes ol{margin:0;padding-left:20px;display:grid;gap:7px;font-size:14px;color:var(--ink-700)}
+.plan-wrap{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff}
+.plan{width:100%;min-width:720px;border-collapse:collapse;font-size:13.5px}
+.plan th,.plan td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.plan thead th{background:var(--surface);font-weight:600;font-size:12.5px;color:var(--ink-500);text-transform:uppercase;letter-spacing:.05em}
+.plan td:first-child{font-weight:700;color:var(--note-ink);white-space:nowrap}
+.st{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.st-new{background:var(--indigo-100);color:var(--indigo)}
+.st-keep{background:var(--surface);color:var(--ink-500);border:1px solid var(--line)}
+.st-mod{background:var(--c-yellow-100);color:#7a5a00}
+.st-out{background:var(--c-coral-100);color:#b23a3a}
+</style>
+
+<!-- ===== Barre maquette (ne fait pas partie du site) ===== -->
+<div class="mq"><div class="wrap">
+  <b>Maquette accueil V2</b><span>Objectif : comprendre en 5 secondes la différence entre fiches et formations</span>
+  <label for="toggle-an"><input type="checkbox" id="toggle-an" checked> Annotations</label>
+</div></div>
+
+<div class="promo">🔥 Formation Green Belt certifiante à 1 500€, finançable par votre CPF. <a href="#formations">Voir les formations</a></div>
+
+<header class="nav"><div class="wrap">
+  <img src="{{LOGO}}" alt="Fichly">
+  <ul>
+    <li><a href="#fiches">Les fiches <span class="k k-f">dès 29,90€</span></a></li>
+    <li><a href="#formations">Les formations <span class="k k-t">Qualiopi</span></a></li>
+    <li><a href="#entreprises">Entreprises</a></li>
+    <li><a href="#">Articles</a></li>
+    <li><a href="#">À propos</a></li>
+  </ul>
+  <div class="cart">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+    <svg class="burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </div>
+</div></header>
+
+<main>
+<!-- ===== 1. Hero : deux portes ===== -->
+<section class="hero"><div class="wrap">
+  <div class="an"><span class="n">1</span><div><strong>Hero en deux portes.</strong> Aujourd'hui le titre dit « fiches et formations » mais le seul bouton mène aux fiches, et aucun bloc ne parle des formations. Ici le visiteur choisit dès le premier écran : apprendre seul (fiches) ou être accompagné (formations). Les deux portes ont deux couleurs qu'on retrouve partout dans la page : bleu clair = fiches, nuit = formations.</div></div>
+  <div class="hero-top">
+    <h1>Le Lean accessible, <em>seul ou accompagné</em>.</h1>
+    <p>Chez Fichly, vous apprenez le Lean de deux façons. Avec nos fiches, vous comprenez un outil et vous l'appliquez dès demain. Avec nos formations, vous montez en compétence avec un formateur, sur un vrai projet, jusqu'à la certification.</p>
+  </div>
+  <div class="doors">
+    <article class="door door-f">
+      <div class="vis" aria-hidden="true"><div class="fan">
+        <div class="mini" style="--c:var(--c-blue)"><i></i><span>40 outils du Lean<small>L'essentiel</small></span></div>
+        <div class="mini" style="--c:var(--c-lime)"><i></i><span>Le guide du 5S<small>20 fiches</small></span></div>
+        <div class="mini" style="--c:var(--c-teal)"><i></i><span>Le guide de la VSM<small>20 fiches</small></span></div>
+        <div class="mini" style="--c:var(--c-green)"><i></i><span>40 outils de la QSE<small>L'essentiel</small></span></div>
+      </div></div>
+      <div class="txt">
+        <span class="tag"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="13" height="17" rx="2"/><path d="M8 7h5M8 11h5"/><path d="M20 7v13a1 1 0 0 1-1 1H8"/></svg>Les fiches · en autonomie</span>
+        <h2>J'ai besoin d'un outil, maintenant.</h2>
+        <p>Des decks de fiches imprimées en France. Un outil par fiche : le recto pour comprendre, le verso pour mettre en place.</p>
+        <ul><li>À lire seul ou en équipe, sur le terrain</li><li>Par métier : Lean, QSE, Achats, Gestion de projet</li><li>Livrées chez vous</li></ul>
+      </div>
+      <div class="foot">
+        <div class="price">De 29,90€ à 49,90€<b>7 decks de fiches</b></div>
+        <a class="btn btn-p" href="#fiches">Explorer les fiches →</a>
+      </div>
+    </article>
+    <article class="door door-t">
+      <div class="vis" aria-hidden="true"><div class="ladder">
+        <div class="step b-white"><div class="belt"></div><div class="bar" style="height:34px">White</div></div>
+        <div class="step b-yellow"><div class="belt"></div><div class="bar" style="height:58px">Yellow</div></div>
+        <div class="step b-green"><div class="belt"></div><div class="bar" style="height:82px">Green</div></div>
+        <div class="step b-black"><div class="belt"></div><div class="bar" style="height:106px">Black</div></div>
+      </div></div>
+      <div class="txt">
+        <span class="tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Les formations · accompagné</span>
+        <h2>Je veux être formé et certifié.</h2>
+        <p>Des formations Lean de 3 à 9 jours avec un formateur, 80 % de pratique et votre propre projet d'amélioration.</p>
+        <ul><li>Un parcours par niveau, de la White à la Black Belt</li><li>En distanciel ou à Lyon, Bordeaux, Paris</li><li>Le Pack Lean de fiches offert</li></ul>
+      </div>
+      <div class="foot">
+        <div class="price">Dès 1 500€, finançable CPF ou OPCO<b>4 niveaux de formation</b></div>
+        <a class="btn btn-w" href="#formations">Voir les formations →</a>
+      </div>
+    </article>
+  </div>
+  <div class="trust">
+    <span><span class="stars">★★★★★</span><b>4,8/5</b></span>
+    <span><b>+70 000</b> professionnels conquis</span>
+    <span><b>Organisme certifié Qualiopi</b></span>
+  </div>
+</div></section>
+
+<!-- ===== 2. Logos ===== -->
+<section class="logos" aria-label="Références">
+  <div class="wrap">
+    <small>Ils nous font confiance</small>
+    <b>THALES</b><b>DECATHLON</b><b>SAFRAN</b><b>KPMG</b><b>DASSAULT</b><b>SUEZ</b>
+  </div>
+</section>
+
+<!-- ===== 3. Fiche ou formation ? ===== -->
+<section class="sec" id="choisir"><div class="wrap">
+  <div class="an"><span class="n">3</span><div><strong>Nouveau bloc « Fiche ou formation ? ».</strong> Le visiteur part de sa situation, pas de notre catalogue. Chaque réponse pointe vers un produit ou une formation précise, avec son prix. Le tableau dessous résume la différence en six lignes. Il remplace le tableau « Grande vs petite boîte », qui descend dans le bloc fiches.</div></div>
+  <div class="sec-head">
+    <span class="eyebrow">Par où commencer</span>
+    <h2>Fiche ou formation, <em>que choisir</em> ?</h2>
+    <p>Tout dépend de ce que vous voulez obtenir. Choisissez la phrase qui vous ressemble.</p>
+  </div>
+  <div class="choose">
+    <div class="chips" role="group" aria-label="Votre situation">
+      <button class="chip" id="s-5s" aria-pressed="true" data-k="s5s"><span class="q"></span>J'anime un chantier 5S la semaine prochaine</button>
+      <button class="chip" id="s-decouvre" aria-pressed="false" data-k="decouvre"><span class="q"></span>Je découvre le Lean et je veux une vue d'ensemble</button>
+      <button class="chip" id="s-chantiers" aria-pressed="false" data-k="chantiers"><span class="q"></span>Je veux mener mes premiers chantiers d'amélioration</button>
+      <button class="chip" id="s-certif" aria-pressed="false" data-k="certif"><span class="q"></span>Je veux piloter un projet et être certifié</button>
+      <button class="chip" id="s-equipe" aria-pressed="false" data-k="equipe"><span class="q"></span>Je veux équiper ou former mon équipe</button>
+    </div>
+    <div class="answer is-f" id="answer" aria-live="polite"></div>
+  </div>
+
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <thead><tr><th></th><th>Les fiches</th><th>Les formations</th></tr></thead>
+      <tbody>
+        <tr><th>Vous apprenez</th><td>Seul ou en équipe, à votre rythme</td><td>Avec un formateur, en groupe</td></tr>
+        <tr><th>Format</th><td>Un deck imprimé de 20 ou 40 fiches</td><td>3 à 9 jours, en distanciel ou en présentiel</td></tr>
+        <tr><th>Vous repartez avec</th><td>Les outils dans la poche, prêts pour le terrain</td><td>Un projet mené de bout en bout et une attestation ou une certification</td></tr>
+        <tr><th>Prix</th><td>29,90€ à 49,90€</td><td>Dès 1 500€</td></tr>
+        <tr><th>Financement</th><td>Achat direct, livraison chez vous</td><td>CPF, OPCO ou France Travail, dossier monté avec vous</td></tr>
+        <tr><th>Idéal pour</th><td>Agir vite sur un outil précis</td><td>Changer de niveau et le faire reconnaître</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- ===== 4. Les fiches ===== -->
+<section class="sec sec-f" id="fiches" style="padding-top:0"><div class="wrap">
+  <div class="an"><span class="n">4</span><div><strong>Bloc fiches regroupé.</strong> Les 4 avantages, le comparatif grande / petite boîte et « Comment ça fonctionne » tiennent maintenant dans un seul bloc, au lieu de 4 sections. Les produits sont rangés par format (L'essentiel, Le guide, le pack), ce qui rend le choix de la boîte évident. Les visuels sont ici dessinés en CSS : sur le site, ce seront les photos produits et les prix lus dans la boutique.</div></div>
+  <div class="sec-head">
+    <span class="eyebrow">Les fiches</span>
+    <h2>Un outil, <em>une fiche claire</em>.</h2>
+    <p>Synthétiques, visuelles et imprimées en France. Au recto, la définition, un schéma et un exemple. Au verso, comment la mettre en place et les bonnes pratiques.</p>
+  </div>
+
+  <div class="group">
+    <div class="group-h"><h3>L'essentiel</h3><span class="meta">40 fiches pour couvrir tout un métier<span class="dot"></span>Vue d'ensemble rapide</span></div>
+    <div class="grid4">
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-blue-100)"><div class="box" style="--c:var(--c-blue)"><i></i><span>40 outils du Lean</span></div><span class="count">40 fiches</span></div><h4>40 outils du Lean à portée de main</h4><span class="sub">Lean Management</span><div class="pr">49,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-green-100)"><div class="box" style="--c:var(--c-green)"><i></i><span>40 outils de la QSE</span></div><span class="count">40 fiches</span></div><h4>40 outils de la QSE à portée de main</h4><span class="sub">QSE</span><div class="pr">49,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-yellow-100)"><div class="box" style="--c:var(--c-yellow)"><i></i><span>40 outils de la Gestion de projet</span></div><span class="count">40 fiches</span></div><h4>40 outils de la Gestion de projet</h4><span class="sub">Gestion de projet</span><div class="pr">49,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-purple-100)"><div class="box" style="--c:var(--c-purple)"><i></i><span>40 outils des Achats</span></div><span class="count">40 fiches</span></div><h4>40 outils des Achats à portée de main</h4><span class="sub">Achats</span><div class="pr">49,90€<span class="add">Ajouter au panier</span></div></a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-h"><h3>Le guide</h3><span class="meta">20 fiches ciblées sur un outil<span class="dot"></span>Pour aller plus loin sur un sujet clé</span></div>
+    <div class="grid4 three">
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-lime-100)"><div class="box small" style="--c:var(--c-lime)"><i></i><span>Le guide du 5S</span></div><span class="count">20 fiches</span></div><h4>Le guide du 5S en 20 fiches</h4><span class="sub">Mettez de l'ordre sur le terrain</span><div class="pr">29,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-teal-100)"><div class="box small" style="--c:var(--c-teal)"><i></i><span>Le guide de la VSM</span></div><span class="count">20 fiches</span></div><h4>Le guide de la VSM en 20 fiches</h4><span class="sub">Visualisez et optimisez vos flux</span><div class="pr">29,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc" href="#"><div class="cover" style="--cs:var(--c-coral-100)"><div class="box small" style="--c:var(--c-coral)"><i></i><span>Résolution de problèmes</span></div><span class="count">20 fiches</span></div><h4>Le guide de la résolution de problèmes (DMAIC)</h4><span class="sub">Résolvez vos problèmes pas à pas</span><div class="pr">29,90€<span class="add">Ajouter au panier</span></div></a>
+      <a class="pc pack" href="#"><div class="cover"><div class="pack-stack"><div class="box" style="--c:var(--c-blue)"><i></i><span>Lean</span></div><div class="box small" style="--c:var(--c-lime)"><i></i><span>5S</span></div><div class="box small" style="--c:var(--c-teal)"><i></i><span>VSM</span></div><div class="box small" style="--c:var(--c-coral)"><i></i><span>DMAIC</span></div></div><span class="count">Pack 4 decks</span></div><h4>Pack Lean Management</h4><span class="sub">L'essentiel Lean et les 3 guides</span><div class="pr">109,90€<span class="badge-sale">-22%</span></div></a>
+    </div>
+  </div>
+
+  <div class="benefits">
+    <div><b>Un outil = une fiche</b><span>En quelques lignes, vous comprenez la logique et la mise en pratique.</span></div>
+    <div><b>Visuel et synthétique</b><span>Codes couleur et schémas clairs, pour les esprits visuels et les gens pressés.</span></div>
+    <div><b>Conçu par des experts</b><span>Éprouvé en réunion, en coaching et en formation.</span></div>
+    <div><b>Nomade</b><span>Tient dans la main, s'utilise en solo ou en équipe.</span></div>
+  </div>
+  <div class="howto">
+    <div><em>Étape 1</em><b>Choisir son « Je souhaite… »</b>Une porte d'entrée par situation : analyser un problème, structurer un plan d'action…</div>
+    <div><em>Étape 2</em><b>Lire le recto</b>Concepts clés, définition, visuel, quand l'utiliser et un exemple.</div>
+    <div><em>Étape 3</em><b>Passer à l'action au verso</b>« Comment mettre en place » et les bonnes pratiques, plus 15 templates en bonus.</div>
+  </div>
+  <div class="sec-cta"><a class="btn btn-p" href="#">Voir toutes les fiches</a><a class="btn btn-s" href="#">Grande ou petite boîte : comparer</a></div>
+</div></section>
+
+<!-- ===== 5. Les formations ===== -->
+<section class="sec sec-t" id="formations"><div class="wrap">
+  <div class="an"><span class="n">5</span><div><strong>Nouveau bloc formations, sur fond nuit.</strong> Il manque totalement à l'accueil actuel. Le parcours des 4 ceintures se lit comme un escalier, avec durée, prix et financement visibles sans cliquer. La Green Belt est mise en avant parce que c'est la seule éligible CPF. Infos reprises des pages formation du thème en ligne. La White Belt n'a pas de tarif dans le thème : à compléter.</div></div>
+  <div class="sec-head">
+    <span class="eyebrow">Les formations</span>
+    <h2>Un parcours, <em>quatre niveaux</em>.</h2>
+    <p>80 % de pratique, un formateur à vos côtés et un projet réel à mener. Choisissez votre niveau d'entrée, nous montons le financement avec vous.</p>
+  </div>
+  <div class="path">
+    <a class="lvl b-white tbc" href="#"><div class="belt"></div><span class="lv">Niveau 1</span><h3>White Belt</h3><p>Comprendre les bases du Lean.</p><dl><dt>Durée</dt><dd>À compléter</dd><dt>Prix</dt><dd>À compléter</dd></dl><span class="go">Découvrir →</span></a>
+    <a class="lvl b-yellow" href="#"><div class="belt"></div><span class="lv">Niveau 2<span>Sans prérequis</span></span><h3>Yellow Belt</h3><p>Devenir acteur de l'amélioration continue.</p><dl><dt>Durée</dt><dd>3 jours · 21 h</dd><dt>Format</dt><dd>Présentiel</dd><dt>Prix</dt><dd>1 500€ HT</dd><dt>Financement</dt><dd>OPCO</dd><dt>Validation</dt><dd>Attestation</dd></dl><span class="go">Découvrir →</span></a>
+    <a class="lvl b-green star" href="#"><div class="belt"></div><span class="lv">Niveau 3<span class="cpf">Éligible CPF</span></span><h3>Green Belt</h3><p>Piloter un projet d'amélioration avec la méthode DMAIC.</p><dl><dt>Durée</dt><dd>6 jours · 42 h</dd><dt>Format</dt><dd>Distanciel ou présentiel</dd><dt>Prix</dt><dd>Dès 1 500€</dd><dt>Financement</dt><dd>CPF, OPCO</dd><dt>Validation</dt><dd>Certification RS7114</dd></dl><span class="go">Découvrir →</span></a>
+    <a class="lvl b-black" href="#"><div class="belt"></div><span class="lv">Niveau 4<span>Prérequis Green Belt</span></span><h3>Black Belt</h3><p>Mener les projets de transformation à fort impact.</p><dl><dt>Durée</dt><dd>9 jours · 72 h</dd><dt>Format</dt><dd>Présentiel</dd><dt>Prix</dt><dd>4 500€ HT</dd><dt>Financement</dt><dd>OPCO</dd><dt>Validation</dt><dd>Certification</dd></dl><span class="go">Découvrir →</span></a>
+  </div>
+  <div class="fund">
+    <b>Comment la financer</b>
+    <div><strong>CPF · salarié</strong>La Green Belt distanciel à 1 500€ entre dans le plafond CPF.</div>
+    <div><strong>OPCO · entreprise</strong>Prise en charge de tout ou partie selon votre branche.</div>
+    <div><strong>France Travail</strong>Le montage CPF + AIF peut couvrir les frais selon votre situation.</div>
+  </div>
+  <div class="sec-cta">
+    <a class="btn btn-w" href="https://calendar.app.google/r2FZHTjKzBM6W2Mf6">Réserver 30 min d'échange</a>
+    <a class="btn btn-wo" href="https://lean.fichly.com/r/wQZ8d7">Télécharger le catalogue</a>
+    <a class="btn btn-wo" href="#">Prochaines sessions</a>
+    <small>Sans engagement · réponse sous 24 h</small>
+  </div>
+</div></section>
+
+<!-- ===== 6. Pont fiches + formations ===== -->
+<section class="sec"><div class="wrap">
+  <div class="an"><span class="n">6</span><div><strong>Le lien entre les deux.</strong> Le Pack Lean offert avec les formations est aujourd'hui caché sur la page Green Belt. Le dire sur l'accueil explique que fiches et formations ne sont pas deux entreprises différentes, mais deux étapes d'un même apprentissage.</div></div>
+  <div class="bridge">
+    <div class="txt">
+      <span class="eyebrow">Fiches et formations</span>
+      <h2>Les deux <em>se complètent</em>.</h2>
+      <p>Nos fiches sont éprouvées en formation, et chaque apprenant repart avec. Ce que vous avez pratiqué pendant les jours de formation reste à portée de main sur le terrain.</p>
+      <div class="flow">
+        <div class="f1"><b>Je découvre</b>avec un deck de fiches</div>
+        <span class="arr" aria-hidden="true">→</span>
+        <div class="f2"><b>Je me forme</b><span>Yellow, Green, Black Belt</span></div>
+        <span class="arr" aria-hidden="true">→</span>
+        <div class="f3"><b>J'applique</b>les fiches restent avec moi</div>
+      </div>
+      <blockquote>« C'est exactement le support qu'il manquait : un format pratique, complémentaire à une formation, et facile à emporter partout. »<footer>Clément B., consultant Lean</footer></blockquote>
+    </div>
+    <div class="vis">
+      <img src="{{GUIDES}}" alt="Les guides Fichly : résolution de problèmes, 5S et VSM">
+      <div class="gift"><span>Offert</span>Le Pack Lean avec la Green et la Black Belt, le deck Lean de 40 fiches avec la Yellow Belt.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== 7. Avis ===== -->
+<section class="sec sec-r"><div class="wrap">
+  <div class="an"><span class="n">7</span><div><strong>Avis mélangés et étiquetés.</strong> Chaque avis porte l'étiquette « Fiches » ou « Formation » pour que le visiteur voie que les deux existent. Les avis formation sont repris de la page Green Belt : vérifier qu'ils sont réels et qu'on peut les afficher ici.</div></div>
+  <div class="sec-head">
+    <h2>La <em>parole</em> à ceux qui apprennent avec nous.</h2>
+  </div>
+  <div class="reviews">
+    <article class="rv"><span class="k k-f">Fiches</span><span class="stars">★★★★★</span><h4>Indispensables pour débuter dans l'industrie</h4><p>« C'est un peu comme un album Panini. Hâte de les partager. Pour les novices, ces fiches sont indispensables pour débuter dans l'industrie. »</p><footer><b>Yann D.</b> · Responsable industrialisation</footer></article>
+    <article class="rv"><span class="k k-t">Formation Green Belt</span><span class="stars">★★★★★</span><h4>Mon premier projet DMAIC</h4><p>« J'ai piloté mon premier projet DMAIC pendant la formation. Trois mois après, les gains étaient mesurables sur ma ligne. »</p><footer><b>Camille D.</b> · Responsable production</footer></article>
+    <article class="rv"><span class="k k-f">Fiches</span><span class="stars">★★★★★</span><h4>Super pratique</h4><p>« J'ai reçu les fiches. Super pratique, un grand merci pour votre travail à toutes et à tous pour la réalisation de ces fiches. »</p><footer><b>Séverine G.</b> · Formatrice industrie</footer></article>
+    <article class="rv"><span class="k k-t">Formation Green Belt</span><span class="stars">★★★★★</span><h4>80 % de pratique, pour de vrai</h4><p>« Ce n'est pas un slogan. On manipule les outils sur un cas réel, on ne subit pas des slides. »</p><footer><b>Sophie R.</b> · Responsable qualité</footer></article>
+  </div>
+</div></section>
+
+<!-- ===== 8. Fondateurs + entreprises ===== -->
+<section class="sec" id="entreprises"><div class="wrap">
+  <div class="an"><span class="n">8</span><div><strong>Fin de page en deux colonnes.</strong> Le texte des fondateurs est conservé. Le bloc entreprises propose maintenant les deux offres (lot de decks et formation intra) au lieu des seuls decks.</div></div>
+  <div class="two">
+    <div class="panel p-team">
+      <h2>À l'origine de Fichly, deux passionnés : <em>Hugo et Clément</em>.</h2>
+      <p>Tous deux ont commencé en partageant sur LinkedIn du contenu pour rendre le monde industriel plus compréhensible et plus humain. Ce simple partage est devenu une mission : 👉 rendre le savoir industriel accessible à toutes et tous.</p>
+      <p>Aujourd'hui, Fichly propose des fiches pédagogiques concrètes et des formations pratiques, pensées pour transmettre l'essentiel, simplement.</p>
+      <div><a class="btn btn-p" href="#">Découvrir l'équipe</a></div>
+    </div>
+    <div class="panel p-biz">
+      <span class="eyebrow">Entreprises</span>
+      <h2>Équiper ou <em>former</em> vos équipes ?</h2>
+      <p>Nous adaptons les fiches et les formations à votre activité.</p>
+      <div class="biz">
+        <a href="#"><span class="k k-f">Fiches</span><b>Un lot de decks</b>Une version personnalisée de nos fiches pour vos équipes.</a>
+        <a href="#"><span class="k k-t">Formation</span><b>Une formation intra</b>Dans vos locaux, partout en France, cas adaptés à votre activité. Devis sous 48 h.</a>
+      </div>
+      <div><a class="btn btn-s" href="#">Profiter de l'offre entreprises</a></div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer class="foot-site"><div class="wrap">
+  <div class="cols">
+    <div><h5>Les fiches</h5><ul><li><a href="#">L'essentiel (40 fiches)</a></li><li><a href="#">Le guide (20 fiches)</a></li><li><a href="#">Pack Lean Management</a></li><li><a href="#">Templates</a></li></ul></div>
+    <div><h5>Les formations</h5><ul><li><a href="#">White Belt</a></li><li><a href="#">Yellow Belt</a></li><li><a href="#">Green Belt CPF</a></li><li><a href="#">Black Belt</a></li><li><a href="#">Prochaines sessions</a></li></ul></div>
+    <div><h5>Fichly</h5><ul><li><a href="#">À propos</a></li><li><a href="#">Articles</a></li><li><a href="#">Entreprises</a></li><li><a href="#">Partenaires</a></li></ul></div>
+    <div><h5>Aide</h5><ul><li><a href="#">Contact</a></li><li><a href="#">Avis clients</a></li></ul></div>
+  </div>
+  <div class="base">Fichly · Le LEAN ACCESSIBLE · Organisme certifié Qualiopi au titre des actions de formation</div>
+</div></footer>
+
+<!-- ===== Notes de maquette ===== -->
+<section class="sec notes"><div class="wrap">
+  <span class="eyebrow" style="color:var(--note-ink)">Hors site · notes pour Hugo</span>
+  <h2>Ce qui change par rapport à l'accueil actuel</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Le problème constaté</h3>
+      <ul>
+        <li>Le titre du hero annonce « fiches et formations », mais son seul bouton est « Explorer les fiches ».</li>
+        <li>Sur les 12 sections de <code>templates/index.json</code>, 9 parlent des fiches et 0 présente une formation, un prix ou un financement.</li>
+        <li>Le visiteur qui cherche une Green Belt CPF ne trouve rien sans passer par le menu.</li>
+        <li>Le lien entre les deux (Pack Lean offert en formation) n'est expliqué que sur la page Green Belt.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>À confirmer avant intégration</h3>
+      <ol>
+        <li>White Belt : durée, prix et financement (aucun tarif dans le thème).</li>
+        <li>Chiffre d'audience : l'accueil dit « +70 000 professionnels conquis », les pages formation « 80 000+ professionnels nous suivent ». Lequel garder ?</li>
+        <li>Valeur du Pack Lean offert : « +150€ » (Green, Black) contre « +49€ » (Yellow, seulement le deck de 40 fiches ?).</li>
+        <li>Les avis formation (Camille D., Sophie R.) sont-ils de vrais apprenants ?</li>
+        <li>Black Belt : nom exact de la certification délivrée.</li>
+        <li>Le bandeau du haut met en avant la Green Belt CPF : OK, ou garder une offre fiches ?</li>
+      </ol>
+    </div>
+  </div>
+  <div class="plan-wrap">
+    <table class="plan">
+      <thead><tr><th>#</th><th>Bloc V2</th><th>Statut</th><th>Section actuelle</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Bandeau + menu</td><td><span class="st st-mod">Modifié</span></td><td>Thème</td><td>Deux entrées de menu « Les fiches » et « Les formations », chacune avec son repère (prix d'entrée, Qualiopi).</td></tr>
+        <tr><td>1</td><td>Hero en deux portes</td><td><span class="st st-mod">Modifié</span></td><td>image_with_text_overlay</td><td>Fait choisir dès le premier écran. Le mot changeant (« le Lean, la VSM… ») disparaît au profit d'un titre fixe.</td></tr>
+        <tr><td>2</td><td>Logos clients</td><td><span class="st st-keep">Conservé</span></td><td>rich_text + scrolling_promotion</td><td>Mêmes logos, titre intégré à la bande.</td></tr>
+        <tr><td>3</td><td>Fiche ou formation ?</td><td><span class="st st-new">Nouveau</span></td><td>remplace tableau_comparatif</td><td>Sélecteur de situation + tableau en 6 lignes.</td></tr>
+        <tr><td>4</td><td>Les fiches</td><td><span class="st st-mod">Regroupé</span></td><td>featured_collection, image_width_text_columns, collage_tabs</td><td>Produits par format, avantages et « comment ça marche » condensés. Le détail recto / verso part sur les pages produit.</td></tr>
+        <tr><td>5</td><td>Les formations</td><td><span class="st st-new">Nouveau</span></td><td>aucune</td><td>Parcours des 4 ceintures, financement, prise de rendez-vous. Peut réutiliser la section <code>gb-parcours</code>.</td></tr>
+        <tr><td>6</td><td>Les deux se complètent</td><td><span class="st st-new">Nouveau</span></td><td>reprend gb-pack-lean</td><td>Explique le lien fiches ↔ formations.</td></tr>
+        <tr><td>7</td><td>Avis</td><td><span class="st st-mod">Modifié</span></td><td>testimonials</td><td>Avis fiches et formation, étiquetés.</td></tr>
+        <tr><td>8</td><td>Fondateurs + entreprises</td><td><span class="st st-mod">Fusionné</span></td><td>image_with_text + rich_text</td><td>Deux colonnes. Offre entreprises : decks et intra.</td></tr>
+        <tr><td>×</td><td>« Comment ça fonctionne » en onglets</td><td><span class="st st-out">Déplacé</span></td><td>collage_tabs</td><td>Résumé en 3 étapes sur l'accueil, version complète sur les pages produit.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  var A={
+    s5s:{c:'is-f',k:'Notre conseil : une fiche',t:'Le guide du 5S en 20 fiches',p:"Un mini-deck qui vous guide pas à pas pour transformer un espace encombré en zone de travail claire.",f:['20 fiches','29,90€','Livré chez vous'],b:[['btn-p','Voir le guide du 5S','#fiches']],a:"Vous voulez tous les outils du Lean ? Le <a href=\"#fiches\">Pack Lean Management</a> (-22%)."},
+    decouvre:{c:'is-f',k:'Notre conseil : une fiche',t:'40 outils du Lean à portée de main',p:"Le deck L'essentiel : 40 fiches pour avoir une vue d'ensemble du Lean, un outil par fiche.",f:['40 fiches','49,90€','Imprimé en France'],b:[['btn-p','Voir le deck Lean','#fiches']],a:"Vous préférez être accompagné ? La <a href=\"#formations\">Yellow Belt</a> pose les fondamentaux en 3 jours."},
+    chantiers:{c:'is-t',k:'Notre conseil : une formation',t:'Formation Yellow Belt',p:"Le premier niveau du parcours. Vous acquérez les fondamentaux du Lean et menez vos premiers chantiers d'amélioration, sans prérequis.",f:['3 jours · 21 h','1 500€ HT','Finançable OPCO','80 % de pratique'],b:[['btn-w','Voir la Yellow Belt','#formations']],a:"Le deck de 40 fiches Lean est offert avec la formation."},
+    certif:{c:'is-t',k:'Notre conseil : une formation',t:'Formation Green Belt, éligible CPF',p:"Vous pilotez un vrai projet d'amélioration avec la méthode DMAIC et vous obtenez la certification RS7114.",f:['6 jours · 42 h','Dès 1 500€','Finançable CPF','Certification RS7114'],b:[['btn-w','Voir la Green Belt','#formations'],['btn-wo','Réserver 30 min','https://calendar.app.google/r2FZHTjKzBM6W2Mf6']],a:"Le Pack Lean est offert avec la formation."},
+    equipe:{c:'is-e',k:'Notre conseil : l’offre entreprises',t:'Des fiches ou une formation intra',p:"Un lot de decks personnalisés pour vos équipes, ou une formation dans vos locaux avec un cas adapté à votre activité.",f:['Decks personnalisés','Formation intra','Devis sous 48 h'],b:[['btn-p','Voir l’offre entreprises','#entreprises']],a:"Les formations sont finançables par votre OPCO."}
+  };
+  var box=document.getElementById('answer');
+  function show(k){
+    var d=A[k];
+    box.className='answer '+d.c;
+    box.innerHTML='<span class="kind">'+d.k+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><div class="facts">'+d.f.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><div class="row">'+d.b.map(function(b){return '<a class="btn '+b[0]+'" href="'+b[2]+'">'+b[1]+'</a>'}).join('')+'</div><p class="also">'+d.a+'</p>';
+  }
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      c.setAttribute('aria-pressed','true'); show(c.dataset.k);
+    });
+  });
+  show('s5s');
+  var t=document.getElementById('toggle-an');
+  t.addEventListener('change',function(){document.body.classList.toggle('no-an',!t.checked)});
+})();
+</script>
