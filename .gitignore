@@ -6,3 +6,6 @@ articles-v2/sauvegardes/
 videos/*/capture/
 videos/*/.media/
 videos/*/snapshots/
+
+# Caches Python
+__pycache__/
