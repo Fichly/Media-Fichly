@@ -9,10 +9,16 @@ export const C = {
   line: "#e2e2ee",
   green: "#8cc978",
   red: "#f16969",
+  yellow: "#e6b839",
+  violet: "#aa76b2",
   pGreen: "#e6f3df",
   pRed: "#fde6e6",
+  pLav: "#ececf5",
+  pYellow: "#f8f3d9",
   tGreen: "#2f5a1f",
   tRed: "#a83434",
+  tYellow: "#7a5806",
+  muted: "#6b6b9a",
   ribbon: ["#f16969", "#75bec0", "#aa76b2", "#8cc978", "#e0cf35", "#74a3d6"],
 } as const;
 
