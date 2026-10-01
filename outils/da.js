@@ -5,6 +5,9 @@
 //   · la palette, Poppins, et le contrat de rendu lu par outils/rendu.js (window.FICHE)
 // Rien sur la structure ni sur le mouvement : chaque fiche écrit les siens dans son fiche.js.
 // Zone libre pour la fiche : ZONE (entre le chapeau et l'encart).
+// Composition de chaque post : la tête, une explication courte et pédagogique (une ou deux lignes)
+// juste au-dessus du visuel, puis le visuel, pièce maîtresse qui occupe toute la zone libre, et l'encart.
+// Pas de phrase de conclusion en bas de la fiche.
 (() => {
   const W = 1080, H = 1350;
   const ASSETS = '../../assets/';
