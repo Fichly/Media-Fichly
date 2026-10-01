@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le TRS en 3 minutes — storyboard v1</title>
+<link rel="stylesheet" href="public/fonts.css">
+<style>
+  :root {
+    --bg: #FFFFFF; --dark: #1C1410; --red: #D8000F; --light: #F5F2EF;
+    --sheet: #E9E4DE; --muted: #6B5F58;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--sheet); color: var(--dark); font-family: "Libre Baskerville", Georgia, serif; padding: 40px 16px 80px; }
+  .sheet { max-width: 1680px; margin: 0 auto; }
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px; border-bottom: 3px solid var(--dark); padding-bottom: 18px; }
+  header h1 { font-family: "Shrikhand", serif; font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1; transform: rotate(-2deg); transform-origin: left bottom; }
+  header h1 span { color: var(--red); }
+  header p { font-size: 15px; line-height: 1.6; max-width: 760px; margin-top: 10px; }
+  .tag { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); border: 1.5px solid var(--red); padding: 6px 10px; white-space: nowrap; }
+  .act { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--bg); background: var(--dark); padding: 8px 12px; margin: 30px 0 14px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 20px; }
+  @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 700px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  .cell { display: flex; flex-direction: column; gap: 8px; }
+  .meta { display: flex; justify-content: space-between; gap: 8px; font-family: "Space Grotesk", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+  .meta .r { color: var(--muted); font-weight: 500; letter-spacing: .5px; text-transform: none; }
+  .note { font-size: 13px; line-height: 1.6; }
+  .note b { font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+  .chip { align-self: flex-start; font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; border: 1.5px solid var(--dark); padding: 3px 8px; }
+
+  /* ── Le cadre : 16:9, unités cqw comme au montage (1 cqw = 19,2 px en 1920) ── */
+  .f { position: relative; aspect-ratio: 16 / 9; container-type: inline-size; overflow: hidden; background: var(--bg); outline: 1px solid rgba(28,20,16,.18); }
+  .f.red { background: var(--red); }
+  .f > * { position: absolute; }
+  .eyebrow { left: 3.6cqw; top: 3cqw; font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1.15cqw; letter-spacing: .32cqw; text-transform: uppercase; color: var(--red); }
+  .red .eyebrow { color: var(--bg); }
+  .progress { left: 0; bottom: 0; height: .5cqw; background: var(--red); }
+  .red .progress { background: var(--bg); }
+  .sh { font-family: "Shrikhand", serif; font-weight: 400; line-height: .9; white-space: nowrap; }
+  .serif { font-family: "Libre Baskerville", serif; line-height: 1.55; }
+  .mono { font-family: "Space Grotesk", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .2cqw; }
+  .stack-shadow { text-shadow: .1cqw .1cqw 0 rgba(28,20,16,.25), .21cqw .21cqw 0 rgba(28,20,16,.2), .31cqw .31cqw 0 rgba(28,20,16,.15); }
+  .pin { width: 1.1cqw; height: 1.1cqw; background: var(--red); transform: rotate(45deg); }
+
+  /* Ruban des heures : grille à double filet (3 px extérieur, 1,5 px intérieur) */
+  .ribbon { display: grid; border: .16cqw solid var(--dark); background: var(--bg); }
+  .ribbon > div { border-left: .08cqw solid var(--dark); position: relative; display: flex; align-items: flex-end; justify-content: center; padding-bottom: .6cqw; font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1cqw; letter-spacing: .1cqw; text-transform: uppercase; }
+  .ribbon > div:first-child { border-left: 0; }
+  .ribbon > div::before { content: attr(data-h); position: absolute; left: .4cqw; top: .35cqw; font-size: .85cqw; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .ribbon .stop { background: var(--red); color: var(--bg); }
+  .ribbon .stop::before { color: var(--bg); opacity: .85; }
+  .ribbon .plan { background: var(--light); color: var(--dark); }
+  .loose { display: flex; border: .16cqw solid var(--dark); }
+  .loose > div { background: var(--light); border-left: .08cqw solid var(--dark); display: flex; align-items: center; justify-content: center; font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1cqw; letter-spacing: .1cqw; text-transform: uppercase; }
+  .loose > div:first-child { border-left: 0; }
+
+  /* Fiche de témoin : carte à filet rouge à gauche */
+  .card { border-left: .21cqw solid var(--red); padding-left: 1.2cqw; }
+  .card .t { font-family: "Shrikhand", serif; font-size: 3.3cqw; line-height: 1.05; }
+  .card ul { list-style: none; margin-top: 1cqw; }
+  .card li { font-family: "Space Grotesk", sans-serif; font-size: 1.6cqw; line-height: 1.45; padding-left: 2.2cqw; position: relative; }
+  .card li::before { content: "—"; color: var(--red); position: absolute; left: 0; }
+
+  /* Grille de données à double filet */
+  .fin { display: grid; border: .16cqw solid var(--dark); }
+  .fin > div { border-left: .08cqw solid var(--dark); padding: 1.4cqw 1.6cqw; }
+  .fin > div:first-child { border-left: 0; }
+  .fin .lab { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1.15cqw; letter-spacing: .28cqw; text-transform: uppercase; color: var(--red); }
+  .fin .num { font-family: "Shrikhand", serif; color: var(--red); line-height: 1; margin: .8cqw 0 .5cqw; }
+  .fin .txt { font-family: "Libre Baskerville", serif; font-size: 1.5cqw; line-height: 1.5; }
+
+  /* Tampon */
+  .stamp { border: .16cqw solid var(--red); outline: .08cqw solid var(--red); outline-offset: .35cqw; color: var(--red); font-family: "Shrikhand", serif; padding: .6cqw 1.6cqw; line-height: 1; white-space: nowrap; }
+
+  /* Cellules de fin */
+  .info { background: var(--bg); outline: 1px solid rgba(28,20,16,.18); padding: 22px; font-size: 13px; line-height: 1.6; }
+  .info h3 { font-family: "Shrikhand", serif; font-weight: 400; font-size: 24px; margin-bottom: 10px; }
+  .seams { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .seams span { font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border: 1.5px solid var(--dark); padding: 3px 6px; }
+  .seams span.x { border-color: var(--red); color: var(--red); }
+  .sw { display: flex; gap: 8px; margin: 8px 0 12px; flex-wrap: wrap; }
+  .sw div { width: 74px; font-family: "Space Grotesk", sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .sw div i { display: block; height: 40px; border: 1.5px solid var(--dark); margin-bottom: 4px; }
+  .info ul { list-style: none; }
+  .info li { padding-left: 18px; position: relative; margin: 3px 0; }
+  .info li::before { content: "—"; color: var(--red); position: absolute; left: 0; }
+</style>
+</head>
+<body>
+<div class="sheet">
+<header>
+  <div>
+    <h1>Le TRS en <span>3 minutes</span> — storyboard v1</h1>
+    <p>Une enquête en 12 cadres : la machine tourne toute la journée, mais il manque plus de trois heures. Trois témoins, une reconstitution à 77 %, puis le vrai verdict, la décomposition. Images fixes du moment clé de chaque cadre, sans mouvement.</p>
+  </div>
+  <div class="tag">1920×1080 · environ 3 min · 12 cadres · voix Emilie</div>
+</header>
+
+<div class="act">Acte I — Le mystère</div>
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="cell">
+    <div class="f" id="frame-01">
+      <div class="eyebrow">Dossier n° 01 — Presse, ligne 2</div>
+      <div class="sh" style="left:3.6cqw; top:10cqw; font-size:6cqw;">Il manque</div>
+      <div class="sh" style="left:3cqw; top:17.5cqw; font-size:10.5cqw; color:var(--red); transform:rotate(-4deg); transform-origin:left center;">3 heures.</div>
+      <div class="sh" style="left:4.2cqw; top:31cqw; font-size:5.6cqw; transform:rotate(2deg); transform-origin:left center;">Où sont-elles ?</div>
+      <div class="mono" style="left:3.6cqw; top:43cqw; font-size:1.4cqw;">2 équipes · 16 h d'ouverture</div>
+      <!-- polaroïd -->
+      <div style="left:66cqw; top:9cqw; width:26cqw; height:31cqw; background:var(--bg); border:.16cqw solid var(--dark); transform:rotate(4deg); padding:1.4cqw 1.4cqw 0;">
+        <div style="position:relative; height:22cqw; background:var(--light); border:.08cqw solid var(--dark);">
+          <div style="position:absolute; left:5cqw; right:5cqw; bottom:2cqw; height:3cqw; background:var(--dark);"></div>
+          <div style="position:absolute; left:7.5cqw; width:2.2cqw; bottom:5cqw; height:11cqw; background:var(--dark);"></div>
+          <div style="position:absolute; right:7.5cqw; width:2.2cqw; bottom:5cqw; height:11cqw; background:var(--dark);"></div>
+          <div style="position:absolute; left:6.5cqw; right:6.5cqw; top:3cqw; height:3.2cqw; background:var(--dark);"></div>
+          <div style="position:absolute; left:10.4cqw; width:2.4cqw; top:6.2cqw; height:5cqw; background:var(--red);"></div>
+        </div>
+        <div class="mono" style="font-size:1.05cqw; margin-top:1.4cqw; letter-spacing:.15cqw;">Pièce à conviction · presse L2</div>
+      </div>
+      <div class="pin" style="left:78.6cqw; top:8.3cqw;"></div>
+      <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080"><path d="M1517 168 C 1640 260, 1760 210, 1930 330" fill="none" stroke="#D8000F" stroke-width="4"/></svg>
+      <div class="progress" style="width:8.33%;"></div>
+    </div>
+    <div class="meta"><span>01 · L'affaire</span><span class="r">frame-01 · 0–12 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> on démarre en gros plan sur le polaroïd de la presse, puis un seul recul ralenti découvre le tableau. Les trois lignes du titre tombent sur « trois heures » et « passées ». Fondu enchaîné vers 02.</p>
+    <span class="chip">entrée : cut</span>
+  </div>
+
+  <!-- 02 -->
+  <div class="cell">
+    <div class="f" id="frame-02">
+      <div class="eyebrow">L'outil d'enquête</div>
+      <div class="sh" style="left:4cqw; top:9cqw; font-size:22cqw; color:var(--red); transform:rotate(-6deg); transform-origin:left center;">TRS</div>
+      <div class="mono" style="left:4.6cqw; top:38cqw; font-size:1.4cqw; color:var(--dark); letter-spacing:.28cqw;">Taux de rendement synthétique</div>
+      <div class="sh" style="left:57cqw; top:11cqw; font-size:5cqw; color:var(--dark);">une note</div>
+      <div style="left:55.5cqw; top:14.4cqw; width:31cqw; height:.9cqw; background:var(--red); transform:rotate(-3deg);"></div>
+      <div class="card" style="left:57cqw; top:22cqw; width:36cqw;">
+        <div class="t">Le relevé des pertes</div>
+        <div class="serif" style="font-size:1.7cqw; margin-top:.8cqw;">De ce que la machine <em>devait</em> produire aux pièces bonnes. Et où chercher.</div>
+      </div>
+      <div class="progress" style="width:16.67%;"></div>
+    </div>
+    <div class="meta"><span>02 · L'outil</span><span class="r">frame-02 · 12–29 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> « TRS » tombe en grand et s'incline, son nom complet s'écrit dessous. « une note » apparaît puis se fait barrer d'un trait rouge, et la fiche « Le relevé des pertes » glisse à sa place sur « relevé ». Glissement vers la gauche vers 03.</p>
+    <span class="chip">entrée : crossfade</span>
+  </div>
+
+</div>
+
+<div class="act">Acte II — Le dossier et les trois témoins</div>
+<div class="grid">
+
+  <!-- 03 -->
+  <div class="cell">
+    <div class="f" id="frame-03">
+      <div class="eyebrow">Pièce n° 1 — Le temps</div>
+      <div class="mono" style="left:3.6cqw; top:8cqw; font-size:1.4cqw;">16 h d'ouverture · 2 équipes de 8 h</div>
+      <div class="ribbon" style="left:3.6cqw; top:11.5cqw; width:92.8cqw; height:7cqw; grid-template-columns:repeat(16,1fr);">
+        <div data-h="6h" class="plan"></div><div data-h="7h"></div><div data-h="8h"></div><div data-h="9h"></div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
+        <div data-h="14h" class="plan"></div><div data-h="15h"></div><div data-h="16h"></div><div data-h="17h"></div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
+      </div>
+      <div class="loose" style="left:3.6cqw; top:22cqw; width:11.6cqw; height:5.6cqw; transform:rotate(-3deg);"><div style="flex:1">Maint.</div><div style="flex:1">Maint.</div></div>
+      <div class="mono" style="left:16.5cqw; top:23.6cqw; font-size:1.2cqw; color:var(--red);">— 2 h de maintenance prévue, retirées</div>
+      <div class="sh" style="left:3.4cqw; top:31cqw; font-size:13.5cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">14 h</div>
+      <div style="left:40cqw; top:34cqw; width:52cqw;">
+        <div class="mono" style="font-size:1.4cqw; color:var(--red); letter-spacing:.3cqw;">Temps requis</div>
+        <div class="serif" style="font-size:1.8cqw; margin-top:.6cqw;">Celui où la machine devait produire. Tout part de là.</div>
+      </div>
+      <div class="progress" style="width:25%;"></div>
+    </div>
+    <div class="meta"><span>03 · Le temps requis</span><span class="r">frame-03 · 29–46 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> les 16 cases du ruban s'épinglent une à une de gauche à droite, sur « seize heures ». Sur « maintenance prévue », les deux cases claires se décrochent et tombent, puis « 14 h » se pose en rouge. Glissement vers la gauche vers 04 : le ruban reste en place.</p>
+    <span class="chip">entrée : push-slide left</span>
+  </div>
+
+  <!-- 04 -->
+  <div class="cell">
+    <div class="f" id="frame-04">
+      <div class="eyebrow">Témoin n° 1</div>
+      <div class="ribbon" style="left:3.6cqw; top:8cqw; width:92.8cqw; height:7cqw; grid-template-columns:repeat(14,1fr);">
+        <div data-h="7h"></div><div data-h="8h"></div><div data-h="9h" class="stop">Arrêt</div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
+        <div data-h="15h"></div><div data-h="16h"></div><div data-h="17h" class="stop">Arrêt</div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
+      </div>
+      <div class="mono" style="left:3.6cqw; top:16.6cqw; font-size:1.2cqw;">14 h requises → <span style="color:var(--red)">12 h de fonctionnement</span></div>
+      <div class="card" style="left:3.6cqw; top:23cqw; width:44cqw;">
+        <div class="t">Disponibilité</div>
+        <ul><li>pannes</li><li>manques matière</li><li>réglages imprévus</li></ul>
+      </div>
+      <div class="sh" style="left:50cqw; top:24cqw; font-size:12cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">85,7 %</div>
+      <div class="mono" style="left:51cqw; top:40.5cqw; font-size:1.4cqw;">12 h sur 14 h</div>
+      <div class="progress" style="width:33.33%;"></div>
+    </div>
+    <div class="meta"><span>04 · Disponibilité</span><span class="r">frame-04 · 46–60 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la fiche du témoin s'épingle à gauche. Les trois causes arrivent une à une, sur leur nom, puis deux cases du ruban virent au rouge « Arrêt ». Le compteur monte jusqu'à 85,7 % sur « disponibilité ». Glissement vers la gauche vers 05.</p>
+    <span class="chip">entrée : push-slide left</span>
+  </div>
+
+  <!-- 05 -->
+  <div class="cell">
+    <div class="f" id="frame-05">
+      <div class="eyebrow">Témoin n° 2</div>
+      <div class="ribbon" style="left:3.6cqw; top:8cqw; width:56cqw; height:6cqw; grid-template-columns:repeat(12,1fr);">
+        <div data-h="7h"></div><div data-h="8h"></div><div data-h="10h"></div><div data-h="11h" style="outline:.21cqw solid var(--red); outline-offset:-.21cqw;"></div><div data-h="12h"></div><div data-h="13h"></div>
+        <div data-h="15h"></div><div data-h="16h"></div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
+      </div>
+      <!-- agrandissement : une heure à la loupe -->
+      <div style="left:64cqw; top:5cqw; width:32.4cqw; height:16cqw; border:.16cqw solid var(--dark); background:var(--bg);">
+        <div class="mono" style="position:absolute; left:1cqw; top:.9cqw; font-size:1cqw; color:var(--red);">11 h, à la loupe</div>
+        <div style="position:absolute; left:1cqw; right:1cqw; top:5cqw; height:6cqw; border:.08cqw solid var(--dark); background:var(--light);">
+          <i style="position:absolute; left:6%; width:.35cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:14%; width:.6cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:23%; width:.3cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:31%; width:.45cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:44%; width:.3cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:52%; width:.7cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:63%; width:.3cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:71%; width:.4cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:83%; width:.35cqw; top:0; bottom:0; background:var(--red);"></i>
+          <i style="position:absolute; left:92%; width:.5cqw; top:0; bottom:0; background:var(--red);"></i>
+        </div>
+        <div class="mono" style="position:absolute; left:1cqw; bottom:.9cqw; font-size:1.05cqw;">Micro-arrêts de quelques secondes</div>
+      </div>
+      <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080"><path d="M640 268 C 820 330, 1040 330, 1229 300" fill="none" stroke="#D8000F" stroke-width="4"/></svg>
+      <div class="fin" style="left:3.6cqw; top:24cqw; width:44cqw; grid-template-columns:1fr 1fr;">
+        <div><div class="lab">Attendues</div><div class="num" style="font-size:5.4cqw;">720</div><div class="txt">60 pièces/h × 12 h</div></div>
+        <div><div class="lab">Produites</div><div class="num" style="font-size:5.4cqw;">680</div><div class="txt">40 manquent</div></div>
+      </div>
+      <div class="card" style="left:52cqw; top:25cqw; width:20cqw;"><div class="t">Performance</div></div>
+      <div class="sh" style="left:52cqw; top:32cqw; font-size:11cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">94,4 %</div>
+      <div class="progress" style="width:41.67%;"></div>
+    </div>
+    <div class="meta"><span>05 · Performance</span><span class="r">frame-05 · 60–79 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la caméra s'approche de la case de 11 h et l'agrandissement s'ouvre, relié par le fil rouge. Sur « quelques secondes », dix encoches rouges apparaissent en cascade. Les compteurs 720 puis 680 tournent sur leurs mots. Glissement vers la gauche vers 06.</p>
+    <span class="chip">entrée : push-slide left</span>
+  </div>
+
+  <!-- 06 -->
+  <div class="cell">
+    <div class="f" id="frame-06">
+      <div class="eyebrow">Témoin n° 3</div>
+      <div style="left:3.6cqw; top:9cqw; width:51cqw; display:grid; grid-template-columns:repeat(17,1fr); gap:.5cqw;">
+        <!-- 68 cases = 680 pièces ; 3 rouges = 30 non conformes -->
+        <i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i>
+        <i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark); background:var(--red);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i>
+        <i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark); background:var(--red);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i>
+        <i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark); background:var(--red);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i><i style="aspect-ratio:1; border:.12cqw solid var(--dark);"></i>
+      </div>
+      <div class="stamp" style="left:14cqw; top:18cqw; font-size:4.2cqw; transform:rotate(-6deg); background:var(--bg);">Non conforme</div>
+      <div class="mono" style="left:3.6cqw; top:27.6cqw; font-size:1.1cqw;">1 case = 10 pièces · 30 rebutées ou retouchées</div>
+      <div class="card" style="left:3.6cqw; top:33cqw; width:46cqw;">
+        <div class="t">Qualité</div>
+        <div class="serif" style="font-size:1.7cqw; margin-top:.6cqw;">Une retouche : du temps consommé deux fois.</div>
+      </div>
+      <div class="sh" style="left:59cqw; top:10cqw; font-size:5.4cqw; color:var(--dark);">650 bonnes</div>
+      <div class="mono" style="left:59.4cqw; top:16.6cqw; font-size:1.4cqw;">sur 680 produites</div>
+      <div class="sh" style="left:55cqw; top:27cqw; font-size:11cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">95,6 %</div>
+      <div class="progress" style="width:50%;"></div>
+    </div>
+    <div class="meta"><span>06 · Qualité</span><span class="r">frame-06 · 79–95 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la grille des 68 cases se remplit en cascade. Sur « trente », trois cases virent au rouge et le tampon « Non conforme » s'abat avec un léger dépassement. « 650 bonnes », puis 95,6 % se posent sur leurs mots. Coupe franche vers 07.</p>
+    <span class="chip">entrée : push-slide left</span>
+  </div>
+
+</div>
+
+<div class="act">Acte III — Le verdict</div>
+<div class="grid">
+
+  <!-- 07 -->
+  <div class="cell">
+    <div class="f red" id="frame-07">
+      <div class="eyebrow">Reconstitution</div>
+      <div class="mono" style="left:0; right:0; top:8.5cqw; text-align:center; font-size:2.2cqw; color:var(--bg); letter-spacing:.25cqw;">85,7 % × 94,4 % × 95,6 %</div>
+      <div class="sh stack-shadow" style="left:0; right:0; top:13cqw; text-align:center; font-size:22cqw; color:var(--bg); transform:rotate(-6deg);">77 %</div>
+      <div class="serif" style="left:0; right:0; top:43cqw; text-align:center; font-size:2.1cqw; color:var(--bg);">10 h 50 utiles sur 14 h requises — les 3 h 10 sont retrouvées.</div>
+      <div class="progress" style="width:58.33%;"></div>
+    </div>
+    <div class="meta"><span>07 · Reconstitution</span><span class="r">frame-07 · 95–112 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> les trois taux arrivent côte à côte sur « disponibilité, fois performance, fois qualité », puis se fondent en « 77 % », qui monte en grandissant. <b>Cadre tenu :</b> le 77 % reste immobile pendant « dix heures cinquante ». Coupe franche vers 08.</p>
+    <span class="chip">entrée : cut</span>
+  </div>
+
+  <!-- 08 -->
+  <div class="cell">
+    <div class="f" id="frame-08">
+      <div class="eyebrow">Le vrai verdict</div>
+      <div class="sh" style="left:3.6cqw; top:7cqw; font-size:4.4cqw; transform:rotate(-2deg); transform-origin:left center;">Où partent les points ?</div>
+      <div class="fin" style="left:3.6cqw; top:17cqw; width:92.8cqw; grid-template-columns:1fr 1fr 1fr;">
+        <div><div class="lab">Disponibilité</div><div class="num" style="font-size:7cqw;">−14,3</div><div class="txt">points perdus · pannes, réglages</div></div>
+        <div><div class="lab">Performance</div><div class="num" style="font-size:7cqw;">−5,6</div><div class="txt">points perdus · micro-arrêts, cadence</div></div>
+        <div><div class="lab">Qualité</div><div class="num" style="font-size:7cqw;">−4,4</div><div class="txt">points perdus · rebuts, retouches</div></div>
+      </div>
+      <svg style="left:0; top:0; width:100cqw; height:56.25cqw;" viewBox="0 0 1920 1080"><path d="M640 305 C 520 280, 160 280, 85 330 C 20 380, 30 560, 120 600 C 260 655, 560 650, 660 590 C 740 540, 720 340, 600 300" fill="none" stroke="#D8000F" stroke-width="5"/></svg>
+      <div class="stamp" style="left:6cqw; top:42cqw; font-size:3.4cqw; transform:rotate(-5deg);">Premier chantier</div>
+      <div class="progress" style="width:66.67%;"></div>
+    </div>
+    <div class="meta"><span>08 · Le vrai verdict</span><span class="r">frame-08 · 112–128 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la grille se trace à partir de son double filet, et chaque case se remplit sur son chiffre prononcé. Sur « disponibilité », le fil rouge encercle la première case et le tampon « Premier chantier » s'abat. Coupe franche vers 09.</p>
+    <span class="chip">entrée : cut</span>
+  </div>
+
+  <!-- 09 -->
+  <div class="cell">
+    <div class="f" id="frame-09">
+      <div class="eyebrow">Fausse piste n° 1</div>
+      <div class="sh" style="left:3.6cqw; top:7cqw; font-size:4.4cqw; transform:rotate(-2deg); transform-origin:left center;">Le « bon TRS » n'existe pas.</div>
+      <div class="fin" style="left:3.6cqw; top:17cqw; width:42cqw; grid-template-columns:1fr; ">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;"><span class="num" style="font-size:3.6cqw; margin:0;">&lt; 50 %</span><span class="txt">mauvais</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; border-left:0; border-top:.08cqw solid var(--dark);"><span class="num" style="font-size:3.6cqw; margin:0;">60–70 %</span><span class="txt">correct</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; border-left:0; border-top:.08cqw solid var(--dark);"><span class="num" style="font-size:3.6cqw; margin:0;">&gt; 85 %</span><span class="txt">excellent</span></div>
+      </div>
+      <div style="left:1.5cqw; top:30cqw; width:46cqw; height:1.1cqw; background:var(--red); transform:rotate(-14deg);"></div>
+      <div class="mono" style="left:3.6cqw; top:47cqw; font-size:1.2cqw; color:var(--red);">Les grilles qui circulent : à oublier</div>
+      <div style="left:52cqw; top:17cqw; width:44cqw; height:30cqw; border-left:.16cqw solid var(--dark); border-bottom:.16cqw solid var(--dark);">
+        <svg style="position:absolute; inset:0; width:100%; height:100%;" viewBox="0 0 440 300" preserveAspectRatio="none"><polyline points="10,230 80,215 150,205 220,180 290,160 360,130 430,95" fill="none" stroke="#1C1410" stroke-width="4"/></svg>
+        <div class="sh" style="position:absolute; left:1.4cqw; top:24.5cqw; font-size:3.6cqw; color:var(--red);">61</div>
+        <div class="sh" style="position:absolute; right:.6cqw; top:3.5cqw; font-size:3.6cqw; color:var(--red);">68</div>
+      </div>
+      <div class="serif" style="left:52cqw; top:48cqw; font-size:1.6cqw;">Votre ligne, mois après mois, à règles constantes.</div>
+      <div class="progress" style="width:75%;"></div>
+    </div>
+    <div class="meta"><span>09 · Le « bon TRS »</span><span class="r">frame-09 · 128–141 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> la grille toute faite s'affiche ligne par ligne, puis un trait rouge la barre d'un coup sur « ne veulent rien dire ». À droite, la courbe de la ligne se trace de 61 à 68 sur « propre historique ». Fondu enchaîné vers 10.</p>
+    <span class="chip">entrée : cut</span>
+  </div>
+
+  <!-- 10 -->
+  <div class="cell">
+    <div class="f" id="frame-10">
+      <div class="eyebrow">Fausse piste n° 2</div>
+      <div class="ribbon" style="left:3.6cqw; top:8cqw; width:92.8cqw; height:7cqw; grid-template-columns:repeat(14,1fr);">
+        <div data-h="7h"></div><div data-h="8h"></div><div data-h="9h" class="stop">Arrêt</div><div data-h="10h"></div><div data-h="11h"></div><div data-h="12h"></div><div data-h="13h"></div>
+        <div data-h="15h"></div><div data-h="16h"></div><div data-h="17h" style="background:var(--light); border-left-style:dashed;"></div><div data-h="18h"></div><div data-h="19h"></div><div data-h="20h"></div><div data-h="21h"></div>
+      </div>
+      <div class="loose" style="left:59cqw; top:17.5cqw; width:9cqw; height:5.6cqw; transform:rotate(-4deg);"><div style="flex:1; font-size:.95cqw; text-align:center; line-height:1.15;">Maint.<br>planifiée</div></div>
+      <div class="mono" style="left:70cqw; top:19cqw; font-size:1.2cqw; color:var(--red);">← la même panne, rebaptisée</div>
+      <div class="sh" style="left:3.6cqw; top:29cqw; font-size:7cqw;">77 %</div>
+      <div style="left:2.6cqw; top:32.6cqw; width:22cqw; height:.8cqw; background:var(--red); transform:rotate(-4deg);"></div>
+      <div class="sh" style="left:27cqw; top:30cqw; font-size:5cqw; color:var(--dark);">→</div>
+      <div class="sh" style="left:35cqw; top:25cqw; font-size:13.5cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">83 %</div>
+      <div class="mono" style="left:35.5cqw; top:44.5cqw; font-size:1.4cqw; color:var(--red);">13 h requises au lieu de 14</div>
+      <div class="serif" style="left:68cqw; top:33cqw; font-size:2.2cqw; width:28cqw;">Même machine.<br>Même arrêt.</div>
+      <div class="progress" style="width:83.33%;"></div>
+    </div>
+    <div class="meta"><span>10 · Le tour de passe-passe</span><span class="r">frame-10 · 141–155 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> retour du ruban du cadre 04. Sur « requalifiez », la case rouge de 17 h change d'étiquette et glisse hors du temps requis. Le compteur passe de 77 % à 83 % sur « grimpe », puis « Même machine. Même arrêt. » se pose. Coupe franche vers 11.</p>
+    <span class="chip">entrée : crossfade</span>
+  </div>
+
+  <!-- 11 -->
+  <div class="cell">
+    <div class="f red" id="frame-11">
+      <div class="eyebrow">Fin de l'enquête</div>
+      <div class="sh stack-shadow" style="left:14cqw; top:12cqw; font-size:9.4cqw; color:var(--bg); border:.16cqw solid var(--bg); outline:.08cqw solid var(--bg); outline-offset:.5cqw; padding:1.6cqw 3cqw; transform:rotate(-5deg);">Affaire classée</div>
+      <div class="serif" style="left:0; right:0; top:37cqw; text-align:center; font-size:2.6cqw; color:var(--bg);">TRS = temps utile ÷ temps requis</div>
+      <div class="mono" style="left:0; right:0; top:44cqw; text-align:center; font-size:1.4cqw; color:var(--bg); letter-spacing:.28cqw;">Il ne juge pas les équipes · il dit où chercher</div>
+      <div class="progress" style="width:91.67%;"></div>
+    </div>
+    <div class="meta"><span>11 · Affaire classée</span><span class="r">frame-11 · 155–167 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> le panneau rouge entre en coupe franche, et le tampon s'abat de plus haut, avec un dépassement, sur « Affaire classée ». La formule s'écrit sur « divisé par », puis la phrase « Il ne juge pas les équipes » se pose. Fondu enchaîné vers 12.</p>
+    <span class="chip">entrée : cut</span>
+  </div>
+
+  <!-- 12 -->
+  <div class="cell">
+    <div class="f" id="frame-12">
+      <div class="eyebrow">Pour aller plus loin</div>
+      <div class="sh" style="left:3.6cqw; top:13cqw; font-size:13.5cqw; color:var(--red); transform:rotate(-5deg); transform-origin:left center;">fichly.com</div>
+      <div class="serif" style="left:3.6cqw; top:33cqw; font-size:2cqw; width:60cqw;">Le calcul complet et les six grandes pertes, dans notre article.</div>
+      <div class="mono" style="left:3.6cqw; top:41cqw; font-size:1.2cqw;">Taux de rendement synthétique · définition, exemples et calculs</div>
+      <img src="public/fichly-logo.png" alt="Fichly" style="right:4cqw; bottom:4.5cqw; width:12cqw;">
+      <div class="progress" style="width:100%;"></div>
+    </div>
+    <div class="meta"><span>12 · Le dossier complet</span><span class="r">frame-12 · 167–177 s</span></div>
+    <p class="note"><b>Ce qui bouge d'abord :</b> le dossier se referme vers la gauche, « fichly.com » se pose en s'inclinant sur « notre article », puis le logo Fichly s'inscrit en bas à droite et reste à l'écran jusqu'à la dernière image.</p>
+    <span class="chip">entrée : crossfade</span>
+  </div>
+
+  <!-- Carte des enchaînements -->
+  <div class="info">
+    <h3>Les enchaînements</h3>
+    <p>Trois types seulement : la coupe franche (cut), le fondu enchaîné (crossfade) et le glissement vers la gauche pour la suite des témoins (push-slide left). Le sens est toujours de la droite vers la gauche.</p>
+    <div class="seams">
+      <span>01 cut</span><span>02 crossfade</span><span class="x">03 push ←</span><span class="x">04 push ←</span><span class="x">05 push ←</span><span class="x">06 push ←</span><span>07 cut</span><span>08 cut</span><span>09 cut</span><span>10 crossfade</span><span>11 cut</span><span>12 crossfade</span>
+    </div>
+  </div>
+
+  <!-- Jetons -->
+  <div class="info">
+    <h3>La charte (bold-poster)</h3>
+    <div class="sw">
+      <div><i style="background:#FFFFFF"></i>Fond #FFFFFF</div>
+      <div><i style="background:#1C1410"></i>Encre #1C1410</div>
+      <div><i style="background:#D8000F"></i>Rouge #D8000F</div>
+      <div><i style="background:#F5F2EF"></i>Papier #F5F2EF</div>
+    </div>
+    <ul>
+      <li><b style="font-family:Shrikhand; font-weight:400;">Shrikhand</b> : titres, chiffres, tampons, toujours inclinés</li>
+      <li>Libre Baskerville : phrases (jamais la phrase que dit la voix)</li>
+      <li>Space Grotesk capitales : étiquettes du dossier</li>
+      <li>Interdits : diaporama, formule avant le cadre 07, cinquième couleur, coins arrondis, ombres portées, chiffres inventés</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
