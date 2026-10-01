@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <!-- Comparatif · cadre 04 « Témoin n° 1 : la disponibilité » · version HyperFrames · DA Fichly -->
+    <script src="public/js/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: Poppins; font-weight: 500; src: url(public/fonts/poppins-latin-500-normal.woff2) format("woff2"); }
+      @font-face { font-family: Poppins; font-weight: 600; src: url(public/fonts/poppins-latin-600-normal.woff2) format("woff2"); }
+      @font-face { font-family: Poppins; font-weight: 700; src: url(public/fonts/poppins-latin-700-normal.woff2) format("woff2"); }
+      @font-face { font-family: Poppins; font-weight: 800; src: url(public/fonts/poppins-latin-800-normal.woff2) format("woff2"); }
+      :root {
+        --blue: #4a4aa0; --ink: #23235a; --card: #fdfdfb; --line: #e2e2ee; --green: #8cc978; --red: #f16969;
+        --pGreen: #e6f3df; --pRed: #fde6e6; --tGreen: #2f5a1f; --tRed: #a83434;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #f3f3f3; }
+      #root { position: relative; width: 1920px; height: 1080px; font-family: Poppins, sans-serif; color: var(--ink); }
+      #ground { position: absolute; inset: 0; background: #f3f3f3 url(public/paper.png) center / cover; }
+      #scene > * { position: absolute; }
+      .pill { display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; padding: 10px 22px; font-weight: 700; font-size: 27px; line-height: 1; white-space: nowrap; }
+      .b { display: inline-block; flex: none; width: 31px; height: 31px; border-radius: 50%; background-position: center; background-size: 100%; background-repeat: no-repeat; }
+      .b.ok { background-color: var(--green); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M16 27 L23 34 L37 19' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+      .b.ko { background-color: var(--red); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M17.5 17.5 L34.5 34.5 M34.5 17.5 L17.5 34.5' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+      #eyebrow { left: 61px; top: 61px; background: var(--blue); color: #fff; font-size: 25px; padding: 9px 23px; transform-origin: left center; }
+      #board { left: 61px; top: 154px; width: 1797px; height: 300px; background: var(--card); border: 2px solid var(--line); border-radius: 24px; }
+      #hours { position: absolute; left: 38px; right: 38px; top: 35px; height: 123px; display: grid; grid-template-columns: repeat(14, 1fr); gap: 9px; }
+      .h { position: relative; border-radius: 12px; background: var(--blue); color: #fff; }
+      .h i { position: absolute; left: 9px; top: 7px; font-style: normal; font-size: 16px; font-weight: 600; opacity: .85; }
+      .h b { position: absolute; left: 0; right: 0; bottom: 11px; text-align: center; font-size: 19px; font-weight: 700; opacity: 0; }
+      #pills { position: absolute; left: 38px; top: 192px; display: flex; gap: 19px; }
+      #witness { left: 61px; top: 518px; width: 1037px; height: 269px; background: var(--pRed); border-radius: 24px; padding: 38px; }
+      #witness .row { display: flex; align-items: center; gap: 19px; }
+      #num { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 700; font-size: 27px; display: grid; place-items: center; }
+      #wtitle { font-weight: 700; font-size: 40px; line-height: 1.2; }
+      #causes { margin-top: 38px; display: flex; gap: 15px; }
+      #causes .pill { background: #fff; color: var(--tRed); }
+      #stat { left: 1171px; top: 540px; font-weight: 800; font-size: 182px; line-height: 1; color: var(--tRed); font-variant-numeric: tabular-nums; letter-spacing: -1px; white-space: nowrap; transform-origin: left 70%; }
+      #statlbl { left: 1179px; top: 760px; font-weight: 600; font-size: 31px; }
+      #ribbon { position: absolute; left: 0; bottom: 0; width: 1920px; height: 18px; display: flex; }
+      #ribbon i { flex: 1; }
+      #logo { position: absolute; right: 46px; bottom: 36px; width: 142px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="ground" class="clip" data-start="0" data-duration="12" data-track-index="0"></div>
+
+      <div id="scene" class="clip" data-start="0" data-duration="12" data-track-index="1">
+        <div id="eyebrow" class="pill">Témoin n° 1</div>
+        <div id="board">
+          <div id="hours">
+            <div class="h"><i>7h</i></div><div class="h"><i>8h</i></div><div class="h" id="h9"><i>9h</i><b>Arrêt</b></div><div class="h"><i>10h</i></div><div class="h"><i>11h</i></div><div class="h"><i>12h</i></div><div class="h"><i>13h</i></div>
+            <div class="h"><i>15h</i></div><div class="h"><i>16h</i></div><div class="h" id="h17"><i>17h</i><b>Arrêt</b></div><div class="h"><i>18h</i></div><div class="h"><i>19h</i></div><div class="h"><i>20h</i></div><div class="h"><i>21h</i></div>
+          </div>
+          <div id="pills">
+            <span class="pill" id="p-ok" style="background: var(--pGreen); color: var(--tGreen);"><span class="b ok"></span>12 h de fonctionnement</span>
+            <span class="pill" id="p-ko" style="background: var(--pRed); color: var(--tRed);"><span class="b ko"></span>2 h d'arrêts subis</span>
+          </div>
+        </div>
+        <div id="witness">
+          <div class="row"><span id="num">1</span><span id="wtitle">Disponibilité</span></div>
+          <div id="causes">
+            <span class="pill" id="c1"><span class="b ko"></span>Pannes</span>
+            <span class="pill" id="c2"><span class="b ko"></span>Manques matière</span>
+            <span class="pill" id="c3"><span class="b ko"></span>Réglages imprévus</span>
+          </div>
+        </div>
+        <div id="stat">0,0 %</div>
+        <div id="statlbl">12 h sur 14 h</div>
+      </div>
+
+      <div id="chrome" class="clip" data-start="0" data-duration="12" data-track-index="2">
+        <div id="ribbon"><i style="background:#f16969"></i><i style="background:#75bec0"></i><i style="background:#aa76b2"></i><i style="background:#8cc978"></i><i style="background:#e0cf35"></i><i style="background:#74a3d6"></i></div>
+        <img id="logo" src="public/fichly-logo.png" alt="fichly" />
+      </div>
+
+      <audio id="vo" src="public/04-disponibilite.mp3" data-start="0.4" data-duration="10.58" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script>
+      // Repères de la voix (audio/04-disponibilite.words.json) décalés de 0,4 s : la voix démarre à 0,4 s.
+      const A = 0.4;
+      const cue = (t) => A + t;
+      const OUT = "expo.out", POP = "back.out(2.2)";
+      const tl = gsap.timeline({ paused: true });
+
+      // 0,0 s : le ruban se pose, case par case (continuité du cadre 03)
+      tl.from("#board", { y: 24, opacity: 0, duration: 0.5, ease: OUT }, 0);
+      tl.from(".h", { y: 18, opacity: 0, duration: 0.4, ease: OUT, stagger: 0.025 }, 0.08);
+
+      // « Premier témoin »
+      tl.from("#eyebrow", { scale: 0.6, opacity: 0, duration: 0.45, ease: POP }, cue(0.0));
+
+      // « la disponibilité » : la bande du témoin monte, pastille puis titre
+      tl.from("#witness", { y: 46, opacity: 0, duration: 0.5, ease: OUT }, cue(0.92));
+      tl.from("#num", { scale: 0, duration: 0.4, ease: POP }, cue(1.05));
+      tl.from("#wtitle", { x: -18, opacity: 0, duration: 0.4, ease: OUT }, cue(1.12));
+
+      // Les trois causes, chacune sur son mot
+      tl.from("#c1", { scale: 0.5, opacity: 0, duration: 0.38, ease: POP }, cue(1.98));
+      tl.from("#c2", { scale: 0.5, opacity: 0, duration: 0.38, ease: POP }, cue(2.80));
+      tl.from("#c3", { scale: 0.5, opacity: 0, duration: 0.38, ease: POP }, cue(3.54));
+
+      // « deux heures d'arrêts subis » : deux cases virent au rouge
+      ["#h9", "#h17"].forEach((id, i) => {
+        const t = cue(4.62) + i * 0.16;
+        tl.to(id, { backgroundColor: "#f16969", duration: 0.3, ease: "power2.out" }, t);
+        tl.fromTo(id, { scale: 1 }, { scale: 1.08, duration: 0.16, yoyo: true, repeat: 1, ease: "power2.out" }, t);
+        tl.to(`${id} b`, { opacity: 1, duration: 0.25 }, t + 0.12);
+        tl.to([`${id} i`, `${id} b`], { color: "#23235a", duration: 0.3 }, t);
+      });
+      tl.from("#p-ko", { scale: 0.5, opacity: 0, duration: 0.38, ease: POP }, cue(5.2));
+
+      // « La machine a tourné douze heures »
+      tl.to(".h:not(#h9):not(#h17)", { y: -7, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out", stagger: 0.02 }, cue(5.88));
+      tl.from("#p-ok", { scale: 0.5, opacity: 0, duration: 0.38, ease: POP }, cue(6.62));
+
+      // « sur quatorze »
+      tl.from("#statlbl", { y: 14, opacity: 0, duration: 0.4, ease: OUT }, cue(7.18));
+
+      // « Disponibilité : quatre-vingt-cinq virgule sept pour cent » : le chiffre monte en grandissant
+      const stat = document.getElementById("stat");
+      const s = { v: 0 };
+      tl.from("#stat", { opacity: 0, duration: 0.25 }, cue(7.8));
+      tl.to(s, {
+        v: 85.7, duration: 2.0, ease: "power2.out",
+        onUpdate: () => { stat.textContent = s.v.toFixed(1).replace(".", ",") + " %"; },
+      }, cue(7.8));
+      tl.fromTo("#stat", { scale: 0.72 }, { scale: 1, duration: 2.0, ease: "power2.out" }, cue(7.8));
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

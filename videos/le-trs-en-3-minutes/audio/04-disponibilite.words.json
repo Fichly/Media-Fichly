@@ -1,0 +1,18 @@
+{
+  "source": "ElevenLabs, Emilie - Podcast Host (d3AXX0BlgJHYFCuH9X88), eleven_multilingual_v2, prise du 1er octobre 2026",
+  "duration": 10.58,
+  "timing": "faster-whisper small (sandbox Higgsfield), horodatage par mot ; texte remis à l'orthographe du script",
+  "cues": [
+    { "t": 0.00, "end": 0.70, "text": "Premier témoin" },
+    { "t": 0.92, "end": 1.76, "text": "la disponibilité" },
+    { "t": 1.98, "end": 2.44, "text": "Pannes" },
+    { "t": 2.80, "end": 3.38, "text": "manques matière" },
+    { "t": 3.54, "end": 4.28, "text": "réglages imprévus" },
+    { "t": 4.62, "end": 5.58, "text": "deux heures d'arrêts subis" },
+    { "t": 5.88, "end": 6.62, "text": "La machine a tourné" },
+    { "t": 6.62, "end": 7.02, "text": "douze heures" },
+    { "t": 7.02, "end": 7.50, "text": "sur quatorze" },
+    { "t": 7.80, "end": 8.46, "text": "Disponibilité" },
+    { "t": 8.46, "end": 10.08, "text": "quatre-vingt-cinq virgule sept pour cent" }
+  ]
+}
