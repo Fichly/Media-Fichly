@@ -78,8 +78,8 @@
 .fv2-eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--sec, var(--fv2-indigo)); flex: none; }
 .fv2-resume__text, .fv2-resume__text p { font-size: 17px; line-height: 1.6; font-weight: 500; }
 .fv2 .fv2-dots { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.fv2-dots li { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 12px; font-size: 15px; }
-.fv2-dots li::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--fv2-indigo); margin-top: .55em; }
+.fv2-dots li { position: relative; display: block; padding-left: 20px; font-size: 15px; }
+.fv2-dots li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 999px; background: var(--fv2-indigo); }
 .fv2-dots li:nth-child(6n+2)::before { background: var(--fv2-green); }
 .fv2-dots li:nth-child(6n+3)::before { background: var(--fv2-coral); }
 .fv2-dots li:nth-child(6n+4)::before { background: var(--fv2-yellow); }
@@ -142,8 +142,9 @@
 .fv2-content blockquote { border: 0; padding: 0; font-style: normal; }
 
 /* Composants (nouveau format et anciens articles) */
-.fv2-content .fichly-note, .fv2-content .f-note { background: var(--fv2-indigo-050); border-radius: var(--fv2-r-lg); padding: 20px 24px; display: grid; gap: 8px; font-size: 16px; }
-.fv2-content .fichly-note::before, .fv2-content .f-note::before { content: "Bon à savoir"; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fv2-indigo); padding-left: 15px; background: radial-gradient(circle at 3.5px 50%, var(--sec, var(--fv2-indigo)) 3.5px, transparent 4px); }
+.fv2-content .fichly-note, .fv2-content .f-note { background: var(--fv2-indigo-050); border-radius: var(--fv2-r-lg); padding: 20px 24px; display: block; font-size: 16px; }
+.fv2-content .fichly-note > * + *, .fv2-content .f-note > * + *, .fv2-content .fichly-cta > * + * { margin-top: 10px; }
+.fv2-content .fichly-note::before, .fv2-content .f-note::before { content: "Bon à savoir"; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--fv2-indigo); padding-left: 15px; background: radial-gradient(circle at 3.5px 50%, var(--sec, var(--fv2-indigo)) 3.5px, transparent 4px); }
 .fv2-content .fichly-pieges, .fv2-content .f-dodont { display: grid; gap: 10px; padding: 0; list-style: none; }
 .fv2-content .fichly-pieges > p { background: var(--fv2-surface); border-radius: var(--fv2-r-md); padding: 14px 16px; font-size: 15.5px; line-height: 1.6; }
 .fv2-content .fichly-pieges br { display: none; }
@@ -170,7 +171,7 @@
 .fv2-content details[open] > summary::after { transform: rotate(45deg); }
 .fv2-content .fichly-faq .answer, .fv2-content .f-faq details > p { padding: 0 2px 20px; font-size: 16px; color: var(--fv2-ink-700); line-height: 1.65; }
 
-.fv2-content .fichly-cta { position: relative; border: 1px solid var(--fv2-line); border-radius: var(--fv2-r-lg); padding: 30px 26px 24px; display: grid; gap: 10px; box-shadow: var(--fv2-sh-1); font-size: 16px; overflow: hidden; }
+.fv2-content .fichly-cta { position: relative; border: 1px solid var(--fv2-line); border-radius: var(--fv2-r-lg); padding: 30px 26px 24px; display: block; box-shadow: var(--fv2-sh-1); font-size: 16px; overflow: hidden; }
 .fv2-content .fichly-cta::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 8px; background: var(--fv2-ribbon); }
 .fv2-content .fichly-cta a { font-weight: 700; }
 .fv2-content .fichly-bio, .fv2-content .fichly-author { display: none; }
