@@ -1,0 +1,1174 @@
+<title>Articles Fichly V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap">
+<style>
+/* Maquette d'une page article fichly.com : rail sommaire collant à gauche, colonne de lecture de 680 px,
+   zone commerciale pleine largeur en bas, liseré six couleurs comme fil conducteur, calque d'annotations orange.
+   Page volontairement claire : elle montre le site tel qu'il s'affiche. */
+:root {
+  --bg: #ffffff; --surface: #f7f7f7; --chrome: #eceef5;
+  --ink: #2c2c2c; --ink-700: #4a4a4a; --ink-500: #6b6b6b; --line: #e5e5e5;
+  --indigo: #3c4499; --indigo-700: #2e3576; --indigo-100: #e4e5f3; --indigo-050: #f3f4fb;
+  --navy: #151b43; --navy-2: #1d2456; --navy-line: #2c346c; --on-navy: #ffffff; --on-navy-2: #c7cbea;
+  --cat: #74a3d6; --cat-soft: #e3ecf6;
+  --green: #8cc978; --green-soft: #e8f4e3; --ok: #2f5a1f;
+  --coral: #f16969; --coral-soft: #fce5e5; --ko: #a83434;
+  --yellow: #e6b839; --lime: #e0cf35; --lime-soft: #f8f5d7; --wait: #6b5205;
+  --rust: #b35a23; --rust-soft: #f2e2d5; --yellow-soft: #faf0d7;
+  --ring: conic-gradient(var(--indigo) 0 60deg, var(--green) 0 120deg, var(--coral) 0 180deg, var(--yellow) 0 240deg, var(--cat) 0 300deg, var(--rust) 0 360deg);
+  --note: #c2410c; --white: #ffffff;
+  --ribbon: linear-gradient(90deg, var(--indigo) 0 16.667%, var(--green) 0 33.333%, var(--coral) 0 50%, var(--yellow) 0 66.667%, var(--cat) 0 83.333%, var(--rust) 0 100%);
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(44,44,44,.04), 0 1px 1px rgba(44,44,44,.03);
+  --shadow-2: 0 4px 12px rgba(44,44,44,.06), 0 2px 4px rgba(44,44,44,.04);
+  --focus: 0 0 0 3px rgba(60,68,153,.35);
+  --bar-h: 58px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { background: var(--chrome); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 0 48px; }
+a { color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible + label { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p, ul, ol, dl, figure, blockquote { margin: 0; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ribbon { height: 10px; background: var(--ribbon); }
+::selection { background: var(--yellow-soft); color: var(--ink); }
+/* Une couleur par partie, dans l'ordre du liseré */
+.c1 { --sec: var(--indigo); --sec-soft: var(--indigo-100); --sec-on: var(--white); }
+.c2 { --sec: var(--green); --sec-soft: var(--green-soft); --sec-on: var(--ink); }
+.c3 { --sec: var(--coral); --sec-soft: var(--coral-soft); --sec-on: var(--ink); }
+.c4 { --sec: var(--yellow); --sec-soft: var(--yellow-soft); --sec-on: var(--ink); }
+.c5 { --sec: var(--cat); --sec-soft: var(--cat-soft); --sec-on: var(--ink); }
+.c6 { --sec: var(--rust); --sec-soft: var(--rust-soft); --sec-on: var(--white); }
+/* L'anneau Fichly autour des photos d'auteur */
+.avatar { border-radius: var(--r-pill); border: 3px solid transparent; padding: 2px; background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--ring) border-box; display: block; }
+
+/* ---------- Barre de la maquette ---------- */
+.proto-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; margin-inline: -16px; padding: 10px 16px; background: var(--bg); border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.proto-bar__name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.proto-bar__name .dot { width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--indigo); }
+.proto-bar__controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 3px; gap: 2px; }
+.seg button { font: 600 13px/1 var(--font); color: var(--ink-700); background: transparent; border: 0; border-radius: 7px; padding: 8px 12px; cursor: pointer; transition: background-color .12s, color .12s; }
+.seg button[aria-pressed="true"] { background: var(--bg); color: var(--indigo); box-shadow: var(--shadow-1); }
+.seg button.is-anno[aria-pressed="true"] { color: var(--note); }
+
+.proto-intro { max-width: 1240px; margin: 28px auto 0; display: grid; gap: 14px; }
+.proto-intro h1 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 500; line-height: 1.2; }
+.proto-intro h1 em { font-style: italic; color: var(--indigo); }
+.proto-intro > p { max-width: 72ch; color: var(--ink-700); font-size: 15px; }
+.shifts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; padding: 0; list-style: none; }
+.shifts li { background: var(--bg); border-radius: var(--r-lg); padding: 14px 16px; font-size: 14px; color: var(--ink-700); box-shadow: var(--shadow-1); }
+.shifts strong { display: block; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+.shifts .n { color: var(--note); font-weight: 700; }
+
+/* ---------- Cadre du site ---------- */
+.frame { container: site / inline-size; max-width: 1240px; margin: 24px auto 0; background: var(--bg); border-radius: var(--r-xl); box-shadow: var(--shadow-2); overflow: clip; transition: max-width .25s ease; }
+.frame.is-mobile { max-width: 400px; }
+.site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--line); }
+.site-nav img { height: 30px; width: auto; display: block; }
+.site-nav ul { display: none; list-style: none; padding: 0; gap: 26px; align-items: center; font-weight: 600; font-size: 14px; }
+.site-nav ul a { color: var(--ink); text-decoration: none; }
+.site-nav ul a[aria-current] { color: var(--indigo); }
+.burger { width: 22px; display: grid; gap: 4px; }
+.burger i { height: 2px; background: var(--ink); border-radius: 2px; }
+@container site (min-width: 820px) { .site-nav ul { display: flex; } .burger { display: none; } }
+.progress { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bar-h)); z-index: 6; height: 4px; background: var(--ribbon); }
+.progress span { position: absolute; top: 0; right: 0; bottom: 0; width: 100%; background: var(--line); }
+
+.art { max-width: 1004px; margin-inline: auto; padding: 28px 24px 72px; display: flex; flex-direction: column; gap: 40px; }
+@container site (max-width: 520px) { .art { padding: 20px 16px 56px; gap: 32px; } .site-nav { padding: 12px 16px; } }
+
+/* En-tête */
+.art-head { display: grid; gap: 28px; }
+@container site (min-width: 760px) { .art-head { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: center; gap: 48px; } }
+.art-head__text { display: grid; gap: 18px; min-width: 0; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--ink-500); }
+.crumbs a { color: var(--ink-500); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs .sep { color: var(--indigo); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--indigo); background: var(--indigo-100); padding: 4px 10px; border-radius: var(--r-pill); text-decoration: none; }
+.tag::before { content: ""; width: 6px; height: 6px; border-radius: var(--r-pill); background: var(--cat); }
+.art-head h1 { font-size: clamp(28px, 4.4cqi, 44px); font-weight: 500; line-height: 1.15; letter-spacing: -.01em; }
+.art-head h1 em { font-style: italic; color: var(--indigo); }
+.lede { font-size: 18px; line-height: 1.6; color: var(--ink-700); max-width: 60ch; }
+.byline { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding-top: 4px; }
+.byline__who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.byline__who img { width: 50px; height: 50px; }
+.byline__who strong { display: block; font-size: 14px; }
+.byline__who span { display: block; font-size: 13px; color: var(--ink-500); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 13px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.meta i { width: 4px; height: 4px; border-radius: var(--r-pill); background: var(--indigo); }
+.share { display: flex; gap: 8px; margin-left: auto; }
+@container site (max-width: 620px) { .share { margin-left: 0; } }
+.chip-btn { font: 600 13px/1 var(--font); color: var(--indigo); background: var(--bg); border: 1px solid var(--indigo); border-radius: var(--r-md); padding: 8px 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background-color .12s; }
+.chip-btn:hover { background: var(--indigo-100); }
+.chip-btn svg { width: 15px; height: 15px; }
+
+/* Couverture au format fiche, liseré en tête */
+.cover { --c-soft: var(--cat-soft); position: relative; aspect-ratio: 4 / 3; max-width: 100%; background: var(--c-soft); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 40px 30px 44px; }
+.cover::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 14px; background: var(--ribbon); }
+.cover__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); }
+.cover__big { font-size: clamp(56px, 9cqi, 92px); font-weight: 700; line-height: 1; color: var(--ink); display: flex; align-items: flex-end; gap: 6px; }
+.cover__big .dot { width: .16em; height: .16em; border-radius: var(--r-pill); background: var(--indigo); margin-bottom: .1em; }
+.cover__sub { font-size: 17px; font-weight: 600; color: var(--ink); }
+.cover__foot { font-size: 14px; color: var(--ink-700); max-width: 26ch; }
+.cover__logo { position: absolute; right: 20px; bottom: 16px; width: 64px; height: auto; }
+.cover--sm { aspect-ratio: 16 / 9; padding: 22px 18px 30px; gap: 2px; border-radius: var(--r-lg) var(--r-lg) 0 0; }
+.cover--sm::before { height: 8px; }
+.cover--sm .cover__big { font-size: 40px; }
+.cover--sm .cover__sub { font-size: 13px; }
+.cover--sm .cover__logo { width: 44px; right: 14px; bottom: 10px; }
+
+/* Résumé et essentiel */
+.resume { position: relative; background: var(--cat-soft); border-radius: var(--r-lg); display: grid; }
+.resume > .ribbon { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+.resume__inner { display: grid; gap: 22px; padding: 24px 26px 26px; }
+@container site (min-width: 760px) { .resume__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; padding: 28px 32px 30px; } }
+.resume__part { display: grid; gap: 10px; align-content: start; }
+.resume h2 { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); display: flex; align-items: center; gap: 8px; }
+.resume h2::before { content: ""; width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--indigo); }
+.resume__text { font-size: 17px; line-height: 1.6; font-weight: 500; }
+.dots { list-style: none; padding: 0; display: grid; gap: 10px; }
+.dots li { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 12px; font-size: 15px; }
+.dots li::before { content: ""; width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--indigo); margin-top: .55em; }
+.resume .dots li:nth-child(6n+2)::before { background: var(--green); }
+.resume .dots li:nth-child(6n+3)::before { background: var(--coral); }
+.resume .dots li:nth-child(6n+4)::before { background: var(--yellow); }
+.resume .dots li:nth-child(6n+5)::before { background: var(--cat); }
+.resume .dots li:nth-child(6n+6)::before { background: var(--rust); }
+
+/* Rail : sommaire et carte produit */
+.art-body { display: flex; flex-direction: column; gap: 32px; }
+@container site (min-width: 980px) { .art-body { display: grid; grid-template-columns: 220px minmax(0, 680px); gap: 60px; justify-content: space-between; align-items: start; } }
+.rail { display: grid; gap: 22px; }
+@container site (min-width: 980px) { .rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bar-h) + 24px); } }
+.toc-box { border: 1px solid var(--line); border-radius: var(--r-lg); }
+.toc-box > .ribbon { height: 8px; border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0; }
+.toc { padding: 14px 18px; }
+.toc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary svg { width: 18px; height: 18px; transition: transform .2s ease; }
+.toc[open] summary svg { transform: rotate(180deg); }
+.toc ol { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 2px; counter-reset: toc; }
+.toc li a { display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: 10px; padding: 7px 8px; border-radius: var(--r-sm); font-size: 14px; line-height: 1.4; color: var(--ink-700); text-decoration: none; counter-increment: toc; }
+.toc li:nth-child(6n+1) { --sec: var(--indigo); --sec-soft: var(--indigo-100); --sec-on: var(--white); }
+.toc li:nth-child(6n+2) { --sec: var(--green); --sec-soft: var(--green-soft); --sec-on: var(--ink); }
+.toc li:nth-child(6n+3) { --sec: var(--coral); --sec-soft: var(--coral-soft); --sec-on: var(--ink); }
+.toc li:nth-child(6n+4) { --sec: var(--yellow); --sec-soft: var(--yellow-soft); --sec-on: var(--ink); }
+.toc li:nth-child(6n+5) { --sec: var(--cat); --sec-soft: var(--cat-soft); --sec-on: var(--ink); }
+.toc li:nth-child(6n+6) { --sec: var(--rust); --sec-soft: var(--rust-soft); --sec-on: var(--white); }
+.toc li a::before { content: counter(toc); width: 20px; height: 20px; margin-top: 1px; border-radius: var(--r-pill); display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--sec); color: var(--sec-on); font-variant-numeric: tabular-nums; }
+.toc li a:hover { background: var(--surface); }
+.toc li a.is-current { background: var(--sec-soft); color: var(--ink); font-weight: 600; }
+.toc__foot { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-500); display: grid; gap: 6px; }
+.toc__bar { height: 4px; background: var(--line); border-radius: var(--r-pill); overflow: hidden; }
+.toc__bar span { display: block; height: 100%; width: 0; background: var(--indigo); }
+@container site (min-width: 980px) {
+  .toc-box { border: 0; }
+  .toc-box > .ribbon { height: 6px; border-radius: var(--r-pill); }
+  .toc { padding: 14px 0 0; }
+  .toc summary { pointer-events: none; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-500); }
+  .toc summary svg { display: none; }
+}
+.rail-product { display: none; }
+@container site (min-width: 980px) {
+  .rail-product { display: grid; gap: 10px; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 14px; text-decoration: none; color: var(--ink); box-shadow: var(--shadow-1); transition: box-shadow .12s; }
+  .rail-product:hover { box-shadow: var(--shadow-2); }
+}
+.rail-product .pbox { aspect-ratio: 16 / 10; }
+.rail-product small { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); }
+.rail-product b { font-size: 14px; line-height: 1.35; }
+.rail-product .price { font-size: 15px; font-weight: 700; }
+.rail-product .more { font-size: 13px; font-weight: 600; color: var(--indigo); }
+
+/* Colonne de lecture */
+.content { min-width: 0; display: flex; flex-direction: column; gap: 64px; }
+.content > section { display: flex; flex-direction: column; gap: 22px; }
+.prose { font-size: 17px; line-height: 1.7; }
+.prose h2 { font-size: clamp(23px, 3cqi, 29px); font-weight: 600; line-height: 1.25; scroll-margin-top: calc(var(--bar-h) + 28px); }
+.prose h3 { font-size: 19px; font-weight: 600; line-height: 1.35; }
+.content { counter-reset: part; }
+.content > section { counter-increment: part; }
+.q { display: grid; gap: 14px; }
+.q::before { content: "Partie " counter(part); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-500); padding-left: 46px; line-height: 1; background: linear-gradient(var(--sec, var(--indigo)), var(--sec, var(--indigo))) left center / 34px 6px no-repeat; }
+.answer { font-size: 18px; line-height: 1.6; font-weight: 600; color: var(--ink); }
+.content p { max-width: 68ch; }
+
+/* Composants */
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--indigo); display: flex; align-items: center; gap: 8px; }
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: var(--sec, currentColor); }
+
+.f-def { background: var(--surface); border-radius: var(--r-lg); padding: 22px 24px; display: grid; gap: 12px; }
+.f-def dt { font-size: 19px; font-weight: 600; }
+.f-def dt small { display: block; font-size: 14px; font-weight: 500; color: var(--ink-500); margin-top: 2px; }
+.f-def dd { margin: 0; display: grid; gap: 8px; font-size: 16px; }
+.f-def dd b { color: var(--indigo); }
+
+.f-figure { display: grid; gap: 12px; }
+.f-figure figcaption { font-size: 14px; color: var(--ink-500); line-height: 1.5; }
+.temple { background: var(--surface); border-radius: var(--r-lg); padding: 24px 20px 20px; display: grid; gap: 8px; }
+.temple__roof { height: 74px; background: var(--indigo); clip-path: polygon(50% 0, 100% 100%, 0 100%); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; color: var(--white); font-weight: 700; font-size: 20px; letter-spacing: .04em; }
+.temple__pillars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.pillar { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-sm) var(--r-sm) 0 0; min-height: 64px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 4px; font-size: 12px; font-weight: 600; line-height: 1.25; color: var(--ink-700); }
+.pillar.is-start { background: var(--sec, var(--cat)); border-color: var(--sec, var(--cat)); color: var(--sec-on, var(--ink)); }
+.temple__base { background: var(--indigo-100); color: var(--indigo); border-radius: var(--r-sm); text-align: center; padding: 10px; font-weight: 600; font-size: 14px; }
+@container site (min-width: 700px) {
+  .temple__pillars { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .pillar { min-height: 168px; writing-mode: vertical-rl; transform: rotate(180deg); border-radius: 0 0 var(--r-sm) var(--r-sm); font-size: 13px; padding: 10px 4px; }
+}
+
+.f-table { display: grid; gap: 10px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
+.f-table table { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.f-table th { text-align: left; background: var(--indigo); color: var(--white); font-weight: 600; padding: 12px 14px; font-size: 14px; }
+.f-table td { padding: 11px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+.f-table td:first-child { font-weight: 600; }
+.f-table td:nth-child(2) { color: var(--ink-500); font-style: italic; }
+.f-table tr.is-start td:first-child { color: var(--indigo); }
+.f-table tr.is-start td:first-child::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--sec, var(--cat)); margin-right: 8px; vertical-align: middle; }
+
+/* Produit cité dans le texte */
+.p-chip { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; padding: 3px 10px 3px 4px; margin-block: 2px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--bg); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; line-height: 1.3; box-shadow: var(--shadow-1); transition: box-shadow .12s; }
+.p-chip:hover { box-shadow: var(--shadow-2); }
+.p-chip i { width: 22px; height: 22px; border-radius: var(--r-pill); background: var(--c-soft); border: 5px solid var(--c); flex: none; }
+.p-chip b { color: var(--indigo); font-variant-numeric: tabular-nums; }
+
+/* Boîte produit (en attendant les photos des boîtes) */
+.pbox { --c: var(--cat); --c-soft: var(--cat-soft); position: relative; display: block; width: 100%; min-width: 0; overflow: hidden; border-radius: var(--r-md); background: var(--c-soft); aspect-ratio: 4 / 3; }
+.pbox__lid { position: absolute; top: 11%; bottom: 11%; left: 50%; transform: translateX(-50%); width: auto; height: auto; aspect-ratio: 3 / 4; background: var(--bg); border-radius: 8px; box-shadow: var(--shadow-2); border-top: 12px solid var(--c); padding: 9px; display: grid; align-content: space-between; }
+.pbox__lid span { font-size: 9px; color: var(--ink-500); }
+.pbox__lid b { font-size: 11px; line-height: 1.2; }
+.pbox__lid i { width: 7px; height: 7px; border-radius: var(--r-pill); background: var(--indigo); }
+
+.f-note { background: var(--indigo-050); border-radius: var(--r-lg); padding: 20px 24px; display: grid; gap: 8px; font-size: 16px; }
+.f-note strong { color: var(--ink); }
+
+.f-test { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px; display: grid; gap: 18px; box-shadow: var(--shadow-1); }
+.f-test__head { display: grid; gap: 6px; }
+.f-test__head h3 { font-size: 20px; }
+.f-test__head p { font-size: 14px; color: var(--ink-500); }
+.f-test ol { list-style: none; padding: 0; display: grid; counter-reset: q; }
+.f-test li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 4px 12px; padding: 14px 0; border-top: 1px solid var(--line); counter-increment: q; }
+.f-test li::before { content: counter(q); width: 26px; height: 26px; border-radius: var(--r-pill); background: var(--sec-soft, var(--indigo-100)); color: var(--ink); font-weight: 700; font-size: 13px; display: grid; place-items: center; margin-top: 1px; }
+.f-test__q { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; font-size: 15px; font-weight: 500; line-height: 1.45; }
+.f-test__q > span:first-child { flex: 1 1 260px; min-width: 0; }
+.badge-block { display: inline-block; font-size: 11px; font-weight: 600; color: var(--ko); background: var(--coral-soft); padding: 2px 8px; border-radius: var(--r-pill); margin-left: 6px; vertical-align: 2px; }
+.yn { position: relative; display: inline-flex; border: 1px solid var(--line); border-radius: var(--r-md); padding: 3px; gap: 2px; flex: none; }
+.yn input { position: absolute; opacity: 0; pointer-events: none; }
+.yn label { font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 7px; cursor: pointer; color: var(--ink-700); transition: background-color .12s, color .12s; }
+.yn input[value="oui"]:checked + label { background: var(--green-soft); color: var(--ok); }
+.yn input[value="non"]:checked + label { background: var(--coral-soft); color: var(--ko); }
+.f-test__hint { grid-column: 2; display: none; font-size: 14px; color: var(--ink-700); background: var(--surface); border-radius: var(--r-sm); padding: 8px 12px; }
+.f-test li[data-answer="non"] .f-test__hint { display: block; }
+.f-test__result { border-radius: var(--r-md); padding: 14px 16px; display: grid; gap: 4px; background: var(--surface); }
+.f-test__result strong { font-size: 16px; }
+.f-test__result span { font-size: 14px; }
+.f-test__result[data-state="ok"] { background: var(--green-soft); color: var(--ok); }
+.f-test__result[data-state="wait"] { background: var(--lime-soft); color: var(--wait); }
+.f-test__result[data-state="ko"] { background: var(--coral-soft); color: var(--ko); }
+.f-test__result .score { font-variant-numeric: tabular-nums; }
+
+.f-steps { list-style: none; padding: 0; display: grid; counter-reset: s; }
+.f-steps li { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 16px; padding-bottom: 22px; counter-increment: s; }
+.f-steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: var(--r-pill); background: var(--sec, var(--indigo)); color: var(--sec-on, var(--white)); font-weight: 700; font-size: 15px; display: grid; place-items: center; position: relative; z-index: 1; }
+.f-steps li::after { content: ""; position: absolute; left: 17px; top: 36px; bottom: 0; width: 2px; background: var(--sec-soft, var(--indigo-100)); }
+.f-steps li:last-child { padding-bottom: 0; }
+.f-steps li:last-child::after { display: none; }
+.f-steps h3 { font-size: 17px; font-weight: 600; line-height: 1.4; padding-top: 6px; }
+.f-steps p { font-size: 16px; color: var(--ink-700); margin-top: 4px; line-height: 1.6; }
+
+.f-product { display: grid; gap: 18px; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; box-shadow: var(--shadow-1); align-items: center; }
+@container site (min-width: 600px) { .f-product { grid-template-columns: 180px minmax(0, 1fr); gap: 22px; } }
+.f-product .pbox { aspect-ratio: 1; max-width: 180px; }
+.f-product__text { display: grid; gap: 8px; }
+.f-product__text h3 { font-size: 19px; }
+.f-product__text p { font-size: 15px; color: var(--ink-700); }
+.f-product__buy { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 4px; }
+.f-product__buy .price { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.btn { font: 600 14px/1 var(--font); display: inline-flex; align-items: center; gap: 8px; justify-self: start; background: var(--indigo); color: var(--white); border: 0; border-radius: var(--r-md); padding: 12px 18px; text-decoration: none; cursor: pointer; transition: background-color .12s; }
+.btn:hover { background: var(--indigo-700); }
+.btn:active { transform: translateY(1px); }
+
+/* Sur le terrain */
+.f-field { background: var(--surface); border-radius: var(--r-lg); padding: 24px 26px; display: grid; gap: 16px; }
+.f-field__mark { width: 34px; height: 26px; color: var(--sec, var(--indigo)); }
+.f-field blockquote { font-size: 19px; line-height: 1.6; font-weight: 500; }
+.f-field figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; font-size: 13px; color: var(--ink-500); }
+.f-field figcaption img { width: 58px; height: 58px; }
+.f-field figcaption strong { color: var(--ink); display: block; font-size: 15px; }
+.f-field figcaption a { font-weight: 600; font-size: 13px; }
+
+.f-dodont { display: grid; gap: 8px; }
+.f-dodont__head { display: none; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.f-dodont__head span:first-child { color: var(--ko); }
+.f-dodont__head span:last-child { color: var(--ok); }
+.pair { display: grid; gap: 4px; }
+.pair > div { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding: 12px 14px; font-size: 15px; line-height: 1.5; }
+.pair .ko { background: var(--coral-soft); border-radius: var(--r-md) var(--r-md) 0 0; }
+.pair .ok { background: var(--green-soft); border-radius: 0 0 var(--r-md) var(--r-md); }
+.pair svg { width: 22px; height: 22px; }
+.pair .lbl { display: block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.pair .ko .lbl { color: var(--ko); }
+.pair .ok .lbl { color: var(--ok); }
+@container site (min-width: 760px) {
+  .f-dodont__head { display: grid; }
+  .pair { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pair .ko, .pair .ok { border-radius: var(--r-md); }
+  .pair .lbl { display: none; }
+}
+
+.f-faq { display: grid; border-top: 1px solid var(--line); }
+.f-faq details { border-bottom: 1px solid var(--line); }
+.f-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 2px; font-weight: 600; font-size: 17px; line-height: 1.4; }
+.f-faq summary::-webkit-details-marker { display: none; }
+.f-faq summary svg { flex: none; width: 20px; height: 20px; color: var(--indigo); transition: transform .2s ease; }
+.f-faq details[open] summary svg { transform: rotate(45deg); }
+.f-faq details p { padding: 0 2px 20px; font-size: 16px; color: var(--ink-700); line-height: 1.65; }
+
+.f-sources { display: grid; gap: 10px; }
+.f-sources h2 { font-size: 16px; font-weight: 600; }
+.f-sources ol { padding-left: 20px; display: grid; gap: 6px; font-size: 14px; color: var(--ink-700); }
+
+.f-author { position: relative; display: grid; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); background: var(--bg); }
+.f-author > .ribbon { border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0; }
+.f-author__inner { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 18px; align-items: start; padding: 22px 24px 24px; }
+.f-author img { width: 80px; height: 80px; }
+.f-author__body { display: grid; gap: 6px; }
+.f-author__body strong { font-size: 17px; }
+.f-author__body .role { font-size: 14px; color: var(--ink-500); }
+.f-author__body p { font-size: 15px; color: var(--ink-700); }
+.f-author__links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; font-weight: 600; }
+
+/* Zone pleine largeur : outils, formation, articles liés */
+.zone-title { display: grid; gap: 6px; }
+.zone-title h2 { font-size: 23px; font-weight: 600; line-height: 1.3; }
+.zone-title p { font-size: 15px; color: var(--ink-700); max-width: 70ch; }
+.tools { display: grid; gap: 20px; }
+.tools__grid { display: grid; gap: 16px; }
+@container site (min-width: 760px) { .tools__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pcard { border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); text-decoration: none; color: var(--ink); display: grid; grid-template-rows: auto 1fr; transition: box-shadow .12s; }
+.pcard:hover { box-shadow: var(--shadow-2); }
+.pcard .pbox { border-radius: var(--r-lg) var(--r-lg) 0 0; aspect-ratio: 16 / 9; }
+.pcard__body { padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start; }
+.pcard__body small { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); }
+.pcard__body b { font-size: 15px; line-height: 1.4; }
+.pcard__foot { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 4px; }
+.pcard__foot .price { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pcard__foot .more { font-size: 13px; font-weight: 600; color: var(--indigo); }
+.tools__pack { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; background: var(--indigo-050); border-radius: var(--r-lg); padding: 14px 18px; font-size: 15px; }
+.tools__pack strong { color: var(--indigo); }
+
+/* Bloc formation Green Belt, fond nuit et liseré comme sur le site */
+.f-formation { position: relative; background: var(--navy); color: var(--on-navy); border: 1px solid var(--navy-line); border-radius: var(--r-xl); display: grid; }
+.f-formation > .ribbon { height: 12px; border-radius: var(--r-xl) var(--r-xl) 0 0; }
+.f-formation__inner { display: grid; gap: 28px; padding: 30px 26px 30px; }
+@container site (min-width: 880px) { .f-formation__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; padding: 38px 40px 40px; align-items: center; } }
+.f-formation__text { display: grid; gap: 14px; align-content: start; }
+.f-formation .eyebrow { color: var(--on-navy-2); }
+.f-formation h2 { font-size: clamp(24px, 3.2cqi, 32px); font-weight: 500; line-height: 1.2; }
+.f-formation h2 em { font-style: italic; color: var(--yellow); }
+.f-formation p { color: var(--on-navy-2); font-size: 16px; line-height: 1.6; }
+.gb-facts { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.gb-facts li { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: var(--r-pill); background: var(--navy-2); border: 1px solid var(--navy-line); color: var(--on-navy); }
+.gb-price { display: grid; gap: 2px; }
+.gb-price strong { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gb-price strong span { font-size: 15px; font-weight: 500; color: var(--on-navy-2); }
+.gb-price small { font-size: 12px; color: var(--on-navy-2); }
+.gb-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn--light { background: var(--white); color: var(--navy); }
+.btn--light:hover { background: var(--indigo-100); }
+.btn--ghost { background: transparent; color: var(--on-navy); border: 1px solid var(--on-navy-2); }
+.btn--ghost:hover { background: var(--navy-2); }
+.gb-trust { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--on-navy-2); }
+.gb-trust b { color: var(--on-navy); }
+.gb-path { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--on-navy-2); padding-top: 4px; border-top: 1px solid var(--navy-line); padding-top: 14px; }
+.gb-path a { color: var(--on-navy); font-weight: 600; }
+.gb-path .here { color: var(--navy); background: var(--green); font-weight: 700; padding: 2px 8px; border-radius: var(--r-pill); }
+
+/* Encart animé : la Green Belt jour par jour, en DMAIC */
+.gb-motion { background: var(--navy-2); border: 1px solid var(--navy-line); border-radius: var(--r-lg); padding: 22px 20px 20px; display: grid; gap: 18px; min-width: 0; }
+.gb-motion__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--on-navy-2); }
+.gb-motion__head b { color: var(--on-navy); font-variant-numeric: tabular-nums; letter-spacing: 0; text-transform: none; font-size: 14px; }
+.gb-track { --d: 44px; position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-top: 4px; }
+.gb-rail, .gb-rail-on { position: absolute; top: calc(4px + var(--d) / 2 - 1.5px); left: calc(100% / 12); height: 3px; border-radius: 3px; }
+.gb-rail { right: calc(100% / 12); background: var(--navy-line); }
+.gb-rail-on { width: 0; background: var(--on-navy); }
+.gb-stop { position: relative; display: grid; justify-items: center; gap: 6px; z-index: 1; }
+.gb-stop b { width: var(--d); height: var(--d); border-radius: var(--r-pill); display: grid; place-items: center; font-size: 17px; font-weight: 700; background: var(--navy); border: 2px solid var(--navy-line); color: var(--on-navy-2); transition: background-color .25s, border-color .25s, color .25s, transform .25s; }
+.gb-stop span { font-size: 11px; font-weight: 600; color: var(--on-navy-2); }
+.gb-stop.is-on b { background: var(--s); border-color: var(--s); color: var(--t, var(--ink)); }
+.gb-token { --ring: calc(var(--d) + 12px); position: absolute; top: calc(4px - 6px); left: calc(100% / 12); width: var(--ring); height: var(--ring); margin-left: calc(var(--ring) / -2); border-radius: var(--r-pill); border: 3px solid var(--white); z-index: 2; pointer-events: none; }
+@container site (max-width: 520px) { .gb-track { --d: 36px; } .gb-stop b { font-size: 15px; } .gb-day { min-height: 98px; } .f-formation__inner { padding: 26px 18px; } .gb-motion { padding: 18px 14px; } }
+.gb-day { min-height: 74px; display: grid; gap: 4px; align-content: start; }
+.gb-day__n { font-size: 13px; font-weight: 700; color: var(--yellow); }
+.gb-day p { font-size: 15px; color: var(--on-navy); line-height: 1.5; }
+.gb-chips { display: flex; flex-wrap: wrap; gap: 8px; min-height: 64px; align-content: flex-start; }
+.gb-chips span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: var(--r-pill); background: var(--white); color: var(--navy); opacity: 0; transform: translateY(8px); }
+.gb-chips span svg { width: 14px; height: 14px; color: var(--ok); }
+.gb-motion.is-static .gb-chips span { opacity: 1; transform: none; }
+
+.related { display: grid; gap: 22px; }
+.related__grid { display: grid; gap: 18px; }
+@container site (min-width: 760px) { .related__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.card { border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); text-decoration: none; color: var(--ink); display: grid; grid-template-rows: auto 1fr; transition: box-shadow .12s; }
+.card:hover { box-shadow: var(--shadow-2); }
+.card__body { padding: 16px 18px 18px; display: grid; gap: 8px; align-content: start; }
+.card__body .tag { justify-self: start; }
+.card__body h3 { font-size: 16px; font-weight: 600; line-height: 1.4; }
+.card__body span.more { font-size: 13px; font-weight: 600; color: var(--indigo); }
+
+.site-foot { background: var(--ink); color: var(--white); padding: 28px 24px; font-size: 13px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.site-foot span:last-child { color: #c9c9c9; }
+
+/* ---------- Calque d'annotations ---------- */
+.show-anno [data-anno] { position: relative; outline: 2px solid var(--note); outline-offset: 6px; }
+.show-anno [data-anno]::after { content: attr(data-anno) "  " attr(data-label); position: absolute; top: -6px; left: 12px; transform: translateY(-50%); background: var(--note); color: var(--white); font: 600 12px/1 var(--font); letter-spacing: .01em; padding: 5px 9px; border-radius: var(--r-pill); z-index: 8; white-space: nowrap; pointer-events: none; writing-mode: horizontal-tb; text-transform: none; }
+.show-anno .p-chip[data-anno]::after { top: auto; bottom: -8px; transform: translateY(100%); left: 0; }
+.show-anno .p-chip[data-anno] { outline-offset: 3px; }
+.show-anno .art { gap: 52px; }
+.show-anno .content { gap: 72px; }
+.show-anno .content > section { gap: 30px; }
+.show-anno .rail { gap: 34px; }
+.show-anno .toc-box::after { top: -11px; }
+
+/* ---------- Plan de la structure ---------- */
+.proto-plan { max-width: 1240px; margin: 32px auto 0; background: var(--bg); border-radius: var(--r-xl); padding: 32px clamp(18px, 4vw, 40px) 36px; display: grid; gap: 22px; box-shadow: var(--shadow-1); }
+.proto-plan h2 { font-size: 26px; font-weight: 500; }
+.proto-plan h2 em { font-style: italic; color: var(--indigo); }
+.proto-plan > p { color: var(--ink-700); max-width: 72ch; }
+.plan-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-lg); }
+.plan { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.plan th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-500); padding: 12px 14px; background: var(--surface); }
+.plan td { padding: 12px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+.plan td:first-child { width: 44px; }
+.plan .n { display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 6px; border-radius: var(--r-pill); background: var(--note); color: var(--white); font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.plan td:nth-child(2) { font-weight: 600; white-space: nowrap; }
+.plan td:nth-child(5) { color: var(--ink-500); }
+.plan tr.grp td { background: var(--indigo-050); font-weight: 600; color: var(--indigo); font-size: 13px; }
+.plan tr.is-new td:nth-child(2)::after { content: "nouveau"; margin-left: 8px; font-size: 11px; font-weight: 600; color: var(--note); background: #fff1e8; padding: 2px 7px; border-radius: var(--r-pill); }
+.plan code { font-size: 12.5px; background: var(--surface); padding: 1px 5px; border-radius: 4px; }
+
+.geo { display: grid; gap: 20px; }
+@container plan (min-width: 900px) { .geo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; } }
+.proto-plan { container: plan / inline-size; }
+.geo__rules { list-style: none; padding: 0; display: grid; gap: 12px; counter-reset: g; }
+.geo__rules li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; font-size: 14px; color: var(--ink-700); counter-increment: g; }
+.geo__rules li::before { content: counter(g); width: 26px; height: 26px; border-radius: var(--r-pill); background: var(--indigo); color: var(--white); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.geo__rules strong { color: var(--ink); }
+.geo__previews { display: grid; gap: 12px; align-content: start; }
+.serp { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px 18px; display: grid; gap: 8px; background: var(--bg); }
+.serp__label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-500); }
+.serp__q { font-size: 13px; color: var(--ink-500); display: flex; align-items: center; gap: 8px; }
+.serp__q span { border: 1px solid var(--line); border-radius: var(--r-pill); padding: 4px 12px; color: var(--ink); }
+.serp p { font-size: 14px; line-height: 1.55; }
+.serp ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; display: grid; gap: 2px; }
+.serp__src { font-size: 12px; color: var(--ink-500); display: flex; align-items: center; gap: 6px; }
+.serp__src i { width: 16px; height: 16px; border-radius: var(--r-pill); background: var(--indigo); display: inline-block; }
+.serp__src a { font-weight: 600; }
+.serp mark { background: var(--lime-soft); color: inherit; padding: 0 2px; border-radius: 3px; }
+
+.sw__ribbon { height: 12px; border-radius: var(--r-pill); }
+.sw { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.sw li { display: grid; gap: 4px; font-size: 13px; color: var(--ink-700); align-content: start; }
+.sw__chip { height: 56px; border-radius: var(--r-md); margin-bottom: 6px; }
+.sw b { font-size: 15px; color: var(--ink); }
+.sw code { font-size: 12px; color: var(--ink-500); }
+.steps-setup { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; counter-reset: m; }
+.steps-setup li { background: var(--surface); border-radius: var(--r-lg); padding: 16px 18px; font-size: 14px; color: var(--ink-700); display: grid; gap: 6px; align-content: start; counter-increment: m; }
+.steps-setup li::before { content: counter(m); width: 26px; height: 26px; border-radius: var(--r-pill); background: var(--indigo); color: var(--white); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.steps-setup strong { color: var(--ink); font-size: 15px; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+
+<div class="proto-bar" id="protoBar">
+  <div class="proto-bar__name"><span class="dot"></span>Articles Fichly · Proposition V2</div>
+  <div class="proto-bar__controls">
+    <div class="seg" role="group" aria-label="Annotations">
+      <button type="button" id="btnAnnoOn" class="is-anno" aria-pressed="true">Structure affichée</button>
+      <button type="button" id="btnAnnoOff" aria-pressed="false">Article seul</button>
+    </div>
+    <div class="seg" role="group" aria-label="Largeur d'affichage">
+      <button type="button" id="btnDesk" aria-pressed="true">Ordinateur</button>
+      <button type="button" id="btnMob" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
+</div>
+
+<section class="proto-intro">
+  <h1>La structure V2 de nos articles, <em>appliquée à la TPM</em></h1>
+  <p>Deuxième version de la maquette, avec vos retours. Contenu réel de l'article TPM, raccourci ; produits, prix et formation repris de la boutique. Les pastilles orange numérotent chaque bloc, le plan en bas de page les détaille.</p>
+  <ul class="shifts">
+    <li><strong>Nos six couleurs, comme fil conducteur</strong>Le liseré signe les blocs Fichly, chaque partie de l'article prend une couleur dans l'ordre du liseré, et l'anneau entoure la photo de l'auteur. Mode d'emploi sous la maquette.</li>
+    <li><strong>Résumé et essentiel, pensés pour Google et les IA</strong>Deux parties distinctes, calibrées pour les extraits en paragraphe et en liste <span class="n">(bloc 3)</span>.</li>
+    <li><strong>Nos produits à quatre endroits</strong>Colonne du sommaire, lien dans le texte, encart au bon moment, boîte à outils en fin d'article <span class="n">(5, 10, 14, 20)</span>.</li>
+    <li><strong>« Découvrir nos formations » en bas</strong>La Green Belt CPF, avec un encart animé qui déroule les six jours en DMAIC <span class="n">(bloc 21)</span>.</li>
+  </ul>
+</section>
+
+<div class="frame show-anno" id="frame">
+  <nav class="site-nav" aria-label="Navigation du site (thème actuel)">
+    <img src="{{LOGO}}" alt="Fichly" width="178" height="94">
+    <ul>
+      <li><a href="#top">Formations</a></li>
+      <li><a href="#top">Fiches</a></li>
+      <li><a href="#top">Entreprises</a></li>
+      <li><a href="#top" aria-current="page">Blog</a></li>
+    </ul>
+    <div class="burger" aria-hidden="true"><i></i><i></i><i></i></div>
+  </nav>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <article class="art" id="top">
+    <header class="art-head">
+      <div class="art-head__text" data-anno="1" data-label="En-tête">
+        <nav class="crumbs" aria-label="Fil d'Ariane">
+          <a href="#top">Accueil</a><span class="sep">•</span><a href="#top">Blog</a><span class="sep">•</span><a class="tag" href="#top">Maintenance</a>
+        </nav>
+        <h1>TPM (Total Productive Maintenance) : par quoi commencer et <em>ce qui la fait tenir</em></h1>
+        <p class="lede">La TPM se lance bien et s'arrête à six mois. Les huit piliers, les sept étapes de la maintenance autonome, le test en cinq questions pour savoir si votre atelier est prêt, et les cinq pièges qui font mourir une démarche après le lancement.</p>
+        <div class="byline">
+          <div class="byline__who">
+            <img class="avatar" src="{{HUGO}}" alt="" width="50" height="50">
+            <div><strong>Hugo Duc</strong><span>Fondateur de Fichly, formateur Lean</span></div>
+          </div>
+          <div class="meta"><span>Mis à jour le 31 août 2026</span><i></i><span>{{READ}} min de lecture</span></div>
+          <div class="share">
+            <a class="chip-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.fichly.com%2Fblogs%2Fnos-articles%2Ftpm-total-productive-maintenance" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4z"/></svg>
+              Partager
+            </a>
+            <button type="button" class="chip-btn" id="copyLink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>
+              <span>Copier le lien</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div data-anno="2" data-label="Couverture au format fiche, avec le liseré">
+        <div class="cover" role="img" aria-label="Couverture : TPM, maintenance productive totale. Par quoi commencer, ce qui la fait tenir.">
+          <span class="cover__eyebrow">Maintenance</span>
+          <span class="cover__big">TPM<i class="dot"></i></span>
+          <span class="cover__sub">Maintenance productive totale</span>
+          <span class="cover__foot">Par quoi commencer, ce qui la fait tenir</span>
+          <img class="cover__logo" src="{{LOGO}}" alt="">
+        </div>
+      </div>
+    </header>
+
+    <section class="resume" aria-label="En résumé et essentiel à retenir" data-anno="3" data-label="Résumé + essentiel : extraits Google et réponses IA">
+      <div class="ribbon" aria-hidden="true"></div>
+      <div class="resume__inner">
+        <div class="resume__part">
+          <h2 id="resume">En résumé</h2>
+          <p class="resume__text">La TPM (Total Productive Maintenance) est une organisation qui transfère les gestes simples d'entretien vers la production. La TPM se lance par un seul pilier, la maintenance autonome, adossé au socle 5S. La TPM meurt toujours au même endroit : le jour où plus personne ne relit les fiches remplies.</p>
+        </div>
+        <div class="resume__part">
+          <h2 id="essentiel">L'essentiel à retenir</h2>
+          <ul class="dots">
+            <li>La TPM est un programme d'organisation, pas un type de maintenance.</li>
+            <li>Les huit piliers ne se lancent pas ensemble, les 5S d'abord.</li>
+            <li>La maintenance autonome est la porte d'entrée, en sept étapes.</li>
+            <li>Les trois premières étapes de la maintenance autonome sont du nettoyage.</li>
+            <li>L'indicateur utile est la part des arrêts subis, pas les fiches remplies.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="art-body">
+      <div class="rail">
+        <div class="toc-box" data-anno="4" data-label="Sommaire : liseré et couleur de chaque partie">
+        <div class="ribbon" aria-hidden="true"></div>
+        <details class="toc" id="toc">
+          <summary>Sommaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ol>
+            <li><a href="#definition">Qu'est-ce que la TPM ?</a></li>
+            <li><a href="#piliers">Les 8 piliers et leur ordre</a></li>
+            <li><a href="#trs">Mesurer la TPM avec le TRS</a></li>
+            <li><a href="#test">Le test en cinq questions</a></li>
+            <li><a href="#etapes">Les 7 étapes de la maintenance autonome</a></li>
+            <li><a href="#pieges">Pourquoi elle s'arrête à six mois</a></li>
+            <li><a href="#faq">Vos questions sur la TPM</a></li>
+          </ol>
+          <div class="toc__foot"><span id="tocLeft">{{READ}} min restantes</span><div class="toc__bar"><span id="tocBar"></span></div></div>
+        </details>
+        </div>
+        <a class="rail-product" href="https://www.fichly.com/products/fiches-lean" target="_blank" rel="noopener" data-anno="5" data-label="Produit du sommaire">
+          <div class="pbox" style="--c: var(--cat); --c-soft: var(--cat-soft)" aria-hidden="true"><div class="pbox__lid"><span>Fichly</span><b>40 outils du Lean</b><i></i></div></div>
+          <small>Les fiches de cet article</small>
+          <b>40 outils du Lean à portée de main</b>
+          <span class="price">49,90€</span>
+          <span class="more">Voir le produit →</span>
+        </a>
+      </div>
+
+      <div class="content prose">
+        <section class="c1" aria-labelledby="definition">
+          <div class="q" data-anno="6" data-label="Partie : sa couleur, sa question, sa réponse directe">
+            <h2 id="definition">Qu'est-ce que la TPM (Total Productive Maintenance) ?</h2>
+            <p class="answer">La TPM confie les gestes de premier niveau à ceux qui sont devant la machine toute la journée, pour que le service de maintenance consacre son temps à ce que lui seul sait faire.</p>
+          </div>
+          <dl class="f-def" data-anno="7" data-label="Définition">
+            <div class="eyebrow">Définition</div>
+            <dt>Total Productive Maintenance<small>en français : maintenance productive totale</small></dt>
+            <dd>
+              <span><b>Totale</b> : tout le monde y participe, la production comme la maintenance, l'atelier comme les services support.</span>
+              <span><b>Productive</b> : la maintenance se fait avec la production et non contre elle.</span>
+              <span><b>Maintenance</b> : maintenir en état, ce qui n'est pas réparer. On agit avant, sur des gestes simples et répétés.</span>
+            </dd>
+          </dl>
+          <p>La démarche naît chez Nippondenso, équipementier du groupe Toyota, à la fin des années 1960. Elle est formalisée en 1971 par le JIPM, l'institut japonais de la maintenance des usines, sous l'impulsion de Seiichi Nakajima. Son point de départ était très concret : les opérateurs voyaient les premiers signes de dégradation, et personne ne leur demandait rien.</p>
+        </section>
+
+        <section class="c2" aria-labelledby="piliers">
+          <div class="q">
+            <h2 id="piliers">Quels sont les 8 piliers de la TPM, et dans quel ordre les prendre ?</h2>
+            <p class="answer">Les huit piliers ne se lancent pas ensemble. Un site qui démarre prend la maintenance autonome et l'amélioration ciblée, sur un périmètre restreint, avec les 5S comme socle.</p>
+          </div>
+          <figure class="f-figure" data-anno="8" data-label="Figure légendée">
+            <div class="temple" role="img" aria-label="Schéma : le toit TPM repose sur huit piliers, posés sur le socle 5S. La maintenance autonome et l'amélioration ciblée sont mises en avant comme piliers de démarrage.">
+              <div class="temple__roof">TPM</div>
+              <div class="temple__pillars">
+                <div class="pillar is-start">Maintenance autonome</div>
+                <div class="pillar is-start">Amélioration ciblée</div>
+                <div class="pillar">Maintenance planifiée</div>
+                <div class="pillar">Formation</div>
+                <div class="pillar">Conception</div>
+                <div class="pillar">Qualité</div>
+                <div class="pillar">Services</div>
+                <div class="pillar">Sécurité</div>
+              </div>
+              <div class="temple__base">Le socle : les 5S</div>
+            </div>
+            <figcaption><strong>Figure 1.</strong> Les huit piliers reposent sur le socle 5S. Les deux piliers en couleur sont ceux d'un site qui démarre.</figcaption>
+          </figure>
+          <div class="f-table" data-anno="9" data-label="Tableau">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th scope="col">Pilier</th><th scope="col">Nom d'origine ou anglais</th><th scope="col">Ce qu'il produit</th></tr></thead>
+                <tbody>
+                  <tr class="is-start"><td>Maintenance autonome</td><td>Jishu hozen</td><td>Les gestes de premier niveau passent à la production</td></tr>
+                  <tr class="is-start"><td>Amélioration ciblée</td><td>Kobetsu kaizen</td><td>Des chantiers courts sur les pertes les plus lourdes</td></tr>
+                  <tr><td>Maintenance planifiée</td><td>Planned maintenance</td><td>Un plan tenu par le service de maintenance</td></tr>
+                  <tr><td>Formation et compétences</td><td>Education and training</td><td>Des opérateurs capables d'inspecter, pas seulement de nettoyer</td></tr>
+                  <tr><td>Maîtrise de la conception</td><td>Early equipment management</td><td>Des équipements neufs plus faciles à entretenir</td></tr>
+                  <tr><td>Maintenance de la qualité</td><td>Hinshitsu hozen</td><td>Le réglage machine qui garantit la conformité</td></tr>
+                  <tr><td>TPM dans les services</td><td>Office TPM</td><td>Les flux administratifs qui bloquent l'atelier</td></tr>
+                  <tr><td>Sécurité, santé, environnement</td><td>Safety, health, environment</td><td>Zéro accident pendant les interventions</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p>Les 5S ne sont pas un neuvième pilier. Ils sont la condition d'entrée, pour une raison mécanique : sur une machine sale, une fuite ne se voit pas. C'est l'objet d'un <a href="https://www.fichly.com/blogs/nos-articles/la-methode-5s-definition-et-exemples">chantier 5S</a>, où l'on nettoie pour inspecter et non pour faire propre. Pour le mener pas à pas : <a class="p-chip" href="https://www.fichly.com/products/le-guide-du-5s-en-20-fiches" target="_blank" rel="noopener" style="--c: var(--lime); --c-soft: var(--lime-soft)" data-anno="10" data-label="Produit cité dans le texte"><i aria-hidden="true"></i>Le guide du 5S en 20 fiches <b>29,90€</b></a></p>
+        </section>
+
+        <section class="c3" aria-labelledby="trs">
+          <div class="q">
+            <h2 id="trs">Comment mesurer la TPM ? Ce qu'elle change sur votre TRS</h2>
+            <p class="answer">La TPM se juge sur les pertes qu'elle fait disparaître, et la plupart se lisent directement sur le TRS.</p>
+          </div>
+          <p>Les pannes et les changements d'outils pèsent sur la disponibilité. Les micro-arrêts et la sous-vitesse pèsent sur la performance. Les défauts et les rebuts pèsent sur la qualité. Une TPM qui avance se lit donc sur le <a href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition">taux de rendement synthétique</a>, sans inventer d'indicateur maison. Pour relever les arrêts automatiquement, voyez nos <a href="https://www.fichly.com/pages/partenaires-logiciels" target="_blank" rel="noopener">partenaires logiciels de pilotage du TRS</a>.</p>
+          <div class="f-note" data-anno="11" data-label="Bon à savoir">
+            <div class="eyebrow">Bon à savoir</div>
+            <p><strong>Il n'existe aucun seuil de TRS qu'une usine devrait atteindre.</strong> Un taux se compare à lui-même, sur le même équipement et la même période. Au démarrage, suivez plutôt la part des arrêts subis dans le temps d'ouverture : relevez-la sur un seul équipement avant le lancement, puis à trois mois.</p>
+          </div>
+        </section>
+
+        <section class="c4" aria-labelledby="test">
+          <div class="q">
+            <h2 id="test">Votre atelier est-il prêt pour la TPM ? Le test en cinq questions</h2>
+            <p class="answer">Quatre réponses positives sur cinq permettent de lancer, sur une ligne pilote. La cinquième question ne se compense pas.</p>
+          </div>
+          <form class="f-test" id="testForm" data-anno="12" data-label="Test interactif">
+            <div class="f-test__head">
+              <div class="eyebrow">Test en cinq questions</div>
+              <h3>Votre atelier est-il prêt ?</h3>
+              <p>Répondez pour une ligne précise, pas pour l'usine entière. Exemple pré-rempli : changez les réponses.</p>
+            </div>
+            <ol>
+              <li>
+                <div class="f-test__q"><span>Les machines sont-elles assez propres et accessibles pour qu'une fuite se voie ?</span>
+                  <span class="yn"><input type="radio" name="q1" id="q1o" value="oui" checked><label for="q1o">Oui</label><input type="radio" name="q1" id="q1n" value="non"><label for="q1n">Non</label></span></div>
+                <p class="f-test__hint">À la place : un chantier 5S sur la ligne, avant toute autre chose.</p>
+              </li>
+              <li>
+                <div class="f-test__q"><span>Le temps de l'auto-maintenance est-il inscrit dans le temps d'ouverture ?</span>
+                  <span class="yn"><input type="radio" name="q2" id="q2o" value="oui" checked><label for="q2o">Oui</label><input type="radio" name="q2" id="q2n" value="non"><label for="q2n">Non</label></span></div>
+                <p class="f-test__hint">À la place : poser le créneau d'auto-maintenance au planning, à horaire fixe.</p>
+              </li>
+              <li>
+                <div class="f-test__q"><span>Le service de maintenance est-il d'accord sur les gestes transférés ?</span>
+                  <span class="yn"><input type="radio" name="q3" id="q3o" value="oui"><label for="q3o">Oui</label><input type="radio" name="q3" id="q3n" value="non" checked><label for="q3n">Non</label></span></div>
+                <p class="f-test__hint">À la place : une liste de gestes négociée geste par geste, écrite et signée.</p>
+              </li>
+              <li>
+                <div class="f-test__q"><span>Existe-t-il un standard écrit pour chacun de ces gestes ?</span>
+                  <span class="yn"><input type="radio" name="q4" id="q4o" value="oui" checked><label for="q4o">Oui</label><input type="radio" name="q4" id="q4n" value="non"><label for="q4n">Non</label></span></div>
+                <p class="f-test__hint">À la place : écrire la gamme de nettoyage, lubrification et serrage.</p>
+              </li>
+              <li>
+                <div class="f-test__q"><span>Quelqu'un relit-il les fiches remplies, chaque semaine, à date fixe ?<span class="badge-block">Bloquante</span></span>
+                  <span class="yn"><input type="radio" name="q5" id="q5o" value="oui" checked><label for="q5o">Oui</label><input type="radio" name="q5" id="q5n" value="non"><label for="q5n">Non</label></span></div>
+                <p class="f-test__hint">À la place : nommer la personne et poser le rendez-vous avant le lancement.</p>
+              </li>
+            </ol>
+            <div class="f-test__result" id="testResult" role="status" aria-live="polite">
+              <strong><span class="score" id="testScore">4/5</span> réponses positives</strong>
+              <span id="testVerdict">Vous pouvez lancer, sur une ligne pilote et une seule.</span>
+            </div>
+          </form>
+        </section>
+
+        <section class="c5" aria-labelledby="etapes">
+          <div class="q">
+            <h2 id="etapes">Les 7 étapes de la maintenance autonome</h2>
+            <p class="answer">Le JIPM décrit sept étapes, franchies dans l'ordre. Les trois premières ne sont que du nettoyage, et c'est voulu.</p>
+          </div>
+          <ol class="f-steps" data-anno="13" data-label="Étapes numérotées">
+            <li><div><h3>Le nettoyage initial</h3><p>La ligne est nettoyée en profondeur par ceux qui y travaillent. L'objectif est de découvrir ce qu'on ne voyait plus : jeu anormal, boulon manquant, fuite ancienne. Chaque anomalie est étiquetée sur place.</p></div></li>
+            <li><div><h3>Supprimer les sources de salissure et les zones inaccessibles</h3><p>On traite la source (un carter, une goulotte, un déflecteur) et les points qu'on n'atteint pas sans démontage. C'est l'étape qui rend la suite soutenable.</p></div></li>
+            <li><div><h3>Écrire le standard provisoire</h3><p>Une gamme fixe les gestes de nettoyage, de lubrification et de serrage : quoi, où, avec quoi, à quelle fréquence. Elle est écrite par les opérateurs avec la maintenance, jamais pour eux.</p></div></li>
+            <li><div><h3>La formation à l'inspection générale</h3><p>La marche la plus haute. Sans comprendre la fonction des organes, l'opérateur nettoie correctement et ne détecte rien.</p></div></li>
+            <li><div><h3>L'inspection autonome</h3><p>L'opérateur signale ce qui dérive, plus seulement ce qui est cassé. L'effet mesurable sur les arrêts commence ici.</p></div></li>
+            <li><div><h3>Standardiser le poste et son environnement</h3><p>Approvisionnement, outillage, consommables, circulation : le standard tient quel que soit l'opérateur et l'équipe.</p></div></li>
+            <li><div><h3>La gestion autonome</h3><p>L'équipe pilote son périmètre et ses indicateurs. Peu de sites y arrivent : la cinquième bien tenue vaut mieux que la septième affichée.</p></div></li>
+          </ol>
+          <aside class="f-product" data-anno="14" data-label="Encart produit au bon moment">
+            <div class="pbox" style="--c: var(--cat); --c-soft: var(--cat-soft)" aria-hidden="true"><div class="pbox__lid"><span>Fichly</span><b>40 outils du Lean</b><i></i></div></div>
+            <div class="f-product__text">
+              <div class="eyebrow">Pour l'étape 3</div>
+              <h3>40 outils du Lean à portée de main</h3>
+              <p>Une fiche par outil, avec les trames et les rubriques attendues pour formaliser vos gammes de production et de maintenance.</p>
+              <div class="f-product__buy">
+                <span class="price">49,90€</span>
+                <a class="btn" href="https://www.fichly.com/products/fiches-lean" target="_blank" rel="noopener">Explorer les fiches <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="c6" aria-labelledby="pieges">
+          <div class="q">
+            <h2 id="pieges">Pourquoi la maintenance autonome s'arrête-t-elle à six mois ?</h2>
+            <p class="answer">Aucune des causes d'arrêt n'est une question de méthode. Toutes décrivent le même moment : celui où la démarche cesse d'être regardée.</p>
+          </div>
+          <figure class="f-field" data-anno="15" data-label="Sur le terrain : la remarque de l'expert">
+            <svg class="f-field__mark" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.6 13 0l1.6 3.6C10 5 7.6 7.8 7.3 12H13v14H0zm20 0V15C20 6.7 24.4 1.6 33 0l1 3.6C29.6 5 27.6 7.8 27.3 12H33v14H20z"/></svg>
+            <div class="eyebrow">Sur le terrain</div>
+            <blockquote><p>Le lancement est réussi, les machines sont nettoyées, les fiches sont affichées et signées. Six mois plus tard, les fiches ont jauni et personne ne les remplit.</p></blockquote>
+            <figcaption><img class="avatar" src="{{HUGO}}" alt="" width="58" height="58"><span><strong>Hugo Duc</strong>Formateur Lean, plus de 70 usines formées</span><a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">LinkedIn ↗</a></figcaption>
+          </figure>
+          <div class="f-dodont" data-anno="16" data-label="Erreur fréquente / À faire">
+            <div class="f-dodont__head" aria-hidden="true"><span>Erreur fréquente</span><span>À faire</span></div>
+            <div class="pair">
+              <div class="ko">{{X}}<span><span class="lbl">Erreur fréquente</span>Les huit piliers sont lancés en même temps.</span></div>
+              <div class="ok">{{V}}<span><span class="lbl">À faire</span>Un pilier, une ligne, un périmètre.</span></div>
+            </div>
+            <div class="pair">
+              <div class="ko">{{X}}<span><span class="lbl">Erreur fréquente</span>Le nettoyage est demandé sans que le temps soit donné.</span></div>
+              <div class="ok">{{V}}<span><span class="lbl">À faire</span>Le créneau est au planning, à horaire fixe, et il survit à la semaine chargée.</span></div>
+            </div>
+            <div class="pair">
+              <div class="ko">{{X}}<span><span class="lbl">Erreur fréquente</span>La maintenance vit le transfert comme une perte de métier.</span></div>
+              <div class="ok">{{V}}<span><span class="lbl">À faire</span>Le transfert se négocie geste par geste, et la maintenance garde ce qui demande sa compétence.</span></div>
+            </div>
+            <div class="pair">
+              <div class="ko">{{X}}<span><span class="lbl">Erreur fréquente</span>Les fiches sont remplies et personne ne les lit.</span></div>
+              <div class="ok">{{V}}<span><span class="lbl">À faire</span>Un passage hebdomadaire, à date fixe, par quelqu'un qui peut décider.</span></div>
+            </div>
+            <div class="pair">
+              <div class="ko">{{X}}<span><span class="lbl">Erreur fréquente</span>On mesure l'activité au lieu du résultat.</span></div>
+              <div class="ok">{{V}}<span><span class="lbl">À faire</span>On suit la part des arrêts subis, pas le nombre de fiches remplies.</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="c1" aria-labelledby="faq">
+          <div class="q"><h2 id="faq">Vos questions sur la TPM</h2></div>
+          <div class="f-faq" data-anno="17" data-label="FAQ : les questions que posent les internautes">
+            <details open>
+              <summary>Qu'est-ce que la maintenance productive totale ?{{PLUS}}</summary>
+              <p>C'est la traduction française de Total Productive Maintenance : une organisation, née chez Nippondenso et formalisée par le JIPM en 1971, qui associe la production à l'entretien des équipements. Nettoyage, lubrification, inspection et serrage passent aux opérateurs, pendant que la maintenance se concentre sur ce qui demande sa compétence.</p>
+            </details>
+            <details>
+              <summary>Quel est le lien entre la TPM et le Lean Management ?{{PLUS}}</summary>
+              <p>Les deux viennent du système de production Toyota et visent les pertes. Le Lean traite les gaspillages du flux, la TPM les pertes de l'équipement. Un flux tiré parfaitement conçu ne résiste pas à une machine qui tombe en panne deux fois par semaine.</p>
+            </details>
+            <details>
+              <summary>Comment mettre en pratique la TPM sur le terrain ?{{PLUS}}</summary>
+              <p>En commençant par une ligne unique et par un seul pilier, la maintenance autonome. Vérifiez d'abord les cinq conditions du test ci-dessus ; si l'une manque, traitez-la avant de lancer.</p>
+            </details>
+            <details>
+              <summary>Combien de temps faut-il pour qu'une maintenance autonome tienne ?{{PLUS}}</summary>
+              <p>Il n'existe pas de durée standard. Le critère de passage est la stabilité : on ne franchit une étape que lorsque la précédente tient sans rappel.</p>
+            </details>
+          </div>
+        </section>
+
+        <div class="f-sources" data-anno="18" data-label="Sources">
+          <h2>Sources et références</h2>
+          <ol>
+            <li><a href="https://norminfo.afnor.org/norme/nf-en-13306/maintenance-terminologie-de-la-maintenance/98892" target="_blank" rel="noopener">NF EN 13306, terminologie de la maintenance</a> (AFNOR)</li>
+            <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000019761378" target="_blank" rel="noopener">Code du travail, maintien en état de conformité des équipements de travail</a> (Légifrance)</li>
+            <li><a href="https://code.travail.gouv.fr/code-du-travail/r4141-2" target="_blank" rel="noopener">Code du travail, article R4141-2, formation à la sécurité</a></li>
+            <li>JIPM (Japan Institute of Plant Maintenance) : les seize pertes et les sept étapes de la maintenance autonome</li>
+          </ol>
+        </div>
+
+        <div class="f-author" data-anno="19" data-label="Auteur, avec le liseré (fiche réutilisable)">
+          <div class="ribbon" aria-hidden="true"></div>
+          <div class="f-author__inner">
+          <img class="avatar" src="{{HUGO}}" alt="Hugo Duc" width="80" height="80">
+          <div class="f-author__body">
+            <strong>Hugo Duc</strong>
+            <span class="role">Fondateur de Fichly, formateur Lean Management</span>
+            <p>Ingénieur industriel de formation, Hugo partage ses connaissances sur LinkedIn avec un post par jour. Il a créé Fichly, organisme de formation QUALIOPI dédié au Lean Management, qui a formé plus de 70 usines en France.</p>
+            <div class="f-author__links"><a href="https://www.linkedin.com/in/hugo-duc/" target="_blank" rel="noopener">Suivre Hugo sur LinkedIn ↗</a><a href="#top">Ses autres articles</a></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="tools" aria-labelledby="outils" data-anno="20" data-label="Les outils de l'article">
+      <div class="zone-title">
+        <h2 id="outils">Les outils de cet article</h2>
+        <p>Les fiches et les guides Fichly pour passer de la lecture au terrain.</p>
+      </div>
+      <div class="tools__grid">
+        <a class="pcard" href="https://www.fichly.com/products/fiches-lean" target="_blank" rel="noopener">
+          <div class="pbox" style="--c: var(--cat); --c-soft: var(--cat-soft)" aria-hidden="true"><div class="pbox__lid"><span>Fichly</span><b>40 outils du Lean</b><i></i></div></div>
+          <div class="pcard__body"><small>L'essentiel · 40 fiches</small><b>40 outils du Lean à portée de main</b><div class="pcard__foot"><span class="price">49,90€</span><span class="more">Voir le produit →</span></div></div>
+        </a>
+        <a class="pcard" href="https://www.fichly.com/products/le-guide-du-5s-en-20-fiches" target="_blank" rel="noopener">
+          <div class="pbox" style="--c: var(--lime); --c-soft: var(--lime-soft)" aria-hidden="true"><div class="pbox__lid"><span>Fichly</span><b>Le guide du 5S</b><i></i></div></div>
+          <div class="pcard__body"><small>Guide · 20 fiches</small><b>Le guide du 5S en 20 fiches</b><div class="pcard__foot"><span class="price">29,90€</span><span class="more">Voir le produit →</span></div></div>
+        </a>
+        <a class="pcard" href="https://www.fichly.com/products/le-guide-de-la-resolution-de-problemes-dmaic" target="_blank" rel="noopener">
+          <div class="pbox" style="--c: var(--coral); --c-soft: var(--coral-soft)" aria-hidden="true"><div class="pbox__lid"><span>Fichly</span><b>Résolution de problèmes</b><i></i></div></div>
+          <div class="pcard__body"><small>Guide · pannes qui reviennent</small><b>Le guide de la résolution de problèmes DMAIC</b><div class="pcard__foot"><span class="price">29,90€</span><span class="more">Voir le produit →</span></div></div>
+        </a>
+      </div>
+      <div class="tools__pack"><span>Tout réunir : <strong>le Pack Lean Management</strong>, 109,90€ (-22 %)</span><a class="chip-btn" href="https://www.fichly.com/products/pack-lean-management-green-belt" target="_blank" rel="noopener">Voir le pack →</a></div>
+    </section>
+
+    <section class="f-formation" aria-labelledby="formations" data-anno="21" data-label="Découvrir nos formations · Green Belt CPF">
+      <div class="ribbon" aria-hidden="true"></div>
+      <div class="f-formation__inner">
+        <div class="f-formation__text">
+          <div class="eyebrow">Découvrir nos formations</div>
+          <h2 id="formations">Pilotez vos projets d'amélioration avec la <em>Green Belt</em></h2>
+          <p>La certification Green Belt Lean Management (RS7114) : 6 jours pour mener un projet réel de bout en bout, avec la démarche DMAIC.</p>
+          <ul class="gb-facts">
+            <li>Certification RS7114</li>
+            <li>Éligible CPF</li>
+            <li>6 jours · 42 h</li>
+            <li>80 % de pratique</li>
+          </ul>
+          <div class="gb-price"><strong>1 500€ <span>en distanciel, finançable via votre CPF</span></strong><small>Sous conditions d'éligibilité et de droits disponibles. Pack Lean offert avec la formation.</small></div>
+          <div class="gb-actions">
+            <a class="btn btn--light" href="https://www.fichly.com/pages/formation-lean-green-belt-cpf" target="_blank" rel="noopener">Découvrir la Green Belt <span aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="https://calendar.app.google/r2FZHTjKzBM6W2Mf6" target="_blank" rel="noopener">Réserver 30 min d'échange</a>
+          </div>
+          <div class="gb-trust"><span><b>4,8/5</b> note des apprenants</span><span><b>9 sur 10</b> recommandent nos formations</span><span>Organisme certifié <b>Qualiopi</b></span></div>
+          <div class="gb-path">Le parcours : <a href="https://www.fichly.com/pages/formation-yellow-belt-lean-management-fichly" target="_blank" rel="noopener">Yellow Belt</a><span aria-hidden="true">→</span><span class="here">Green Belt</span><span aria-hidden="true">→</span><a href="https://www.fichly.com/pages/formation-black-belt-lean-six-sigma" target="_blank" rel="noopener">Black Belt</a></div>
+        </div>
+        <div class="gb-motion" id="gbMotion">
+          <p class="vh">Programme en six jours : Define, Measure, Analyze, Improve, Control, puis soutenance et certification RS7114.</p>
+          <div class="gb-motion__head" aria-hidden="true"><span>La Green Belt en 6 jours</span><b id="gbCount">Jour 1/6</b></div>
+          <div class="gb-track" aria-hidden="true">
+            <div class="gb-rail"></div><div class="gb-rail-on" id="gbRailOn"></div>
+            <div class="gb-stop" style="--s: var(--indigo); --t: var(--white)"><b>D</b><span>Jour 1</span></div>
+            <div class="gb-stop" style="--s: var(--green)"><b>M</b><span>Jour 2</span></div>
+            <div class="gb-stop" style="--s: var(--coral)"><b>A</b><span>Jour 3</span></div>
+            <div class="gb-stop" style="--s: var(--yellow)"><b>I</b><span>Jour 4</span></div>
+            <div class="gb-stop" style="--s: var(--cat)"><b>C</b><span>Jour 5</span></div>
+            <div class="gb-stop" style="--s: var(--rust); --t: var(--white)"><b>✓</b><span>Jour 6</span></div>
+            <div class="gb-token" id="gbToken"></div>
+          </div>
+          <div class="gb-day" aria-hidden="true"><span class="gb-day__n" id="gbDayN">Jour 1 · Define</span><p id="gbDayT">Cadrer le projet : charte, périmètre, SIPOC et voix du client.</p></div>
+          <div class="gb-chips" aria-hidden="true">
+            <span>{{CHK}}Projet réel mené de bout en bout</span>
+            <span>{{CHK}}Certification RS7114</span>
+            <span>{{CHK}}Finançable CPF</span>
+            <span>{{CHK}}Pack Lean offert</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="related" aria-labelledby="rel" data-anno="22" data-label="À lire aussi (même thème)">
+      <div class="zone-title"><h2 id="rel">À lire aussi sur la maintenance</h2></div>
+      <div class="related__grid">
+        <a class="card" href="https://www.fichly.com/blogs/nos-articles/taux-de-rendement-synthetique-definition" target="_blank" rel="noopener">
+          <div class="cover cover--sm" aria-hidden="true"><span class="cover__eyebrow">TRS</span><span class="cover__big">TRS<i class="dot"></i></span><span class="cover__sub">Taux de rendement synthétique</span><img class="cover__logo" src="{{LOGO}}" alt=""></div>
+          <div class="card__body"><span class="tag">TRS</span><h3>TRS (Taux de Rendement Synthétique) : définition, exemples et calculs</h3><span class="more">Lire l'article →</span></div>
+        </a>
+        <a class="card" href="https://www.fichly.com/blogs/nos-articles/mtbf-mttr-indicateurs-disponibilite" target="_blank" rel="noopener">
+          <div class="cover cover--sm" aria-hidden="true"><span class="cover__eyebrow">Maintenance</span><span class="cover__big">MTBF<i class="dot"></i></span><span class="cover__sub">et MTTR</span><img class="cover__logo" src="{{LOGO}}" alt=""></div>
+          <div class="card__body"><span class="tag">Maintenance</span><h3>MTBF et MTTR : les deux indicateurs qui expliquent votre disponibilité</h3><span class="more">Lire l'article →</span></div>
+        </a>
+        <a class="card" href="https://www.fichly.com/blogs/nos-articles/types-de-maintenance-comment-choisir" target="_blank" rel="noopener">
+          <div class="cover cover--sm" aria-hidden="true"><span class="cover__eyebrow">Maintenance</span><span class="cover__big">Types<i class="dot"></i></span><span class="cover__sub">de maintenance</span><img class="cover__logo" src="{{LOGO}}" alt=""></div>
+          <div class="card__body"><span class="tag">Maintenance</span><h3>Types de maintenance : laquelle choisir pour quel équipement</h3><span class="more">Lire l'article →</span></div>
+        </a>
+      </div>
+    </section>
+  </article>
+
+  <footer class="site-foot"><span>Pied de page du thème, inchangé</span><span>Le LEAN ACCESSIBLE</span></footer>
+</div>
+
+<section class="proto-plan" id="plan">
+  <h2>Nos six couleurs, <em>mode d'emploi</em></h2>
+  <p>C'est la marque de fabrique Fichly : on les reconnaît sur les fiches, sur LinkedIn et maintenant sur chaque article. Pour qu'elles restent une signature et pas une décoration, elles suivent cinq règles.</p>
+  <div class="ribbon sw__ribbon" aria-hidden="true"></div>
+  <ul class="sw">
+      <li><span class="sw__chip" style="background: var(--indigo)"></span><b>Indigo</b><code>#3c4499</code><span>Parties 1 et 7, liens, boutons, point du logo</span></li>
+      <li><span class="sw__chip" style="background: var(--green)"></span><b>Vert</b><code>#8cc978</code><span>Partie 2, « À faire »</span></li>
+      <li><span class="sw__chip" style="background: var(--coral)"></span><b>Corail</b><code>#f16969</code><span>Partie 3, « Erreur fréquente »</span></li>
+      <li><span class="sw__chip" style="background: var(--yellow)"></span><b>Jaune</b><code>#e6b839</code><span>Partie 4, mot clé du bloc formation</span></li>
+      <li><span class="sw__chip" style="background: var(--cat)"></span><b>Bleu</b><code>#74a3d6</code><span>Partie 5, catégorie Lean Management</span></li>
+      <li><span class="sw__chip" style="background: var(--rust)"></span><b>Rouille</b><code>#b35a23</code><span>Partie 6, certification Green Belt</span></li>
+  </ul>
+  <ol class="geo__rules">
+    <li><span><strong>Le liseré signe les blocs Fichly</strong> : couverture, résumé, sommaire, auteur, formation, et la barre de lecture qui se colore au fil du défilement. Jamais sur un composant de contenu, pour garder sa force.</span></li>
+    <li><span><strong>Une couleur par partie, dans l'ordre du liseré.</strong> Le segment au-dessus de chaque intertitre et la pastille du sommaire ont la même couleur : en lisant, on reconstitue le liseré.</span></li>
+    <li><span><strong>Les détails d'une partie prennent sa couleur</strong> : points des étiquettes, numéros des étapes et du test, guillemets du terrain, piliers mis en avant.</span></li>
+    <li><span><strong>L'anneau Fichly</strong> entoure la photo de l'auteur, et le parcours Green Belt prend une couleur par étape, D, M, A, I, C, puis la certification.</span></li>
+    <li><span><strong>Ce qui ne bouge pas</strong> : les couleurs sont des aplats, jamais du texte (le texte reste en encre ou en indigo, pour la lisibilité) ; corail et vert gardent leur sens erreur / à faire ; liens et boutons restent indigo.</span></li>
+  </ol>
+
+  <h2>Résumé et essentiel, <em>écrits pour être repris</em></h2>
+  <p>Ce bloc est le plus important de l'article : c'est lui que les moteurs de recherche affichent en extrait et que les moteurs IA citent. Il suit six règles, les mêmes pour tous les articles.</p>
+  <div class="geo">
+    <ol class="geo__rules">
+      <li><span><strong>Le résumé commence par le terme recherché et sa définition</strong> : « La TPM (Total Productive Maintenance) est… ». C'est la forme la plus souvent reprise en extrait de type paragraphe.</span></li>
+      <li><span><strong>40 à 60 mots, 2 ou 3 phrases autonomes.</strong> Chaque phrase se comprend seule ; on répète le sujet (« La TPM… ») au lieu d'écrire « elle », pour qu'une IA puisse citer une phrase isolée sans perdre le sens.</span></li>
+      <li><span><strong>L'essentiel : 4 à 6 points de moins de 15 mots</strong>, chacun commence par le mot clé. C'est la forme reprise en extrait de type liste.</span></li>
+      <li><span><strong>Placé juste sous le titre, en texte</strong> (ni image ni contenu chargé après coup), avec deux vrais titres de bloc : « En résumé » et « L'essentiel à retenir ».</span></li>
+      <li><span><strong>Un seul texte, partout.</strong> Le résumé alimente aussi la meta description et la description des données structurées, que le thème génère.</span></li>
+      <li><span><strong>Chaque H2 prolonge le travail</strong> : une vraie question de recherche, puis une réponse directe de 1 à 2 phrases. Autant d'extraits possibles sur les questions voisines.</span></li>
+    </ol>
+    <div class="geo__previews">
+      <div class="serp">
+        <span class="serp__label">Schéma · extrait en paragraphe</span>
+        <div class="serp__q"><span>qu'est-ce que la TPM</span></div>
+        <p><mark>La TPM (Total Productive Maintenance) est une organisation qui transfère les gestes simples d'entretien vers la production.</mark> La TPM se lance par un seul pilier, la maintenance autonome, adossé au socle 5S.</p>
+        <div class="serp__src"><i></i><span>fichly.com › blogs › nos-articles</span></div>
+      </div>
+      <div class="serp">
+        <span class="serp__label">Schéma · extrait en liste</span>
+        <div class="serp__q"><span>TPM à retenir</span></div>
+        <ul><li>La TPM est un programme d'organisation, pas un type de maintenance.</li><li>Les huit piliers ne se lancent pas ensemble, les 5S d'abord.</li><li>La maintenance autonome est la porte d'entrée, en sept étapes.</li></ul>
+        <div class="serp__src"><i></i><span>fichly.com › blogs › nos-articles</span></div>
+      </div>
+      <div class="serp">
+        <span class="serp__label">Schéma · réponse d'un moteur IA</span>
+        <div class="serp__q"><span>par où commencer une TPM ?</span></div>
+        <p>Commencez par un seul pilier, la maintenance autonome, sur une ligne pilote, avec les 5S comme socle. La démarche s'arrête souvent quand plus personne ne relit les fiches remplies.</p>
+        <div class="serp__src"><i></i><span>Source citée : <a href="https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance" target="_blank" rel="noopener">fichly.com, TPM : par quoi commencer</a></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Plan de la structure V2, <em>bloc par bloc</em></h2>
+  <p>Chaque numéro correspond à une pastille de la maquette. La colonne « Contenu » dit qui remplit le bloc : le rédacteur dans le corps de l'article, un champ Shopify, ou le thème tout seul.</p>
+  <div class="plan-wrap">
+    <table class="plan">
+      <thead><tr><th scope="col">#</th><th scope="col">Bloc</th><th scope="col">À quoi il sert</th><th scope="col">Contenu (dans Shopify)</th><th scope="col">Aujourd'hui</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">Haut de page, géré par le gabarit</td></tr>
+        <tr><td><span class="n">1</span></td><td>En-tête</td><td>Situer l'article et prouver qui l'écrit : fil d'Ariane, catégorie, titre, chapeau, auteur, date de mise à jour, temps de lecture, partage.</td><td>Titre, extrait (chapeau), auteur, dates et tag principal. Le temps de lecture est calculé par le thème.</td><td>Date et auteur masqués, titre affiché en petit, pas de fil d'Ariane.</td></tr>
+        <tr><td><span class="n">2</span></td><td>Couverture</td><td>Un visuel reconnaissable dans le fil LinkedIn comme sur le blog, au format des fiches, avec le liseré.</td><td>Image de l'article, produite avec le même gabarit que les visuels LinkedIn. Texte alternatif obligatoire.</td><td>Image pleine largeur au-dessus du titre, texte incrusté, texte alternatif vide sur 12 articles.</td></tr>
+        <tr><td><span class="n">3</span></td><td>En résumé + L'essentiel</td><td>Être repris en extrait par les moteurs de recherche et cité par les moteurs IA (règles ci-dessus).</td><td>Deux métachamps : « Résumé » (texte, 40 à 60 mots) et « Essentiel » (liste de 4 à 6 points).</td><td>Les deux existent déjà, mais écrits dans le corps avec leur propre CSS, et précédés d'une introduction qui les répète.</td></tr>
+        <tr><td><span class="n">4</span></td><td>Sommaire qui suit la lecture</td><td>Se repérer dans un article de plus de 3 000 mots : collant sur ordinateur, repliable sur mobile, partie en cours surlignée dans sa couleur, temps restant. Liseré en tête.</td><td>Généré par le thème à partir des H2.</td><td>Liste écrite à la main, figée en haut de page.</td></tr>
+        <tr class="is-new"><td><span class="n">5</span></td><td>Produit du sommaire</td><td>Garder un produit visible pendant toute la lecture, sans couper le texte.</td><td>Premier produit du métachamp « Produits liés ».</td><td>Absent.</td></tr>
+        <tr class="grp"><td colspan="5">Corps de l'article, écrit par le rédacteur avec des composants fixes</td></tr>
+        <tr><td><span class="n">6</span></td><td>Question + réponse directe</td><td>Chaque partie a sa couleur, dans l'ordre du liseré (segment au-dessus du H2, pastille du sommaire). Le H2 est une question ; la première phrase y répond, en gras.</td><td>Corps : un H2, puis un paragraphe de classe « réponse ».</td><td>H2 déjà en questions, réponse souvent en fin de paragraphe.</td></tr>
+        <tr><td><span class="n">7</span></td><td>Définition</td><td>Isoler la définition citée par les lecteurs et par Google.</td><td rowspan="3">Corps : des blocs HTML courts avec une classe du thème, sans aucun style dans l'article. Un modèle à copier par composant.</td><td rowspan="3">Encadrés à bordure gauche, CSS recopié dans chaque article (quatre versions différentes), police Helvetica au lieu de celle du site.</td></tr>
+        <tr><td><span class="n">8</span></td><td>Figure légendée</td><td>Un schéma numéroté, avec légende et texte alternatif.</td></tr>
+        <tr><td><span class="n">9</span></td><td>Tableau</td><td>Comparer. Défile horizontalement sur mobile au lieu de déborder.</td></tr>
+        <tr class="is-new"><td><span class="n">10</span></td><td>Produit cité dans le texte</td><td>Un lien vers un produit devient une pastille avec sa couleur de catégorie et son prix.</td><td>Corps : un simple lien vers la page produit. Le thème lit le prix à jour dans la boutique.</td><td>Lien texte simple, sans prix ni visuel.</td></tr>
+        <tr><td><span class="n">11</span></td><td>Bon à savoir</td><td>Un contresens ou une précaution, un seul par section au plus.</td><td>Corps : bloc à classe du thème.</td><td>Encadré vert « note ».</td></tr>
+        <tr><td><span class="n">12</span></td><td>Test interactif</td><td>Faire agir le lecteur sur son propre atelier : c'est ce qu'un résumé d'IA ne remplace pas.</td><td>Composant du thème ; les questions et les règles sont écrites dans le corps.</td><td>Tableau statique à trois colonnes.</td></tr>
+        <tr><td><span class="n">13</span></td><td>Étapes numérotées</td><td>Une vraie séquence : l'ordre compte, on numérote.</td><td>Corps : une liste numérotée, un titre et deux phrases par étape.</td><td>Suite de H3 « Étape 1 », « Étape 2 »… sans repère visuel.</td></tr>
+        <tr><td><span class="n">14</span></td><td>Encart produit au bon moment</td><td>Proposer le produit à l'endroit précis où le lecteur en a besoin (ici, écrire sa gamme à l'étape 3).</td><td>Corps : un bloc qui désigne le produit ; titre, prix et lien viennent de la fiche produit. Bouton « Ajouter au panier » possible.</td><td>Un lien texte au milieu d'un paragraphe.</td></tr>
+        <tr><td><span class="n">15</span></td><td>Sur le terrain</td><td>La remarque de l'expert : l'expérience réelle qui distingue Fichly d'un article générique. Une ou deux par article.</td><td>Corps : une citation courte ; photo et rôle viennent de la fiche Auteur (Hugo ou Clément).</td><td>Absent en tant que bloc.</td></tr>
+        <tr><td><span class="n">16</span></td><td>Erreur fréquente / À faire</td><td>Remplacer les listes ❌ ✅ par des paires lisibles côte à côte.</td><td>Corps : une liste de paires.</td><td>Emojis dans le texte, sous cinq formes selon les articles.</td></tr>
+        <tr><td><span class="n">17</span></td><td>FAQ</td><td>Répondre aux questions que les internautes posent vraiment (encadré « Autres questions », moteurs IA), en accordéon.</td><td>Corps : questions et réponses, en texte. Google n'affiche plus de résultat enrichi FAQ : pas de balisage FAQ à attendre. Le thème génère les données structurées Article (auteur, dates, image).</td><td>Données structurées écrites à la main, avec des dates fausses sur 10 articles.</td></tr>
+        <tr><td><span class="n">18</span></td><td>Sources</td><td>Regrouper les normes et textes cités : un signal de sérieux pour les lecteurs et les moteurs.</td><td>Corps : une liste en fin d'article.</td><td>Liens dispersés dans le texte.</td></tr>
+        <tr class="grp"><td colspan="5">Fin d'article et zone commerciale, gérées par le gabarit</td></tr>
+        <tr><td><span class="n">19</span></td><td>Auteur</td><td>Établir la crédibilité, avec la même fiche partout. Encart avec le liseré en tête.</td><td>Métaobjet « Auteur » : photo, rôle, bio, LinkedIn. Sert aussi pour Clément.</td><td>Bio copiée dans chaque article ; photo cassée sur 7 articles.</td></tr>
+        <tr class="is-new"><td><span class="n">20</span></td><td>Les outils de l'article</td><td>Rassembler les produits utiles au sujet, avec le pack en option.</td><td>Métachamp « Produits liés » (liste de 3 produits) ; prix et liens à jour automatiquement.</td><td>Absent.</td></tr>
+        <tr class="is-new"><td><span class="n">21</span></td><td>Découvrir nos formations</td><td>Amener vers la Green Belt CPF, avec un encart animé qui montre le déroulé en 6 jours et les bénéfices.</td><td>Section du gabarit, identique sur tous les articles ; formation choisie dans les réglages du thème. Animation en code, sans vidéo : légère et lisible par les moteurs.</td><td>Un appel à l'action différent selon l'article : partenaires logiciels, Green Belt, formation et conseil, formulaire Tally.</td></tr>
+        <tr><td><span class="n">22</span></td><td>À lire aussi</td><td>Garder le lecteur sur le même thème.</td><td>Thème : trois articles qui partagent un tag.</td><td>Liste manuelle, plus les trois derniers articles du blog quel que soit le sujet.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Mise en place, <em>en cinq temps</em></h2>
+  <ol class="steps-setup">
+    <li><strong>Valider cette structure</strong>Blocs, ordre et composants, sur cette maquette.</li>
+    <li><strong>Construire le gabarit V2</strong>Dans une copie du thème : un gabarit d'article dédié, une feuille de style unique, le sommaire, la zone produits, le bloc formation et les données structurées générés.</li>
+    <li><strong>Créer les champs</strong>Métachamps Résumé, Essentiel et Produits liés ; métaobjet Auteur pour Hugo et Clément.</li>
+    <li><strong>Migrer un article pilote</strong>La TPM d'abord, comparée à l'actuelle, puis les 27 articles par script : on retire le CSS, les notes internes et les données structurées du corps.</li>
+    <li><strong>Publier et mesurer</strong>Search Console (extraits, données structurées, clics) et clics vers les produits et la Green Belt.</li>
+  </ol>
+</section>
+
+<script>
+(() => {
+  const frame = document.getElementById('frame');
+  const bar = document.getElementById('protoBar');
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hauteur de la barre de maquette : décale les éléments collants
+  const setBarH = () => root.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  setBarH();
+  new ResizeObserver(setBarH).observe(bar);
+
+  // Boutons de la barre
+  const pair = (a, b, on) => { a.setAttribute('aria-pressed', on); b.setAttribute('aria-pressed', !on); };
+  const annoOn = document.getElementById('btnAnnoOn'), annoOff = document.getElementById('btnAnnoOff');
+  annoOn.addEventListener('click', () => { frame.classList.add('show-anno'); pair(annoOn, annoOff, true); });
+  annoOff.addEventListener('click', () => { frame.classList.remove('show-anno'); pair(annoOn, annoOff, false); });
+  const desk = document.getElementById('btnDesk'), mob = document.getElementById('btnMob');
+  desk.addEventListener('click', () => { frame.classList.remove('is-mobile'); pair(desk, mob, true); });
+  mob.addEventListener('click', () => { frame.classList.add('is-mobile'); pair(desk, mob, false); });
+
+  // Sommaire : ouvert en colonne sur grand écran, repliable sinon
+  const toc = document.getElementById('toc');
+  let wide = null;
+  new ResizeObserver(() => {
+    const w = frame.clientWidth >= 980;
+    if (w !== wide) { wide = w; toc.open = w; }
+  }).observe(frame);
+  toc.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (!wide) toc.open = false; }));
+
+  // Section en cours
+  const links = [...toc.querySelectorAll('a')];
+  const heads = links.map(a => document.getElementById(a.hash.slice(1)));
+  const current = () => {
+    const line = bar.offsetHeight + 120;
+    let idx = 0;
+    heads.forEach((h, i) => { if (h.getBoundingClientRect().top <= line) idx = i; });
+    links.forEach((a, i) => a.classList.toggle('is-current', i === idx));
+  };
+
+  // Progression de lecture : le liseré se découvre, et le temps restant
+  const content = document.querySelector('.content');
+  const prog = document.getElementById('progress'), tocBar = document.getElementById('tocBar'), left = document.getElementById('tocLeft');
+  const TOTAL = {{READ}};
+  const progress = () => {
+    const r = content.getBoundingClientRect();
+    const view = window.innerHeight - bar.offsetHeight;
+    const p = Math.min(1, Math.max(0, (bar.offsetHeight + view * 0.4 - r.top) / r.height));
+    prog.style.width = ((1 - p) * 100).toFixed(1) + '%';
+    tocBar.style.width = (p * 100).toFixed(1) + '%';
+    const rest = Math.ceil(TOTAL * (1 - p));
+    left.textContent = rest > 0 ? rest + ' min restantes' : 'Lecture terminée';
+  };
+  let ticking = false;
+  const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { current(); progress(); ticking = false; }); };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  // Copier le lien de l'article
+  const copy = document.getElementById('copyLink');
+  const url = 'https://www.fichly.com/blogs/nos-articles/tpm-total-productive-maintenance';
+  copy.addEventListener('click', () => {
+    const label = copy.querySelector('span');
+    const done = t => { label.textContent = t; setTimeout(() => { label.textContent = 'Copier le lien'; }, 2200); };
+    try { navigator.clipboard.writeText(url).then(() => done('Lien copié'), () => done(url)); } catch (e) { done(url); }
+  });
+
+  // Test en cinq questions
+  const form = document.getElementById('testForm');
+  const items = [...form.querySelectorAll('li')];
+  const result = document.getElementById('testResult'), score = document.getElementById('testScore'), verdict = document.getElementById('testVerdict');
+  const update = () => {
+    let yes = 0, answered = 0;
+    const vals = items.map(li => {
+      const v = (li.querySelector('input:checked') || {}).value || '';
+      li.dataset.answer = v;
+      if (v) answered++;
+      if (v === 'oui') yes++;
+      return v;
+    });
+    score.textContent = yes + '/5';
+    let state, text;
+    if (vals[4] === 'non') { state = 'ko'; text = "Pas encore prêt. La relecture des fiches ne se compense pas : nommez la personne et posez le rendez-vous avant le lancement."; }
+    else if (answered < 5) { state = ''; text = 'Encore ' + (5 - answered) + ' question' + (5 - answered > 1 ? 's' : '') + ' pour obtenir le verdict.'; }
+    else if (yes >= 4) { state = 'ok'; text = 'Vous pouvez lancer, sur une ligne pilote et une seule.'; }
+    else { state = 'wait'; text = "Traitez d'abord les manques : ce n'est pas un retard, c'est l'économie d'un échec."; }
+    result.dataset.state = state;
+    verdict.textContent = text;
+  };
+  form.addEventListener('change', update);
+  form.addEventListener('submit', e => e.preventDefault());
+  update();
+
+  // Encart animé Green Belt : la pièce avance de jour en jour, puis les bénéfices apparaissent.
+  // Rendu déterministe draw(t) sur une boucle de 14 s, comme les fiches LinkedIn.
+  const DAYS = [
+    ['Jour 1 · Define', "Cadrer le projet : charte, périmètre, SIPOC et voix du client."],
+    ['Jour 2 · Measure', 'Mesurer le processus : VSM, collecte de données, indicateurs.'],
+    ['Jour 3 · Analyze', 'Analyser les causes : Ishikawa, 5 pourquoi, Pareto.'],
+    ['Jour 4 · Improve', "Améliorer : 5S, SMED, Kanban, plan d'action."],
+    ['Jour 5 · Control', 'Pérenniser : standards, A3, pilotage de la performance.'],
+    ['Jour 6 · Certification', 'Soutenance de votre projet et certification RS7114.'],
+  ];
+  const motion = document.getElementById('gbMotion');
+  const stops = [...motion.querySelectorAll('.gb-stop')];
+  const chips = [...motion.querySelectorAll('.gb-chips span')];
+  const token = document.getElementById('gbToken'), railOn = document.getElementById('gbRailOn');
+  const dayN = document.getElementById('gbDayN'), dayT = document.getElementById('gbDayT'), count = document.getElementById('gbCount');
+  const CYCLE = 14, START = 0.5, STEP = 1.35, MOVE = 0.45, CHIPS = 8.2, FADE = 13.2;
+  const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const clamp = v => Math.min(1, Math.max(0, v));
+  const pos = i => (i + 0.5) / 6 * 100;
+  let shown = -1;
+  const draw = t => {
+    let f = 0; // position de la pièce, en index de jour (0 à 5)
+    for (let i = 1; i < 6; i++) { const a = START + i * STEP; f = t >= a ? i : t >= a - MOVE ? i - 1 + ease(clamp((t - (a - MOVE)) / MOVE)) : f; }
+    const x = pos(f);
+    token.style.left = x + '%';
+    railOn.style.width = 'calc(' + (x - pos(0)) + '%)';
+    const day = Math.round(f);
+    const reset = t >= FADE + 0.2;
+    stops.forEach((s, i) => s.classList.toggle('is-on', !reset && i <= f + 0.01));
+    if (day !== shown) { shown = day; dayN.textContent = DAYS[day][0]; dayT.textContent = DAYS[day][1]; count.textContent = 'Jour ' + (day + 1) + '/6'; }
+    const fade = t >= FADE ? 1 - clamp((t - FADE) / 0.6) : 1;
+    chips.forEach((c, i) => {
+      const p = ease(clamp((t - CHIPS - i * 0.45) / 0.4));
+      c.style.opacity = (p * fade).toFixed(3);
+      c.style.transform = 'translateY(' + ((1 - p) * 8).toFixed(1) + 'px)';
+    });
+    token.style.opacity = railOn.style.opacity = fade;
+  };
+  if (reduce) {
+    motion.classList.add('is-static');
+    draw(CHIPS + 3);
+  } else {
+    let visible = false, t0 = null, raf = 0;
+    const loop = now => {
+      if (t0 === null) t0 = now;
+      draw(((now - t0) / 1000) % CYCLE);
+      raf = visible ? requestAnimationFrame(loop) : 0;
+    };
+    new IntersectionObserver(es => {
+      visible = es[0].isIntersecting;
+      if (visible && !raf) raf = requestAnimationFrame(loop);
+    }).observe(motion);
+    draw(CHIPS + 3); // état complet tant que l'encart n'est pas à l'écran
+  }
+})();
+</script>
