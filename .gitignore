@@ -1,3 +1,8 @@
 controle/
 node_modules/
 articles-v2/sauvegardes/
+
+# Vidéos HyperFrames : copie de l article source et mémoire locale, hors du dépôt public
+videos/*/capture/
+videos/*/.media/
+videos/*/snapshots/
