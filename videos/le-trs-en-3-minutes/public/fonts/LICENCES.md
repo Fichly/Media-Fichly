@@ -1,4 +1,4 @@
 # Polices
 
-Shrikhand, Libre Baskerville et Space Grotesk, téléchargées depuis Google Fonts (sous-ensemble latin) le 1er octobre 2026.
-Toutes trois sont distribuées sous SIL Open Font License 1.1 : https://openfontlicense.org
+Poppins (400, 500, 600, 700, 800, sous-ensemble latin), reprise de `assets/fonts/` du dépôt.
+SIL Open Font License 1.1 : voir `OFL-Poppins.txt`.

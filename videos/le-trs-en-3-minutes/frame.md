@@ -1,275 +1,153 @@
 ---
-version: alpha
-name: Bold Poster — Frame (video / frame layer)
+version: 1
+name: Fichly — Frame (vidéo 16:9)
 description: >
-  Video-first companion to Bold Poster's design.md. The unit is the frame (1920×1080). Atoms are
-  identical and sacred — the four-color palette (white / brown-black ink / tomato red / off-white),
-  the three-face stack (Shrikhand display tilted at poster scale, Libre Baskerville serif body,
-  Space Grotesk mono chrome), the stacked text-shadow on red display, the 3px+1.5px double-border
-  grid, red leftbar cards, red em-dash bullets, and the red progress bar. Composition + frame scale
-  rewritten. Motion out of scope.
-unit: the frame — 1920×1080 primary; 9:16 and 1:1 documented
-principle: atoms are sacred · composition is free · numbers come from the script
+  Direction artistique Fichly transposée au cadre vidéo 1920×1080. Source : le gabarit des fiches
+  LinkedIn Fichly (`outils/gabarit.js`, palette C, composants title / chapeau / pill / card / check /
+  cross / badgeNum / encart / ruban) et les visuels livrés (`livrables/*.png`). Les atomes sont repris
+  tels quels ; la composition est réécrite pour le 16:9. Le mouvement est hors du champ de ce fichier.
+unit: le cadre — 1920×1080 ; 9:16 décrit plus bas
+principle: atomes sacrés · composition libre · les chiffres viennent du script
 
 colors:
-  bg: "#FFFFFF"
-  dark: "#1C1410"
-  red: "#D8000F"
-  light: "#F5F2EF"
+  canvas: "#f3f3f3"        # fond papier (gabarit : rect #f3f3f3 + paper.png)
+  blue: "#4a4aa0"          # couleur de marque : titres, bandeau, pastilles numérotées, machine
+  ink: "#23235a"           # texte courant
+  white: "#ffffff"
+  card: "#fdfdfb"          # fond des cartes
+  line: "#e2e2ee"          # filet des cartes
+  green: "#8cc978"         # ok, temps utile
+  yellow: "#e6b839"        # cartons, famille performance
+  red: "#f16969"           # ko, pertes, famille disponibilité
+  violet: "#aa76b2"        # famille qualité
+  lightBlue: "#74a3d6"
+  teal: "#75bec0"
+  pGreen: "#e6f3df"        # bandes pastel
+  pRed: "#fde6e6"
+  pLav: "#ececf5"
+  pYellow: "#f8f3d9"
+  tGreen: "#2f5a1f"        # texte sur bande pastel
+  tRed: "#a83434"
+  tYellow: "#7a5806"
+  ribbon: ["#f16969", "#75bec0", "#aa76b2", "#8cc978", "#e0cf35", "#74a3d6"]
 
 typography:
-  # — reading + chrome ramp —
-  body:    { fontFamily: "Libre Baskerville", cqw: 0.85, weight: 400, lineHeight: 1.75, color: "dark" }
-  body-cell:{ fontFamily: "Libre Baskerville", cqw: 0.7, weight: 400, lineHeight: 1.55 }
-  label:   { fontFamily: "Space Grotesk", px: 10, weight: 600, tracking: "2px", upper: true, color: "red" }
-  bullet-body:{ fontFamily: "Space Grotesk", cqw: 0.62, weight: 400, lineHeight: 1.45 }
-  # — display / hero ramp (Shrikhand 400, tilted) —
-  card-title:{ fontFamily: "Shrikhand", cqw: 1.9, weight: 400, lineHeight: 1.1, color: "dark" }
-  cell-number:{ fontFamily: "Shrikhand", cqw: 2.7, weight: 400, lineHeight: 1.0, color: "red" }
-  section-header:{ fontFamily: "Shrikhand", cqw: 3.3, weight: 400, lineHeight: 1.0, color: "dark" }
-  red-quote:{ fontFamily: "Shrikhand", cqw: 4.7, weight: 400, lineHeight: 1.15, color: "bg", shadow: "stacked" }
-  hero-title-bottom:{ fontFamily: "Shrikhand", cqw: 10.4, weight: 400, lineHeight: 0.9, color: "dark", rotate: "2deg" }
-  hero-title:{ fontFamily: "Shrikhand", cqw: 11.5, weight: 400, lineHeight: 0.88, color: "dark" }
-  hero-title-red:{ fontFamily: "Shrikhand", cqw: 13.5, weight: 400, lineHeight: 0.85, color: "red", rotate: "-4deg" }
-  close-big:{ fontFamily: "Shrikhand", cqw: 13.5, weight: 400, lineHeight: 0.88, color: "red", rotate: "-5deg" }
-  stat-big:{ fontFamily: "Shrikhand", cqw: 22.0, weight: 400, lineHeight: 0.82, color: "red", rotate: "-6deg" }
-
-spacing:
-  pad-slide: "3cqw 3.6cqw"
-  gap-grid: "1.5cqw 2cqw"
+  # Une seule famille : Poppins (400 / 500 / 600 / 700 / 800), polices locales public/fonts/.
+  title:      { fontFamily: "Poppins", cqw: 4.6, weight: 800, lineHeight: 1.0, color: "blue" }
+  title-band: { fontFamily: "Poppins", cqw: 4.6, weight: 800, lineHeight: 1.0, color: "white", on: "blue band" }
+  hero:       { fontFamily: "Poppins", cqw: 8.0, weight: 800, lineHeight: 1.0, color: "blue" }
+  stat:       { fontFamily: "Poppins", cqw: 9.5, weight: 800, lineHeight: 1.0, color: "family text tone" }
+  chapeau:    { fontFamily: "Poppins", cqw: 1.75, weight: 500, lineHeight: 1.35, color: "blue" }
+  card-title: { fontFamily: "Poppins", cqw: 2.1, weight: 700, lineHeight: 1.2, color: "ink" }
+  body:       { fontFamily: "Poppins", cqw: 1.55, weight: 500, lineHeight: 1.4, color: "ink" }
+  band-text:  { fontFamily: "Poppins", cqw: 1.75, weight: 700, lineHeight: 1.35, color: "family text tone" }
+  pill:       { fontFamily: "Poppins", cqw: 1.4, weight: 700, lineHeight: 1.0 }
+  chute:      { fontFamily: "Poppins", cqw: 2.2, weight: 700, lineHeight: 1.3, color: "blue" }
+  label:      { fontFamily: "Poppins", cqw: 1.05, weight: 600, lineHeight: 1.0, color: "ink", note: "heures du ruban, légendes ; jamais porteur de sens seul" }
 
 components:
-  progress-bar:
-    backgroundColor: "{colors.red}"
-    size: "0.5cqw tall, bottom edge, width grows with index"
-    description: "The most prominent chrome."
-  hero-title-stack:
-    typography: "{typography.hero-title} + {typography.hero-title-red} + {typography.hero-title-bottom}"
-    transform: "≥4 tilt (−4°/+2°), ≥1 line in {colors.red}"
-    description: "A 3-line Shrikhand composition — the signature opener."
-  stat-big:
-    typography: "{typography.stat-big}"
-    color: "{colors.red} (or {colors.bg} on red with stacked shadow)"
-    transform: "rotate(-6deg)"
-    description: "Hero numeral at poster scale."
-  fin-grid:
-    border: "0.3cqw solid {colors.dark} outer"
-    rule: "0.15cqw solid {colors.dark} inner (touching at intersections)"
-    rounded: "0"
-    typography: "{typography.cell-number} ({colors.red}) + {typography.label} + {typography.body-cell}"
-    description: "The double-border tabular signature."
-  red-leftbar-card:
-    borderLeft: "4px solid {colors.red}"
-    padding: "0 0 0 ~1cqw"
-    rounded: "0"
-    shadow: "none"
-    typography: "{typography.card-title} + {typography.body} + red em-dash bullets"
-    description: "Editorial card cantilevered off a red left rule — no outline."
-  red-panel:
-    backgroundColor: "{colors.red}"
-    textColor: "{colors.bg}"
-    description: "Full-bleed statement surface; display carries the stacked text-shadow."
-  dark-panel:
-    backgroundColor: "{colors.dark}"
-    textColor: "{colors.bg}"
-    description: "Full-bleed dark statement surface; red accents."
-  stacked-text-shadow:
-    shadow: "2px 2px 0 rgba(28,20,16,.25), 4px 4px 0 rgba(28,20,16,.2), 6px 6px 0 rgba(28,20,16,.15)"
-    appliesTo: "red display text on red panels only"
-    description: "The ONLY shadow in the system — text-shadow, not box-shadow."
-  bullet:
-    marker: "red em-dash (—) or round (•) glyph at absolute-left"
-    color: "{colors.red}"
-    description: "No default disc bullets; capped at three."
+  title-block:
+    description: "La signature Fichly : ligne 1 en bleu 800, ligne 2 en blanc 800 dans un bandeau bleu (rx 0,75cqw) dont la largeur suit le texte (+2,5cqw)."
+  chapeau:
+    description: "Une ligne bleue 500 sous le titre."
+  card:
+    fill: "{colors.card}"
+    border: "0,1cqw solid {colors.line}"
+    radius: "1,25cqw (24 px à 1920)"
+    description: "La carte blanche des fiches : le plateau sur lequel vivent les schémas (ici, le tableau d'enquête)."
+  band:
+    radius: "1,25cqw"
+    variants: "pRed + tRed (ko, pertes) · pGreen + tGreen (ok) · pLav + ink (règle, définition) · pYellow + tYellow (performance)"
+    description: "Bande pastel pleine largeur ; une pastille ✓ / ✗ ou numérotée à gauche, texte 700."
+  pill:
+    radius: "hauteur / 2"
+    description: "Étiquette pastel, texte 700 de la même famille, icône ✓ / ✗ facultative. Variante pleine : fond bleu, texte blanc (« La règle à garder en tête »)."
+  badge-check: { fill: "{colors.green}", glyph: "✓ blanc", description: "Pastille ronde ok." }
+  badge-cross: { fill: "{colors.red}", glyph: "✗ blanc", description: "Pastille ronde ko." }
+  badge-num:   { fill: "{colors.blue}", glyph: "chiffre blanc 700", description: "Pastille ronde numérotée." }
+  machine:
+    description: "Picto machine du gabarit : corps bleu arrondi, écran blanc avec jauge verte, deux voyants (bleu clair, vert), touches blanches translucides."
+  carton: { fill: "{colors.yellow}", description: "Carré jaune arrondi avec un trait blanc : une pièce / un lot." }
+  hand-arrow:
+    description: "Flèche ou soulignement tracé à la main (trait 3 px, bouts ronds) : flèche bleue, double soulignement vert sous le lien."
+  ribbon:
+    description: "Les six couleurs du ruban, pleine largeur, 18 px en bas du cadre. Fixe, sur tous les cadres."
+  logo:
+    description: "Logo fichly en bas à droite, au-dessus du ruban. Fixe."
+
+families:
+  # Codage couleur des trois pertes du TRS, constant sur toute la vidéo
+  disponibilite: { accent: "{colors.red}", band: "{colors.pRed}", text: "{colors.tRed}" }
+  performance:   { accent: "{colors.yellow}", band: "{colors.pYellow}", text: "{colors.tYellow}" }
+  qualite:       { accent: "{colors.violet}", band: "{colors.pLav}", text: "{colors.ink}", numeral: "{colors.violet}" }
+  utile:         { accent: "{colors.green}", band: "{colors.pGreen}", text: "{colors.tGreen}" }
 ---
 
-# Bold Poster — Frame (video / frame layer)
+# Fichly — Frame (vidéo 16:9)
 
 ## Overview
 
-Bold Poster at frame scale is a **populist editorial poster** — vintage Italian sports-magazine
-display, classical serif body, one saturated tomato red, grids ruled in ink. Every frame should
-feel _printed_: heavy display type at poster scale, locked to one red accent, on a white/off-white
-sheet (or a full red/dark statement panel), with decoration kept to a strict minimum.
-
-The voice is a three-face stack: **Shrikhand** (heavy slab-script, weight 400 only, routinely
-tilted −6°..+2°) carries every hero title, section header, stat, and card title; **Libre
-Baskerville** (literary serif) carries every body paragraph — it's what makes the system feel
-printed; **Space Grotesk** (uppercase, 2–3px tracked) is chrome only — labels, eyebrows, counters,
-bullet bodies. The plane is flat; the _only_ shadow is the stacked text-shadow on red display.
-
-**Key characteristics at frame scale:**
-
-- **Four colors only** — white / brown-black ink / tomato red / off-white. Red is the lone accent.
-- **Shrikhand display, tilted** (−6° stat, −5° close, −4° hero-red, +2° hero-bottom) — the signature movement.
-- **Libre Baskerville serif body** (line 1.75); **Space Grotesk** chrome (uppercase tracked).
-- **Double-border grids** (3px outer + 1.5px inner ink); **red leftbar cards**; **red em-dash bullets** (max 3).
-- **Stacked text-shadow** on red display — the only shadow; flat plane otherwise; square corners.
-- **Red progress bar** at the bottom edge of every frame.
+La vidéo parle comme une fiche Fichly : un titre en deux temps (bleu, puis blanc dans le bandeau
+bleu), une phrase bleue dessous, puis un schéma simple posé sur une carte blanche, sur fond papier.
+Les verdicts arrivent en bandes pastel avec leur pastille ✓ ou ✗. Couleurs franches mais douces,
+coins arrondis, aucune ombre, une seule famille de caractères (Poppins). Le ton est celui de la
+marque : du jeu, du terrain, zéro PowerPoint ronflant.
 
 ## The Frame
 
-### Frame Craft Bar
-
-Three eyeball tests gate every frame before any structural check:
-
-- **Squint** — **one display moment dominates** at 3–6× everything else (the hero stack, `stat-big`, or `close-big`); nothing competes.
-- **Silence** — statement frames reserve **~50–60% negative space**; the **financial grid is the one dense exception**.
-- **Restraint** — **four colors only**, red the lone accent; one display moment per frame; the stacked text-shadow on red is the only shadow; bullets capped at three.
-- **Reference** — aim at a **vintage Italian sports-magazine cover / mid-century European annual report**; failure looks like a **rounded, soft-shadowed multi-accent slide**.
-
-- **Primary:** 1920×1080 (16:9). Display authored in **`cqw`** (`px ÷ 1920 × 100 = cqw`).
-- **Vertical:** 1080×1920 (9:16). **Square:** 1080×1080 (1:1).
-- **Safe area:** `pad-slide` ~3cqw — deliberately tight so the poster type crowds the frame.
-
-**The container law (load-bearing).** Every frame ground sets `container-type: size`; ALL
-frame-relative units are `cqw`/`cqh` against it — never `vw`. Borders stay px; rotation transforms hold.
+- **Format** : 1920×1080 ; tailles en `cqw` (px ÷ 1920 × 100). Le fond est `canvas` + `paper.png`
+  étiré en `cover`.
+- **Marges** : 3,2cqw à gauche et à droite, 3,4cqw en haut ; la zone utile s'arrête au-dessus du
+  ruban (18 px) et du logo (bas droite).
+- **Chrome fixe** : ruban six couleurs en bas, logo fichly en bas à droite. Rien d'autre.
+- **Un seul moment fort par cadre** : un titre, un chiffre ou un verdict domine ; le reste est à
+  au moins trois fois moins de surface.
 
 ## Colors
 
-Tokens identical to the source. `{colors.bg}` white is the default ground; `{colors.dark}` is body,
-borders, headers; `{colors.red}` is the only accent — every numeral, section rule, eyebrow,
-leftbar, bullet, progress bar, and the full statement-panel ground. `{colors.light}` off-white
-stripes alternating panels. **No fifth color** (no green/blue/yellow); categorical difference comes
-from position, label, and tilt. Red is never body text, never a tint, never an untexted fill.
+`blue` porte la marque (titres, bandeau, pastilles numérotées, machine). `ink` est le texte
+courant. Les pastels ne servent qu'aux bandes et pilules, toujours avec leur ton de texte (`tRed`
+sur `pRed`, `tGreen` sur `pGreen`, `tYellow` sur `pYellow`, `ink` sur `pLav`). Le codage des
+familles de pertes ne change jamais : disponibilité rouge, performance jaune, qualité violet, temps
+utile vert. Les couleurs du ruban ne servent pas de texte.
 
 ## Typography
 
-Two ramps. The **reading/chrome ramp** (Baskerville body 0.85cqw, Space Grotesk labels in px)
-carries copy + chrome; the **display ramp** (Shrikhand `section-header` 3.3cqw → `stat-big` 22cqw)
-carries every statement and numeral.
-
-- **Legibility floor:** any load-bearing line ≥ **1.4cqw**; mono labels are chrome only.
-- **Fit-to-measure:** size the headline to its length. Cap the block at **≤ 78cqw**; ≤2 words → `stat-big`/`hero-title-red`; 3–4 → `hero-title`; 5+ → `section-header`. The hero is a stacked 3-line composition.
-- **Shrikhand is weight 400, tilted on statement/hero elements, red on numerals**; **Baskerville body at line ≥1.5**; **Space Grotesk chrome uppercase, 2–3px**. Inline `<strong>` switches face to Space Grotesk 600. No italic display, no untilted red hero.
+Poppins uniquement. Titres 800, chiffres 800, texte de bandes et pilules 700, chapeau et texte
+courant 500. Aucune ligne porteuse de sens sous 1,4cqw. Les chiffres affichés sont ceux du script ;
+la phrase que dit la voix n'est jamais recopiée à l'écran (mots-clés et chiffres seulement).
 
 ## Depth & Surface
 
-Flat plane. Depth from:
-
-- **Heavy borders** — 3px+1.5px double-border grids, 2px global-card outline, 4px red leftbar rules.
-- **Surface inversion** — full-bleed red or dark statement panels.
-- **Tilt** — rotated Shrikhand breaks the baseline for perceived dimension.
-- **The single shadow** — stacked text-shadow on red display only (text-shadow, three steps).
-
-**Ceiling:** no box-shadow, no rounded surface (square corners; only the hint pill is 4px), no gradient.
-
-## Shapes
-
-- **0 radius everywhere** except the hint pill (4px). Cards, cells, panels, callouts — sharp rectangles.
-
-## Components
-
-- **hero-title-stack** — the 3-line tilted opener. **stat-big** — the poster numeral.
-- **fin-grid** — the double-border tabular signature. **red-leftbar-card** — the cantilevered editorial card.
-- **red-panel / dark-panel** — statement surfaces. **stacked-text-shadow** — the one shadow.
-- **bullet** — red em-dash (max 3). **progress-bar** — the red bottom strip.
-
-## Frame Treatments
-
-> Recipe: ground · register · composes · focal · chrome · accent · silence · Fixed/Free · density.
-> One display moment per frame; statement frames reserve massive negative space.
-
-### 1 · Hero Stack (identity · move: 3-line tilted stack · left)
-
-**Ground** white. **Composes** hero-title-stack, label, body tagline, progress-bar. **Focal** a
-3-line Shrikhand stack (e.g. ink / red-tilted / paper) — one red line, one+ tilted. **Chrome** mono
-eyebrow + Baskerville tagline; bottom progress bar + counter. **Accent** the red line. **Silence**
-right half open. **Fixed** Shrikhand 400, ≥1 tilt + ≥1 red, square. **Free** the words, line sizes.
-**Density** low.
-
-### 2 · Hero Stat (statement · move: poster numeral · red panel · centered)
-
-**Ground** full `{colors.red}`. **Composes** stat-big, label, body sub. **Focal** a `stat-big`
-numeral rotated −6° in white with the stacked shadow, centered, with a mono label above + Baskerville
-sub below. **Accent** the ink stacked-shadow on white. **Silence** ~60%. **Fixed** white-on-red +
-stacked shadow, −6° tilt. **Free** the figure (from script), label. **Density** low.
-
-### 3 · Financial Grid (data · move: double-border matrix · the dense frame)
-
-**Ground** white, `pad-slide`. **Composes** label, section-header, fin-grid. **Focal** a 3px-outer/
-1.5px-inner ink grid of cells (red Shrikhand numeral + mono label + Baskerville body). **Chrome** mono
-eyebrow; progress bar. **Accent** the red numerals. **Silence** tight — the density exception.
-**Fixed** double-border, red numerals, serif body. **Free** figures (from script), labels. **Density** dense-exception.
-
-### 4 · Pull Quote (quote · move: tilted/stacked display · red panel · left)
-
-**Ground** full `{colors.red}`. **Composes** red-quote, Baskerville cite. **Focal** a 2-line Shrikhand
-quote in white with the stacked shadow; a Baskerville cite beneath. **Accent** the stacked shadow.
-**Silence** ~50%. **Fixed** white-on-red + stacked shadow. **Free** quote, cite. **Density** low.
-
-### 5 · Editorial Cards (content · move: red leftbar cards · left)
-
-**Ground** white (or alternating off-white stripes). **Composes** label, section-header, 2–3×
-red-leftbar-card. **Focal** cards cantilevered off 4px red rules — Shrikhand title + Baskerville body
-
-- red em-dash bullets (max 3). **Accent** the red left rules + bullets. **Silence** moderate. **Fixed**
-  4px red leftbar, em-dash bullets, no outline. **Free** card content. **Density** standard.
-
-### 6 · Closing Statement (closer · move: tilted close-big · centered/left)
-
-**Ground** white or `{colors.dark}`. **Composes** close-big, label, body sub, progress-bar. **Focal**
-a Shrikhand `close-big` (rotated −5°, red) sign-off; mono eyebrow + Baskerville contact line. **Accent**
-the red tilted title. **Silence** ~60%. **Fixed** −5° tilt, red close-big. **Free** sign-off, contact.
-**Density** low.
+À plat. La profondeur vient de la carte blanche sur papier et des bandes pastel. Pas d'ombre
+portée, pas de dégradé, pas de contour épais (filet `line` 2 px sur les cartes).
 
 ## Composition Rules
 
 ### Do
 
-- Stack hero titles in 3 Shrikhand lines — at least one tilted, at least one red.
-- Make every numeral **red Shrikhand**; tilt statement display **−5° to −6°**.
-- Set eyebrows in **Space Grotesk 600 uppercase, 2–3px**, red; body in **Baskerville, line 1.75**.
-- Build data grids with the **3px outer + 1.5px inner double border**; use red leftbar cards elsewhere.
-- Use **red em-dash bullets, capped at three**; apply the stacked text-shadow on red display.
-- One display moment per frame; reserve negative space on statement frames.
+- Ouvrir les cadres clés sur le bloc titre Fichly (ligne bleue + bandeau blanc).
+- Poser les schémas sur une carte blanche arrondie.
+- Dire ok / ko avec les pastilles ✓ vertes et ✗ rouges, dans des bandes pastel.
+- Garder le codage couleur des familles de pertes sur toute la vidéo.
+- Laisser respirer : 40 % de vide au moins sur les cadres de verdict.
 
 ### Don't
 
-- No second accent color; no rounded corners (square only, save the hint pill).
-- No drop shadow — the stacked text-shadow on red is the only one.
-- No font substitutes; no Shrikhand body, no Baskerville labels, no Space Grotesk headlines.
-- No default disc bullets; no untilted red statement display.
-- Don't crowd a statement frame; don't blow a long line edge-to-edge (step down).
+- Pas d'autre police que Poppins, pas de couleur hors palette.
+- Pas d'ombre, pas de dégradé, pas de coin carré sur les cartes et bandes.
+- Pas de puces rondes par défaut : pastilles ✓ / ✗ / numérotées.
+- Pas de photo d'usine, pas d'icône générique : les pictos du gabarit (machine, carton).
 
 ## Aspect-Ratio Behavior
 
-| Treatment       | 16:9                      | 9:16                     | 1:1                  |
-| --------------- | ------------------------- | ------------------------ | -------------------- |
-| Hero Stack      | stack left, tagline below | stack centered, taller   | stack, tagline below |
-| Hero Stat       | numeral centered          | numeral centered, taller | centered             |
-| Financial Grid  | 3 cells across            | 2 across / stacked       | 2×2                  |
-| Pull Quote      | quote left                | quote stacked            | centered             |
-| Editorial Cards | 2–3 across                | stacked                  | stacked              |
-| Closing         | close-big centered        | close-big stacked        | centered             |
+| Élément | 16:9 | 9:16 |
+| --- | --- | --- |
+| Bloc titre | en haut à gauche | en haut, plein largeur, 2 lignes max |
+| Carte schéma | pleine largeur sous le titre | pleine largeur, schéma empilé |
+| Bandes ✓ / ✗ | une à trois, pleine largeur ou côte à côte | empilées |
+| Chiffre fort | à droite du schéma | sous le schéma |
 
-`pad-slide` stays tight on the short edge; re-step display so the line stays ≤78cqw above the floor.
-Tilts hold; the progress bar spans the bottom on every ratio.
+## Numerals & Claims
 
-## Approved Entities
-
-No real customers, logos, or vendors are defined in the source — render any such mark as a
-placeholder. The system supplies type, one red, and ink rules, not brands.
-
-## Numerals & Claims (hard rule)
-
-Never invent figures, financials, percentages, or dates at frame scale. Render slots as `— figure —`,
-`{metric}`, `+NN%`. Fin-grid cells and stat-big especially carry placeholders until the script
-supplies them. Catalogue numbers / progress are decorative.
-
-## Pre-Render Self-Audit
-
-- **Squint** — one display moment dominates; nothing competes.
-- **Silence** — statement frames reserve ~50–60% negative space; only the fin-grid runs dense.
-- **Color** — four colors only; red is the lone accent; no red body text.
-- **Type** — Shrikhand 400 tilted on statements, red numerals, fit-to-measure; Baskerville body line 1.75; mono chrome uppercase 2–3px; ≥1.4cqw floor.
-- **Depth** — flat; the stacked text-shadow on red display is the only shadow; square corners.
-- **Bullets** — red em-dash, capped at three.
-- **Fabrication** — every numeral traces to the script, else placeholder.
-
-## Known Gaps
-
-- **Motion intentionally out of scope.** frame.md specifies composition only; the source's 550ms slide transitions are deck mechanics.
-- **Shrikhand + Libre Baskerville + Space Grotesk via Google Fonts.** CJK: Noto Serif SC 900/400 + Noto Sans SC; Shrikhand's slab-script has no Hanzi equal — keep tilts + red + double-borders to carry the identity.
-- **9:16 / 1:1 are guidance**; verify the one big line ≤78cqw per ratio and that tilts don't clip.
-- Grids, leftbar cards, and the stacked shadow are CSS-only; no external imagery is required.
+Aucun chiffre inventé : tous viennent du cas de référence de l'article (voir `BRIEF.md`).

@@ -85,9 +85,9 @@ Les nombres sont écrits en toutes lettres dans le texte parlé pour fixer la pr
 
     Affaire classée. Le TRS, c'est le temps utile divisé par le temps requis. Il ne juge pas les équipes : il retrouve le temps perdu, et vous dit où chercher en premier.
 
-## Line 12 — Le dossier complet (Frame 12)
+## Line 12 — Se former avec Fichly (Frame 12)
 
-**Time:** 167 – 177 s
-**Delivery:** Invitation simple, sans emphase.
+**Time:** 167 – 182 s
+**Delivery:** Invitation chaleureuse, deux temps nets (la formation, puis les decks), sans emphase commerciale.
 
-    Le calcul complet et les six grandes pertes vous attendent dans notre article, sur fichly point com.
+    Pour aller plus loin, formez-vous : notre formation Lean Green Belt est éligible au CPF. Et pour garder les outils sous la main, nos decks de fiches vous suivent sur le terrain. Tous les liens sont en description.

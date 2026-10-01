@@ -17,16 +17,18 @@ voice: d3AXX0BlgJHYFCuH9X88
 
 « Le TRS en 3 minutes » : une vidéo YouTube pédagogique et ludique qui explique ce qu'est le TRS et en quoi il consiste, en voix off (Emilie). Parti pris retenu : **L'enquête**. La machine tourne toute la journée, pourtant il manque plus de 3 heures : où sont-elles passées ? Trois témoins (disponibilité, performance, qualité), une loupe sur les micro-arrêts que personne ne déclare, un verdict à 77 %, et la leçon : c'est la décomposition, pas le chiffre, qui dit où agir. Accroche validée : « Cette machine tourne toute la journée. Pourtant, il lui manque plus de 3 heures. Où sont-elles passées ? »
 
-Feuille blanche pour le motion : on ne reprend ni le gabarit ni le style des fiches LinkedIn Fichly. Zéro PowerPoint ronflant : la formule n'arrive qu'en fin d'enquête.
+Feuille blanche pour le motion (nouveau langage de mouvement), mais habillage dans la **DA Fichly** (demande du 1er octobre 2026 : « je veux la DA fichly ») : palette, Poppins, titre bleu + bandeau, cartes, bandes ✓ / ✗, pictos et ruban du gabarit des fiches. Zéro PowerPoint ronflant : la formule n'arrive qu'en fin d'enquête.
 
 ## Assets
 
 - Aucun visuel fourni. Le logo Fichly (`/home/user/Media-Fichly/assets/fichly-logo.png`) signe la fin de la vidéo.
+- `public/guides-fichly.png` — encart des decks de fiches (basse définition), en attendant des packshots HD pour le cadre 12.
 
 ## Customizations
 
 - Voix off : ElevenLabs « Emilie - Podcast Host » (voice_id `d3AXX0BlgJHYFCuH9X88`), via le connecteur ElevenLabs (l'API et HeyGen sont bloqués dans l'environnement cloud).
 - Compteurs : « 3 h 10 manquantes » et le verdict « 77 % » défilent jusqu'à leur valeur au moment où la voix les prononce.
+- Fin de vidéo (demande du 1er octobre 2026) : pousser la formation « Lean Management Green Belt », éligible au CPF (page `formation-lean-green-belt-cpf`), et les decks de fiches (« 40 outils du Lean à portée de main », guides en 20 fiches VSM / 5S / DMAIC). L'article TRS passe dans la description YouTube.
 - Sous-titres : fichier `.srt` pour YouTube, pas de sous-titres incrustés.
 - Musique et bruitages d'enquête (punaise, papier, tampon « Affaire classée ») : proposés, en attente de décision (coût en crédits ElevenLabs à annoncer avant génération). Version 1 sans musique.
 
