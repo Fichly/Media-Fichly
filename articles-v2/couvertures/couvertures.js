@@ -163,23 +163,39 @@
       text(p, 1090, base - tk - 10, 'takt', { size: 17, weight: 800, fill: C.blue, anchor: 'end' });
     },
     '5s'(p) {
-      const L = ['Trier', 'Ranger', 'Nettoyer', 'Standardiser', 'Faire durer'];
-      const cols = [C.red, C.teal, C.violet, C.green, C.lightBlue];
-      L.forEach((l, i) => {
-        const y = 175 + i * 92;
-        rect(p, 745, y, 350, 72, C.white, { stroke: C.line, 'stroke-width': 2, rx: 16 });
-        el('circle', { cx: 785, cy: y + 36, r: 22, fill: cols[i] }, p);
-        text(p, 785, y + 45, 'S', { size: 24, weight: 800, fill: C.white, anchor: 'middle' });
-        text(p, 825, y + 45, `${i + 1}. ${l}`, { size: 24, weight: 700, fill: C.ink });
+      // Tableau d'ombres : l'outil manquant se voit d'un regard
+      rect(p, 745, 175, 350, 300, C.pLav, { rx: 14 });
+      const shadow = { fill: C.white, stroke: C.ink, 'stroke-width': 2, 'stroke-dasharray': '6 5' };
+      const hammer = (x, o) => { rect(p, x - 8, 250, 16, 190, o.fill, { ...o, rx: 6 }); rect(p, x - 38, 205, 76, 44, o.fill, { ...o, rx: 8 }); };
+      const driver = (x, o) => { rect(p, x - 15, 205, 30, 92, o.fill, { ...o, rx: 12 }); rect(p, x - 5, 297, 10, 145, o.fill, { ...o, rx: 4 }); };
+      const wrench = (x, o) => { rect(p, x - 11, 250, 22, 190, o.fill, { ...o, rx: 8 }); el('circle', { cx: x, cy: 232, r: 30, ...o }, p); };
+      hammer(800, shadow); driver(920, shadow); wrench(1040, shadow);
+      hammer(800, { fill: C.blue }); wrench(1040, { fill: C.blue });
+      driver(920, { fill: 'none', stroke: C.red, 'stroke-width': 3, 'stroke-dasharray': '6 5' });
+      G.cross(p, 958, 215, 16);
+      ['Trier', 'Ranger', 'Nettoyer', 'Standardiser', 'Tenir'].forEach((l, i) => {
+        const x = 770 + i * 75;
+        el('circle', { cx: x, cy: 535, r: 22, fill: [C.red, C.teal, C.violet, C.green, C.lightBlue][i] }, p);
+        text(p, x, 543, 'S', { size: 22, weight: 800, fill: C.white, anchor: 'middle' });
+        text(p, x, i % 2 ? 604 : 582, l, { size: 14, weight: 700, fill: C.ink, anchor: 'middle' });
       });
-      text(p, CX, 690, 'l’anomalie se voit', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
+      text(p, CX, 690, 'l’outil manquant se voit', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     trs(p) {
-      const B = [['Temps d’ouverture', 340, C.line, C.ink], ['Disponibilité', 290, C.teal, C.white], ['Performance', 240, C.lightBlue, C.white], ['Qualité', 200, C.violet, C.white]];
-      B.forEach(([l, w, f, fg], i) => { rect(p, 750, 190 + i * 88, w, 62, f, { rx: 12 }); text(p, 768, 229 + i * 88, l, { size: 20, weight: 700, fill: fg }); });
-      arrow(p, 'M 960 560 L 960 585', C.blue); head(p, 960, 590, 90, C.blue);
-      rect(p, 750, 600, 200, 70, C.blue, { rx: 14 });
-      text(p, 850, 646, 'TRS', { size: 32, weight: 800, fill: C.white, anchor: 'middle' });
+      // Cascade : le temps d'ouverture perd trois fois, il reste le TRS
+      const X0 = 750, Wd = 340, rows = [['Temps d’ouverture', 340, C.pLav, C.ink], ['Disponibilité', 290, C.teal, C.white], ['Performance', 240, C.lightBlue, C.white], ['Qualité', 200, C.violet, C.white]];
+      rows.forEach(([l, w, f, fg], i) => {
+        const y = 180 + i * 84;
+        rect(p, X0, y, w, 56, f, { rx: 10 });
+        if (i) rect(p, X0 + w + 4, y, rows[i - 1][1] - w - 4, 56, C.pRed, { rx: 10 });
+        text(p, X0 + 16, y + 35, l, { size: 19, weight: 700, fill: fg });
+      });
+      line(p, X0 + 200, 520, X0 + 200, 560, C.blue, 3, { 'stroke-dasharray': '5 5' });
+      rect(p, X0, 560, 200, 66, C.blue, { rx: 12 });
+      text(p, X0 + 100, 603, 'TRS', { size: 30, weight: 800, fill: C.white, anchor: 'middle' });
+      rect(p, X0 + 222, 578, 26, 26, C.pRed, { rx: 6 });
+      text(p, X0 + 258, 598, 'pertes', { size: 18, weight: 700, fill: C.tRed });
+      text(p, CX, 690, 'trois pertes, un seul taux', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     vsm(p) {
       [770, 885, 1000].forEach((x, i) => {
@@ -207,6 +223,7 @@
         rect(p, 760, 440 + i * 56, 320, 42, f, { rx: 21, stroke: C.line, 'stroke-width': 2 });
         text(p, 920, 468 + i * 56, l, { size: 19, weight: 800, fill: fg, anchor: 'middle' });
       });
+      text(p, CX, 702, 'quel niveau, pour quel besoin', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     muda(p) {
       const L = ['Surproduction', 'Attentes', 'Transports', 'Traitements', 'Stocks', 'Mouvements', 'Défauts', 'Compétences'];
@@ -216,25 +233,41 @@
         G.badgeNum(p, x + 30, y + 32, i + 1, 17);
         fit(text(p, x + 14, y + 80, l, { size: 17, weight: 700, fill: C.ink }), x + 162, `muda ${l}`);
       });
+      text(p, CX, 690, 'huit façons de perdre du temps', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     qualiopi(p) {
       el('path', { d: `M ${CX} 180 L ${CX + 130} 225 L ${CX + 130} 340 Q ${CX + 130} 440 ${CX} 495 Q ${CX - 130} 440 ${CX - 130} 340 L ${CX - 130} 225 Z`, fill: C.blue }, p);
       G.check(p, CX, 335, 58, C.green);
-      ['Processus certifié', 'Indicateurs suivis', 'Financements ouverts'].forEach((l, i) => G.pill(p, CX, 545 + i * 50, l, { size: 18, h: 38, bg: C.pGreen, fg: C.tGreen, icon: 'check', anchor: 'middle' }));
+      ['Processus certifié', 'Indicateurs suivis', 'Financements ouverts'].forEach((l, i) => G.pill(p, CX, 535 + i * 48, l, { size: 18, h: 38, bg: C.pGreen, fg: C.tGreen, icon: 'check', anchor: 'middle' }));
+      text(p, CX, 702, 'ce que le label garantit', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     financement(p) {
-      [0, 1, 2, 3].forEach(i => { el('ellipse', { cx: CX, cy: 420 - i * 34, rx: 82, ry: 26, fill: C.yellow, stroke: C.tYellow, 'stroke-width': 3 }, p); });
-      text(p, CX, 330, '€', { size: 40, weight: 800, fill: C.tYellow, anchor: 'middle' });
-      [['CPF', C.teal], ['OPCO', C.violet], ['France Travail', C.lightBlue], ['Plan de développement', C.green]].forEach(([l, f], i) =>
-        G.pill(p, CX, 500 + i * 48, l, { size: 18, h: 38, bg: f, fg: C.white, anchor: 'middle' }));
+      // Le coût de la formation, découpé entre les financeurs
+      el('circle', { cx: CX, cy: 235, r: 50, fill: C.yellow, stroke: C.tYellow, 'stroke-width': 4 }, p);
+      text(p, CX, 254, '€', { size: 52, weight: 800, fill: C.white, anchor: 'middle' });
+      text(p, 750, 335, 'Coût de la formation', { size: 18, weight: 700, fill: C.ink });
+      [['CPF', 150, C.teal, C.white], ['OPCO', 115, C.violet, C.white], ['reste', 75, C.pLav, C.ink]].reduce((x, [l, w, f, fg]) => {
+        rect(p, x, 350, w - 4, 70, f, { rx: 10 });
+        text(p, x + (w - 4) / 2, 393, l, { size: 19, weight: 800, fill: fg, anchor: 'middle' });
+        return x + w;
+      }, 750);
+      text(p, 750, 480, 'Selon votre situation :', { size: 18, weight: 700, fill: C.ink });
+      G.pill(p, 750, 520, 'France Travail', { size: 18, h: 40, bg: C.lightBlue, fg: C.white });
+      G.pill(p, 750, 572, 'Plan de développement', { size: 18, h: 40, bg: C.green, fg: C.white });
+      text(p, CX, 690, 'qui finance quoi', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     metier(p) {
-      person(p, CX, 300, C.blue, 2.2);
-      rect(p, CX - 40, 360, 80, 54, C.yellow, { rx: 8, stroke: C.tYellow, 'stroke-width': 3 });
-      rect(p, CX - 16, 350, 32, 14, 'none', { stroke: C.tYellow, 'stroke-width': 3, rx: 4 });
+      // Le responsable devant son tableau de progrès
+      rect(p, 850, 185, 240, 230, C.white, { stroke: C.blue, 'stroke-width': 4, rx: 14 });
+      line(p, 875, 375, 1065, 375, C.ink, 3); line(p, 875, 375, 875, 215, C.ink, 3);
+      line(p, 875, 250, 1065, 250, C.green, 3, { 'stroke-dasharray': '7 6' });
+      arrow(p, 'M 885 360 L 925 340 L 960 345 L 995 300 L 1030 285 L 1055 262', C.blue, 5);
+      el('circle', { cx: 1055, cy: 262, r: 7, fill: C.blue }, p);
+      person(p, 780, 400, C.blue, 1.6);
+      rect(p, 745, 440, 70, 48, C.yellow, { rx: 8, stroke: C.tYellow, 'stroke-width': 3 });
       ['Mesurer', 'Animer', 'Former', 'Standardiser'].forEach((l, i) =>
-        G.pill(p, i % 2 ? 1020 : 820, 480 + Math.floor(i / 2) * 60, l, { size: 19, h: 42, bg: C.pLav, fg: C.blue, anchor: 'middle' }));
-      text(p, CX, 690, 'le métier au quotidien', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
+        G.pill(p, i % 2 ? 1010 : 830, 545 + Math.floor(i / 2) * 54, l, { size: 18, h: 40, bg: C.pLav, fg: C.blue, anchor: 'middle' }));
+      text(p, CX, 700, 'piloter le progrès au quotidien', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     'green-belt'(p) {
       rect(p, 745, 280, 350, 70, C.green, { rx: 14 });
@@ -255,6 +288,7 @@
       line(p, 745, 640, 1095, 520, C.blue, 5);
       el('path', { d: 'M 900 588 L 950 570 L 950 540 Z', fill: C.yellow, stroke: C.tYellow, 'stroke-width': 2 }, p);
       text(p, 1000, 610, 'standard', { size: 16, weight: 800, fill: C.tYellow, anchor: 'middle' });
+      text(p, CX, 702, 'chaque tour calé par un standard', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     dmaic(p) {
       [['D', 'Définir', C.blue], ['M', 'Mesurer', C.teal], ['A', 'Analyser', C.violet], ['I', 'Innover', C.green], ['C', 'Contrôler', C.red]].forEach(([ch, l, f], i) => {
@@ -263,28 +297,38 @@
         text(p, 830, y + 50, ch, { size: 32, weight: 800, fill: C.white, anchor: 'middle' });
         text(p, 870, y + 47, l, { size: 22, weight: 700, fill: C.white });
       });
+      text(p, CX, 702, 'cinq étapes, dans l’ordre', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     smed(p) {
-      text(p, 750, 205, 'Avant', { size: 20, weight: 800, fill: C.ink });
-      rect(p, 750, 222, 340, 56, C.red, { rx: 10 }); text(p, 920, 258, 'arrêt de la machine', { size: 18, weight: 700, fill: C.white, anchor: 'middle' });
-      text(p, 750, 345, 'Après', { size: 20, weight: 800, fill: C.ink });
-      rect(p, 750, 362, 120, 56, C.red, { rx: 10 }); text(p, 810, 398, 'interne', { size: 17, weight: 700, fill: C.white, anchor: 'middle' });
-      rect(p, 885, 362, 205, 56, C.teal, { rx: 10, opacity: 0.85 }); text(p, 987, 398, 'externe, en marche', { size: 17, weight: 700, fill: C.white, anchor: 'middle' });
-      el('circle', { cx: CX, cy: 545, r: 78, fill: C.white, stroke: C.blue, 'stroke-width': 9 }, p);
-      rect(p, CX - 16, 452, 32, 20, C.blue, { rx: 5 });
-      arrow(p, `M ${CX} 545 L ${CX + 44} 515`, C.red, 6);
-      el('path', { d: `M ${CX} 545 L ${CX} 475 A 70 70 0 0 1 ${CX + 60} 510 Z`, fill: C.pRed }, p);
+      // Avant / après : le réglage préparé machine en marche raccourcit l'arrêt
+      const X0 = 750;
+      text(p, X0, 205, 'Avant', { size: 20, weight: 800, fill: C.ink });
+      rect(p, X0, 220, 340, 64, C.red, { rx: 10 });
+      text(p, X0 + 170, 260, 'arrêt : tout le réglage', { size: 18, weight: 700, fill: C.white, anchor: 'middle' });
+      text(p, X0, 355, 'Après', { size: 20, weight: 800, fill: C.ink });
+      rect(p, X0, 370, 150, 64, C.teal, { rx: 10 });
+      text(p, X0 + 75, 408, 'en marche', { size: 17, weight: 700, fill: C.white, anchor: 'middle' });
+      rect(p, X0 + 156, 370, 110, 64, C.red, { rx: 10 });
+      text(p, X0 + 211, 408, 'arrêt', { size: 17, weight: 700, fill: C.white, anchor: 'middle' });
+      rect(p, X0 + 272, 370, 68, 64, C.teal, { rx: 10 });
+      // Durées d'arrêt comparées
+      line(p, X0, 470, X0 + 340, 470, C.tRed, 4);
+      line(p, X0 + 156, 500, X0 + 266, 500, C.tRed, 4);
+      [[X0, 470], [X0 + 340, 470], [X0 + 156, 500], [X0 + 266, 500]].forEach(([x, y]) => line(p, x, y - 10, x, y + 10, C.tRed, 4));
+      G.pill(p, CX, 570, 'arrêt raccourci', { size: 20, h: 46, bg: C.pGreen, fg: C.tGreen, icon: 'check', anchor: 'middle' });
+      text(p, CX, 690, 'sortir le réglage de l’arrêt', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     'trs-trg-tre'(p) {
-      [['TRS', 0.55, C.blue], ['TRG', 0.68, C.teal], ['TRE', 0.42, C.violet]].forEach(([l, v, f], i) => {
-        const cx = 920, cy = 285 + i * 160, r = 62, x0 = cx - 120;
-        el('path', { d: `M ${x0 - r} ${cy} A ${r} ${r} 0 0 1 ${x0 + r} ${cy}`, fill: 'none', stroke: C.line, 'stroke-width': 16, 'stroke-linecap': 'round' }, p);
-        const a = Math.PI * (1 - v);
-        el('path', { d: `M ${x0 - r} ${cy} A ${r} ${r} 0 0 1 ${x0 + r * Math.cos(a)} ${cy - r * Math.sin(a)}`, fill: 'none', stroke: f, 'stroke-width': 16, 'stroke-linecap': 'round' }, p);
-        line(p, x0, cy, x0 + (r - 18) * Math.cos(a), cy - (r - 18) * Math.sin(a), C.ink, 5);
-        text(p, cx - 10, cy - 8, l, { size: 34, weight: 800, fill: f });
-        rect(p, cx - 10, cy + 6, 160, 10, C.line, { rx: 5 });
+      // Même temps utile, trois dénominateurs différents
+      [['TRS', 'sur le temps requis', 230, C.blue], ['TRG', 'sur le temps d’ouverture', 290, C.teal], ['TRE', 'sur le temps total', 340, C.violet]].forEach(([k, l, w, f], i) => {
+        const y = 215 + i * 140;
+        text(p, 750, y, k, { size: 30, weight: 800, fill: f });
+        text(p, 830, y - 2, l, { size: 17, weight: 600, fill: C.ink });
+        rect(p, 750, y + 18, w, 54, C.pLav, { rx: 10 });
+        rect(p, 750, y + 18, 150, 54, C.green, { rx: 10 });
+        text(p, 825, y + 52, 'utile', { size: 18, weight: 800, fill: C.white, anchor: 'middle' });
       });
+      text(p, CX, 690, 'même temps utile, trois bases', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     'cinq-pourquoi'(p) {
       for (let i = 0; i < 5; i++) {
@@ -297,9 +341,26 @@
       arrow(p, 'M 990 595 L 990 560', C.red, 4);
     },
     'types-maintenance'(p) {
-      el('path', { d: `M 870 210 a 46 46 0 1 0 60 60 l 120 120 a 22 22 0 0 0 30 -30 l -120 -120 a 46 46 0 0 0 -60 -60 l 26 26 l -8 30 l -30 8 Z`, fill: C.blue }, p);
-      [['Corrective', C.red], ['Préventive systématique', C.teal], ['Conditionnelle', C.violet], ['Prévisionnelle', C.green]].forEach(([l, f], i) =>
-        G.pill(p, CX, 480 + i * 52, l, { size: 19, h: 42, bg: f, fg: C.white, anchor: 'middle' }));
+      // L'état d'un équipement dans le temps et les quatre déclencheurs
+      const P0 = [760, 225], P1 = [905, 230], P2 = [1000, 300], P3 = [1075, 520];
+      const bez = t => [0, 1].map(k => (1 - t) ** 3 * P0[k] + 3 * (1 - t) ** 2 * t * P1[k] + 3 * (1 - t) * t * t * P2[k] + t ** 3 * P3[k]);
+      line(p, 750, 540, 1095, 540, C.ink, 3); line(p, 750, 540, 750, 200, C.ink, 3);
+      text(p, 758, 200, 'état', { size: 15, weight: 700, fill: C.ink });
+      el('path', { d: `M ${P0} C ${P1} ${P2} ${P3}`, fill: 'none', stroke: C.blue, 'stroke-width': 5, 'stroke-linecap': 'round' }, p);
+      const ys = 430;
+      line(p, 750, ys, 1095, ys, C.violet, 3, { 'stroke-dasharray': '8 6' });
+      let tc = 0; for (let t = 0; t <= 1; t += 0.002) if (bez(t)[1] >= ys) { tc = t; break; }
+      const [cx, cy] = bez(tc), [px, py] = bez(tc - 0.22);
+      el('circle', { cx, cy, r: 9, fill: C.violet }, p);
+      arrow(p, `M ${px} ${py} L ${px + 70} ${py + 95}`, C.green, 3); el('circle', { cx: px, cy: py, r: 9, fill: C.green }, p);
+      [800, 880, 960, 1040].forEach(x => el('path', { d: `M ${x - 9} 556 L ${x + 9} 556 L ${x} 541 Z`, fill: C.teal }, p));
+      G.cross(p, 1075, 520, 14);
+      [['Corrective', C.red], ['Systématique', C.teal], ['Conditionnelle', C.violet], ['Prévisionnelle', C.green]].forEach(([l, f], i) => {
+        const x = i % 2 ? 935 : 760, y = 600 + Math.floor(i / 2) * 36;
+        el('circle', { cx: x + 8, cy: y - 6, r: 8, fill: f }, p);
+        text(p, x + 24, y, l, { size: 17, weight: 700, fill: C.ink });
+      });
+      text(p, CX, 702, 'quatre façons de déclencher', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     'mtbf-mttr'(p) {
       const S = [[750, 120, 1], [870, 40, 0], [910, 100, 1], [1010, 30, 0], [1040, 55, 1]];
@@ -313,6 +374,7 @@
       brace(750, 870, 320, 'MTBF', C.tGreen, true);
       brace(870, 910, 410, 'MTTR', C.tRed, false);
       G.pill(p, CX, 600, 'Disponibilité', { size: 22, h: 50, bg: C.blue, fg: C.white, anchor: 'middle' });
+      text(p, CX, 690, 'deux temps, une disponibilité', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
     tpm(p) {
       el('path', { d: `M 740 300 L ${CX} 190 L 1100 300 Z`, fill: C.blue }, p);
@@ -345,6 +407,7 @@
       person(p, CX, 470, C.lightBlue, 1.1);
       rect(p, 740, 580, 360, 56, C.ink, { rx: 10 });
       text(p, CX, 617, 'Standards et kaizen', { size: 22, weight: 800, fill: C.white, anchor: 'middle' });
+      text(p, CX, 700, 'la maison du Lean', { size: 20, weight: 700, fill: C.blue, anchor: 'middle' });
     },
   };
 
