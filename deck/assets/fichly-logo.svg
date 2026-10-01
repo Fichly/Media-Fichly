@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 795" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="#231f20" stroke-width="55">
+    <path d="M70 515 V195 A150 150 0 0 1 220 45 H300"/>
+    <path d="M28 284 H174"/>
+    <path d="M340 284 V522"/>
+    <path d="M671 302 A123 123 0 1 0 671 498"/>
+    <path d="M807 28 V522"/>
+    <path d="M807 400 A123 123 0 0 1 1053 400 V522"/>
+    <path d="M1191 46 V522"/>
+    <path d="M1325 272 V388 A124 124 0 0 0 1573 388"/>
+    <path d="M1573 272 V645 A124 124 0 0 1 1325 645"/>
+  </g>
+  <circle cx="340" cy="180" r="47" fill="#3c4499"/>
+  <text x="38" y="688" font-family="Montserrat" font-weight="400" font-size="128" textLength="1178" lengthAdjust="spacing" fill="#3c4499">Les outils du lean</text>
+</svg>
