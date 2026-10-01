@@ -1,4 +1,6 @@
 // Rendu d'une fiche : node outils/rendu.js <id> stills [t…] | gif [fps] | mp4 [fps] [--scenario nom]
+// <id> : dossier de fiches/ (fiche LinkedIn), ou chemin d'un dossier de visuel d'article
+// (articles-v2/visuels/<handle>/<n>-<nom>) → livrables/articles/fichly-<handle>-<n>-<nom>.*
 // stills : PNG de contrôle dans controle/<id>-t<t>.png
 // gif    : livrables/<id>.gif, .mp4 et .png (image t = 0) ; mp4 : sans le GIF (mouvements de caméra)
 // Dépendances : playwright (Chromium) et ffmpeg (FFMPEG=… ou ffmpeg dans le PATH).
@@ -13,12 +15,16 @@ const argv = process.argv.slice(2);
 const si = argv.indexOf('--scenario');
 const scenario = si >= 0 ? argv.splice(si, 2)[1] : null;
 const [id, mode = 'stills', ...rest] = argv;
-const name = scenario ? `${id}--${scenario}` : id;
+const ficheDir = path.join(ROOT, 'fiches', id || '');
+const isFiche = id && fs.existsSync(path.join(ficheDir, 'index.html'));
+const pageDir = isFiche ? ficheDir : path.resolve(ROOT, id || '');
+const base = isFiche ? id : `fichly-${path.basename(path.dirname(pageDir))}-${path.basename(pageDir)}`;
+const name = scenario ? `${base}--${scenario}` : base;
 if (!id) { console.error('Usage : node outils/rendu.js <id> stills [t…] | gif [fps]'); process.exit(1); }
 const FFMPEG = process.env.FFMPEG || 'ffmpeg';
 
 (async () => {
-  const page_url = 'file://' + path.join(ROOT, 'fiches', id, 'index.html') + (scenario ? `?scenario=${scenario}` : '');
+  const page_url = 'file://' + path.join(pageDir, 'index.html') + (scenario ? `?scenario=${scenario}` : '');
   const browser = await chromium.launch({ args: ['--allow-file-access-from-files'] });
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
   const errors = [];
@@ -26,15 +32,16 @@ const FFMPEG = process.env.FFMPEG || 'ffmpeg';
   page.on('pageerror', e => errors.push(String(e)));
   await page.goto(page_url);
   await page.evaluate(() => window.FICHE.ready);
-  const { duration } = await page.evaluate(() => ({ duration: window.FICHE.duration }));
+  const { duration, width: W, height: H } = await page.evaluate(() => window.FICHE);
+  await page.setViewportSize({ width: W, height: H });
   // Calque plein cadre quasi transparent : le basculer force Chromium à tout redessiner,
   // sinon l'anti-aliasing des zones redessinées partiellement varie d'une image à l'autre.
-  await page.evaluate(() => {
+  await page.evaluate(([W, H]) => {
     const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    Object.entries({ id: '__repaint', x: 0, y: 0, width: 1080, height: 1350, fill: '#000', 'fill-opacity': 0, 'pointer-events': 'none' })
+    Object.entries({ id: '__repaint', x: 0, y: 0, width: W, height: H, fill: '#000', 'fill-opacity': 0, 'pointer-events': 'none' })
       .forEach(([k, v]) => r.setAttribute(k, v));
     document.getElementById('stage').appendChild(r);
-  });
+  }, [W, H]);
   let flip = false;
   const shot = async (t, file) => {
     flip = !flip;
@@ -42,7 +49,7 @@ const FFMPEG = process.env.FFMPEG || 'ffmpeg';
       document.getElementById('__repaint').setAttribute('fill-opacity', flip ? 0.001 : 0);
       window.FICHE.draw(t);
     }, [t, flip]);
-    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: 1080, height: 1350 } });
+    await page.screenshot({ path: file, clip: { x: 0, y: 0, width: W, height: H } });
   };
 
   if (mode === 'stills') {
@@ -58,7 +65,7 @@ const FFMPEG = process.env.FFMPEG || 'ffmpeg';
     const n = Math.round(duration * fps);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `${name}-`));
     for (let i = 0; i < n; i++) await shot(i / fps, path.join(tmp, `f${String(i).padStart(4, '0')}.png`));
-    const out = path.join(ROOT, 'livrables');
+    const out = path.join(ROOT, 'livrables', ...(isFiche ? [] : ['articles']));
     fs.mkdirSync(out, { recursive: true });
     const seq = path.join(tmp, 'f%04d.png');
     fs.copyFileSync(path.join(tmp, 'f0000.png'), path.join(out, `${name}.png`));

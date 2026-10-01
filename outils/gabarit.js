@@ -280,7 +280,7 @@
     W, H, C, svg, el, text, measure, fit, noOverlap,
     clamp, prog, easeOut, easeInOut, back, invEaseInOut,
     FADE_START, FADE_END, fading, fadeOut, pop, slide, rise,
-    check, cross, badgeNum, pill, card, template, title, chapeau, chute, encart, start,
+    check, cross, badgeNum, pill, card, template, title, chapeau, chute, encart, start, checkAll,
     camera, outline, clipRect,
   };
 })();
