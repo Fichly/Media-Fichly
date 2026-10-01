@@ -205,17 +205,15 @@
   endif
 
   assign accent = article.metafields.fichly.titre_accent.value
+  assign title_mode = 'plain'
   if accent != blank and article.title contains accent
-    assign a_esc = accent | escape
-    assign title_html = article.title | escape | replace_first: a_esc, '<em>§</em>' | replace_first: '§', a_esc
+    assign title_mode = 'accent'
+    assign t_before = article.title | split: accent | first
+    assign t_after = article.title | remove_first: t_before | remove_first: accent
   elsif article.title contains ' : '
+    assign title_mode = 'colon'
     assign t_first = article.title | split: ' : ' | first
     assign t_rest = article.title | remove_first: t_first | remove_first: ' : '
-    assign t_first = t_first | escape
-    assign t_rest = t_rest | escape
-    assign title_html = t_first | append: '&nbsp;: <em>' | append: t_rest | append: '</em>'
-  else
-    assign title_html = article.title | escape
   endif
 
   assign mois = 'janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre' | split: ','
@@ -253,7 +251,13 @@
           <a href="{{ blog.url }}">Blog</a><span class="fv2-sep" aria-hidden="true">•</span>
           <a class="fv2-tag" href="{{ blog.url }}/tagged/{{ categorie | handleize }}">{{ categorie }}</a>
         </nav>
-        <h1 class="fv2-title">{{ title_html }}</h1>
+        <h1 class="fv2-title" data-fv2-title>
+          {%- case title_mode -%}
+            {%- when 'accent' -%}{{ t_before | escape }}<em>{{ accent | escape }}</em>{{ t_after | escape }}
+            {%- when 'colon' -%}{{ t_first | escape }} : <em>{{ t_rest | escape }}</em>
+            {%- else -%}{{ article.title | escape }}
+          {%- endcase -%}
+        </h1>
         {%- if article.excerpt != blank -%}
           <p class="fv2-lede">{{ article.excerpt | strip_html | strip }}</p>
         {%- endif -%}

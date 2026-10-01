@@ -4,6 +4,24 @@
   if (!root) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Garde-fou : si un script tiers a transformé le balisage du titre en texte, on le rétablit
+  const title = root.querySelector('[data-fv2-title]');
+  const repair = () => {
+    if (!title) return;
+    const txt = title.textContent;
+    if (!/<em>|&nbsp;/.test(txt)) return;
+    const safe = txt.replace(/<\/?em>/g, '').replace(/&nbsp;/g, '');
+    if (/[<>]/.test(safe)) return;
+    const esc = s => s.replace(/&(?!nbsp;|#\d+;|amp;|quot;|lt;|gt;)/g, '&amp;');
+    title.innerHTML = esc(txt.trim()).replace(/&nbsp;/g, '\u00a0');
+  };
+  repair();
+  if (title) {
+    const mo = new MutationObserver(repair);
+    mo.observe(title, { childList: true, characterData: true, subtree: true });
+    setTimeout(() => mo.disconnect(), 4000);
+  }
+
   // Décalage sous l'en-tête collant du thème
   const setTop = () => {
     let h = 0;
