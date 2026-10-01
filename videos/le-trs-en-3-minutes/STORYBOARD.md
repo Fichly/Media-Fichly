@@ -9,7 +9,13 @@ language: fr
 music: none
 ---
 
-# Le TRS en 3 minutes — storyboard (v3)
+# Le TRS en 3 minutes — storyboard (v3, découpage v4 en cours)
+
+## Changes from v3 (en attente de validation)
+
+- « Ok, le texte est pas assez naturel… Je veux un texte humain du style "Dans notre cas la machine a tourné X h, ce qui nous donne, une fois enlevés les arrêts non planifiés…" » et « pas trop d'animation par frame. On ne sait pas où regarder. Une frame = une idée que l'on montre » (1er octobre 2026) : `SCRIPT.md` passe en version 2, sur un ton parlé, redécoupée en **14 cadres, une idée chacun** (l'idée et ce qu'on montre sont notés à chaque ligne). Elle intègre le verdict en heures et le TRG / TRE.
+- Règle de mise en scène : **un cadre = une idée = un seul élément à regarder**, au plus trois temps forts posés sur la voix ; plus de panneaux côte à côte, plus de fil d'enquête en haut à droite. Le panneau de contrôle reste le décor : un widget au centre (voyant, « En direct »).
+- Cadre 04 refait sur cette règle (`videos/remotion/src/trs/Cadre04.tsx`, voix `audio/04-disponibilite-v2.mp3`). Les sections « Frame » ci-dessous décrivent encore la v3 ; elles seront réécrites sur les 14 cadres une fois le script v2 validé.
 
 ## Changes from v2
 
@@ -22,6 +28,8 @@ music: none
 - « je veux la DA fichly » (1er octobre 2026) : la charte bold-poster est remplacée par la direction artistique Fichly (`frame.md` réécrit depuis le gabarit des fiches). Récit, script et découpage inchangés.
 
 ## Still open
+
+- **Script v2** (`SCRIPT.md`) à valider, puis voix complète (environ 3 100 caractères, soit environ 3 100 crédits ElevenLabs). Prise test de la ligne 4 faite le 1er octobre 2026 (321 crédits).
 
 - **Ligne 8 du script (recommandée)** : parler en heures plutôt qu'en points, pour coller à l'écran du cadre 08. Proposition : « Mais le verdict, ce n'est pas le chiffre. Reprenons nos trois heures dix. À votre avis, où est passée la plus grosse part ? … Deux heures en arrêts. Quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : la disponibilité. » En attente de validation ; `SCRIPT.md` garde la version actuelle.
 - **Cadre 10 bis, TRG et TRE (nouveau)** : nouvelle ligne de voix d'environ 15 s, la vidéo passe à environ 3 min 15. À valider, ou à compenser en resserrant d'autres lignes.

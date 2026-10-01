@@ -1,0 +1,17 @@
+{
+  "source": "ElevenLabs, Emilie - Podcast Host (d3AXX0BlgJHYFCuH9X88), eleven_multilingual_v2, prise du 1er octobre 2026 (script v2, ligne 4)",
+  "duration": 16.43,
+  "timing": "silences mesurés avec ffmpeg silencedetect (-30 dB, 0,1 s) ; positions des mots à l'intérieur d'une phrase estimées au prorata des syllabes",
+  "cues": [
+    { "t": 0.13, "end": 1.85, "text": "Premier témoin : la disponibilité." },
+    { "t": 2.39, "end": 5.51, "text": "Dans notre cas, la presse s'est arrêtée deux heures sans que ce soit prévu :" },
+    { "t": 4.15, "end": 4.62, "text": "deux heures", "estimated": true },
+    { "t": 5.62, "end": 7.68, "text": "une panne, un manque de matière, un réglage." },
+    { "t": 8.04, "end": 10.14, "text": "Une fois ces arrêts non planifiés enlevés," },
+    { "t": 10.27, "end": 12.15, "text": "elle a tourné douze heures sur quatorze." },
+    { "t": 11.0, "end": 11.81, "text": "douze heures", "estimated": true },
+    { "t": 11.91, "end": 12.15, "text": "sur quatorze", "estimated": true },
+    { "t": 12.54, "end": 15.58, "text": "Ce qui nous donne une disponibilité de quatre-vingt-cinq virgule sept pour cent." },
+    { "t": 14.2, "end": 15.58, "text": "quatre-vingt-cinq virgule sept pour cent", "estimated": true }
+  ]
+}
