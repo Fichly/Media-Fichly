@@ -10,14 +10,14 @@ const W = 990;
 
 export const Formule: React.FC<{ o: number }> = ({ o }) => {
   const f = useG(o);
-  const num = pop(f, T(18.58));
-  const bar = interpolate(f, [T(19.82), T(19.82) + 12], [0, W], { ...clamp, easing: OUT });
-  const den = pop(f, T(19.82) + 4);
+  const num = pop(f, T(23.18));
+  const bar = interpolate(f, [T(24.08), T(24.08) + 12], [0, W], { ...clamp, easing: OUT });
+  const den = pop(f, T(24.08) + 4);
   return (
     <Scene>
-      <Eyebrow text="Calcul n° 1 · la méthode simple" start={T(16.06)} />
+      <Eyebrow text="Calcul n° 1 · la méthode simple" start={T(19.9)} />
       <Widget title="La méthode simple" light="none">
-        <div style={{ position: "absolute", left: IN.x, top: 330, fontWeight: 800, fontSize: 110, lineHeight: 1, color: C.ink, opacity: fade(f, T(16.4), 8) }}>
+        <div style={{ position: "absolute", left: IN.x, top: 330, fontWeight: 800, fontSize: 110, lineHeight: 1, color: C.ink, opacity: fade(f, T(20.54), 8) }}>
           TRS =
         </div>
         <div
@@ -30,7 +30,7 @@ export const Formule: React.FC<{ o: number }> = ({ o }) => {
             fontWeight: 800,
             fontSize: 76,
             color: C.tGreen,
-            opacity: fade(f, T(18.58), 4),
+            opacity: fade(f, T(23.18), 4),
             scale: interpolate(num, [0, 1], [0.7, 1]),
           }}
         >
@@ -47,7 +47,7 @@ export const Formule: React.FC<{ o: number }> = ({ o }) => {
             fontWeight: 800,
             fontSize: 76,
             color: C.blue,
-            opacity: fade(f, T(19.82) + 4, 4),
+            opacity: fade(f, T(24.08) + 4, 4),
             scale: interpolate(den, [0, 1], [0.7, 1]),
           }}
         >
@@ -63,8 +63,8 @@ export const Formule: React.FC<{ o: number }> = ({ o }) => {
             fontWeight: 600,
             fontSize: 40,
             color: C.blue,
-            opacity: fade(f, T(20.98), 8),
-            translate: `0px ${interpolate(f, [T(20.98), T(20.98) + 12], [12, 0], { ...clamp, easing: OUT })}px`,
+            opacity: fade(f, T(26.2), 8),
+            translate: `0px ${interpolate(f, [T(26.2), T(26.2) + 12], [12, 0], { ...clamp, easing: OUT })}px`,
           }}
         >
           au temps de cycle idéal

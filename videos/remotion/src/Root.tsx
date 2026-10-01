@@ -1,6 +1,6 @@
 import { delayRender, continueRender } from "remotion";
 import { fontsLoaded } from "./trs/fichly";
-import { Minute1Composition } from "./trs/minute1/Minute1";
+import { EpisodeComposition } from "./trs/episode/Episode";
 import { Panneau04Composition } from "./trs/Panneau04";
 import { Temoin1Composition } from "./trs/Temoin1";
 
@@ -11,7 +11,7 @@ fontsLoaded.then(() => continueRender(handle));
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      <Minute1Composition />
+      <EpisodeComposition />
       <Panneau04Composition />
       <Temoin1Composition />
     </>

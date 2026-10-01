@@ -22,27 +22,27 @@ type Row = {
 };
 
 const ROWS: Row[] = [
-  { name: "Temps total", hours: 24, bg: C.card, fg: C.blue, border: C.blue, bar: 43.14 },
+  { name: "Temps total", hours: 24, bg: C.card, fg: C.blue, border: C.blue, bar: 51.76 },
   {
     name: "Temps d'ouverture",
     hours: 16,
     bg: C.blue,
     fg: "#ffffff",
-    bar: 47.58,
-    loss: { label: "atelier fermé", bg: C.pLav, fg: C.blue, dashed: C.blue, at: 45.32, inside: true },
+    bar: 56.68,
+    loss: { label: "atelier fermé", bg: C.pLav, fg: C.blue, dashed: C.blue, at: 55.32, inside: true },
   },
-  { name: "Temps requis", hours: 14, bg: C.blue, fg: "#ffffff", bar: 50.02, loss: { label: "arrêts prévus", bg: C.pLav, fg: C.blue, dashed: C.blue, at: 48.62 } },
-  { name: "Temps de fonctionnement", hours: 12, bg: C.blue, fg: "#ffffff", bar: 52.06, loss: { label: "arrêts subis", bg: C.red, fg: C.tRed, at: 51.0 } },
-  { name: "Temps net", hours: 11 + 1 / 3, bg: C.blue, fg: "#ffffff", bar: 54.54, loss: { label: "ralentissements", bg: C.yellow, fg: C.tYellow, at: 53.54 } },
-  { name: "Temps utile", hours: 10 + 5 / 6, bg: C.green, fg: C.tGreen, bar: 56.72, loss: { label: "pièces mauvaises", bg: C.violet, fg: C.ink, at: 55.52 } },
+  { name: "Temps requis", hours: 14, bg: C.blue, fg: "#ffffff", bar: 59.9, loss: { label: "arrêts prévus", bg: C.pLav, fg: C.blue, dashed: C.blue, at: 58.36 } },
+  { name: "Temps de fonctionnement", hours: 12, bg: C.blue, fg: "#ffffff", bar: 62.58, loss: { label: "arrêts subis", bg: C.red, fg: C.tRed, at: 61.38 } },
+  { name: "Temps net", hours: 11 + 1 / 3, bg: C.blue, fg: "#ffffff", bar: 65.48, loss: { label: "ralentissements", bg: C.yellow, fg: C.tYellow, at: 64.34 } },
+  { name: "Temps utile", hours: 10 + 5 / 6, bg: C.green, fg: C.tGreen, bar: 68.88, loss: { label: "pièces mauvaises", bg: C.violet, fg: C.ink, at: 67.2 } },
 ];
 
 export const TempsEtats: React.FC<{ o: number }> = ({ o }) => {
   const f = useG(o);
-  const wrap = T(57.4); // « Chaque marche retire une famille de pertes »
+  const wrap = T(70.06); // « Chaque marche retire une famille de pertes »
   return (
     <Scene>
-      <Eyebrow text="Les temps d'états" start={T(40.5)} />
+      <Eyebrow text="Les temps d'états" start={T(48.24)} />
       <Widget title="La journée, découpée en temps d'états" light="none">
         {ROWS.map((r, i) => {
           const y = Y0 + i * STEP;
@@ -115,7 +115,8 @@ export const TempsEtats: React.FC<{ o: number }> = ({ o }) => {
                   color: r.fg,
                   display: "flex",
                   alignItems: "center",
-                  paddingLeft: 22,
+                  paddingLeft: Math.min(22, grow),
+                  opacity: grow > 8 ? 1 : 0,
                   fontWeight: 700,
                   fontSize: 28,
                   whiteSpace: "nowrap",

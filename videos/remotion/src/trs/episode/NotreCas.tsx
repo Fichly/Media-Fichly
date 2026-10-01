@@ -26,8 +26,9 @@ const Bar: React.FC<{ y: number; w: number; bg: string; fg: string; children: Re
       color: fg,
       display: "flex",
       alignItems: "center",
-      paddingLeft: 34,
+      paddingLeft: Math.min(34, w),
       boxSizing: "border-box",
+      opacity: w > 4 ? 1 : 0,
       fontWeight: 700,
       fontSize: 40,
       whiteSpace: "nowrap",
@@ -40,15 +41,15 @@ const Bar: React.FC<{ y: number; w: number; bg: string; fg: string; children: Re
 
 export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
   const f = useG(o);
-  const w1 = interpolate(f, [T(25.26), T(25.26) + 20], [0, IN.w], { ...clamp, easing: OUT });
-  const w2 = interpolate(f, [T(30.56), T(30.56) + 20], [0, GOOD], { ...clamp, easing: OUT });
-  const n1 = count(f, T(28.76), T(29.84), 840);
-  const n2 = count(f, T(31.0), T(31.8), 650);
-  const big = pop(f, T(35.6));
-  const gap = pop(f, T(38.48));
+  const w1 = interpolate(f, [T(31.06), T(31.06) + 20], [0, IN.w], { ...clamp, easing: OUT });
+  const w2 = interpolate(f, [T(37.06), T(37.06) + 20], [0, GOOD], { ...clamp, easing: OUT });
+  const n1 = count(f, T(35.0), T(35.8), 840);
+  const n2 = count(f, T(37.42), T(38.04), 650);
+  const big = pop(f, T(42.3));
+  const gap = pop(f, T(45.54));
   return (
     <Scene>
-      <Eyebrow text="Calcul n° 1 · notre presse" start={T(22.3)} />
+      <Eyebrow text="Calcul n° 1 · notre presse" start={T(27.4)} />
       <Widget title="Presse · ligne 2">
         <span
           style={{
@@ -64,18 +65,18 @@ export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
             color: C.blue,
             fontWeight: 700,
             fontSize: 26,
-            opacity: fade(f, T(23.78), 6),
+            opacity: fade(f, T(29.2), 6),
           }}
         >
           Temps de cycle idéal : 1 pièce par minute
         </span>
-        <div style={{ position: "absolute", right: IN.x, top: 166, fontWeight: 600, fontSize: 26, color: C.blue, opacity: fade(f, T(25.26), 8) }}>
+        <div style={{ position: "absolute", right: IN.x, top: 166, fontWeight: 600, fontSize: 26, color: C.blue, opacity: fade(f, T(31.06), 8) }}>
           14 h requises × 60 pièces par heure
         </div>
 
         <Bar y={Y1} w={w1} bg={C.blue} fg="#ffffff">
-          <span style={{ fontVariantNumeric: "tabular-nums", opacity: fade(f, T(28.76), 4) }}>{n1}&nbsp;</span>
-          <span style={{ opacity: fade(f, T(25.26) + 10, 6) }}>pièces possibles</span>
+          <span style={{ fontVariantNumeric: "tabular-nums", opacity: fade(f, T(35.0), 4) }}>{n1}&nbsp;</span>
+          <span style={{ opacity: fade(f, T(31.06) + 10, 6) }}>pièces possibles</span>
         </Bar>
         <Bar y={Y2} w={w2} bg={C.green} fg={C.tGreen}>
           <span style={{ fontVariantNumeric: "tabular-nums" }}>{n2}&nbsp;</span>pièces bonnes
@@ -98,7 +99,7 @@ export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
             fontWeight: 800,
             fontSize: 70,
             color: C.tRed,
-            opacity: fade(f, T(38.48), 6),
+            opacity: fade(f, T(45.54), 6),
             scale: interpolate(gap, [0, 1], [0.9, 1]),
           }}
         >
@@ -115,7 +116,7 @@ export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
             fontWeight: 700,
             fontSize: 30,
             color: C.tRed,
-            opacity: fade(f, T(39.2), 6),
+            opacity: fade(f, T(46.7), 6),
           }}
         >
           <Badge kind="ko" size={34} />
@@ -123,14 +124,14 @@ export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
         </div>
 
         <div style={{ position: "absolute", left: IN.x, top: 590, display: "flex", alignItems: "baseline", gap: 26, whiteSpace: "nowrap" }}>
-          <span style={{ fontWeight: 700, fontSize: 64, color: C.ink, opacity: fade(f, T(32.56), 6) }}>650 ÷ 840 =</span>
+          <span style={{ fontWeight: 700, fontSize: 64, color: C.ink, opacity: fade(f, T(38.9), 6) }}>650 ÷ 840 =</span>
           <span
             style={{
               fontWeight: 800,
               fontSize: 150,
               lineHeight: 1,
               color: C.blue,
-              opacity: fade(f, T(35.6), 4),
+              opacity: fade(f, T(42.3), 4),
               scale: interpolate(big, [0, 1], [0.7, 1]),
               transformOrigin: "left 70%",
               display: "inline-block",
@@ -138,7 +139,7 @@ export const NotreCas: React.FC<{ o: number }> = ({ o }) => {
           >
             77 %
           </span>
-          <span style={{ fontWeight: 600, fontSize: 34, color: C.blue, opacity: fade(f, T(35.9), 8) }}>de TRS</span>
+          <span style={{ fontWeight: 600, fontSize: 34, color: C.blue, opacity: fade(f, T(42.6), 8) }}>de TRS</span>
         </div>
       </Widget>
     </Scene>

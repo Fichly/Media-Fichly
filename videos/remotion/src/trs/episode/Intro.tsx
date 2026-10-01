@@ -7,7 +7,7 @@ import { LogoFichly } from "../LogoFichly";
 import { clamp, fade, OUT, pop, Scene, Typed } from "../ui";
 import { HANDOFF, T, useG } from "./timeline";
 
-const FLY = [52, HANDOFF]; // le logo et le ruban glissent vers leur place
+const FLY = [T(1.1), HANDOFF]; // le logo et le ruban glissent vers leur place pendant « comprendre ce qu'est »
 const BIG = { x: 580, y: 300, w: 760 };
 const SMALL = { x: 1920 - 46 - 142, y: 1080 - 36 - (142 * 470) / 890, w: 142 };
 
@@ -17,8 +17,8 @@ export const Intro: React.FC<{ o: number }> = ({ o }) => {
   const dot = pop(f, 32);
   const fly = interpolate(f, FLY, [0, 1], { ...clamp, easing: Easing.inOut(Easing.cubic) });
   const ribbon = interpolate(f, [34, 50], [0, 1], { ...clamp, easing: OUT });
-  const title = pop(f, T(1.52));
-  const wipe = interpolate(f, [T(4.1), T(4.1) + 14], [0, 100], { ...clamp, easing: OUT });
+  const title = pop(f, T(1.84));
+  const wipe = interpolate(f, [T(5.45), T(5.45) + 14], [0, 100], { ...clamp, easing: OUT });
   const lerp = (a: number, b: number) => a + (b - a) * fly;
   return (
     <Scene>
@@ -58,7 +58,7 @@ export const Intro: React.FC<{ o: number }> = ({ o }) => {
             lineHeight: 1,
             letterSpacing: -2,
             color: C.blue,
-            opacity: fade(f, T(1.52), 6),
+            opacity: fade(f, T(1.84), 6),
             scale: interpolate(title, [0, 1], [0.85, 1]),
           }}
         >
@@ -80,7 +80,7 @@ export const Intro: React.FC<{ o: number }> = ({ o }) => {
           en 3 minutes.
         </div>
         <div style={{ marginTop: 40, fontWeight: 600, fontSize: 40, color: C.blue }}>
-          <Typed text="Taux de rendement synthétique" start={T(2.36)} cps={30} />
+          <Typed text="Taux de rendement synthétique" start={T(2.82)} cps={30} />
         </div>
       </div>
     </Scene>

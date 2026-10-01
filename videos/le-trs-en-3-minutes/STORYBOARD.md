@@ -9,7 +9,36 @@ language: fr
 music: none
 ---
 
-# Le TRS en 3 minutes — storyboard (v3, découpage v4 en cours)
+# Le TRS en 3 minutes — storyboard (v3, montage complet v4)
+
+## Montage complet (v4, 1er octobre 2026)
+
+« Fait moi l'animation complète avec cet audio maintenant » : la prise complète fournie (ElevenLabs, Emilie - Podcast Host, modèle v4, vitesse 1,12, stabilité 46 %, similarité 75 %, 4 min 04) est dans `audio/v4/trs-complet.mp3`, avec les temps de chaque mot dans `audio/v4/trs-complet.words.json` (Whisper small). Elle suit le script, à un détail près : la ligne 3 devient une question (« Alors, la façon la plus simple de le calculer ? On compare… »).
+
+Montage Remotion : `videos/remotion/src/trs/episode/` (composition `TRS-en-3-minutes`, calage dans `timeline.ts`). Rendu : `livrables/le-trs-en-3-minutes.mp4` (1920×1080, 30 i/s, 4 min 09). Une seule prise, 19 cadres d'une idée chacun, fondus de 10 images pendant que la voix continue. Temps ci-dessous en secondes de la prise (la vidéo ajoute 2 s de logo au début).
+
+| Cadre | Prise | L'idée à l'écran |
+| --- | --- | --- |
+| 1. Intro | 0 → 6,8 | Le logo s'écrit puis rejoint son coin ; « Le TRS en 3 minutes. » |
+| 2. Le constat | 6,8 → 19,7 | La presse a tourné 16 h, il manque plus de 3 h. |
+| 3. La méthode simple | 19,7 → 27,3 | Pièces bonnes ÷ pièces possibles au temps de cycle idéal. |
+| 4. Notre cas | 27,3 → 48,05 | 650 ÷ 840 = 77 %, mais où sont passées les 3 heures ? |
+| 5. Les temps d'états | 48,05 → 72,4 | Chaque marche retire une famille de pertes. |
+| 6. Le temps requis | 72,4 → 80 | 16 blocs d'une heure ; les 2 h de maintenance sortent : 14 h. |
+| 7. Marche 1 · disponibilité | 80 → 97,3 | Deux heures passent au rouge et sortent : 12 h ÷ 14 h = 85,7 %. |
+| 8. Marche 2 · performance | 97,3 → 113,4 | 680 pièces sorties sur 720 attendues, l'écart en jaune : 94,4 %. |
+| 9. Marche 3 · qualité | 113,4 → 125,1 | 68 cases de 10 pièces, 3 au violet : 650 ÷ 680 = 95,6 %. |
+| 10. Le TRS, reconstitué | 125,1 → 134,8 | Les trois taux se multiplient, la jauge monte à 77 %, comme la méthode simple. |
+| 11. Le verdict | 134,8 → 147,95 | Sur 14 h, 10 h 50 utiles ; 2 h d'arrêts, 40 min de lenteurs, 30 min de rebuts ; premier chantier cerclé. |
+| 12. Fausse piste n° 1 | 147,95 → 156,8 | Pas de « bon TRS » universel : la courbe de la presse, mois après mois (valeurs d'illustration jusqu'aux 77 %). |
+| 13. Fausse piste n° 2 | 156,8 → 168,1 | Une panne rebaptisée « maintenance planifiée » sort du temps requis : 83 %, sans une pièce de plus. |
+| 14. TRS, TRG, TRE | 168,1 → 180,1 | Même numérateur (10 h 50), « divisé par quel temps ? ». |
+| 15. Le TRG | 180,1 → 204,9 | Comparateur : TRS ÷ 14 h = 77 % ; TRG ÷ 16 h = 68 %, la maintenance compte comme perte. |
+| 16. Le TRE | 204,9 → 221,85 | L'échelle passe à 24 h ; les 8 h de fermeture, puis « 8 h de capacité libre » : 45 %. |
+| 17. Sur quel temps ? | 221,85 → 226,2 | Les trois taux côte à côte, leurs dénominateurs surlignés. |
+| 18. À retenir | 226,2 → 234,95 | TRS = temps utile ÷ temps requis ; il ne juge personne, il montre où chercher. |
+| 19. Pour aller plus loin | 234,95 → fin | Formation Lean Green Belt (éligible au CPF), decks de fiches ; liens en description ; le logo s'écrit à nouveau. |
+
 
 ## Changes from v3 (en attente de validation)
 
@@ -29,8 +58,8 @@ music: none
 
 ## Still open
 
-- **Première minute v3** (1er octobre 2026, « une intro avec le logo Fichly en motion… introduire le sujet… il y a des blancs qui cassent le rythme… la manière simple, puis les temps d'états, puis on décompose ») : script v3, lignes 1 à 5 en une seule prise (`audio/v3/bloc1.mp3`, 1 324 crédits), montée en Remotion (`videos/remotion/src/trs/minute1/`). Rendu : `videos/essais/minute-1/trs-minute-1.mp4`. Logo animé à partir d'un tracé vectoriel redessiné d'après le PNG : à remplacer par le fichier vectoriel officiel.
-- Voix des lignes 6 à 16 : deux prises continues (lignes 6 à 11, puis 12 à 17), environ 1 850 crédits, après validation de la première minute.
+- **Montage complet v4** : à relire sur `livrables/le-trs-en-3-minutes.mp4`. Durée 4 min 09 pour un titre « en 3 minutes ». Logo animé à partir d'un tracé vectoriel redessiné d'après le PNG : à remplacer par le fichier vectoriel officiel. Ensuite : sous-titres `.srt` (les temps des mots sont prêts) et version 9:16.
+- Première minute v3 (`audio/v3/bloc1.mp3`, rendu `videos/essais/minute-1/trs-minute-1.mp4`) : remplacée par le montage complet ; ses pastilles de titre ne s'affichaient pas (corrigé dans le montage complet).
 
 - **Ligne 8 du script (recommandée)** : parler en heures plutôt qu'en points, pour coller à l'écran du cadre 08. Proposition : « Mais le verdict, ce n'est pas le chiffre. Reprenons nos trois heures dix. À votre avis, où est passée la plus grosse part ? … Deux heures en arrêts. Quarante minutes en lenteurs, trente en rebuts. Le premier chantier est tout trouvé : la disponibilité. » En attente de validation ; `SCRIPT.md` garde la version actuelle.
 - **Cadre 10 bis, TRG et TRE (nouveau)** : nouvelle ligne de voix d'environ 15 s, la vidéo passe à environ 3 min 15. À valider, ou à compenser en resserrant d'autres lignes.

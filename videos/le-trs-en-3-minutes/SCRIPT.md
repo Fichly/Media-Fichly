@@ -1,7 +1,7 @@
 # SCRIPT — le-trs-en-3-minutes
 
-**Voice:** Emilie - Podcast Host (ElevenLabs, voice_id `d3AXX0BlgJHYFCuH9X88`), modèle `eleven_multilingual_v2`
-**Voice settings:** réglages par défaut de la voix (à ajuster après la première prise)
+**Voice:** Emilie - Podcast Host (ElevenLabs, voice_id `d3AXX0BlgJHYFCuH9X88`) ; prise retenue en modèle v4 (texte avec effets de `ELEVENLABS.md`)
+**Voice settings:** vitesse 1,12, stabilité 46 %, similarité 75 % (prise complète du 1er octobre 2026 : `audio/v4/trs-complet.mp3`, 4 min 04)
 **Voice direction:** Chaleureuse et naturelle, comme une collègue qui raconte une enquête à l'atelier : phrases parlées (« dans notre cas », « ce qui nous donne »), pas de lecture de tableau. Rythme posé, petites pauses avant chaque chiffre, légère tension sur les questions, sourire audible sur « Affaire classée ». Vouvoiement.
 
 Les nombres entiers sont écrits en toutes lettres pour fixer la prononciation. **Les pourcentages à virgule sont écrits en chiffres** (« 85,7 % ») : test B du 1er octobre 2026, validé (« B et C très bien », `audio/tests-pourcentages/`). Repli si une prise bute : l'arrondi parlé (test C, « presque quatre-vingt-six pour cent »), l'écran gardant le chiffre exact.

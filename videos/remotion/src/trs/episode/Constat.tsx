@@ -62,21 +62,21 @@ const Big: React.FC<{ f: number; at: number; top: number; color: string; value: 
 
 export const Constat: React.FC<{ o: number }> = ({ o }) => {
   const f = useG(o);
-  const q = pop(f, T(12.42));
-  const trs = pop(f, T(14.8));
+  const q = pop(f, T(16.12));
+  const trs = pop(f, T(18.94));
   return (
     <Scene>
-      <Eyebrow text="Pour commencer" start={T(5.08)} />
+      <Eyebrow text="Pour commencer" start={T(7.0)} />
       <Widget title="Presse · ligne 2" enter>
         <Presse f={f} />
-        <div style={{ position: "absolute", left: 640, top: 190, fontWeight: 600, fontSize: 30, color: C.blue, opacity: fade(f, T(6.98)) }}>
+        <div style={{ position: "absolute", left: 640, top: 190, fontWeight: 600, fontSize: 30, color: C.blue, opacity: fade(f, T(9.62)) }}>
           Toute la journée, en 2 équipes
         </div>
-        <Big f={f} at={T(9.16)} top={236} color={C.blue} value="16 h" unit="d'ouverture" />
-        <div style={{ position: "absolute", left: 640, top: 430, fontWeight: 700, fontSize: 44, color: C.ink, opacity: fade(f, T(10.66)) }}>
+        <Big f={f} at={T(11.58)} top={236} color={C.blue} value="16 h" unit="d'ouverture" />
+        <div style={{ position: "absolute", left: 640, top: 430, fontWeight: 700, fontSize: 44, color: C.ink, opacity: fade(f, T(14.0)) }}>
           Il manque plus de
         </div>
-        <Big f={f} at={T(11.28)} top={488} color={C.tRed} value="3 h" unit="de production" shake />
+        <Big f={f} at={T(14.6)} top={488} color={C.tRed} value="3 h" unit="de production" shake />
         <div style={{ position: "absolute", left: 640, top: 668, display: "flex", gap: 18, alignItems: "center" }}>
           <span
             style={{
@@ -87,7 +87,7 @@ export const Constat: React.FC<{ o: number }> = ({ o }) => {
               fontWeight: 700,
               fontSize: 38,
               whiteSpace: "nowrap",
-              opacity: fade(f, T(12.42), 4),
+              opacity: fade(f, T(16.12), 4),
               scale: interpolate(q, [0, 1], [0.6, 1]),
             }}
           >
@@ -101,7 +101,7 @@ export const Constat: React.FC<{ o: number }> = ({ o }) => {
               color: "#ffffff",
               fontWeight: 800,
               fontSize: 38,
-              opacity: fade(f, T(14.8), 4),
+              opacity: fade(f, T(18.94), 4),
               scale: interpolate(trs, [0, 1], [0.6, 1]),
             }}
           >
