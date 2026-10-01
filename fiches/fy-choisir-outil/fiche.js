@@ -77,7 +77,7 @@
     { name: 'Ishikawa', acc: C.lightBlue, bg: C.pLav, ink: C.blue, seg: 'p3a',
       desc: ['Explorer les six', 'familles de causes', `(6M) avant d’en`, 'retenir une.'] },
     { name: 'DMAIC', acc: C.red, bg: C.pRed, ink: C.tRed, seg: 'p3b',
-      desc: ['Définir, mesurer,', 'analyser, améliorer,', 'contrôler : un projet', 'de plusieurs semaines.'] },
+      desc: ['Définir, mesurer,', 'analyser, améliorer,', `contrôler${NB}: un projet`, 'de plusieurs semaines.'] },
   ];
   const QUESTIONS = [
     ['Beaucoup de problèmes,', `pas de priorité claire${NB}?`],
@@ -291,6 +291,7 @@
       const tl = TOOLS[ti], cx = STRIP.xs[i];
       const dim = pill(D.svg, cx, STRIP.chip, tl.name, { size: 18, h: 34, fill: C.white, stroke: CARD_LINE, color: DIM, weight: 800 });
       const lit = pill(D.svg, cx, STRIP.chip, tl.name, { size: 18, h: 34, fill: tl.bg, stroke: tl.acc, color: tl.ink, weight: 800 });
+      fit(lit.r, 1000, `pastille ${tl.name}`, 80);
       const role = text(D.svg, cx, STRIP.role, ROLES[i], { size: 16, weight: 500, fill: C.ink, anchor: 'middle' });
       fit(role, cx + 112, `rôle ${i + 1}`, cx - 112);
       let arrow = null;
@@ -337,8 +338,11 @@
     CASES.forEach((c, k) => {
       c.node = text(D.svg, PB.x + 20, PB.y + 45, c.text, { size: 19, weight: 700, fill: C.ink });
       fit(c.node, PB.x + PB.w - 22, `cas ${k + 1}`);
-      c.chip = pill(D.svg, 0, HEAD_Y - 5, `Cas${NB}${k + 1}/4`, { size: 15, h: 24, fill: C.blue, stroke: 'none', color: C.white });
-      c.chip.g.setAttribute('transform', `translate(${f2(PB.x + PB.w - c.chip.w / 2)} 0)`);
+      const probe = pill(D.svg, 0, HEAD_Y - 5, `Cas${NB}${k + 1}/4`, { size: 15, h: 24, fill: C.blue, stroke: 'none', color: C.white });
+      probe.g.remove();
+      c.chipX = PB.x + PB.w - probe.w / 2;
+      c.chip = pill(D.svg, c.chipX, HEAD_Y - 5, `Cas${NB}${k + 1}/4`, { size: 15, h: 24, fill: C.blue, stroke: 'none', color: C.white });
+      fit(c.chip.r, PB.x + PB.w + 0.5, `pastille cas ${k + 1}`, 360);
     });
     S.cursor = el('rect', { x: 0, y: PB.y + 27, width: 2.5, height: 23, rx: 1, fill: C.blue });
 
@@ -384,6 +388,7 @@
         const dim = pill(D.svg, c.x, c.y, c.label, { size: 16, h: 26 });
         const lit = pill(D.svg, c.x, c.y, c.label, { size: 16, h: 26, fill: C.blue, stroke: 'none', color: C.white });
         fit(dim.r, 1000, `étiquette ${c.label}`, 80);
+        fit(lit.r, 1000, `étiquette ${c.label} allumée`, 80);
         return { dim: dim.g, lit: lit.g };
       }));
     });
@@ -447,7 +452,7 @@
 
     // ----- Billes -----
     CASES.forEach((c, k) => {
-      const tl = TOOLS[c.tool], cx = CXS[c.tool];
+      const cx = CXS[c.tool];
       if (pre) {
         if (k === 0 && t >= T_CLEAR + CLEAR_DUR + 0.12) { placeBall(c.ball, SLOT[0], SLOT[1]); return; }
         const p = prog(t, T_CLEAR + 0.05 * c.tool, 0.24);
@@ -475,7 +480,6 @@
       else if (u >= 0.17 && u < 0.21) sy = 1 - 0.07 * Math.sin(Math.PI * (u - 0.17) / 0.04);
       const rot = (c.r.L / BR * 180 / Math.PI) * (1 - easeInOut(prog(u, 0.05, 0.3)));
       placeBall(c.ball, cx, REST_Y + dy, { rot, sx: 1 + (1 - sy) * 0.6, sy, lit: prog(u, 0.08, 0.32) });
-      void tl;
     });
     // Bille d'attente de l'image finale (devient la bille du cas 1, puis revient en fin de boucle)
     if (pre && t < T_CLEAR + CLEAR_DUR + 0.12) placeBall(S.next, SLOT[0], SLOT[1]);
@@ -488,8 +492,8 @@
       const s = Math.min(sAt(c.sim, t), c.trailL);
       const o = 1 - prog(t, c.tLand + 0.15, 0.3);
       if (show(c.trail, s > 1 ? o : 0)) {
-        c.trail.setAttribute('stroke-dasharray', `${f2(c.trailL)} ${f2(c.trailL + 10)}`);
-        c.trail.setAttribute('stroke-dashoffset', f2(c.trailL - s));
+        if (s >= c.trailL - 0.01) { c.trail.removeAttribute('stroke-dasharray'); c.trail.removeAttribute('stroke-dashoffset'); }
+        else { c.trail.setAttribute('stroke-dasharray', `${f2(c.trailL)} ${f2(c.trailL + 10)}`); c.trail.setAttribute('stroke-dashoffset', f2(c.trailL - s)); }
       }
     });
 
@@ -547,9 +551,7 @@
       } else c.node.textContent = c.text;
       const co = pre ? 0 : win(t, c.tType + 0.02, end - 0.14, 0.18, 0.12);
       if (show(c.chip.g, co)) {
-        const kk = popScale(prog(t, c.tType + 0.02, 0.24));
-        const cx = PB.x + PB.w - c.chip.w / 2;
-        c.chip.g.setAttribute('transform', `translate(${f2(cx)} 0)` + (kk === 1 ? '' : ` translate(0 ${HEAD_Y - 5}) scale(${kk.toFixed(4)}) translate(0 ${-(HEAD_Y - 5)})`));
+        scaleAt(c.chip.g, c.chipX, HEAD_Y - 5, popScale(prog(t, c.tType + 0.02, 0.24)));
       }
     });
     if (cur && show(S.cursor, Math.floor((t - cur.tType) / 0.25) % 2 === 0 || t < cur.tType + cur.text.length / CPS ? 1 : 0)) {

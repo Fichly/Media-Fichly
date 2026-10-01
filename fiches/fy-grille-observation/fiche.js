@@ -76,7 +76,7 @@
     { cat: 0, row: 0, m: 2 + 10 / 60, src: 'op', count: 2, l2: 'fin du cycle machine', wrong: `opérateur lent${NB}?` },
     { cat: 1, row: 0, m: 7 + 20 / 60, src: 'mag', l1: 'magasin', badge: true, l2: 'chercher une clé' },
     { cat: 2, row: 0, m: 14, src: 'bin', l1: 'manque matière', l2: 'chef d’équipe appelé' },
-    { cat: 3, row: 0, m: 18 + 40 / 60, src: 'tray', l1: 'pièce 12', l2: 'bavure, vue au toucher' },
+    { cat: 3, row: 0, m: 18 + 40 / 60, src: 'tray', l1: `pièce${NB}12`, l2: 'bavure, vue au toucher' },
     { cat: 1, upd: 1, m: 22, src: 'mag' },            // 2e passage au magasin : « 1 fois » → « 2 fois »
     { cat: 0, row: 1, m: 26 + 20 / 60, src: 'op', count: 3, l2: 'validation qualité' },
   ];
@@ -216,8 +216,8 @@
 
   function build() {
     D.template({ author: null });
-    D.title('La grille d’observation', 'en 4 colonnes', 1020);
-    D.chapeau('Pour revenir de 30 minutes au poste avec quelque chose d’exploitable.');
+    D.title('La grille d’observation', `en 4${NB}colonnes`, 1020);
+    D.chapeau(`Pour revenir de 30${NB}minutes au poste avec quelque chose d’exploitable.`);
 
     // Explication courte au-dessus du visuel
     fit(rich(D.svg, 62, 352, [['En direct, chaque événement vu au poste s’inscrit, ', 0], ['horodaté', 1], [', dans ', 0], ['sa colonne', 1], ['.', 0]]), 1020, 'explication 1');

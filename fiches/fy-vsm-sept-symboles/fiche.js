@@ -442,7 +442,7 @@
       const active = final ? 0 : prog(s, STEP_T[i], 0.2) * (1 - prog(s, STEP_T[i + 1], 0.2));
       const k = Math.max(done, active);
       c.bc.setAttribute('fill', mix(C.white, C.blue, k));
-      c.bn.setAttribute('fill', mix(C.blue, C.white, k));
+      c.bn.setAttribute('fill', k >= 0.5 ? C.white : C.blue);
       const pulse = active > 0 ? 1 + 0.09 * active * (0.5 - 0.5 * Math.cos(2 * Math.PI * (s - STEP_T[i]) / 0.7)) : 1;
       c.badge.setAttribute('transform', `translate(${c.bx} ${c.cy})` + (pulse !== 1 ? ` scale(${f2(pulse)})` : ''));
       c.box.setAttribute('stroke', mix(CARD_LINE, C.blue, active));

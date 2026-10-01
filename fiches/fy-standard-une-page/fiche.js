@@ -398,7 +398,8 @@
     if (final) return st;
     const e = EX[k];
     const te = T_EXP(k), tl = T_LAND(k);
-    const bob = 2 * Math.sin(2 * Math.PI * t / 1.8 + k * 0.9) * prog(t, te + 0.45, 0.3);
+    // Les blocs flottent pendant la vue éclatée, puis restent immobiles en l'air pendant l'assemblage
+    const bob = 2.5 * Math.sin(2 * Math.PI * t / 1.8 + k * 0.9) * prog(t, te + 0.45, 0.3) * (1 - prog(t, T_LAND(0) - 0.15, 0.3));
     if (t < te) return st;
     if (t < tl) {
       const u = t - te;

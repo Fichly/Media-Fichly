@@ -95,12 +95,12 @@
   const T_GHOSTLINE = 8.05, T_BRACKET = 8.3, T_HYPOK = 8.75, T_EFF = 8.55, T_EFF2 = 9.0;
   const T_BLOCK = ROLLS[3] + ROLL - 0.05, T_FLY = [T_BLOCK + 0.1, T_BLOCK + 0.26], FLY = 0.55;
   const PILLS = [
-    { t: 2.0, label: `1${NB}·${NB}Plan${NB}: comprendre et prévoir`, dot: QUADS[0].color },
+    { t: 2.0, label: `1${NB}·${NB}Plan${NB}: comprendre et prévoir`, q: QUADS[0] },
     { t: 3.5, label: `Passer de Plan à Act${NB}?`, err: true },
-    { t: ROLLS[0], label: `2${NB}·${NB}Do${NB}: tester en petit`, dot: QUADS[1].color },
+    { t: ROLLS[0], label: `2${NB}·${NB}Do${NB}: tester en petit`, q: QUADS[1] },
     { t: 6.45, label: `Oublier Check${NB}?`, err: true },
-    { t: ROLLS[1], label: `3${NB}·${NB}Check${NB}: mesurer et comparer`, dot: QUADS[2].color },
-    { t: ROLLS[2], label: `4${NB}·${NB}Act${NB}: décider`, dot: QUADS[3].color },
+    { t: ROLLS[1], label: `3${NB}·${NB}Check${NB}: mesurer et comparer`, q: QUADS[2] },
+    { t: ROLLS[2], label: `4${NB}·${NB}Act${NB}: décider`, q: QUADS[3] },
     { t: ROLLS[3], label: `Cycle bouclé, aucune étape sautée`, ok: true },
   ];
 
@@ -138,11 +138,15 @@
     [-1, 4, 9].forEach(y => el('line', { x1: -5, y1: y - 1, x2: 6, y2: y - 1, stroke: C.blue, 'stroke-width': 2, 'stroke-linecap': 'round' }, g));
     return g;
   }
-  function pillShape(parent, x, cy, label, { bg, fg, dot, icon, size = 20, h = 40 }) {
+  function pillShape(parent, x, cy, label, { bg, fg, letter, icon, size = 20, h = 40 }) {
     const g = el('g', {}, parent);
     const r = el('rect', { x, y: cy - h / 2, height: h, rx: h / 2, fill: bg }, g);
     let tx0 = x + 20;
-    if (dot) { el('circle', { cx: x + 26, cy, r: 8, fill: dot, stroke: C.white, 'stroke-width': 2.5 }, g); tx0 = x + 44; }
+    if (letter) {
+      el('circle', { cx: x + 22, cy, r: 14, fill: C.white }, g);
+      text(g, x + 22, cy + 5.5, letter.key, { size: 15, weight: 800, fill: letter.color, anchor: 'middle' });
+      tx0 = x + 44;
+    }
     if (icon === 'x') { crossIcon(g, x + 29, cy, 12); tx0 = x + 50; }
     if (icon === 'ok') { checkIcon(g, x + 29, cy, 12); tx0 = x + 50; }
     const tx = text(g, tx0, cy + size * 0.36, label, { size, weight: 700, fill: fg });
@@ -172,7 +176,7 @@
       parts.forEach(([str, color]) => { const sp = el('tspan', color ? { 'font-weight': 700, fill: color } : {}, t); sp.textContent = str; });
       fit(t, 1020, `explication ${y}`);
     };
-    line(352, [['L’exemple : une ligne met ', 0], [`25${NB}min`, C.tRed], [' à redémarrer en début de poste, pour ', 0], [`10 prévues`, C.blue], ['.', 0]]);
+    line(352, [[`L’exemple${NB}: une ligne met `, 0], [`25${NB}min`, C.tRed], [' à redémarrer en début de poste, pour ', 0], [`10${NB}prévues`, C.blue], ['.', 0]]);
     line(384, [['La ', 0], ['roue', C.blue], [' n’avance que d’un cran à la fois. À droite de chaque étape, ', 0], ['la trame vierge', C.blue], ['.', 0]]);
 
     const defs = el('defs');
@@ -360,6 +364,7 @@
       { x0: 430, x1: TPL_X1, l1: [['Oublier Check', true, C.tRed], [`${NB}: on teste, mais personne ne mesure.`, false]], l2: [['L’impression remplace le résultat.', false]] },
     ];
     cells.forEach((c, i) => {
+      el('circle', { cx: c.x0 + 32, cy: ERR.y + ERR.h / 2, r: 14, fill: 'none', stroke: C.red, 'stroke-opacity': 0.45, 'stroke-width': 2, 'stroke-dasharray': '5 4' });
       const g = el('g');
       crossIcon(g, c.x0 + 32, ERR.y + ERR.h / 2, 14);
       const a = rich(g, c.x0 + 58, ERR.y + 31, c.l1, { size: 16 });
@@ -374,7 +379,7 @@
 
     // Pastilles d'étape
     S.pills = PILLS.map(p => {
-      const g = pillShape(D.svg, 92, PILL_Y, p.label, p.err ? { bg: C.pRed, fg: C.tRed, icon: 'x' } : p.ok ? { bg: C.pGreen, fg: C.tGreen, icon: 'ok' } : { bg: C.blue, fg: C.white, dot: p.dot });
+      const g = pillShape(D.svg, 92, PILL_Y, p.label, p.err ? { bg: C.pRed, fg: C.tRed, icon: 'x' } : p.ok ? { bg: C.pGreen, fg: C.tGreen, icon: 'ok' } : { bg: C.blue, fg: C.white, letter: p.q });
       fit(g, 690, `pastille ${p.label}`);
       return g;
     });
@@ -392,6 +397,11 @@
       ROLLS.forEach((t0, k) => { if (t >= t0) x = lerp(ST[k], ST[k + 1], easeInOut(prog(t, t0, ROLL))); });
     }
     let dx = 0, lift = 0, sx = 1, sy = 1, wob = 0;
+    // Le cran s'enclenche : petit tassement à l'arrivée de chaque quart de tour
+    [T_REW + REW, ...ROLLS.map(v => v + ROLL)].forEach(te => {
+      const v = (t - te) / 0.16;
+      if (v >= 0 && v < 1) { sy = 1 - 0.04 * Math.sin(Math.PI * v); sx = 1 + 0.02 * Math.sin(Math.PI * v); }
+    });
     HOPS.forEach(h => {
       const u = t - h.t;
       if (u < 0 || u > UP + DOWN + LAND) return;
@@ -507,14 +517,14 @@
     // Effet imprévu : la question, puis la réponse vérifiée (l'une sort avant que l'autre entre)
     const qIn = final ? 0 : prog(t, T_EFF, 0.25) * (1 - prog(t, T_EFF2, 0.14));
     if (show(S.effQ, qIn)) scaleAt(S.effQ, 340, 499, popScale(prog(t, T_EFF, 0.3)));
-    if (show(S.effOk, vis(T_EFF2 + 0.12, 0.25))) scaleAt(S.effOk, 340, 499, pop(T_EFF2 + 0.12, 0.35));
+    if (show(S.effOk, vis(T_EFF2 + 0.16, 0.25))) scaleAt(S.effOk, 340, 499, pop(T_EFF2 + 0.16, 0.35));
 
     // Standard : sort du sol derrière la roue, puis le kit et la fiche y entrent
     const pbk = final ? 1 : easeOut(prog(t, T_BLOCK, 0.4));
     if (show(S.block, final ? fade : (pbk > 0 ? 1 : 0))) S.blockIn.setAttribute('transform', pbk >= 1 ? '' : `translate(0 ${f2((A - BLOCK.y0 + 4) * (1 - pbk))})`);
     [[S.kit, 0], [S.doc, 1]].forEach(([g, i]) => {
       const [x1, y1] = S.chipAt[i];
-      const x0 = 300 + 90 * i, y0 = ROW_Y[3] + 44;
+      const x0 = 662 + 32 * i, y0 = ROW_Y[3] + 37;
       const p = final ? 1 : prog(t, T_FLY[i], FLY);
       const q = easeInOut(p);
       const x = lerp(x0, x1, q), y = lerp(y0, y1, q) - 150 * Math.sin(Math.PI * q);
@@ -532,10 +542,10 @@
     let gho = 0, bo = 0, bk = 0, bx = 0, shake = 0;
     if (!final) HOPS.forEach(h => {
       const u = t - h.t;
-      gho = Math.max(gho, prog(t, h.t - 0.1, 0.2) * (1 - prog(t, h.t + UP + DOWN + 0.35, 0.2)));
-      if (u > -0.05 && u < UP + DOWN + 0.7) {
+      gho = Math.max(gho, prog(t, h.t - 0.1, 0.2) * (1 - prog(t, h.t + UP + DOWN + 0.08, 0.2)));
+      if (u > -0.05 && u < UP + DOWN + 0.4) {
         bx = ST[h.st] + R + 30;
-        const pin = prog(t, h.t + 0.04, 0.16), pout = prog(t, h.t + UP + DOWN + 0.35, 0.25);
+        const pin = prog(t, h.t + 0.04, 0.16), pout = prog(t, h.t + UP + DOWN + 0.1, 0.22);
         bk = pin <= 0 ? 0 : (pin >= 1 ? 1 : back(pin)) * (1 - easeIn(pout));
         bo = clamp(pin * 3) * (1 - pout);
         const ps = prog(t, h.t + UP, 0.35);
@@ -557,7 +567,7 @@
     // Pastilles d'étape : l'ancienne sort (0,14 s) avant que la nouvelle entre
     S.pills.forEach((g, i) => {
       const last = i === PILLS.length - 1;
-      const a = PILLS[i].t + 0.12;
+      const a = PILLS[i].t + 0.15;
       let o;
       if (final) o = last ? fade : 0;
       else o = prog(t, a, 0.25) * (last ? 1 : 1 - prog(t, PILLS[i + 1].t, 0.14));
