@@ -1,6 +1,7 @@
 // Rendu d'une fiche : node outils/rendu.js <id> stills [t…] | gif [fps] | mp4 [fps] [--scenario nom]
 // stills : PNG de contrôle dans controle/<id>-t<t>.png
-// gif    : livrables/<id>.gif, .mp4 et .png (image t = 0) ; mp4 : sans le GIF (mouvements de caméra)
+// gif    : livrables/<id>.gif, .mp4 et .png (image t = 0), 250 images au plus (limite LinkedIn)
+// mp4    : .mp4 et .png sans le GIF (pour un MP4 plus fluide que le GIF : gif puis mp4 25)
 // Dépendances : playwright (Chromium) et ffmpeg (FFMPEG=… ou ffmpeg dans le PATH).
 const path = require('path');
 const fs = require('fs');
@@ -54,7 +55,13 @@ const FFMPEG = process.env.FFMPEG || 'ffmpeg';
       console.log('→', path.relative(ROOT, f));
     }
   } else if (mode === 'gif' || mode === 'mp4') {
-    const fps = Number(rest[0] || 20);
+    // LinkedIn refuse les GIF de plus de 250 images : la cadence du GIF s'adapte, la durée ne change pas
+    const GIF_MAX = 250;
+    let fps = Number(rest[0] || 20);
+    if (mode === 'gif' && Math.round(duration * fps) > GIF_MAX) {
+      fps = GIF_MAX / duration;
+      console.log(`GIF limité à ${GIF_MAX} images (LinkedIn) : ${fps.toFixed(2)} i/s`);
+    }
     const n = Math.round(duration * fps);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `${name}-`));
     for (let i = 0; i < n; i++) await shot(i / fps, path.join(tmp, `f${String(i).padStart(4, '0')}.png`));
