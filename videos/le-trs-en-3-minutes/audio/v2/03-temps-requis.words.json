@@ -1,0 +1,191 @@
+{
+ "source": "ElevenLabs, Emilie - Podcast Host (d3AXX0BlgJHYFCuH9X88), eleven_multilingual_v2, script v2, prise du 1er octobre 2026",
+ "timing": "faster-whisper small (sandbox Higgsfield), horodatage par mot, transcription brute (graphie de Whisper)",
+ "words": [
+  {
+   "w": "On",
+   "t": 0.0,
+   "end": 0.14
+  },
+  {
+   "w": "commence",
+   "t": 0.14,
+   "end": 0.44
+  },
+  {
+   "w": "par",
+   "t": 0.44,
+   "end": 0.58
+  },
+  {
+   "w": "le",
+   "t": 0.58,
+   "end": 0.7
+  },
+  {
+   "w": "temps.",
+   "t": 0.7,
+   "end": 0.9
+  },
+  {
+   "w": "L",
+   "t": 1.26,
+   "end": 1.36
+  },
+  {
+   "w": "'atelier",
+   "t": 1.36,
+   "end": 1.62
+  },
+  {
+   "w": "est",
+   "t": 1.62,
+   "end": 1.8
+  },
+  {
+   "w": "ouvert",
+   "t": 1.8,
+   "end": 1.96
+  },
+  {
+   "w": "16",
+   "t": 1.96,
+   "end": 2.3
+  },
+  {
+   "w": "heures,",
+   "t": 2.3,
+   "end": 2.58
+  },
+  {
+   "w": "dont",
+   "t": 2.7,
+   "end": 2.8
+  },
+  {
+   "w": "2",
+   "t": 2.8,
+   "end": 3.02
+  },
+  {
+   "w": "heures",
+   "t": 3.02,
+   "end": 3.18
+  },
+  {
+   "w": "de",
+   "t": 3.18,
+   "end": 3.3
+  },
+  {
+   "w": "maintenance",
+   "t": 3.3,
+   "end": 3.66
+  },
+  {
+   "w": "prévue,",
+   "t": 3.66,
+   "end": 4.24
+  },
+  {
+   "w": "qu",
+   "t": 4.46,
+   "end": 4.54
+  },
+  {
+   "w": "'on",
+   "t": 4.54,
+   "end": 4.62
+  },
+  {
+   "w": "met",
+   "t": 4.62,
+   "end": 4.7
+  },
+  {
+   "w": "de",
+   "t": 4.7,
+   "end": 4.78
+  },
+  {
+   "w": "côté.",
+   "t": 4.78,
+   "end": 5.06
+  },
+  {
+   "w": "Il",
+   "t": 5.56,
+   "end": 5.64
+  },
+  {
+   "w": "reste",
+   "t": 5.64,
+   "end": 5.86
+  },
+  {
+   "w": "14",
+   "t": 5.86,
+   "end": 6.18
+  },
+  {
+   "w": "heures.",
+   "t": 6.18,
+   "end": 6.5
+  },
+  {
+   "w": "C",
+   "t": 6.78,
+   "end": 6.82
+  },
+  {
+   "w": "'est",
+   "t": 6.82,
+   "end": 6.9
+  },
+  {
+   "w": "le",
+   "t": 6.9,
+   "end": 7.0
+  },
+  {
+   "w": "temps",
+   "t": 7.0,
+   "end": 7.16
+  },
+  {
+   "w": "requis.",
+   "t": 7.16,
+   "end": 7.58
+  },
+  {
+   "w": "Tout",
+   "t": 8.02,
+   "end": 8.16
+  },
+  {
+   "w": "le",
+   "t": 8.16,
+   "end": 8.28
+  },
+  {
+   "w": "calcul",
+   "t": 8.28,
+   "end": 8.56
+  },
+  {
+   "w": "part",
+   "t": 8.56,
+   "end": 8.84
+  },
+  {
+   "w": "de",
+   "t": 8.84,
+   "end": 8.98
+  },
+  {
+   "w": "là.",
+   "t": 8.98,
+   "end": 9.1
+  }
+ ]
+}

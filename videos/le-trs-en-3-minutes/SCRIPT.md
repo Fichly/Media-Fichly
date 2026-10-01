@@ -4,7 +4,7 @@
 **Voice settings:** réglages par défaut de la voix (à ajuster après la première prise)
 **Voice direction:** Chaleureuse et naturelle, comme une collègue qui raconte une enquête à l'atelier : phrases parlées (« dans notre cas », « ce qui nous donne »), pas de lecture de tableau. Rythme posé, petites pauses avant chaque chiffre, légère tension sur les questions, sourire audible sur « Affaire classée ». Vouvoiement.
 
-Les nombres sont écrits en toutes lettres dans le texte parlé pour fixer la prononciation ; l'écran les affiche en chiffres.
+Les nombres entiers sont écrits en toutes lettres pour fixer la prononciation. **Les pourcentages à virgule sont écrits en chiffres** (« 85,7 % ») : test B du 1er octobre 2026, validé (« B et C très bien », `audio/tests-pourcentages/`). Repli si une prise bute : l'arrondi parlé (test C, « presque quatre-vingt-six pour cent »), l'écran gardant le chiffre exact.
 
 **Version 2 (1er octobre 2026)** : réécrite sur un ton parlé (« Ok, le texte est pas assez naturel… Je veux un texte humain du style "Dans notre cas la machine a tourné X h, ce qui nous donne, une fois enlevés les arrêts non planifiés…" ») et redécoupée en 14 cadres, un cadre = une idée (« pas trop d'animation par frame, on ne sait pas où regarder »). Elle intègre le verdict en heures (ligne 9) et le TRG / TRE (ligne 12). Environ 513 mots, soit environ 3 min 10 avec les respirations.
 
@@ -36,21 +36,21 @@ Les nombres sont écrits en toutes lettres dans le texte parlé pour fixer la pr
 **L'idée :** La disponibilité : 12 h sur 14 h.
 **À l'écran :** La journée de 14 h en blocs d'une heure. Deux blocs passent au rouge, puis sortent de la journée : 12 h sur 14 h, 85,7 %.
 
-    Premier témoin : la disponibilité. Dans notre cas, la presse s'est arrêtée deux heures sans que ce soit prévu : une panne, un manque de matière, un réglage. Une fois ces arrêts non planifiés enlevés, elle a tourné douze heures sur quatorze. Ce qui nous donne une disponibilité de quatre-vingt-cinq virgule sept pour cent.
+    Premier témoin : la disponibilité. Dans notre cas, la presse s'est arrêtée deux heures sans que ce soit prévu : une panne, un manque de matière, un réglage. Une fois ces arrêts non planifiés enlevés, elle a tourné douze heures sur quatorze. Ce qui nous donne une disponibilité de 85,7 %.
 
 ## Line 5 — La performance (Frame 5)
 
 **L'idée :** La performance : 680 pièces sur 720.
 **À l'écran :** Un compteur de pièces : il vise 720 et s'arrête à 680. 94,4 %.
 
-    Deuxième témoin, plus discret : la performance. À soixante pièces à l'heure, la presse aurait dû en sortir sept cent vingt en douze heures. Elle en a sorti six cent quatre-vingts : des micro-arrêts, une cadence un peu lente, que personne ne note. Sa performance est donc de quatre-vingt-quatorze virgule quatre pour cent.
+    Deuxième témoin, plus discret : la performance. À soixante pièces à l'heure, la presse aurait dû en sortir sept cent vingt en douze heures. Elle en a sorti six cent quatre-vingts : des micro-arrêts, une cadence un peu lente, que personne ne note. Sa performance est donc de 94,4 %.
 
 ## Line 6 — La qualité (Frame 6)
 
 **L'idée :** La qualité : 650 bonnes sur 680.
 **À l'écran :** Les 680 pièces : 30 passent au violet (rebut ou retouche). 650 bonnes, 95,6 %.
 
-    Troisième témoin : la qualité. Sur ces six cent quatre-vingts pièces, trente sont parties au rebut ou en retouche, et une retouche, c'est du temps passé deux fois. Il reste six cent cinquante pièces bonnes, soit une qualité de quatre-vingt-quinze virgule six pour cent.
+    Troisième témoin : la qualité. Sur ces six cent quatre-vingts pièces, trente sont parties au rebut ou en retouche, et une retouche, c'est du temps passé deux fois. Il reste six cent cinquante pièces bonnes, soit une qualité de 95,6 %.
 
 ## Line 7 — Le TRS (Frame 7)
 

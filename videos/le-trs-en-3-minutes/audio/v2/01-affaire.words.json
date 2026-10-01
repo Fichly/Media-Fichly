@@ -1,0 +1,151 @@
+{
+ "source": "ElevenLabs, Emilie - Podcast Host (d3AXX0BlgJHYFCuH9X88), eleven_multilingual_v2, script v2, prise du 1er octobre 2026",
+ "timing": "faster-whisper small (sandbox Higgsfield), horodatage par mot, transcription brute (graphie de Whisper)",
+ "words": [
+  {
+   "w": "Regardez",
+   "t": 0.0,
+   "end": 0.42
+  },
+  {
+   "w": "cette",
+   "t": 0.42,
+   "end": 0.54
+  },
+  {
+   "w": "presse,",
+   "t": 0.54,
+   "end": 1.24
+  },
+  {
+   "w": "elle",
+   "t": 1.3,
+   "end": 1.46
+  },
+  {
+   "w": "a",
+   "t": 1.46,
+   "end": 1.54
+  },
+  {
+   "w": "tourné",
+   "t": 1.54,
+   "end": 1.88
+  },
+  {
+   "w": "toute",
+   "t": 1.88,
+   "end": 2.04
+  },
+  {
+   "w": "la",
+   "t": 2.04,
+   "end": 2.26
+  },
+  {
+   "w": "journée",
+   "t": 2.26,
+   "end": 2.52
+  },
+  {
+   "w": "en",
+   "t": 2.52,
+   "end": 2.78
+  },
+  {
+   "w": "deux",
+   "t": 2.78,
+   "end": 2.96
+  },
+  {
+   "w": "équipes,",
+   "t": 2.96,
+   "end": 3.42
+  },
+  {
+   "w": "16h",
+   "t": 3.62,
+   "end": 4.06
+  },
+  {
+   "w": "et",
+   "t": 4.06,
+   "end": 4.26
+  },
+  {
+   "w": "pourtant",
+   "t": 4.26,
+   "end": 4.64
+  },
+  {
+   "w": "le",
+   "t": 4.64,
+   "end": 4.98
+  },
+  {
+   "w": "soir",
+   "t": 4.98,
+   "end": 5.3
+  },
+  {
+   "w": "il",
+   "t": 5.3,
+   "end": 5.62
+  },
+  {
+   "w": "manque",
+   "t": 5.62,
+   "end": 5.82
+  },
+  {
+   "w": "plus",
+   "t": 5.82,
+   "end": 6.18
+  },
+  {
+   "w": "de",
+   "t": 6.18,
+   "end": 6.32
+  },
+  {
+   "w": "3h",
+   "t": 6.32,
+   "end": 6.74
+  },
+  {
+   "w": "de",
+   "t": 6.74,
+   "end": 6.86
+  },
+  {
+   "w": "production,",
+   "t": 6.86,
+   "end": 7.28
+  },
+  {
+   "w": "où",
+   "t": 7.48,
+   "end": 7.54
+  },
+  {
+   "w": "sont",
+   "t": 7.54,
+   "end": 7.7
+  },
+  {
+   "w": "-elles",
+   "t": 7.7,
+   "end": 7.84
+  },
+  {
+   "w": "passées",
+   "t": 7.84,
+   "end": 8.32
+  },
+  {
+   "w": "?",
+   "t": 8.32,
+   "end": 8.66
+  }
+ ]
+}
