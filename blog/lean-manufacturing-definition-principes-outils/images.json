@@ -1,38 +1,50 @@
 [
   {
-    "id": "1-valeur",
-    "section": "Qu'est-ce que le Lean Manufacturing ? Définition",
-    "apres": "En français, on parle aussi de production au plus juste.",
-    "alt": "Les six opérations du parcours d'une commande triées par la question du client : usiner, assembler et emballer ajoutent de la valeur ; déplacer une palette, attendre une validation et reprendre une pièce ratée sont des gaspillages."
+    "id": "2-outils-sans-routine",
+    "section": "Lean Manufacturing, Lean Management, Lean : quelle différence ?",
+    "apres": "En pratique, les deux premiers sont indissociables.",
+    "alt": "Deux postes après le même chantier 5S : sans routine, les outils quittent leur place et l'état du poste retombe en six mois ; avec un point régulier, un responsable par écart et des indicateurs affichés, il tient."
   },
   {
-    "id": "2-cinq-principes",
+    "id": "3-cinq-principes",
     "section": "Les 5 principes du Lean Manufacturing",
     "apres": "Les cinq principes formalisés dans",
-    "alt": "Les cinq principes du Lean Manufacturing dans l'ordre : identifier la valeur, cartographier la chaîne de valeur, créer le flux, tirer le flux, viser la perfection ; chaque amélioration fait apparaître le problème suivant et relance la boucle."
+    "alt": "Les cinq principes du Lean dans l'ordre, chacun avec sa question : identifier la valeur, cartographier la chaîne de valeur, créer le flux, tirer le flux, viser la perfection. Une flèche ramène du cinquième au premier, sur le socle du respect des personnes."
   },
   {
-    "id": "3-flux-pousse-flux-tire",
+    "id": "4-flux-pousse-flux-tire",
     "section": "4. Tirer le flux",
     "apres": "qu'est-ce qui déclenche la production à ce poste",
-    "alt": "Flux poussé et flux tiré sur la même ligne : en flux poussé, la prévision lance chaque poste et le stock grossit entre eux ; en flux tiré, chaque poste remplace ce que l'étape suivante a consommé, avec un supermarché de deux places."
+    "alt": "Deux lignes identiques avec la même demande client : en flux poussé sur prévision, les stocks montent à 15 pièces ; en flux tiré, une carte kanban remonte à chaque consommation et l'encours ne dépasse jamais 4 pièces."
   },
   {
-    "id": "4-maison-toyota",
+    "id": "5-maison-toyota",
     "section": "Juste-à-temps et jidoka : les deux piliers du système Toyota",
     "apres": "Le système Toyota est souvent représenté sous la forme d'une maison.",
-    "alt": "La maison Toyota : fondations stabilité et standards, toit satisfaction du client, pilier juste-à-temps (Kanban, flux tiré, takt time, SMED, lissage de la charge) et pilier jidoka (andon, poka-yoke, autocontrôle, résolution de problèmes)."
+    "alt": "La maison Toyota : fondations stabilité et standards, piliers juste-à-temps et jidoka avec leurs outils, toit satisfaction du client."
   },
   {
-    "id": "5-le-stock-cache-les-problemes",
+    "id": "6-le-stock-cache-les-problemes",
     "section": "Juste-à-temps et jidoka : les deux piliers du système Toyota",
     "apres": "Les deux piliers ne fonctionnent qu'ensemble.",
-    "alt": "La rivière des stocks : avec un stock élevé, les problèmes restent sous la surface ; en juste-à-temps, le stock baisse et les pannes, les changements de série et les défauts apparaissent, le jidoka oblige à les traiter."
+    "alt": "La rivière des stocks : quand le juste-à-temps baisse le niveau, les pannes, les changements de série longs et les défauts récurrents apparaissent ; le jidoka arrête la production et les traite avec la TPM, le SMED et le poka-yoke."
   },
   {
-    "id": "6-exemple-chiffre",
+    "id": "8-partir-du-probleme",
+    "section": "Les outils du Lean Manufacturing, et quand les utiliser",
+    "apres": "Les outils Lean sont nombreux, et c'est un piège.",
+    "alt": "Chaque observation de terrain appelle son outil : stocks et attentes, VSM ; recherches d'outils, 5S ; changements de série longs, SMED ; pannes répétées, TPM ; erreurs qui reviennent, poka-yoke. Les autres outils restent dans la boîte."
+  },
+  {
+    "id": "9-demarche-flux-pilote",
+    "section": "Par où commencer : une démarche en 5 étapes",
+    "apres": "La question revient dans toutes les usines",
+    "alt": "Démarche en 5 étapes : dans l'usine, on écarte le flux le plus problématique et on choisit un flux pilote, puis on suit le produit, on stabilise, on fait circuler et on installe la routine."
+  },
+  {
+    "id": "10-exemple-chiffre",
     "section": "Exemple chiffré : diviser le délai sans toucher aux machines",
     "apres": "Le temps de traversée passe à 200 divisé par 50",
-    "alt": "Exemple chiffré : mêmes machines (sciage, tournage, fraisage, ébavurage) et même débit de 50 pièces par jour ; l'encours passe de 450 à 200 pièces et le temps de traversée de 9 à 4 jours (encours divisé par débit)."
+    "alt": "Exemple chiffré : mêmes machines et même débit de 50 pièces par jour ; l'encours passe de 450 à 200 pièces et le temps de traversée de 9 à 4 jours, les 42 minutes de transformation restant identiques."
   }
 ]
