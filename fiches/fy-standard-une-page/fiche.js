@@ -62,13 +62,13 @@
   const DURATION = 12.5;
   const T_OUT = 1.2;                                     // l'image finale tient jusqu'ici
   const T_REJ_OUT = i => 1.2 + 0.05 * i, REJ_OUT_DUR = 0.36;
-  const T_EXP = k => 1.42 + 0.06 * (6 - k), EXP_DUR = 0.62; // la page se démonte (bloc 7 d'abord)
+  const T_EXP = k => 1.42 + 0.05 * (6 - k), EXP_DUR = 0.55; // la page se démonte (bloc 7 d'abord)
   const T_GHOST = 1.45;
-  const T_LAND = k => 2.9 + 0.6 * k;                     // les blocs s'emboîtent un à un
+  const T_LAND = k => 3.0 + 0.6 * k;                     // les blocs s'emboîtent un à un
   const CONTACT = 0.52, LAND_END = 0.83;
   const T_DONE = T_LAND(6) + CONTACT + 0.2;              // la page est complète
-  const T_REJ = [8.3, 9.15, 10.0], APPROACH = 0.45, RECOIL = 0.65;
-  const PILLS_T = [1.26, 2.78, 7.32, 8.12];              // pastilles 1, 2, « tient sur une page », « ce qu'il ne contient pas »
+  const T_REJ = [8.45, 9.25, 10.05], APPROACH = 0.45, RECOIL = 0.65;
+  const PILLS_T = [1.26, 2.86, 7.5, 8.25];              // pastilles 1, 2, « tient sur une page », « ce qu'il ne contient pas »
 
   // ---------- Petits éléments ----------
   function rich(parent, x, y, segs, size = 22) {
@@ -234,13 +234,14 @@
     // 7 · Version et propriétaire
     (g, r) => {
       const t = head(g, r, 7, 'Version et propriétaire');
-      const v = el('text', { x: r.x + r.w - 14, y: r.y + 30, 'font-family': 'Poppins', 'font-size': 15, 'font-weight': 500, fill: C.ink, 'text-anchor': 'end' }, g);
-      [['v4', C.blue, 700], [`${NB}·${NB}01/10/2026${NB}·${NB}`, C.ink, 500], ['Chef d’équipe', C.blue, 700]].forEach(([str, fill, w]) => {
+      const own = text(g, r.x + r.w - 14, r.y + 30, 'Chef d’équipe', { size: 15, weight: 700, fill: C.blue, anchor: 'end' });
+      const ob = measure(own);
+      personIcon(g, ob.x - 11, r.y + 24.5, C.blue);
+      const v = el('text', { x: ob.x - 27, y: r.y + 30, 'font-family': 'Poppins', 'font-size': 15, 'font-weight': 500, fill: C.ink, 'text-anchor': 'end' }, g);
+      [['v4', C.blue, 700], [`${NB}·${NB}01/10/2026`, C.ink, 500]].forEach(([str, fill, w]) => {
         const sp = el('tspan', { fill, 'font-weight': w }, v); sp.textContent = str;
       });
-      const vb = measure(v);
-      personIcon(g, vb.x - 13, r.y + 24.5, MUTED);
-      fit(t, vb.x - 32, 'bloc 7 titre / version');
+      fit(t, measure(v).x - 16, 'bloc 7 titre / version');
     },
   ];
 
@@ -344,8 +345,8 @@
       const div = el('rect', { x: 16, y: 88, width: RW - 32, height: 66, rx: 12 }, g);   // la ligne qu'on voudrait ajouter
       let strike, slen;
       if (c.ex) {
-        const ex = text(g, 30, 127, c.ex, { size: 16, weight: 500, fill: REASON });
-        fit(ex, RW - 26, `rejet ${i + 1} exemple`, 20);
+        const ex = text(g, 28, 126.5, c.ex, { size: 15, weight: 500, fill: REASON });
+        fit(ex, RW - 24, `rejet ${i + 1} exemple`, 20);
         const b = measure(ex);
         slen = b.width + 8;
         strike = el('line', { x1: b.x - 4, y1: 121.5, x2: b.x + b.width + 4, y2: 121.5, stroke: C.red, 'stroke-width': 2.6, 'stroke-linecap': 'round' }, g);

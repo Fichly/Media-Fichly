@@ -224,7 +224,7 @@
       c.r = makeRoute(c.route, CXS[c.tool]);
       c.tType = t;
       c.tDrop = t + c.text.length / CPS + 0.14;
-      const checks = c.br.map((b, j) => ({ s: c.r.cum[j] - 3, sw: j, br: b, k, stop: flap[j] !== b, pause: k === 0 ? PAUSE_FIRST : PAUSE }));
+      const checks = c.br.map((b, j) => ({ s: c.r.cum[j] - 12, sw: j, br: b, k, stop: flap[j] !== b, pause: k === 0 ? PAUSE_FIRST : PAUSE }));
       c.sim = simulate(c.r, checks, c.tDrop);
       c.tLand = c.sim.tLand;
       c.sim.ev.forEach(e => {
@@ -362,16 +362,20 @@
       const bis = unit(dA[0] + dB[0], dA[1] + dB[1]);
       const half = Math.acos(clamp(dA[0] * dB[0] + dA[1] * dB[1], -1, 1)) / 2;
       const hk = clamp((BR + 14) / Math.sin(half), 30, 60);
-      const H = [fx + bis[0] * hk, fy + bis[1] * hk];
+      const H = [fx + bis[0] * hk, fy + bis[1] * hk];          // moyeu numéroté, au fond de la fourche
+      const pk = clamp(13 / Math.sin(half), 18, 40);
+      const P = [fx + bis[0] * pk, fy + bis[1] * pk];          // pivot de la palette, à la pointe de la fourche
       const nin = [-din[1], din[0]];
       const tip = d => { const sd = Math.sign(nin[0] * d[0] + nin[1] * d[1]) || 1; return [fx + nin[0] * sd * 12, fy + nin[1] * sd * 12]; };
-      const ang = d => { const q = tip(d); return { a: Math.atan2(q[1] - H[1], q[0] - H[0]) * 180 / Math.PI, l: Math.hypot(q[0] - H[0], q[1] - H[1]) }; };
+      const ang = d => { const q = tip(d); return { a: Math.atan2(q[1] - P[1], q[0] - P[0]) * 180 / Math.PI, l: Math.hypot(q[0] - P[0], q[1] - P[1]) + 2 }; };
       const g = el('g');
       const blade = el('line', { x1: 0, y1: 0, x2: 0, y2: 0, stroke: C.ink, 'stroke-width': 6.5, 'stroke-linecap': 'round' }, g);
       const halo = el('circle', { cx: H[0], cy: H[1], r: 20, fill: 'none', stroke: C.blue, 'stroke-width': 3 }, g);
       el('circle', { cx: H[0], cy: H[1], r: 14.5, fill: C.blue, stroke: C.white, 'stroke-width': 2.5 }, g);
       text(g, H[0], H[1] + 5.8, String(j + 1), { size: 16, weight: 800, fill: C.white, anchor: 'middle' });
-      S.hubs.push({ blade, halo, H, A: ang(dB), B: ang(dA) });   // voie A ouverte = palette contre la bouche de B
+      el('circle', { cx: P[0], cy: P[1], r: 5.5, fill: C.ink }, g);
+      el('circle', { cx: P[0], cy: P[1], r: 2, fill: C.white }, g);
+      S.hubs.push({ blade, halo, P, A: ang(dB), B: ang(dA) });   // voie A ouverte = palette contre la bouche de B
     });
 
     // ----- Étiquettes des branches -----
@@ -510,10 +514,10 @@
         a = a0 + dA * q; l = lerp(h[f.from].l, h[f.to].l, clamp(q));
       });
       const r = a * Math.PI / 180;
-      h.blade.setAttribute('x1', f2(h.H[0]));
-      h.blade.setAttribute('y1', f2(h.H[1]));
-      h.blade.setAttribute('x2', f2(h.H[0] + Math.cos(r) * l));
-      h.blade.setAttribute('y2', f2(h.H[1] + Math.sin(r) * l));
+      h.blade.setAttribute('x1', f2(h.P[0]));
+      h.blade.setAttribute('y1', f2(h.P[1]));
+      h.blade.setAttribute('x2', f2(h.P[0] + Math.cos(r) * l));
+      h.blade.setAttribute('y2', f2(h.P[1] + Math.sin(r) * l));
       const v = lit[j];
       const pulse = 0.5 + 0.5 * Math.sin(2 * Math.PI * (t - since[j]) / 0.55 - Math.PI / 2);
       if (show(h.halo, v * (0.6 - 0.4 * pulse))) h.halo.setAttribute('r', f2(18 + 6 * pulse));

@@ -33,7 +33,7 @@
   const SC = { x: 76, y: 424, w: 564, h: 140 };       // la scène, en direct
   const CC = { x: 654, y: 424, w: 350, h: 140 };      // le chronomètre
   const SH = { x: 76, y: 578, w: 928, h: 560 };       // la feuille : la grille à reproduire
-  const FLOOR = 548, HOME = 392, MAG = 214, OBX = 596;
+  const FLOOR = 548, HOME = 386, MAG = 214, OBX = 596;
   const MACH = { x: 428, y: 466, w: 104 };
   const BIN = { x: 278, y: 490, w: 62 };
   const PARTS = [292, 314];                           // pièces brutes dans le bac
@@ -45,7 +45,7 @@
   // ---------- Contenu de la grille (mots du post) ----------
   const CATS = [
     { name: 'Attentes', col: C.teal, soft: '#e1f1f1', dark: '#2b6466',
-      def: `L’opérateur ou la machine attend${NB}: une pièce, une info, une validation, la fin d’un cycle.`,
+      def: `L’opérateur ou la machine attend${NB}: une pièce, une info, une validation, la fin du cycle.`,
       note: [['quand'], ['combien de temps'], ['en attente de quoi']] },
     { name: 'Déplacements', col: C.violet, soft: '#f2e8f4', dark: '#6b3a74',
       def: `L’opérateur quitte sa zone ou fait un geste qui ne transforme rien${NB}: outil, magasin, demi-tour.`,
@@ -60,7 +60,7 @@
   const RULES = [
     [['Prévenir l’équipe avant', 1], [`, et dire ce qu’on observe${NB}: le travail, pas la personne.`, 0]],
     [['Noter ce qu’on voit', 1], [', pas ce qu’on en pense. L’analyse vient après.', 0]],
-    [['Montrer la grille remplie à l’opérateur', 1], [` avant de partir${NB}: il corrige souvent.`, 0]],
+    [['Montrer la grille remplie à l’opérateur', 1], [` avant de partir${NB}: il corrige souvent des interprétations.`, 0]],
   ];
 
   // ---------- Chronologie (s) ----------
@@ -270,9 +270,9 @@
     S.sparks = el('g', {}, sc);
     [[-14, -22, -20, -28], [13, -24, 19, -31], [-2, -28, -2, -36]].forEach(([x1, y1, x2, y2]) => el('line', { x1, y1, x2, y2, stroke: C.yellow, 'stroke-width': 2.6, 'stroke-linecap': 'round' }, S.sparks));
     S.bad = el('g', {}, sc);
-    el('circle', { cx: 0, cy: 0, r: 10, fill: C.red }, S.bad);
-    el('path', { d: 'M -3.6 -3.6 L 3.6 3.6 M 3.6 -3.6 L -3.6 3.6', stroke: C.white, 'stroke-width': 2.6, 'stroke-linecap': 'round' }, S.bad);
-    S.good = checkDisc(sc, 0, 0, 10);
+    el('circle', { cx: 0, cy: 0, r: 8.5, fill: C.red }, S.bad);
+    el('path', { d: 'M -3 -3 L 3 3 M 3 -3 L -3 3', stroke: C.white, 'stroke-width': 2.4, 'stroke-linecap': 'round' }, S.bad);
+    S.good = checkDisc(sc, 0, 0, 8.5);
 
     // Silhouettes : l'opérateur (casque), l'observateur (planchette)
     S.op = figure(sc, { body: C.blue, helmet: true });
@@ -310,10 +310,11 @@
     S.hand = el('line', { x1: swx, y1: swy, x2: swx, y2: swy - 13, stroke: C.blue, 'stroke-width': 3, 'stroke-linecap': 'round' });
     el('circle', { cx: swx, cy: swy, r: 2.6, fill: C.blue });
     S.sw = { x: swx, y: swy };
-    S.digits = text(D.svg, 728, 520, '30:00', { size: 38, weight: 800, fill: C.ink });
-    fit(S.digits, 856, 'chrono');
-    S.rec = el('circle', { cx: 872, cy: 507, r: 6, fill: C.red });
-    fit(text(D.svg, BAR.x + BAR.w, 520, `/ 30:00`, { size: 17, weight: 500, fill: MUTED, anchor: 'end' }), BAR.x + BAR.w, 'chrono total', 886);
+    S.digits = text(D.svg, 730, 522, '30:00', { size: 46, weight: 800, fill: C.ink });
+    fit(S.digits, 880, 'chrono');
+    S.rec = el('g');
+    el('circle', { cx: 900, cy: 506, r: 6, fill: C.red }, S.rec);
+    fit(text(S.rec, BAR.x + BAR.w, 511.5, 'en direct', { size: 15, weight: 700, fill: C.tRed, anchor: 'end' }), BAR.x + BAR.w, 'en direct', 910);
     el('rect', { x: BAR.x, y: BAR.y, width: BAR.w, height: 8, rx: 4, fill: '#e6e6f2' });
     S.barFill = el('rect', { x: BAR.x, y: BAR.y, width: BAR.w, height: 8, rx: 4, fill: C.blue, 'fill-opacity': 0.35 });
     EV.forEach(e => {
@@ -344,11 +345,11 @@
     // En-tête de la feuille
     const ht = text(D.svg, 100, 609, 'Observation de poste', { size: 19, weight: 800, fill: C.blue });
     let fx = measure(ht).x + measure(ht).width + 28;
-    [['Poste', 92], ['Date', 78], ['Observateur', 96]].forEach(([lbl, w]) => {
+    [['Poste', 84], ['Date', 66], ['Observateur', 84]].forEach(([lbl, w]) => {
       const n = text(D.svg, fx, 609, lbl, { size: 15, weight: 500, fill: MUTED });
       const lx = measure(n).x + measure(n).width + 6;
       el('line', { x1: lx, y1: 611, x2: lx + w, y2: 611, stroke: '#c9c9de', 'stroke-width': 1.5 });
-      fx = lx + w + 20;
+      fx = lx + w + 18;
     });
     const dur = rich(D.svg, x1 - DOG - 12, 609, [[`Durée${NB}: `, 0], [`30${NB}min`, C.ink]], { size: 15, fill: MUTED });
     dur.setAttribute('text-anchor', 'end');
@@ -467,7 +468,7 @@
   }
 
   // ---------- L'opérateur à l'instant s ----------
-  const HAND = { rest: [9, -27], reach: [27, -42], up: [23, -60] };
+  const HAND = { rest: [9, -27], reach: [31, -40], up: [23, -60] };
   const mixH = (a, b, k) => [lerp(a[0], b[0], k), lerp(a[1], b[1], k)];
   const turn = (s, a, from, to, d = 0.09) => lerp(from, to, easeInOut(prog(s, a, d)));
   function opState(s) {
@@ -529,7 +530,7 @@
     S.hand.setAttribute('x2', f2(S.sw.x + 13 * Math.sin(a)));
     S.hand.setAttribute('y2', f2(S.sw.y - 13 * Math.cos(a)));
     show(S.rec, running);
-    if (running) S.rec.setAttribute('opacity', f2(0.35 + 0.65 * (0.5 + 0.5 * Math.cos((t - T_C0) * Math.PI * 2 / 0.8))));
+    if (running) S.rec.firstChild.setAttribute('opacity', f2(0.35 + 0.65 * (0.5 + 0.5 * Math.cos((t - T_C0) * Math.PI * 2 / 0.8))));
     S.barFill.setAttribute('width', f2(Math.max(0.001, BAR.w * fr)));
     S.ticks.forEach(({ g, e, cx }) => {
       let k;
@@ -613,10 +614,10 @@
     if (sparkOn) { S.sparks.setAttribute('transform', `translate(${TRAY.x + 9} ${TRAY.y})`); S.sparks.setAttribute('opacity', Math.floor(s / 0.06) % 2 ? 0.3 : 1); }
     const badOn = s >= RE1.te + 0.02 && s < RE1.te + 0.62;
     show(S.bad, badOn);
-    if (badOn) S.bad.setAttribute('transform', `translate(${TRAY.x + 9} ${TRAY.y - 30}) scale(${k3(popScale(prog(s, RE1.te + 0.02, 0.3)) * (1 - easeIn(prog(s, RE1.te + 0.5, 0.12))))})`);
+    if (badOn) S.bad.setAttribute('transform', `translate(${TRAY.x + 11} ${TRAY.y - 27}) scale(${k3(popScale(prog(s, RE1.te + 0.02, 0.3)) * (1 - easeIn(prog(s, RE1.te + 0.5, 0.12))))})`);
     const gOn = s >= RE1.te + 0.62 && s < RE1.te + 0.95;
     show(S.good, gOn);
-    if (gOn) S.good.setAttribute('transform', `translate(${TRAY.x + 9} ${TRAY.y - 30}) scale(${k3(popScale(prog(s, RE1.te + 0.62, 0.3)) * (1 - prog(s, RE1.te + 0.8, 0.15)))})`);
+    if (gOn) S.good.setAttribute('transform', `translate(${TRAY.x + 11} ${TRAY.y - 27}) scale(${k3(popScale(prog(s, RE1.te + 0.62, 0.3)) * (1 - prog(s, RE1.te + 0.8, 0.15)))})`);
     // Bulles
     popBubble(S.bObs, s, 1.85, 2.6, OBX, 458);
     popBubble(S.bOp, s, 2.12, 2.6, HOME, 458);
@@ -708,7 +709,7 @@
       const R = S.rowOf(e);
       const dst = e.upd ? R.badgeC : R.chipC;
       const q = easeInOut(p);
-      const cx = (src[0] + dst[0]) / 2 + (dst[0] > src[0] ? -40 : 40), cy = Math.min(src[1], dst[1]) - 40;
+      const cx = lerp(src[0], dst[0], 0.3), cy = src[1] - 90;
       const x = (1 - q) * (1 - q) * src[0] + 2 * (1 - q) * q * cx + q * q * dst[0];
       const y = (1 - q) * (1 - q) * src[1] + 2 * (1 - q) * q * cy + q * q * dst[1];
       tok = { x, y, col: CATS[e.cat].col, k: p < 0.15 ? popScale(p / 0.15) : p > 0.85 ? 1 - (p - 0.85) / 0.15 * 0.4 : 1 };

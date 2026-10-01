@@ -73,7 +73,7 @@
   // ---------- Chronologie (s) ----------
   const DURATION = 12.5;
   const T_OUT = 1.2, T_NEW = 1.55;          // la feuille pleine se rabat, une feuille blanche
-  const W_SPEED = 1600, L_SPEED = 1500, H_SPEED = 1100, RET = 0.035;
+  const W_SPEED = 1400, L_SPEED = 1400, H_SPEED = 1000, RET = 0.035;
   const TRAVEL = 3400, TRAVEL0 = 0.045;
 
   const S = { writes: [], strokes: [], vagues: [], blocks: {}, pens: [] };
@@ -119,15 +119,15 @@
 
   // ---------- Feutres ----------
   function makePen(body, cap, nib) {
-    const g = el('g', { display: 'none' });
+    const g = el('g', { display: 'none' }, S.penLayer);
     const r = el('g', {}, g);
     el('path', { d: 'M 0 0 L -4.5 -12 L 4.5 -12 Z', fill: nib, stroke: nib, 'stroke-width': 1.6, 'stroke-linejoin': 'round' }, r);
     el('rect', { x: -7.5, y: -25, width: 15, height: 14, rx: 2.5, fill: '#e4e4ef' }, r);
-    el('rect', { x: -12, y: -134, width: 24, height: 111, rx: 7, fill: body }, r);
-    el('rect', { x: -12, y: -96, width: 24, height: 30, fill: C.white, opacity: 0.9 }, r);
-    el('rect', { x: -6, y: -85, width: 12, height: 3.5, rx: 1.75, fill: body }, r);
-    el('rect', { x: -6, y: -78, width: 8, height: 3.5, rx: 1.75, fill: body, opacity: 0.55 }, r);
-    el('rect', { x: -13.5, y: -146, width: 27, height: 22, rx: 8, fill: cap }, r);
+    el('rect', { x: -11.5, y: -112, width: 23, height: 89, rx: 7, fill: body }, r);
+    el('rect', { x: -11.5, y: -82, width: 23, height: 26, fill: C.white, opacity: 0.9 }, r);
+    el('rect', { x: -6, y: -73, width: 12, height: 3.5, rx: 1.75, fill: body }, r);
+    el('rect', { x: -6, y: -66, width: 8, height: 3.5, rx: 1.75, fill: body, opacity: 0.55 }, r);
+    el('rect', { x: -13, y: -122, width: 26, height: 20, rx: 8, fill: cap }, r);
     const pen = { g, r, sessions: [] };
     S.pens.push(pen);
     return pen;
@@ -396,6 +396,10 @@
       return { hl, ic, cy: y0 - 7 };
     });
 
+    // ----- Feutres : sous les pastilles et le compteur, au-dessus de la feuille et des règles -----
+    S.penLayer = el('g');
+    D.svg.appendChild(cg);
+
     // ----- Pastilles d'étape -----
     const PILLS = [
       [`1${NB}·${NB}Le problème, en tête du poisson`, C.blue, C.white],
@@ -453,12 +457,13 @@
 
     // Repères de la chronologie
     const firstCause = Math.min(S.blocks[PEN_A_BLOCKS[0]].vg.write.act.t0, S.blocks[PEN_B_BLOCKS[0]].write.act.t0);
-    S.T_PILL = [T_NEW - 0.1, S.spine.act.t0 - 0.12, firstCause - 0.1, S.circles[0].loop.act.t0 - 0.25, S.circles[2].tPop + 0.4];
-    S.T_RULE = [firstVague.strike.act.t1 + 0.05, S.blocks[PEN_B_BLOCKS[0]].write.act.t0, S.circles[2].tPop + 0.15];
+    S.T_PILL = [T_NEW - 0.1, S.spine.act.t0 - 0.12, firstCause - 0.1, Math.max(S.circles[0].loop.act.t0 - 0.25, S.blocks.mes.ev.act.t1), S.circles[2].tPop + 0.4];
+    S.T_RULE = [firstVague.strike.act.t1 + 0.05, S.blocks[PEN_B_BLOCKS[0]].write.act.t1, S.circles[2].tPop + 0.15];
     // Compteurs : une cause de plus à chaque cause écrite, une « à vérifier » de plus à chaque étiquette
     S.causeTimes = BLOCKS.map(b => b.write.act.t1).sort((a, b) => a - b);
     S.tagTimes = S.circles.map(c => c.tPop);
     S.endR = endR;
+    if (window.__DBG) BLOCKS.forEach(b => console.log(b.id, b.vg ? `vague ${b.vg.write.act.t0.toFixed(2)} strike ${b.vg.strike.act.t0.toFixed(2)}-${b.vg.strike.act.t1.toFixed(2)}` : '', `write ${b.write.act.t0.toFixed(2)}-${b.write.act.t1.toFixed(2)}`)), console.log('pills', S.T_PILL.map(x => x.toFixed(2)).join(' '), 'rules', S.T_RULE.map(x => x.toFixed(2)).join(' '), 'circles', S.circles.map(c => c.loop.act.t0.toFixed(2)).join(' '));
     console.log(`Feutre A : ${T_NEW.toFixed(2)} → ${endA.toFixed(2)} s · B → ${endB.toFixed(2)} s · rouge → ${endR.toFixed(2)} s · pastille finale ${S.T_PILL[4].toFixed(2)} s`);
     if (S.T_PILL[4] > DURATION - 0.9 || endR > DURATION - 0.3) console.error(`Chronologie trop longue (fin ${endR.toFixed(2)} s)`);
 

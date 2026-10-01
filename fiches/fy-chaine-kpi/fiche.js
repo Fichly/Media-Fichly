@@ -78,7 +78,7 @@
   const T_BACK = ARR[3] + RESUME, BACK_DUR = 1.0;  // après l'action : retour au chiffre par la boucle
   const T_ARRIVE = T_BACK + BACK_DUR;
   const T_DOWN = T_ARRIVE + 0.04, DOWN_DUR = 0.42; // 7 → 4
-  const BURSTS = [[0, 16], [0.42, 7], [0.8, 7]];   // étincelles : [décalage, nombre]
+  const BURSTS = [[0, 20], [0.42, 8], [0.8, 8]];   // étincelles : [décalage, nombre]
 
   // ---------- Petits éléments ----------
   function rich(parent, x, y, segs, { size = 22, anchor = 'start' } = {}) {
@@ -230,7 +230,7 @@
     CX.forEach((cx, k) => BURSTS.forEach(([, n], b) => {
       for (let j = 0; j < n; j++) {
         const id = k * 100 + b * 20 + j;
-        const ang = -Math.PI / 2 + (rnd(id) - 0.5) * (b ? 2.2 : 2.9);
+        const ang = -Math.PI / 2 + (rnd(id) - 0.5) * (b ? 2.6 : 3.4);
         const sp = { k, b, j, ang, v: 160 + 140 * rnd(id + 7), life: 0.32 + 0.22 * rnd(id + 13),
           col: [C.yellow, '#fff1b8', C.yellow, C.red][j % 4], w: j % 3 ? 3.4 : 4.4 };
         sp.n = el('line', { stroke: sp.col, 'stroke-width': sp.w, 'stroke-linecap': 'round', display: 'none' });
@@ -422,7 +422,7 @@
       if (!on) return;
       const gx = CX[sp.k] - GATE + 2, gy = TOP;
       const pos = w => [gx + sp.v * w * Math.cos(sp.ang), gy + sp.v * w * Math.sin(sp.ang) + 0.5 * 1100 * w * w];
-      const [x1, y1] = pos(u), [x0, y0] = pos(Math.max(0, u - 0.05));
+      const [x1, y1] = pos(u), [x0, y0] = pos(Math.max(0, u - 0.07));
       sp.n.setAttribute('x1', f2(x0)); sp.n.setAttribute('y1', f2(y0));
       sp.n.setAttribute('x2', f2(x1)); sp.n.setAttribute('y2', f2(y1));
       sp.n.setAttribute('opacity', f2(1 - Math.pow(u / sp.life, 2)));

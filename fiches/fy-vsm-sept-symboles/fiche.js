@@ -73,13 +73,14 @@
   const T_OUT = 1.2, OUT = 0.3;
   const STEP_T = [1.55, 2.92, 4.86, 6.12, 7.12, 8.32, 9.9, 11.48]; // sept étapes, puis la fiche terminée
   const SQUASH = 0.14, LIFT = 0.1;
-  // Symboles qui volent depuis la légende : [case, symbole, x, y, départ, longueur (flèche)]
+  // Symboles qui volent depuis la légende : [case, symbole, x, y, départ, longueur (flèche), trajectoire]
+  // (bow : écart latéral sur le papier, arc : hauteur du vol, yk : descend d'abord), pour contourner l'usine du fournisseur
   const FLIGHTS = [
     [0, 'factory', CLI_X, TOP_Y, 1.62], [0, 'factory', SUP_X, TOP_Y, 1.86],
     [1, 'process', PX[2], PROC_Y, 2.98], [1, 'process', PX[1], PROC_Y, 3.13], [1, 'process', PX[0], PROC_Y, 3.28],
-    [2, 'stock', STOCKS[3][0], TRI_Y, 4.92], [2, 'stock', STOCKS[2][0], TRI_Y, 5.04], [2, 'stock', STOCKS[1][0], TRI_Y, 5.16], [2, 'stock', STOCKS[0][0], TRI_Y, 5.28],
+    [2, 'stock', STOCKS[3][0], TRI_Y, 4.92], [2, 'stock', STOCKS[2][0], TRI_Y, 5.04], [2, 'stock', STOCKS[1][0], TRI_Y, 5.16], [2, 'stock', STOCKS[0][0], TRI_Y, 5.28, 0, { bow: 105 }],
     [3, 'push', 930, PUSH_Y, 6.18, 80], [3, 'push', 666, PUSH_Y, 6.28, 58], [3, 'push', 414, PUSH_Y, 6.38, 58], [3, 'push', 150, PUSH_Y, 6.48, 80],
-    [4, 'truck', CLI_X, TRUCK_Y, 7.18], [4, 'truck', SUP_X, TRUCK_Y, 7.38],
+    [4, 'truck', CLI_X, TRUCK_Y, 7.18], [4, 'truck', SUP_X, TRUCK_Y, 7.38, 0, { bow: 125, arc: 18, yk: 2.5 }],
   ];
   const FLY = { factory: 0.62, process: 0.62, stock: 0.58, push: 0.55, truck: 0.6 };
   const LEGEND_SCALE = { factory: 0.6, process: 0.36, stock: 1, push: 1, truck: 1 };
@@ -263,6 +264,7 @@
     });
 
     S.map = el('g');
+    S.pills.forEach(p => D.svg.appendChild(p));        // la pastille reste au-dessus des symboles en vol
     S.ghostL = el('g', {}, S.map);
     S.lineL = el('g', {}, S.map);
     S.groundL = el('g', {}, S.map);
@@ -273,14 +275,14 @@
     // Symboles posés sur la carte (ils partent tous de leur case de légende)
     const firstOfCell = {};
     FLIGHTS.forEach((f, idx) => {
-      const [cell, sym, x, y, t0, L] = f;
+      const [cell, sym, x, y, t0, L, path = {}] = f;
       const g = el('g', {}, S.groundL);
       const m = SYM[sym](g, L);
       const s0 = LEGEND_SCALE[sym];
       const it = {
         idx, cell, sym, x, y, t0, fly: FLY[sym], land: land(f), g, m,
         ox: S.cells[cell].cx, oy: S.cells[cell].cy,
-        s0x: sym === 'push' ? 64 / L : s0, s0y: s0, first: !(cell in firstOfCell),
+        s0x: sym === 'push' ? 64 / L : s0, s0y: s0, first: !(cell in firstOfCell), bow: path.bow || 0, arc: path.arc ?? 62, yk: path.yk || 1,
       };
       firstOfCell[cell] = true;
       it.shadow = el('ellipse', { cx: 0, cy: 0, rx: 10, ry: 5, fill: C.ink, 'fill-opacity': 0.2, display: 'none' }, S.shadowL);
@@ -413,9 +415,9 @@
     const h = 0.3 * (1 - e) + 0.85 * arc;
     const k = 1 + h / 3;
     const bx = lerp(it.s0x, 1, e), by = lerp(it.s0y, 1, e);
-    const gx = lerp(it.ox, it.x, e), gy = lerp(it.oy, it.y, e);
+    const gx = lerp(it.ox, it.x, e) + it.bow * arc, gy = lerp(it.oy, it.y, 1 - Math.pow(1 - e, it.yk));
     return {
-      x: gx, y: gy - 4 * (1 - e) - 62 * arc, gx, gy, sx: bx * k, sy: by * k, bx, by, h, air: true,
+      x: gx, y: gy - 4 * (1 - e) - it.arc * arc, gx, gy, sx: bx * k, sy: by * k, bx, by, h, air: true,
       rot: 7 * arc * Math.sign(it.x - it.ox), o,
     };
   }
@@ -529,7 +531,8 @@
     show(S.tot, to > 0);
     S.tot.setAttribute('opacity', f2(to));
     S.tot.setAttribute('transform', to >= 1 ? '' : `translate(0 ${f2(10 * (1 - easeOut(to)))})`);
-    S.dv.textContent = `${(final ? 10.5 : wait).toFixed(1).replace('.', ',')}${NB}jours`;
+    const days = final ? 10.5 : Math.round(wait * 10) / 10;
+    S.dv.textContent = `${days.toFixed(1).replace('.', ',')}${NB}${days < 2 ? 'jour' : 'jours'}`;
     S.vv.textContent = `${Math.round(final ? 145 : va)}${NB}s`;
 
     // Pastilles d'étape : l'ancienne sort (0,14 s) avant que la nouvelle entre

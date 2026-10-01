@@ -296,7 +296,8 @@
     const s = t < T_OUT ? END : t;           // avant l'effacement : l'état final
 
     // Aiguille (ressort amorti, crans superposés)
-    const sc = score(s);
+    const raw = score(s);
+    const sc = raw < 0 ? -0.3 * raw : raw;          // butée du zéro : l'aiguille rebondit
     S.needle.setAttribute('transform', needleRot(sc));
     const gIn = s < 5 ? 1 - prog(s, T_OUT, 0.2) : prog(s, T_GHOST, 0.3);
     show(S.ghostNeedle, gIn * 0.85);
