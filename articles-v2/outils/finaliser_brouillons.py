@@ -1,17 +1,20 @@
-"""Finalise les brouillons du blog avant publication.
+"""Finalise les brouillons du blog avant publication, au format attendu par le gabarit V2.
 
-    python3 articles-v2/outils/finaliser_brouillons.py articles-v2/sauvegardes/2026-10-01/brouillons.json sortie/
+    python3 articles-v2/outils/finaliser_brouillons.py articles-v2/sauvegardes/2026-10-01/brouillons.json sortie/ alts.json handles.json
 
 Entrée : export JSON des articles (data.nodes[] : id, handle, title, body, image, summary).
 Sortie : <handle>.html (corps final) et journal.json (changements et contrôles, par article).
 
+Le thème en ligne (section main-article-v2) affiche les corps à classes fichly-* : il garde l'enveloppe
+.fichly-article, reprend résumé, essentiel et sommaire, et génère son propre JSON-LD (Article + fil d'Ariane).
+
 Règles appliquées, dans l'ordre :
-1. Retire les commentaires HTML (briefs internes visibles dans le code source public).
+1. Retire les commentaires HTML (briefs internes, visibles dans le flux du blog et le code source).
    Les commentaires « VISUEL n » sont remplacés par le visuel correspondant quand il existe.
-2. Remplace les marqueurs restants : photo de l'auteur, textes d'exemple entre crochets.
-3. JSON-LD Article : headline = titre, image = couverture, dates = date de publication,
-   mainEntityOfPage = URL réelle de l'article.
-4. Contrôles : plus aucun crochet, commentaire, REMPLACER ni VISUEL-A-CREER ; liens internes vers des articles connus.
+2. Retire les blocs <style> et les JSON-LD écrits à la main : le gabarit V2 porte le style et les données structurées.
+3. Remplace les marqueurs restants : photo de l'auteur, textes d'exemple entre crochets.
+4. Contrôles : plus aucun crochet, commentaire, style, REMPLACER ni VISUEL-A-CREER ; liens internes connus ;
+   texte visible et intertitres identiques à l'original, hors remplacements voulus.
 """
 import json
 import re
@@ -67,6 +70,12 @@ SCRIPT = re.compile(r'<script\b.*?</script>|<style\b.*?</style>', re.S)
 JETONS = re.compile(r'<!--.*?-->|<script\b.*?</script>|<style\b.*?</style>', re.S)
 
 
+def visible(html):
+    """Texte vu par le lecteur : sans commentaires, scripts, styles ni balises (les alt des images ne comptent pas)."""
+    html = JETONS.sub(' ', html)
+    return ' '.join(re.sub(r'<[^>]+>', ' ', html).split())
+
+
 def visuel(handle, nom, alts):
     f = f'fichly-{handle}-{nom}.gif'
     alt = alts[f].replace('"', '&quot;')
@@ -104,28 +113,15 @@ def finaliser(a, alts, couvertures, handles):
         body = body.replace(old, new)
         log.append(f'texte d\'exemple : {old!r} → {new!r}')
 
-    # 3. JSON-LD Article
+    # 2. <style> et JSON-LD écrits à la main
+    n_style = len(re.findall(r'<style\b', body))
+    body = re.sub(r'<style\b.*?</style>\s*', '', body, flags=re.S)
+    n_ld = len(re.findall(r'application/ld\+json', body))
+    body = re.sub(r'(<p>\s*)?<script type="application/ld\+json">.*?</script>(\s*</p>)?\s*', '', body, flags=re.S)
+    body = re.sub(r'<p>\s*</p>\s*', '', body)
+    log.append(f'{n_style} bloc(s) <style> et {n_ld} JSON-LD retirés (portés par le gabarit V2)')
     date = PUBLICATION.get(h, AUJOURDHUI)
-    url = BLOG + h
     image = a['image']['url'].split('?')[0] if a.get('image') else couvertures[h]
-
-    def ld(m):
-        o = json.loads(m.group(2))
-        if o.get('@type') == 'Article':
-            avant = {k: o.get(k) for k in ('headline', 'image', 'datePublished', 'dateModified', 'mainEntityOfPage')}
-            o['headline'] = a['title']
-            if not str(o.get('image', '')).startswith('https://'):
-                o['image'] = image
-            o['datePublished'] = date
-            o['dateModified'] = date
-            if isinstance(o.get('mainEntityOfPage'), dict):
-                o['mainEntityOfPage']['@id'] = url
-            else:
-                o['mainEntityOfPage'] = url
-            apres = {k: o.get(k) for k in avant}
-            log.append(f'JSON-LD Article : {json.dumps({k: [avant[k], apres[k]] for k in avant if avant[k] != apres[k]}, ensure_ascii=False)}')
-        return m.group(1) + json.dumps(o, ensure_ascii=False, indent=2) + m.group(3)
-    body = re.sub(r'(<script type="application/ld\+json">\s*)(.*?)(\s*</script>)', ld, body, flags=re.S)
 
     # 4. Contrôles
     texte = SCRIPT.sub('', body)
@@ -139,6 +135,24 @@ def finaliser(a, alts, couvertures, handles):
         if lien.rstrip('/') not in handles: erreurs.append(f'lien vers un article inconnu : {lien}')
     for f in re.findall(r'src="([^"]+)"', body):
         if not f.startswith('https://'): erreurs.append(f'image sans URL : {f}')
+    if '<style' in body or 'application/ld+json' in body: erreurs.append('style ou JSON-LD restant')
+    if 'class="fichly-article"' not in a['body'] or 'class="fichly-article"' in body:
+        pass
+    else:
+        erreurs.append('enveloppe fichly-article perdue')
+    avant, apres = visible(a['body']), visible(body)
+    for old, new in REMPLACEMENTS.get(h, []):
+        avant = avant.replace(visible(old), visible(new))
+    if avant != apres:
+        import difflib
+        d = [x for x in difflib.ndiff(avant.split(), apres.split()) if x[0] in '+-']
+        if any(not x[2:].startswith(('Deux', 'Trois', 'Courbe', 'Tableau', 'La')) for x in d if x[0] == '-'):
+            erreurs.append(f'texte visible modifié : {d[:12]}')
+        else:
+            log.append(f'texte visible : {len(d)} mots ajoutés par les textes alternatifs des visuels')
+    if re.findall(r'<h2[^>]*>(.*?)</h2>', a['body'], flags=re.S) != re.findall(r'<h2[^>]*>(.*?)</h2>', body, flags=re.S):
+        erreurs.append('intertitres modifiés')
+    log.append(f'taille : {len(a["body"])} → {len(body)} caractères')
     return body, {'handle': h, 'publication': date, 'image': image, 'changements': log, 'erreurs': erreurs}
 
 
