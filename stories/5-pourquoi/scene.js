@@ -3,6 +3,8 @@
 // contrôle de début de série non fait → « l'opérateur ne l'a pas fait » (une personne : on barre)
 // → le contrôle ne figure pas dans le mode opératoire → mode opératoire pas revu → contre-mesure.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-023.png', numero: 9 },
   famille: 1,
   outil: '5 Pourquoi',
   titre: ['5 Pourquoi'],

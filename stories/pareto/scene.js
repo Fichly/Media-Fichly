@@ -3,6 +3,8 @@
 // 6 causes d'arrêt, 88 / 46 / 30 / 18 / 12 / 6 occurrences sur 200, cumul 44 / 67 / 82 / 91 / 97 / 100 %.
 // D'où la mention « Exemple illustratif » à l'écran.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-053.png', numero: 24 },
   famille: 3,
   outil: 'Analyse de Pareto',
   titre: ['Pareto'],

@@ -46,6 +46,14 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .c4 { --sec: var(--yellow); --sec-soft: var(--yellow-soft); --sec-on: var(--ink); }
 .c5 { --sec: var(--cat); --sec-soft: var(--cat-soft); --sec-on: var(--ink); }
 .c6 { --sec: var(--rust); --sec-soft: var(--rust-soft); --sec-on: var(--white); }
+/* Familles du deck : les couleurs imprimées sur les fiches (bandeau et fond teinté) */
+.f0 { --sec: #3f398d; --sec-soft: #f3f4fb; --sec-on: var(--white); }
+.f1 { --sec: #e6b839; --sec-soft: #fbf4e0; --sec-on: var(--ink); }
+.f2 { --sec: #75bec0; --sec-soft: #e9f5f5; --sec-on: var(--ink); }
+.f3 { --sec: #8cc978; --sec-soft: #edf6ea; --sec-on: var(--ink); }
+.f4 { --sec: #f16969; --sec-soft: #fce8e8; --sec-on: var(--ink); }
+.f5 { --sec: #aa76b2; --sec-soft: #f2eaf3; --sec-on: var(--ink); }
+.f6 { --sec: #74a3d6; --sec-soft: #e9f0f8; --sec-on: var(--ink); }
 .avatar { border-radius: var(--r-pill); border: 3px solid transparent; padding: 2px; background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--ring) border-box; display: block; }
 
 /* ---------- Barre de la maquette ---------- */
@@ -126,6 +134,12 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 /* Le deck en éventail : six fiches, une par famille */
 .fan { position: relative; width: 72%; aspect-ratio: 1 / 1; margin-top: -6%; }
 @container site (max-width: 520px) { .fan { width: 84%; margin-top: -14%; } .stage__badge { left: 12px; bottom: 12px; } .stage__badge span { font-size: 11px; padding: 5px 8px; } .stage__badge span:nth-child(3) { display: none; } .add-total { display: none; } }
+.card--real { display: block; padding: 0; background: var(--bg); }
+.card--real img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rv { width: calc(100% - 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: center; }
+.rv figure { display: grid; gap: 8px; justify-items: center; }
+.rv img { width: 100%; height: auto; border-radius: 10px; box-shadow: var(--shadow-card); display: block; }
+.rv figcaption { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-700); }
 .card { position: absolute; left: 50%; top: 50%; width: 46%; aspect-ratio: 63 / 88; margin: -32% 0 0 -23%; background: var(--bg); border-radius: 9px; box-shadow: var(--shadow-card); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; transform-origin: 50% 120%; transform: rotate(var(--a, 0deg)); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
 .card__top { background: var(--sec); color: var(--sec-on); font-size: clamp(6px, 1.05cqi, 10px); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 7% 9%; }
 .card__mid { padding: 9%; display: grid; gap: 7%; align-content: start; }
@@ -223,6 +237,47 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 18px; height: 14px; border-radius: 4px; display: inline-block; }
 .legend .l-a { border: 1px solid var(--indigo); } .legend .l-s { background: var(--surface); } .legend .l-m { border: 1.5px dashed var(--note); background: var(--note-soft); }
+
+/* ---------- 1d. La vraie fiche ---------- */
+.real { display: grid; gap: 24px; }
+.real__layout { display: grid; gap: 28px; }
+@container site (min-width: 860px) { .real__layout { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 48px; align-items: start; } }
+.real__viewer { display: grid; gap: 14px; justify-items: center; min-width: 0; }
+.real__tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.real__tabs button { font: 600 13px/1 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 8px 12px 8px 9px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.real__tabs button i { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--sec); }
+.real__tabs button[aria-pressed="true"] { background: var(--sec-soft); border-color: var(--sec); }
+.flip { width: min(380px, 100%); aspect-ratio: 375 / 532; perspective: 1600px; max-width: 100%; }
+.flip__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.3,.7,.2,1); }
+.flip.is-verso .flip__inner { transform: rotateY(180deg); }
+.flip__face { position: absolute; inset: 0; margin: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-card); background: var(--sec-soft); }
+.flip__face img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.flip__verso { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .flip__inner { transition: none; } }
+.pin { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); min-width: 26px; height: 26px; padding: 0 6px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); font: 700 13px/26px var(--font); text-align: center; box-shadow: 0 0 0 3px rgba(255,255,255,.85); pointer-events: none; }
+.pin--qr { background: var(--indigo); font-size: 10px; }
+.real__controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; }
+.real__num { font-size: 13px; font-weight: 600; color: var(--ink-700); }
+.real__side { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.real__legend { margin: 0; padding: 0; list-style: none; counter-reset: lg; display: grid; gap: 10px; }
+.real__legend li { counter-increment: lg; display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 15px; color: var(--ink-700); line-height: 1.45; }
+.real__legend li::before { content: counter(lg); width: 26px; height: 26px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); font: 700 13px/26px var(--font); text-align: center; }
+.real__legend b { display: block; color: var(--ink); font-size: 15px; }
+.real__qr { display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 14px; color: var(--ink-700); align-items: start; }
+.real__qr .pin { position: static; transform: none; display: inline-block; }
+.finder { background: var(--surface); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 10px; }
+.finder h3 { font-size: 17px; font-weight: 600; }
+.finder h3 em { font-style: italic; color: var(--indigo); }
+.finder label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.finder select { font: 500 15px/1.3 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); padding: 11px 12px; width: 100%; max-width: 100%; }
+.finder select:focus-visible { outline: none; box-shadow: var(--focus); }
+.finder__res { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.finder__res li { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--sec); border-radius: var(--r-md); padding: 8px 10px; font-size: 14px; font-weight: 600; }
+.finder__res li small { font-size: 12px; color: var(--ink-500); font-weight: 600; font-variant-numeric: tabular-nums; }
+.finder__res button { font: 600 12px/1 var(--font); color: var(--indigo); background: var(--indigo-050); border: 0; border-radius: var(--r-pill); padding: 6px 9px; cursor: pointer; }
+.fam li .eye { border: 0; background: var(--sec-soft); color: var(--ink); cursor: pointer; font: 700 12px/1 var(--font); padding: 6px 8px; border-radius: var(--r-md); }
+.fam li .num { font-size: 11px; font-weight: 700; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.legend .l-e { width: auto; height: auto; font-style: normal; font-size: 12px; }
 
 /* ---------- 4. Pour qui, pour quoi ---------- */
 .uses { display: grid; gap: 24px; }
@@ -467,6 +522,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li><strong>Six familles, six couleurs</strong>Le deck compte six familles d'outils, comme notre liseré a six couleurs. Chaque famille garde sa couleur partout : galerie, liste, pack <span class="n">(bloc 3)</span>.</li>
     <li><strong>Chaque outil mène à son article</strong>Les articles du blog renvoient déjà vers le deck. La page renvoie maintenant vers les articles : le maillage marche dans les deux sens <span class="n">(3, 9)</span>.</li>
     <li><strong>La preuve avant les questions</strong>Le mot d'Hugo, puis les 28 avis et la note de 4,79 sur 5, remontés du widget Judge.me <span class="n">(5, 6)</span>.</li>
+    <li><strong>Nouveau : le vrai produit</strong>Les vraies fiches, tirées de vos fichiers Canva : en éventail dans la galerie, recto verso à retourner, et le Guide du deck pour trouver la sienne. Chaque story s'ouvre et se ferme sur la vraie fiche <span class="n">(blocs 1, 1d, 3)</span>.</li>
     <li><strong>Nouveau : les outils en 15 secondes</strong>Sous la galerie, une rangée de bulles ouvre des vidéos verticales en motion design. Sept sont déjà rendues : le deck et un outil par famille. Touchez une bulle <span class="n">(bloc 1c)</span>.</li>
     <li><strong>Le panier moyen</strong>Le pack à −22 % sous le bouton, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
   </ul>
@@ -494,25 +550,25 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="stage">
           <div class="ribbon" aria-hidden="true"></div>
           <div class="stage__view" id="view0">
-            <div class="fan is-closed" id="fan" role="img" aria-label="Six fiches du deck en éventail, une par famille d'outils">
-              <div class="card c1"><div class="card__top">Résolution de problèmes</div><div class="card__mid"><b>5 Pourquoi</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>1</span></div></div>
-              <div class="card c2"><div class="card__top">Engagement et visualisation</div><div class="card__mid"><b>Obeya</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>2</span></div></div>
-              <div class="card c3"><div class="card__top">Planification et stratégie</div><div class="card__mid"><b>Hoshin Kanri</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>3</span></div></div>
-              <div class="card c4"><div class="card__top">Optimisation des flux</div><div class="card__mid"><b>VSM</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>4</span></div></div>
-              <div class="card c5"><div class="card__top">Efficacité de production</div><div class="card__mid"><b>SMED</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>5</span></div></div>
-              <div class="card c6"><div class="card__top">Amélioration de la production</div><div class="card__mid"><b>Poka-Yoke</b><i></i><i></i><i></i><div class="sk"></div></div><div class="card__foot"><span>Fichly</span><span>6</span></div></div>
+            <div class="fan is-closed" id="fan" role="img" aria-label="Six vraies fiches du deck en éventail : 5 Pourquoi, Obeya, Pareto, VSM, SMED et Poka-Yoke">
+              <div class="card card--real"><img src="fiches/page-023.jpg" alt="" width="375" height="532"></div>
+              <div class="card card--real"><img src="fiches/page-049.jpg" alt="" width="375" height="532"></div>
+              <div class="card card--real"><img src="fiches/page-053.jpg" alt="" width="375" height="532"></div>
+              <div class="card card--real"><img src="fiches/page-071.jpg" alt="" width="375" height="532"></div>
+              <div class="card card--real"><img src="fiches/page-085.jpg" alt="" width="375" height="532"></div>
+              <div class="card card--real"><img src="fiches/page-087.jpg" alt="" width="375" height="532"></div>
             </div>
           </div>
-          <div class="stage__view" id="view1" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-3.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
+          <div class="stage__view" id="view1" hidden><div class="rv"><figure><img src="fiches/page-023.jpg" alt="Recto de la fiche 5 Pourquoi : le besoin, un exemple de chaîne de pourquoi, la définition, quand l'utiliser et un exemple" width="375" height="532"><figcaption>Recto</figcaption></figure><figure><img src="fiches/page-024.jpg" alt="Verso de la fiche 5 Pourquoi : comment le mettre en place en quatre étapes et les bonnes pratiques" width="375" height="532"><figcaption>Verso</figcaption></figure></div></div>
           <div class="stage__view" id="view2" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-4.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
           <div class="stage__view" id="view3" hidden><div class="photo-slot"><b>Visuel « Lean, you know »</b><span>Visuel actuel de la boutique</span><code>Lean_YouKnow_Carrousel.png</code><span class="todo">texte alternatif à rédiger</span></div></div>
           <div class="stage__view" id="view4" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-5.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
           <div class="stage__view" id="view5" hidden><div class="photo-slot"><b>Vidéo de la fiche produit</b><span>Déjà dans le métachamp <code>custom.video_fiche_produit</code>, lue sans le son en boucle</span></div></div>
-          <div class="stage__badge"><span>40 fiches</span><span>Imprimé en France</span><span>6 familles</span></div>
+          <div class="stage__badge"><span>Vraies fiches</span><span>Recto verso</span><span>Imprimé en France</span></div>
         </div>
         <ul class="thumbs" aria-label="Choisir un visuel">
           <li><button type="button" class="t-fan" data-v="0" aria-current="true" aria-label="Le deck en éventail">1</button></li>
-          <li><button type="button" class="c1" data-v="1" aria-current="false" aria-label="Visuel 2">2</button></li>
+          <li><button type="button" class="f1" data-v="1" aria-current="false" aria-label="Recto et verso de la fiche 5 Pourquoi">R/V</button></li>
           <li><button type="button" class="c2" data-v="2" aria-current="false" aria-label="Visuel 3">3</button></li>
           <li><button type="button" class="c3" data-v="3" aria-current="false" aria-label="Visuel 4">4</button></li>
           <li><button type="button" class="c4" data-v="4" aria-current="false" aria-label="Visuel 5">5</button></li>
@@ -556,96 +612,66 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       </div>
     </section>
 
+    <!-- 1d : la vraie fiche -->
+    <section class="real" aria-labelledby="vraie" data-anno="1d" data-label="La vraie fiche, recto verso · Guide du deck">
+      <div class="zone-title">
+        <div class="eyebrow">Ce que vous recevez</div>
+        <h2 id="vraie">La vraie fiche, <em>recto verso</em></h2>
+        <p>Voici les fiches telles qu'elles sont imprimées. Choisissez un outil, retournez la fiche : le recto pour comprendre, le verso pour appliquer.</p>
+      </div>
+      <div class="real__layout">
+        <div class="real__viewer">
+          <div class="real__tabs" role="group" aria-label="Choisir une fiche" id="realTabs"></div>
+          <div class="flip f1" id="flip">
+            <div class="flip__inner">
+              <figure class="flip__face flip__recto"><img id="flipRecto" src="fiches/page-023.jpg" alt="" width="375" height="532"><span class="pin" style="--x: 50%; --y: 12%">1</span><span class="pin" style="--x: 50%; --y: 30%">2</span><span class="pin" style="--x: 24%; --y: 56%">3</span><span class="pin" style="--x: 76%; --y: 56%">4</span><span class="pin" style="--x: 50%; --y: 76%">5</span><span class="pin" style="--x: 50%; --y: 90%">6</span><span class="pin pin--qr" style="--x: 89%; --y: 6%">QR</span></figure>
+              <figure class="flip__face flip__verso"><img id="flipVerso" src="fiches/page-024.jpg" alt="" width="375" height="532"><span class="pin" style="--x: 50%; --y: 9%">1</span><span class="pin" style="--x: 12%; --y: 40%">2</span><span class="pin" style="--x: 50%; --y: 86%">3</span></figure>
+            </div>
+          </div>
+          <div class="real__controls">
+            <button type="button" class="btn" id="flipBtn" aria-pressed="false">Retourner la fiche</button>
+            <span class="real__num" id="realNum">Fiche n° 9 · Résolution de problèmes</span>
+          </div>
+          <p class="vh" id="flipDesc" aria-live="polite"></p>
+        </div>
+        <div class="real__side">
+          <ol class="real__legend" id="legendRecto">
+            <li><span><b>« Je souhaite… »</b> Chaque fiche part d'un besoin du terrain.</span></li>
+            <li><span><b>Le schéma</b> L'outil en un coup d'œil, sur un exemple.</span></li>
+            <li><span><b>Définition</b> Ce que c'est, en quelques lignes.</span></li>
+            <li><span><b>Quand ?</b> Les situations où le sortir.</span></li>
+            <li><span><b>Exemple</b> Un cas concret d'atelier ou de bureau.</span></li>
+            <li><span><b>Liens</b> Les fiches à utiliser avant ou après, avec leur numéro.</span></li>
+          </ol>
+          <ol class="real__legend" id="legendVerso" hidden>
+            <li><span><b>Comment le mettre en place ?</b> La démarche, étape par étape.</span></li>
+            <li><span><b>Les étapes</b> Numérotées, avec un exemple pour chacune.</span></li>
+            <li><span><b>Bonnes pratiques</b> Ce qui fait réussir, ou échouer, l'outil.</span></li>
+          </ol>
+          <p class="real__qr"><span class="pin pin--qr" aria-hidden="true">QR</span><span>Sur chaque recto, un QR code ouvre les templates numériques du deck <span class="todo">nombre de templates à confirmer : « +15 » en introduction, « +30 » en page bonus</span></span></p>
+          <div class="finder">
+            <h3>Trouvez votre fiche, <em>comme dans le Guide du deck</em></h3>
+            <label for="besoin">Je souhaite…</label>
+            <select id="besoin"></select>
+            <ul class="finder__res" id="finderRes" aria-live="polite"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 3 : les six familles -->
     <section class="tools" aria-labelledby="outils" data-anno="3" data-label="Les outils du deck, par famille">
       <div class="tools__head">
         <div class="zone-title">
           <div class="eyebrow">Ce qu'il y a dans la boîte</div>
-          <h2 id="outils">Quarante outils, <em>rangés en six familles</em></h2>
-          <p>Du problème à résoudre à la production à fiabiliser, chaque famille a sa couleur. Les outils fléchés ont un article complet sur notre blog.</p>
+          <h2 id="outils">Toutes les fiches, <em>rangées comme dans le Guide du deck</em></h2>
+          <p>Six familles, une couleur chacune, celle de la fiche imprimée. Le numéro est celui de la fiche dans le deck. Les outils fléchés ont un article complet sur notre blog, l'œil ouvre la vraie fiche.</p>
         </div>
-        <div class="counter" aria-live="polite"><b id="toolCount">37</b><span id="toolLabel">outils listés sur la fiche actuelle</span></div>
+        <div class="counter" aria-live="polite"><b id="toolCount">42</b><span id="toolLabel">outils dans le Guide du deck</span></div>
       </div>
-      <div class="filters" role="group" aria-label="Filtrer par famille">
-        <button type="button" data-f="all" aria-pressed="true"><i></i>Toutes <small>37</small></button>
-        <button type="button" class="c1" data-f="1" aria-pressed="false"><i></i>Résolution de problèmes <small>9</small></button>
-        <button type="button" class="c2" data-f="2" aria-pressed="false"><i></i>Engagement et visualisation <small>6</small></button>
-        <button type="button" class="c3" data-f="3" aria-pressed="false"><i></i>Planification et stratégie <small>6</small></button>
-        <button type="button" class="c4" data-f="4" aria-pressed="false"><i></i>Optimisation des flux <small>7</small></button>
-        <button type="button" class="c5" data-f="5" aria-pressed="false"><i></i>Efficacité de production <small>5</small></button>
-        <button type="button" class="c6" data-f="6" aria-pressed="false"><i></i>Amélioration de la production <small>4</small></button>
-      </div>
-      <div class="families" id="families">
-        <article class="fam c1" data-f="1">
-          <div class="fam__head"><small>Famille 1 · 9 outils</small><h3>Résolution de problèmes</h3></div>
-          <ul>
-            <li><span class="soon">QQOQCCP</span></li>
-            <li><span class="soon">Ishikawa</span></li>
-            <li><a href="#top">5 Pourquoi</a></li>
-            <li><a href="#top">DMAIC</a></li>
-            <li><span>8D</span></li>
-            <li><span>A3</span></li>
-            <li><a href="#top">PDCA</a></li>
-            <li><span>Chantier Kaizen</span></li>
-            <li><span>QQQC</span></li>
-          </ul>
-        </article>
-        <article class="fam c2" data-f="2">
-          <div class="fam__head"><small>Famille 2 · 6 outils</small><h3>Engagement et visualisation</h3></div>
-          <ul>
-            <li><span class="soon">Obeya</span></li>
-            <li><span>Visual Management</span></li>
-            <li><span>SQCDP</span></li>
-            <li><span>DILO</span></li>
-            <li><span>Réunion à forte VA</span></li>
-            <li><span>AIC</span></li>
-          </ul>
-        </article>
-        <article class="fam c3" data-f="3">
-          <div class="fam__head"><small>Famille 3 · 6 outils</small><h3>Planification et stratégie</h3></div>
-          <ul>
-            <li><span class="soon">Analyse de Pareto</span></li>
-            <li><span>Gain/Effort</span></li>
-            <li><span>SMART</span></li>
-            <li><span>OKR</span></li>
-            <li><span>Diagramme de Gantt</span></li>
-            <li><span>Hoshin Kanri</span></li>
-          </ul>
-        </article>
-        <article class="fam c4" data-f="4">
-          <div class="fam__head"><small>Famille 4 · 7 outils</small><h3>Optimisation des flux</h3></div>
-          <ul>
-            <li><span>Diagramme spaghetti</span></li>
-            <li><span>Swimlane</span></li>
-            <li><span>SIPOC</span></li>
-            <li><a href="#top">VSM</a></li>
-            <li><span>Flux tiré</span></li>
-            <li><span>Heijunka</span></li>
-            <li><span class="soon">Takt Time</span></li>
-          </ul>
-        </article>
-        <article class="fam c5" data-f="5">
-          <div class="fam__head"><small>Famille 5 · 5 outils</small><h3>Efficacité de production</h3></div>
-          <ul>
-            <li><span>Yamazumi</span></li>
-            <li><span class="soon">AMDEC</span></li>
-            <li><a href="#top">TRS</a></li>
-            <li><a href="#top">Muda, Muri, Mura</a></li>
-            <li><a href="#top">SMED</a></li>
-          </ul>
-        </article>
-        <article class="fam c6" data-f="6">
-          <div class="fam__head"><small>Famille 6 · 4 outils</small><h3>Amélioration de la production</h3></div>
-          <ul>
-            <li><span>Poka-Yoke</span></li>
-            <li><span>Jidoka</span></li>
-            <li><span>Andon</span></li>
-            <li><span>Cartes de contrôle</span></li>
-            <li><span class="missing">3 outils manquants dans la liste</span></li>
-          </ul>
-        </article>
-      </div>
-      <div class="legend" aria-hidden="true"><span><i class="l-a"></i>Article publié sur le blog</span><span><i class="l-s"></i>Fiche du deck</span><span><i class="l-m"></i>À compléter (maquette)</span></div>
+      <div class="filters" role="group" aria-label="Filtrer par famille" id="filters"></div>
+      <div class="families" id="families"></div>
+      <div class="legend" aria-hidden="true"><span><i class="l-a"></i>Article publié sur le blog</span><span><i class="l-s"></i>Fiche du deck</span><span><i class="l-e">◉</i>Voir la vraie fiche</span></div>
     </section>
 
     <!-- 4 : pour qui -->
@@ -714,7 +740,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <section class="faq" aria-labelledby="questions" data-anno="7" data-label="Questions fréquentes">
       <div class="zone-title"><div class="eyebrow">Avant de commander</div><h2 id="questions">Vos questions <em>sur le deck</em></h2></div>
       <div class="faq__list">
-        <details open><summary>Quels outils contient le deck ?</summary><p>Quarante outils du Lean management et manufacturing, rangés en six familles : résolution de problèmes, engagement et visualisation, planification et stratégie, optimisation des flux, efficacité de production, amélioration de la production. La liste complète est plus haut sur cette page.</p></details>
+        <details open><summary>Quels outils contient le deck ?</summary><p>Les outils du Lean management et manufacturing, rangés en six familles : résolution de problèmes, engagement et visualisation, planification et gestion stratégique, optimisation des processus et des flux, efficacité de production, amélioration de la qualité. Un Guide du deck vous indique quelle fiche prendre selon ce que vous voulez faire. La liste complète, avec le numéro de chaque fiche, est plus haut sur cette page.</p></details>
+        <details><summary>Comment est faite une fiche ?</summary><p>Au recto : le besoin (« Je souhaite… »), un schéma, la définition, quand l'utiliser et un exemple. Au verso : la mise en place étape par étape et les bonnes pratiques. Un QR code mène aux templates numériques du deck.</p></details>
         <details><summary>À qui s'adresse-t-il ?</summary><p>Aux managers qui veulent transmettre les outils à leur équipe, aux étudiants qui entrent dans l'industrie et aux professionnels qui veulent monter en compétence.</p></details>
         <details><summary>Où les fiches sont-elles imprimées ?</summary><p>En France.</p></details>
         <details><summary>Quel est le format des fiches ?</summary><p><span class="todo">Dimensions, papier, boîte : à fournir par Hugo.</span></p></details>
@@ -775,11 +802,12 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <table class="plan">
       <thead><tr><th>#</th><th>Bloc</th><th>Contenu et source</th><th>État actuel</th></tr></thead>
       <tbody>
-        <tr><td><span class="n">1</span></td><td>Galerie</td><td>6 médias du produit (5 images, 1 vidéo <code>custom.video_fiche_produit</code>). Premier visuel : le deck ouvert, avec le liseré en tête. Pastilles sous les vignettes : la couleur de la famille montrée.</td><td>6 images sans texte alternatif</td></tr>
+        <tr><td><span class="n">1</span></td><td>Galerie</td><td>Premier visuel : six vraies fiches en éventail (une par famille), puis le recto et le verso d'une fiche, puis les photos actuelles de la boutique et la vidéo <code>custom.video_fiche_produit</code>.</td><td>Vignettes Canva en 375 × 532 : exporter les fiches en haute définition</td></tr>
         <tr><td><span class="n">1c</span></td><td>Bulles · les outils en 15 s</td><td>Métachamp produit <code>fichly.stories</code> (liste de métaobjets <code>story_outil</code> : nom, famille 1 à 6, vidéo MP4, affiche, vignette, texte de la vidéo, article lié). Rangée de vignettes sous la galerie ; le lecteur ne charge la vidéo qu'au tap.</td><td>Nouveau · 7 vidéos rendues sur 41</td></tr>
+        <tr class="is-new"><td><span class="n">1d</span></td><td>La vraie fiche</td><td>Huit fiches à retourner (recto, verso), avec les rubriques du « Guide de lecture des cartes » du deck. Sélecteur « Je souhaite… » qui reprend le Guide du deck : besoin, outil, numéro de fiche, puis la fiche. Données : <code>guide.json</code>, à passer en métaobjets.</td><td>Nouveau</td></tr>
         <tr><td><span class="n">2</span></td><td>Bloc d'achat</td><td>Titre (sans le point final), <code>custom.sous_titre</code>, note <code>reviews.rating</code> et <code>reviews.rating_count</code>, prix lu dans la boutique, <code>custom.avantage_1</code> à <code>_3</code>, quantité, devis équipe, réassurance.</td><td>Avantages et sous-titre déjà remplis</td></tr>
         <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack.</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
-        <tr><td><span class="n">3</span></td><td>Les outils par famille</td><td><code>custom.les_outils_abordes</code>, découpé par paragraphe : une famille par paragraphe, une couleur par famille. Lien vers l'article quand l'outil en a un (nouveau métachamp <code>fichly.articles_outils</code>, ou correspondance par tag).</td><td>37 outils listés sur 40, fautes de saisie</td></tr>
+        <tr><td><span class="n">3</span></td><td>Les fiches par famille</td><td>Le Guide du deck : 42 outils numérotés de 4 à 45, en six familles, avec leur couleur imprimée. Lien vers l'article quand l'outil en a un, œil pour ouvrir la vraie fiche. Remplace <code>custom.les_outils_abordes</code>.</td><td>La liste Shopify ne correspond plus au deck</td></tr>
         <tr><td><span class="n">4</span></td><td>Pour qui, pour quoi</td><td>Trois usages tirés de la description (apprendre, consolider, transmettre), puis <code>custom.texte_seo</code> replié après le premier paragraphe.</td><td>Texte SEO déjà rédigé</td></tr>
         <tr><td><span class="n">5</span></td><td>Le mot de l'expert</td><td>Métaobjet <code>custom.expert</code> (type <code>experts</code>) : titre, citation, photo, nom, poste. Anneau six couleurs autour de la photo, comme l'auteur des articles.</td><td>Rempli</td></tr>
         <tr><td><span class="n">6</span></td><td>Avis</td><td>Widget Judge.me restylé aux couleurs Fichly : note, répartition, quatre avis, puis « Charger plus ».</td><td>28 avis, 4,79/5</td></tr>
@@ -795,7 +823,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   <h2>Les bulles, <em>comment ça marche</em></h2>
   <p>Chaque vidéo est dessinée par un petit programme, comme vos fiches LinkedIn animées : la fiche s'anime, dans la couleur de sa famille. Même gabarit pour les 40 outils, donc une nouvelle vidéo coûte une scène à écrire, pas un tournage. Les sept vidéos de cette maquette sont réelles : ce sont les fichiers que l'on mettrait en ligne.</p>
   <ul class="fixes">
-    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>0 à 3 s : un problème vécu, en huit mots au plus. 3 à 11,5 s : le geste de l'outil, animé. 11,5 à 14 s : « À retenir ». Puis le liseré se remplit. 35 mots au plus, lisibles sans le son.<br><small>stories/moteur.js</small></li>
+    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>La vraie fiche apparaît, se retourne et s'anime. 1 à 3 s : un problème vécu. 3 à 11,5 s : le geste de l'outil. 11,5 à 14 s : « À retenir ». Puis la fiche se retourne à nouveau, avec son numéro dans le deck. Première et dernière images : le produit réel.<br><small>stories/moteur.js</small></li>
     <li class="c2"><strong>Ancrées dans vos articles</strong>5 Pourquoi, VSM, SMED, Pareto et Obeya reprennent l'exemple et le vocabulaire de l'article Fichly (chaîne du contrôle de début de série, 3 jours contre 5 minutes, interne et externe…). Poka-Yoke suit la définition de Shingo, faute d'article.<br><small>Textes à relire par Hugo</small></li>
     <li class="c3"><strong>Légères et rapides</strong>Environ 0,3 Mo par vidéo web (720 × 1280, H.264 et WebM, sans piste son). La rangée n'affiche que des vignettes de 15 à 20 Ko : rien ne se charge avant le tap, et seule la story suivante est préchargée.<br><small>livrables/stories/</small></li>
     <li class="c4"><strong>Accessibles</strong>Bouton pause (WCAG 2.2.2), texte de chaque vidéo pour les lecteurs d'écran et le bouton « Texte » (WCAG 1.2.1), clavier (flèches, espace, Échap), lecture en pause si l'utilisateur limite les animations, pause quand l'onglet passe en arrière-plan.<br><small>Dans le lecteur</small></li>
@@ -834,8 +862,11 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 
   <h2>À corriger dans la fiche, <em>avant la V2</em></h2>
   <ul class="fixes">
-    <li class="c3"><strong>37 outils listés pour un deck de 40</strong>La liste <code>les_outils_abordes</code> compte 9 + 6 + 6 + 7 + 5 + 4 outils. Il manque trois fiches : lesquelles ?<br><small>Question pour Hugo</small></li>
-    <li class="c3"><strong>Fautes dans la liste des outils</strong>« QQQOQCCP » pour QQOQCCP, « Cartes de contrôles1. », « Mes OKR ». Le 5S n'apparaît nulle part alors que le texte SEO le cite.<br><small>Correction simple</small></li>
+    <li class="c3"><strong>La liste Shopify est celle de l'ancien deck</strong>Ses 37 outils suivent l'ancienne numérotation (n° 3 à 42). Le deck actuel en compte 42 (n° 4 à 45). Il manque sur Shopify : VOC, VA / NVA / NVAO, Bâtonnage, Les 3G, 5S, Matrice de décision et TWI. Shopify garde « Réunion à forte VA » et « Diagramme de Gantt », qui n'ont plus de fiche, et « QQQC » pour QRQC. Takt Time et Heijunka sont en Efficacité de production, Muda en Résolution de problèmes.<br><small>Mettre à jour le métachamp</small></li>
+    <li class="c3"><strong>Quel deck est dans la boîte aujourd'hui ?</strong>La couverture dit « 40 fiches », chiffre de l'ancienne numérotation, alors que la version Canva actuelle en a 42. La maquette suit la version actuelle : vérifier que c'est celle qui est imprimée et expédiée, sinon reprendre l'ancienne liste.<br><small>Question pour Hugo</small></li>
+    <li class="c4"><strong>Dans les fichiers du deck</strong>« ISBN : 3760451390019 » est un code EAN, pas un ISBN. Le verso de la fiche OKR garde « 2024-2034 - You Know » et le lien des templates pointe en partie vers « template-youknow-lean ». L'encadré d'exemple du Guide renvoie encore à Ishikawa n° 4 et 5 Pourquoi n° 5 (anciens numéros). Coquilles : « quotidiendes », « problèmepour », « nécéssaire », « White BELt ».<br><small>À corriger avant la prochaine impression</small></li>
+    <li class="c4"><strong>Noms des familles</strong>Le deck dit « Planification et gestion stratégique », « Optimisation des processus et des flux », « Amélioration de la qualité ». Shopify dit « Planification et stratégie », « Optimisation des flux », « Amélioration de la production ». La maquette suit le deck.<br><small>Correction simple</small></li>
+    <li class="c3"><strong>Fautes dans la liste Shopify</strong>« QQQOQCCP » pour QQOQCCP, « Cartes de contrôles1. », « Mes OKR ». Elles disparaissent si la liste est reprise du Guide du deck.<br><small>Correction simple</small></li>
     <li class="c4"><strong>Textes alternatifs vides</strong>Les six médias n'ont pas d'alt. Bon pour Google Images et l'accessibilité.<br><small>À rédiger avec les photos sous les yeux</small></li>
     <li class="c4"><strong>GTIN dans la description</strong>Le code 3760451390019 est écrit dans le texte, avec une balise <code>&lt;meta&gt;</code> collée. Sa place est le champ code-barres de la variante, lu par Google Shopping.<br><small>Correction simple</small></li>
     <li class="c5"><strong>Stock à −67</strong>Le suivi de stock est actif et le stock est négatif : la vente continue, mais le chiffre ne sert plus à rien. Soit on le remet à jour, soit on coupe le suivi.<br><small>Décision d'Hugo</small></li>
@@ -873,6 +904,10 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <button type="button" class="sp__nav" id="spNext" aria-label="Story suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </dialog>
+
+<script type="application/json" id="guideData">
+{{GUIDE}}
+</script>
 
 <script type="application/json" id="storiesData">
 {{STORIES}}
@@ -937,19 +972,102 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     sticky.classList.toggle('is-on', !e.isIntersecting && e.boundingClientRect.top < 0);
   }, { rootMargin: '-' + 80 + 'px 0px 0px 0px' }).observe(addBtn);
 
+
+  // ---------- La vraie fiche et le Guide du deck ----------
+  const GUIDE = JSON.parse(document.getElementById('guideData').textContent);
+  const FAMS = GUIDE.familles;
+  const FICHES = GUIDE.fiches;
+  const ARTICLES = { '5 Pourquoi': 1, 'DMAIC': 1, 'PDCA': 1, 'VSM': 1, 'TRS': 1, 'Muda, Muri, Mura': 1, 'SMED': 1, '5S': 1 };
+  const SOON = { 'QQOQCCP': 1, 'Ishikawa': 1, 'Obeya': 1, 'Analyse de Pareto': 1, 'Takt Time': 1, 'AMDEC': 1 };
+  const numOf = {}, famOf = {};
+  GUIDE.besoins.forEach(b => b.outils.forEach(([o, n]) => { numOf[o] = n; famOf[o] = b.f; }));
+  const flip = document.getElementById('flip'), flipBtn = document.getElementById('flipBtn');
+  const tabs = document.getElementById('realTabs');
+  const realNum = document.getElementById('realNum'), flipDesc = document.getElementById('flipDesc');
+  const legR = document.getElementById('legendRecto'), legV = document.getElementById('legendVerso');
+  let curFiche = '5 Pourquoi';
+  function showFiche(name, scroll) {
+    const fi = FICHES[name]; if (!fi) return;
+    curFiche = name;
+    const f = famOf[name];
+    flip.className = 'flip f' + f;
+    document.getElementById('flipRecto').src = fi.recto;
+    document.getElementById('flipVerso').src = fi.verso;
+    document.getElementById('flipRecto').alt = `Recto de la fiche ${fi.titre}`;
+    document.getElementById('flipVerso').alt = `Verso de la fiche ${fi.titre}`;
+    setSide(false);
+    realNum.textContent = `Fiche n° ${numOf[name]} · ${FAMS[f].nom}`;
+    tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === name));
+    if (scroll) flip.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  }
+  function setSide(verso) {
+    flip.classList.toggle('is-verso', verso);
+    flipBtn.setAttribute('aria-pressed', String(verso));
+    flipBtn.textContent = verso ? 'Revoir le recto' : 'Retourner la fiche';
+    legR.hidden = verso; legV.hidden = !verso;
+    flipDesc.textContent = (verso ? 'Verso' : 'Recto') + ' de la fiche ' + FICHES[curFiche].titre;
+  }
+  Object.keys(FICHES).forEach(name => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'f' + famOf[name]; b.dataset.f = name;
+    b.innerHTML = `<i></i>${name === 'Analyse de Pareto' ? 'Pareto' : name}`;
+    b.addEventListener('click', () => showFiche(name));
+    tabs.appendChild(b);
+  });
+  flipBtn.addEventListener('click', () => setSide(!flip.classList.contains('is-verso')));
+  showFiche('5 Pourquoi');
+
+  // « Je souhaite… » : le Guide du deck
+  const sel = document.getElementById('besoin'), res = document.getElementById('finderRes');
+  FAMS.forEach(fm => {
+    const og = document.createElement('optgroup'); og.label = fm.nom;
+    GUIDE.besoins.forEach((b, i) => { if (b.f === fm.id) { const o = document.createElement('option'); o.value = i; o.textContent = b.je; og.appendChild(o); } });
+    sel.appendChild(og);
+  });
+  const renderRes = () => {
+    const b = GUIDE.besoins[+sel.value];
+    res.innerHTML = '';
+    b.outils.forEach(([o, n]) => {
+      const li = document.createElement('li'); li.className = 'f' + b.f;
+      li.innerHTML = `${o} <small>n° ${n}</small>`;
+      if (FICHES[o]) { const bt = document.createElement('button'); bt.type = 'button'; bt.textContent = 'Voir la fiche'; bt.addEventListener('click', () => showFiche(o, true)); li.appendChild(bt); }
+      res.appendChild(li);
+    });
+  };
+  sel.value = String(GUIDE.besoins.findIndex(b => b.outils.some(([o]) => o === '5 Pourquoi')));
+  sel.addEventListener('change', renderRes);
+  renderRes();
+
+  // Liste des fiches, famille par famille, depuis le Guide du deck
+  const famBox = document.getElementById('families'), filt = document.getElementById('filters');
+  const toolsOf = f => GUIDE.besoins.filter(b => b.f === f).flatMap(b => b.outils);
+  const famIds = FAMS.filter(fm => fm.id > 0).map(fm => fm.id);
+  const nTools = famIds.reduce((n, f) => n + toolsOf(f).length, 0);
+  filt.innerHTML = `<button type="button" data-f="all" aria-pressed="true"><i></i>Toutes <small>${nTools}</small></button>` +
+    famIds.map(f => `<button type="button" class="f${f}" data-f="${f}" aria-pressed="false"><i></i>${FAMS[f].nom} <small>${toolsOf(f).length}</small></button>`).join('');
+  famBox.innerHTML = famIds.map(f => {
+    const ts = toolsOf(f);
+    return `<article class="fam f${f}" data-f="${f}"><div class="fam__head"><small>Famille ${f} · ${ts.length} fiches</small><h3>${FAMS[f].nom}</h3></div><ul>` +
+      ts.map(([o, n]) => {
+        const lab = `${o} <span class="num">n° ${n}</span>`;
+        const eye = FICHES[o] ? ` <button type="button" class="eye" data-o="${o}" aria-label="Voir la vraie fiche ${o}">◉</button>` : '';
+        const core = ARTICLES[o] ? `<a href="#top">${lab}</a>` : SOON[o] ? `<span class="soon">${lab}</span>` : `<span>${lab}</span>`;
+        return `<li>${core}${eye}</li>`;
+      }).join('') + `</ul></article>`;
+  }).join('');
+  famBox.querySelectorAll('.eye').forEach(b => b.addEventListener('click', () => showFiche(b.dataset.o, true)));
+
   // Filtres par famille
   const filters = [...document.querySelectorAll('.filters button')];
   const fams = [...document.querySelectorAll('.fam')];
   const counter = document.getElementById('toolCount'), label = document.getElementById('toolLabel');
-  const names = { 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et stratégie', 4: 'Optimisation des flux', 5: 'Efficacité de production', 6: 'Amélioration de la production' };
+  const names = Object.fromEntries(FAMS.map(fm => [fm.id, fm.nom]));
   let current = 'all';
   function count() {
     const shown = fams.filter(f => !f.hidden);
-    const n = shown.reduce((s, f) => s + f.querySelectorAll('li > :not(.missing)').length, 0);
-    counter.textContent = current === 'all' && !frame.classList.contains('show-anno') ? 40 : n;
-    label.textContent = current === 'all'
-      ? (frame.classList.contains('show-anno') ? 'outils listés sur la fiche actuelle' : 'outils, une fiche chacun')
-      : 'outils en ' + names[current].toLowerCase();
+    const n = shown.reduce((s, f) => s + f.querySelectorAll('li').length, 0);
+    counter.textContent = n;
+    label.textContent = current === 'all' ? 'outils dans le Guide du deck' : 'outils en ' + names[current].toLowerCase();
   }
   filters.forEach(b => b.addEventListener('click', () => {
     current = b.dataset.f;
@@ -976,7 +1094,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     const li = document.createElement('li');
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'bubble c' + st.famille + (seen.includes(st.id) ? ' is-seen' : '') + (st.video ? '' : ' is-soon');
+    b.className = 'bubble f' + st.famille + (seen.includes(st.id) ? ' is-seen' : '') + (st.video ? '' : ' is-soon');
     b.dataset.id = st.id;
     if (st.famille === 0) b.dataset.deck = '';
     b.style.setProperty('--rc', 'var(--sec)');
@@ -996,7 +1114,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   let cur = 0, paused = false, raf = 0, opener = null;
   bars.innerHTML = ready.map(() => '<i><b></b></i>').join('');
   const fills = [...bars.querySelectorAll('b')];
-  const famNames = { 0: '40 outils du Lean', 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et stratégie', 4: 'Optimisation des flux', 5: 'Efficacité de production', 6: 'Amélioration de la production' };
+  const famNames = { 0: '40 outils du Lean', 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et gestion stratégique', 4: 'Optimisation des processus et des flux', 5: 'Efficacité de production', 6: 'Amélioration de la qualité' };
   const PAUSE_ICON = pauseBtn.innerHTML, PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 
   function setPaused(p) {
@@ -1013,7 +1131,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     els('spTitle').textContent = st.nom;
     els('spFam').textContent = famNames[st.famille];
     els('spDesc').textContent = st.texte;
-    els('spPanel').className = 'sp c' + st.famille;
+    els('spPanel').className = 'sp f' + st.famille;
     els('spCtaText').textContent = st.famille === 0 ? 'Le deck des 40 outils, imprimé en France' : `${st.nom} fait partie des 40 fiches du deck`;
     const more = els('spMore');
     if (st.article) { more.textContent = "Lire l'article"; more.href = '#top'; }

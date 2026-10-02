@@ -3,6 +3,8 @@
 // attentes de 1 / 1,5 / 0,5 jour, transformation de 1 / 3 / 1 minute, soit 5 minutes de valeur
 // ajoutée pour 3 jours de traversée. Ligne de temps à la convention Fichly : attente en bas.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-071.png', numero: 33 },
   famille: 4,
   outil: 'VSM',
   titre: ['VSM'],
@@ -24,7 +26,7 @@ Story.scene({
       if (k === 'T') {
         el('path', { d: `M ${x} ${FY - 34} L ${x + 36} ${FY + 32} L ${x - 36} ${FY + 32} Z`, fill: C.white, stroke: C.ink, 'stroke-width': 4, 'stroke-linejoin': 'round' }, g);
         [[-12, 18], [6, 18], [-3, 2]].forEach(([dx, dy]) => el('rect', { x: x + dx - 7, y: FY + dy - 7, width: 14, height: 14, rx: 2, fill: C.ink500 }, g));
-      } else el('rect', { x: x - 80, y: FY - 52, width: 160, height: 104, rx: 12, fill: C.yellow, stroke: C.ink, 'stroke-width': 4 }, g);
+      } else el('rect', { x: x - 80, y: FY - 52, width: 160, height: 104, rx: 12, fill: C.white, stroke: C.ink, 'stroke-width': 4 }, g);  // poste : boîte blanche, comme sur une VSM
       return { g, x, k };
     });
     S.flowArrow = A.arrow(root, 936, FY, 975, FY, { color: C.ink, sw: 5, head: 18 }).g;

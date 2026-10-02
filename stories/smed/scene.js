@@ -3,6 +3,8 @@
 // en marche. » On sort de l'arrêt tout ce qui peut se faire machine en marche, puis on réduit le reste.
 // Les longueurs de tâches sont illustratives : aucune durée n'est affichée.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-085.png', numero: 40 },
   famille: 5,
   outil: 'SMED',
   titre: ['SMED'],

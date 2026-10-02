@@ -2,6 +2,8 @@
 // Pas d'article Fichly sur cet outil : définition standard (Shigeo Shingo, système de production
 // Toyota). Un détrompeur rend l'erreur physiquement impossible au lieu de compter sur la vigilance.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-087.png', numero: 41 },
   famille: 6,
   outil: 'Poka-Yoke',
   titre: ['Poka-Yoke'],
@@ -15,8 +17,8 @@ Story.scene({
     const root = el('g', { transform: 'translate(540 1150) scale(1.3) translate(-540 -1150)' }, root0);
     // Gabarit de montage : socle et logement
     S.base = el('g', {}, root);
-    el('rect', { x: 290, y: 1060, width: 500, height: 250, rx: 26, fill: C.rustSoft }, S.base);
-    el('rect', { x: 380, y: 1080, width: 320, height: 180, rx: 8, fill: C.white, stroke: C.rust, 'stroke-width': 4 }, S.base);
+    el('rect', { x: 290, y: 1060, width: 500, height: 250, rx: 26, fill: '#e9f0f8' }, S.base);
+    el('rect', { x: 380, y: 1080, width: 320, height: 180, rx: 8, fill: C.white, stroke: '#74a3d6', 'stroke-width': 4 }, S.base);
     // Détrompeur : vient remplir l'encoche de la pièce bien orientée
     S.pin = el('g', {}, root);
     el('rect', { x: 620, y: 1200, width: 70, height: 58, rx: 6, fill: C.green, stroke: C.ok, 'stroke-width': 3 }, S.pin);

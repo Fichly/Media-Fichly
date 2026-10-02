@@ -18,15 +18,17 @@
     ink: '#2c2c2c', ink700: '#4a4a4a', ink500: '#6b6b6b', line: '#e5e5e5', surface: '#f7f7f7', white: '#ffffff',
   };
   const RIBBON = [C.indigo, C.green, C.coral, C.yellow, C.blue, C.rust];
-  // Une couleur par famille, dans l'ordre du liseré. 0 = le deck entier.
+  // Une couleur par famille : celles des fiches imprimées (bandeau et fond teinté relevés sur les
+  // fichiers Canva du deck, identiques à la charte), et les noms de famille imprimés sur les fiches.
+  // 0 = le deck entier, à la couleur de l'étui.
   const FAM = {
-    0: { c: C.indigo, soft: C.indigo050, on: C.white, label: 'Le deck' },
-    1: { c: C.indigo, soft: C.indigo100, on: C.white, label: 'Résolution de problèmes' },
-    2: { c: C.green, soft: C.greenSoft, on: C.ink, label: 'Engagement et visualisation' },
-    3: { c: C.coral, soft: C.coralSoft, on: C.ink, label: 'Planification et stratégie' },
-    4: { c: C.yellow, soft: C.yellowSoft, on: C.ink, label: 'Optimisation des flux' },
-    5: { c: C.blue, soft: C.blueSoft, on: C.ink, label: 'Efficacité de production' },
-    6: { c: C.rust, soft: C.rustSoft, on: C.white, label: 'Amélioration de la production' },
+    0: { c: '#3f398d', soft: C.indigo050, on: C.white, label: 'Le deck' },
+    1: { c: '#e6b839', soft: '#fbf4e0', on: C.ink, label: 'Résolution de problèmes' },
+    2: { c: '#75bec0', soft: '#e9f5f5', on: C.ink, label: 'Engagement et visualisation' },
+    3: { c: '#8cc978', soft: '#edf6ea', on: C.ink, label: 'Planification et gestion stratégique' },
+    4: { c: '#f16969', soft: '#fce8e8', on: C.ink, label: 'Optimisation des processus et des flux' },
+    5: { c: '#aa76b2', soft: '#f2eaf3', on: C.ink, label: 'Efficacité de production' },
+    6: { c: '#74a3d6', soft: '#e9f0f8', on: C.ink, label: 'Amélioration de la qualité' },
   };
 
   // Géométrie commune
@@ -208,17 +210,18 @@
     el('rect', { x: CARD.x, y: CARD.y, width: CARD.w, height: BAND_H, fill: fam.c }, inner);
     if (sc.famille === 0) RIBBON.forEach((c, i) => el('rect', { x: CARD.x + i * CARD.w / 6, y: CARD.y + BAND_H, width: CARD.w / 6 + 1, height: 12, fill: c }, inner));
     const bandLabel = text(inner, CARD.x + PAD, CARD.y + 74, (sc.bandeau || fam.label).toUpperCase(), { size: 32, weight: 700, fill: fam.on, ls: 3 });
+    for (let bs = 32; bs > 22 && width(bandLabel) > CARD.w - PAD * 2; bs -= 1) { bandLabel.setAttribute('font-size', bs); bandLabel.setAttribute('letter-spacing', bs > 27 ? 3 : 2); }
     fit(bandLabel, CARD.x + CARD.w - PAD, 'bandeau');
 
     // Nom de l'outil
     S.title = el('g', {}, S.card);
     const titleLines = sc.titre || [sc.outil];
-    // Taille du titre : 104 px, réduite jusqu'à 72 px pour tenir sur la largeur de la fiche
+    // Taille du titre : 104 px, réduite jusqu’à 60 px pour tenir sur la largeur de la fiche
     let tSize = titleLines.length > 1 ? 88 : 104;
     const avail = CARD.w - PAD * 2;
     const probe = text(S.title, 0, 0, '', { size: tSize, weight: 700, ls: -1 });
     const widest = s => Math.max(...titleLines.map(l => { probe.setAttribute('font-size', s); probe.textContent = l; return width(probe); }));
-    while (tSize > 72 && widest(tSize) > avail) tSize -= 2;
+    while (tSize > 60 && widest(tSize) > avail - 6) tSize -= 2;
     probe.remove();
     titleLines.forEach((l, i) => fit(text(S.title, CARD.x + PAD, CARD.y + BAND_H + 128 + i * tSize * 1.05, l, { size: tSize, weight: 700, fill: C.ink, ls: -1 }), CARD.x + CARD.w - PAD, 'titre'));
     S.titleBar = el('rect', { x: CARD.x + PAD, y: CARD.y + BAND_H + 128 + (titleLines.length - 1) * tSize * 1.05 + 34, width: 0, height: 12, rx: 6, fill: fam.c === C.white ? C.indigo : fam.c }, S.card);
@@ -260,6 +263,22 @@
     S.endRib = el('g', { 'clip-path': 'url(#fiche)' }, S.card);
     S.endRibBars = RIBBON.map((c, i) => el('rect', { x: CARD.x + i * CARD.w / 6, y: CARD.y + CARD.h - 16, width: 0, height: 16, fill: c }, S.endRib));
 
+    // La vraie fiche (vignette des fichiers Canva du deck) : ouverture et fermeture de la story
+    if (sc.fiche) {
+      const RW = 880, RH = Math.round(880 * 532 / 375), RX = (W - RW) / 2, RY = 230;
+      S.realBox = { x: RX, y: RY, w: RW, h: RH };
+      const rc = el('clipPath', { id: 'vraie' }, defs);
+      el('rect', { x: RX, y: RY, width: RW, height: RH, rx: 26 }, rc);
+      S.real = el('g');
+      el('rect', { x: RX, y: RY, width: RW, height: RH, rx: 26, fill: C.white, filter: 'url(#ombre)' }, S.real);
+      el('image', { href: sc.fiche.recto, x: RX, y: RY, width: RW, height: RH, preserveAspectRatio: 'xMidYMid slice', 'clip-path': 'url(#vraie)' }, S.real);
+      el('rect', { x: RX, y: RY, width: RW, height: RH, rx: 26, fill: 'none', stroke: C.line, 'stroke-width': 2 }, S.real);
+      S.realTag = el('g');
+      const tg = pill(S.realTag, W / 2, RY + RH + 78, sc.fiche.legende || `Fiche n° ${sc.fiche.numero} du deck`, { size: 38, bg: fam.c, fg: fam.on, h: 76, pad: 34, anchor: 'middle' });
+      S.realTagC = { x: W / 2, y: RY + RH + 78 };
+      S.hookIn = 1.2;
+    } else S.hookIn = T.hookIn;
+
     // Pied : logo et rappel du deck
     S.foot = el('g');
     el('image', { href: '../../assets/fichly-logo.png', x: W / 2 - 89, y: 1730, width: 178, height: 94 }, S.foot);
@@ -269,9 +288,25 @@
   function drawCommon(t) {
     // Titre visible dès la première image (vignette, Reels) ; la barre d'accent se trace
     S.titleBar.setAttribute('width', (140 * easeOut(prog(t, 0.35, 0.5))).toFixed(1));
+    // Vraie fiche : elle se retourne et devient la fiche animée (0,55 → 1,15 s), puis l'inverse à la fin
+    if (S.real) {
+      const flip = (a, b) => { const p = prog(t, a, b - a); return p; };
+      const cx = W / 2;
+      const outA = flip(0.55, 0.85), inA = flip(0.85, 1.15);      // ouverture
+      const outB = flip(13.9, 14.2), inB = flip(14.2, 14.5);      // fermeture
+      let realK, cardK;
+      if (t < 7.5) { realK = 1 - easeInOut(outA); cardK = easeInOut(inA); }
+      else { cardK = 1 - easeInOut(outB); realK = easeInOut(inB); }
+      const sx = k => `translate(${cx} 0) scale(${Math.max(0.001, k).toFixed(4)} 1) translate(${-cx} 0)`;
+      S.real.setAttribute('transform', sx(realK));
+      S.real.setAttribute('opacity', realK > 0.002 ? 1 : 0);
+      S.card.setAttribute('transform', sx(cardK));
+      S.card.setAttribute('opacity', cardK > 0.002 ? 1 : 0);
+      show(S.realTag, t, 14.45, { from: 'pop', cx: S.realTagC.x, cy: S.realTagC.y, dur: 0.4 });
+    }
     // Accroche, ligne par ligne, puis s'efface vers le haut
-    S.hookLines.forEach((g, i) => show(g, t, T.hookIn + i * 0.22, { dur: 0.5, from: 'up', d: 40 }));
-    const out = prog(t, T.hookOut, 0.4);
+    S.hookLines.forEach((g, i) => show(g, t, S.hookIn + i * 0.22, { dur: 0.5, from: 'up', d: 40 }));
+    const out = prog(t, S.real ? 2.95 : T.hookOut, 0.35);
     S.hook.setAttribute('opacity', (1 - out).toFixed(3));
     S.hook.setAttribute('transform', out > 0 ? `translate(0 ${-60 * easeInOut(out)})` : '');
     // Mécanisme : visible à partir de 3 s
@@ -294,7 +329,9 @@
     api,
     scene(sc) {
       SCENE = sc;
-      window.FICHE.poster = sc.poster ?? 10;
+      window.FICHE.poster = sc.fiche ? 0 : (sc.poster ?? 10);
+      // Avec une vraie fiche, la vignette de bulle montre le haut de la fiche imprimée
+      if (sc.fiche) window.FICHE.bulle = { x: 100, y: 230, s: 880 };
       if (sc.bulle) window.FICHE.bulle = sc.bulle;  // carré { x, y, s } de la vignette de bulle
       Promise.all(['500', '600', '700'].map(w => document.fonts.load(`${w} 40px Montserrat`)).concat(document.fonts.load('italic 600 40px Montserrat'))).then(() => {
         template(sc);

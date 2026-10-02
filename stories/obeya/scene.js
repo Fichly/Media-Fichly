@@ -3,6 +3,8 @@
 // cinq zones lues dans l'ordre (objectif et écart, plan et avancement, problèmes ouverts, indicateurs
 // avec seuil, décisions à prendre) ; un rendez-vous court, debout, à heure fixe ; on y décide.
 Story.scene({
+  // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
+  fiche: { recto: '../../assets/produit/canva/page-049.png', numero: 22 },
   famille: 2,
   outil: 'Obeya',
   titre: ['Obeya'],
@@ -26,12 +28,12 @@ Story.scene({
     });
     // Le mur et ses cinq zones
     S.wall = el('g', {}, root);
-    el('rect', { x: WX, y: WY, width: WW, height: WH, rx: 18, fill: C.greenSoft, stroke: C.ink, 'stroke-width': 4 }, S.wall);
+    el('rect', { x: WX, y: WY, width: WW, height: WH, rx: 18, fill: '#e9f5f5', stroke: C.ink, 'stroke-width': 4 }, S.wall);
     for (let i = 1; i < 5; i++) el('line', { x1: WX + CW * i, y1: WY + 16, x2: WX + CW * i, y2: WY + WH - 16, stroke: C.ink, 'stroke-width': 2, opacity: 0.35 }, S.wall);
     S.zones = [];
     for (let i = 0; i < 5; i++) {
       const cx = WX + CW * (i + 0.5), g = el('g', {}, S.wall);
-      el('circle', { cx, cy: WY + 52, r: 26, fill: C.green }, g);
+      el('circle', { cx, cy: WY + 52, r: 26, fill: '#75bec0' }, g);
       text(g, cx, WY + 63, String(i + 1), { size: 30, weight: 700, fill: C.ink, anchor: 'middle' });
       const pg = el('g', {}, g), my = WY + 230;
       if (i === 0) { // objectif et écart
