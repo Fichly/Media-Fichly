@@ -15,10 +15,12 @@ start(() => {
   { const cx = cols[1];
     el('path', {d: `M ${cx - 130} ${GY - 110} H ${cx + 130} M ${cx - 110} ${GY - 110} V ${GY - 4} M ${cx + 110} ${GY - 110} V ${GY - 4}`, stroke: C.blue, 'stroke-width': 9, 'stroke-linecap': 'round'});
     el('rect', {x: cx - 44, y: GY - 178, width: 88, height: 64, rx: 12, fill: C.blue}); el('circle', {cx, cy: GY - 146, r: 12, fill: C.white});
-    const r = 84, a0 = -0.35 * Math.PI, a1 = 1.15 * Math.PI, py = GY - 146, P = a => [cx + r * Math.cos(a), py + r * Math.sin(a)];
+    const r = 86, a0 = 0.11 * Math.PI, a1 = 0.89 * Math.PI, py = GY - 146, P = a => [cx + r * Math.cos(a), py + r * Math.sin(a)];
     const [sx, sy] = P(a0), [ex, ey] = P(a1);
     el('path', {d: `M ${sx} ${sy} A ${r} ${r} 0 1 0 ${ex} ${ey}`, stroke: C.yellow, 'stroke-width': 10, fill: 'none', 'stroke-linecap': 'round'});
-    el('path', {d: `M ${ex - 4} ${ey - 26} L ${ex} ${ey} L ${ex + 24} ${ey - 8}`, stroke: C.yellow, 'stroke-width': 10, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}) }
+    const dx = Math.sin(a1), dy = -Math.cos(a1), hd = (t) => [ex - 26 * (dx * Math.cos(t) - dy * Math.sin(t)), ey - 26 * (dx * Math.sin(t) + dy * Math.cos(t))];
+    const [h1x, h1y] = hd(0.6), [h2x, h2y] = hd(-0.6);
+    el('path', {d: `M ${h1x} ${h1y} L ${ex} ${ey} L ${h2x} ${h2y}`, stroke: C.yellow, 'stroke-width': 10, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}) }
   // 3. Réunion de crise : table et trois personnes, alerte
   { const cx = cols[2];
     [-90, 0, 90].forEach((dx, k) => person(cx + dx, GY - 148, 40, [C.turq, C.violet, C.lblue][k]));

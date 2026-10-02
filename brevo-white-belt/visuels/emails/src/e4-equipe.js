@@ -14,6 +14,6 @@ start(() => {
     person(cx, BY + 84, 52, col);
     const t = tx(S, cx, BY + 190, name, {size: 44, weight: 700, anchor: 'middle'}); fit(t, x + 14, x + BW - 14, name);
   });
-  belt({L, R, top: BT, th: 84, sag: 20, label: 'WHITE BELT', knot: 0.42, offset: '16%'});
+  belt({L, R, top: BT, th: 84, sag: 20, label: 'WHITE BELT', knot: 0.64, offset: '9%'});
   seal(1012, 618, 130, ['Gratuite'], {size: 42, rot: -8});
 });
