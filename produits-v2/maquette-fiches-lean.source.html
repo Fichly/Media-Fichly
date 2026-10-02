@@ -238,7 +238,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .legend i { width: 18px; height: 14px; border-radius: 4px; display: inline-block; }
 .legend .l-a { border: 1px solid var(--indigo); } .legend .l-s { background: var(--surface); } .legend .l-m { border: 1.5px dashed var(--note); background: var(--note-soft); }
 
-/* ---------- 1d. La vraie fiche ---------- */
+/* ---------- 1d. Une fiche du deck, recto verso ---------- */
 .real { display: grid; gap: 24px; }
 .real__layout { display: grid; gap: 28px; }
 @container site (min-width: 860px) { .real__layout { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 48px; align-items: start; } }
@@ -420,6 +420,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .plan .n { display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 6px; border-radius: var(--r-pill); background: var(--note); color: var(--white); font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
 .plan td:nth-child(2) { font-weight: 600; }
 .plan td:nth-child(4) { color: var(--ink-500); }
+.plan--5 td:nth-child(4) { color: var(--ink-700); }
+.plan--5 td:nth-child(5) { color: var(--ink-500); white-space: nowrap; }
 .plan code, .fixes code { font-size: 12.5px; background: var(--surface); padding: 1px 5px; border-radius: 4px; }
 .fixes { list-style: none; padding: 0; display: grid; gap: 10px; }
 @container plan (min-width: 760px) { .fixes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -522,7 +524,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li><strong>Six familles, six couleurs</strong>Le deck compte six familles d'outils, comme notre liseré a six couleurs. Chaque famille garde sa couleur partout : galerie, liste, pack <span class="n">(bloc 3)</span>.</li>
     <li><strong>Chaque outil mène à son article</strong>Les articles du blog renvoient déjà vers le deck. La page renvoie maintenant vers les articles : le maillage marche dans les deux sens <span class="n">(3, 9)</span>.</li>
     <li><strong>La preuve avant les questions</strong>Le mot d'Hugo, puis les 28 avis et la note de 4,79 sur 5, remontés du widget Judge.me <span class="n">(5, 6)</span>.</li>
-    <li><strong>Nouveau : le vrai produit</strong>Les vraies fiches, tirées de vos fichiers Canva : en éventail dans la galerie, recto verso à retourner, et le Guide du deck pour trouver la sienne. Chaque story s'ouvre et se ferme sur la vraie fiche <span class="n">(blocs 1, 1d, 3)</span>.</li>
+    <li><strong>Nouveau : le produit tel qu'il est</strong>Les fiches du deck, en aperçu numérique tiré de vos fichiers Canva : en éventail dans la galerie, recto verso à retourner, et le Guide du deck pour trouver la sienne. Chaque story s'ouvre et se ferme sur la fiche. Les photos du deck imprimé suivent la liste de prises de vue en bas de page <span class="n">(blocs 1, 1d, 3)</span>.</li>
     <li><strong>Nouveau : les outils en 15 secondes</strong>Sous la galerie, une rangée de bulles ouvre des vidéos verticales en motion design. Sept sont déjà rendues : le deck et un outil par famille. Touchez une bulle <span class="n">(bloc 1c)</span>.</li>
     <li><strong>Le panier moyen</strong>Le pack à −22 % sous le bouton, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
   </ul>
@@ -550,7 +552,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="stage">
           <div class="ribbon" aria-hidden="true"></div>
           <div class="stage__view" id="view0">
-            <div class="fan is-closed" id="fan" role="img" aria-label="Six vraies fiches du deck en éventail : 5 Pourquoi, Obeya, Pareto, VSM, SMED et Poka-Yoke">
+            <div class="fan is-closed" id="fan" role="img" aria-label="Aperçu numérique de six fiches du deck en éventail : 5 Pourquoi, Obeya, Pareto, VSM, SMED et Poka-Yoke">
               <div class="card card--real"><img src="fiches/page-023.jpg" alt="" width="375" height="532"></div>
               <div class="card card--real"><img src="fiches/page-049.jpg" alt="" width="375" height="532"></div>
               <div class="card card--real"><img src="fiches/page-053.jpg" alt="" width="375" height="532"></div>
@@ -564,7 +566,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
           <div class="stage__view" id="view3" hidden><div class="photo-slot"><b>Visuel « Lean, you know »</b><span>Visuel actuel de la boutique</span><code>Lean_YouKnow_Carrousel.png</code><span class="todo">texte alternatif à rédiger</span></div></div>
           <div class="stage__view" id="view4" hidden><div class="photo-slot"><b>Photo du deck</b><span>Visuel actuel de la boutique</span><code>Carrousel-produit-5.jpg</code><span class="todo">texte alternatif à rédiger</span></div></div>
           <div class="stage__view" id="view5" hidden><div class="photo-slot"><b>Vidéo de la fiche produit</b><span>Déjà dans le métachamp <code>custom.video_fiche_produit</code>, lue sans le son en boucle</span></div></div>
-          <div class="stage__badge"><span>Vraies fiches</span><span>Recto verso</span><span>Imprimé en France</span></div>
+          <div class="stage__badge"><span>Aperçu numérique</span><span>Recto verso</span><span>Imprimé en France</span></div>
         </div>
         <ul class="thumbs" aria-label="Choisir un visuel">
           <li><button type="button" class="t-fan" data-v="0" aria-current="true" aria-label="Le deck en éventail">1</button></li>
@@ -613,11 +615,11 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     </section>
 
     <!-- 1d : la vraie fiche -->
-    <section class="real" aria-labelledby="vraie" data-anno="1d" data-label="La vraie fiche, recto verso · Guide du deck">
+    <section class="real" aria-labelledby="vraie" data-anno="1d" data-label="Une fiche du deck, recto verso · Guide du deck">
       <div class="zone-title">
         <div class="eyebrow">Ce que vous recevez</div>
-        <h2 id="vraie">La vraie fiche, <em>recto verso</em></h2>
-        <p>Voici les fiches telles qu'elles sont imprimées. Choisissez un outil, retournez la fiche : le recto pour comprendre, le verso pour appliquer.</p>
+        <h2 id="vraie">Une fiche du deck, <em>recto verso</em></h2>
+        <p>Choisissez un outil et retournez la fiche : le recto pour comprendre, le verso pour appliquer. Aperçu numérique des fichiers d'impression <span class="todo">à doubler d'une photo de la fiche imprimée (bouton « Voir en photo »)</span>.</p>
       </div>
       <div class="real__layout">
         <div class="real__viewer">
@@ -665,13 +667,13 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="zone-title">
           <div class="eyebrow">Ce qu'il y a dans la boîte</div>
           <h2 id="outils">Toutes les fiches, <em>rangées comme dans le Guide du deck</em></h2>
-          <p>Six familles, une couleur chacune, celle de la fiche imprimée. Le numéro est celui de la fiche dans le deck. Les outils fléchés ont un article complet sur notre blog, l'œil ouvre la vraie fiche.</p>
+          <p>Six familles, une couleur chacune, celle de la fiche imprimée. Le numéro est celui de la fiche dans le deck. Les outils fléchés ont un article complet sur notre blog, l'œil ouvre la fiche, recto verso.</p>
         </div>
         <div class="counter" aria-live="polite"><b id="toolCount">42</b><span id="toolLabel">outils dans le Guide du deck</span></div>
       </div>
       <div class="filters" role="group" aria-label="Filtrer par famille" id="filters"></div>
       <div class="families" id="families"></div>
-      <div class="legend" aria-hidden="true"><span><i class="l-a"></i>Article publié sur le blog</span><span><i class="l-s"></i>Fiche du deck</span><span><i class="l-e">◉</i>Voir la vraie fiche</span></div>
+      <div class="legend" aria-hidden="true"><span><i class="l-a"></i>Article publié sur le blog</span><span><i class="l-s"></i>Fiche du deck</span><span><i class="l-e">◉</i>Voir la fiche</span></div>
     </section>
 
     <!-- 4 : pour qui -->
@@ -802,9 +804,9 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <table class="plan">
       <thead><tr><th>#</th><th>Bloc</th><th>Contenu et source</th><th>État actuel</th></tr></thead>
       <tbody>
-        <tr><td><span class="n">1</span></td><td>Galerie</td><td>Premier visuel : six vraies fiches en éventail (une par famille), puis le recto et le verso d'une fiche, puis les photos actuelles de la boutique et la vidéo <code>custom.video_fiche_produit</code>.</td><td>Vignettes Canva en 375 × 532 : exporter les fiches en haute définition</td></tr>
+        <tr><td><span class="n">1</span></td><td>Galerie</td><td>Dans la maquette : six fiches en éventail (aperçu numérique), puis le recto et le verso d'une fiche. En ligne : une vraie photo en premier (plan 1 de la liste), puis la fiche en main avec les cotes, le recto verso, « tout ce que vous recevez », la vidéo <code>custom.video_fiche_produit</code>. Le visuel « Lean, you know » descend dans « Pour qui, pour quoi ».</td><td>Vignettes Canva en 375 × 532 : exporter les fiches en haute définition</td></tr>
         <tr><td><span class="n">1c</span></td><td>Bulles · les outils en 15 s</td><td>Métachamp produit <code>fichly.stories</code> (liste de métaobjets <code>story_outil</code> : nom, famille 1 à 6, vidéo MP4, affiche, vignette, texte de la vidéo, article lié). Rangée de vignettes sous la galerie ; le lecteur ne charge la vidéo qu'au tap.</td><td>Nouveau · 7 vidéos rendues sur 41</td></tr>
-        <tr class="is-new"><td><span class="n">1d</span></td><td>La vraie fiche</td><td>Huit fiches à retourner (recto, verso), avec les rubriques du « Guide de lecture des cartes » du deck. Sélecteur « Je souhaite… » qui reprend le Guide du deck : besoin, outil, numéro de fiche, puis la fiche. Données : <code>guide.json</code>, à passer en métaobjets.</td><td>Nouveau</td></tr>
+        <tr class="is-new"><td><span class="n">1d</span></td><td>Une fiche du deck, recto verso</td><td>Huit fiches à retourner (recto, verso), avec les rubriques du « Guide de lecture des cartes » du deck. Sélecteur « Je souhaite… » qui reprend le Guide du deck : besoin, outil, numéro de fiche, puis la fiche. Données : <code>guide.json</code>, à passer en métaobjets.</td><td>Nouveau</td></tr>
         <tr><td><span class="n">2</span></td><td>Bloc d'achat</td><td>Titre (sans le point final), <code>custom.sous_titre</code>, note <code>reviews.rating</code> et <code>reviews.rating_count</code>, prix lu dans la boutique, <code>custom.avantage_1</code> à <code>_3</code>, quantité, devis équipe, réassurance.</td><td>Avantages et sous-titre déjà remplis</td></tr>
         <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack.</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
         <tr><td><span class="n">3</span></td><td>Les fiches par famille</td><td>Le Guide du deck : 42 outils numérotés de 4 à 45, en six familles, avec leur couleur imprimée. Lien vers l'article quand l'outil en a un, œil pour ouvrir la vraie fiche. Remplace <code>custom.les_outils_abordes</code>.</td><td>La liste Shopify ne correspond plus au deck</td></tr>
@@ -823,7 +825,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   <h2>Les bulles, <em>comment ça marche</em></h2>
   <p>Chaque vidéo est dessinée par un petit programme, comme vos fiches LinkedIn animées : la fiche s'anime, dans la couleur de sa famille. Même gabarit pour les 40 outils, donc une nouvelle vidéo coûte une scène à écrire, pas un tournage. Les sept vidéos de cette maquette sont réelles : ce sont les fichiers que l'on mettrait en ligne.</p>
   <ul class="fixes">
-    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>La vraie fiche apparaît, se retourne et s'anime. 1 à 3 s : un problème vécu. 3 à 11,5 s : le geste de l'outil. 11,5 à 14 s : « À retenir ». Puis la fiche se retourne à nouveau, avec son numéro dans le deck. Première et dernière images : le produit réel.<br><small>stories/moteur.js</small></li>
+    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>La fiche du deck apparaît, se retourne et s'anime. 1 à 3 s : un problème vécu. 3 à 11,5 s : le geste de l'outil. 11,5 à 14 s : « À retenir ». Puis la fiche se retourne à nouveau, avec son numéro dans le deck. Première et dernière images : le produit réel.<br><small>stories/moteur.js</small></li>
     <li class="c2"><strong>Ancrées dans vos articles</strong>5 Pourquoi, VSM, SMED, Pareto et Obeya reprennent l'exemple et le vocabulaire de l'article Fichly (chaîne du contrôle de début de série, 3 jours contre 5 minutes, interne et externe…). Poka-Yoke suit la définition de Shingo, faute d'article.<br><small>Textes à relire par Hugo</small></li>
     <li class="c3"><strong>Légères et rapides</strong>Environ 0,3 Mo par vidéo web (720 × 1280, H.264 et WebM, sans piste son). La rangée n'affiche que des vignettes de 15 à 20 Ko : rien ne se charge avant le tap, et seule la story suivante est préchargée.<br><small>livrables/stories/</small></li>
     <li class="c4"><strong>Accessibles</strong>Bouton pause (WCAG 2.2.2), texte de chaque vidéo pour les lecteurs d'écran et le bouton « Texte » (WCAG 1.2.1), clavier (flèches, espace, Échap), lecture en pause si l'utilisateur limite les animations, pause quand l'onglet passe en arrière-plan.<br><small>Dans le lecteur</small></li>
@@ -831,6 +833,29 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li class="c6"><strong>Réutilisables partout</strong>Les maîtres 1080 × 1920 servent tels quels en Reels, Shorts et LinkedIn : une série « un outil Lean par semaine » sur le profil d'Hugo, avec le lien vers le deck.<br><small>Mêmes fichiers</small></li>
   </ul>
   <p>À mesurer dès la mise en ligne : ouverture d'une bulle, vidéo vue jusqu'au bout, clic sur « Ajouter au panier » dans le lecteur. On compare ensuite le taux d'ajout au panier de ceux qui ouvrent une story à celui des autres. Les hausses de conversion annoncées par les éditeurs d'applis de stories viennent de leur marketing : on ne s'y fie pas.</p>
+
+  <h2>Montrer le deck imprimé, <em>en plus des aperçus</em></h2>
+  <p>Les aperçus numériques montrent le contenu des fiches. Ils ne montrent ni la taille, ni la matière, ni l'étui. Pour cela il faut des photos et une courte vidéo de l'objet, faites au smartphone. Veille du 2 octobre 2026 (Baymard, Pip Decks, MethodKit, Kickstarter) ; le réseau de la session a bloqué une partie des pages, les constats reposent alors sur les extraits de recherche.</p>
+  <div class="plan-wrap">
+    <table class="plan plan--5">
+      <thead><tr><th>#</th><th>Action</th><th>Où sur la page</th><th>Ce que Fichly produit</th><th>Impact / effort</th></tr></thead>
+      <tbody><tr><td><span class="n">1</span></td><td>Une vraie photo en 1re image de la galerie</td><td>Galerie du haut (cadre carré 1:1), vue 1 et vignette 1. « Lean, you know » descend dans la section « Pour qui, pour quoi ».</td><td>Plan 1 de la liste. Export JPG de 2048 × 2048 px au moins. Texte alternatif : « Étui du deck 40 outils du Lean ouvert, six fiches en éventail, une par famille de couleur ».</td><td>fort / faible</td></tr><tr><td><span class="n">2</span></td><td>Une fiche en main, et les cotes écrites sur l'image</td><td>Galerie, vues 2 et 3, avant la vidéo.</td><td>Plans 2 et 3. Mesurer la fiche et l'étui au réglet, puis ajouter les cotes dans Canva. Prendre un peu de recul : un gros plan seul grossit l'objet.</td><td>fort / faible</td></tr><tr><td><span class="n">3</span></td><td>Écrire le format, le papier, la finition et l'étui</td><td>Une ligne sous le prix. La réponse de la FAQ « Quel est le format des fiches ? ». Les textes alternatifs des images.</td><td>La fiche technique de l'imprimeur (devis ou facture). N'écrire que ce qui est prouvé.</td><td>fort / faible</td></tr><tr><td><span class="n">4</span></td><td>La photo « tout ce que vous recevez »</td><td>Galerie, vue 5. Et en tête de la section « Ce que vous recevez · La vraie fiche, recto verso », au-dessus du lecteur qui retourne la fiche.</td><td>Plan 5 : vue du dessus à 90°, debout sur une chaise ou avec un trépied tête en bas. Exports 1:1 et 4:5.</td><td>fort / moyen</td></tr><tr><td><span class="n">5</span></td><td>Une vidéo réelle de prise en main, dans la galerie et en tête des bulles</td><td>Galerie, vue 3 : le métachamp custom.video_fiche_produit existe déjà. Pas de lecture automatique en 1re position. Et une bulle « En vrai » en 1re place dans la rangée « Les outils en 15 secondes ».</td><td>Plan 9. Compression H.264 avec CRF 20 à 23 et +faststart. Une image d'aperçu nette. Le texte de la vidéo pour les lecteurs d'écran : le lecteur des bulles le prévoit déjà.</td><td>fort / moyen</td></tr><tr><td><span class="n">6</span></td><td>Des stories qui s'ouvrent et se ferment sur la fiche imprimée</td><td>Rangée de bulles, sur les 7 stories existantes. C'est la clé fiche.recto de chaque fichier stories/&lt;id&gt;/scene.js.</td><td>Plan 7 : une photo par outil, vue du dessus, redressée et recadrée au ratio 375:532. Étiquette de fin (legende) : « Fiche n° 9 du deck, imprimée ». Relancer outils/rendu.js.</td><td>moyen / faible</td></tr><tr><td><span class="n">7</span></td><td>Le recto, le verso et la matière en photo HD, et l'aperçu Canva nommé comme tel</td><td>Galerie, vues 4 et 8. Dans la section « La vraie fiche, recto verso », un bouton « Voir en photo » à côté de « Retourner la fiche ». Le badge « Vraies fiches » de la galerie seulement sur les photos.</td><td>Plans 4 et 6. Réexport Canva en HD de 6 fiches (une par famille), recto et verso.</td><td>moyen / faible</td></tr><tr><td><span class="n">8</span></td><td>Une bulle « Fabrication » tirée des rushes de l'imprimeur</td><td>Rangée de bulles, en 2e place après « En vrai ». Une image fixe des rushes dans la galerie (vue 8), à côté du badge « Imprimé en France ».</td><td>L'accord écrit de l'imprimeur, et son nom s'il accepte d'être cité. Garder la facture qui justifie la mention. Version page sans le son, version Reels avec le son des machines.</td><td>moyen / moyen</td></tr><tr><td><span class="n">9</span></td><td>Les photos des clients dans les avis</td><td>En haut de la section des avis (Judge.me), une galerie de photos clients. Ajouter les posts LinkedIn de stagiaires, avec leur accord.</td><td>Le réglage du coupon dans Judge.me (offre Awesome, 15 $/mois). Les accords pour reprendre les posts LinkedIn.</td><td>moyen / faible</td></tr><tr><td><span class="n">10</span></td><td>Option : l'étui en 3D et en réalité augmentée, à taille réelle</td><td>Galerie, en 4e position ou plus loin, jamais en 1re. Le modèle se charge au clic, avec une image d'aperçu.</td><td>Le patron de l'étui en HD (celui du dépôt fait 668 × 376 px) et ses cotes exactes en mm. Une demi-journée dans Blender. Mesurer ensuite les clics sur « Voir dans votre espace » et les ajouts au panier.</td><td>faible / moyen</td></tr></tbody>
+    </table>
+  </div>
+  <h2>La liste de prises de vue, <em>au smartphone</em></h2>
+  <p>Lumière de fenêtre, exposition verrouillée, même table pour tous les plans. Vous avez déjà dans Google Drive une photo du deck et les vidéos de l'impression, de la découpe, de la mise sous blister et du colisage : je n'ai pas pu les récupérer, elles dépassent la taille que le connecteur sait transférer (10 Mo). Exportez des extraits plus légers dans Drive, ou déposez-les dans le dépôt GitHub, et je les intègre.</p>
+  <div class="plan-wrap">
+    <table class="plan plan--5">
+      <thead><tr><th>#</th><th>Plan</th><th>Cadrage</th><th>Usage</th><th>Format</th></tr></thead>
+      <tbody><tr><td><span class="n">1</span></td><td>Plan hero : étui ouvert, 6 fiches en éventail (une par famille)</td><td>De 3/4, un peu en plongée. Fond de papier blanc, fenêtre sur le côté, carton blanc en face pour adoucir les ombres.</td><td>Galerie vue 1, vignette Shopify, affiche de la bulle « En vrai ».</td><td>Photo 1:1, 2048 px au moins (plus une version 4:5 pour les réseaux)</td></tr><tr><td><span class="n">2</span></td><td>Fiche tenue en main, recto lisible</td><td>Plan rapproché, main ouverte, bureau flou derrière, stylo et smartphone dans le champ.</td><td>Galerie vue 2 : l'image à l'échelle.</td><td>Photo 1:1 (plus 4:5 pour LinkedIn)</td></tr><tr><td><span class="n">3</span></td><td>Étui fermé et une fiche, à côté d'un smartphone, d'un stylo et d'une tasse</td><td>Vue du dessus à 90°, objets sans marque, un peu de recul.</td><td>Base de l'image cotée : les cotes en mm sont ajoutées dans Canva (galerie vue 3).</td><td>Photo 1:1</td></tr><tr><td><span class="n">4</span></td><td>Recto et verso de la même fiche, côte à côte (5 Pourquoi, n° 9)</td><td>Vue du dessus à 90°, fiches parallèles au cadre, lumière douce et égale.</td><td>Galerie vue 4, lisible au zoom.</td><td>Photo 1:1, 2500 px de large au moins</td></tr><tr><td><span class="n">5</span></td><td>Les 40 fiches étalées par famille</td><td>Vue du dessus : 6 colonnes, étui ouvert et guide en haut. Debout sur une chaise ou trépied tête en bas.</td><td>Galerie vue 5, et en tête du bloc « Ce que vous recevez ».</td><td>Photo 1:1 et 4:5, 2500 px au moins</td></tr><tr><td><span class="n">6</span></td><td>Macro de la tranche et d'un coin</td><td>Lumière rasante, mode macro. Une pile de 5 ou 6 fiches vue de côté, puis un coin.</td><td>Galerie vue 8 (matière), et un plan d'une seconde dans les Reels.</td><td>Photo 1:1, et vidéo 9:16 de 3 s</td></tr><tr><td><span class="n">7</span></td><td>La fiche à plat, cadrée comme dans les stories</td><td>Vue du dessus à 90°, fiche redressée sans perspective. Une par outil : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke, et le guide.</td><td>Remplace le PNG Canva à l'ouverture et à la fermeture des 7 stories (clé fiche.recto).</td><td>Photo 9:16, 2160 × 3840 au moins, recadrée au ratio 375:532</td></tr><tr><td><span class="n">8</span></td><td>La main sort la fiche de l'étui et la pose dans le cadre</td><td>Plan fixe vu du dessus. La fiche finit exactement à la place du plan 7 (x 100 → 980, y 230 → 1478 sur 1080 × 1920), puis 1 s d'immobilité.</td><td>Ouverture des Reels, raccordée à la 1re image de la story.</td><td>Vidéo 9:16, 1,5 à 2 s, 30 i/s comme le rendu des stories</td></tr><tr><td><span class="n">9</span></td><td>Prise en main et déballage</td><td>Plan fixe vu du dessus : colis, étui, ouverture, fiches qui glissent, éventail des 6 couleurs, une fiche retournée. Action dans le carré central.</td><td>Galerie vue 3 (custom.video_fiche_produit), recadrée en 1:1, et bulle « En vrai ».</td><td>Vidéo 9:16, 15 à 20 s, sans le son</td></tr><tr><td><span class="n">10</span></td><td>Retournement du recto au verso, en boucle</td><td>Plan serré vu du dessus. Une main retourne la fiche, et la fiche revient à sa position de départ.</td><td>Boucle courte dans la section « La vraie fiche, recto verso », à côté de l'aperçu numérique.</td><td>Vidéo 1:1 et 9:16, 3 à 4 s, sans le son</td></tr><tr><td><span class="n">11</span></td><td>Feuilletage des 40 fiches par famille</td><td>Vue du dessus, une fiche toutes les 0,5 à 1 s. Le nom de la famille s'affiche en texte animé quand la couleur change.</td><td>Reel, Short et LinkedIn : la preuve qu'il y a 40 fiches imprimées.</td><td>Vidéo 9:16, 30 à 45 s</td></tr><tr><td><span class="n">12</span></td><td>En situation : formation ou atelier</td><td>Une fiche sur la table de formation avec un doigt qui pointe le schéma, ou une fiche tenue devant un tableau blanc ou dans une ligne de production.</td><td>Galerie vue 7, section « Pour qui, pour quoi », LinkedIn.</td><td>Photo 4:5 (plus 1:1), avec l'accord des stagiaires</td></tr><tr><td><span class="n">13</span></td><td>Rushes de l'imprimeur : feuilles, massicot, pile, mise en étui</td><td>Extraits de 1 à 2 s pris dans les vidéos existantes, avec le son réel des machines.</td><td>Bulle « Fabrication », plan de preuve « Imprimé en France », image fixe dans la galerie.</td><td>Vidéo 9:16 de 15 s, et image fixe 1:1</td></tr><tr><td><span class="n">14</span></td><td>Plan hero vidéo de fin</td><td>Étui debout, fiches en éventail devant, lumière de fenêtre, 2 à 3 s presque immobiles.</td><td>Fin des Reels, avec « 40 outils · 49,90 € » au centre du cadre.</td><td>Vidéo 9:16, 2 à 3 s</td></tr></tbody>
+    </table>
+  </div>
+  <ul class="fixes">
+    <li class="f4"><strong>Pas d'image générée par IA pour montrer l'objet</strong>Fiches, étui, taille, papier ou atelier : une image inventée expose à une pratique commerciale trompeuse. On montre des photos, et on nomme les aperçus Canva comme tels.<br><small>À éviter</small></li>
+    <li class="f4"><strong>Pas de fausse mise en scène</strong>Pas de fiche Canva incrustée dans une fausse main ou sur un faux bureau, présentée comme une photo.<br><small>À éviter</small></li>
+    <li class="f1"><strong>Les stories passent à la photo sans rien changer d'autre</strong>Il suffit de remplacer l'image de la clé <code>fiche.recto</code> de chaque scène par la photo de la fiche imprimée, prise à plat (plan 7), puis de relancer le rendu.<br><small>7 photos</small></li>
+    <li class="f2"><strong>Deux nouvelles bulles</strong>« En vrai » : la prise en main et le déballage (plan 9). « Fabrication » : vos rushes de l'imprimeur (plan 13), avec son accord.<br><small>À tourner ou à monter</small></li>
+  </ul>
 
   <h2>Ce qui se fait de mieux, <em>et ce qu'on en garde</em></h2>
   <p>Veille du 2 octobre 2026 : pages de decks d'outils (Pip Decks, Kitted, MethodKit, Facilitator Cards, SuperTilt, Dunod), applis de stories Shopify, recherche Baymard et obligations françaises. Le réseau de la session a bloqué la lecture complète de la plupart des pages : les constats reposent sur les extraits des résultats de recherche.</p>
@@ -973,7 +998,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   }, { rootMargin: '-' + 80 + 'px 0px 0px 0px' }).observe(addBtn);
 
 
-  // ---------- La vraie fiche et le Guide du deck ----------
+  // ---------- Une fiche du deck, recto verso, et le Guide du deck ----------
   const GUIDE = JSON.parse(document.getElementById('guideData').textContent);
   const FAMS = GUIDE.familles;
   const FICHES = GUIDE.fiches;
@@ -1050,7 +1075,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     return `<article class="fam f${f}" data-f="${f}"><div class="fam__head"><small>Famille ${f} · ${ts.length} fiches</small><h3>${FAMS[f].nom}</h3></div><ul>` +
       ts.map(([o, n]) => {
         const lab = `${o} <span class="num">n° ${n}</span>`;
-        const eye = FICHES[o] ? ` <button type="button" class="eye" data-o="${o}" aria-label="Voir la vraie fiche ${o}">◉</button>` : '';
+        const eye = FICHES[o] ? ` <button type="button" class="eye" data-o="${o}" aria-label="Voir la fiche ${o}, recto verso">◉</button>` : '';
         const core = ARTICLES[o] ? `<a href="#top">${lab}</a>` : SOON[o] ? `<span class="soon">${lab}</span>` : `<span>${lab}</span>`;
         return `<li>${core}${eye}</li>`;
       }).join('') + `</ul></article>`;

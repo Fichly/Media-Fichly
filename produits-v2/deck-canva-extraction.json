@@ -1,0 +1,1090 @@
+{
+ "fiches": [
+  {
+   "outil": "VOC - Voix du client",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite recueillir et traduire la voix du client.",
+   "numeros_vus": [
+    "4 (en-tête imprimé « Résolution de problèmes 4 VOC - Voix du client », recto et verso)",
+    "N°4 (guide actuel)",
+    "VOC 4 (liste « Outils Lean à utiliser » au verso de DMAIC)",
+    "N°3 (ancien guide intermédiaire, numéro partagé avec QQOQCCP)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition (le texte est là, mais le libellé « Définition » ne se lit pas dans le bloc VOC)",
+    "Quand ?",
+    "Exemple (Sans VOC / Avec VOC, la baguette)",
+    "Schéma « Ce que le client demande » / « Caractéristiques(Qualité - Coût - Délai) » / « Exigences Critiques du Client (ECC) »",
+    "Exemple non exhaustif",
+    "Liens avec d’autres cartes (renvoi vers QQOQCCP)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques",
+    "Modèle de Kano : Basique / Attendu / Différenciateur"
+   ],
+   "citation_definition": "La Voix du Client (VOC) regroupe l’ensemble des attentes, besoins, irritants ou"
+  },
+  {
+   "outil": "QQOQCCP",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite caractériser/définir un problème.",
+   "numeros_vus": [
+    "5 (en-tête imprimé)",
+    "N°5 (guide actuel)",
+    "QQOQCCP 5 (verso DMAIC)",
+    "3 (ancienne fiche imprimée « Résolution de problèmes 3 QQOQCCP », après OLD)",
+    "N°3 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (Sans QQOQCCP / Avec QQOQCCP)",
+    "Visuel Qui ? / Quoi ? / Où ? / Quand ? / Comment ? / Combien ? / Pourquoi ?",
+    "Liens avec d’autres cartes (DMAIC, diagramme d’Ishikawa)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ? (« Exemple: Des biscuits cassés dans les boîtes chez le client »)",
+    "(aucun libellé « Bonnes pratiques » trouvé)"
+   ],
+   "citation_definition": "Le QQOQCCP est une méthode d’analyse structurée basée sur 7 questions : Qui,"
+  },
+  {
+   "outil": "VA, NVA, NVAO",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Fiche : « Je souhaite éliminer les gaspillages inutiles afin d’être plus efficace. » — Guide actuel : « Je souhaite identifier et éliminer les gaspillages dans les processus. »",
+   "numeros_vus": [
+    "6 (en-tête imprimé)",
+    "N°6 (guide actuel)",
+    "N°37 (ancien guide, même numéro que Muda, Muri, Mura)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Visuel VA / NVAO / NVA (ESSENTIEL / MINIMISER / ELIMINER)",
+    "« Frise d’activité détaillée – Injection plastique » Avant / Après (pas de libellé « Exemple »)",
+    "Liens avec d’autres cartes (SIPOC, VSM)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck (dans le texte, le libellé tombe au milieu du recto, à côté d’un « Mouvement inutile » isolé)",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Cette classification permet de distinguer les activités selon leur contribution"
+  },
+  {
+   "outil": "Muda Muri Mura",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Fiche : « Je souhaite éliminer les gaspillages inutiles afin d’être plus efficace. » — Guide actuel : « Je souhaite identifier et éliminer les gaspillages dans les processus. » (entrée « Muda, Muri, Mura »)",
+   "numeros_vus": [
+    "7 (en-tête imprimé)",
+    "N°7 (guide actuel)",
+    "N°37 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Visuel « 8 Gaspillages » (MUDA (Gaspillage) / MURI (Surcharge) / MURA (Irrégularité))",
+    "Liens avec d’autres cartes (VA / NVA / NVAO, 5S)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck (libellé extrait dans le bloc du recto)",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "La méthode 3M (Muda, Mura, Muri) correspond aux 3 types de gaspillages dans les"
+  },
+  {
+   "outil": "Diagramme d’Ishikawa",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite comprendre l’ensemble des causes/la cause racine d’un problème.",
+   "numeros_vus": [
+    "8 (en-tête imprimé)",
+    "N°8 (guide actuel, entrée « Ishikawa »)",
+    "Diag. d’Ishikawa 8 (verso DMAIC)",
+    "N°4 (encadré d’exemple du guide actuel, ancien guide, verso DMAIC anglais « Ishikawa Diagram »)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (bouchons mal vissés, 6M)",
+    "Diagramme « Effet ouproblème » / « Causes potentielles » (« Le gâteau est trop sec »)",
+    "Liens avec d’autres cartes (5 Pourquoi, Matrice Gain Effort)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Détail des 6M : Matières / Main-d'œuvre / Machines / Méthodes / Milieu / Mesure",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le diagramme d’Ishikawa, aussi appelé diagramme de causes et effets ou encore"
+  },
+  {
+   "outil": "5 Pourquoi ? (titre : « Les 5 pourquoi ? »)",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite comprendre l’ensemble des causes/la cause racine d’un problème.",
+   "numeros_vus": [
+    "9 (en-tête imprimé)",
+    "N°9 (guide actuel, entrée « 5 Pourquoi »)",
+    "9 (verso DMAIC)",
+    "N°5 (encadré d’exemple du guide actuel, ancien guide, verso DMAIC anglais « 5 why? »)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (le chariot en panne)",
+    "Visuel en chaîne jusqu’à « CAUSE RACINE »",
+    "Liens avec d’autres cartes (DMAIC, diagramme d’Ishikawa)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le “5 Pourquoi” est une technique d'analyse des causes racines qui consiste à"
+  },
+  {
+   "outil": "Bâtonnage",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Fiche : « Je souhaite mesurer visuellement la fréquence d’un problème. » — Guide actuel : « Je souhaite mesurer la fréquence d’un problème. »",
+   "numeros_vus": [
+    "10 (en-tête imprimé)",
+    "N°10 (guide actuel)",
+    "Bâtonnage 10 (verso DMAIC)",
+    "ancien guide : numéro illisible (proche de N°3 ou de N°37)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (la boulangerie, clients qui attendent plus de 3 min)",
+    "Tableau Heures / Client qui part / Clients ayant attendu >3 min / Rupture baguette / Baguettes pas cuite / Erreurs de saisie",
+    "Liens avec d’autres cartes (Diagramme d’Ishikawa, 5 Pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck (libellé extrait dans le bloc du recto, à côté de « Mouvement inutile »)",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le bâtonnage est une méthode d’observation simple et visuelle qui consiste à"
+  },
+  {
+   "outil": "PDCA",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite systématiser l'amélioration de mes processus de manière continue.",
+   "numeros_vus": [
+    "11 (en-tête imprimé)",
+    "N°11 (guide actuel)",
+    "N°9 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (machines mal calibrées)",
+    "Roue Plan / Do / Check / Act avec « La cale, l’élément le plus important. »",
+    "Liens avec d’autres cartes (Ishikawa, 5 Pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le PDCA (Plan-Do-Check-Act) est une méthode d’amélioration continue en 4 étapes"
+  },
+  {
+   "outil": "A3",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite résoudre un problème de façon méthodique.",
+   "numeros_vus": [
+    "12 (en-tête imprimé)",
+    "N°12 (guide actuel)",
+    "ancien guide : N°6 ou N°8 selon la version (contradictoire)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "A3 rempli en 8 cases, de « 1-Description du problème & le périmètre » à « 8-Standardisation » (pas de libellé « Exemple »)",
+    "Liens avec d’autres cartes (Objectifs SMART, Ishikawa, 5 pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le A3 est un outil synthétique qui consiste à structurer et figurer l'ensemble"
+  },
+  {
+   "outil": "8D",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Fiche : « Je souhaite résoudre un problème qualité de façon méthodique. » — Guide actuel : « Je souhaite résoudre un problème de façon méthodique. »",
+   "numeros_vus": [
+    "13 (en-tête imprimé)",
+    "N°13 (guide actuel)",
+    "N°7 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Schéma 1D à 8D",
+    "Liens avec d’autres cartes (QQOQCCP, diagramme d’Ishikawa, 5 Pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "(aucun libellé « Bonnes pratiques » trouvé)"
+   ],
+   "citation_definition": "Le 8D est une méthodologie de résolution de problèmes en industrie qui suit une"
+  },
+  {
+   "outil": "DMAIC",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite résoudre un problème de façon méthodique.",
+   "numeros_vus": [
+    "14 (en-tête imprimé)",
+    "N°14 (guide actuel)",
+    "6 (anciennes fiches imprimées « Résolution de problèmes 6 DMAIC » et « Problem-solving 6 DMAIC »)",
+    "ancien guide : N°6 ou N°8 selon la version"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (retards de livraison)",
+    "Schéma Définir / Mesurer / Analyser / Améliorer / Contrôler",
+    "« A chaque étape du DMAIC un outil lean peut être utilisé. Les outils sont tous présentés sur le verso. »"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques",
+    "Outils Lean à utiliser (QQOQCCP, VOC 4, Diag. d’Ishikawa, 5 pourquoi ?, Bâtonnage, Pareto, Matrice Gain/Effort, SMART, VSM, TRS, AMDEC, SMED, Cartes de contrôle 44, Contrôle par échantillonnage)"
+   ],
+   "citation_definition": "DMAIC est un sigle pour les cinq phases d'un processus de résolution de"
+  },
+  {
+   "outil": "Chantier Kaizen",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite identifier et résoudre rapidement les problèmes.",
+   "numeros_vus": [
+    "15 (en-tête imprimé)",
+    "N°15 (guide actuel)",
+    "N°10 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (usine de pièces mécaniques, 5 jours)",
+    "Liens avec d’autres cartes (VSM, TRS, Pareto, Ishikawa, 5S, SMED)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "(aucun libellé « Bonnes pratiques » trouvé)"
+   ],
+   "citation_definition": "Le chantier Kaizen repose sur un déploiement méthodique et limité dans le"
+  },
+  {
+   "outil": "QRQC",
+   "famille": "Résolution de problèmes",
+   "je_souhaite": "Je souhaite identifier et résoudre rapidement les problèmes.",
+   "numeros_vus": [
+    "16 (en-tête imprimé)",
+    "N°16 (guide actuel)",
+    "N°11 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "La démarche (Quick Response / Quality Control)",
+    "Sa déclinaison opérationnelle",
+    "(pas de libellé « Exemple »)",
+    "Liens avec d’autres cartes (Les 3G, Obeya)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Système de résolution de problèmes qui met l'accent sur la réaction rapide aux"
+  },
+  {
+   "outil": "Les 3G",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite comprendre la situation en allant sur le terrain.",
+   "numeros_vus": [
+    "17 (en-tête imprimé)",
+    "N°17 (guide actuel)",
+    "N°16 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Visuel Gemba / Genbutsu / Genjitsu",
+    "Liens avec d’autres cartes (5S, 5 Pourquoi, diagramme d’Ishikawa)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Les 3G (Gemba, Gembutsu, Genjitsu) désignent trois termes japonais utilisés"
+  },
+  {
+   "outil": "DILO",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite comprendre la situation en allant sur le terrain.",
+   "numeros_vus": [
+    "18 (en-tête imprimé)",
+    "N°18 (guide actuel)",
+    "N°17 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Exemple de conclusion suite à un “Day In the Life Of” (Catégories de NVA / Causes / % / Leviers opérationnels à actionner)",
+    "Liens avec d’autres cartes (5S, VSM, 5 Pourquoi, diagramme d’Ishikawa)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "(aucun libellé « Bonnes pratiques » trouvé)"
+   ],
+   "citation_definition": "Un DILO (Day In the Life Of) est un enregistrement d’une observation terrain de"
+  },
+  {
+   "outil": "5S",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite créer un environnement de travail ordonné.",
+   "numeros_vus": [
+    "19 (en-tête imprimé)",
+    "N°19 (guide actuel)",
+    "N°12 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Débarrasser (SEIRI) / Ranger (SEITON) / Nettoyer (SEISO) / Standardiser (SEIKETSU) / Rigueur (SHITSUKE)",
+    "Liens avec d’autres cartes (Management Visuel)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "La méthode des 5S est une approche qui vise à créer et à maintenir un espace de"
+  },
+  {
+   "outil": "Management Visuel",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite animer visuellement la performance de mon équipe.",
+   "numeros_vus": [
+    "20 (en-tête imprimé)",
+    "N°20 (guide actuel)",
+    "N°14 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Visuel « Sans Management Visuel » / « Avec Management Visuel »",
+    "Liens avec d’autres cartes (Obeya, 5S)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le Management Visuel est une technique de gestion qui utilise des"
+  },
+  {
+   "outil": "Le SQCDPE (en-tête « SQCDPE » ; guide : « SQCDPE »)",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite animer visuellement la performance de mon équipe.",
+   "numeros_vus": [
+    "21 (en-tête imprimé)",
+    "N°21 (guide actuel)",
+    "N°15 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ? (renvoi vers AIC)",
+    "Tableau « SQCDPE - Septembre 2024 » (pas de libellé « Exemple »)",
+    "Liens avec d’autres cartes (Chantier Kaizen, PDCA, Obeya)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Sécurité, qualité, coûts, délais, personnels : voici les mots derrière"
+  },
+  {
+   "outil": "Obeya",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Je souhaite animer visuellement la performance de mon équipe.",
+   "numeros_vus": [
+    "22 (en-tête imprimé)",
+    "N°22 (guide actuel)",
+    "N°13 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Exemple de structure Obeya",
+    "Liens avec d’autres cartes (SMART, « diagrammes de Gantt »)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Obeya, qui signifie \"grande salle\" en japonais, est un outil d'animation de"
+  },
+  {
+   "outil": "AIC (guide : « Les AIC »)",
+   "famille": "Engagement et visualisation",
+   "je_souhaite": "Fiche : « Je souhaite favoriser les réunions efficaces. » — Guide actuel : « Je souhaite favoriser des réunions efficaces. »",
+   "numeros_vus": [
+    "23 (en-tête imprimé)",
+    "N°23 (guide actuel)",
+    "N°19 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (AIC de niveau 1)",
+    "Schéma AIC 0 / AIC 1 / AIC 2 / AIC 3 (Qui ? / Comment ?)",
+    "Liens avec d’autres cartes (Management Visuel, SMART, OKR, SQCDPE ; TRS dans l’exemple)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "L’Animation à Intervalle Court (AIC) est un système de communication qui"
+  },
+  {
+   "outil": "Pareto (80/20) (en-tête « Pareto » ; guide : « Analyse de Pareto »)",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Je souhaite prioriser mes actions.",
+   "numeros_vus": [
+    "24 (en-tête imprimé)",
+    "N°24 (guide actuel)",
+    "24 (verso DMAIC)",
+    "N°20 (ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (ligne d'assemblage automobile)",
+    "Visuel « EFFORTS » / « RésultaTs »",
+    "Liens avec d’autres cartes (Ishikawa, 5 pourquoi, matrice gain effort)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place avec Excel ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "L'analyse de Pareto, également connue sous le nom de principe 80/20, est une"
+  },
+  {
+   "outil": "Matrice Gain/Effort",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Je souhaite prioriser mes actions.",
+   "numeros_vus": [
+    "25 (en-tête imprimé)",
+    "N°25 (guide actuel)",
+    "25 (verso DMAIC)",
+    "N°21 (ancien guide et verso DMAIC anglais « Benefit/Effort matrix »)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Matrice Projets Majeurs / Gains rapides / Projets Mineurs / À éviter",
+    "Liens avec d’autres cartes (DMAIC)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Tableau Tâche / Effort / Gain",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "La matrice Gain/Effort est un outil qui permet d'identifier et de prioriser les"
+  },
+  {
+   "outil": "Matrice de décision",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Je souhaite décider d’une option.",
+   "numeros_vus": [
+    "26 (en-tête imprimé)",
+    "N°26 (guide actuel)",
+    "N°22 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Tableau Critères / Pondérations / Fournisseur A… / Total pondéré",
+    "Liens avec d’autres cartes (matrice gain effort)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "La matrice d’aide à la décision est un outil utilisé pour évaluer et choisir"
+  },
+  {
+   "outil": "SMART",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Je souhaite fixer et suivre des objectifs stratégiques.",
+   "numeros_vus": [
+    "27 (en-tête imprimé)",
+    "N°27 (guide actuel)",
+    "27 (verso DMAIC)",
+    "N°23 (ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemples",
+    "Grille Spécifique / Mesurable / Atteignable / Réaliste / Temporel",
+    "Liens avec d’autres cartes (OKR)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "SMART est une méthode qui permet de bien définir ses objectifs. L'acronyme"
+  },
+  {
+   "outil": "Les OKR",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Fiche : « Je souhaite fixer et suivre des objectifs stratégiques » (sans point) — Guide actuel : « Je souhaite fixer et suivre des objectifs stratégiques. »",
+   "numeros_vus": [
+    "28 (en-tête imprimé)",
+    "N°28 (guide actuel)",
+    "N°24 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Schéma Définir l’objectif / Définir les Résultats clés (KR) / Prendre des initiatives",
+    "Liens avec d’autres cartes (objectifs SMART)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques",
+    "Mention résiduelle « 2024-2034 - You Know - Tous droits réservés »"
+   ],
+   "citation_definition": "OKR (Objectives and Key Results) est une méthode pour définir et suivre des"
+  },
+  {
+   "outil": "Hoshin Kanri",
+   "famille": "Planification et gestion stratégique",
+   "je_souhaite": "Fiche : « Je souhaite aligner les objectifs stratégiques au travail quotidiendes employés » — Guide actuel : « Je souhaite aligner les objectifs stratégiques au travail quotidien des employés. »",
+   "numeros_vus": [
+    "29 (en-tête imprimé)",
+    "N°29 (guide actuel)",
+    "N°26 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple de matrice (réduire l’empreinte carbone de 30 %)",
+    "Liens avec d’autres cartes (objectifs SMART, OKR)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques (dont le Catchball)"
+   ],
+   "citation_definition": "La méthode Hoshin Kanri désigne une stratégie de planification et"
+  },
+  {
+   "outil": "Le diagramme spaghetti (guide : « Diagramme spaghetti »)",
+   "famille": "Optimisation des processus",
+   "je_souhaite": "Je souhaite visualiser les flux de déplacement pour optimiser les processus.",
+   "numeros_vus": [
+    "30 (en-tête imprimé)",
+    "N°30 (guide actuel)",
+    "N°27 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (usine de production alimentaire)",
+    "Visuel Avant / Après (Poste 1 à Poste 5)",
+    "Liens avec d’autres cartes (5S, VSM, DILO)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le diagramme spaghetti est un outil de visualisation pour représenter et"
+  },
+  {
+   "outil": "Swimlane",
+   "famille": "Optimisation des processus",
+   "je_souhaite": "Je souhaite schématiser et comprendre mes processus métier.",
+   "numeros_vus": [
+    "31 (en-tête imprimé)",
+    "N°31 (guide actuel)",
+    "N°28 (ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Schéma Client / Service client / Préparation de commande (WMS, ERP)",
+    "Liens avec d’autres cartes (SIPOC)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Un diagramme swimlane est un type de diagramme de flux qui divise les"
+  },
+  {
+   "outil": "SIPOC",
+   "famille": "Optimisation des processus",
+   "je_souhaite": "Je souhaite schématiser et comprendre mes processus métier.",
+   "numeros_vus": [
+    "32 (en-tête imprimé)",
+    "N°32 (guide actuel)",
+    "N°29 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (« Exemple d’un processus d'embauche » : Fournisseurs(Suppliers) / Entrées(Input) …)",
+    "Liens avec d’autres cartes (Swimlane, DMAIC)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Son objectif est de donner une vue d’ensemble des éléments essentiels d’un"
+  },
+  {
+   "outil": "VSM (titre : « Value Stream Mapping (VSM) »)",
+   "famille": "Optimisation des processus",
+   "je_souhaite": "Je souhaite schématiser et comprendre mes processus métier.",
+   "numeros_vus": [
+    "33 (en-tête imprimé)",
+    "N°33 (guide actuel)",
+    "33 (verso DMAIC)",
+    "30 (ancienne fiche imprimée « Optimisation des processus VSM 30 », après OLD ; ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Cartographie VSM chiffrée (Injection plastique, « Lead Time : 18,2 jours »), sans libellé « Exemple » ; on ne peut pas dire si elle est au recto ou au verso",
+    "Liens avec d’autres cartes (SIPOC)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "(aucun libellé « Bonnes pratiques » trouvé)"
+   ],
+   "citation_definition": "Le Value Stream Mapping (VSM), ou cartographie de la chaîne de valeur, est un"
+  },
+  {
+   "outil": "Flux tiré",
+   "famille": "Optimisation des processus",
+   "je_souhaite": "Je souhaite baser la production sur la consommation réelle pour réduire les stocks.",
+   "numeros_vus": [
+    "34 (en-tête imprimé)",
+    "N°34 (guide actuel)",
+    "31 (ancienne fiche imprimée « Optimisation des processus Flux tiré 31 », après OLD ; ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Schéma Kanban de prélèvement / Kanban de production (Fabrication des lames / Injection plastique), sans libellé « Exemple » ; on ne peut pas dire s’il est au recto ou au verso",
+    "Liens avec d’autres cartes (Takt-Time)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le “Pull System” est un processus qui est déclenché par la demande réelle des"
+  },
+  {
+   "outil": "Takt Time",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Je souhaite synchroniser la production avec la demande des clients.",
+   "numeros_vus": [
+    "35 (en-tête imprimé)",
+    "N°35 (guide actuel)",
+    "33 (ancienne fiche imprimée « Efficacité de production Takt Time 33 », après OLD ; ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Equation",
+    "Liens avec d’autres cartes (SMED, diagramme spaghetti)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques",
+    "Equation"
+   ],
+   "citation_definition": "TAKT est le mot allemand qui signifie « battement ».Le Takt Time est le rythme"
+  },
+  {
+   "outil": "Yamazumi",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Je souhaite identifier et éliminer les tâches sans valeur ajoutée pour équilibrer la charge de travail.",
+   "numeros_vus": [
+    "36 (en-tête imprimé)",
+    "N°36 (guide actuel)",
+    "N°34 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Diagramme Goulot / Contrainte / Takt Time et arbre Tâche à valeur ajoutée (VA) / Tâche obligatoire / Tâche à non-valeur ajoutée (NVA), sans libellé « Exemple »",
+    "Liens avec d’autres cartes (Takt Time)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Ce diagramme est une représentation visuelle utilisée pour équilibrer les"
+  },
+  {
+   "outil": "Heijunka",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Je souhaite organiser l'atelier pour absorber les variations de la demande client.",
+   "numeros_vus": [
+    "37 (en-tête imprimé)",
+    "N°37 (guide actuel)",
+    "N°32 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Illustration d’un avant/après Heijunka (Ref A / Ref B / Ref C, Semaine/Heure)",
+    "Liens avec d’autres cartes (SMED)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck (libellé extrait dans le bloc du recto)",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Heijunka (prononcé hey-june-kah) signifie “niveler” en Japonais. Cela signifie"
+  },
+  {
+   "outil": "TRS",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Fiche : « Je souhaite mesurer l'efficacité des équipements de production. » — Guide actuel : « Je souhaite mesurer l'efficacité globale des équipements. »",
+   "numeros_vus": [
+    "38 (en-tête imprimé)",
+    "N°38 (guide actuel)",
+    "38 (verso DMAIC)",
+    "N°36 (ancien guide et verso DMAIC anglais « OEE »)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "TRS = Qualité x Disponibilité x Performance (décomposition du TRS selon la norme NFE 60-182)",
+    "Liens avec d’autres cartes (Ishikawa, 5 pourquoi, SMED, 5S, Muda, Muri, Mura)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le TRS (Taux de Rendement Synthétique), est une mesure de performance (KPI) qui"
+  },
+  {
+   "outil": "AMDEC",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Je souhaite anticiper les problèmes en analysant les modes de défaillance.",
+   "numeros_vus": [
+    "39 (en-tête imprimé)",
+    "N°39 (guide actuel)",
+    "39 (verso DMAIC)",
+    "N°35 (ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Tableau AMDEC (Fonction du produit / Mode de défaillance / Fréquence / Gravité / Détectabilité / Criticité)",
+    "Liens avec d’autres cartes (diagramme d’Ishikawa, 5 pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "AMDEC (Analyse des Modes de Défaillances et de leur Criticité) est une méthode"
+  },
+  {
+   "outil": "SMED",
+   "famille": "Efficacité de production",
+   "je_souhaite": "Fiche : « Je souhaite réduire les temps de changement pour augmenter la disponibilité des équipements de production. » — Guide actuel : « Je souhaite réduire les temps de changement pour augmenter la disponibilité des équipements. »",
+   "numeros_vus": [
+    "40 (en-tête imprimé)",
+    "N°40 (guide actuel)",
+    "40 (verso DMAIC)",
+    "N°38 (ancien guide et verso DMAIC anglais)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Schéma Durée du changement de série (I : Opérations Internes / E : Opérations externes)",
+    "Liens avec d’autres cartes (5S, Poka-Yoke)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Lorsqu’une machine est arrêtée et reconfigurée pour fabriquer un autre modèle,"
+  },
+  {
+   "outil": "Poka Yoke (guide : « Poka-yoke »)",
+   "famille": "Amélioration de la qualité",
+   "je_souhaite": "Je souhaite prévenir les erreurs avant qu'elles ne surviennent.",
+   "numeros_vus": [
+    "41 (en-tête imprimé)",
+    "N°41 (guide actuel)",
+    "N°39 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (carte SIM, test de pression des pneus)",
+    "Liens avec d’autres cartes (5S)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Méthode de prévention des défauts, qui utilise des dispositifs/détrompeurs"
+  },
+  {
+   "outil": "Jidoka",
+   "famille": "Amélioration de la qualité",
+   "je_souhaite": "Fiche : « Je souhaite arrêter la production en cas de problèmepour éviter les défauts. » — Guide actuel : « Je souhaite arrêter la production en cas de problème pour éviter les défauts. »",
+   "numeros_vus": [
+    "42 (en-tête imprimé)",
+    "N°42 (guide actuel)",
+    "N°40 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Evolution du JIDOKA",
+    "Liens avec d’autres cartes (Poka Yoke, Andon)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Jidoka, ou \"autonomation\", signifie l'automatisation avec une touche humaine."
+  },
+  {
+   "outil": "Andon",
+   "famille": "Amélioration de la qualité",
+   "je_souhaite": "Je souhaite signaler les problèmes immédiatement pour une intervention rapide.",
+   "numeros_vus": [
+    "43 (en-tête imprimé)",
+    "N°43 (guide actuel)",
+    "N°41 (ancien guide)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Visuel Production normale / Besoin d’assistance / Production à l’arrêt",
+    "Liens avec d’autres cartes (Jidoka, Poka-Yoke)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "L’Andon est un système de signalisation visuelle utilisé sur les lignes de"
+  },
+  {
+   "outil": "Cartes de contrôle (guide : « Cartes de contrôles »)",
+   "famille": "Amélioration de la qualité",
+   "je_souhaite": "Je souhaite réduire les variations qualités de mon outil de production.",
+   "numeros_vus": [
+    "44 (en-tête imprimé)",
+    "N°44 (guide actuel)",
+    "Cartes de contrôle 44 (verso DMAIC)",
+    "N°42 (ancien guide et verso DMAIC anglais « Control charts »)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple",
+    "Graphique LCS / LSS / Cible / LSI / LCI",
+    "Liens avec d’autres cartes (QQOQCCP, Diagramme d’Ishikawa, les 5 Pourquoi)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Une carte de contrôle est un graphique utilisé dans l’industrie pour surveiller"
+  },
+  {
+   "outil": "TWI",
+   "famille": "Amélioration de la qualité",
+   "je_souhaite": "Je souhaite standardiser un processus pour assurer sa maîtrise.",
+   "numeros_vus": [
+    "45 (en-tête imprimé)",
+    "N°45 (guide actuel ; absent des anciens guides)"
+   ],
+   "rubriques_recto": [
+    "Je souhaite… (phrase d’objectif)",
+    "Définition",
+    "Quand ?",
+    "Exemple (cuisine industrielle, cuisson au four)",
+    "Liens avec d’autres cartes (VSM, VA,NVA,NVAO)"
+   ],
+   "rubriques_verso": [
+    "Templates du deck",
+    "« Standard TWI » (tableau Etapes / N° / Indications / Raisons, « Opération : Démarrage du four ») ; on ne peut pas dire s’il est au recto ou au verso",
+    "Comment le mettre en place ?",
+    "Bonnes pratiques"
+   ],
+   "citation_definition": "Le TWI (Training Within Industry) est une méthode de standardisation et de"
+  }
+ ],
+ "familles": [
+  "Résolution de problèmes",
+  "Engagement et visualisation",
+  "Planification et gestion stratégique",
+  "Optimisation des processus",
+  "Efficacité de production",
+  "Amélioration de la qualité"
+ ],
+ "autres_contenus": [
+  "Page de mentions (Introduction 0) : « Collection Lean & Excellence Opérationnelle » ; « Maîtriser les outils du Lean en 40 fiches » ; « Clément Boniol  &  Hugo Duc » ; « Co-fondateurs de Fichly »",
+  "Chiffres annoncés : « 40 fiches pédagogiques | 6 familles d’outils | +15 templates numériques »",
+  "ISBN : « ISBN : 3760451390019 »",
+  "Éditeur : « Éditions Fichly » ; « 22 avenue Danton Demar — 34660 » ; « www.fichly.com  |  contact@fichly.com »",
+  "Copyright : « © Fichly — Clément Boniol & Hugo Duc. Tous droits réservés. » ; « …constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle. »",
+  "Impression : « Imprimé en France »",
+  "Pied de page : « Fichly - Tous droits réservés » (118 fois) ; « Fichly - All rights reserved. » (2 fois, sur l’ancienne fiche DMAIC en anglais)",
+  "Introduction aux cartes (Introduction 0) : « Bonjour !  Un grand merci pour votre confiance et l’achat de ce deck que nous avons imaginé et créé pendant près de 1 an. » ; « Son format vous permettra de l’emporter partout avec vous, sur le terrain, au bureau ou encore en réunion/formation. » ; « Nous espérons que ce tout premier format vous plaira ! » (aucune dimension de carte n’est donnée)",
+  "Remerciements : « Nous tenons à remercier nos bêtatesteurs & graphistes sans qui ce deck n’aurait pas pu voir le jour. » + 32 noms, de « BAK Laurent » à « ZANDECKI Nathalie »",
+  "Accompagnement terrain (Introduction 0, reprise dans la fiche 46) : « Diagnostic terrain & choix des outils Lean adaptés » ; « Formation & montée en compétence Lean » ; « Parcours Yellow, Green & Black Belt » ; « Accompagnement à la mise en œuvre » ; « Lien de prise de RDV » ; noms « ClémentBONIOL », « HugoDUC », « Clément RAYMOND »",
+  "Mode d’emploi (Introduction 0) : « Ce deck de 40 cartes a été conçu pour vous fournir un ensemble complet d’outils Lean, soigneusement sélectionnés et répartis en catégories. » ; « 1 -  Choisir sa catégorie de problématique », « 2 - Choisir ce que vous souhaitez résoudre dans la fiche Guide du deck », « 3 - Lire la ou les cartes en lien avec votre souhait » ; les six catégories avec leur accroche : « Résolution des problèmesIdentifier, analyser et résoudre les problèmes rapidement. », « Engagement et visualisationUtiliser des outils visuels pour suivre et améliorer les performances. », « Planification et gestion stratégiqueDévelopper une vision claire à long terme pour guider votre équipe. », « Optimisation des processus et des fluxAnalyser et améliorer chaque étape des processus. », « Efficacité de productionIdentifier les goulots d’étranglement pour augmenter la productivité. », « Amélioration de la qualitéS’assurer que chaque produit respecte les standards de qualité. »",
+  "Guide de lecture des cartes (Introduction 0) : « Recto » / « Verso » ; « Définition », « Quand l’utiliser ? », « Exemple », « Pour qui ? », « Pas à pas détaillés », « Bonnes pratiques », « Liens avec d’autres cartes », « Numéro de page »",
+  "Guide du deck (Introduction 1, 2 pages) : « Choisir ce que l’on souhaite résoudre. » ; « Rechercher le ou les outils à utiliser. » ; « Utiliser la carte pour comprendre la notion et la mettre en place. » ; « Niveau belt correspondant à la fiche (ici Yellow Belt) » ; renvois « Je souhaite… » de N°2 à N°46",
+  "Comprendre le lean (Introduction 2, N°2) : « Je souhaite connaître l’histoire & les principes du Lean. » ; « L’histoire du lean » (« 1950: Les origines chez Toyota », « 1980: L’analyse du modèle Toyota », « 1990: La formalisation du Lean ») ; « 5 principes du Lean Management à connaître » ; « Le Toyota Production System » (la Maison Lean), présent en plusieurs variantes",
+  "Parcours de ceintures (Introduction 3, N°3) : « Je souhaite identifier les compétences clés de chaque ceinture. » ; « White BELt », « Yellow Belt », « Green Belt », « Black Belt » ; « Les certifications » ; « En France, la norme AFNOR NFX 06-091 détaille les compétences requises pour chaque niveau de certification Lean » ; « Passez vos ceintures avec Fichly !Nous proposons désormais des formations Lean Six Sigma (White, Yellow, Green, Black Belt), en présentiel ou à distance. » ; « Notre catalogue de formation »",
+  "Six Sigma (Introduction 3, N°3, « Introduction au Six sigma ») : « Je souhaite comprendre les bases du Six Sigma. » ; « Le Six Sigma est une méthode d’amélioration de la qualité qui vise à rendre un processus fiable, stable et prévisible, en réduisant la variabilité. » ; LEAN + SIX SIGMA = LEAN SIX SIGMA ; une variante placée après OLD ajoute un tableau « Niveau Sigma » / « Défauts par million (DPMO) »",
+  "Fiche 46 « Envie d’aller plus loin ? » : fiche « Je souhaite continuer à me former aux principes du Lean. » (guide actuel : « Je souhaite continuer à me former dans ces outils. ») ; « Nos autres formats » ; « Ce deck « L’essentiel » vous donne une vue d’ensemble rapide des principaux outils du Lean. Pour approfondir un sujet clé, découvrez nos guides thématiques : 20 fiches pratiques pour maîtriser un outil de A à Z (ex. : VSM, 5S, SMED…). » ; « Résolutions de problèmes & VSM  de A à Z » ; « L’essentiel de la QSE » ; « L’essentiel de  la gestion de projet » ; « Vous pouvez également retrouver nos autres decks Essentiel (Gestion de projet, QSE...) »",
+  "Fiche 46 Templates (« Templates du deck », « Bonus Templates ») : « Je souhaite accéder aux templates. » ; « Nous avons créé des templates pratiques et accessibles en un clic via le QR code fourni. » ; « Nous mettrons régulièrement à jour cette base de templates. » ; « Accédez aux templates avec ce QR code » ; « ou avec le lien suivant : » bit.ly/Templates_Deck_Outils_du_lean. Cette page ne donne pas le nombre de templates.",
+  "Templates : la page de mentions annonce « +15 templates numériques ». L’ancienne carte placée après OLD annonce « BONUS : +30 Templates » (« 43 », « Feuille A3 sheet », « Checklist Audit 5S », « Diagramme de Gantt »). L’ancienne page « Accès aux templates » cite « Diag de Gantt. », « Yamazumi », « Checklist 5S », « Et bien d’autres.... » et porte le seul marqueur « OLD » du fichier.",
+  "Bandeau « Templates du deck » présent sur chacune des 42 fiches outils.",
+  "Anciennes fiches outils (après OLD, absentes de la numérotation actuelle) : « Diagramme de Gantt » (« Planification et gestion stratégique 25 » ; « Je souhaite planifier et suivre les étapes de mes projets efficacement. » ; « Un diagramme de Gantt est un outil de gestion de projet qui permet de… ») et « Réunions à forte valeur ajoutée » (« Engagement et visualisation 18 » ; « Je souhaite favoriser les réunions efficaces. » ; « Les Réunions “Lean” désignent des réunions soigneusement planifiées et… »)",
+  "Autres anciennes versions après OLD : guides à l’ancienne numérotation (Templates N°43), un guide intermédiaire (« Envie d’aller plus loin ? » / Templates N°45, sans TWI), et les anciennes fiches Flux tiré 31, Takt Time 33, VSM 30, QQOQCCP 3, DMAIC 6 (en français et en anglais : « Problem-solving 6 DMAIC », « I want to solve a problem methodically. ») et VOC",
+  "Ancien QR code d’avis : « Voici un QR Code à scanner pour nous laisser tout commentaires & suggestions d’améliorations que vous auriez à la suite de la lecture du deck. »",
+  "Dimensions sans contexte (dernier bloc du fichier) : « 203,5 » « 163 cm » « 30 cm » « 15 cm » « 15 cm »"
+ ],
+ "ecarts_avec_shopify": [
+  "Bilan chiffré : le deck actuel contient 42 fiches outils (n°4 à n°45). 35 des 37 outils Shopify ont une fiche, 2 n’en ont plus, et 7 fiches du deck manquent sur Shopify : 37 − 2 + 7 = 42. Il ne manque donc pas 3 outils mais 7, et il faut en retirer 2.",
+  "Dans le deck mais absents de Shopify (7) : VOC - Voix du client (n°4, Résolution de problèmes) ; VA, NVA, NVAO (n°6, Résolution de problèmes) ; Bâtonnage (n°10, Résolution de problèmes) ; Les 3G (n°17, Engagement et visualisation) ; 5S (n°19, Engagement et visualisation) ; Matrice de décision (n°26, Planification et gestion stratégique) ; TWI (n°45, Amélioration de la qualité).",
+  "Sur Shopify mais absents du deck actuel (2) : « Diagramme de Gantt » n’existe plus qu’en ancienne fiche « Planification et gestion stratégique 25 », placée après OLD. Le n°25 est aujourd’hui la Matrice Gain/Effort et le guide actuel ne cite plus Gantt. Il reste seulement des renvois dans A3 (« Utiliser un Diagramme de Gantt ») et Obeya (« diagrammes de Gantt »). « Réunion à forte VA » n’existe plus qu’en ancienne fiche « Réunions à forte valeur ajoutée » (« Engagement et visualisation 18 », après OLD) et dans l’ancien guide. Le n°18 est aujourd’hui DILO, et dans le guide actuel « Je souhaite favoriser des réunions efficaces. » renvoie seulement à « Les AIC » N°23.",
+  "D’où vient la liste Shopify : ses 37 outils suivent exactement l’ancienne numérotation à 40 outils, de N°3 QQOQCCP à N°42 Cartes de contrôle, dans le même ordre (Heijunka N°32 et Takt Time N°33 juste après Flux tiré N°31 ; Muda N°37 entre TRS N°36 et SMED N°38). Les 3 outils qui manquent par rapport à cette ancienne liste de 40 sont 5S (ancien N°12), Les 3G (ancien N°16) et Matrice de décision (ancien N°22). Mais le deck actuel n’a plus cette numérotation.",
+  "« QQQC » n’apparaît nulle part dans le fichier (0 occurrence). La fiche s’appelle « QRQC » (n°16) : c’est une coquille côté Shopify.",
+  "Familles différentes – Muda Muri Mura : Shopify la met en Efficacité de production, le deck en « Résolution de problèmes » (fiche 7).",
+  "Familles différentes – Takt Time et Heijunka : Shopify les met en Optimisation des flux, le deck en « Efficacité de production » (fiches 35 et 37). L’ancienne fiche Takt Time 33 était déjà en « Efficacité de production ».",
+  "Familles différentes – TWI : absent de Shopify, en « Amélioration de la qualité » dans le deck (fiche 45).",
+  "Noms de familles : Shopify « Amélioration de la production » = deck « Amélioration de la qualité » (partout). Shopify « Optimisation des flux » = en-têtes de fiches « Optimisation des processus », guide « Optimisation des processus & des flux », mode d’emploi « Optimisation des processus et des flux » ; l’expression « Optimisation des flux » n’apparaît jamais. Shopify « Planification et stratégie » = en-têtes de fiches et mode d’emploi « Planification et gestion stratégique », guide « Planification et  stratégie » (avec deux espaces). « Résolution de problèmes », « Engagement et visualisation » et « Efficacité de production » sont identiques (le mode d’emploi écrit « Résolution des problèmes »).",
+  "Nombre d’outils par famille : deck 13 / 7 / 6 / 5 / 6 / 5 (= 42), Shopify 9 / 6 / 6 / 7 / 5 / 4 (= 37).",
+  "Noms d’outils : SQCDP → « SQCDPE » / « Le SQCDPE » (« SQCDP » seul n’apparaît jamais) ; Visual Management → « Management Visuel » ; Mes OKR → « Les OKR » ; Gain/Effort → « Matrice Gain/Effort » ; Analyse de Pareto = entrée du guide, mais la fiche s’intitule « Pareto (80/20) » (en-tête « Pareto ») ; Ishikawa = entrée du guide, fiche « Diagramme d’Ishikawa » ; 5 Pourquoi = entrée du guide, fiche « 5 Pourquoi ? » / « Les 5 pourquoi ? » ; Poka-Yoke → fiche « Poka Yoke », guide « Poka-yoke » ; Cartes de contrôles = entrée du guide, fiche « Cartes de contrôle » ; Diagramme spaghetti = entrée du guide, fiche « Le diagramme spaghetti » ; VSM = en-tête, titre « Value Stream Mapping (VSM) » ; AIC = fiche, guide « Les AIC » ; Muda Muri Mura = fiche, guide « Muda, Muri, Mura » ; Réunion à forte VA = ancien guide, ancienne fiche « Réunions à forte valeur ajoutée ».",
+  "Ordre : la numérotation du deck en Résolution de problèmes est VOC 4, QQOQCCP 5, VA/NVA/NVAO 6, Muda 7, Ishikawa 8, 5 Pourquoi 9, Bâtonnage 10, PDCA 11, A3 12, 8D 13, DMAIC 14, Chantier Kaizen 15, QRQC 16. L’ordre Shopify (QQOQCCP, Ishikawa, 5 Pourquoi, DMAIC, 8D, A3, PDCA, Kaizen, QQQC) correspond à l’ancienne numérotation 3 à 11."
+ ],
+ "incertitudes": [
+  "Le deck compte 42 fiches outils et non 40. Preuves : (1) chaque numéro de 4 à 45 apparaît exactement deux fois (recto et verso) dans un en-tête « famille + numéro + titre », dans les segments 13 à 95 du texte, de « Résolution de problèmes / 4 / VOC - Voix du client » à « Amélioration de la qualité / TWI / 45 » ; (2) le guide actuel (Introduction 1) liste 42 outils de N°4 à N°45, plus N°2 Comprendre le lean, deux N°3 (Parcours de ceintures, Six Sigma) et deux N°46 (Envie d’aller plus loin ?, Templates) ; (3) on lit 42 phrases « Je souhaite… », une sur chaque fiche outil. Pourtant le texte annonce « Maîtriser les outils du Lean en 40 fiches », « 40 fiches pédagogiques » et « Ce deck de 40 cartes ». Le chiffre 40 correspond à l’ancienne numérotation (N°3 à N°42, Templates N°43, dans les guides placés après OLD).",
+  "Il existe aussi un guide intermédiaire, après OLD : « Envie d’aller plus loin ? » et Templates en N°45, outils jusqu’à « Cartes de contrôles » N°44, sans TWI. Soit 41 outils de N°4 à N°44.",
+  "Découpage : le fichier compte 118 pieds de page « Fichly - Tous droits réservés » (119 segments) pour 123 pages. Le pied de page tombe parfois au milieu des éléments d’une page, et certaines paires recto/verso tiennent dans un seul segment (VOC, Bâtonnage, DMAIC/Chantier Kaizen, Flux tiré/Takt Time/Yamazumi, TWI). Le côté recto ou verso de certains visuels se déduit donc de la structure qui revient d’une fiche à l’autre : il reste incertain pour la carte VSM, le schéma Kanban du Flux tiré et le « Standard TWI ».",
+  "« Templates du deck » ouvre le segment verso de presque toutes les fiches. Pour VA/NVA/NVAO, Muda Muri Mura, Bâtonnage et Heijunka, le libellé tombe pourtant au milieu du texte du recto, et le segment verso ne le contient pas. Pour les trois premières, il est accompagné d’un « Mouvement inutile » isolé, peut-être un reste de copie de la page Muda. Pour VOC et TWI, il se trouve dans un segment qui mélange recto et verso. Je l’ai classé au verso, avec une réserve.",
+  "VOC : le libellé « Définition » ne se lit pas dans le bloc VOC. Un « Définition » isolé termine le segment Six Sigma juste avant.",
+  "Rubriques absentes du texte : aucun libellé « Bonnes pratiques » pour QQOQCCP, 8D, Chantier Kaizen, DILO et VSM. Aucun libellé « Exemple » pour VA/NVA/NVAO, A3, QRQC, SQCDPE, VSM, Flux tiré et Yamazumi. Variantes de libellés : « Exemples » (SMART), « Exemple de matrice » (Hoshin Kanri), « Comment le mettre en place avec Excel ? » (Pareto), « La démarche » / « Sa déclinaison opérationnelle » (QRQC), « Outils Lean à utiliser » (DMAIC).",
+  "« Liens avec d’autres cartes » et « Pour qui ? » sont annoncés par le Guide de lecture, mais aucun intitulé de ce nom ne figure sur les fiches. Les liens prennent la forme de phrases de renvoi, suivies des numéros des fiches. « Opérationnels / Managers / Dirigeants » n’apparaît que dans d’anciennes pages placées après OLD. Le « Niveau belt correspondant à la fiche » ne se lit nulle part dans le texte des fiches (c’est peut-être un pictogramme).",
+  "Le guide actuel est cohérent avec les numéros imprimés, sauf son encadré d’exemple : « Je souhaite comprendre l’ensemble des causes racines d’un problème » renvoie encore à « Ishikawa N°4 » et « 5 Pourquoi N°5 », les anciens numéros (actuels : 8 et 9).",
+  "Anciens numéros : les anciens guides se contredisent (A3 et DMAIC sont tantôt N°6, tantôt N°8 ; N°37 est attribué à Muda, Muri, Mura et aussi à VA, NVA, NVAO ; N°3 à VOC et à QQOQCCP). Seuls sont sûrs les numéros confirmés par une ancienne fiche imprimée ou par le verso de DMAIC en anglais : QQOQCCP 3, Ishikawa 4, 5 Pourquoi 5, DMAIC 6, Réunions 18, Pareto 20, Gain/Effort 21, SMART 23, Gantt 25, Swimlane 28, VSM 30, Flux tiré 31, Takt Time 33, AMDEC 35, TRS 36, SMED 38, Cartes de contrôle 42.",
+  "Copier-coller probables : les Bonnes pratiques du Bâtonnage reprennent mot pour mot celles de Muda Muri Mura (« Faire la chasse au gaspillage de manière récurrente. ») ; l’étape « Suivre et améliorer » de TWI reprend le texte de l’Andon (« Chaque semaine, l'équipe se réunit pour discuter des problèmes signalés par l'Andon… ») ; la phrase « Je souhaite » de VA/NVA/NVAO est identique à celle de Muda et diffère du guide ; le verso de QQOQCCP contient un lien parasite vers gymglish.com.",
+  "Marque résiduelle : « 2024-2034 - You Know - Tous droits réservés » au verso de la fiche OKR. Le texte affiché du lien templates est « bit.ly/Templates_Deck_Outils_du_lean », mais une partie du lien pointe vers « https://bit.ly/template-youknow-lean ».",
+  "Coquilles relevées : « quotidiendes » (Hoshin Kanri), « problèmepour » (Jidoka), « Gembutsu » dans la définition des 3G contre « Genbutsu » dans le visuel, « RésultaTs » (Pareto), « White BELt », « Environement » (Comprendre le lean).",
+  "L’ISBN imprimé « 3760451390019 » ne commence pas par 978 ou 979 : il ressemble plutôt à un code EAN. À vérifier.",
+  "Nombre de templates incohérent : « +15 templates numériques » sur la page de mentions, « BONUS : +30 Templates » sur l’ancienne carte. La page Templates actuelle ne donne aucun nombre.",
+  "Les dimensions « 203,5 / 163 cm / 30 cm / 15 cm / 15 cm » du dernier bloc n’ont aucun contexte lisible : rien n’indique qu’il s’agit du format des cartes."
+ ]
+}

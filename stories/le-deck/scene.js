@@ -4,7 +4,7 @@
 // sont ceux des six autres bulles, un par famille.
 Story.scene({
   // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
-  fiche: { recto: '../../assets/produit/canva/page-004.png', legende: 'Le guide du deck, vrai format' },
+  fiche: { recto: '../../assets/produit/canva/page-004.png', legende: 'Le Guide du deck' },
   famille: 0,
   bandeau: 'Le deck Fichly',
   outil: '40 outils du Lean',
