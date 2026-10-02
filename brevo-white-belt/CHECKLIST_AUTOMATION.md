@@ -93,7 +93,6 @@ Une personne inscrite le lundi reçoit donc E1 le mercredi à 9 h, E2 le samedi,
 ## 4. Suivi
 
 - L'e-mail au répondant de Tally est désactivé depuis le 2 octobre : l'accès part uniquement de Brevo (E0).
-
 - Dans Make (Profil → Notifications), activez l'alerte sur les avertissements et les exécutions incomplètes, puis jetez un œil à l'onglet « Exécutions incomplètes » des deux scénarios pendant les premiers jours.
 - Le test de bout en bout du 2 octobre et les 21 cas de test du scénario d'inscription sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
