@@ -5,11 +5,16 @@ OUT = pathlib.Path(__file__).parent / "emails"
 UTM = "utm_source=brevo&utm_medium=email&utm_campaign=white-belt-nurturing&utm_content={}"
 
 def u(url, code):
-    return f"{url}{'&' if '?' in url else '?'}{UTM.format(code)}"
+    # Les UTM se placent avant le fragment « # » (sinon le navigateur ne les envoie pas au serveur).
+    base, sep, frag = url.partition("#")
+    return f"{base}{'&' if '?' in base else '?'}{UTM.format(code)}{sep}{frag}"
 
-ACCESS = "https://www.fichly.com/A-REMPLACER/acces-white-belt"
-LEAN1P = "https://www.fichly.com/A-REMPLACER/lean-en-1-page"
-LANDING = "https://www.fichly.com/A-REMPLACER/landing-white-belt"
+# Adresse de la formation (celle de la redirection Tally) ; u() insère les UTM avant le fragment.
+ACCESS = "https://claude.ai/artifact/8pEwMjaeAVG3Ava5UXzvAV#inscrit-wb1h-q7m4"
+# Formulaire d'inscription White Belt
+LANDING = "https://tally.so/r/ODOB5p"
+# Lien de réduction : applique le code WHITEBELT15 au panier, puis ouvre la collection des fiches.
+DISCOUNT = "https://www.fichly.com/discount/WHITEBELT15?redirect=%2Fcollections%2Ftoutes-les-fiches"
 VSM = "https://www.fichly.com/blogs/nos-articles/value-stream-mapping-definition-et-etapes"
 GEMBA = "https://www.fichly.com/blogs/nos-articles/gemba-walk-tournee-atelier-methode"
 ISHIKAWA = "https://www.fichly.com/blogs/nos-articles/diagramme-ishikawa-6m-methode-exemple"
@@ -23,19 +28,21 @@ AUDIT = "https://fichly-audit-flash.lovable.app/"
 LOGO = "https://img.mailinblue.com/8576704/images/content_library/original/6a671086515d467bab2fcaef.png"
 F = "Montserrat,Arial,Helvetica,sans-serif"
 
-# Blocs : ("p", texte) · ("h2", texte) · ("ol"/"ul", [items]) · ("cta", libellé, url) · ("link", libellé, url) · ("sig",)
+# Blocs : ("p", texte) · ("h2", texte) · ("ol"/"ul", [items]) · ("cta", libellé, url) · ("link", libellé, url)
+#         · ("code", code de réduction) · ("sig",)
 EMAILS = [
   dict(key="e0", name="WB · E0 · Accès", subject="Votre accès à la White Belt Lean",
-       preheader="Six chapitres courts, un test final, et une fiche offerte.",
+       preheader="Six chapitres courts, un test final, et 15 % sur nos fiches.",
        kicker="White Belt Lean · Bienvenue", title="Votre formation est ouverte",
        blocks=[
          ("p", "Bonjour,"),
          ("p", "Merci pour votre inscription à la White Belt Lean. Votre accès est prêt : le bouton ci-dessous ouvre la formation, et vous pouvez garder cet email pour y revenir à tout moment."),
          ("cta", "Ouvrir ma formation", u(ACCESS, "e0")),
          ("p", "Comptez environ une heure au total. La formation se compose de six chapitres courts, chacun avec une vidéo commentée, un exercice interactif et deux questions, puis d’un test de dix questions qui débouche sur votre attestation « Introduction aux bases du Lean - Lean White Belt ». Rien ne vous oblige à tout faire d’une traite : vous pouvez avancer en plusieurs fois."),
-         ("h2", "En cadeau : le Lean en 1 page"),
-         ("p", "Avec votre accès, nous vous offrons la fiche « Le Lean en 1 page ». Elle ramène les fondamentaux à six questions, de la valeur que le client paie vraiment jusqu’à la place laissée aux équipes sur leur poste. Posez-les sur un atelier que vous connaissez : celle à laquelle personne ne sait répondre clairement est votre point de départ."),
-         ("link", "Télécharger la fiche « Le Lean en 1 page »", u(LEAN1P, "e0")),
+         ("h2", "En cadeau : 15 % sur toutes nos fiches"),
+         ("p", "Pour garder les outils sous la main sur le terrain, nous vous offrons 15 % de réduction sur toutes nos fiches, avec ce code :"),
+         ("code", "WHITEBELT15"),
+         ("link", "Profiter de mes 15 %", u(DISCOUNT, "e0")),
          ("p", "Dans les deux semaines qui viennent, vous recevrez quatre emails courts : trois outils simples à tester sur le terrain, puis une suggestion pour la suite, selon ce que vous attendez de la formation."),
          ("p", "Bonne formation,"), ("sig",),
        ]),
@@ -95,7 +102,7 @@ EMAILS = [
          ("p", "Il y a deux semaines, vous avez ouvert la White Belt. Ce dernier email de la série a un seul objectif : vous proposer une suite utile, à votre rythme."),
          ("p", "Pour continuer à découvrir le Lean, le plus efficace est d’avoir les outils à portée de main au moment où une situation se présente sur le terrain. Nos fiches Lean rassemblent 40 outils du Lean, à ressortir avant une réunion d’équipe ou un passage en atelier."),
          ("cta", "Découvrir les fiches Lean", u(FICHES, "e4")),
-         ("p", "Si vous avez gardé la fiche « Le Lean en 1 page », c’est aussi le bon moment pour reposer ses six questions sur votre atelier. Celle qui reste sans réponse claire vous indique par où continuer."),
+         ("p", "Le code WHITEBELT15 reste valable : 15 % de réduction sur toutes nos fiches."),
          ("p", "Et pour continuer sans effort, vous recevrez chaque jeudi L’Atelier de Fichly, notre newsletter. Chaque numéro revient sur un fondamental du terrain, des gaspillages à l’observation, de la résolution de problème aux standards, dans le prolongement de ce que vous avez vu dans la White Belt."),
          ("p", "Merci d’avoir suivi ces quelques emails,"), ("sig",),
        ]),
@@ -169,6 +176,8 @@ def block_html(b):
     if k == "link":
         label, url = b[1], html.escape(b[2], quote=True)
         return p(f'<a href="{url}" target="_blank" style="color:#3C4399;font-weight:700;text-decoration:underline;">{label} &#8594;</a>')
+    if k == "code":
+        return p(b[1], "font-size:24px;line-height:32px;font-weight:700;letter-spacing:.12em;color:#3C4399;")
     if k == "sig":
         return p("Hugo, Fichly", "font-weight:700;color:#3C4399;")
     raise ValueError(k)
@@ -209,7 +218,7 @@ def render(e):
 </body></html>'''
 
 def visible_words(e):
-    txt = " ".join(re.sub("<[^>]+>", "", b[1]) if b[0] in ("p", "h2", "cta", "link") else
+    txt = " ".join(re.sub("<[^>]+>", "", b[1]) if b[0] in ("p", "h2", "cta", "link", "code") else
                    (" ".join(re.sub("<[^>]+>", "", i) for i in b[1]) if b[0] in ("ol", "ul") else "Hugo, Fichly")
                    for b in e["blocks"])
     txt = e["title"] + " " + txt
