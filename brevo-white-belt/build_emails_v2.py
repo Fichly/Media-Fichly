@@ -478,7 +478,7 @@ GB_PICTO = (44, 31)        # styles en ligne : 360 à 413 px, et clients qui ret
 GB_PICTO_L = (48, 34)      # 414 px et plus (ordinateur compris), Outlook Windows
 GB_PICTO_S = (40, 28)      # 341 à 359 px
 GB_PICTO_XS = (36, 25)     # 340 px et moins
-GB_TEXT = 12.5             # taille du texte en ligne (clients sans <style> : Arial ou Roboto, une ligne dès 320 px en Arial)
+GB_TEXT = 12.5             # taille du texte en ligne (clients sans <style>, en Arial : une ligne dès 320 px)
 
 def banner_css():
     """Règles du bandeau dans le <style> (tailles du picto et du texte, marges), par largeur d'écran ; repris tels quels par check()."""
@@ -505,8 +505,8 @@ def banner(key):
     Une seule ligne de 320 à 640 px, en Poppins comme en Arial (banner_css) :
       ordinateur (≥ 621 px)  picto 48 × 34, texte 14 px     414 à 620 px  48 × 34, 13 px     375 à 413 px  44 × 31, 13 px
       360 à 374 px           44 × 31, 12,5 px               341 à 359 px  40 × 28, 12 px     ≤ 340 px      36 × 25, 11,5 px
-    Styles en ligne (clients qui retirent le <style>) : picto 44 × 31, texte 12,5 px ; une ligne dès 320 px en Arial, et dès 360 px
-    en Roboto (Android) ; plus étroit, le texte passe sous le picto, centré.
+    Styles en ligne (clients qui retirent le <style>) : picto 44 × 31, texte 12,5 px ; une ligne dès 320 px en Arial (13 px de marge) ;
+    plus étroit, ou police plus large, le texte passe sous le picto, centré.
     Hauteur : 3 + 2 + 5 + picto + 5 + 2 + 3, soit 45 à 54 px (Outlook : 3 + 3 + 4 + 34 + 4 + 3 + 3 = 54 px).
     Toute la bande est cliquable (lien en bloc). Outlook Windows : tableau vert avec deux liens (pictogramme, texte) et les coutures
     en cellules (comme rule()), sans VML (une image dans une zone de texte VML se décale selon le DPI) ; cellule du texte à hauteur
