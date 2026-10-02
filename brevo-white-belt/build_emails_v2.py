@@ -68,6 +68,7 @@ IMAGES_BREVO = {
     "e4-accompagnement": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcab11e05abe1505bad59.png",
     "logo": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcab60c32667a87f768fb.png",
     "avatar": "https://img.mailinblue.com/8576704/images/rnb/original/6abfc3400c32667a87f76874.png",
+    "greenbelt": "https://img.mailinblue.com/8576704/images/rnb/original/6ac024430c32667a87f76d7b.png",
 }
 
 def png_size(key):
