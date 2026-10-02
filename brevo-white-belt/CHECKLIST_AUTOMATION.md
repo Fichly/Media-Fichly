@@ -1,49 +1,53 @@
-# White Belt Lean : mise en route de la séquence
+# White Belt Lean : la séquence automatique
 
-Ce qui est déjà en place, ce qui reste à faire à la main dans Brevo, et l'ordre de mise en ligne.
-Rien n'est envoyé ni activé à ce stade.
+En service depuis le 2 octobre 2026. Tout passe par Make : aucun workflow Brevo, rien à régler à la main dans Brevo.
+
+```
+Tally ODOB5p → Make « Tally → Brevo » → contact + liste 49 + E0
+                Make « Séquence E1 → E4 », chaque jour à 9 h → E1 … E4
+```
 
 ## 1. Ce qui est en place
 
 | Brique | Où | Identifiant | État |
 | --- | --- | --- | --- |
-| Formulaire Tally « White Belt Lean en 1 h, gratuite » | Tally | `ODOB5p` | modifications en brouillon, non publiées |
+| Formulaire « White Belt Lean en 1 h, gratuite » | Tally | `ODOB5p`, https://tally.so/r/ODOB5p | publié |
 | Hook Tally → Make | Make | hook `4410784` | attaché au formulaire |
-| Scénario « White Belt Lean · Tally → Brevo » | Make, dossier « Séquences Templates » | scénario `9905705` | **inactif** |
-| Liste « White Belt — Inscrits » | Brevo, dossier 37 | liste `49` | vide |
-| Attributs `INSCRIT_WHITEBELT`, `WB_DATE_INSCRIPTION`, `WB_BESOIN`, `UTM_SOURCE`, `UTM_MEDIUM`, `UTM_CAMPAIGN`, `UTM_CONTENT` | Brevo | | créés |
-| 8 templates de la séquence | Brevo | `206` à `213` | actifs, testés sur hugo.duc@fichly.com |
+| Scénario « White Belt Lean · Tally → Brevo » | Make, dossier « Séquences Templates » | `9905705` | **actif**, à chaque réponse |
+| Scénario « White Belt Lean · Séquence E1 → E4 » | Make, même dossier | `9906436` | **actif**, chaque jour à 9 h (Paris) |
+| Scénario « Brevo · appel API (Claude) » | Make | `9905546` | outil de lecture et de vérification |
+| Liste « White Belt — Inscrits » | Brevo, dossier 37 | liste `49` | 2 contacts de test, séquence terminée |
+| Attributs `INSCRIT_WHITEBELT`, `WB_DATE_INSCRIPTION`, `WB_BESOIN`, `WB_ETAPE`, `WB_DERNIER_ENVOI`, `UTM_*` | Brevo | | créés |
+| 8 templates de la séquence | Brevo | `206` à `213` | actifs |
+| Code `WHITEBELT15` | Shopify | 15 % sur la collection « Toutes les fiches » | actif, sans date de fin |
 
 ### Templates
 
 | Template | Nom | Envoi |
 | --- | --- | --- |
 | 206 | WB · E0 · Accès | à l'inscription |
-| 207 | WB · E1 · J+2 · Suivre un flux | J+2 |
-| 208 | WB · E2 · J+5 · Grille d'observation | J+5 |
-| 209 | WB · E3 · J+9 · Quel outil | J+9 |
-| 210 | WB · E4 · J+14 · Découvrir | J+14, besoin 1 ou non renseigné |
-| 211 | WB · E4 · J+14 · Équipe | J+14, besoin 2 |
-| 212 | WB · E4 · J+14 · Formation | J+14, besoin 3 |
-| 213 | WB · E4 · J+14 · Accompagnement | J+14, besoin 4 |
+| 207 | WB · E1 · J+2 · Suivre un flux | 2 jours après E0 |
+| 208 | WB · E2 · J+5 · Grille d'observation | 3 jours après E1 |
+| 209 | WB · E3 · J+9 · Quel outil | 4 jours après E2 |
+| 210 | WB · E4 · J+14 · Découvrir | 5 jours après E3, besoin 1 ou non renseigné |
+| 211 | WB · E4 · J+14 · Équipe | 5 jours après E3, besoin 2 |
+| 212 | WB · E4 · J+14 · Formation | 5 jours après E3, besoin 3 |
+| 213 | WB · E4 · J+14 · Accompagnement | 5 jours après E3, besoin 4 |
 
-### Ce que fait le scénario Make (version 2.1, testée)
+## 2. Le scénario d'inscription (9905705)
 
 1. Tally envoie la réponse au hook 4410784.
 2. **Garde** : la réponse n'est traitée que si l'e-mail est présent, la case de consentement cochée, et si elle vient de la nouvelle version du formulaire, c'est-à-dire qu'elle contient la question « Qu'attendez-vous de cette formation ? ». Les réponses de l'ancienne version, dont le consentement ne couvre pas les 4 e-mails de suivi, n'entrent pas dans la séquence.
 3. Brevo cherche le contact. L'adresse est mise en minuscules et nettoyée de ses espaces. Le scénario ne continue que si Brevo répond « contact absent ». Toute autre erreur est relancée, pour ne jamais traiter un contact existant comme nouveau.
 4. **Création ou mise à jour en une seule étape**, donc jamais de doublon, même en cas de double clic :
-   - prénom, nom, entreprise et `TITRE_JOB` déjà présents sont **conservés**, puisque la saisie existante est plus précise ;
+   - prénom, nom, entreprise et `TITRE_JOB` déjà présents sont **conservés** ;
    - `WB_BESOIN` prend la réponse la plus récente ;
    - `WB_DATE_INSCRIPTION` garde la première inscription (date de Paris) ;
    - l'opt-in n'est écrit que si la case newsletter est cochée, et un opt-in déjà donné n'est jamais retiré ;
    - le bloc UTM du premier contact est gardé tel quel s'il existe, sinon c'est celui de la réponse qui est écrit (jamais de mélange source / medium) ;
    - `ASSET_DERNIER = white_belt` et `DATE_DERNIERE_INTERACTION` prennent la date de la réponse.
-5. Ajout à la liste 49 seulement si le contact n'y est pas déjà. C'est cet ajout qui déclenche la séquence.
+5. Si le contact n'est pas encore dans la liste 49 : ajout à la liste, envoi immédiat de **E0** (réponse à hugo.duc@fichly.com), puis `WB_ETAPE = 0` et `WB_DERNIER_ENVOI` = l'heure d'envoi. Une personne déjà dans la liste voit sa fiche mise à jour, sans nouvel e-mail.
 6. En cas d'erreur Brevo : 3 nouvelles tentatives à 15 minutes d'intervalle, puis la réponse est gardée en « exécution incomplète » dans Make. Rien n'est perdu en silence, et les inscriptions suivantes ne sont pas bloquées.
-7. Pensez à activer dans Make (Profil → Notifications) l'alerte sur les avertissements et les exécutions incomplètes, puis jetez un œil à l'onglet « Exécutions incomplètes » du scénario pendant les premiers jours.
-
-Les résultats des 21 cas de test sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
 Correspondance « Votre fonction » → `TITRE_JOB` :
 
@@ -61,67 +65,44 @@ Correspondance « Votre fonction » → `TITRE_JOB` :
 
 « Qu'attendez-vous de cette formation ? » → `WB_BESOIN` : Découvrir les bases du Lean = 1, Lancer une démarche avec mon équipe = 2, Me former ou me certifier = 3, Faire accompagner mon site = 4.
 
-« Taille de l'entreprise » et « Votre niveau en Lean » ne sont pas encore enregistrés dans Brevo : il faudrait deux attributs (par exemple `TAILLE_ENTREPRISE` et `NIVEAU_LEAN`). Je ne les ai pas créés sans votre accord.
+## 3. La séquence E1 → E4 (9906436)
 
-## 2. Le workflow Brevo à créer (interface uniquement)
+Chaque jour à 9 h, heure de Paris, le scénario relit les contacts de la liste 49 modifiés dans les 20 derniers jours. Pour chacun, il envoie l'e-mail suivant si les trois conditions sont réunies :
 
-L'API Brevo ne permet pas de créer un workflow d'automation : cette étape se fait à la main, en 10 minutes environ.
+- le contact n'est pas désinscrit ;
+- `WB_ETAPE` vaut 0, 1, 2 ou 3 (4 = séquence terminée) ;
+- le délai est écoulé, compté en jours calendaires à Paris depuis `WB_DERNIER_ENVOI` : 2 jours après E0, 3 après E1, 4 après E2, 5 après E3.
 
-1. **Automations** → **Créer un workflow** → **Workflow personnalisé**.
-2. Nom : `WB · Nurturing White Belt`.
-3. **Point d'entrée** : « Un contact est ajouté à une liste » → liste **White Belt — Inscrits (49)**.
-4. Paramètres du point d'entrée : un contact n'entre **qu'une seule fois** dans le workflow.
-5. **Envoyer un e-mail** → « Utiliser un template existant » → **206 · WB · E0 · Accès**.
-   Expéditeur : Hugo de Fichly (hugo.duc@fichly.com).
-6. **Délai** : 2 jours.
-7. **Envoyer un e-mail** → **207 · WB · E1 · J+2 · Suivre un flux**.
-8. **Délai** : 3 jours.
-9. **Envoyer un e-mail** → **208 · WB · E2 · J+5 · Grille d'observation**.
-10. **Délai** : 4 jours.
-11. **Envoyer un e-mail** → **209 · WB · E3 · J+9 · Quel outil**.
-12. **Délai** : 5 jours.
-13. **Condition** (si / sinon) : attribut de contact `WB_BESOIN` **est égal à** « Lancer une démarche avec mon équipe » (2).
-    - Oui → **Envoyer un e-mail** → **211 · WB · E4 · J+14 · Équipe**.
-    - Non → nouvelle **Condition** : `WB_BESOIN` est égal à « Me former ou me certifier » (3).
-      - Oui → **212 · WB · E4 · J+14 · Formation**.
-      - Non → nouvelle **Condition** : `WB_BESOIN` est égal à « Faire accompagner mon site » (4).
-        - Oui → **213 · WB · E4 · J+14 · Accompagnement**.
-        - Non (besoin 1 ou vide) → **210 · WB · E4 · J+14 · Découvrir**.
-14. Facultatif : dans les réglages d'envoi, limiter les envois aux jours ouvrés de 8 h à 18 h.
-15. **Enregistrer sans activer.**
+Après chaque envoi, `WB_ETAPE` avance d'un cran et `WB_DERNIER_ENVOI` prend l'heure d'envoi. Après E3, le template de E4 dépend de `WB_BESOIN` : 2 → 211, 3 → 212, 4 → 213, sinon 210.
 
-### Variante test : voir toute la séquence en 10 minutes
+Une personne inscrite le lundi reçoit donc E1 le mercredi à 9 h, E2 le samedi, E3 le mercredi suivant et E4 le lundi d'après.
 
-Pour le test de bout en bout, créez le même workflow avec des délais de **2 minutes** à la place de 2, 3, 4 et 5 jours (étapes 6, 8, 10 et 12). Activez-le, puis faites l'inscription test (section 3). Les 5 e-mails arrivent en une dizaine de minutes : E0, E1, E2, E3, puis l'E4 qui correspond au besoin choisi dans le formulaire.
+**Où voir l'avancement d'un inscrit** : fiche contact Brevo, attribut `WB_ETAPE` (0 = E0 reçu … 4 = E4 reçu). Les envois sont dans Brevo → Transactionnel → Logs, tag `white-belt-nurturing`.
 
-Après le test, avant le vrai lancement :
-1. mettez le workflow en pause ;
-2. remettez les délais à 2, 3, 4 et 5 jours ;
-3. retirez le contact de test de la liste 49 ;
-4. réactivez le workflow.
+**Erreurs** : 3 nouvelles tentatives à 15 minutes d'intervalle, puis exécution incomplète dans Make. Si l'envoi échoue, l'étape n'avance pas et l'e-mail repart le lendemain.
 
-Pendant le test, vous recevrez deux e-mails d'accès : celui de Tally et E0. C'est normal. L'e-mail de Tally reste actif tant que le workflow n'est pas en service avec les vrais délais, pour qu'un vrai inscrit ne reste jamais sans accès.
+**Limites connues** :
+- si l'envoi réussit mais que la mise à jour de `WB_ETAPE` échoue malgré les 3 relances, le même e-mail repartirait le lendemain. C'est peu probable, mais une exécution incomplète sur le module « Update a Contact » est le signal à surveiller ;
+- le scénario lit 1 000 contacts par passage au plus, ce qui suffit tant qu'il y a moins de 1 000 inscriptions en 20 jours.
 
-## 3. Avant la mise en ligne
+### Mode test
 
-Dans cet ordre :
+`python3 make/build_sequence.py test` génère une variante avec des délais de 2, 3, 4 et 5 **minutes** et un passage chaque minute : toute la séquence arrive en une quinzaine de minutes. `python3 make/build_sequence.py prod` régénère la version réelle. Demandez-moi la bascule : je mets le scénario à jour dans Make, puis je le remets en mode réel après le test. Le mode test ne doit jamais rester actif, car tout vrai inscrit recevrait alors la séquence complète en un quart d'heure.
 
-1. **Liens provisoires à remplacer** dans les e-mails : `A-REMPLACER/acces-white-belt` (E0), `A-REMPLACER/lean-en-1-page` et `A-REMPLACER/landing-white-belt`. Donnez-moi les vraies URL : je régénère les e-mails et je mets à jour les templates.
-2. **Tally, e-mail au répondant** : il est encore activé (« Votre accès à la White Belt Lean en 1 h »). Avec E0 envoyé par Brevo, l'inscrit recevrait deux e-mails d'accès. À désactiver dans Tally (Paramètres → Notifications → e-mail au répondant).
-3. **Case newsletter** : elle est facultative, alors que tous les inscrits recevront L'Atelier une fois les deux bases connectées. Soit on la retire et on mentionne L'Atelier dans la case de consentement, soit on ne connecte que les inscrits qui l'ont cochée (`OPT_IN = oui`). À trancher.
-4. **Publier le formulaire Tally** (vous).
-5. **Faire une inscription test** avec une adresse à vous, en ajoutant `?utm_source=test&utm_medium=test&utm_campaign=test&utm_content=test` au lien du formulaire. Ensuite je relis la réponse dans Make. Je remplace la lecture par libellé de la question « Qu'attendez-vous de cette formation ? » par son identifiant, qui n'existe qu'après publication, et je vérifie les clés `utm_medium` et `utm_content`.
-6. **Activer d'abord le workflow Brevo.** Le déclencheur « ajouté à une liste » ne rattrape pas les contacts ajoutés avant son activation. Si Make tourne en premier, les premiers inscrits ne reçoivent jamais la séquence.
-7. **Activer ensuite le scénario Make 9905705.** Attention : tant que le scénario est inactif, les réponses Tally s'accumulent dans la file du hook et seront toutes traitées à l'activation. Videz la file si elle ne contient que des tests.
-8. **Refaire une inscription test** et vérifier l'arrivée de E0, la fiche contact et la présence dans la liste 49.
+## 4. Suivi
 
-Une personne déjà présente dans la liste 49 qui se réinscrit voit sa fiche mise à jour, mais la séquence ne repart pas. C'est voulu : elle ne reçoit pas deux fois les mêmes e-mails.
+- Dans Make (Profil → Notifications), activez l'alerte sur les avertissements et les exécutions incomplètes, puis jetez un œil à l'onglet « Exécutions incomplètes » des deux scénarios pendant les premiers jours.
+- Le test de bout en bout du 2 octobre et les 21 cas de test du scénario d'inscription sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
-## 4. Points à trancher
+## 5. Points à trancher
 
-- **Robots** : sans protection, une soumission automatique créerait un contact et lui enverrait la séquence. Activez la protection anti-spam de Tally avant la publication. Je n'ai pas ajouté de filtre « devinette » dans Make, qui risquerait d'écarter de vrais inscrits.
-- **Contacts désinscrits** : un contact désinscrit de Brevo qui s'inscrit à la White Belt reste désinscrit. Le scénario ne réabonne jamais personne. Il entre dans la liste 49, mais Brevo ne lui enverra probablement pas la séquence. À surveiller dans les premiers jours.
+- **E-mail au répondant de Tally** : il est encore activé (« Votre accès à la White Belt Lean en 1 h »). Chaque inscrit reçoit donc deux e-mails d'accès, celui de Tally et E0. Je peux le désactiver dans Tally avec votre accord.
+- **Case newsletter** : elle est facultative, alors que tous les inscrits recevront L'Atelier une fois les deux bases connectées. Soit on la retire et on mentionne L'Atelier dans la case de consentement, soit on ne connecte que les inscrits qui l'ont cochée (`OPT_IN = oui`).
+- **Prénom déjà présent dans Brevo** : il est conservé et c'est lui qui apparaît dans « Bonjour … ». Exemple : contact@fichly.com, importé de Shopify, s'appelle « Fiches » dans Brevo. On peut préférer le prénom saisi dans le formulaire pour la salutation.
+- **Robots** : sans protection, une soumission automatique créerait un contact et lui enverrait la séquence. Activez la protection anti-spam de Tally. Je n'ai pas ajouté de filtre « devinette » dans Make, qui risquerait d'écarter de vrais inscrits.
+- **Contacts désinscrits** : un contact désinscrit de Brevo qui s'inscrit à la White Belt reste désinscrit, le scénario ne réabonne jamais personne. Il reçoit E0, l'accès qu'il vient de demander, mais pas E1 à E4.
 - **Réinscription** : une personne déjà dans la liste 49 qui refait le formulaire ne reçoit pas de nouvel e-mail d'accès. Elle est quand même redirigée vers la formation en fin de formulaire. Si vous voulez lui renvoyer l'accès, je peux ajouter l'envoi du template 206 dans ce cas précis.
 - **Table « Votre fonction » → `TITRE_JOB`** : « Direction » donne « Président / PDG / Gérant / Dirigeant » (13), alors que « Directeur des opérations/industriel » (8) existe aussi. « Qualité ou HSE » donne « Responsable Qualité » (21). À valider.
-- **Taille d'entreprise et niveau Lean** : ces deux réponses ne sont pas enregistrées dans Brevo. Il faudrait deux attributs, à créer avec votre accord.
+- **Taille d'entreprise et niveau Lean** : ces deux réponses ne sont pas enregistrées dans Brevo. Il faudrait deux attributs (par exemple `TAILLE_ENTREPRISE` et `NIVEAU_LEAN`), à créer avec votre accord.
 - **Traçabilité du consentement** : `INSCRIT_WHITEBELT` et `WB_DATE_INSCRIPTION` attestent l'inscription par la nouvelle version du formulaire, donc l'accord pour les 4 e-mails. Si vous voulez une preuve plus explicite, on peut ajouter un attribut date dédié.
+- **Contacts de test** : hugo.duc@outlook.com et contact@fichly.com sont dans la liste 49 avec `WB_ETAPE = 4`. Ils ne recevront plus rien. Je les laisse, sauf avis contraire.

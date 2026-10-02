@@ -51,8 +51,24 @@ Harnais recréé (9906111) :
 
 - Les 9 contacts de test créés pendant les tests (ids 20334 à 20342) ont été supprimés. La liste 49 est revenue à 0 contact.
 - Les scénarios harnais 9905753 et 9906111 ont été désactivés puis supprimés. Il se recrée depuis `blueprint_harnais_test.json`, avec l'entrée de scénario `payload` (texte).
-- Le scénario réel 9905705 est en version 2.1, **inactif**. La file du hook 4410784 est vide.
+- À ce stade, le scénario réel 9905705 était en version 2.1, inactif, et la file du hook 4410784 vide.
 
-## Encore à tester après la publication du formulaire
+## Test de bout en bout (2 octobre 2026)
 
-Une vraie soumission Tally doit confirmer, sur la structure publiée, la clé de la question « Qu’attendez-vous de cette formation ? » et les clés `utm_medium` / `utm_content`, qui n'ont jamais été observées dans une sortie réelle.
+Formulaire publié, scénario d'inscription 9905705 actif, séquence 9906436 en mode test (délais de 2, 3, 4 et 5 minutes, passage chaque minute). Deux vraies inscriptions par https://tally.so/r/ODOB5p avec les UTM `test`.
+
+La première réponse réelle a confirmé les clés de la structure publiée : `question_DvOEkj` pour « Qu’attendez-vous de cette formation ? » et les quatre UTM `question_GB4G4k_…`. Le générateur lit désormais ces identifiants, avec le libellé en secours.
+
+| Inscrit | Besoin | E0 (206) | E1 (207) | E2 (208) | E3 (209) | E4 | Résultat |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| hugo.duc@outlook.com, contact créé plus tôt pour les envois de test | 2, équipe | 17:36 | 17:38 | 17:42 | 17:46 | 211 Équipe, 17:51 | OK |
+| contact@fichly.com, contact Shopify existant | 1, découvrir | 17:37 | 17:40 | 17:43 | 17:47 | 210 Découvrir, 17:53 | OK |
+
+Heures de remise Brevo (Paris). Les écarts de 2, 3 à 4, 4 et 5 minutes correspondent aux délais, arrondis au passage suivant du scénario.
+
+Vérifié aussi :
+- contact existant : prénom, nom et `TITRE_JOB` (8) conservés, `WB_BESOIN` 1, UTM `test` écrits puisque le contact n'en avait pas, ajout à la liste 49 sans toucher aux listes 38, 40 et 42 ;
+- après E4, `WB_ETAPE = 4` pour les deux contacts : plus aucun envoi ;
+- le lien de désinscription Brevo et le suivi des clics, UTM compris, fonctionnent dans les e-mails reçus.
+
+La séquence a ensuite été repassée en mode réel (délais en jours, chaque jour à 9 h, premier passage le 3 octobre).
