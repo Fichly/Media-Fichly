@@ -1,0 +1,90 @@
+[
+ {
+  "clé": "e0",
+  "nom": "WB · E0 · Accès",
+  "objet": "Votre accès à la White Belt Lean",
+  "preheader": "Six chapitres courts, un test final, et une fiche offerte.",
+  "mots": 240,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e0.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "FICHES",
+  "fichier": "emails-v2/e0.html"
+ },
+ {
+  "clé": "e1",
+  "nom": "WB · E1 · J+2 · Suivre un flux",
+  "objet": "Suivre un produit en 30 minutes",
+  "preheader": "Un exercice à faire cette semaine, chronomètre en main.",
+  "mots": 203,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e1.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "GREEN BELT",
+  "fichier": "emails-v2/e1.html"
+ },
+ {
+  "clé": "e2",
+  "nom": "WB · E2 · J+5 · Grille d'observation",
+  "objet": "Observer un poste en quatre colonnes",
+  "preheader": "Attentes, déplacements, ruptures, retouches, et trois règles pour bien observer.",
+  "mots": 203,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e2.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "FICHES",
+  "fichier": "emails-v2/e2.html"
+ },
+ {
+  "clé": "e3",
+  "nom": "WB · E3 · J+9 · Quel outil",
+  "objet": "Quel outil pour quel problème ?",
+  "preheader": "Pareto, 5 Pourquoi, Ishikawa ou DMAIC : une phrase suffit pour choisir.",
+  "mots": 209,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e3.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "GREEN BELT",
+  "fichier": "emails-v2/e3.html"
+ },
+ {
+  "clé": "e4-decouvrir",
+  "nom": "WB · E4 · J+14 · Découvrir",
+  "objet": "Et après la White Belt ?",
+  "preheader": "Une suite simple pour garder les outils du Lean sous la main.",
+  "mots": 214,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e4-decouvrir.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "GREEN BELT",
+  "fichier": "emails-v2/e4-decouvrir.html"
+ },
+ {
+  "clé": "e4-equipe",
+  "nom": "WB · E4 · J+14 · Équipe",
+  "objet": "Poser un langage commun avec votre équipe",
+  "preheader": "Faire suivre la White Belt, puis aller plus loin avec la formation intra.",
+  "mots": 189,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e4-equipe.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "FICHES",
+  "fichier": "emails-v2/e4-equipe.html"
+ },
+ {
+  "clé": "e4-formation",
+  "nom": "WB · E4 · J+14 · Formation",
+  "objet": "Après la White Belt, la Green Belt",
+  "preheader": "Une formation certifiante, éligible au CPF.",
+  "mots": 183,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e4-formation.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "FICHES",
+  "fichier": "emails-v2/e4-formation.html"
+ },
+ {
+  "clé": "e4-accompagnement",
+  "nom": "WB · E4 · J+14 · Accompagnement",
+  "objet": "Un regard extérieur sur votre site",
+  "preheader": "L’audit Lean flash, une première étape pour faire accompagner votre site.",
+  "mots": 189,
+  "image": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/e4-accompagnement.png",
+  "avatar": "/home/user/Media-Fichly/brevo-white-belt/visuels/emails/avatar-hugo.png",
+  "upsell": "GREEN BELT",
+  "fichier": "emails-v2/e4-accompagnement.html"
+ }
+]
