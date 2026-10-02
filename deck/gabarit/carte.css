@@ -1,7 +1,9 @@
-/* Gabarit commun des cartes du deck « Les outils du lean » (A5 recto-verso, 148 × 210 mm).
+/* Gabarit v2 des cartes du deck « Les outils du lean » (A5 recto-verso, 148 × 210 mm).
    Une carte = index.html (texte) + fiche.js (illustrations propres à l'outil).
-   Ce fichier porte tout ce qui est commun : polices, couleurs, grille, en-tête, rubriques, pied.
-   La famille se règle par data-famille sur <body>, le niveau par data-niveau. */
+   Recto : comprendre (besoin, schéma héros annoté, Définition / Quand ? / Exemple / Pas pour, parcours).
+   Verso : faire (Pour démarrer, étapes illustrées, À faire / À éviter).
+   La famille se règle par data-famille sur <body>, le niveau par data-niveau : tout le reste en découle.
+   Aucune ressource réseau : polices, papier, QR et bibliothèques sont dans deck/assets et deck/gabarit. */
 
 @font-face{font-family:Poppins;font-weight:500;src:url(../assets/fonts/poppins-latin-500-normal.woff2) format("woff2")}
 @font-face{font-family:Poppins;font-weight:600;src:url(../assets/fonts/poppins-latin-600-normal.woff2) format("woff2")}
@@ -9,48 +11,57 @@
 @font-face{font-family:Poppins;font-weight:800;src:url(../assets/fonts/poppins-latin-800-normal.woff2) format("woff2")}
 @font-face{font-family:Montserrat;font-weight:400;src:url(../assets/fonts/montserrat-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:Montserrat;font-weight:500;src:url(../assets/fonts/montserrat-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:600;src:url(../assets/fonts/montserrat-latin-600-normal.woff2) format("woff2")}
 @font-face{font-family:Montserrat;font-weight:700;src:url(../assets/fonts/montserrat-latin-700-normal.woff2) format("woff2")}
 @font-face{font-family:Montserrat;font-weight:400;font-style:italic;src:url(../assets/fonts/montserrat-latin-400-italic.woff2) format("woff2")}
 @font-face{font-family:Montserrat;font-weight:600;font-style:italic;src:url(../assets/fonts/montserrat-latin-600-italic.woff2) format("woff2")}
-@font-face{font-family:Caveat;font-weight:500;src:url(../assets/fonts/caveat-latin-500-normal.woff2) format("woff2")}
 @font-face{font-family:Caveat;font-weight:600;src:url(../assets/fonts/caveat-latin-600-normal.woff2) format("woff2")}
 @font-face{font-family:Caveat;font-weight:700;src:url(../assets/fonts/caveat-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Kalam;font-weight:400;src:url(../assets/fonts/kalam-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Kalam;font-weight:700;src:url(../assets/fonts/kalam-latin-700-normal.woff2) format("woff2")}
 
-/* ---------- Couleurs : marque, 6 familles, niveaux ---------- */
+/* ---------- Couleurs : marque, 6 familles, 7 niveaux ---------- */
 :root{
-  --indigo:#3C4499;          /* ancre de marque */
-  --encre:#231F20;
-  --marine:#23235A;
-  --gris:#4D4A63;
+  --indigo:#3C4499; --encre:#231F20; --marine:#23235A; --gris:#5A5770; --gris-objet:#D9D6CE;
   --papier:#FFFCF3;
-  --c-resolution:#E5B837;    /* frise, dans cet ordre */
-  --c-engagement:#74BEBF;
-  --c-planification:#8BC878;
-  --c-optimisation:#F16969;
-  --c-efficacite:#AB75B1;
-  --c-qualite:#73A3D4;
-  --ceinture-white:#FFFFFF;
-  --ceinture-yellow:#F4C430;
-  --ceinture-green:#5DAE4B;
+  --corail:#F16969;          /* traits et aplats d'alerte */
+  --corail-texte:#C43E3A;    /* texte corail : 5,0:1 sur le papier, assez pour le petit texte (≥ 4,5:1) */
+  --vert:#8BC878; --bleu:#73A3D4; --moutarde:#E5B837;
+  /* frise des 6 familles, dans cet ordre */
+  --c-resolution:#E5B837; --c-engagement:#74BEBF; --c-planification:#8BC878;
+  --c-optimisation:#F16969; --c-efficacite:#AB75B1; --c-qualite:#73A3D4;
+  /* bandeaux pastel des rubriques (esprit banque d'icônes Style Fichly) */
+  --pastel-vert:#E3F1DC; --pastel-corail:#FBE0DF; --pastel-bleu:#DFEAF6;
+  /* ceintures : jaune du brief ; white et green de la v1 ; orange, blue, brown, black à valider */
+  --ceinture-white:#FFFFFF; --ceinture-yellow:#F2C230; --ceinture-orange:#EE8A3C; --ceinture-green:#5DAE4B;
+  --ceinture-blue:#73A3D4; --ceinture-brown:#8A5A3C; --ceinture-black:#231F20;
 
-  /* grille : marge latérale, gouttière, colonne principale du recto, rail du verso */
-  --mx:28px;                 /* 7,4 mm */
-  --gout:16px;
-  --col:286px;               /* recto : colonne gauche (schéma, définition, exemple) */
-  --rail:25mm;               /* verso : rail des numéros, vignettes et pictos */
-  --bas-corps:68px;          /* réserve pour le pied */
+  /* grille */
+  --mx:20px;                 /* marge latérale : 5,3 mm (zone tranquille de 5 mm) */
+  --gout:14px;               /* gouttière */
+  --gout-infos:16px;         /* recto : gouttière des infos, reprise par le parcours */
+  --infos-g:2;            /* recto : rapport colonne gauche / colonne droite des infos, repris par le parcours */
+  --air:9px;                 /* écart minimal entre deux blocs du corps */
   --frise:4mm;
+  --pied:56px;               /* réserve basse : pied sur deux lignes + frise + 1,6 mm d'air au-dessus du pied */
+  --vignette:95px;          /* verso : largeur des vignettes d'étape */
+  --qr:80px;                 /* QR : code de 62 px (16,4 mm) + 9 px de blanc (4,8 modules) */
 }
-[data-famille=resolution]   {--famille:var(--c-resolution);   --famille-doux:#FBF4E1;--famille-teinte:#F3DB92}
-[data-famille=engagement]   {--famille:var(--c-engagement);   --famille-doux:#EAF6F6;--famille-teinte:#B9DFDF}
-[data-famille=planification]{--famille:var(--c-planification);--famille-doux:#EEF7EA;--famille-teinte:#C5E4BB}
-[data-famille=optimisation] {--famille:var(--c-optimisation); --famille-doux:#FCE8E9;--famille-teinte:#F8B4B4}
-[data-famille=efficacite]   {--famille:var(--c-efficacite);   --famille-doux:#F1EAF2;--famille-teinte:#D5BAD8}
-[data-famille=qualite]      {--famille:var(--c-qualite);      --famille-doux:#EAF1FA;--famille-teinte:#B9D1EA}
-body{--sur-famille:var(--encre)}   /* texte posé sur la couleur de famille : toujours à l'encre */
+/* --famille : aplat ; --famille-doux : fond de carte ; --famille-teinte : surlignage ; --famille-pale : encart */
+[data-famille=resolution]   {--famille:var(--c-resolution);   --famille-doux:#FBF4E1;--famille-teinte:#F3DB92;--famille-pale:#F6E6B8}
+[data-famille=engagement]   {--famille:var(--c-engagement);   --famille-doux:#EAF6F6;--famille-teinte:#B9DFDF;--famille-pale:#D3EBEB}
+[data-famille=planification]{--famille:var(--c-planification);--famille-doux:#EEF7EA;--famille-teinte:#C5E4BB;--famille-pale:#DCEFD5}
+[data-famille=optimisation] {--famille:var(--c-optimisation); --famille-doux:#FCE8E9;--famille-teinte:#F8B4B4;--famille-pale:#FAD3D3}
+[data-famille=efficacite]   {--famille:var(--c-efficacite);   --famille-doux:#F1EAF2;--famille-teinte:#D5BAD8;--famille-pale:#E6D7E8}
+[data-famille=qualite]      {--famille:var(--c-qualite);      --famille-doux:#EAF1FA;--famille-teinte:#B9D1EA;--famille-pale:#D6E4F3}
+body{--sur-famille:var(--encre)}   /* texte posé sur la couleur de famille : toujours à l'encre, jamais blanc */
 [data-niveau=white] {--ceinture:var(--ceinture-white)}
 [data-niveau=yellow]{--ceinture:var(--ceinture-yellow)}
+[data-niveau=orange]{--ceinture:var(--ceinture-orange)}
 [data-niveau=green] {--ceinture:var(--ceinture-green)}
+[data-niveau=blue]  {--ceinture:var(--ceinture-blue)}
+[data-niveau=brown] {--ceinture:var(--ceinture-brown)}
+[data-niveau=black] {--ceinture:var(--ceinture-black)}
 
 /* ---------- Page ---------- */
 @page{size:148mm 210mm;margin:0}
@@ -59,116 +70,193 @@ body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 *{box-sizing:border-box}
 .face{width:148mm;height:210mm;position:relative;overflow:hidden;break-after:page;page-break-after:always;
   display:flex;flex-direction:column;
-  background:var(--famille-doux);color:var(--encre);font:400 11.5px/1.28 Montserrat,sans-serif;
+  background:var(--famille-doux);color:var(--encre);font:400 11px/1.27 Montserrat,sans-serif;
   text-rendering:geometricPrecision;font-variant-ligatures:none;hyphens:manual}
 .face:last-of-type{break-after:auto;page-break-after:auto}
-/* à l'écran, un écart entre les faces : le haut du verso tombe sur un pixel entier (800 px) */
 @media screen{.face{margin-bottom:calc(800px - 210mm)}}
 p{margin:0}
 b,strong{font-weight:700}
+.corps b,.corps strong{color:var(--marine)}   /* une seule règle : le gras du corps est marine, partout */
+ul,ol{margin:0;padding:0;list-style:none}
 
-/* calques : fond, bandeau, frise et grain (data-bleed), puis dessins, puis texte */
-.bandeau{position:absolute;left:0;top:0;width:100%;height:var(--bandeau,150px);background:var(--famille)}
+/* calques : fond, bandeau, frise et grain (data-bleed), puis décor dessiné, puis texte */
+.bandeau{position:absolute;left:0;top:0;width:100%;height:var(--bandeau,120px);background:var(--famille)}
 .frise{position:absolute;left:0;right:0;bottom:0;height:var(--frise);display:flex}
 .frise i{flex:1}
-/* grain papier discret, sous les dessins et le texte : il ne touche ni le QR ni les lettres */
-.papier{position:absolute;inset:0;background:url(../assets/paper.png) center/cover;mix-blend-mode:multiply;opacity:.3;pointer-events:none}
+.papier{position:absolute;inset:0;background:url(../assets/paper.png) center/cover;mix-blend-mode:multiply;opacity:.26;pointer-events:none}
 .deco{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 
-/* ---------- En-tête ---------- */
-.entete{position:relative;flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--gout);
-  padding:20px var(--mx) 10px}
-.entete-g{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.entete-d{display:flex;flex-direction:column;align-items:flex-end}
-.ligne-logo{display:flex;align-items:flex-end;gap:14px;min-width:0}
-.logo{flex:none;width:92px;height:46px}           /* 24,3 mm, identique au recto et au verso */
+/* ---------- En-tête du recto ----------
+   Colonne du QR de largeur fixe ; le titre essaie 38, 32, 26 puis 22 px, puis passe sur 2 lignes. */
+.entete{position:relative;flex:none;display:grid;grid-template-columns:minmax(0,1fr) var(--qr);column-gap:18px;
+  padding:19px var(--mx) 9px}
+.entete-g{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.entete-d{position:relative;display:flex;flex-direction:column;align-items:flex-end}
+.ligne-logo{display:flex;align-items:flex-end;gap:13px;min-width:0}
+.logo{flex:none;width:88px;height:44px}
 .logo svg{display:block;width:100%;height:100%}
-.surtitre{display:block;margin:0 0 4px;
-  padding-left:14px;border-left:1.5px solid currentColor;
-  font:600 11.5px/1.25 Poppins;letter-spacing:.07em;text-transform:uppercase;color:var(--sur-famille)}
+.surtitre{margin:0 0 4px;padding-left:13px;border-left:1.5px solid currentColor;
+  font:600 11px/1.25 Poppins;letter-spacing:.07em;text-transform:uppercase;color:var(--sur-famille)}
 .surtitre .no{font-weight:800;margin-right:.55em}
-.titre{position:relative;margin:0;padding:.07em .31em .15em;font:800 42px/1 Poppins;letter-spacing:-.01em;color:#fff;
-  max-width:100%;white-space:nowrap}
-.titre.deux-lignes{white-space:normal;line-height:1.04}
+.ligne-titre{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;width:100%}
+.titre{position:relative;flex:none;max-width:100%;margin:0;padding:.06em .3em .13em;font:800 38px/1 Poppins;letter-spacing:-.01em;color:#fff;white-space:nowrap}
+.titre.deux-lignes{flex:1 1 100%;white-space:normal;line-height:1.04;text-wrap:balance}
 .titre span{position:relative}
 .titre svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
-.meta{display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;row-gap:4px}
-.sous-titre{font:600 12.5px/1.2 Poppins;color:var(--sur-famille);letter-spacing:.01em}
-.niveau{position:relative;display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 8px;font:700 12px/1.2 Poppins;color:var(--encre);white-space:nowrap}
+.meta{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.sous-titre{font:600 12.5px/1.2 Poppins;color:var(--sur-famille);white-space:nowrap}
+.alias{font:500 11px/1.25 Montserrat;color:var(--sur-famille)}
+.alias b{font-weight:700}
+.niveau{position:relative;display:inline-flex;align-items:baseline;gap:5px;padding:3px 11px 3px 7px;font:700 11.5px/1.2 Poppins;color:var(--encre);white-space:nowrap}
 .niveau svg.fond{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
-.niveau .ceinture{position:relative;width:30px;height:17px;overflow:visible}
-.niveau small{position:relative;font:600 10px/1 Poppins;letter-spacing:.08em;text-transform:uppercase;color:var(--marine)}
+.niveau .ceinture{position:relative;align-self:center;width:28px;height:16px;overflow:visible}
+.niveau small{position:relative;font:600 11px/1.2 Poppins;letter-spacing:.08em;text-transform:uppercase;color:var(--marine)}
 .niveau span{position:relative}
-.qr{width:84px;height:84px;padding:9px;background:#fff;border-radius:8px}  /* 22,2 mm, code 17,5 mm, marge 4,5 modules */
-.qr img{display:block;width:66px;height:66px}
-.qr-legende{margin-top:7px;font:700 16px/1 Caveat;color:var(--sur-famille);white-space:nowrap}
-.verso .entete{grid-template-columns:minmax(0,1fr)}
-.verso .entete-g{align-items:stretch}
-.verso .ligne-logo{align-self:flex-start}
-.verso .ligne-titre{display:flex;align-items:center;flex-wrap:wrap;column-gap:14px;row-gap:4px}
-.verso .ligne-titre .niveau{margin-left:auto}
-.verso .titre{font-size:30px}
+.qr{width:var(--qr);height:var(--qr);padding:9px;background:#fff;border-radius:8px}
+.qr img{display:block;width:62px;height:62px}
+.qr-legende{position:absolute;right:calc(100% + 20px);top:6px;font:700 16px/1 Caveat;color:var(--sur-famille);white-space:nowrap}
+
+/* ---------- En-tête du verso : logo | outil | titre de la face | niveau ---------- */
+.entete-verso{position:relative;flex:none;display:flex;align-items:center;flex-wrap:wrap;gap:6px 9px;padding:20px var(--mx) 8px}
+.entete-verso .logo{width:66px;height:33px;padding-right:9px;border-right:1.5px solid var(--encre);box-sizing:content-box}
+.entete-verso .titre{font-size:22px}
+.titre-face{margin:0;font:700 15.5px/1.1 Kalam;color:var(--sur-famille);white-space:nowrap}
+.entete-verso .niveau{margin-left:auto}
 
 /* ---------- Corps ---------- */
-.corps{position:relative;flex:1 1 auto;min-height:0;margin:11px var(--mx) var(--bas-corps);
-  display:flex;flex-direction:column;justify-content:space-between}
+.corps{position:relative;flex:1 1 auto;min-height:0;margin:0 var(--mx) var(--pied);
+  display:flex;flex-direction:column;justify-content:space-between;row-gap:var(--air)}   /* au moins --air entre deux blocs */
 .corps>*{flex-shrink:0}
-.grille{display:grid;grid-template-columns:var(--col) minmax(0,1fr);column-gap:var(--gout)}
-.h{font:700 13px/1.2 Poppins;color:var(--indigo);margin:0 0 6px;width:fit-content;position:relative}
-.h2{font:800 17px/1.15 Poppins;color:var(--indigo);margin:0;width:fit-content;position:relative}
-.filet{display:block;width:100%;height:6px;overflow:visible}
 .surligne{position:relative}
 
-/* « Je souhaite… » */
-.besoin{position:relative;margin:0;padding-left:36px;text-wrap:balance;font:600 15px/1.3 Poppins;color:var(--marine);letter-spacing:-.005em}
-.besoin .je{color:var(--indigo)}
-.besoin svg{position:absolute;left:-1px;top:-3px;width:30px;height:27px;overflow:visible}
+/* titre de rubrique : icône Style Fichly + écriture feutre (Kalam) */
+.h{display:flex;align-items:center;gap:5px;margin:0 0 3px;font:700 14px/1.1 Kalam;color:var(--marine)}
+.h .ic{flex:none;width:22px;height:22px;margin:-3px 0 -3px -2px}
+.ic svg{display:block;width:100%;height:100%}
+/* titre en tête de paragraphe (encart) */
+.h.run{display:inline;margin:0 5px 0 0;line-height:1}
+.h.run .ic{display:inline-block;vertical-align:-6px;margin:0 4px 0 -1px}
 
-/* listes à puce dessinée : la puce occupe 22 px, le texte démarre au même x partout */
-.liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
-.liste li{position:relative;padding-left:24px}
-.liste li>svg{position:absolute;left:0;top:0;width:18px;height:18px;overflow:visible}
+/* bandeau pastel arrondi (titres feutre de la banque d'icônes) */
+.bande{display:inline-flex;align-items:center;gap:6px;padding:1px 12px 0 5px;border-radius:999px;background:var(--fond-bande,var(--famille-teinte));
+  font:700 14px/1.15 Kalam;color:var(--encre);white-space:nowrap}
+.bande .ic{width:20px;height:20px;margin:-2px 0}
 
-/* renvoi vers une autre carte : nom à l'encre marine (lisible), trait de marqueur et pastille ronde
-   dans la couleur pure de la famille citée (--c) */
+/* encart teinté (Exemple) et encart d'alerte (Pas pour) : un aplat, pas de cadre */
+.encart{padding:7px 10px 8px;border-radius:10px;background:var(--famille-pale)}
+.encart p{text-wrap:pretty}
+/* Pas pour : pas d'aplat (la couleur de la carte reste celle de la famille), un filet corail à gauche */
+.alerte{padding:7px 0 8px 10px;border-left:1.5px solid var(--corail)}
+
+/* renvoi vers une autre carte : nom marine, trait de marqueur (carte.js) et pastille en pilule
+   à la couleur de la famille citée (--c) ; la pilule tient les numéros à deux chiffres */
 .renvoi{font-weight:700;color:var(--marine);white-space:nowrap}
-.pastille{display:inline-block;width:15px;height:15px;margin:0 1px 0 3px;border-radius:50%;background:var(--c);
-  font:700 10px/15px Poppins;letter-spacing:-.04em;text-indent:-.04em;color:var(--encre);text-align:center;vertical-align:1px}
+.pastille{display:inline-block;min-width:13px;height:13px;padding:0 3px;margin:-1px 0 -1px 2px;border-radius:6.5px;background:var(--c);
+  font:700 11px/13px Poppins;letter-spacing:0;color:var(--encre);text-align:center;vertical-align:middle}
+/* une liste qui porte des renvois prend un interligne plus grand, régulier sur toute la liste :
+   deux pastilles sur deux lignes consécutives gardent au moins 1,5 px d'écart */
+.puces:has(.renvoi),.liste:has(.renvoi){line-height:1.34 !important}
 
-/* ---------- Verso : étapes (3 à 8), vignettes facultatives ---------- */
-.etapes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--ecart-etapes,9px)}
-.etape{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);column-gap:var(--gout)}
-.rail{position:relative}
-.tete-etape{display:flex;align-items:center;gap:5px;height:34px;margin-top:-2px}
-.rail .num{flex:none;width:33px;height:35px;overflow:visible}
-.rail .vignette{display:block;margin-top:2px;width:100%;height:auto;overflow:visible}
-.etape h3{margin:0;font:700 14px/1.1 Poppins;color:var(--encre)}
-.etape h3 span{display:block;font:500 11.5px/1.25 Poppins;color:var(--gris)}
-.etapes.compact .tete-etape{height:28px}
-.etapes.compact .rail .num{width:27px;height:29px}
-.ex{margin-top:3px;font:italic 400 10.6px/1.34 Montserrat;color:var(--marine)}
-.ex .tag{font:700 15px/1 Caveat;font-style:normal;color:var(--indigo)}
-.ex em{font-weight:600}
-.ex.pda{display:grid;grid-template-columns:auto 1fr;column-gap:6px}
-.pratiques{display:flex;flex-direction:column;gap:7px}
-.pratique{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);column-gap:var(--gout)}
-.pratique>svg{justify-self:end;width:40px;height:30px;overflow:visible}
+/* listes */
+.puces{display:flex;flex-direction:column;gap:1px}
+.puces li{position:relative;padding-left:12px}
+/* puce centrée sur la hauteur d'x de Montserrat (ascendante .968em, hauteur d'x .52em), 1,5 mm avant le texte */
+.puces li::before{content:"";position:absolute;left:.6px;top:calc(.5lh - 1.219em / 2 + .708em - 2.6px);width:5.2px;height:5.2px;border-radius:50%;background:var(--famille);box-shadow:0 0 0 .8px var(--encre)}
+.liste{display:flex;flex-direction:column;gap:3px}
+.liste li{position:relative;padding-left:21px}
+.liste li>.ic,.liste li>svg{position:absolute;left:0;top:-1px;width:16px;height:16px;overflow:visible}
 
-/* ---------- Pied de page ---------- */
-.pied{position:absolute;left:var(--mx);right:var(--mx);bottom:21px;height:40px}
-.pied svg{position:absolute;left:0;top:0;width:100%;height:24px;overflow:visible}
-.pied .famille,.pied .outil{position:absolute;top:3px;font:600 11.5px/16px Poppins}
+/* ---------- Nom d'étape : même marqueur (repère d'étape de la fiche) et même style sur les deux faces ----------
+   Kalam pour le nom (rubrique), numéro d'ordre devant ; au verso, la traduction en Kalam léger. */
+.nom-etape{margin:0;font:700 15px/1.1 Kalam;color:var(--marine);white-space:nowrap}
+.nom-etape .n{margin-right:.22em}
+.nom-etape .trad{font:500 11px/1 Montserrat;color:var(--gris);margin-left:.15em}
+
+/* ---------- Schéma héros annoté (recto) ---------- */
+.heros{position:relative;height:var(--h-heros,214px)}
+.heros>svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.anno{position:absolute;font:400 11px/1.25 Montserrat;color:var(--encre);text-wrap:pretty}
+.anno .q{display:flex;align-items:center;gap:5px;margin-bottom:2px}
+.anno .q .ic{flex:none;width:22px;height:22px;margin:-3px 0 -3px -2px}
+.note-heros{position:absolute;font:600 15px/1 Caveat;color:var(--marine);white-space:nowrap}
+.note-heros b{font-weight:700;color:var(--encre)}
+
+/* ---------- Parcours Avant → Pendant → Après (recto) : frise fléchée, sans cadre ---------- */
+.parcours .h{margin-bottom:1px}
+.frise-parcours{--c1:calc((100% - var(--gout-infos)) * var(--infos-g) / (var(--infos-g) + 1));position:relative;display:grid;
+  grid-template-columns:calc(var(--c1) * .465) calc(var(--c1) * .535 - var(--gout-infos)) minmax(0,1fr);column-gap:var(--gout-infos);padding-top:2px}
+.frise-parcours>svg{position:absolute;left:0;top:0;width:100%;height:30px;overflow:visible}
+.station{position:relative;min-width:0}
+.station .moment{position:relative;display:flex;align-items:center;gap:0;height:26px;margin-bottom:1px;font:700 14px/1 Kalam;color:var(--marine)}
+.station .moment .ic{flex:none;width:24px;height:24px}
+.station .moment span{padding:0 0 0 5px}
+.station.ici .moment span{padding-left:9px}   /* l’anneau indigo « vous êtes ici » déborde de l’icône de 3 px */
+.station .quoi{margin:0 0 2px;font:500 11px/1.2 Montserrat;color:var(--encre)}
+.station .refs{display:flex;flex-wrap:wrap;gap:3px 10px;line-height:1.3}
+
+/* ---------- Pour démarrer (verso) : étiquette à gauche, lignes empilées à droite ---------- */
+.demarrer{margin-top:7px;display:grid;grid-template-columns:var(--vignette) minmax(0,1fr);column-gap:9px;align-items:center}
+.demarrer .h{flex-direction:column;align-items:flex-start;gap:1px;margin:0;font-size:14px;line-height:1}
+.demarrer .h .ic{margin:0 0 0 -2px}
+.demarrer ul{display:flex;flex-direction:column;gap:2.5px}
+.demarrer li{position:relative;padding-left:20px;line-height:14px;white-space:nowrap}
+.demarrer li .ic{position:absolute;left:0;top:0;width:14px;height:14px}   /* 14 px sur un pas de 16,5 px : jamais de chevauchement */
+.demarrer li b{color:var(--marine)}
+
+/* ---------- Étapes (verso) ----------
+   Un seul composant .etape, deux dispositions :
+   .etapes.lignes : une ligne par étape, vignette à gauche (3 à 8 étapes ; au-delà de 5, --vignette:86px et 2 puces) ;
+   .etapes.grille : 2 × 2, vignette en tête de case (outils à 4 étapes courtes). */
+.etapes{display:flex;flex-direction:column;gap:0}
+/* entre deux étapes : de l'air, pas de filet */
+.etapes.lignes .etape+.etape{margin-top:var(--air-etape,9px)}
+.etape{display:grid;grid-template-columns:var(--vignette) minmax(0,1fr);column-gap:9px;align-items:stretch}
+.cadre{position:relative;min-height:var(--h-min,80px)}   /* --h-min : hauteur minimale d'une vignette qui doit montrer plus (graphe, chiffres) */
+.cadre .vignette{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.cadre .num{position:absolute;left:1px;top:-5px;width:25px;height:26px;overflow:visible}
+.etape .tete{display:flex;align-items:center;flex-wrap:wrap;column-gap:6px;margin-bottom:0}
+.etape .tete .ic{flex:none;width:22px;height:22px;margin:-3px 0 -3px -2px}  /* repère d'étape (PDCA : ⊕, quart de l'étape en couleur de famille) */
+/* question clé : surlignée en famille (carte.js), c'est elle qu'on lit après le nom de l'étape */
+.question{position:relative;margin-left:4px;font:700 16px/1.05 Caveat;color:var(--indigo)}
+.etape .puces{gap:0;line-height:1.22}
+.etape .ex{margin-top:1px;padding-left:22px;text-indent:-22px;font:italic 400 10px/1.2 Montserrat;color:var(--marine)}
+.etape .ex .tag{display:inline-block;width:22px;text-indent:0;font:700 14px/1 Caveat;font-style:normal;color:var(--indigo)}
+.etape .ex em{font-weight:600}
+.etape .ex.pda{display:grid;grid-template-columns:22px auto minmax(0,1fr);column-gap:5px;padding-left:0;text-indent:0}
+.etape .ex.pda .tag{grid-row:1 / span 3;width:auto}
+/* livrable : étiquette en aplat famille-pâle, icône à gauche */
+.livrable{position:relative;display:table;margin-top:2px;padding:0 9px 0 21px;border-radius:8px;background:var(--famille-pale);line-height:15px}
+.livrable .ic{position:absolute;left:3px;top:0;width:15px;height:15px}
+.livrable b{color:var(--marine)}
+.etapes.grille{display:grid;grid-template-columns:1fr 1fr;gap:9px var(--gout)}
+.etapes.grille .etape{grid-template-columns:1fr;row-gap:5px}
+.etapes.grille .cadre{height:var(--h-vignette,80px)}
+.etapes.grille ~ .faire-eviter{grid-template-columns:1fr 1fr}
+
+/* ---------- À faire / À éviter (verso) : bandeaux pastel, ✓ vert et ✗ corail, deux colonnes égales ---------- */
+.faire-eviter{display:grid;grid-template-columns:minmax(0,var(--fe-faire,1fr)) minmax(0,var(--fe-eviter,1fr));column-gap:var(--gout)}
+.faire-eviter .bande{margin-bottom:3px}
+.faire{--fond-bande:var(--pastel-vert)}
+.eviter{--fond-bande:var(--pastel-corail)}
+.faire-eviter .liste{gap:1.5px;line-height:1.22}
+.faire-eviter .liste li{padding-left:21px}
+.faire-eviter .liste li>.ic{width:16px;height:16px;top:-1px}
+.faire-eviter .liste li b{color:var(--marine)}
+
+/* ---------- Pied : famille ——— (11) ——— outil, puis © centré dessous ---------- */
+.pied{position:absolute;left:var(--mx);right:var(--mx);bottom:calc(var(--frise) + 5px);height:31px}
+.pied svg{position:absolute;left:0;top:0;width:100%;height:18px;overflow:visible}
+.pied .famille,.pied .outil{position:absolute;top:1px;font:600 11px/16px Poppins;white-space:nowrap}
 .pied .famille{left:0;color:var(--marine)}
 .pied .outil{right:0;font-weight:700;color:var(--indigo)}
-.pied .no{position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;font:800 11.5px/22px Poppins;text-align:center;color:var(--sur-famille)}
-.pied .copy{position:absolute;left:0;right:0;bottom:0;text-align:center;font:500 10px/1 Montserrat;color:var(--gris)}
+.pied .no{position:absolute;left:50%;top:-2px;transform:translateX(-50%);width:22px;height:22px;font:800 11px/22px Poppins;text-align:center;color:var(--sur-famille)}
+.pied .copy{position:absolute;left:0;right:0;top:20px;font:500 10px/11px Montserrat;color:var(--gris);text-align:center;white-space:nowrap}
 
-/* ---------- Version imprimeur : 154 × 216 mm, fond perdu 3 mm, traits de coupe ---------- */
+/* ---------- Version imprimeur (imprimeur.js) : fond perdu de 3 mm ---------- */
 .imprimeur{--fp:3mm}
 .imprimeur .planche{width:calc(148mm + 2 * var(--fp) + 12mm);height:calc(210mm + 2 * var(--fp) + 12mm);position:relative;break-after:page;background:#fff}
 .imprimeur .planche:last-of-type{break-after:auto}
-.imprimeur .face{position:absolute;left:calc(6mm + var(--fp));top:calc(6mm + var(--fp));overflow:visible;margin:0;break-after:auto;
-  box-shadow:0 0 0 var(--fp) var(--famille-doux)}
+.imprimeur .face{position:absolute;left:calc(6mm + var(--fp));top:calc(6mm + var(--fp));overflow:visible;margin:0;break-after:auto;box-shadow:0 0 0 var(--fp) var(--famille-doux)}
 .imprimeur .bandeau{left:calc(-1 * var(--fp));top:calc(-1 * var(--fp));width:calc(100% + 2 * var(--fp));height:calc(var(--bandeau) + var(--fp))}
 .imprimeur .frise{left:calc(-1 * var(--fp));right:calc(-1 * var(--fp));bottom:calc(-1 * var(--fp));height:calc(var(--frise) + var(--fp))}
 .imprimeur .papier{inset:calc(-1 * var(--fp))}

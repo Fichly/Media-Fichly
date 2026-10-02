@@ -3,20 +3,22 @@
 <head>
 <meta charset="utf-8">
 <title>Fichly · N°11 PDCA</title>
-<!-- Carte N°11 PDCA du deck « Les outils du lean », A5 recto-verso (148 × 210 mm).
-     Gabarit commun : ../../gabarit/carte.css et carte.js. Ici : le texte de la carte (CONTENU.md),
-     la mise en place du schéma et des listes, et fiche.js pour les illustrations propres au PDCA. -->
+<!-- Carte N°11 PDCA du deck « Les outils du lean », v2. A5 recto-verso (148 × 210 mm).
+     Texte : CONTENU.md (version 2). Gabarit commun : ../../gabarit/carte.css et carte.js.
+     Bibliothèques : ../../gabarit/personnages.js (Léa, Malik, Sam) et icones.js (Style Fichly).
+     Ici : le texte de la carte et la mise en place propre au PDCA ; fiche.js dessine le héros et les vignettes. -->
 <link rel="stylesheet" href="../../gabarit/carte.css">
 <style>
-/* ---------- Propre à la carte PDCA ---------- */
-.schema{align-items:start}
-.illu{position:relative;width:var(--col);height:206px}
-.illu>svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
-.note-cale{position:absolute;right:2px;top:160px;width:178px;text-align:right;font:500 15px/1.02 Caveat;color:var(--marine)}
-.note-cale b{font-weight:700;color:var(--encre)}
-.quarts{gap:7px;padding-top:4px}
-.quarts li b{font:700 12.5px/1 Poppins;margin-right:2px}
-.liens{margin:0}
+/* ---------- Recto ---------- */
+.heros{--h-heros:178px}
+.besoin{position:relative;margin:4px 0 0;padding-left:34px;text-wrap:balance;font:600 14px/1.28 Poppins;color:var(--marine);letter-spacing:-.005em}
+.besoin .je{color:var(--indigo)}
+.besoin svg{position:absolute;left:-1px;top:-3px;width:28px;height:25px;overflow:visible}
+/* à faire / à éviter : la colonne « À faire » porte plus de texte, elle prend plus de largeur */
+.faire-eviter{--fe-faire:1.22fr}
+/* infos : grille 2 × 2. Rangée 1 : Définition | Quand ? ; rangée 2 : Exemple | Pas pour, même départ et même bas (stretch) */
+.infos{display:grid;grid-template-columns:minmax(0,calc((100% - var(--gout-infos)) * var(--infos-g) / (var(--infos-g) + 1))) minmax(0,1fr);gap:9px var(--gout-infos);align-items:stretch}
+.bloc p{text-wrap:pretty}
 </style>
 </head>
 <body data-famille="resolution" data-niveau="yellow">
@@ -26,99 +28,7 @@
   <div class="bandeau" data-bleed></div>
   <div class="frise" data-bleed><i style="background:var(--c-resolution)"></i><i style="background:var(--c-engagement)"></i><i style="background:var(--c-planification)"></i><i style="background:var(--c-optimisation)"></i><i style="background:var(--c-efficacite)"></i><i style="background:var(--c-qualite)"></i></div>
   <div class="papier" data-bleed></div>
-  <svg class="deco" data-bleed></svg>
-
-  <header class="entete">
-    <div class="entete-g">
-      <div class="ligne-logo">
-        <div class="logo" aria-label="fichly, Les outils du lean"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 795" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <g stroke="#231f20" stroke-width="55">
-    <path d="M70 515 V195 A150 150 0 0 1 220 45 H300"/>
-    <path d="M28 284 H174"/>
-    <path d="M340 284 V522"/>
-    <path d="M671 302 A123 123 0 1 0 671 498"/>
-    <path d="M807 28 V522"/>
-    <path d="M807 400 A123 123 0 0 1 1053 400 V522"/>
-    <path d="M1191 46 V522"/>
-    <path d="M1325 272 V388 A124 124 0 0 0 1573 388"/>
-    <path d="M1573 272 V645 A124 124 0 0 1 1325 645"/>
-  </g>
-  <circle cx="340" cy="180" r="47" fill="#3c4499"/>
-  <text x="38" y="688" font-family="Montserrat" font-weight="400" font-size="128" textLength="1178" lengthAdjust="spacing" fill="#3c4499">Les outils du lean</text>
-</svg></div>
-        <p class="surtitre"><span class="no">N°11</span><span>Résolution de problèmes</span></p>
-      </div>
-      <h1 class="titre" data-tailles="42 32 26"><svg></svg><span>PDCA</span></h1>
-      <div class="meta">
-        <span class="sous-titre">Plan · Do · Check · Act</span>
-        <span class="niveau"><svg class="fond"></svg><svg class="ceinture" viewBox="0 0 30 17"></svg><small>Niveau</small><span>Yellow Belt</span></span>
-      </div>
-    </div>
-    <div class="entete-d">
-      <div class="qr"><img src="../../assets/qr-templates.svg" alt="QR code : templates du deck"></div>
-      <div class="qr-legende">Templates du deck</div>
-    </div>
-  </header>
-
-  <div class="corps">
-    <p class="besoin"><svg viewBox="0 0 30 27" data-guillemets></svg><span class="je">Je souhaite</span> systématiser <span class="surligne">l’amélioration de mes processus</span> de manière continue.</p>
-
-    <div class="grille schema">
-      <div class="illu">
-        <svg data-dessin="heros" viewBox="0 0 286 206"></svg>
-        <p class="note-cale"><b>La cale, l’élément le plus important.</b><br>Elle empêche de retomber dans<br>d’anciennes habitudes.</p>
-      </div>
-      <ul class="liste quarts">
-        <li><svg viewBox="0 0 18 18" data-dessin="quart" data-quart="0"></svg><b>Plan</b> Planifier, analyser, comprendre les causes racines du problème.</li>
-        <li><svg viewBox="0 0 18 18" data-dessin="quart" data-quart="1"></svg><b>Do</b> Identifier les solutions, les implémenter en utilisant un&nbsp;pilote.</li>
-        <li><svg viewBox="0 0 18 18" data-dessin="quart" data-quart="2"></svg><b>Check</b> Vérifier les résultats, mesurer les améliorations et les évaluer.</li>
-        <li><svg viewBox="0 0 18 18" data-dessin="quart" data-quart="3"></svg><b>Act</b> Implémenter la solution généralisée, recommencer un autre cycle si besoin.</li>
-      </ul>
-    </div>
-
-    <svg class="filet"></svg>
-
-    <div class="grille">
-      <div>
-        <h2 class="h">Définition</h2>
-        <p>Le <b>PDCA</b> (<b>Plan-Do-Check-Act</b>) est une méthode d’<b>amélioration continue</b> en 4&nbsp;étapes&nbsp;: planifier (Plan) une action, réaliser (Do) cette action, vérifier (Check) les résultats, et implémenter (Act) les résultats de manière durable. Simple et <b>cyclique</b>, elle permet de tester, apprendre et améliorer en continu les produits, les processus…</p>
-      </div>
-      <div>
-        <h2 class="h">Quand&nbsp;?</h2>
-        <ul class="liste">
-          <li><svg viewBox="0 0 18 18" data-coche></svg>Lorsqu’un problème <b>récurrent</b> apparaît, auquel on cherche une <b>solution durable</b>.</li>
-          <li><svg viewBox="0 0 18 18" data-coche></svg>Pour <b>assurer</b> que les améliorations et les bonnes pratiques sont <b>maintenues dans le&nbsp;temps</b>.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="grille">
-      <div>
-        <h2 class="h">Exemple</h2>
-        <p>Une équipe constate que des machines mal calibrées génèrent des défauts&nbsp;: <b>elle applique le PDCA</b>. Planifier une recalibration régulière, tester sur une semaine, vérifier les résultats, puis ajuster le plan de maintenance pour réduire les défauts à <b>moins&nbsp;de&nbsp;1&nbsp;%</b>. Si l’étape «&nbsp;Check&nbsp;» n’est pas convenable, ne pas hésiter à recommencer le cycle à l’étape «&nbsp;Plan&nbsp;».</p>
-      </div>
-      <div>
-        <h2 class="h">Liens avec d’autres cartes</h2>
-        <p class="liens">Pour bien comprendre la cause des problèmes avant de mettre en place un PDCA, se référer au <span class="renvoi" style="--c:var(--c-resolution)">Diagramme d’Ishikawa<span class="pastille">8</span></span> ou aux <span class="renvoi" style="--c:var(--c-resolution)">5&nbsp;Pourquoi<span class="pastille">9</span></span>.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="pied">
-    <svg></svg>
-    <span class="famille">Résolution de problèmes</span>
-    <span class="no">11</span>
-    <span class="outil">PDCA</span>
-    <span class="copy">© Fichly - Tous droits réservés</span>
-  </div>
-</section>
-
-<!-- =============================== VERSO : faire =============================== -->
-<section class="face verso">
-  <div class="bandeau" data-bleed></div>
-  <div class="frise" data-bleed><i style="background:var(--c-resolution)"></i><i style="background:var(--c-engagement)"></i><i style="background:var(--c-planification)"></i><i style="background:var(--c-optimisation)"></i><i style="background:var(--c-efficacite)"></i><i style="background:var(--c-qualite)"></i></div>
-  <div class="papier" data-bleed></div>
-  <svg class="deco" data-bleed></svg>
+  <svg class="deco"></svg>
 
   <header class="entete">
     <div class="entete-g">
@@ -141,53 +51,190 @@
         <p class="surtitre"><span class="no">N°11</span><span>Résolution de problèmes</span></p>
       </div>
       <div class="ligne-titre">
-        <h1 class="titre" data-tailles="30 26 22"><svg></svg><span>PDCA</span></h1>
-        <span class="sous-titre">Plan · Do · Check · Act</span>
-        <span class="niveau"><svg class="fond"></svg><svg class="ceinture" viewBox="0 0 30 17"></svg><small>Niveau</small><span>Yellow Belt</span></span>
+        <h1 class="titre" data-tailles="38 32 26 22"><svg></svg><span>PDCA</span></h1>
+        <div class="meta">
+          <span class="sous-titre">Plan · Do · Check · Act</span>
+          <span class="niveau"><svg class="fond"></svg><svg class="ceinture" viewBox="0 0 30 17"></svg><small>Niveau</small><span>Yellow Belt</span></span>
+        </div>
       </div>
+      <p class="alias"><b>Aussi appelé&nbsp;:</b> roue de Deming, cycle de Shewhart.</p>
+    </div>
+    <div class="entete-d">
+      <div class="qr"><img src="../../assets/qr-templates.svg" alt="QR code : templates du deck"></div>
+      <div class="qr-legende">Templates du deck</div>
     </div>
   </header>
 
   <div class="corps">
-    <h2 class="h2">Comment le mettre <span class="surligne">en place&nbsp;?</span></h2>
-    <ol class="etapes">
+    <p class="besoin"><svg viewBox="0 0 30 27" data-guillemets></svg><span class="je">Je souhaite</span> systématiser <span class="surligne">l’amélioration de mes processus</span> de manière continue.</p>
+
+    <!-- Schéma : la roue PDCA monte une pente, poussée par Malik, retenue par la cale -->
+    <div class="heros">
+      <svg data-dessin="heros"></svg>
+      <!-- deux étapes de chaque côté, à la place de leur quart sur la roue : Plan et Act à gauche, Do et Check à droite -->
+      <div class="anno"><p class="q"><span class="ic" data-icone="pdca" data-quart="0" data-accent="famille"></span><span class="nom-etape"><span class="n">1.</span>Plan</span></p>Planifier, analyser, comprendre les causes racines du&nbsp;problème.</div>
+      <div class="anno"><p class="q"><span class="ic" data-icone="pdca" data-quart="1" data-accent="famille"></span><span class="nom-etape"><span class="n">2.</span>Do</span></p>Identifier les solutions, les implémenter en utilisant un&nbsp;pilote.</div>
+      <div class="anno"><p class="q"><span class="ic" data-icone="pdca" data-quart="2" data-accent="famille"></span><span class="nom-etape"><span class="n">3.</span>Check</span></p>Vérifier les résultats, mesurer les améliorations et les&nbsp;évaluer.</div>
+      <div class="anno"><p class="q"><span class="ic" data-icone="pdca" data-quart="3" data-accent="famille"></span><span class="nom-etape"><span class="n">4.</span>Act</span></p>Implémenter la solution généralisée, recommencer un autre cycle si&nbsp;besoin.</div>
+      <p class="note-heros"><b>La cale, l’élément le plus important.</b><br>Elle empêche de retomber dans d’anciennes habitudes.</p>
+    </div>
+
+    <div class="infos">
+        <section class="bloc">
+          <h2 class="h"><span class="ic" data-icone="info" data-accent="bleu"></span>Définition</h2>
+          <p>Le <b>PDCA</b> (<b>Plan-Do-Check-Act</b>) est une méthode d’<b>amélioration continue</b> en 4&nbsp;étapes&nbsp;: planifier (Plan) une action, réaliser (Do) cette action, vérifier (Check) les résultats, et implémenter (Act) les résultats de manière durable. Simple et <b>cyclique</b>, elle permet de tester, apprendre et améliorer en continu les produits, les processus…</p>
+        </section>
+        <section class="bloc">
+          <h2 class="h"><span class="ic" data-icone="horloge" data-accent="famille"></span>Quand&#8239;?</h2>
+          <ul class="liste">
+            <li><span class="ic" data-icone="valide" data-accent="famille"></span>Lorsqu’un problème <b>récurrent</b> apparaît, auquel on cherche une <b>solution durable</b>.</li>
+            <li><span class="ic" data-icone="valide" data-accent="famille"></span>Pour <b>assurer</b> que les améliorations et les bonnes pratiques sont <b>maintenues dans le&nbsp;temps</b>.</li>
+          </ul>
+        </section>
+        <section class="bloc encart">
+          <h2 class="h"><span class="ic" data-icone="usine" data-accent="famille" data-papier="#FFFCF3"></span>Exemple</h2>
+          <p>Une équipe constate que des machines mal calibrées génèrent des défauts&nbsp;: <b>elle applique le PDCA</b>. Planifier une recalibration régulière, tester sur une semaine, vérifier les résultats, puis ajuster le plan de maintenance pour réduire les défauts à <b>moins&nbsp;de&nbsp;1&nbsp;%</b>. Si l’étape «&nbsp;Check&nbsp;» n’est pas convenable, ne pas hésiter à recommencer le cycle à l’étape «&nbsp;Plan&nbsp;».</p>
+        </section>
+        <section class="bloc alerte">
+          <h2 class="h"><span class="ic" data-icone="attention" data-accent="corail"></span>Pas pour</h2>
+          <p>Une <b>urgence</b> qui exige d’agir tout de suite&nbsp;: d’abord <b>sécuriser</b>, ensuite lancer le PDCA pour traiter la cause.</p>
+        </section>
+    </div>
+
+    <section class="parcours">
+      <h2 class="h"><span class="ic" data-icone="etapes" data-accent="famille"></span>Dans votre démarche</h2>
+      <div class="frise-parcours">
+        <svg data-dessin="parcours"></svg>
+        <div class="station"><p class="moment"><span class="ic" data-icone="loupe" data-accent="famille"></span><span>Avant</span></p><p class="quoi">comprendre les causes&nbsp;:</p>
+          <p class="refs"><span class="renvoi" style="--c:var(--c-resolution)"><span class="nom">Diagramme d’Ishikawa</span><span class="pastille">8</span></span><span class="renvoi" style="--c:var(--c-resolution)"><span class="nom">5&nbsp;Pourquoi</span><span class="pastille">9</span></span></p></div>
+        <div class="station ici"><p class="moment"><span class="ic" data-icone="pdca" data-accent="famille"></span><span>Pendant</span></p><p class="quoi">cadrer et prioriser&nbsp;:</p>
+          <p class="refs"><span class="renvoi" style="--c:var(--c-resolution)"><span class="nom">QQOQCCP</span><span class="pastille">5</span></span><span class="renvoi" style="--c:var(--c-planification)"><span class="nom">Pareto</span><span class="pastille">24</span></span><span class="renvoi" style="--c:var(--c-planification)"><span class="nom">SMART</span><span class="pastille">27</span></span></p></div>
+        <div class="station"><p class="moment"><span class="ic" data-icone="standard" data-accent="indigo"></span><span>Après</span></p><p class="quoi">ancrer le nouveau&nbsp;standard&nbsp;:</p>
+          <p class="refs"><span class="renvoi" style="--c:var(--c-qualite)"><span class="nom">TWI</span><span class="pastille">45</span></span></p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="pied">
+    <svg></svg>
+    <span class="famille">Résolution de problèmes</span>
+    <span class="no">11</span>
+    <span class="outil">PDCA</span>
+    <span class="copy">© Fichly - Tous droits réservés</span>
+  </div>
+</section>
+
+<!-- =============================== VERSO : faire =============================== -->
+<section class="face verso">
+  <div class="bandeau" data-bleed></div>
+  <div class="frise" data-bleed><i style="background:var(--c-resolution)"></i><i style="background:var(--c-engagement)"></i><i style="background:var(--c-planification)"></i><i style="background:var(--c-optimisation)"></i><i style="background:var(--c-efficacite)"></i><i style="background:var(--c-qualite)"></i></div>
+  <div class="papier" data-bleed></div>
+  <svg class="deco"></svg>
+
+  <header class="entete-verso">
+    <div class="logo" aria-label="fichly, Les outils du lean"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 795" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="#231f20" stroke-width="55">
+    <path d="M70 515 V195 A150 150 0 0 1 220 45 H300"/>
+    <path d="M28 284 H174"/>
+    <path d="M340 284 V522"/>
+    <path d="M671 302 A123 123 0 1 0 671 498"/>
+    <path d="M807 28 V522"/>
+    <path d="M807 400 A123 123 0 0 1 1053 400 V522"/>
+    <path d="M1191 46 V522"/>
+    <path d="M1325 272 V388 A124 124 0 0 0 1573 388"/>
+    <path d="M1573 272 V645 A124 124 0 0 1 1325 645"/>
+  </g>
+  <circle cx="340" cy="180" r="47" fill="#3c4499"/>
+  <text x="38" y="688" font-family="Montserrat" font-weight="400" font-size="128" textLength="1178" lengthAdjust="spacing" fill="#3c4499">Les outils du lean</text>
+</svg></div>
+    <h1 class="titre" data-tailles="22 20 18"><svg></svg><span>PDCA</span></h1>
+    <h2 class="titre-face">Comment le mettre en place&#8239;?</h2>
+    <span class="niveau"><svg class="fond"></svg><svg class="ceinture" viewBox="0 0 30 17"></svg><span>Yellow Belt</span></span>
+  </header>
+
+  <div class="corps">
+    <section class="demarrer">
+      <h2 class="h"><span class="ic" data-icone="idee" data-accent="famille"></span>Pour démarrer</h2>
+      <ul>
+        <li><span class="ic" data-icone="equipe" data-accent="indigo"></span><b>Qui&nbsp;:</b> l’équipe concernée, avec son manager.</li>
+        <li><span class="ic" data-icone="sablier" data-accent="famille"></span><b>Durée&nbsp;:</b> des cycles courts, de quelques jours à quelques semaines.</li>
+        <li><span class="ic" data-icone="document" data-accent="indigo"></span><b>Support&nbsp;:</b> le template PDCA du deck (QR au recto).</li>
+      </ul>
+    </section>
+
+    <ol class="etapes lignes">
       <li class="etape">
-        <div class="rail"><div class="tete-etape"><svg class="num" viewBox="0 0 38 40" data-num="1"></svg><h3>Plan<span>(Planifier)</span></h3></div><svg class="vignette" viewBox="0 0 96 64" data-dessin="vignette-plan"></svg></div>
-        <div>
-          <p>Identifier clairement <b>le problème ou l’objectif</b> que l’on souhaite atteindre (voir <span class="renvoi" style="--c:var(--c-resolution)">QQOQCCP<span class="pastille">5</span></span>). Se concentrer sur les problèmes qui auront le plus d’impact (voir <span class="renvoi" style="--c:var(--c-planification)">Pareto<span class="pastille">24</span></span>). Définir ensuite des objectifs <span class="renvoi" style="--c:var(--c-planification)">SMART<span class="pastille">27</span></span>.</p>
-          <div class="ex pda"><em>Problème&nbsp;:</em><span>60&nbsp;% des rebuts proviennent de mauvais réglages.</span><em>Objectif&nbsp;:</em><span>réduire le taux de rebuts de 10&nbsp;% à 5&nbsp;% sous 2&nbsp;semaines.</span><em>Action&nbsp;:</em><span>former les opérateurs aux réglages machines.</span></div>
+        <div class="cadre"><svg class="vignette" data-dessin="v-plan"></svg></div>
+        <div class="texte">
+          <div class="tete"><span class="ic" data-icone="pdca" data-quart="0" data-accent="famille"></span><h3 class="nom-etape"><span class="n">1.</span>Plan<span class="trad">&nbsp;: planifier</span></h3><p class="question">Quel problème, et quel objectif mesurable&nbsp;?</p></div>
+          <ul class="puces">
+            <li>Identifier clairement le problème ou l’objectif à atteindre (<span class="renvoi" style="--c:var(--c-resolution)"><span class="nom">QQOQCCP</span><span class="pastille">5</span></span>).</li>
+            <li>Se concentrer sur les problèmes qui auront le plus d’impact (<span class="renvoi" style="--c:var(--c-planification)"><span class="nom">Pareto</span><span class="pastille">24</span></span>).</li>
+            <li>Définir des objectifs <span class="renvoi" style="--c:var(--c-planification)"><span class="nom">SMART</span><span class="pastille">27</span></span>.</li>
+          </ul>
+          <div class="ex pda"><span class="tag">Ex.</span><em>Problème&nbsp;:</em><span>60&nbsp;% des rebuts proviennent de mauvais réglages.</span><em>Objectif&nbsp;:</em><span>réduire le taux de rebuts de 10&nbsp;% à 5&nbsp;% sous 2&nbsp;semaines.</span><em>Action&nbsp;:</em><span>former les opérateurs aux réglages machines.</span></div>
+          <p class="livrable"><span class="ic" data-icone="livrable" data-accent="famille"></span><b>Livrable&nbsp;:</b> un plan d’action et un objectif chiffré.</p>
         </div>
       </li>
       <li class="etape">
-        <div class="rail"><div class="tete-etape"><svg class="num" viewBox="0 0 38 40" data-num="2"></svg><h3>Do<span>(Faire)</span></h3></div><svg class="vignette" viewBox="0 0 96 64" data-dessin="vignette-do"></svg></div>
-        <div>
-          <p>Mettre en œuvre le plan d’action élaboré. Définir un <b>PoC</b> (Proof of Concept) pour débuter à petite échelle et itérer rapidement. Former les personnes impliquées si nécessaire. Documenter les changements et les observations, et communiquer sur les actions.</p>
-          <p class="ex"><span class="tag">Ex.</span>&nbsp;: tester les nouveaux réglages et la formation sur une machine pendant une&nbsp;journée.</p>
+        <div class="cadre"><svg class="vignette" data-dessin="v-do"></svg></div>
+        <div class="texte">
+          <div class="tete"><span class="ic" data-icone="pdca" data-quart="1" data-accent="famille"></span><h3 class="nom-etape"><span class="n">2.</span>Do<span class="trad">&nbsp;: faire</span></h3><p class="question">Comment tester petit et vite&nbsp;?</p></div>
+          <ul class="puces">
+            <li>Débuter à petite échelle avec un pilote (PoC, Proof of Concept) et itérer&nbsp;rapidement.</li>
+            <li>Former les personnes impliquées si nécessaire.</li>
+            <li>Documenter les changements et les observations, communiquer sur&nbsp;les&nbsp;actions.</li>
+          </ul>
+          <p class="ex"><span class="tag">Ex.</span>tester les nouveaux réglages et la formation sur une machine pendant&nbsp;une&nbsp;journée.</p>
+          <p class="livrable"><span class="ic" data-icone="livrable" data-accent="famille"></span><b>Livrable&nbsp;:</b> le test réalisé, ses observations notées.</p>
         </div>
       </li>
       <li class="etape">
-        <div class="rail"><div class="tete-etape"><svg class="num" viewBox="0 0 38 40" data-num="3"></svg><h3>Check<span>(Vérifier)</span></h3></div><svg class="vignette" viewBox="0 0 96 64" data-dessin="vignette-check"></svg></div>
-        <div>
-          <p>Évaluer les résultats obtenus en les comparant aux objectifs fixés. Analyser <b>les écarts</b> entre résultats attendus et résultats réels. Identifier les points forts et les points faibles de la démarche.</p>
-          <p class="ex"><span class="tag">Ex.</span>&nbsp;: les rebuts passent de 10&nbsp;% à 7&nbsp;% sur la machine testée après deux&nbsp;semaines.</p>
+        <div class="cadre" style="--h-min:100px"><svg class="vignette" data-dessin="v-check"></svg></div>
+        <div class="texte">
+          <div class="tete"><span class="ic" data-icone="pdca" data-quart="2" data-accent="famille"></span><h3 class="nom-etape"><span class="n">3.</span>Check<span class="trad">&nbsp;: vérifier</span></h3><p class="question">Le résultat atteint-il l’objectif&nbsp;?</p></div>
+          <ul class="puces">
+            <li>Comparer les résultats obtenus aux objectifs fixés.</li>
+            <li>Analyser les écarts entre résultats attendus et résultats réels.</li>
+            <li>Identifier les points forts et les points faibles de la démarche.</li>
+          </ul>
+          <p class="ex"><span class="tag">Ex.</span>les rebuts passent de 10&nbsp;% à 7&nbsp;% sur la machine testée après deux&nbsp;semaines.</p>
+          <p class="livrable"><span class="ic" data-icone="livrable" data-accent="famille"></span><b>Livrable&nbsp;:</b> les écarts mesurés et expliqués.</p>
         </div>
       </li>
       <li class="etape">
-        <div class="rail"><div class="tete-etape"><svg class="num" viewBox="0 0 38 40" data-num="4"></svg><h3>Act<span>(Agir)</span></h3></div><svg class="vignette" viewBox="0 0 96 64" data-dessin="vignette-act"></svg></div>
-        <div>
-          <p>Si les résultats sont satisfaisants, ajuster, déployer et <b>standardiser</b> la nouvelle méthode. S’assurer que les changements sont intégrés à l’organisation sans provoquer de perturbations. Puis réengager un nouveau PDCA pour continuer à progresser.</p>
-          <p class="ex"><span class="tag">Ex.</span>&nbsp;: mise en place d’une procédure claire de paramétrage au démarrage de la machine, puis déploiement aux autres machines.</p>
+        <div class="cadre"><svg class="vignette" data-dessin="v-act"></svg></div>
+        <div class="texte">
+          <div class="tete"><span class="ic" data-icone="pdca" data-quart="3" data-accent="famille"></span><h3 class="nom-etape"><span class="n">4.</span>Act<span class="trad">&nbsp;: agir</span></h3><p class="question">Que standardiser, et quel est le prochain cycle&nbsp;?</p></div>
+          <ul class="puces">
+            <li>Si les résultats sont satisfaisants&nbsp;: ajuster, déployer et standardiser la nouvelle méthode.</li>
+            <li>Sinon&nbsp;: repartir à l’étape Plan avec ce qu’on a appris.</li>
+            <li>Réengager un nouveau PDCA pour continuer à progresser.</li>
+          </ul>
+          <p class="ex"><span class="tag">Ex.</span>mise en place d’une procédure claire de paramétrage au démarrage de la machine, puis déploiement aux autres machines.</p>
+          <p class="livrable"><span class="ic" data-icone="livrable" data-accent="famille"></span><b>Livrable&nbsp;:</b> un standard à jour. C’est la cale.</p>
         </div>
       </li>
     </ol>
 
-    <svg class="filet"></svg>
-
-    <div class="pratiques">
-      <div class="pratique"><span></span><h2 class="h">Bonnes pratiques</h2></div>
-      <div class="pratique"><svg viewBox="0 0 40 30" data-dessin="icone-cale"></svg><p><b>La cale de standardisation garantit l’adoption durable des pratiques</b> issues du PDCA. Par exemple, après avoir réduit les temps d’attente, une procédure standardisée avec rappel automatique est mise en place&nbsp;: elle s’applique même en cas de turnover.</p></div>
-      <div class="pratique"><svg viewBox="0 0 40 30" data-dessin="icone-horloge"></svg><p><b>Accorder plus de temps à l’étape «&nbsp;Plan&nbsp;»</b>&nbsp;: une préparation minutieuse garantit une meilleure exécution.</p></div>
-    </div>
+    <section class="faire-eviter">
+      <div class="faire">
+        <span class="bande"><span class="ic" data-icone="valide" data-accent="vert" data-papier="#FFFCF3"></span>À faire</span>
+        <ul class="liste">
+          <li><span class="ic" data-icone="valide" data-accent="vert"></span><b>Accorder plus de temps au Plan</b>&nbsp;: une préparation minutieuse garantit une meilleure exécution.</li>
+          <li><span class="ic" data-icone="valide" data-accent="vert"></span><b>Poser la cale</b>&nbsp;: un standard, par exemple une procédure avec rappel automatique, garantit l’adoption durable, même en cas de turnover.</li>
+          <li><span class="ic" data-icone="valide" data-accent="vert"></span><b>Enchaîner des cycles courts</b> plutôt qu’un seul grand&nbsp;cycle.</li>
+        </ul>
+      </div>
+      <div class="eviter">
+        <span class="bande"><span class="ic" data-icone="non" data-accent="corail" data-papier="#FFFCF3"></span>À éviter</span>
+        <ul class="liste">
+          <li><span class="ic" data-icone="non" data-accent="corail"></span><b>Sauter le Check</b> et déployer une solution qui n’a pas fait&nbsp;ses&nbsp;preuves.</li>
+          <li><span class="ic" data-icone="non" data-accent="corail"></span><b>Traiter un symptôme</b> sans avoir trouvé la cause racine.</li>
+          <li><span class="ic" data-icone="non" data-accent="corail"></span><b>Clore le cycle sans standard</b>&nbsp;: l’équipe retombe dans ses anciennes habitudes.</li>
+        </ul>
+      </div>
+    </section>
   </div>
 
   <div class="pied">
@@ -200,6 +247,8 @@
 </section>
 
 <script src="../../assets/vendor/rough.js"></script>
+<script src="../../gabarit/personnages.js"></script>
+<script src="../../gabarit/icones.js"></script>
 <script src="../../gabarit/carte.js"></script>
 <script src="fiche.js"></script>
 </body>

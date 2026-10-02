@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Personnages Fichly</title>
+<style>
+  @font-face { font-family: 'Kalam'; font-weight: 700; src: url('../assets/fonts/kalam-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Poppins'; font-weight: 500; src: url('../assets/fonts/poppins-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Poppins'; font-weight: 600; src: url('../assets/fonts/poppins-latin-600-normal.woff2') format('woff2'); }
+  :root { --encre: #231F20; --creme: #FBF7EE; }
+  body { margin: 0; padding: 32px 40px 48px; background: var(--creme); font-family: Poppins, sans-serif; color: var(--encre); }
+  h1 { font-family: Kalam; font-weight: 700; font-size: 40px; margin: 0 0 2px; }
+  p.sous { margin: 0 0 20px; font-size: 14px; opacity: .72; max-width: 1100px; }
+  h2 { font-family: Kalam; font-weight: 700; font-size: 24px; margin: 26px 0 8px; display: inline-block; padding: 2px 18px; border-radius: 20px; }
+  .bloc { background: #fff; border-radius: 18px; padding: 14px 18px 10px; }
+  .rang { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 16px; }
+  .case { display: flex; flex-direction: column; align-items: center; }
+  .case span { font-size: 12px; font-weight: 500; opacity: .6; margin-top: 4px; }
+  .petits .rang { gap: 4px 4mm; }
+  .note { font-size: 12px; opacity: .6; margin: 8px 0 0; }
+</style>
+<script src="../gabarit/personnages.js"></script>
+</head>
+<body>
+<h1>Personnages Fichly</h1>
+<p class="sous">Léa, Malik et Sam : huit poses et un avatar. Trait feutre encre, judogi blanc au col croisé, rond indigo Fichly, ceinture à la couleur du niveau (ici Yellow Belt), aplat moutarde décalé de la famille PDCA.</p>
+<div id="contenu"></div>
+<script>
+  const P = Personnages;
+  const NOMS = { lea: 'Léa', malik: 'Malik', sam: 'Sam' }, FONDS = { lea: '#F9E3A7', malik: '#D4DAF0', sam: '#FBD3D3' };
+  const LIB = { standard: 'standard', montre: 'montre', teste: 'teste', inspecte: 'inspecte', pouce: 'pouce', reflechit: 'réfléchit', pousse: 'pousse', affiche: 'affiche', avatar: 'avatar' };
+  const E = 2.4;
+  const cas = (o, lab) => `<div class="case">${P.svg(o)}<span>${lab}</span></div>`;
+  let html = '';
+  for (const p of P.persos) {
+    html += `<h2 style="background:${FONDS[p]}">${NOMS[p]}</h2><div class="bloc"><div class="rang">`;
+    for (const po of P.poses) html += cas({ perso: p, pose: po, echelle: E }, LIB[po]);
+    html += '</div></div>';
+  }
+  // Ceintures : charte des niveaux (seul le jaune vient du brief)
+  html += '<h2 style="background:#DCEFD5">Ceintures et variantes</h2><div class="bloc"><div class="rang">';
+  Object.entries(P.ceintures).forEach(([n, c], i) => { html += cas({ perso: P.persos[i % 3], pose: 'standard', ceinture: c, echelle: 1.7 }, n + ' belt'); });
+  html += cas({ perso: 'malik', pose: 'pouce', miroir: true, ceinture: P.ceintures.orange, echelle: 1.7 }, 'miroir');
+  html += cas({ perso: 'sam', pose: 'reflechit', miroir: true, echelle: 1.7 }, 'miroir, « ? » non retourné');
+  html += cas({ perso: 'lea', pose: 'montre', bas: '#3C4499', ceinture: P.ceintures.blue, echelle: 1.7, decor: false }, 'option bas indigo');
+  html += '</div></div>';
+  // Ancres : la carte dessine son propre décor
+  {
+    const k = 1.7, W = 900, H = 230;
+    let s = '';
+    const o1 = { perso: 'malik', pose: 'pousse', decor: false, x: 110, y: 200, echelle: k };
+    const a1 = P.ancres(o1), R = a1.roue, t = Math.tan(a1.pente * Math.PI / 180);
+    const sol = X => o1.y - t * (X - o1.x);
+    s += `<path d="M30 ${sol(30)} L${R.cx + R.r + 40} ${sol(R.cx + R.r + 40)}" stroke="#231F20" stroke-width="3" stroke-linecap="round"/>`;
+    const q = a => [R.cx + R.r * Math.cos(a * Math.PI / 180), R.cy + R.r * Math.sin(a * Math.PI / 180)];
+    const sec = (a0, a1_) => { const [x0, y0] = q(a0), [x1, y1] = q(a1_); return `M${R.cx} ${R.cy} L${x0} ${y0} A${R.r} ${R.r} 0 0 1 ${x1} ${y1} Z`; };
+    s += `<circle cx="${R.cx}" cy="${R.cy}" r="${R.r}" fill="#fff"/><path d="${sec(180, 270)} ${sec(0, 90)}" fill="#73A3D4"/><circle cx="${R.cx}" cy="${R.cy}" r="${R.r}" fill="none" stroke="#231F20" stroke-width="3"/>`;
+    s += `<path d="M${R.cx - R.r} ${R.cy} L${R.cx + R.r} ${R.cy} M${R.cx} ${R.cy - R.r} L${R.cx} ${R.cy + R.r}" stroke="#231F20" stroke-width="2"/>`;
+    s += P.dessiner(o1);
+    const o2 = { perso: 'lea', pose: 'montre', decor: false, x: 520, y: 210, echelle: k };
+    const d = P.ancres(o2).doigt;
+    s += `<rect x="${d[0] + 4}" y="${d[1] - 60}" width="150" height="110" rx="4" fill="#fff" stroke="#231F20" stroke-width="3"/>`;
+    s += `<path d="M${d[0] + 24} ${d[1] + 30} L${d[0] + 60} ${d[1] - 2} L${d[0] + 90} ${d[1] + 12} L${d[0] + 134} ${d[1] - 34}" fill="none" stroke="#F16969" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+    s += P.dessiner(o2) + `<circle cx="${d[0]}" cy="${d[1]}" r="3" fill="#F16969"/>`;
+    html += '<h2 style="background:#F2E6D0">Ancres : le décor vient de la carte</h2><div class="bloc">' +
+      `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${s}</svg><p class="note">decor:false, puis Personnages.ancres() : roue (cx, cy, r) et pente pour « pousse », doigt pour « montre ».</p></div>`;
+  }
+  // Vignettes à 25 mm de haut (unités = mm), sans décor
+  html += '<h2 style="background:#E4E0F3">À taille de vignette : 25 mm</h2><div class="bloc petits">';
+  const e25 = 25 / 107;
+  for (const p of P.persos) {
+    html += '<div class="rang">';
+    for (const po of P.poses) {
+      const o = { perso: p, pose: po, echelle: e25, decor: po === 'pousse' };
+      const b = P.boite(o);
+      html += `<svg style="width:${b.largeur + 2}mm;height:${b.hauteur + 2}mm" viewBox="${b.x - 1} ${b.y - 1} ${b.largeur + 2} ${b.hauteur + 2}">${P.dessiner(o)}</svg>`;
+    }
+    html += '</div>';
+  }
+  html += '<p class="note">Échelle réelle (mm CSS). Contrôle des mains, des visages, du col et de la ceinture.</p></div>';
+  document.getElementById('contenu').innerHTML = html;
+</script>
+</body>
+</html>
