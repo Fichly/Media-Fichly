@@ -1,0 +1,66 @@
+[
+ {
+  "key": "e0",
+  "name": "WB · E0 · Accès",
+  "subject": "Votre accès à la White Belt Lean",
+  "preheader": "Six chapitres courts, un test final, et une fiche offerte.",
+  "words": 208,
+  "file": "emails/e0.html"
+ },
+ {
+  "key": "e1",
+  "name": "WB · E1 · J+2 · Suivre un flux",
+  "subject": "Suivre un produit en 30 minutes",
+  "preheader": "Un exercice à faire cette semaine, chronomètre en main.",
+  "words": 164,
+  "file": "emails/e1.html"
+ },
+ {
+  "key": "e2",
+  "name": "WB · E2 · J+5 · Grille d'observation",
+  "subject": "Observer un poste en quatre colonnes",
+  "preheader": "Attentes, déplacements, ruptures, retouches, et trois règles pour bien observer.",
+  "words": 171,
+  "file": "emails/e2.html"
+ },
+ {
+  "key": "e3",
+  "name": "WB · E3 · J+9 · Quel outil",
+  "subject": "Quel outil pour quel problème ?",
+  "preheader": "Pareto, 5 Pourquoi, Ishikawa ou DMAIC : une phrase suffit pour choisir.",
+  "words": 170,
+  "file": "emails/e3.html"
+ },
+ {
+  "key": "e4-decouvrir",
+  "name": "WB · E4 · J+14 · Découvrir",
+  "subject": "Et après la White Belt ?",
+  "preheader": "Une suite simple pour garder les outils du Lean sous la main.",
+  "words": 170,
+  "file": "emails/e4-decouvrir.html"
+ },
+ {
+  "key": "e4-equipe",
+  "name": "WB · E4 · J+14 · Équipe",
+  "subject": "Poser un langage commun avec votre équipe",
+  "preheader": "Faire suivre la White Belt, puis aller plus loin avec la formation intra.",
+  "words": 157,
+  "file": "emails/e4-equipe.html"
+ },
+ {
+  "key": "e4-formation",
+  "name": "WB · E4 · J+14 · Formation",
+  "subject": "Après la White Belt, la Green Belt",
+  "preheader": "Une formation certifiante, éligible au CPF.",
+  "words": 151,
+  "file": "emails/e4-formation.html"
+ },
+ {
+  "key": "e4-accompagnement",
+  "name": "WB · E4 · J+14 · Accompagnement",
+  "subject": "Un regard extérieur sur votre site",
+  "preheader": "L’audit Lean flash, une première étape pour faire accompagner votre site.",
+  "words": 150,
+  "file": "emails/e4-accompagnement.html"
+ }
+]
