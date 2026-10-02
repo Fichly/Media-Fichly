@@ -4,48 +4,48 @@
     "nom": "Le deck",
     "famille": 0,
     "article": null,
-    "texte": "Des fiches à emporter partout. Six fiches s'étalent : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke. 40 fiches. 6 familles, une couleur chacune. À retenir : pour apprendre, consolider et transmettre, sur le terrain."
+    "texte": "La vidéo s'ouvre et se ferme sur le Guide du deck. Des fiches à emporter partout. Six fiches s'étalent : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke. Un outil par fiche. 6 familles, une couleur chacune. À retenir : pour apprendre, consolider et transmettre, sur le terrain."
   },
   {
     "id": "5-pourquoi",
     "nom": "5 Pourquoi",
     "famille": 1,
     "article": "methode-5-pourquoi-cause-racine",
-    "texte": "Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? « L'opérateur a oublié » : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement. À retenir : la réponse désigne une personne ? Posez un pourquoi de plus."
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 9 du deck. Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? L'opérateur a oublié : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement de gamme. À retenir : la réponse désigne une personne ? Posez un pourquoi de plus."
   },
   {
     "id": "obeya",
     "nom": "Obeya",
     "famille": 2,
-    "article": null,
-    "texte": "Chacun travaille sur sa version du projet. Les versions éparses rejoignent un seul mur en cinq zones : objectif et écart, plan, problèmes, indicateurs, décisions. Lu dans l'ordre. Debout, à heure fixe. Une décision écrite. Décider, pas informer. À retenir : une Obeya se mesure aux décisions prises devant elle."
+    "article": "obeya-salle-pilotage-visuel",
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 22 du deck. Chacun travaille sur sa version du projet. Les versions éparses rejoignent une seule salle, organisée en zones. Lu dans l'ordre. Debout, à heure fixe. Une décision écrite. Décider, pas informer. À retenir : une Obeya se mesure aux décisions prises devant elle."
   },
   {
     "id": "pareto",
     "nom": "Pareto",
     "famille": 3,
-    "article": null,
-    "texte": "Des arrêts partout. Par où commencer ? Exemple illustratif : 6 causes en vrac. Trier par poids, de la plus fréquente à la plus rare. Cumuler les parts. 3 causes : 82 % des arrêts. Commencer par là. À retenir : quelques causes font le gros du problème. Commencez par elles."
+    "article": "diagramme-de-pareto-methode-exemple",
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 24 du deck. Des arrêts partout. Par où commencer ? Exemple illustratif : 6 causes en vrac. Trier par poids, de la plus fréquente à la plus rare. Cumuler les parts. 3 causes sur 6 : 82 % des arrêts. Commencer par là. À retenir : quelques causes font le gros du problème. Commencez par elles."
   },
   {
     "id": "vsm",
     "nom": "VSM",
     "famille": 4,
     "article": "value-stream-mapping-definition-et-etapes",
-    "texte": "Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Réduire l'attente. À retenir : le temps se perd surtout entre les postes."
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 33 du deck. Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Réduire l'attente. À retenir : le temps se perd surtout entre les postes."
   },
   {
     "id": "smed",
     "nom": "SMED",
     "famille": 5,
     "article": "methode-smed-5-etapes",
-    "texte": "Changer de série bloque la machine. Toutes les tâches commencent machine arrêtée : c'est l'interne. Celles qui peuvent se faire machine en marche passent en externe. Puis réduire l'interne. Arrêt plus court. À retenir : ce qui peut se faire machine en marche sort de l'arrêt."
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 40 du deck. Changer de série bloque la machine. Toutes les tâches se font machine arrêtée. Interne ou externe ? Celles qui pourraient se faire machine en marche sont externes : on les sort de l'arrêt, avant ou après. Puis réduire l'interne. Arrêt plus court : plus de disponibilité. À retenir : ce qui peut se faire machine en marche sort de l'arrêt."
   },
   {
     "id": "poka-yoke",
     "nom": "Poka-Yoke",
     "famille": 6,
     "article": null,
-    "texte": "L'erreur arrive même aux meilleurs. La pièce est montée à l'envers. « Faire attention » ne suffit pas. Un détrompeur. Impossible à l'envers : la pièce bute. Retournée, elle est bonne du premier coup. À retenir : rendre l'erreur impossible plutôt que compter sur l'attention."
+    "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 41 du deck. L'erreur arrive même aux meilleurs. La pièce est montée à l'envers. « Faire attention » ne suffit pas. Un détrompeur. Impossible à l'envers : la pièce bute. Seul le bon sens passe. À retenir : rendre l'erreur impossible plutôt que compter sur l'attention."
   }
 ]

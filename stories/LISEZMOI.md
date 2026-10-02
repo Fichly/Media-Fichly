@@ -17,7 +17,8 @@ Le mode `story` produit :
 | Fichier | Usage |
 |---|---|
 | `<id>.mp4` | maître 1080 × 1920, 30 i/s, H.264, sans piste son |
-| `<id>-720.mp4` | version web 720 × 1280, environ 0,3 Mo, pour la page produit |
+| `<id>-720.mp4` | version web 720 × 1280, environ 0,5 Mo, pour la page produit |
+| `<id>-720.webm` | même version en VP9, pour les navigateurs qui ne lisent pas le H.264 |
 | `<id>.jpg` | affiche (attribut `poster`), image à `poster` secondes |
 | `<id>-bulle.png` | vignette ronde de la bulle, 240 × 240 |
 
@@ -28,11 +29,20 @@ Le rendu échoue (code 2) si un texte déborde de la fiche ou de la zone du méc
 `stories/moteur.js` dessine le décor commun, identique d'une story à l'autre :
 
 - fond pâle de la famille, liseré six couleurs en haut ;
-- fiche blanche (x 56 → 1024, y 200 → 1700), bandeau à la couleur de la famille, nom de l'outil visible dès la première image ;
-- **0,45 → 3,0 s** : l'accroche, au centre de la zone du mécanisme, puis elle s'efface vers le haut ;
-- **3,0 → 11,5 s** : le mécanisme, dessiné par la scène dans `ZONE` (x 100 → 980, y 600 → 1400) ;
-- **11,5 → 14,0 s** : « À retenir », surligné en jaune pâle, au bas de la fiche ;
-- **14,0 → 15,0 s** : le liseré se remplit au bas de la fiche ; logo et « Une fiche du deck 40 outils du Lean » en pied.
+- fiche blanche (x 56 → 1024, y 200 → 1700), bandeau à la couleur de la famille, nom de l'outil visible dès la première image.
+
+Chronologie quand la scène déclare `fiche` (cas de toutes les stories actuelles) :
+
+- **0 → 0,3 s** : l'aperçu numérique de la fiche du deck (vignette Canva), plein cadre ;
+- **0,3 → 0,7 s** : la fiche se retourne et laisse place à la fiche animée ;
+- **0,75 → 3,2 s** : l'accroche, au centre de la zone du mécanisme, qui s'efface en fondu à 2,95 s ;
+- **3,2 → 11,2 s** : le mécanisme, dessiné par la scène dans `ZONE` (x 100 → 980, y 600 → 1400) ;
+- **11,2 → 12,9 s** : « À retenir », surligné en jaune pâle, au bas de la fiche ;
+- **12,9 → 13,6 s** : le liseré se remplit au bas de la fiche ;
+- **13,6 → 14,1 s** : la fiche se retourne de nouveau sur l'aperçu de la fiche imprimée ;
+- **14,05 → 15,0 s** : étiquette « Fiche n° X du deck » (ou `fiche.legende`). Logo et « Une fiche du deck 40 outils du Lean » en pied.
+
+Sans `fiche`, l'accroche entre à 0,45 s et sort à 2,8 s, le mécanisme commence à 3,0 s, « À retenir » à 11,5 s et le liseré à 14,0 s.
 
 Les 200 px du haut et les 220 px du bas restent libres : le lecteur y pose ses barres de progression et son bouton.
 
@@ -45,8 +55,9 @@ Story.scene({
   titre: ['5 Pourquoi'],              // une ou deux lignes
   accroche: { lignes: ['La même panne', 'revient chaque lundi.'], accent: 1 },  // ligne en italique indigo
   retenir: 'On s’arrête sur une cause qu’on peut traiter.',   // 12 mots au plus, 3 lignes au plus
-  poster: 10.5,                       // image de l'affiche et de la bulle
-  bulle: { x: 100, y: 560, s: 880 },  // carré de la vignette, facultatif
+  fiche: { recto: '../../assets/produit/canva/page-023.png', numero: 9 },  // aperçu de la fiche du deck, ouvre et ferme la story
+  poster: 10.5,                       // image de l'affiche (0 avec une fiche : l'affiche montre la fiche)
+  bulle: { x: 100, y: 560, s: 880 },  // carré de la vignette, facultatif (avec une fiche : le haut de la fiche)
   build(S, A, root) { /* crée les nœuds SVG dans root, garde-les dans S */ },
   anim(t, S, A) { /* fixe l'état de CHAQUE nœud animé pour l'instant t */ },
 });

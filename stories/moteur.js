@@ -276,7 +276,7 @@
       S.realTag = el('g');
       const tg = pill(S.realTag, W / 2, RY + RH + 78, sc.fiche.legende || `Fiche n° ${sc.fiche.numero} du deck`, { size: 38, bg: fam.c, fg: fam.on, h: 76, pad: 34, anchor: 'middle' });
       S.realTagC = { x: W / 2, y: RY + RH + 78 };
-      S.hookIn = 1.2;
+      S.hookIn = 0.75;
     } else S.hookIn = T.hookIn;
 
     // Pied : logo et rappel du deck
@@ -292,8 +292,8 @@
     if (S.real) {
       const flip = (a, b) => { const p = prog(t, a, b - a); return p; };
       const cx = W / 2;
-      const outA = flip(0.55, 0.85), inA = flip(0.85, 1.15);      // ouverture
-      const outB = flip(13.9, 14.2), inB = flip(14.2, 14.5);      // fermeture
+      const outA = flip(0.3, 0.5), inA = flip(0.5, 0.7);          // ouverture
+      const outB = flip(13.6, 13.85), inB = flip(13.85, 14.1);    // fermeture : l'étiquette reste ~0,9 s
       let realK, cardK;
       if (t < 7.5) { realK = 1 - easeInOut(outA); cardK = easeInOut(inA); }
       else { cardK = 1 - easeInOut(outB); realK = easeInOut(inB); }
@@ -302,21 +302,24 @@
       S.real.setAttribute('opacity', realK > 0.002 ? 1 : 0);
       S.card.setAttribute('transform', sx(cardK));
       S.card.setAttribute('opacity', cardK > 0.002 ? 1 : 0);
-      show(S.realTag, t, 14.45, { from: 'pop', cx: S.realTagC.x, cy: S.realTagC.y, dur: 0.4 });
+      show(S.realTag, t, 14.05, { from: 'pop', cx: S.realTagC.x, cy: S.realTagC.y, dur: 0.35 });
     }
     // Accroche, ligne par ligne, puis s'efface vers le haut
-    S.hookLines.forEach((g, i) => show(g, t, S.hookIn + i * 0.22, { dur: 0.5, from: 'up', d: 40 }));
-    const out = prog(t, S.real ? 2.95 : T.hookOut, 0.35);
+    S.hookLines.forEach((g, i) => show(g, t, S.hookIn + i * (S.real ? 0.1 : 0.22), { dur: 0.5, from: 'up', d: 40 }));
+    // Sortie de l'accroche en simple fondu, terminée avant que le mécanisme n'apparaisse
+    const out = prog(t, S.real ? 2.95 : T.hookOut, 0.25);
     S.hook.setAttribute('opacity', (1 - out).toFixed(3));
-    S.hook.setAttribute('transform', out > 0 ? `translate(0 ${-60 * easeInOut(out)})` : '');
-    // Mécanisme : visible à partir de 3 s
-    S.meca.setAttribute('opacity', prog(t, T.mecaIn - 0.15, 0.3).toFixed(3));
-    // À retenir
-    show(S.ret, t, T.retenir, { dur: 0.5, from: 'up', d: 30 });
-    show(S.retLabel, t, T.retenir + 0.1, { dur: 0.4, from: 'pop', cx: CARD.x + PAD + 22, cy: 1514 });
-    S.retHi.setAttribute('width', ((CARD.w - PAD * 2 + 16) * easeInOut(prog(t, T.retenir + 0.5, 0.8))).toFixed(1));
-    // Fin : le liseré se remplit
-    S.endRibBars.forEach((r, i) => r.setAttribute('width', ((CARD.w / 6 + 1) * easeOut(prog(t, T.fin + i * 0.1, 0.35))).toFixed(1)));
+    S.hook.setAttribute('transform', '');
+    // Mécanisme : visible à partir de 3,2 s
+    S.meca.setAttribute('opacity', prog(t, S.real ? 3.2 : T.mecaIn - 0.15, 0.25).toFixed(3));
+    // À retenir (plus tôt avec une vraie fiche, pour garder 2,4 s de lecture avant le retournement)
+    const tr = S.real ? 11.2 : T.retenir;
+    show(S.ret, t, tr, { dur: 0.5, from: 'up', d: 30 });
+    show(S.retLabel, t, tr + 0.1, { dur: 0.4, from: 'pop', cx: CARD.x + PAD + 22, cy: 1514 });
+    S.retHi.setAttribute('width', ((CARD.w - PAD * 2 + 16) * easeInOut(prog(t, tr + 0.5, 0.8))).toFixed(1));
+    // Fin : le liseré se remplit (avant le retournement quand la story se ferme sur la fiche)
+    const tf = S.real ? 12.9 : T.fin;
+    S.endRibBars.forEach((r, i) => r.setAttribute('width', ((CARD.w / 6 + 1) * easeOut(prog(t, tf + i * 0.08, 0.3))).toFixed(1)));
   }
 
   const api = { W, H, C, FAM, RIBBON, ZONE, CARD, T, el, text, wrap, width, measure, fit, inZone, clamp, prog, lerp, easeOut, easeInOut, back, show, stroke, count, grow, box, pill, check, cross, arrow, clock };
@@ -331,7 +334,7 @@
       SCENE = sc;
       window.FICHE.poster = sc.fiche ? 0 : (sc.poster ?? 10);
       // Avec une vraie fiche, la vignette de bulle montre le haut de la fiche imprimée
-      if (sc.fiche) window.FICHE.bulle = { x: 100, y: 230, s: 880 };
+      if (sc.fiche) window.FICHE.bulle = { x: 240, y: 240, s: 600 };  // titre et schéma de la fiche
       if (sc.bulle) window.FICHE.bulle = sc.bulle;  // carré { x, y, s } de la vignette de bulle
       Promise.all(['500', '600', '700'].map(w => document.fonts.load(`${w} 40px Montserrat`)).concat(document.fonts.load('italic 600 40px Montserrat'))).then(() => {
         template(sc);

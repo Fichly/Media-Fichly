@@ -63,7 +63,7 @@ Story.scene({
     S.clock.turn(0);
     // Légendes
     const cap = str => { const g = el('g', {}, root); A.fit(text(g, 540, 732, str, { size: 52, weight: 700, fill: C.ink, anchor: 'middle' }), ZONE.x + ZONE.w - 90, 'légende', ZONE.x); return g; };
-    S.caps = [[cap('Un seul mur'), 3.15, 4.45], [cap('Lu dans l’ordre'), 4.6, 6.35], [cap('Debout, à heure fixe'), 6.5, 8.25], [cap('Une décision écrite'), 8.4, 9.95], [cap('Décider, pas informer'), 10.1, null]];
+    S.caps = [[cap('Une seule salle'), 3.15, 4.45], [cap('Lu dans l’ordre'), 4.6, 6.35], [cap('Debout, à heure fixe'), 6.5, 8.25], [cap('Une décision écrite'), 8.4, 9.95], [cap('Décider, pas informer'), 10.1, null]];
   },
 
   anim(t, S, A) {

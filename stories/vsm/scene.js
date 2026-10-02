@@ -1,7 +1,8 @@
 // Story · VSM (famille 4, Optimisation des flux)
 // Exemple simplifié de l'article value-stream-mapping-definition-et-etapes : 3 postes, 3 stocks,
 // attentes de 1 / 1,5 / 0,5 jour, transformation de 1 / 3 / 1 minute, soit 5 minutes de valeur
-// ajoutée pour 3 jours de traversée. Ligne de temps à la convention Fichly : attente en bas.
+// ajoutée pour 3 jours de traversée. Ligne de temps dans le sens de la fiche n° 33 du deck (attente en haut),
+// l'article la dessine à l'inverse : à harmoniser.
 Story.scene({
   // Vraie fiche : vignette Canva du deck (FR - Outils du Lean - VF), numéro du Guide du deck
   fiche: { recto: '../../assets/produit/canva/page-071.png', numero: 33 },
@@ -33,22 +34,23 @@ Story.scene({
     // La pièce suivie
     S.token = el('rect', { x: -14, y: -14, width: 28, height: 28, rx: 5, fill: C.indigo, stroke: C.white, 'stroke-width': 3 }, root);
     S.FY = FY;
-    // Ligne de temps : attentes en bas (hachurées), transformation en haut
-    const LOW = 1150, HIGH = 1066;
+    // Ligne de temps dans le sens et les couleurs de la fiche n° 33 du deck :
+    // jours d'attente en haut (corail, hachurés), temps de transformation en bas (vert)
+    const LOW = 1066, HIGH = 1150;
     // Ligne en escalier sous la carte : attente sous chaque stock, transformation sous chaque poste
     const waits = [[95, 195], [380, 480], [665, 765]];
     const va = [[205, 355], [490, 640], [775, 925]];
     S.waits = waits.map(([a, b]) => el('rect', { x: a, y: LOW - 14, width: 0, height: 28, rx: 5, fill: 'url(#hachures)' }, root)).map((r, i) => ({ r, w: waits[i][1] - waits[i][0] }));
     S.va = el('g', {}, root);
     va.forEach(([a, b], i) => {
-      el('line', { x1: a - 10, y1: LOW, x2: a, y2: HIGH, stroke: C.indigo, 'stroke-width': 4 }, S.va);
-      el('line', { x1: a, y1: HIGH, x2: b, y2: HIGH, stroke: C.indigo, 'stroke-width': 12, 'stroke-linecap': 'round' }, S.va);
-      el('line', { x1: b, y1: HIGH, x2: b + 10, y2: LOW, stroke: C.indigo, 'stroke-width': 4 }, S.va);
+      el('line', { x1: a - 10, y1: LOW, x2: a, y2: HIGH, stroke: C.green, 'stroke-width': 4 }, S.va);
+      el('line', { x1: a, y1: HIGH, x2: b, y2: HIGH, stroke: C.green, 'stroke-width': 12, 'stroke-linecap': 'round' }, S.va);
+      el('line', { x1: b, y1: HIGH, x2: b + 10, y2: LOW, stroke: C.green, 'stroke-width': 4 }, S.va);
     });
     // Comparaison : 3 jours d'attente contre 5 minutes de transformation
     S.cmp = el('g', {}, root);
     el('rect', { x: ZONE.x, y: 1250, width: ZONE.w - 14, height: 56, rx: 10, fill: 'url(#hachures)' }, S.cmp);
-    el('rect', { x: ZONE.x + ZONE.w - 8, y: 1250, width: 8, height: 56, rx: 3, fill: C.indigo }, S.cmp);
+    el('rect', { x: ZONE.x + ZONE.w - 8, y: 1250, width: 8, height: 56, rx: 3, fill: C.green }, S.cmp);
     // Éclair kaizen sur la plus longue attente
     S.burst = el('g', {}, root);
     const bx = 540, by = 1278, pts = [];
@@ -65,7 +67,7 @@ Story.scene({
     S.caps = [
       [cap([['Suivre une pièce', C.ink]]), 3.15, 4.85],
       [cap([['Attente : ', C.ink], ['3 jours', C.ko]]), 5.0, 6.85],
-      [cap([['Machine : ', C.ink], ['5 minutes', C.indigo]]), 7.0, 9.05],
+      [cap([['Machine : ', C.ink], ['5 minutes', C.ok]]), 7.0, 9.05],
       [cap([['Réduire l’attente', C.ink]]), 9.2, null],
     ];
   },

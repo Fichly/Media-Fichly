@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fiche produit 40 outils V2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +38,8 @@
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body { background: var(--chrome); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 0 48px; }
 a { color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--focus-c, var(--indigo)); outline-offset: 2px; border-radius: var(--r-sm); }
+.f-formation { --focus-c: var(--white); }
 h1, h2, h3 { text-wrap: balance; margin: 0; }
 p, ul, ol, dl, figure, blockquote { margin: 0; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -203,6 +208,10 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .pack span { font-size: 13px; color: var(--ink-700); }
 .pack__price { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 16px; }
 .pack__price em { display: block; font-style: normal; font-size: 12px; color: var(--indigo); font-weight: 600; }
+.pack .ref { display: block; margin-top: 2px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.pcard__foot .ref { display: block; font-size: 12px; font-weight: 500; color: var(--ink-700); }
+.rev-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; font-size: 13px; color: var(--ink-700); }
+.rev-tools select { font: 500 13px/1.2 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); padding: 7px 10px; margin-left: 6px; }
 @container site (max-width: 520px) { .pack { grid-template-columns: 52px 1fr; } .pack__img { width: 52px; height: 52px; } .pack__price { grid-column: 2; text-align: left; } }
 
 /* ---------- 3. Les six familles ---------- */
@@ -216,7 +225,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .filters button i { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--sec, var(--ribbon)); }
 .filters button[data-f="all"] i { background: var(--ribbon); width: 18px; }
 .filters button small { font-size: 12px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
-.filters button[aria-pressed="true"] { background: var(--sec-soft, var(--indigo-050)); border-color: var(--sec, var(--indigo)); }
+.filters button[aria-pressed="true"] { background: var(--sec-soft, var(--indigo-050)); border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 700; }
 .families { display: grid; gap: 14px; }
 @container site (min-width: 760px) { .families { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @container site (min-width: 1060px) { .families { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -246,12 +255,12 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .real__tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .real__tabs button { font: 600 13px/1 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 8px 12px 8px 9px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
 .real__tabs button i { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--sec); }
-.real__tabs button[aria-pressed="true"] { background: var(--sec-soft); border-color: var(--sec); }
-.flip { width: min(380px, 100%); aspect-ratio: 375 / 532; perspective: 1600px; max-width: 100%; }
+.real__tabs button[aria-pressed="true"] { background: var(--sec-soft); border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 700; }
+.flip { width: min(380px, calc(100% - 28px)); aspect-ratio: 375 / 532; perspective: 1600px; max-width: 100%; }
 .flip__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.3,.7,.2,1); }
 .flip.is-verso .flip__inner { transform: rotateY(180deg); }
-.flip__face { position: absolute; inset: 0; margin: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-card); background: var(--sec-soft); }
-.flip__face img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.flip__face { position: absolute; inset: 0; margin: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; box-shadow: var(--shadow-card); background: var(--sec-soft); }
+.flip__face img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 14px; }
 .flip__verso { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) { .flip__inner { transition: none; } }
 .pin { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); min-width: 26px; height: 26px; padding: 0 6px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); font: 700 13px/26px var(--font); text-align: center; box-shadow: 0 0 0 3px rgba(255,255,255,.85); pointer-events: none; }
@@ -263,6 +272,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .real__legend li { counter-increment: lg; display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 15px; color: var(--ink-700); line-height: 1.45; }
 .real__legend li::before { content: counter(lg); width: 26px; height: 26px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); font: 700 13px/26px var(--font); text-align: center; }
 .real__legend b { display: block; color: var(--ink); font-size: 15px; }
+.real__legend[hidden], .real__legend li[hidden] { display: none; }
 .real__qr { display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 14px; color: var(--ink-700); align-items: start; }
 .real__qr .pin { position: static; transform: none; display: inline-block; }
 .finder { background: var(--surface); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 10px; }
@@ -270,7 +280,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .finder h3 em { font-style: italic; color: var(--indigo); }
 .finder label { font-size: 14px; font-weight: 700; color: var(--ink); }
 .finder select { font: 500 15px/1.3 var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); padding: 11px 12px; width: 100%; max-width: 100%; }
-.finder select:focus-visible { outline: none; box-shadow: var(--focus); }
+.finder select:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
 .finder__res { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .finder__res li { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--sec); border-radius: var(--r-md); padding: 8px 10px; font-size: 14px; font-weight: 600; }
 .finder__res li small { font-size: 12px; color: var(--ink-500); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -323,6 +333,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .avis-ctrl { font-size: 13px; }
 .rev__reply { border-left: 3px solid var(--indigo-100); padding-left: 12px; font-size: 14px; color: var(--ink-700); }
 .rev__reply b { display: block; font-size: 13px; color: var(--ink); }
+.rev-col { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.rev-more { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; }
 .rev-list { display: grid; gap: 14px; }
 @container site (min-width: 760px) { .rev-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .rev { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 8px; align-content: start; }
@@ -401,7 +413,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Annotations ---------- */
-.show-anno [data-anno] { position: relative; outline: 2px solid var(--note); outline-offset: 6px; }
+:where(.show-anno [data-anno]) { position: relative; }
+.show-anno [data-anno] { outline: 2px solid var(--note); outline-offset: 6px; }
 .show-anno [data-anno]::after { content: attr(data-anno) "  " attr(data-label); position: absolute; top: -6px; left: 12px; transform: translateY(-50%); background: var(--note); color: var(--white); font: 600 12px/1 var(--font); padding: 5px 9px; border-radius: var(--r-pill); z-index: 8; white-space: nowrap; pointer-events: none; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis; }
 .show-anno .page { gap: 76px; }
 .frame:not(.show-anno) .todo { color: inherit; background: none; padding: 0; font-weight: inherit; }
@@ -431,13 +444,13 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 /* ---------- 1c. Bulles : les outils en 15 secondes ---------- */
 .bubbles { display: grid; gap: 10px; padding-top: 6px; min-width: 0; }
 .bubbles__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
-.bubbles__head h2 { font-size: 15px; font-weight: 600; }
+.bubbles__title { font-size: 15px; font-weight: 600; margin: 0; }
 .bubbles__head span { font-size: 12px; color: var(--ink-500); }
-.bubbles__row { list-style: none; padding: 4px 2px 6px; margin: 0 -2px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.bubbles__row { list-style: none; padding: 4px 2px 6px; margin: 0 -2px; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
 .bubbles__row::-webkit-scrollbar { display: none; }
 .bubbles__row li { scroll-snap-align: start; flex: none; }
-.bubble { --rc: var(--indigo); width: 82px; display: grid; justify-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink); }
-.bubble__ring { position: relative; width: 78px; height: 78px; border-radius: var(--r-pill); padding: 3px; background: var(--rc); display: grid; place-items: center; transition: transform .15s ease; }
+.bubble { --rc: var(--indigo); width: 72px; display: grid; justify-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink); }
+.bubble__ring { position: relative; width: 66px; height: 66px; border-radius: var(--r-pill); padding: 3px; background: var(--rc); display: grid; place-items: center; transition: transform .15s ease; }
 .bubble__dur { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; line-height: 1; padding: 3px 6px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .bubble__dur svg { width: 8px; height: 8px; }
 .bubble[data-deck] .bubble__ring { background: var(--ring); }
@@ -446,7 +459,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .bubble__name { font-size: 12px; font-weight: 600; line-height: 1.25; text-align: center; max-width: 82px; margin-top: 4px; }
 .bubble:hover .bubble__ring { transform: scale(1.04); }
 .bubble:focus-visible { outline: none; }
-.bubble:focus-visible .bubble__ring { box-shadow: var(--focus); }
+.bubble:focus-visible .bubble__ring { outline: 2px solid var(--indigo); outline-offset: 2px; }
 .bubble.is-soon { cursor: default; opacity: .55; }
 .bubble.is-soon .bubble__ring { background: var(--line); }
 .bubble.is-soon .bubble__ring i { width: 100%; height: 100%; border-radius: var(--r-pill); border: 3px solid var(--bg); background: var(--sec-soft, var(--surface)); display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 600; color: var(--ink-500); }
@@ -461,7 +474,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .sp { --pw: min(440px, calc((100dvh - 200px) * 9 / 16)); width: var(--pw); display: grid; gap: 12px; position: relative; }
 .sp__media { position: relative; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--navy-2); touch-action: none; user-select: none; -webkit-user-select: none; }
 .sp__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.sp__top { position: absolute; inset: 0 0 auto 0; padding: 10px 10px 28px; display: grid; gap: 10px; background: linear-gradient(rgba(21,27,67,.78), rgba(21,27,67,.35) 70%, rgba(21,27,67,0)); z-index: 2; pointer-events: none; text-shadow: 0 1px 2px rgba(21,27,67,.6); }
+.sp__top { position: absolute; inset: 0 0 auto 0; padding: 10px 10px 28px; display: grid; gap: 10px; background: linear-gradient(rgba(21,27,67,.78), rgba(21,27,67,.35) 70%, rgba(21,27,67,0)); z-index: 5; pointer-events: none; text-shadow: 0 1px 2px rgba(21,27,67,.6); }
 .sp__bars { display: flex; gap: 4px; }
 .sp__bars i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; position: relative; }
 .sp__bars i b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--white); }
@@ -469,7 +482,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .sp__head img { width: 34px; height: 34px; border-radius: var(--r-pill); border: 2px solid var(--white); background: var(--white); }
 .sp__head div { min-width: 0; flex: 1; display: grid; }
 .sp__head strong { font-size: 14px; color: var(--white); }
-.sp__head span { font-size: 12px; color: var(--on-navy-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp__head span { font-size: 12px; line-height: 1.3; color: var(--white); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .sp__btn { width: 38px; height: 38px; border-radius: var(--r-pill); border: 0; background: rgba(21,27,67,.45); color: var(--white); display: grid; place-items: center; cursor: pointer; flex: none; }
 .sp__btn:hover { background: rgba(21,27,67,.7); }
 .sp__btn svg { width: 18px; height: 18px; }
@@ -495,7 +508,9 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .sp__nav:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6); }
 @media (max-width: 600px) {
   .sp-wrap { padding: 0; gap: 0; width: 100%; }
-  .sp__nav { display: none; }
+  .sp__nav { position: absolute; z-index: 6; top: 45%; width: 44px; height: 44px; background: rgba(21,27,67,.7); }
+  #spPrev { left: 6px; } #spNext { right: 6px; }
+  .sp__nav:not(:focus-visible) { clip-path: inset(50%); }
   .sp { --pw: 100vw; width: 100vw; height: 100dvh; grid-template-rows: minmax(0, 1fr) auto; gap: 0; background: var(--navy); }
   .sp__media { border-radius: 0; aspect-ratio: auto; height: 100%; }
   .sp__cta { border-radius: 16px 16px 0 0; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
@@ -526,7 +541,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li><strong>La preuve avant les questions</strong>Le mot d'Hugo, puis les 28 avis et la note de 4,79 sur 5, remontés du widget Judge.me <span class="n">(5, 6)</span>.</li>
     <li><strong>Nouveau : le produit tel qu'il est</strong>Les fiches du deck, en aperçu numérique tiré de vos fichiers Canva : en éventail dans la galerie, recto verso à retourner, et le Guide du deck pour trouver la sienne. Chaque story s'ouvre et se ferme sur la fiche. Les photos du deck imprimé suivent la liste de prises de vue en bas de page <span class="n">(blocs 1, 1d, 3)</span>.</li>
     <li><strong>Nouveau : les outils en 15 secondes</strong>Sous la galerie, une rangée de bulles ouvre des vidéos verticales en motion design. Sept sont déjà rendues : le deck et un outil par famille. Touchez une bulle <span class="n">(bloc 1c)</span>.</li>
-    <li><strong>Le panier moyen</strong>Le pack à −22 % sous le bouton, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
+    <li><strong>Le panier moyen</strong>Le pack en alternative sous le bouton, avec le total des articles achetés séparément, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
   </ul>
 </section>
 
@@ -577,7 +592,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
           <li><button type="button" class="c5" data-v="5" aria-current="false" aria-label="Vidéo">▶</button></li>
         </ul>
         <section class="bubbles" aria-labelledby="bulles" data-anno="1c" data-label="Bulles · les outils en 15 s">
-          <div class="bubbles__head"><h2 id="bulles">Les outils en 15 secondes</h2><span id="bubblesCount">vidéos sans le son</span></div>
+          <div class="bubbles__head"><p class="bubbles__title" id="bulles">Les outils en 15 secondes</p><span id="bubblesCount">vidéos sans le son</span></div>
           <ul class="bubbles__row" id="bubbles"></ul>
         </section>
       </div>
@@ -585,11 +600,11 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       <div class="buy" data-anno="2" data-label="Bloc d'achat">
         <nav class="crumbs" aria-label="Fil d'Ariane"><a href="#top">Accueil</a><span class="sep">•</span><a href="#top">Fiches</a><span class="sep">•</span><a href="#top">Lean Management</a></nav>
         <h1>40 outils du Lean <em>à portée de main</em></h1>
-        <p class="buy__sub">Les outils clés pour structurer, animer et améliorer. Un deck de 40 fiches imprimées en France, à garder sur le terrain.</p>
-        <a class="rating" href="#avis"><span class="stars" style="--v: 4.79" aria-hidden="true"></span><b>4,79/5</b><u>28 avis vérifiés</u></a>
-        <div class="price"><strong id="unitPrice">49,90 €</strong><small>TTC · soit 1,25 € par outil</small></div>
-        <p class="price-pro">41,58 € HT pour les entreprises, facture à votre nom <span class="todo">taux de TVA à confirmer</span></p>
-        <p class="ship">Livraison <span class="todo">prix</span>, reçu entre le <span class="todo">date</span> et le <span class="todo">date</span> · 14 jours pour changer d'avis</p>
+        <p class="buy__sub">Les outils clés pour structurer, animer et améliorer. Un deck de 40 fiches <span class="todo">40 ou 42 : selon la version imprimée</span> imprimées en France, à garder sur le terrain.</p>
+        <a class="rating" href="#avis"><span class="stars" style="--v: 4.79" aria-hidden="true"></span><b>4,79/5</b><u>28 avis</u></a>
+        <div class="price"><strong id="unitPrice">49,90 €</strong><small>TTC · soit 1,25 € par outil <span class="todo">calculé sur 40 : 1,19 € sur 42</span></small></div>
+        <p class="price-pro">41,58 € HT pour les entreprises <span class="todo">taux de TVA à confirmer</span>, <span class="todo">facture à votre nom : à confirmer</span></p>
+        <p class="ship">Livraison <span class="todo">prix</span>, reçu entre le <span class="todo">date</span> et le <span class="todo">date</span> · Droit légal de rétractation : 14 jours après réception</p>
         <ul class="gains">
           <li class="c1">Comprendre les principes du Lean et ses outils</li>
           <li class="c2">Identifier et éliminer les gaspillages facilement</li>
@@ -601,15 +616,15 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         </form>
         <div class="team"><span>Pour équiper une équipe ou une promotion</span><a href="#top">Demander un devis <span class="todo">tarif dégressif à définir</span></a></div>
         <a class="pack" href="#top" data-anno="2b" data-label="Pack · produit complémentaire">
-          <div class="pack__img" aria-hidden="true"><i class="c1"></i><i class="c4"></i><i class="c6"></i></div>
-          <div><small>−22 % par rapport aux produits achetés séparément <i class="todo">prix de référence à afficher</i></small><b>Pack Lean Management</b><span>VSM, 5S et résolution de problèmes <i class="todo">contenu exact à confirmer</i></span></div>
+          <div class="pack__img" aria-hidden="true"><i class="f4"></i><i class="f1"></i><i class="f2"></i></div>
+          <div><small>Ou prenez le pack</small><b>Pack Lean Management</b><span>Ce deck + les guides VSM, DMAIC et 5S</span><span class="ref">Au lieu de 139,60 € achetés séparément (−21 %)</span></div>
           <div class="pack__price">109,90 €<em>Voir le pack →</em></div>
         </a>
         <ul class="reassure">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg><div><b>Imprimé en France</b>Un deck de 40 fiches</div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg><div><b>Imprimé en France</b>Un deck de 40 fiches <span class="todo">40 ou 42</span></div></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><div><b>Livraison</b><span class="todo">délai et prix à fournir</span></div></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Paiement sécurisé</b>Par la boutique Shopify</div></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><div><b>Garantie légale</b>Conformité 2 ans, <a href="#top">voir les CGV</a></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><div><b>Garanties légales</b>De conformité (2 ans) et des vices cachés, <a href="#top">voir les CGV</a></div></li>
         </ul>
       </div>
     </section>
@@ -626,8 +641,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
           <div class="real__tabs" role="group" aria-label="Choisir une fiche" id="realTabs"></div>
           <div class="flip f1" id="flip">
             <div class="flip__inner">
-              <figure class="flip__face flip__recto"><img id="flipRecto" src="fiches/page-023.jpg" alt="" width="375" height="532"><span class="pin" style="--x: 50%; --y: 12%">1</span><span class="pin" style="--x: 50%; --y: 30%">2</span><span class="pin" style="--x: 24%; --y: 56%">3</span><span class="pin" style="--x: 76%; --y: 56%">4</span><span class="pin" style="--x: 50%; --y: 76%">5</span><span class="pin" style="--x: 50%; --y: 90%">6</span><span class="pin pin--qr" style="--x: 89%; --y: 6%">QR</span></figure>
-              <figure class="flip__face flip__verso"><img id="flipVerso" src="fiches/page-024.jpg" alt="" width="375" height="532"><span class="pin" style="--x: 50%; --y: 9%">1</span><span class="pin" style="--x: 12%; --y: 40%">2</span><span class="pin" style="--x: 50%; --y: 86%">3</span></figure>
+              <figure class="flip__face flip__recto" id="faceRecto"><img id="flipRecto" src="fiches/page-023.jpg" alt="" width="375" height="532"></figure>
+              <figure class="flip__face flip__verso" id="faceVerso" aria-hidden="true"><img id="flipVerso" src="fiches/page-024.jpg" alt="" width="375" height="532"></figure>
             </div>
           </div>
           <div class="real__controls">
@@ -642,13 +657,13 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
             <li><span><b>Le schéma</b> L'outil en un coup d'œil, sur un exemple.</span></li>
             <li><span><b>Définition</b> Ce que c'est, en quelques lignes.</span></li>
             <li><span><b>Quand ?</b> Les situations où le sortir.</span></li>
-            <li><span><b>Exemple</b> Un cas concret d'atelier ou de bureau.</span></li>
+            <li><span><b>Exemple</b> Selon l'outil, un cas concret d'atelier ou de bureau.</span></li>
             <li><span><b>Liens</b> Les fiches à utiliser avant ou après, avec leur numéro.</span></li>
           </ol>
           <ol class="real__legend" id="legendVerso" hidden>
             <li><span><b>Comment le mettre en place ?</b> La démarche, étape par étape.</span></li>
-            <li><span><b>Les étapes</b> Numérotées, avec un exemple pour chacune.</span></li>
-            <li><span><b>Bonnes pratiques</b> Ce qui fait réussir, ou échouer, l'outil.</span></li>
+            <li><span><b>Les étapes</b> Numérotées, souvent avec un exemple.</span></li>
+            <li><span><b>Bonnes pratiques</b> Sur la plupart des fiches : ce qui fait réussir, ou échouer, l'outil.</span></li>
           </ol>
           <p class="real__qr"><span class="pin pin--qr" aria-hidden="true">QR</span><span>Sur chaque recto, un QR code ouvre les templates numériques du deck <span class="todo">nombre de templates à confirmer : « +15 » en introduction, « +30 » en page bonus</span></span></p>
           <div class="finder">
@@ -718,7 +733,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="score">
           <div class="score__n"><b>4,79</b><span>sur 5</span></div>
           <span class="stars" style="--v: 4.79" aria-hidden="true"></span>
-          <p style="font-size:14px;color:var(--ink-700)">28 avis d'acheteurs vérifiés</p>
+          <p style="font-size:14px;color:var(--ink-700)">28 avis <span class="todo">dont N achats vérifiés : à relever dans Judge.me</span></p>
           <ul class="hist" aria-label="Répartition des notes">
             <li><span>5 ★</span><i style="--w: 79%"></i><span>22</span></li>
             <li><span>4 ★</span><i style="--w: 21%"></i><span>6</span></li>
@@ -727,13 +742,17 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
             <li><span>1 ★</span><i style="--w: 0%"></i><span>0</span></li>
           </ul>
           <a class="btn btn--line" href="#top">Laisser un avis</a>
-          <a class="avis-ctrl" href="#top">Comment sont collectés et contrôlés nos avis ?</a>
+          <a class="avis-ctrl" href="#top">Comment sont collectés et contrôlés nos avis ?</a> <span class="todo">rubrique à rédiger : collecte, modération, contreparties, tri</span>
         </div>
-        <div class="rev-list">
-          <article class="rev"><div class="rev__head"><h3>Une référence !</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>La meilleure synthèse pratico-pratique que je déploie au sein de mes équipes…</p><footer><span>Anonyme</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
-          <article class="rev"><div class="rev__head"><h3>Très bon outil</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ce deck est un très bon outil pédagogique de second temps. Il permet d'avoir un aide-mémoire de qualité, complet mais synthétique pour engager une démarche d'amélioration.</p><footer><span>Erwan</span><span class="v">Achat vérifié</span><span>mai 2025</span></footer><div class="rev__reply"><b>Réponse d'Hugo</b>Merci beaucoup pour votre commentaire positif sur notre produit. Nous sommes ravis de savoir que vous trouvez notre deck très utile pour votre démarche d'amélioration.</div></article>
-          <article class="rev"><div class="rev__head"><h3>Ces fiches sont au top</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ces fiches sont au top de leur design à leur format et pour le contenu c'est d'une clarté… Rien à dire… Bravo !!</p><footer><span>Lara</span><span class="v">Achat vérifié</span><span>juillet 2025</span></footer></article>
-          <article class="rev"><div class="rev__head"><h3>Excellentes fiches pédagogiques</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Excellentes fiches pédagogiques ^^</p><footer><span>Guillaume Gaston</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
+        <div class="rev-col">
+          <div class="rev-tools"><span>4 avis sur 28</span><label>Trier<select id="revSort"><option value="recent">Les plus récents</option><option value="ancien">Les plus anciens</option><option value="note">Note la plus basse</option></select></label></div>
+          <div class="rev-list" id="revList">
+            <article class="rev" data-date="2026-04-14" data-note="5"><div class="rev__head"><h3>Excellentes fiches pédagogiques</h3><span class="stars" style="--v: 5" role="img" aria-label="5 sur 5"></span></div><p>Excellentes fiches pédagogiques ^^</p><footer><span>Guillaume Gaston</span><span class="v">Achat vérifié</span><span>14 avril 2026</span></footer></article>
+            <article class="rev" data-date="2026-04-10" data-note="5"><div class="rev__head"><h3>Une référence !</h3><span class="stars" style="--v: 5" role="img" aria-label="5 sur 5"></span></div><p>La meilleure synthèse pratico-pratique que je déploie au sein de mes équipes…</p><footer><span>Anonyme</span><span class="v">Achat vérifié</span><span>10 avril 2026</span></footer></article>
+            <article class="rev" data-date="2025-07-11" data-note="5"><div class="rev__head"><h3>Ces fiches sont au top</h3><span class="stars" style="--v: 5" role="img" aria-label="5 sur 5"></span></div><p>Ces fiches sont au top de leurs design à leurs format et pour le contenu c’est d’une clarté… Rien à dire… Bravo!!</p><footer><span>Lara</span><span class="v">Achat vérifié</span><span>11 juillet 2025</span></footer></article>
+            <article class="rev" data-date="2025-05-23" data-note="5"><div class="rev__head"><h3>Très bon outil</h3><span class="stars" style="--v: 5" role="img" aria-label="5 sur 5"></span></div><p>Ce deck est un très bon outil pédagogique de second temps. Il permet d'avoir un aide-mémoire de qualité, complet mais synthétique pour engager une démarche d'amélioration.</p><footer><span>Erwan</span><span class="v">Achat vérifié</span><span>23 mai 2025</span></footer><div class="rev__reply"><b>Réponse d'Hugo</b>Merci beaucoup pour votre commentaire positif sur notre produit. Nous sommes ravis de savoir que vous trouvez notre deck très utile pour votre démarche d'amélioration.</div></article>
+          </div>
+          <p class="rev-more"><a class="btn btn--line" href="#top">Voir les 28 avis</a> <span class="todo">montrer aussi des avis à 4 étoiles (6 sur 28) et la date d'achat de chaque avis</span></p>
         </div>
       </div>
     </section>
@@ -743,12 +762,12 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       <div class="zone-title"><div class="eyebrow">Avant de commander</div><h2 id="questions">Vos questions <em>sur le deck</em></h2></div>
       <div class="faq__list">
         <details open><summary>Quels outils contient le deck ?</summary><p>Les outils du Lean management et manufacturing, rangés en six familles : résolution de problèmes, engagement et visualisation, planification et gestion stratégique, optimisation des processus et des flux, efficacité de production, amélioration de la qualité. Un Guide du deck vous indique quelle fiche prendre selon ce que vous voulez faire. La liste complète, avec le numéro de chaque fiche, est plus haut sur cette page.</p></details>
-        <details><summary>Comment est faite une fiche ?</summary><p>Au recto : le besoin (« Je souhaite… »), un schéma, la définition, quand l'utiliser et un exemple. Au verso : la mise en place étape par étape et les bonnes pratiques. Un QR code mène aux templates numériques du deck.</p></details>
+        <details><summary>Comment est faite une fiche ?</summary><p>Au recto : le besoin (« Je souhaite… »), un schéma, la définition, quand l'utiliser et, selon l'outil, un exemple. Au verso : la mise en place étape par étape et, sur la plupart des fiches, les bonnes pratiques. Un QR code mène aux templates numériques du deck.</p></details>
         <details><summary>À qui s'adresse-t-il ?</summary><p>Aux managers qui veulent transmettre les outils à leur équipe, aux étudiants qui entrent dans l'industrie et aux professionnels qui veulent monter en compétence.</p></details>
         <details><summary>Où les fiches sont-elles imprimées ?</summary><p>En France.</p></details>
         <details><summary>Quel est le format des fiches ?</summary><p><span class="todo">Dimensions, papier, boîte : à fournir par Hugo.</span></p></details>
         <details><summary>Sous combien de temps vais-je le recevoir ?</summary><p><span class="todo">Délai et frais de livraison : à fournir par Hugo.</span></p></details>
-        <details><summary>Puis-je le retourner ?</summary><p>Oui. Vous disposez de 14 jours après réception pour changer d'avis. <span class="todo">Frais de retour à la charge du client ou de Fichly : à préciser.</span></p></details>
+        <details><summary>Puis-je le retourner ?</summary><p>Oui. Le droit légal de rétractation vous laisse 14 jours après réception pour changer d'avis. <span class="todo">Frais de retour à la charge du client ou de Fichly : à préciser.</span></p></details>
         <details><summary>Puis-je en commander pour toute mon équipe ?</summary><p><span class="todo">Conditions de commande en volume et facture entreprise : à fournir par Hugo.</span></p></details>
       </div>
     </section>
@@ -757,8 +776,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <section class="more" aria-labelledby="loin" data-anno="8" data-label="Produits liés · recommandations Shopify">
       <div class="zone-title"><div class="eyebrow">Pour aller plus loin</div><h2 id="loin">Complétez <em>votre boîte à outils</em></h2></div>
       <div class="more__grid">
-        <a class="pcard c1" href="#top"><div class="pcard__img" aria-hidden="true"><i class="c1"></i><i class="c4"></i><i class="c6"></i></div><div class="pcard__body"><small>Pack expert</small><b>Pack Lean Management (−22 %)</b><p>Nos guides VSM, 5S et résolution de problèmes réunis. <i class="todo">Contenu exact à confirmer</i></p><div class="pcard__foot"><span class="p">109,90 €</span><span class="m">Voir le pack →</span></div></div></a>
-        <a class="pcard c4" href="#top"><div class="pcard__img" aria-hidden="true"><i class="c4"></i><i class="c4"></i><i class="c4"></i></div><div class="pcard__body"><small>Guide</small><b>Le guide de la VSM en 20 fiches</b><p>Pour aller au bout de la famille « Optimisation des flux ».</p><div class="pcard__foot"><span class="p">29,90 €</span><span class="m">Voir le guide →</span></div></div></a>
+        <a class="pcard f0" href="#top"><div class="pcard__img" aria-hidden="true"><i class="f4"></i><i class="f1"></i><i class="f2"></i></div><div class="pcard__body"><small>Pack</small><b>Pack Lean Management</b><p>Le deck et nos guides VSM, 5S et DMAIC réunis.</p><div class="pcard__foot"><span class="p">109,90 €<small class="ref">au lieu de 139,60 € achetés séparément (−21 %)</small></span><span class="m">Voir le pack →</span></div></div></a>
+        <a class="pcard f4" href="#top"><div class="pcard__img" aria-hidden="true"><i class="f4"></i><i class="f4"></i><i class="f4"></i></div><div class="pcard__body"><small>Guide</small><b>Le guide de la VSM en 20 fiches</b><p>Pour aller au bout de la famille « Optimisation des processus et des flux ».</p><div class="pcard__foot"><span class="p">29,90 €</span><span class="m">Voir le guide →</span></div></div></a>
       </div>
     </section>
 
@@ -775,7 +794,6 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="gb-side">
           <strong>1 500 € <span>en distanciel, finançable via votre CPF</span></strong>
           <small>Sous conditions d'éligibilité et de droits disponibles.</small>
-          <p class="gift">Pack Lean offert avec la formation.</p>
         </div>
       </div>
     </section>
@@ -784,9 +802,9 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <section class="blog" aria-labelledby="blog" data-anno="10" data-label="Le deck dans nos articles">
       <div class="zone-title"><div class="eyebrow">Sur le blog</div><h2 id="blog">Trois outils du deck, <em>expliqués en détail</em></h2></div>
       <div class="blog__grid">
-        <a class="post c1" href="#top"><small>Résolution de problèmes</small><b>La méthode des 5 Pourquoi : remonter à la cause racine</b><span>Lire l'article →</span></a>
-        <a class="post c4" href="#top"><small>Optimisation des flux</small><b>Value Stream Mapping : définition et étapes</b><span>Lire l'article →</span></a>
-        <a class="post c5" href="#top"><small>Efficacité de production</small><b>La méthode SMED en 5 étapes</b><span>Lire l'article →</span></a>
+        <a class="post f1" href="#top"><small>Résolution de problèmes · fiche n° 9</small><b>Méthode des 5 pourquoi : exemple, étapes et cause racine</b><span>Lire l'article →</span></a>
+        <a class="post f4" href="#top"><small>Optimisation des processus et des flux · fiche n° 33</small><b>Value Stream Mapping : Définition et étapes</b><span>Lire l'article →</span></a>
+        <a class="post f5" href="#top"><small>Efficacité de production · fiche n° 40</small><b>Méthode SMED : les 5 étapes expliquées (guide 2026)</b><span>Lire l'article →</span></a>
       </div>
     </section>
   </main>
@@ -805,29 +823,29 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       <thead><tr><th>#</th><th>Bloc</th><th>Contenu et source</th><th>État actuel</th></tr></thead>
       <tbody>
         <tr><td><span class="n">1</span></td><td>Galerie</td><td>Dans la maquette : six fiches en éventail (aperçu numérique), puis le recto et le verso d'une fiche. En ligne : une vraie photo en premier (plan 1 de la liste), puis la fiche en main avec les cotes, le recto verso, « tout ce que vous recevez », la vidéo <code>custom.video_fiche_produit</code>. Le visuel « Lean, you know » descend dans « Pour qui, pour quoi ».</td><td>Vignettes Canva en 375 × 532 : exporter les fiches en haute définition</td></tr>
-        <tr><td><span class="n">1c</span></td><td>Bulles · les outils en 15 s</td><td>Métachamp produit <code>fichly.stories</code> (liste de métaobjets <code>story_outil</code> : nom, famille 1 à 6, vidéo MP4, affiche, vignette, texte de la vidéo, article lié). Rangée de vignettes sous la galerie ; le lecteur ne charge la vidéo qu'au tap.</td><td>Nouveau · 7 vidéos rendues sur 41</td></tr>
+        <tr><td><span class="n">1c</span></td><td>Bulles · les outils en 15 s</td><td>Métachamp produit <code>fichly.stories</code> (liste de métaobjets <code>story_outil</code> : nom, famille 1 à 6, vidéo MP4, affiche, vignette, texte de la vidéo, article lié). Rangée de vignettes sous la galerie ; le lecteur ne charge la vidéo qu'au tap.</td><td>Nouveau · 7 vidéos rendues sur 43 (42 outils + le deck)</td></tr>
         <tr class="is-new"><td><span class="n">1d</span></td><td>Une fiche du deck, recto verso</td><td>Huit fiches à retourner (recto, verso), avec les rubriques du « Guide de lecture des cartes » du deck. Sélecteur « Je souhaite… » qui reprend le Guide du deck : besoin, outil, numéro de fiche, puis la fiche. Données : <code>guide.json</code>, à passer en métaobjets.</td><td>Nouveau</td></tr>
         <tr><td><span class="n">2</span></td><td>Bloc d'achat</td><td>Titre (sans le point final), <code>custom.sous_titre</code>, note <code>reviews.rating</code> et <code>reviews.rating_count</code>, prix lu dans la boutique, <code>custom.avantage_1</code> à <code>_3</code>, quantité, devis équipe, réassurance.</td><td>Avantages et sous-titre déjà remplis</td></tr>
-        <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack.</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
+        <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack. Présenté comme une alternative au deck seul : « 109,90 € au lieu de 139,60 € achetés séparément (−21 %) ».</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
         <tr><td><span class="n">3</span></td><td>Les fiches par famille</td><td>Le Guide du deck : 42 outils numérotés de 4 à 45, en six familles, avec leur couleur imprimée. Lien vers l'article quand l'outil en a un, œil pour ouvrir la vraie fiche. Remplace <code>custom.les_outils_abordes</code>.</td><td>La liste Shopify ne correspond plus au deck</td></tr>
         <tr><td><span class="n">4</span></td><td>Pour qui, pour quoi</td><td>Trois usages tirés de la description (apprendre, consolider, transmettre), puis <code>custom.texte_seo</code> replié après le premier paragraphe.</td><td>Texte SEO déjà rédigé</td></tr>
         <tr><td><span class="n">5</span></td><td>Le mot de l'expert</td><td>Métaobjet <code>custom.expert</code> (type <code>experts</code>) : titre, citation, photo, nom, poste. Anneau six couleurs autour de la photo, comme l'auteur des articles.</td><td>Rempli</td></tr>
-        <tr><td><span class="n">6</span></td><td>Avis</td><td>Widget Judge.me restylé aux couleurs Fichly : note, répartition, quatre avis, puis « Charger plus ».</td><td>28 avis, 4,79/5</td></tr>
+        <tr><td><span class="n">6</span></td><td>Avis</td><td>Widget Judge.me restylé aux couleurs Fichly : note, répartition, avis les plus récents d'abord avec leur date complète, tri, puis « Voir les 28 avis ». Les avis sont repris mot pour mot.</td><td>28 avis, 4,79/5</td></tr>
         <tr><td><span class="n">7</span></td><td>Questions</td><td>Trois réponses tirées de la fiche, trois à rédiger. Nouveau métachamp <code>fichly.faq</code> pour qu'elles soient modifiables sans toucher au thème.</td><td>Aucune FAQ aujourd'hui</td></tr>
         <tr><td><span class="n">8</span></td><td>Produits liés</td><td><code>related_products</code> : pack et guide VSM, avec la famille du guide rappelée.</td><td>Rempli</td></tr>
-        <tr><td><span class="n">9</span></td><td>Formation Green Belt</td><td>Le bloc des articles V2, avec un message adapté : le pack Lean est offert avec la formation.</td><td>Textes déjà validés pour les articles</td></tr>
-        <tr><td><span class="n">10</span></td><td>Le deck dans nos articles</td><td>Trois articles publiés dont l'outil est dans le deck, choisis par tag. Six autres arrivent avec la publication des brouillons (QQOQCCP, Ishikawa, Obeya, Pareto, Takt Time, AMDEC).</td><td>Nouveau</td></tr>
-        <tr><td><span class="n">11</span></td><td>Barre d'achat qui suit</td><td>Apparaît quand le bouton principal sort de l'écran. Titre court, prix, bouton.</td><td>Nouveau</td></tr>
+        <tr><td><span class="n">9</span></td><td>Formation Green Belt</td><td>Le bloc des articles V2, sans cadeau associé à la formation (un avantage lié à une inscription financée par le CPF est interdit).</td><td>Textes déjà validés pour les articles</td></tr>
+        <tr><td><span class="n">10</span></td><td>Le deck dans nos articles</td><td>Trois articles publiés dont l'outil est dans le deck, choisis par tag. Quinze outils de la liste ont déjà leur article (dont QQOQCCP, Ishikawa, Obeya, Pareto, Takt Time, AMDEC et Gemba, publiés les 1er et 2 octobre). Management visuel et Kaizen suivent les 19 et 26 octobre.</td><td>Nouveau</td></tr>
+        <tr><td><span class="n">11</span></td><td>Barre d'achat qui suit</td><td>Apparaît quand le bouton principal est passé au-dessus de l'écran (calcul au défilement). Titre court, prix, bouton.</td><td>Nouveau</td></tr>
       </tbody>
     </table>
   </div>
 
   <h2>Les bulles, <em>comment ça marche</em></h2>
-  <p>Chaque vidéo est dessinée par un petit programme, comme vos fiches LinkedIn animées : la fiche s'anime, dans la couleur de sa famille. Même gabarit pour les 40 outils, donc une nouvelle vidéo coûte une scène à écrire, pas un tournage. Les sept vidéos de cette maquette sont réelles : ce sont les fichiers que l'on mettrait en ligne.</p>
+  <p>Chaque vidéo est dessinée par un petit programme, comme vos fiches LinkedIn animées : la fiche s'anime, dans la couleur de sa famille. Même gabarit pour tous les outils, donc une nouvelle vidéo coûte une scène à écrire, pas un tournage. Les sept vidéos de cette maquette sont réelles : ce sont les fichiers que l'on mettrait en ligne.</p>
   <ul class="fixes">
-    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>La fiche du deck apparaît, se retourne et s'anime. 1 à 3 s : un problème vécu. 3 à 11,5 s : le geste de l'outil. 11,5 à 14 s : « À retenir ». Puis la fiche se retourne à nouveau, avec son numéro dans le deck. Première et dernière images : le produit réel.<br><small>stories/moteur.js</small></li>
+    <li class="c1"><strong>Le même déroulé pour tous les outils</strong>La fiche du deck apparaît, se retourne et s'anime. 0,75 à 3 s : un problème vécu. 3,2 à 11,2 s : le geste de l'outil. 11,2 à 13,6 s : « À retenir ». Puis la fiche se retourne à nouveau, avec son numéro dans le deck, et reste 1,2 s à l'écran avant la story suivante. Première et dernière images : l'aperçu Canva de la fiche, en attendant la photo (plan 7).<br><small>stories/moteur.js</small></li>
     <li class="c2"><strong>Ancrées dans vos articles</strong>5 Pourquoi, VSM, SMED, Pareto et Obeya reprennent l'exemple et le vocabulaire de l'article Fichly (chaîne du contrôle de début de série, 3 jours contre 5 minutes, interne et externe…). Poka-Yoke suit la définition de Shingo, faute d'article.<br><small>Textes à relire par Hugo</small></li>
-    <li class="c3"><strong>Légères et rapides</strong>Environ 0,3 Mo par vidéo web (720 × 1280, H.264 et WebM, sans piste son). La rangée n'affiche que des vignettes de 15 à 20 Ko : rien ne se charge avant le tap, et seule la story suivante est préchargée.<br><small>livrables/stories/</small></li>
+    <li class="c3"><strong>Légères et rapides</strong>Environ 0,5 Mo par vidéo web (720 × 1280, H.264 et WebM, sans piste son). La rangée n'affiche que des vignettes de 40 à 55 Ko : rien ne se charge avant le tap, et seule la story suivante est préchargée.<br><small>livrables/stories/</small></li>
     <li class="c4"><strong>Accessibles</strong>Bouton pause (WCAG 2.2.2), texte de chaque vidéo pour les lecteurs d'écran et le bouton « Texte » (WCAG 1.2.1), clavier (flèches, espace, Échap), lecture en pause si l'utilisateur limite les animations, pause quand l'onglet passe en arrière-plan.<br><small>Dans le lecteur</small></li>
     <li class="c5"><strong>Dans Shopify sans application</strong>Vidéos dans Contenu &gt; Fichiers, un métaobjet par story, une section de thème faite maison. Pas d'abonnement à une appli de stories, et Hugo ajoute une vidéo sans toucher au code.<br><small>À développer sur le thème copié</small></li>
     <li class="c6"><strong>Réutilisables partout</strong>Les maîtres 1080 × 1920 servent tels quels en Reels, Shorts et LinkedIn : une série « un outil Lean par semaine » sur le profil d'Hugo, avec le lien vers le deck.<br><small>Mêmes fichiers</small></li>
@@ -839,7 +857,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   <div class="plan-wrap">
     <table class="plan plan--5">
       <thead><tr><th>#</th><th>Action</th><th>Où sur la page</th><th>Ce que Fichly produit</th><th>Impact / effort</th></tr></thead>
-      <tbody><tr><td><span class="n">1</span></td><td>Une vraie photo en 1re image de la galerie</td><td>Galerie du haut (cadre carré 1:1), vue 1 et vignette 1. « Lean, you know » descend dans la section « Pour qui, pour quoi ».</td><td>Plan 1 de la liste. Export JPG de 2048 × 2048 px au moins. Texte alternatif : « Étui du deck 40 outils du Lean ouvert, six fiches en éventail, une par famille de couleur ».</td><td>fort / faible</td></tr><tr><td><span class="n">2</span></td><td>Une fiche en main, et les cotes écrites sur l'image</td><td>Galerie, vues 2 et 3, avant la vidéo.</td><td>Plans 2 et 3. Mesurer la fiche et l'étui au réglet, puis ajouter les cotes dans Canva. Prendre un peu de recul : un gros plan seul grossit l'objet.</td><td>fort / faible</td></tr><tr><td><span class="n">3</span></td><td>Écrire le format, le papier, la finition et l'étui</td><td>Une ligne sous le prix. La réponse de la FAQ « Quel est le format des fiches ? ». Les textes alternatifs des images.</td><td>La fiche technique de l'imprimeur (devis ou facture). N'écrire que ce qui est prouvé.</td><td>fort / faible</td></tr><tr><td><span class="n">4</span></td><td>La photo « tout ce que vous recevez »</td><td>Galerie, vue 5. Et en tête de la section « Ce que vous recevez · La vraie fiche, recto verso », au-dessus du lecteur qui retourne la fiche.</td><td>Plan 5 : vue du dessus à 90°, debout sur une chaise ou avec un trépied tête en bas. Exports 1:1 et 4:5.</td><td>fort / moyen</td></tr><tr><td><span class="n">5</span></td><td>Une vidéo réelle de prise en main, dans la galerie et en tête des bulles</td><td>Galerie, vue 3 : le métachamp custom.video_fiche_produit existe déjà. Pas de lecture automatique en 1re position. Et une bulle « En vrai » en 1re place dans la rangée « Les outils en 15 secondes ».</td><td>Plan 9. Compression H.264 avec CRF 20 à 23 et +faststart. Une image d'aperçu nette. Le texte de la vidéo pour les lecteurs d'écran : le lecteur des bulles le prévoit déjà.</td><td>fort / moyen</td></tr><tr><td><span class="n">6</span></td><td>Des stories qui s'ouvrent et se ferment sur la fiche imprimée</td><td>Rangée de bulles, sur les 7 stories existantes. C'est la clé fiche.recto de chaque fichier stories/&lt;id&gt;/scene.js.</td><td>Plan 7 : une photo par outil, vue du dessus, redressée et recadrée au ratio 375:532. Étiquette de fin (legende) : « Fiche n° 9 du deck, imprimée ». Relancer outils/rendu.js.</td><td>moyen / faible</td></tr><tr><td><span class="n">7</span></td><td>Le recto, le verso et la matière en photo HD, et l'aperçu Canva nommé comme tel</td><td>Galerie, vues 4 et 8. Dans la section « La vraie fiche, recto verso », un bouton « Voir en photo » à côté de « Retourner la fiche ». Le badge « Vraies fiches » de la galerie seulement sur les photos.</td><td>Plans 4 et 6. Réexport Canva en HD de 6 fiches (une par famille), recto et verso.</td><td>moyen / faible</td></tr><tr><td><span class="n">8</span></td><td>Une bulle « Fabrication » tirée des rushes de l'imprimeur</td><td>Rangée de bulles, en 2e place après « En vrai ». Une image fixe des rushes dans la galerie (vue 8), à côté du badge « Imprimé en France ».</td><td>L'accord écrit de l'imprimeur, et son nom s'il accepte d'être cité. Garder la facture qui justifie la mention. Version page sans le son, version Reels avec le son des machines.</td><td>moyen / moyen</td></tr><tr><td><span class="n">9</span></td><td>Les photos des clients dans les avis</td><td>En haut de la section des avis (Judge.me), une galerie de photos clients. Ajouter les posts LinkedIn de stagiaires, avec leur accord.</td><td>Le réglage du coupon dans Judge.me (offre Awesome, 15 $/mois). Les accords pour reprendre les posts LinkedIn.</td><td>moyen / faible</td></tr><tr><td><span class="n">10</span></td><td>Option : l'étui en 3D et en réalité augmentée, à taille réelle</td><td>Galerie, en 4e position ou plus loin, jamais en 1re. Le modèle se charge au clic, avec une image d'aperçu.</td><td>Le patron de l'étui en HD (celui du dépôt fait 668 × 376 px) et ses cotes exactes en mm. Une demi-journée dans Blender. Mesurer ensuite les clics sur « Voir dans votre espace » et les ajouts au panier.</td><td>faible / moyen</td></tr></tbody>
+      <tbody><tr><td><span class="n">1</span></td><td>Une vraie photo en 1re image de la galerie</td><td>Galerie du haut (cadre carré 1:1), vue 1 et vignette 1. « Lean, you know » descend dans la section « Pour qui, pour quoi ».</td><td>Plan 1 de la liste. Export JPG de 2048 × 2048 px au moins. Texte alternatif : « Étui du deck 40 outils du Lean ouvert, six fiches en éventail, une par famille de couleur ».</td><td>fort / faible</td></tr><tr><td><span class="n">2</span></td><td>Une fiche en main, et les cotes écrites sur l'image</td><td>Galerie, vues 2 et 3, avant la vidéo.</td><td>Plans 2 et 3. Mesurer la fiche et l'étui au réglet, puis ajouter les cotes dans Canva. Prendre un peu de recul : un gros plan seul grossit l'objet.</td><td>fort / faible</td></tr><tr><td><span class="n">3</span></td><td>Écrire le format, le papier, la finition et l'étui</td><td>Une ligne sous le prix. La réponse de la FAQ « Quel est le format des fiches ? ». Les textes alternatifs des images.</td><td>La fiche technique de l'imprimeur (devis ou facture). N'écrire que ce qui est prouvé.</td><td>fort / faible</td></tr><tr><td><span class="n">4</span></td><td>La photo « tout ce que vous recevez »</td><td>Galerie, vue 5. Et en tête de la section « Ce que vous recevez · La vraie fiche, recto verso », au-dessus du lecteur qui retourne la fiche.</td><td>Plan 5 : vue du dessus à 90°, debout sur une chaise ou avec un trépied tête en bas. Exports 1:1 et 4:5.</td><td>fort / moyen</td></tr><tr><td><span class="n">5</span></td><td>Une vidéo réelle de prise en main, dans la galerie et en tête des bulles</td><td>Galerie, vue 3 : le métachamp custom.video_fiche_produit existe déjà. Pas de lecture automatique en 1re position. Et une bulle « En vrai » en 1re place dans la rangée « Les outils en 15 secondes ».</td><td>Plan 9. Compression H.264 avec CRF 20 à 23 et +faststart. Une image d'aperçu nette. Le texte de la vidéo pour les lecteurs d'écran : le lecteur des bulles le prévoit déjà.</td><td>fort / moyen</td></tr><tr><td><span class="n">6</span></td><td>Des stories qui s'ouvrent et se ferment sur la fiche imprimée</td><td>Rangée de bulles, sur les 7 stories existantes. C'est la clé fiche.recto de chaque fichier stories/&lt;id&gt;/scene.js.</td><td>Plan 7 : une photo par outil, vue du dessus, redressée et recadrée au ratio 375:532. Étiquette de fin (legende) : « Fiche n° 9 du deck, imprimée ». Relancer outils/rendu.js.</td><td>moyen / faible</td></tr><tr><td><span class="n">7</span></td><td>Le recto, le verso et la matière en photo HD, et l'aperçu Canva nommé comme tel</td><td>Galerie, vues 4 et 8. Dans la section « La vraie fiche, recto verso », un bouton « Voir en photo » à côté de « Retourner la fiche ». Le badge « Vraies fiches » de la galerie seulement sur les photos.</td><td>Plans 4 et 6. Réexport Canva en HD de 6 fiches (une par famille), recto et verso.</td><td>moyen / faible</td></tr><tr><td><span class="n">8</span></td><td>Une bulle « Fabrication » tirée des rushes de l'imprimeur</td><td>Rangée de bulles, en 2e place après « En vrai ». Une image fixe des rushes dans la galerie (vue 8), à côté du badge « Imprimé en France ».</td><td>L'accord écrit de l'imprimeur, et son nom s'il accepte d'être cité. Garder la facture qui justifie la mention. Version page sans le son, version Reels avec le son des machines.</td><td>moyen / moyen</td></tr><tr><td><span class="n">9</span></td><td>Les photos des clients dans les avis</td><td>En haut de la section des avis (Judge.me), une galerie de photos clients. Ajouter les posts LinkedIn de stagiaires, avec leur accord.</td><td>Le réglage du coupon dans Judge.me (offre Awesome, 15 $/mois). Un coupon contre un avis avec photo est une contrepartie : la page doit le dire près des avis (art. L111-7-2). Les accords pour reprendre les posts LinkedIn.</td><td>moyen / faible</td></tr><tr><td><span class="n">10</span></td><td>Option : l'étui en 3D et en réalité augmentée, à taille réelle</td><td>Galerie, en 4e position ou plus loin, jamais en 1re. Le modèle se charge au clic, avec une image d'aperçu.</td><td>Le patron de l'étui en HD (celui du dépôt fait 668 × 376 px) et ses cotes exactes en mm. Une demi-journée dans Blender. Mesurer ensuite les clics sur « Voir dans votre espace » et les ajouts au panier.</td><td>faible / moyen</td></tr></tbody>
     </table>
   </div>
   <h2>La liste de prises de vue, <em>au smartphone</em></h2>
@@ -847,7 +865,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   <div class="plan-wrap">
     <table class="plan plan--5">
       <thead><tr><th>#</th><th>Plan</th><th>Cadrage</th><th>Usage</th><th>Format</th></tr></thead>
-      <tbody><tr><td><span class="n">1</span></td><td>Plan hero : étui ouvert, 6 fiches en éventail (une par famille)</td><td>De 3/4, un peu en plongée. Fond de papier blanc, fenêtre sur le côté, carton blanc en face pour adoucir les ombres.</td><td>Galerie vue 1, vignette Shopify, affiche de la bulle « En vrai ».</td><td>Photo 1:1, 2048 px au moins (plus une version 4:5 pour les réseaux)</td></tr><tr><td><span class="n">2</span></td><td>Fiche tenue en main, recto lisible</td><td>Plan rapproché, main ouverte, bureau flou derrière, stylo et smartphone dans le champ.</td><td>Galerie vue 2 : l'image à l'échelle.</td><td>Photo 1:1 (plus 4:5 pour LinkedIn)</td></tr><tr><td><span class="n">3</span></td><td>Étui fermé et une fiche, à côté d'un smartphone, d'un stylo et d'une tasse</td><td>Vue du dessus à 90°, objets sans marque, un peu de recul.</td><td>Base de l'image cotée : les cotes en mm sont ajoutées dans Canva (galerie vue 3).</td><td>Photo 1:1</td></tr><tr><td><span class="n">4</span></td><td>Recto et verso de la même fiche, côte à côte (5 Pourquoi, n° 9)</td><td>Vue du dessus à 90°, fiches parallèles au cadre, lumière douce et égale.</td><td>Galerie vue 4, lisible au zoom.</td><td>Photo 1:1, 2500 px de large au moins</td></tr><tr><td><span class="n">5</span></td><td>Les 40 fiches étalées par famille</td><td>Vue du dessus : 6 colonnes, étui ouvert et guide en haut. Debout sur une chaise ou trépied tête en bas.</td><td>Galerie vue 5, et en tête du bloc « Ce que vous recevez ».</td><td>Photo 1:1 et 4:5, 2500 px au moins</td></tr><tr><td><span class="n">6</span></td><td>Macro de la tranche et d'un coin</td><td>Lumière rasante, mode macro. Une pile de 5 ou 6 fiches vue de côté, puis un coin.</td><td>Galerie vue 8 (matière), et un plan d'une seconde dans les Reels.</td><td>Photo 1:1, et vidéo 9:16 de 3 s</td></tr><tr><td><span class="n">7</span></td><td>La fiche à plat, cadrée comme dans les stories</td><td>Vue du dessus à 90°, fiche redressée sans perspective. Une par outil : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke, et le guide.</td><td>Remplace le PNG Canva à l'ouverture et à la fermeture des 7 stories (clé fiche.recto).</td><td>Photo 9:16, 2160 × 3840 au moins, recadrée au ratio 375:532</td></tr><tr><td><span class="n">8</span></td><td>La main sort la fiche de l'étui et la pose dans le cadre</td><td>Plan fixe vu du dessus. La fiche finit exactement à la place du plan 7 (x 100 → 980, y 230 → 1478 sur 1080 × 1920), puis 1 s d'immobilité.</td><td>Ouverture des Reels, raccordée à la 1re image de la story.</td><td>Vidéo 9:16, 1,5 à 2 s, 30 i/s comme le rendu des stories</td></tr><tr><td><span class="n">9</span></td><td>Prise en main et déballage</td><td>Plan fixe vu du dessus : colis, étui, ouverture, fiches qui glissent, éventail des 6 couleurs, une fiche retournée. Action dans le carré central.</td><td>Galerie vue 3 (custom.video_fiche_produit), recadrée en 1:1, et bulle « En vrai ».</td><td>Vidéo 9:16, 15 à 20 s, sans le son</td></tr><tr><td><span class="n">10</span></td><td>Retournement du recto au verso, en boucle</td><td>Plan serré vu du dessus. Une main retourne la fiche, et la fiche revient à sa position de départ.</td><td>Boucle courte dans la section « La vraie fiche, recto verso », à côté de l'aperçu numérique.</td><td>Vidéo 1:1 et 9:16, 3 à 4 s, sans le son</td></tr><tr><td><span class="n">11</span></td><td>Feuilletage des 40 fiches par famille</td><td>Vue du dessus, une fiche toutes les 0,5 à 1 s. Le nom de la famille s'affiche en texte animé quand la couleur change.</td><td>Reel, Short et LinkedIn : la preuve qu'il y a 40 fiches imprimées.</td><td>Vidéo 9:16, 30 à 45 s</td></tr><tr><td><span class="n">12</span></td><td>En situation : formation ou atelier</td><td>Une fiche sur la table de formation avec un doigt qui pointe le schéma, ou une fiche tenue devant un tableau blanc ou dans une ligne de production.</td><td>Galerie vue 7, section « Pour qui, pour quoi », LinkedIn.</td><td>Photo 4:5 (plus 1:1), avec l'accord des stagiaires</td></tr><tr><td><span class="n">13</span></td><td>Rushes de l'imprimeur : feuilles, massicot, pile, mise en étui</td><td>Extraits de 1 à 2 s pris dans les vidéos existantes, avec le son réel des machines.</td><td>Bulle « Fabrication », plan de preuve « Imprimé en France », image fixe dans la galerie.</td><td>Vidéo 9:16 de 15 s, et image fixe 1:1</td></tr><tr><td><span class="n">14</span></td><td>Plan hero vidéo de fin</td><td>Étui debout, fiches en éventail devant, lumière de fenêtre, 2 à 3 s presque immobiles.</td><td>Fin des Reels, avec « 40 outils · 49,90 € » au centre du cadre.</td><td>Vidéo 9:16, 2 à 3 s</td></tr></tbody>
+      <tbody><tr><td><span class="n">1</span></td><td>Plan hero : étui ouvert, 6 fiches en éventail (une par famille)</td><td>De 3/4, un peu en plongée. Fond de papier blanc, fenêtre sur le côté, carton blanc en face pour adoucir les ombres.</td><td>Galerie vue 1, vignette Shopify, affiche de la bulle « En vrai ».</td><td>Photo 1:1, 2048 px au moins (plus une version 4:5 pour les réseaux)</td></tr><tr><td><span class="n">2</span></td><td>Fiche tenue en main, recto lisible</td><td>Plan rapproché, main ouverte, bureau flou derrière, stylo et smartphone dans le champ.</td><td>Galerie vue 2 : l'image à l'échelle.</td><td>Photo 1:1 (plus 4:5 pour LinkedIn)</td></tr><tr><td><span class="n">3</span></td><td>Étui fermé et une fiche, à côté d'un smartphone, d'un stylo et d'une tasse</td><td>Vue du dessus à 90°, objets sans marque, un peu de recul.</td><td>Base de l'image cotée : les cotes en mm sont ajoutées dans Canva (galerie vue 3).</td><td>Photo 1:1</td></tr><tr><td><span class="n">4</span></td><td>Recto et verso de la même fiche, côte à côte (5 Pourquoi, n° 9)</td><td>Vue du dessus à 90°, fiches parallèles au cadre, lumière douce et égale.</td><td>Galerie vue 4, lisible au zoom.</td><td>Photo 1:1, 2500 px de large au moins</td></tr><tr><td><span class="n">5</span></td><td>Toutes les fiches étalées par famille</td><td>Vue du dessus : 6 colonnes, étui ouvert et guide en haut. Debout sur une chaise ou trépied tête en bas.</td><td>Galerie vue 5, et en tête du bloc « Ce que vous recevez ».</td><td>Photo 1:1 et 4:5, 2500 px au moins</td></tr><tr><td><span class="n">6</span></td><td>Macro de la tranche et d'un coin</td><td>Lumière rasante, mode macro. Une pile de 5 ou 6 fiches vue de côté, puis un coin.</td><td>Galerie vue 8 (matière), et un plan d'une seconde dans les Reels.</td><td>Photo 1:1, et vidéo 9:16 de 3 s</td></tr><tr><td><span class="n">7</span></td><td>La fiche à plat, cadrée comme dans les stories</td><td>Vue du dessus à 90°, fiche redressée sans perspective. Une par outil : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke, et le guide.</td><td>Remplace le PNG Canva à l'ouverture et à la fermeture des 7 stories (clé fiche.recto).</td><td>Photo 9:16, 2160 × 3840 au moins, recadrée au ratio 375:532</td></tr><tr><td><span class="n">8</span></td><td>La main sort la fiche de l'étui et la pose dans le cadre</td><td>Plan fixe vu du dessus. La fiche finit exactement à la place du plan 7 (x 100 → 980, y 230 → 1478 sur 1080 × 1920), puis 1 s d'immobilité.</td><td>Ouverture des Reels, raccordée à la 1re image de la story.</td><td>Vidéo 9:16, 1,5 à 2 s, 30 i/s comme le rendu des stories</td></tr><tr><td><span class="n">9</span></td><td>Prise en main et déballage</td><td>Plan fixe vu du dessus : colis, étui, ouverture, fiches qui glissent, éventail des 6 couleurs, une fiche retournée. Action dans le carré central.</td><td>Galerie vue 3 (custom.video_fiche_produit), recadrée en 1:1, et bulle « En vrai ».</td><td>Vidéo 9:16, 15 à 20 s, sans le son</td></tr><tr><td><span class="n">10</span></td><td>Retournement du recto au verso, en boucle</td><td>Plan serré vu du dessus. Une main retourne la fiche, et la fiche revient à sa position de départ.</td><td>Boucle courte dans la section « La vraie fiche, recto verso », à côté de l'aperçu numérique.</td><td>Vidéo 1:1 et 9:16, 3 à 4 s, sans le son</td></tr><tr><td><span class="n">11</span></td><td>Feuilletage de toutes les fiches, par famille</td><td>Vue du dessus, une fiche toutes les 0,5 à 1 s. Le nom de la famille s'affiche en texte animé quand la couleur change.</td><td>Reel, Short et LinkedIn : la preuve du nombre de fiches imprimées.</td><td>Vidéo 9:16, 30 à 45 s</td></tr><tr><td><span class="n">12</span></td><td>En situation : formation ou atelier</td><td>Une fiche sur la table de formation avec un doigt qui pointe le schéma, ou une fiche tenue devant un tableau blanc ou dans une ligne de production.</td><td>Galerie vue 7, section « Pour qui, pour quoi », LinkedIn.</td><td>Photo 4:5 (plus 1:1), avec l'accord des stagiaires</td></tr><tr><td><span class="n">13</span></td><td>Rushes de l'imprimeur : feuilles, massicot, pile, mise en étui</td><td>Extraits de 1 à 2 s pris dans les vidéos existantes, avec le son réel des machines.</td><td>Bulle « Fabrication », plan de preuve « Imprimé en France », image fixe dans la galerie.</td><td>Vidéo 9:16 de 15 s, et image fixe 1:1</td></tr><tr><td><span class="n">14</span></td><td>Plan hero vidéo de fin</td><td>Étui debout, fiches en éventail devant, lumière de fenêtre, 2 à 3 s presque immobiles.</td><td>Fin des Reels, avec le nom du deck et son prix au centre du cadre.</td><td>Vidéo 9:16, 2 à 3 s</td></tr></tbody>
     </table>
   </div>
   <ul class="fixes">
@@ -866,15 +884,15 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <tr class="grp"><td colspan="4">Déjà dans la maquette</td></tr>
         <tr><td><span class="n">1c</span></td><td>Les vidéos produit doivent être dans la galerie ou juste dessous, avec une icône lecture.</td><td>Rangée de bulles sous l'image, pastille « ▶ 15 s » sur chaque bulle.</td><td><a href="https://baymard.com/blog/embedding-product-page-videos" target="_blank" rel="noopener">Baymard</a></td></tr>
         <tr><td><span class="n">1c</span></td><td>Format « PDP Stories » : vignettes rondes, lecteur 9:16 en surimpression, achat sans quitter la vidéo.</td><td>Lecteur avec barres de progression, tap gauche / droite, appui long, glisser pour fermer, bouton d'achat dans le lecteur.</td><td><a href="https://help.gotolstoy.com/en/articles/15707642-how-to-create-and-publish-pdp-stories" target="_blank" rel="noopener">Tolstoy</a></td></tr>
-        <tr><td><span class="n">1c</span></td><td>Un éditeur français de référence ajoute déjà des vidéos par QR code à sa boîte à outils du Lean (8 vidéos).</td><td>Fichly peut faire plus : une vidéo par outil, 40 au total, au format terrain.</td><td><a href="https://dunod.com/entreprise-et-economie/boite-outils-du-lean" target="_blank" rel="noopener">Dunod</a></td></tr>
+        <tr><td><span class="n">1c</span></td><td>Un éditeur français de référence ajoute déjà des vidéos par QR code à sa boîte à outils du Lean (8 vidéos).</td><td>Fichly peut faire plus : une vidéo par outil du deck, au format terrain.</td><td><a href="https://dunod.com/entreprise-et-economie/boite-outils-du-lean" target="_blank" rel="noopener">Dunod</a></td></tr>
         <tr><td><span class="n">2</span></td><td>Frais et date de livraison visibles avant le panier.</td><td>Ligne « Livraison · reçu entre le … et le … » sous le prix.</td><td><a href="https://baymard.com/blog/show-shipping-costs-on-product-pages" target="_blank" rel="noopener">Baymard</a></td></tr>
         <tr><td><span class="n">2</span></td><td>Justifier le prix par l'unité plutôt que le baisser.</td><td>« Soit 1,25 € par outil ». Prix HT et facture pour les entreprises.</td><td><a href="https://pipdecks.com/products/workshop-tactics" target="_blank" rel="noopener">Pip Decks</a></td></tr>
         <tr><td><span class="n">6</span></td><td>Les avis négatifs sont recherchés ; répondre est un signe de sérieux.</td><td>Répartition des notes et réponse d'Hugo sous l'avis.</td><td><a href="https://baymard.com/research-articles/respond-to-negative-user-reviews" target="_blank" rel="noopener">Baymard</a></td></tr>
         <tr class="grp"><td colspan="4">Obligations françaises</td></tr>
         <tr><td><span class="n">6</span></td><td>Une page qui affiche des avis doit dire s'ils sont contrôlés et comment, et dater chaque avis.</td><td>Lien « Comment sont collectés et contrôlés nos avis ? » vers une courte rubrique (Judge.me, invitation après achat).</td><td><a href="https://www.inc-conso.fr/node/10142" target="_blank" rel="noopener">INC</a>, art. L111-7-2</td></tr>
-        <tr><td><span class="n">2b</span></td><td>Une annonce de réduction se calcule sur un prix de référence réel. Pour un pack, on compare au total des articles achetés séparément.</td><td>Écrire « 109,90 € au lieu de … € achetés séparément » avec les vrais prix.</td><td><a href="https://www.economie.gouv.fr/dgccrf/des-regles-plus-claires-contre-les-faux-rabais" target="_blank" rel="noopener">DGCCRF</a>, art. L112-1-1</td></tr>
+        <tr><td><span class="n">2b</span></td><td>Une annonce de réduction se calcule sur un prix de référence réel. Pour un pack, on compare au total des articles achetés séparément.</td><td>« 109,90 € au lieu de 139,60 € achetés séparément (−21 %) » : le deck et les trois guides, aux prix du 2 octobre.</td><td><a href="https://www.economie.gouv.fr/dgccrf/des-regles-plus-claires-contre-les-faux-rabais" target="_blank" rel="noopener">DGCCRF</a>, art. L112-1-1</td></tr>
         <tr><td><span class="n">7</span></td><td>Délai de livraison, droit de rétractation de 14 jours et frais de retour à annoncer avant la commande.</td><td>Ligne sous le prix et question « Puis-je le retourner ? ».</td><td><a href="https://www.economie.gouv.fr/dgccrf/vente-a-distance" target="_blank" rel="noopener">DGCCRF</a>, art. L221-5</td></tr>
-        <tr><td><span class="n">2</span></td><td>Encadré obligatoire sur les garanties légales dans les CGV depuis octobre 2022.</td><td>Réassurance « Garantie légale de conformité 2 ans » avec lien vers les CGV, à vérifier.</td><td><a href="https://www.engage.hoganlovells.com/knowledgeservices/news/france-e-merchants-dont-forget-to-update-your-tcs-of-sale" target="_blank" rel="noopener">Hogan Lovells</a>, décret 2022-946</td></tr>
+        <tr><td><span class="n">2</span></td><td>Encadré obligatoire sur les garanties légales dans les CGV depuis octobre 2022.</td><td>Réassurance « Garanties légales de conformité (2 ans) et des vices cachés » avec lien vers les CGV, à vérifier.</td><td><a href="https://www.engage.hoganlovells.com/knowledgeservices/news/france-e-merchants-dont-forget-to-update-your-tcs-of-sale" target="_blank" rel="noopener">Hogan Lovells</a>, décret 2022-946</td></tr>
         <tr class="grp"><td colspan="4">À décider avec Hugo</td></tr>
         <tr><td>—</td><td>Les decks premium détaillent la boîte : nombre de cartes, format en mm, grammage, finition, étui, avec un repère de taille.</td><td>Bloc « Dans la boîte » et une photo du deck tenu en main. Il faut les caractéristiques exactes.</td><td><a href="https://methodkit.com/kits/" target="_blank" rel="noopener">MethodKit</a>, <a href="https://kitted.shop/products/design-thinking-tools-deck" target="_blank" rel="noopener">Kitted</a></td></tr>
         <tr><td>—</td><td>Les leaders font télécharger un échantillon gratuit avant l'achat.</td><td>Une fiche exemple en PDF contre une adresse e-mail, relancée ensuite avec les vidéos.</td><td><a href="https://pipdecks.com/pages/free-pdf-download" target="_blank" rel="noopener">Pip Decks</a></td></tr>
@@ -887,16 +905,19 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 
   <h2>À corriger dans la fiche, <em>avant la V2</em></h2>
   <ul class="fixes">
-    <li class="c3"><strong>La liste Shopify est celle de l'ancien deck</strong>Ses 37 outils suivent l'ancienne numérotation (n° 3 à 42). Le deck actuel en compte 42 (n° 4 à 45). Il manque sur Shopify : VOC, VA / NVA / NVAO, Bâtonnage, Les 3G, 5S, Matrice de décision et TWI. Shopify garde « Réunion à forte VA » et « Diagramme de Gantt », qui n'ont plus de fiche, et « QQQC » pour QRQC. Takt Time et Heijunka sont en Efficacité de production, Muda en Résolution de problèmes.<br><small>Mettre à jour le métachamp</small></li>
-    <li class="c3"><strong>Quel deck est dans la boîte aujourd'hui ?</strong>La couverture dit « 40 fiches », chiffre de l'ancienne numérotation, alors que la version Canva actuelle en a 42. La maquette suit la version actuelle : vérifier que c'est celle qui est imprimée et expédiée, sinon reprendre l'ancienne liste.<br><small>Question pour Hugo</small></li>
+    <li class="c3"><strong>La liste Shopify est celle de l'ancien deck</strong>Ses 37 outils suivent une ancienne liste. Le deck actuel en compte 42 (n° 4 à 45). Il manque sur Shopify : VOC, VA / NVA / NVAO, Bâtonnage, Les 3G, 5S, Matrice de décision et TWI. Shopify garde « Réunion à forte VA » et « Diagramme de Gantt », qui n'ont plus de fiche, et « QQQC » pour QRQC. Takt Time et Heijunka sont en Efficacité de production, Muda en Résolution de problèmes.<br><small>Mettre à jour le métachamp</small></li>
+    <li class="c3"><strong>Quel deck est dans la boîte aujourd'hui ?</strong>La couverture et la page 3 du Canva disent « 40 fiches », alors que le Guide du deck numérote 42 outils (n° 4 à 45). La maquette suit la version actuelle : vérifier que c'est celle qui est imprimée et expédiée, sinon reprendre l'ancienne liste.<br><small>Question pour Hugo</small></li>
     <li class="c4"><strong>Dans les fichiers du deck</strong>« ISBN : 3760451390019 » est un code EAN, pas un ISBN. Le verso de la fiche OKR garde « 2024-2034 - You Know » et le lien des templates pointe en partie vers « template-youknow-lean ». L'encadré d'exemple du Guide renvoie encore à Ishikawa n° 4 et 5 Pourquoi n° 5 (anciens numéros). Coquilles : « quotidiendes », « problèmepour », « nécéssaire », « White BELt ».<br><small>À corriger avant la prochaine impression</small></li>
-    <li class="c4"><strong>Noms des familles</strong>Le deck dit « Planification et gestion stratégique », « Optimisation des processus et des flux », « Amélioration de la qualité ». Shopify dit « Planification et stratégie », « Optimisation des flux », « Amélioration de la production ». La maquette suit le deck.<br><small>Correction simple</small></li>
+    <li class="c4"><strong>Noms des familles</strong>Le deck lui-même n'emploie pas toujours le même nom d'une page à l'autre, et Shopify dit encore « Planification et stratégie », « Optimisation des flux », « Amélioration de la production ». La maquette suit le Guide du deck (pages 4 et 5) : « Planification et gestion stratégique », « Optimisation des processus et des flux », « Amélioration de la qualité ». À fixer une fois, puis à reporter partout.<br><small>Décision simple</small></li>
     <li class="c3"><strong>Fautes dans la liste Shopify</strong>« QQQOQCCP » pour QQOQCCP, « Cartes de contrôles1. », « Mes OKR ». Elles disparaissent si la liste est reprise du Guide du deck.<br><small>Correction simple</small></li>
     <li class="c4"><strong>Textes alternatifs vides</strong>Les six médias n'ont pas d'alt. Bon pour Google Images et l'accessibilité.<br><small>À rédiger avec les photos sous les yeux</small></li>
     <li class="c4"><strong>GTIN dans la description</strong>Le code 3760451390019 est écrit dans le texte, avec une balise <code>&lt;meta&gt;</code> collée. Sa place est le champ code-barres de la variante, lu par Google Shopping.<br><small>Correction simple</small></li>
     <li class="c5"><strong>Stock à −67</strong>Le suivi de stock est actif et le stock est négatif : la vente continue, mais le chiffre ne sert plus à rien. Soit on le remet à jour, soit on coupe le suivi.<br><small>Décision d'Hugo</small></li>
     <li class="c5"><strong>Vendeur « Ma boutique »</strong>Valeur par défaut de Shopify, reprise dans les données produit envoyées à Google. À remplacer par Fichly.<br><small>Correction simple</small></li>
     <li class="c1"><strong>Données structurées</strong>Un seul JSON-LD <code>Product</code> avec <code>gtin13</code>, <code>brand</code> Fichly, <code>offers</code> et <code>aggregateRating</code> (4,79 sur 28). Les étoiles peuvent alors s'afficher dans Google.<br><small>Dans le gabarit V2</small></li>
+    <li class="c3"><strong>Pack Lean Management : prix et titre</strong>Le pack contient le deck et les guides VSM, DMAIC et 5S : 139,60 € achetés séparément, 109,90 € en pack, soit −21 %. Dans Shopify, le prix barré (<code>compareAtPrice</code>) vaut 109,70 € au lieu de 139,60 €, le titre dit −22 % et la description −20 %, et elle ne cite que trois produits (le guide 5S manque).<br><small>Correction simple</small></li>
+    <li class="c5"><strong>Cadeau et CPF</strong>La maquette des articles V2 propose encore « Pack Lean offert avec la formation » : un avantage lié à une inscription financée par le CPF est interdit, à retirer. L'article Green Belt annonce 70 % de pratique, la page de la formation 80 % : à aligner.<br><small>À revoir</small></li>
+    <li class="c4"><strong>Sens de la ligne de temps VSM</strong>La fiche n° 33 met les jours d'attente en haut et le temps de transformation en bas, l'article VSM fait l'inverse. La story suit la fiche. À harmoniser dans l'article.<br><small>Correction simple</small></li>
     <li class="c1"><strong>Titre SEO</strong>« 40 outils du Lean management - des fiches à emporter partout. » : pas de point final, tiret long ou deux-points, et le mot « deck » que les acheteurs emploient dans leurs avis.<br><small>Proposition à valider</small></li>
   </ul>
 </section>
@@ -922,8 +943,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="sp__text" id="spText" hidden><h3>Texte de la vidéo</h3><p id="spDesc"></p></div>
       </div>
       <div class="sp__cta" id="spCta">
-        <p><i></i><span id="spCtaText">Cet outil est dans le deck 40 outils du Lean</span><span class="sp__note"><span class="stars" style="--v: 4.79; width: 60px; height: 11px" aria-hidden="true"></span>4,79 · 28 avis</span></p>
-        <div><button type="button" class="btn" id="spAdd">Ajouter au panier · 49,90 €</button><a class="btn btn--line" id="spMore" href="#outils">Voir les 40</a></div>
+        <p><i></i><span id="spCtaText">Cet outil est une des fiches du deck</span><span class="sp__note"><span class="stars" style="--v: 4.79; width: 60px; height: 11px" aria-hidden="true"></span>4,79 · 28 avis</span></p>
+        <div><button type="button" class="btn" id="spAdd">Ajouter au panier · 49,90 €</button><a class="btn btn--line" id="spMore" href="#outils">Voir toutes les fiches</a></div>
       </div>
     </div>
     <button type="button" class="sp__nav" id="spNext" aria-label="Story suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -946,6 +967,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     { "f": 0, "je": "connaître l'histoire & les principes du Lean", "outils": [["Comprendre le lean", 2]] },
     { "f": 0, "je": "identifier les compétences clés de chaque ceinture", "outils": [["Parcours de ceintures", 3]] },
     { "f": 0, "je": "comprendre les bases du Six Sigma", "outils": [["Six Sigma", 3]] },
+    { "f": 0, "je": "continuer à me former aux principes du Lean", "outils": [["Envie d'aller plus loin ?", 46]] },
+    { "f": 0, "je": "accéder aux templates", "outils": [["Templates", 46]] },
     { "f": 1, "je": "recueillir et traduire la voix du client", "outils": [["VOC", 4]] },
     { "f": 1, "je": "caractériser / définir un problème", "outils": [["QQOQCCP", 5]] },
     { "f": 1, "je": "identifier et éliminer les gaspillages dans les processus", "outils": [["VA, NVA, NVAO", 6], ["Muda, Muri, Mura", 7]] },
@@ -978,21 +1001,21 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     { "f": 6, "je": "standardiser un processus pour assurer sa maîtrise", "outils": [["TWI", 45]] }
   ],
   "fiches": {
-    "5 Pourquoi": { "recto": "fiches/page-023.jpg", "verso": "fiches/page-024.jpg", "titre": "Les 5 pourquoi ?" },
-    "Obeya": { "recto": "fiches/page-049.jpg", "verso": "fiches/page-050.jpg", "titre": "Obeya" },
-    "Analyse de Pareto": { "recto": "fiches/page-053.jpg", "verso": "fiches/page-054.jpg", "titre": "Pareto (80/20)" },
-    "VSM": { "recto": "fiches/page-071.jpg", "verso": "fiches/page-072.jpg", "titre": "Value Stream Mapping (VSM)" },
-    "SMED": { "recto": "fiches/page-085.jpg", "verso": "fiches/page-086.jpg", "titre": "SMED" },
-    "Poka-Yoke": { "recto": "fiches/page-087.jpg", "verso": "fiches/page-088.jpg", "titre": "Poka Yoke" },
-    "DMAIC": { "recto": "fiches/page-033.jpg", "verso": "fiches/page-034.jpg", "titre": "DMAIC" },
-    "5S": { "recto": "fiches/page-043.jpg", "verso": "fiches/page-044.jpg", "titre": "5S" }
+    "5 Pourquoi": { "recto": "fiches/page-023.jpg", "verso": "fiches/page-024.jpg", "titre": "Les 5 pourquoi ?", "pins": { "recto": [["g", 13.5], ["g", 23], ["g", 47.5], ["d", 47.5], ["g", 73.5], ["g", 89]], "verso": [["g", 12], ["g", 30], ["g", 82]] } },
+    "Obeya": { "recto": "fiches/page-049.jpg", "verso": "fiches/page-050.jpg", "titre": "Obeya", "pins": { "recto": [["g", 13.5], ["g", 27], ["g", 40], ["d", 40], ["g", 69], ["g", 86]], "verso": [["g", 13.5], ["g", 30], ["g", 77]] } },
+    "Analyse de Pareto": { "recto": "fiches/page-053.jpg", "verso": "fiches/page-054.jpg", "titre": "Pareto (80/20)", "pins": { "recto": [["g", 13.5], ["g", 27], ["g", 46], ["d", 46], ["g", 72.5], ["g", 88]], "verso": [["g", 12.5], ["g", 30], ["g", 79]] } },
+    "VSM": { "recto": "fiches/page-071.jpg", "verso": "fiches/page-072.jpg", "titre": "Value Stream Mapping (VSM)", "pins": { "recto": [["g", 13.5], ["g", 21], ["g", 61.5], ["d", 61.5], null, ["g", 89]], "verso": [["g", 11], ["g", 30], null] } },
+    "SMED": { "recto": "fiches/page-085.jpg", "verso": "fiches/page-086.jpg", "titre": "SMED", "pins": { "recto": [["g", 12], ["g", 30], ["g", 50.5], ["d", 50.5], ["g", 76.5], ["g", 89.5]], "verso": [["g", 11.5], ["g", 30], ["g", 80.5]] } },
+    "Poka-Yoke": { "recto": "fiches/page-087.jpg", "verso": "fiches/page-088.jpg", "titre": "Poka Yoke", "pins": { "recto": [["g", 11.5], ["g", 27], ["g", 42], ["d", 42], ["g", 67], ["g", 89.5]], "verso": [["g", 12], ["g", 30], ["g", 72]] } },
+    "DMAIC": { "recto": "fiches/page-033.jpg", "verso": "fiches/page-034.jpg", "titre": "DMAIC", "pins": { "recto": [["g", 12], ["g", 27], ["g", 42.5], ["d", 42.5], ["g", 68], ["g", 88.5]], "verso": [["g", 11], ["g", 30], ["g", 80.5]] } },
+    "5S": { "recto": "fiches/page-043.jpg", "verso": "fiches/page-044.jpg", "titre": "5S", "pins": { "recto": [["g", 11.5], ["g", 30], ["g", 47.5], ["d", 47.5], ["g", 75], ["g", 88.5]], "verso": [["g", 11], ["g", 30], ["g", 78.5]] } }
   }
 }
 
 </script>
 
 <script type="application/json" id="storiesData">
-[{"id": "le-deck", "nom": "Le deck", "famille": 0, "article": null, "texte": "Des fiches à emporter partout. Six fiches s'étalent : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke. 40 fiches. 6 familles, une couleur chacune. À retenir : pour apprendre, consolider et transmettre, sur le terrain.", "video": "stories/le-deck-720.mp4", "affiche": "stories/le-deck.jpg", "bulle": "stories/le-deck-bulle.png"}, {"id": "5-pourquoi", "nom": "5 Pourquoi", "famille": 1, "article": "methode-5-pourquoi-cause-racine", "texte": "Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? « L'opérateur a oublié » : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement. À retenir : la réponse désigne une personne ? Posez un pourquoi de plus.", "video": "stories/5-pourquoi-720.mp4", "affiche": "stories/5-pourquoi.jpg", "bulle": "stories/5-pourquoi-bulle.png"}, {"id": "obeya", "nom": "Obeya", "famille": 2, "article": null, "texte": "Chacun travaille sur sa version du projet. Les versions éparses rejoignent un seul mur en cinq zones : objectif et écart, plan, problèmes, indicateurs, décisions. Lu dans l'ordre. Debout, à heure fixe. Une décision écrite. Décider, pas informer. À retenir : une Obeya se mesure aux décisions prises devant elle.", "video": "stories/obeya-720.mp4", "affiche": "stories/obeya.jpg", "bulle": "stories/obeya-bulle.png"}, {"id": "pareto", "nom": "Pareto", "famille": 3, "article": null, "texte": "Des arrêts partout. Par où commencer ? Exemple illustratif : 6 causes en vrac. Trier par poids, de la plus fréquente à la plus rare. Cumuler les parts. 3 causes : 82 % des arrêts. Commencer par là. À retenir : quelques causes font le gros du problème. Commencez par elles.", "video": "stories/pareto-720.mp4", "affiche": "stories/pareto.jpg", "bulle": "stories/pareto-bulle.png"}, {"id": "vsm", "nom": "VSM", "famille": 4, "article": "value-stream-mapping-definition-et-etapes", "texte": "Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Réduire l'attente. À retenir : le temps se perd surtout entre les postes.", "video": "stories/vsm-720.mp4", "affiche": "stories/vsm.jpg", "bulle": "stories/vsm-bulle.png"}, {"id": "smed", "nom": "SMED", "famille": 5, "article": "methode-smed-5-etapes", "texte": "Changer de série bloque la machine. Toutes les tâches commencent machine arrêtée : c'est l'interne. Celles qui peuvent se faire machine en marche passent en externe. Puis réduire l'interne. Arrêt plus court. À retenir : ce qui peut se faire machine en marche sort de l'arrêt.", "video": "stories/smed-720.mp4", "affiche": "stories/smed.jpg", "bulle": "stories/smed-bulle.png"}, {"id": "poka-yoke", "nom": "Poka-Yoke", "famille": 6, "article": null, "texte": "L'erreur arrive même aux meilleurs. La pièce est montée à l'envers. « Faire attention » ne suffit pas. Un détrompeur. Impossible à l'envers : la pièce bute. Retournée, elle est bonne du premier coup. À retenir : rendre l'erreur impossible plutôt que compter sur l'attention.", "video": "stories/poka-yoke-720.mp4", "affiche": "stories/poka-yoke.jpg", "bulle": "stories/poka-yoke-bulle.png"}]
+[{"id": "le-deck", "nom": "Le deck", "famille": 0, "article": null, "texte": "La vidéo s'ouvre et se ferme sur le Guide du deck. Des fiches à emporter partout. Six fiches s'étalent : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke. Un outil par fiche. 6 familles, une couleur chacune. À retenir : pour apprendre, consolider et transmettre, sur le terrain.", "video": "stories/le-deck-720.mp4", "affiche": "stories/le-deck.jpg", "bulle": "stories/le-deck-bulle.png"}, {"id": "5-pourquoi", "nom": "5 Pourquoi", "famille": 1, "article": "methode-5-pourquoi-cause-racine", "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 9 du deck. Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? L'opérateur a oublié : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement de gamme. À retenir : la réponse désigne une personne ? Posez un pourquoi de plus.", "video": "stories/5-pourquoi-720.mp4", "affiche": "stories/5-pourquoi.jpg", "bulle": "stories/5-pourquoi-bulle.png"}, {"id": "obeya", "nom": "Obeya", "famille": 2, "article": "obeya-salle-pilotage-visuel", "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 22 du deck. Chacun travaille sur sa version du projet. Les versions éparses rejoignent une seule salle, organisée en zones. Lu dans l'ordre. Debout, à heure fixe. Une décision écrite. Décider, pas informer. À retenir : une Obeya se mesure aux décisions prises devant elle.", "video": "stories/obeya-720.mp4", "affiche": "stories/obeya.jpg", "bulle": "stories/obeya-bulle.png"}, {"id": "pareto", "nom": "Pareto", "famille": 3, "article": "diagramme-de-pareto-methode-exemple", "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 24 du deck. Des arrêts partout. Par où commencer ? Exemple illustratif : 6 causes en vrac. Trier par poids, de la plus fréquente à la plus rare. Cumuler les parts. 3 causes sur 6 : 82 % des arrêts. Commencer par là. À retenir : quelques causes font le gros du problème. Commencez par elles.", "video": "stories/pareto-720.mp4", "affiche": "stories/pareto.jpg", "bulle": "stories/pareto-bulle.png"}, {"id": "vsm", "nom": "VSM", "famille": 4, "article": "value-stream-mapping-definition-et-etapes", "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 33 du deck. Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Réduire l'attente. À retenir : le temps se perd surtout entre les postes.", "video": "stories/vsm-720.mp4", "affiche": "stories/vsm.jpg", "bulle": "stories/vsm-bulle.png"}, {"id": "smed", "nom": "SMED", "famille": 5, "article": "methode-smed-5-etapes", "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 40 du deck. Changer de série bloque la machine. Toutes les tâches se font machine arrêtée. Interne ou externe ? Celles qui pourraient se faire machine en marche sont externes : on les sort de l'arrêt, avant ou après. Puis réduire l'interne. Arrêt plus court : plus de disponibilité. À retenir : ce qui peut se faire machine en marche sort de l'arrêt.", "video": "stories/smed-720.mp4", "affiche": "stories/smed.jpg", "bulle": "stories/smed-bulle.png"}, {"id": "poka-yoke", "nom": "Poka-Yoke", "famille": 6, "article": null, "texte": "La vidéo s'ouvre et se ferme sur la fiche n° 41 du deck. L'erreur arrive même aux meilleurs. La pièce est montée à l'envers. « Faire attention » ne suffit pas. Un détrompeur. Impossible à l'envers : la pièce bute. Seul le bon sens passe. À retenir : rendre l'erreur impossible plutôt que compter sur l'attention.", "video": "stories/poka-yoke-720.mp4", "affiche": "stories/poka-yoke.jpg", "bulle": "stories/poka-yoke-bulle.png"}]
 </script>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1050,24 +1073,62 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 
   // Barre d'achat : visible quand le bouton principal est sorti de l'écran
   const sticky = document.getElementById('stickyBuy'), addBtn = document.getElementById('addBtn');
-  new IntersectionObserver(([e]) => {
-    sticky.classList.toggle('is-on', !e.isIntersecting && e.boundingClientRect.top < 0);
-  }, { rootMargin: '-' + 80 + 'px 0px 0px 0px' }).observe(addBtn);
+  const onScroll = () => sticky.classList.toggle('is-on', addBtn.getBoundingClientRect().bottom < 80);
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  // Avis : tri par date ou par note
+  const revList = document.getElementById('revList');
+  document.getElementById('revSort').addEventListener('change', e => {
+    const v = e.target.value, items = [...revList.children];
+    items.sort((a, b) => v === 'note' ? (a.dataset.note - b.dataset.note) || b.dataset.date.localeCompare(a.dataset.date)
+      : v === 'ancien' ? a.dataset.date.localeCompare(b.dataset.date) : b.dataset.date.localeCompare(a.dataset.date));
+    items.forEach(it => revList.appendChild(it));
+  });
 
 
   // ---------- Une fiche du deck, recto verso, et le Guide du deck ----------
   const GUIDE = JSON.parse(document.getElementById('guideData').textContent);
   const FAMS = GUIDE.familles;
   const FICHES = GUIDE.fiches;
-  const ARTICLES = { '5 Pourquoi': 1, 'DMAIC': 1, 'PDCA': 1, 'VSM': 1, 'TRS': 1, 'Muda, Muri, Mura': 1, 'SMED': 1, '5S': 1 };
-  const SOON = { 'QQOQCCP': 1, 'Ishikawa': 1, 'Obeya': 1, 'Analyse de Pareto': 1, 'Takt Time': 1, 'AMDEC': 1 };
+  // Articles publiés du blog (handle Shopify), relevés le 2 octobre 2026
+  const ARTICLES = {
+    'Comprendre le lean': 'lean-manufacturing-definition-principes-outils',
+    'QQOQCCP': 'qqoqccp-methode-cadrer-un-probleme', 'Muda, Muri, Mura': 'les-muda-les-8-gaspillages-du-lean-guide-complet',
+    'Ishikawa': 'diagramme-ishikawa-6m-methode-exemple', '5 Pourquoi': 'methode-5-pourquoi-cause-racine',
+    'PDCA': 'methode-pdca-roue-de-deming-cycle', 'DMAIC': 'methode-dmaic-5-etapes', 'Les 3G': 'gemba-walk-tournee-atelier-methode',
+    '5S': 'la-methode-5s-definition-et-exemples', 'Obeya': 'obeya-salle-pilotage-visuel', 'Analyse de Pareto': 'diagramme-de-pareto-methode-exemple',
+    'VSM': 'value-stream-mapping-definition-et-etapes', 'Takt Time': 'takt-time-calcul-definition', 'TRS': 'taux-de-rendement-synthetique-definition',
+    'AMDEC': 'amdec-methode-cotation-criticite', 'SMED': 'methode-smed-5-etapes',
+  };
+  // Programmés : Management visuel le 19 octobre, Kaizen le 26 octobre
+  const SOON = { 'Management visuel': 1, 'Chantier Kaizen': 1 };
   const numOf = {}, famOf = {};
   GUIDE.besoins.forEach(b => b.outils.forEach(([o, n]) => { numOf[o] = n; famOf[o] = b.f; }));
   const flip = document.getElementById('flip'), flipBtn = document.getElementById('flipBtn');
   const tabs = document.getElementById('realTabs');
   const realNum = document.getElementById('realNum'), flipDesc = document.getElementById('flipDesc');
   const legR = document.getElementById('legendRecto'), legV = document.getElementById('legendVerso');
+  const faceR = document.getElementById('faceRecto'), faceV = document.getElementById('faceVerso');
   let curFiche = '5 Pourquoi';
+  // Repères en marge de la fiche (g = bord gauche, d = bord droit), numérotés comme la légende ;
+  // une rubrique absente de la fiche (null dans guide.json) n'a ni repère ni ligne de légende
+  function placePins(face, leg, list, qr) {
+    face.querySelectorAll('.pin').forEach(p => p.remove());
+    let k = 0;
+    [...leg.children].forEach((li, i) => {
+      const pin = list[i];
+      li.hidden = !pin;
+      if (!pin) return;
+      const sp = document.createElement('span');
+      sp.className = 'pin'; sp.setAttribute('aria-hidden', 'true');
+      sp.style.setProperty('--x', pin[0] === 'd' ? '100%' : '0%'); sp.style.setProperty('--y', pin[1] + '%');
+      sp.textContent = ++k;
+      face.appendChild(sp);
+    });
+    if (qr) { const q = document.createElement('span'); q.className = 'pin pin--qr'; q.setAttribute('aria-hidden', 'true'); q.style.setProperty('--x', '100%'); q.style.setProperty('--y', '6%'); q.textContent = 'QR'; face.appendChild(q); }
+  }
   function showFiche(name, scroll) {
     const fi = FICHES[name]; if (!fi) return;
     curFiche = name;
@@ -1075,18 +1136,24 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     flip.className = 'flip f' + f;
     document.getElementById('flipRecto').src = fi.recto;
     document.getElementById('flipVerso').src = fi.verso;
-    document.getElementById('flipRecto').alt = `Recto de la fiche ${fi.titre}`;
-    document.getElementById('flipVerso').alt = `Verso de la fiche ${fi.titre}`;
+    document.getElementById('flipRecto').alt = `Aperçu numérique du recto de la fiche ${fi.titre}`;
+    document.getElementById('flipVerso').alt = `Aperçu numérique du verso de la fiche ${fi.titre}`;
+    placePins(faceR, legR, fi.pins.recto, true);
+    placePins(faceV, legV, fi.pins.verso, false);
     setSide(false);
     realNum.textContent = `Fiche n° ${numOf[name]} · ${FAMS[f].nom}`;
     tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === name));
-    if (scroll) flip.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    if (scroll) {
+      flip.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      flipBtn.focus({ preventScroll: true });
+    }
   }
   function setSide(verso) {
     flip.classList.toggle('is-verso', verso);
     flipBtn.setAttribute('aria-pressed', String(verso));
     flipBtn.textContent = verso ? 'Revoir le recto' : 'Retourner la fiche';
     legR.hidden = verso; legV.hidden = !verso;
+    faceR.setAttribute('aria-hidden', String(verso)); faceV.setAttribute('aria-hidden', String(!verso));
     flipDesc.textContent = (verso ? 'Verso' : 'Recto') + ' de la fiche ' + FICHES[curFiche].titre;
   }
   Object.keys(FICHES).forEach(name => {
@@ -1133,7 +1200,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       ts.map(([o, n]) => {
         const lab = `${o} <span class="num">n° ${n}</span>`;
         const eye = FICHES[o] ? ` <button type="button" class="eye" data-o="${o}" aria-label="Voir la fiche ${o}, recto verso">◉</button>` : '';
-        const core = ARTICLES[o] ? `<a href="#top">${lab}</a>` : SOON[o] ? `<span class="soon">${lab}</span>` : `<span>${lab}</span>`;
+        const core = ARTICLES[o] ? `<a href="#top" data-article="${ARTICLES[o]}">${lab}</a>` : SOON[o] ? `<span class="soon">${lab}</span>` : `<span>${lab}</span>`;
         return `<li>${core}${eye}</li>`;
       }).join('') + `</ul></article>`;
   }).join('');
@@ -1193,19 +1260,28 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   const bars = document.getElementById('spBars');
   const els = id => document.getElementById(id);
   const pauseBtn = els('spPause'), playBtn = els('spPlay'), textBtn = els('spTextBtn'), textBox = els('spText');
-  let cur = 0, paused = false, raf = 0, opener = null;
+  let cur = 0, paused = false, raf = 0, opener = null, advT = 0, pausedBeforeText = false;
   bars.innerHTML = ready.map(() => '<i><b></b></i>').join('');
   const fills = [...bars.querySelectorAll('b')];
   const famNames = { 0: '40 outils du Lean', 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et gestion stratégique', 4: 'Optimisation des processus et des flux', 5: 'Efficacité de production', 6: 'Amélioration de la qualité' };
   const PAUSE_ICON = pauseBtn.innerHTML, PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 
-  function setPaused(p) {
+  function setIcon(p) {
     paused = p;
     pauseBtn.innerHTML = p ? PLAY_ICON : PAUSE_ICON;
     pauseBtn.setAttribute('aria-label', p ? 'Reprendre la lecture' : 'Mettre en pause');
-    if (p) video.pause(); else { const pr = video.play(); if (pr) pr.catch(() => { playBtn.hidden = false; }); }
+  }
+  function setPaused(p) {
+    setIcon(p);
+    if (p) { clearTimeout(advT); video.pause(); return; }
+    playBtn.hidden = true;
+    const pr = video.play();
+    // Lecture refusée par le navigateur : on revient en pause et on montre le bouton lecture.
+    // AbortError : la source a changé pendant le chargement, ce n'est pas un refus.
+    if (pr) pr.catch(e => { if (e && e.name === 'AbortError') return; setIcon(true); playBtn.hidden = false; });
   }
   function load(i) {
+    clearTimeout(advT);
     cur = i;
     const st = ready[i];
     video.src = canH264 ? st.video : st.video.replace('.mp4', '.webm'); video.poster = st.affiche;
@@ -1214,15 +1290,15 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     els('spFam').textContent = famNames[st.famille];
     els('spDesc').textContent = st.texte;
     els('spPanel').className = 'sp f' + st.famille;
-    els('spCtaText').textContent = st.famille === 0 ? 'Le deck des 40 outils, imprimé en France' : `${st.nom} fait partie des 40 fiches du deck`;
+    els('spCtaText').textContent = st.famille === 0 ? 'Le deck complet, imprimé en France' : `${st.nom} est une des fiches du deck`;
     const more = els('spMore');
     if (st.article) { more.textContent = "Lire l'article"; more.href = '#top'; }
-    else { more.textContent = 'Voir les 40'; more.href = '#outils'; }
+    else { more.textContent = 'Voir toutes les fiches'; more.href = '#outils'; }
     fills.forEach((f, j) => { f.style.width = j < i ? '100%' : '0%'; });
     els('spPrev').disabled = i === 0;
     els('spNext').disabled = i === ready.length - 1;
     playBtn.hidden = true;
-    textBox.hidden = true; textBtn.setAttribute('aria-pressed', 'false');
+    textBox.hidden = true; textBtn.setAttribute('aria-pressed', 'false'); pausedBeforeText = false;
     markSeen(st.id);
     if (reduce) { setPaused(true); playBtn.hidden = false; } else setPaused(false);
   }
@@ -1231,6 +1307,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     raf = requestAnimationFrame(tick);
   }
   function go(d) {
+    clearTimeout(advT);
     const n = cur + d;
     if (n < 0) { video.currentTime = 0; return; }
     if (n >= ready.length) { close(); return; }
@@ -1238,23 +1315,32 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
   }
   function open(i) {
     opener = document.activeElement;
+    clearTimeout(advT);
     dlg.showModal();
     load(i);
     cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
     pauseBtn.focus();
   }
   function close() { if (dlg.open) dlg.close(); }
-  dlg.addEventListener('close', () => { video.pause(); video.removeAttribute('src'); video.load(); cancelAnimationFrame(raf); if (opener) opener.focus(); });
-  video.addEventListener('ended', () => { fills[cur].style.width = '100%'; if (!reduce) go(1); else playBtn.hidden = false; });
+  dlg.addEventListener('close', () => { clearTimeout(advT); video.pause(); video.removeAttribute('src'); video.load(); cancelAnimationFrame(raf); if (opener) opener.focus({ preventScroll: true }); });
+  // Fin de story : la dernière image (la fiche et son numéro) reste 1,2 s avant la suivante
+  video.addEventListener('ended', () => {
+    fills[cur].style.width = '100%';
+    if (reduce) { setPaused(true); playBtn.hidden = false; return; }
+    clearTimeout(advT);
+    advT = setTimeout(() => { if (dlg.open && !paused) go(1); }, 1200);
+  });
   els('spClose').addEventListener('click', close);
   els('spPrev').addEventListener('click', () => go(-1));
   els('spNext').addEventListener('click', () => go(1));
   pauseBtn.addEventListener('click', () => setPaused(!paused));
   playBtn.addEventListener('click', () => { playBtn.hidden = true; if (video.ended) video.currentTime = 0; setPaused(false); });
+  // Le texte met la vidéo en pause ; le refermer rend l'état d'avant
   textBtn.addEventListener('click', () => {
     const on = textBox.hidden;
     textBox.hidden = !on; textBtn.setAttribute('aria-pressed', String(on));
-    setPaused(on);
+    if (on) { pausedBeforeText = paused; setPaused(true); }
+    else if (!pausedBeforeText) setPaused(false);
   });
   els('spAdd').addEventListener('click', () => { add(1); close(); });
   // Pause quand l'onglet passe en arrière-plan ; reprise au retour si la lecture n'était pas en pause

@@ -47,7 +47,7 @@ Story.scene({
     S.c2 = cap('« Faire attention »', 'note');
     S.c3 = cap('Un détrompeur', 'ok');
     S.c4 = cap('Impossible à l’envers', 'ko');
-    S.c5 = cap('Bonne du premier coup', 'ok');
+    S.c5 = cap('Seul le bon sens passe', 'ok');
   },
 
   anim(t, S, A) {
@@ -76,8 +76,8 @@ Story.scene({
     show(S.c1, t, 3.95, { dur: 0.35, from: 'up', d: 20, out: 5.2 });
     show(S.c2, t, 5.5, { dur: 0.35, from: 'up', d: 20, out: 6.75 });
     stroke(S.noteStrike, t, 6.15, 0.35);
-    show(S.c3, t, 6.95, { dur: 0.35, from: 'up', d: 20, out: 7.95, outDur: 0.3 });
-    show(S.c4, t, 8.3, { dur: 0.35, from: 'up', d: 20, out: 9.75 });
+    show(S.c3, t, 6.95, { dur: 0.35, from: 'up', d: 20, out: 8.4, outDur: 0.15 });
+    show(S.c4, t, 8.55, { dur: 0.35, from: 'up', d: 20, out: 9.75 });
     show(S.c5, t, 10.15, { dur: 0.4, from: 'pop', cx: 540, cy: 714 });
   },
 });

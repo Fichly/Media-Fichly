@@ -13,6 +13,8 @@
     { "f": 0, "je": "connaître l'histoire & les principes du Lean", "outils": [["Comprendre le lean", 2]] },
     { "f": 0, "je": "identifier les compétences clés de chaque ceinture", "outils": [["Parcours de ceintures", 3]] },
     { "f": 0, "je": "comprendre les bases du Six Sigma", "outils": [["Six Sigma", 3]] },
+    { "f": 0, "je": "continuer à me former aux principes du Lean", "outils": [["Envie d'aller plus loin ?", 46]] },
+    { "f": 0, "je": "accéder aux templates", "outils": [["Templates", 46]] },
     { "f": 1, "je": "recueillir et traduire la voix du client", "outils": [["VOC", 4]] },
     { "f": 1, "je": "caractériser / définir un problème", "outils": [["QQOQCCP", 5]] },
     { "f": 1, "je": "identifier et éliminer les gaspillages dans les processus", "outils": [["VA, NVA, NVAO", 6], ["Muda, Muri, Mura", 7]] },
@@ -45,13 +47,13 @@
     { "f": 6, "je": "standardiser un processus pour assurer sa maîtrise", "outils": [["TWI", 45]] }
   ],
   "fiches": {
-    "5 Pourquoi": { "recto": "fiches/page-023.jpg", "verso": "fiches/page-024.jpg", "titre": "Les 5 pourquoi ?" },
-    "Obeya": { "recto": "fiches/page-049.jpg", "verso": "fiches/page-050.jpg", "titre": "Obeya" },
-    "Analyse de Pareto": { "recto": "fiches/page-053.jpg", "verso": "fiches/page-054.jpg", "titre": "Pareto (80/20)" },
-    "VSM": { "recto": "fiches/page-071.jpg", "verso": "fiches/page-072.jpg", "titre": "Value Stream Mapping (VSM)" },
-    "SMED": { "recto": "fiches/page-085.jpg", "verso": "fiches/page-086.jpg", "titre": "SMED" },
-    "Poka-Yoke": { "recto": "fiches/page-087.jpg", "verso": "fiches/page-088.jpg", "titre": "Poka Yoke" },
-    "DMAIC": { "recto": "fiches/page-033.jpg", "verso": "fiches/page-034.jpg", "titre": "DMAIC" },
-    "5S": { "recto": "fiches/page-043.jpg", "verso": "fiches/page-044.jpg", "titre": "5S" }
+    "5 Pourquoi": { "recto": "fiches/page-023.jpg", "verso": "fiches/page-024.jpg", "titre": "Les 5 pourquoi ?", "pins": { "recto": [["g", 13.5], ["g", 23], ["g", 47.5], ["d", 47.5], ["g", 73.5], ["g", 89]], "verso": [["g", 12], ["g", 30], ["g", 82]] } },
+    "Obeya": { "recto": "fiches/page-049.jpg", "verso": "fiches/page-050.jpg", "titre": "Obeya", "pins": { "recto": [["g", 13.5], ["g", 27], ["g", 40], ["d", 40], ["g", 69], ["g", 86]], "verso": [["g", 13.5], ["g", 30], ["g", 77]] } },
+    "Analyse de Pareto": { "recto": "fiches/page-053.jpg", "verso": "fiches/page-054.jpg", "titre": "Pareto (80/20)", "pins": { "recto": [["g", 13.5], ["g", 27], ["g", 46], ["d", 46], ["g", 72.5], ["g", 88]], "verso": [["g", 12.5], ["g", 30], ["g", 79]] } },
+    "VSM": { "recto": "fiches/page-071.jpg", "verso": "fiches/page-072.jpg", "titre": "Value Stream Mapping (VSM)", "pins": { "recto": [["g", 13.5], ["g", 21], ["g", 61.5], ["d", 61.5], null, ["g", 89]], "verso": [["g", 11], ["g", 30], null] } },
+    "SMED": { "recto": "fiches/page-085.jpg", "verso": "fiches/page-086.jpg", "titre": "SMED", "pins": { "recto": [["g", 12], ["g", 30], ["g", 50.5], ["d", 50.5], ["g", 76.5], ["g", 89.5]], "verso": [["g", 11.5], ["g", 30], ["g", 80.5]] } },
+    "Poka-Yoke": { "recto": "fiches/page-087.jpg", "verso": "fiches/page-088.jpg", "titre": "Poka Yoke", "pins": { "recto": [["g", 11.5], ["g", 27], ["g", 42], ["d", 42], ["g", 67], ["g", 89.5]], "verso": [["g", 12], ["g", 30], ["g", 72]] } },
+    "DMAIC": { "recto": "fiches/page-033.jpg", "verso": "fiches/page-034.jpg", "titre": "DMAIC", "pins": { "recto": [["g", 12], ["g", 27], ["g", 42.5], ["d", 42.5], ["g", 68], ["g", 88.5]], "verso": [["g", 11], ["g", 30], ["g", 80.5]] } },
+    "5S": { "recto": "fiches/page-043.jpg", "verso": "fiches/page-044.jpg", "titre": "5S", "pins": { "recto": [["g", 11.5], ["g", 30], ["g", 47.5], ["d", 47.5], ["g", 75], ["g", 88.5]], "verso": [["g", 11], ["g", 30], ["g", 78.5]] } }
   }
 }

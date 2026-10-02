@@ -55,7 +55,7 @@ Story.scene({
       [cap('6 causes en vrac'), 3.2, 4.65],
       [cap('Trier par poids'), 4.8, 6.25],
       [cap('Cumuler les parts'), 6.4, 7.95],
-      [cap('', [['3 causes : ', C.ink], ['82 %', C.indigo]]), 8.1, 9.65],
+      [cap('', [['3 causes sur 6 : ', C.ink], ['82 %', C.indigo]]), 8.1, 9.65],
       [cap('Commencer par là'), 9.8, null],
     ];
   },

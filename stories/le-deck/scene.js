@@ -36,8 +36,7 @@ Story.scene({
     // Compteur
     S.count = el('g', {}, root);
     const cy = y0 + 2 * CH + GY + 120;
-    S.num = text(S.count, 540 - 24, cy, '0', { size: 132, weight: 700, fill: C.indigo, anchor: 'end' });
-    text(S.count, 540, cy, 'fiches', { size: 64, weight: 600, fill: C.ink });
+    text(S.count, 540, cy, 'Un outil par fiche', { size: 64, weight: 700, fill: C.indigo, anchor: 'middle' });
     S.fams = el('g', {}, root);
     const fy = cy + 0;
     S.famDots = [];
@@ -54,9 +53,8 @@ Story.scene({
       const s = 0.92 + 0.08 * p;
       c.g.setAttribute('transform', `translate(${dx.toFixed(2)} ${dy.toFixed(2)}) rotate(${r.toFixed(2)} ${c.cx} ${c.cy}) translate(${c.cx} ${c.cy}) scale(${s.toFixed(3)}) translate(${-c.cx} ${-c.cy})`);
     });
-    // 0 → 40 fiches, puis « 6 familles, une couleur chacune » remplace la ligne
+    // « Un outil par fiche », puis « 6 familles, une couleur chacune » (sans compter les fiches : 40 ou 42 à confirmer)
     show(S.count, t, 6.6, { dur: 0.45, from: 'up', out: 9.4 });
-    count(S.num, t, 6.7, 1.6, 0, 40);
     S.famLabel.textContent = '6 familles, une couleur chacune';
     show(S.fams, t, 9.75, { dur: 0.45, from: 'up' });
   },
