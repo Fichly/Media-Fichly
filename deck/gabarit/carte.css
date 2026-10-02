@@ -1,0 +1,175 @@
+/* Gabarit commun des cartes du deck « Les outils du lean » (A5 recto-verso, 148 × 210 mm).
+   Une carte = index.html (texte) + fiche.js (illustrations propres à l'outil).
+   Ce fichier porte tout ce qui est commun : polices, couleurs, grille, en-tête, rubriques, pied.
+   La famille se règle par data-famille sur <body>, le niveau par data-niveau. */
+
+@font-face{font-family:Poppins;font-weight:500;src:url(../assets/fonts/poppins-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:600;src:url(../assets/fonts/poppins-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:700;src:url(../assets/fonts/poppins-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:800;src:url(../assets/fonts/poppins-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:400;src:url(../assets/fonts/montserrat-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:500;src:url(../assets/fonts/montserrat-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:700;src:url(../assets/fonts/montserrat-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:400;font-style:italic;src:url(../assets/fonts/montserrat-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:600;font-style:italic;src:url(../assets/fonts/montserrat-latin-600-italic.woff2) format("woff2")}
+@font-face{font-family:Caveat;font-weight:500;src:url(../assets/fonts/caveat-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Caveat;font-weight:600;src:url(../assets/fonts/caveat-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:Caveat;font-weight:700;src:url(../assets/fonts/caveat-latin-700-normal.woff2) format("woff2")}
+
+/* ---------- Couleurs : marque, 6 familles, niveaux ---------- */
+:root{
+  --indigo:#3C4499;          /* ancre de marque */
+  --encre:#231F20;
+  --marine:#23235A;
+  --gris:#4D4A63;
+  --papier:#FFFCF3;
+  --c-resolution:#E5B837;    /* frise, dans cet ordre */
+  --c-engagement:#74BEBF;
+  --c-planification:#8BC878;
+  --c-optimisation:#F16969;
+  --c-efficacite:#AB75B1;
+  --c-qualite:#73A3D4;
+  --ceinture-white:#FFFFFF;
+  --ceinture-yellow:#F4C430;
+  --ceinture-green:#5DAE4B;
+
+  /* grille : marge latérale, gouttière, colonne principale du recto, rail du verso */
+  --mx:28px;                 /* 7,4 mm */
+  --gout:16px;
+  --col:286px;               /* recto : colonne gauche (schéma, définition, exemple) */
+  --rail:25mm;               /* verso : rail des numéros, vignettes et pictos */
+  --bas-corps:68px;          /* réserve pour le pied */
+  --frise:4mm;
+}
+[data-famille=resolution]   {--famille:var(--c-resolution);   --famille-doux:#FBF4E1;--famille-teinte:#F3DB92}
+[data-famille=engagement]   {--famille:var(--c-engagement);   --famille-doux:#EAF6F6;--famille-teinte:#B9DFDF}
+[data-famille=planification]{--famille:var(--c-planification);--famille-doux:#EEF7EA;--famille-teinte:#C5E4BB}
+[data-famille=optimisation] {--famille:var(--c-optimisation); --famille-doux:#FCE8E9;--famille-teinte:#F8B4B4}
+[data-famille=efficacite]   {--famille:var(--c-efficacite);   --famille-doux:#F1EAF2;--famille-teinte:#D5BAD8}
+[data-famille=qualite]      {--famille:var(--c-qualite);      --famille-doux:#EAF1FA;--famille-teinte:#B9D1EA}
+body{--sur-famille:var(--encre)}   /* texte posé sur la couleur de famille : toujours à l'encre */
+[data-niveau=white] {--ceinture:var(--ceinture-white)}
+[data-niveau=yellow]{--ceinture:var(--ceinture-yellow)}
+[data-niveau=green] {--ceinture:var(--ceinture-green)}
+
+/* ---------- Page ---------- */
+@page{size:148mm 210mm;margin:0}
+html,body{margin:0;padding:0;background:#d9d6cf}
+body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+*{box-sizing:border-box}
+.face{width:148mm;height:210mm;position:relative;overflow:hidden;break-after:page;page-break-after:always;
+  display:flex;flex-direction:column;
+  background:var(--famille-doux);color:var(--encre);font:400 11.5px/1.28 Montserrat,sans-serif;
+  text-rendering:geometricPrecision;font-variant-ligatures:none;hyphens:manual}
+.face:last-of-type{break-after:auto;page-break-after:auto}
+/* à l'écran, un écart entre les faces : le haut du verso tombe sur un pixel entier (800 px) */
+@media screen{.face{margin-bottom:calc(800px - 210mm)}}
+p{margin:0}
+b,strong{font-weight:700}
+
+/* calques : fond, bandeau, frise et grain (data-bleed), puis dessins, puis texte */
+.bandeau{position:absolute;left:0;top:0;width:100%;height:var(--bandeau,150px);background:var(--famille)}
+.frise{position:absolute;left:0;right:0;bottom:0;height:var(--frise);display:flex}
+.frise i{flex:1}
+/* grain papier discret, sous les dessins et le texte : il ne touche ni le QR ni les lettres */
+.papier{position:absolute;inset:0;background:url(../assets/paper.png) center/cover;mix-blend-mode:multiply;opacity:.3;pointer-events:none}
+.deco{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+
+/* ---------- En-tête ---------- */
+.entete{position:relative;flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--gout);
+  padding:20px var(--mx) 10px}
+.entete-g{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.entete-d{display:flex;flex-direction:column;align-items:flex-end}
+.ligne-logo{display:flex;align-items:flex-end;gap:14px;min-width:0}
+.logo{flex:none;width:92px;height:46px}           /* 24,3 mm, identique au recto et au verso */
+.logo svg{display:block;width:100%;height:100%}
+.surtitre{display:block;margin:0 0 4px;
+  padding-left:14px;border-left:1.5px solid currentColor;
+  font:600 11.5px/1.25 Poppins;letter-spacing:.07em;text-transform:uppercase;color:var(--sur-famille)}
+.surtitre .no{font-weight:800;margin-right:.55em}
+.titre{position:relative;margin:0;padding:.07em .31em .15em;font:800 42px/1 Poppins;letter-spacing:-.01em;color:#fff;
+  max-width:100%;white-space:nowrap}
+.titre.deux-lignes{white-space:normal;line-height:1.04}
+.titre span{position:relative}
+.titre svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.meta{display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;row-gap:4px}
+.sous-titre{font:600 12.5px/1.2 Poppins;color:var(--sur-famille);letter-spacing:.01em}
+.niveau{position:relative;display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 8px;font:700 12px/1.2 Poppins;color:var(--encre);white-space:nowrap}
+.niveau svg.fond{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.niveau .ceinture{position:relative;width:30px;height:17px;overflow:visible}
+.niveau small{position:relative;font:600 10px/1 Poppins;letter-spacing:.08em;text-transform:uppercase;color:var(--marine)}
+.niveau span{position:relative}
+.qr{width:84px;height:84px;padding:9px;background:#fff;border-radius:8px}  /* 22,2 mm, code 17,5 mm, marge 4,5 modules */
+.qr img{display:block;width:66px;height:66px}
+.qr-legende{margin-top:7px;font:700 16px/1 Caveat;color:var(--sur-famille);white-space:nowrap}
+.verso .entete{grid-template-columns:minmax(0,1fr)}
+.verso .entete-g{align-items:stretch}
+.verso .ligne-logo{align-self:flex-start}
+.verso .ligne-titre{display:flex;align-items:center;flex-wrap:wrap;column-gap:14px;row-gap:4px}
+.verso .ligne-titre .niveau{margin-left:auto}
+.verso .titre{font-size:30px}
+
+/* ---------- Corps ---------- */
+.corps{position:relative;flex:1 1 auto;min-height:0;margin:11px var(--mx) var(--bas-corps);
+  display:flex;flex-direction:column;justify-content:space-between}
+.corps>*{flex-shrink:0}
+.grille{display:grid;grid-template-columns:var(--col) minmax(0,1fr);column-gap:var(--gout)}
+.h{font:700 13px/1.2 Poppins;color:var(--indigo);margin:0 0 6px;width:fit-content;position:relative}
+.h2{font:800 17px/1.15 Poppins;color:var(--indigo);margin:0;width:fit-content;position:relative}
+.filet{display:block;width:100%;height:6px;overflow:visible}
+.surligne{position:relative}
+
+/* « Je souhaite… » */
+.besoin{position:relative;margin:0;padding-left:36px;text-wrap:balance;font:600 15px/1.3 Poppins;color:var(--marine);letter-spacing:-.005em}
+.besoin .je{color:var(--indigo)}
+.besoin svg{position:absolute;left:-1px;top:-3px;width:30px;height:27px;overflow:visible}
+
+/* listes à puce dessinée : la puce occupe 22 px, le texte démarre au même x partout */
+.liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.liste li{position:relative;padding-left:24px}
+.liste li>svg{position:absolute;left:0;top:0;width:18px;height:18px;overflow:visible}
+
+/* renvoi vers une autre carte : nom à l'encre marine (lisible), trait de marqueur et pastille ronde
+   dans la couleur pure de la famille citée (--c) */
+.renvoi{font-weight:700;color:var(--marine);white-space:nowrap}
+.pastille{display:inline-block;width:15px;height:15px;margin:0 1px 0 3px;border-radius:50%;background:var(--c);
+  font:700 10px/15px Poppins;letter-spacing:-.04em;text-indent:-.04em;color:var(--encre);text-align:center;vertical-align:1px}
+
+/* ---------- Verso : étapes (3 à 8), vignettes facultatives ---------- */
+.etapes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--ecart-etapes,9px)}
+.etape{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);column-gap:var(--gout)}
+.rail{position:relative}
+.tete-etape{display:flex;align-items:center;gap:5px;height:34px;margin-top:-2px}
+.rail .num{flex:none;width:33px;height:35px;overflow:visible}
+.rail .vignette{display:block;margin-top:2px;width:100%;height:auto;overflow:visible}
+.etape h3{margin:0;font:700 14px/1.1 Poppins;color:var(--encre)}
+.etape h3 span{display:block;font:500 11.5px/1.25 Poppins;color:var(--gris)}
+.etapes.compact .tete-etape{height:28px}
+.etapes.compact .rail .num{width:27px;height:29px}
+.ex{margin-top:3px;font:italic 400 10.6px/1.34 Montserrat;color:var(--marine)}
+.ex .tag{font:700 15px/1 Caveat;font-style:normal;color:var(--indigo)}
+.ex em{font-weight:600}
+.ex.pda{display:grid;grid-template-columns:auto 1fr;column-gap:6px}
+.pratiques{display:flex;flex-direction:column;gap:7px}
+.pratique{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);column-gap:var(--gout)}
+.pratique>svg{justify-self:end;width:40px;height:30px;overflow:visible}
+
+/* ---------- Pied de page ---------- */
+.pied{position:absolute;left:var(--mx);right:var(--mx);bottom:21px;height:40px}
+.pied svg{position:absolute;left:0;top:0;width:100%;height:24px;overflow:visible}
+.pied .famille,.pied .outil{position:absolute;top:3px;font:600 11.5px/16px Poppins}
+.pied .famille{left:0;color:var(--marine)}
+.pied .outil{right:0;font-weight:700;color:var(--indigo)}
+.pied .no{position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;font:800 11.5px/22px Poppins;text-align:center;color:var(--sur-famille)}
+.pied .copy{position:absolute;left:0;right:0;bottom:0;text-align:center;font:500 10px/1 Montserrat;color:var(--gris)}
+
+/* ---------- Version imprimeur : 154 × 216 mm, fond perdu 3 mm, traits de coupe ---------- */
+.imprimeur{--fp:3mm}
+.imprimeur .planche{width:calc(148mm + 2 * var(--fp) + 12mm);height:calc(210mm + 2 * var(--fp) + 12mm);position:relative;break-after:page;background:#fff}
+.imprimeur .planche:last-of-type{break-after:auto}
+.imprimeur .face{position:absolute;left:calc(6mm + var(--fp));top:calc(6mm + var(--fp));overflow:visible;margin:0;break-after:auto;
+  box-shadow:0 0 0 var(--fp) var(--famille-doux)}
+.imprimeur .bandeau{left:calc(-1 * var(--fp));top:calc(-1 * var(--fp));width:calc(100% + 2 * var(--fp));height:calc(var(--bandeau) + var(--fp))}
+.imprimeur .frise{left:calc(-1 * var(--fp));right:calc(-1 * var(--fp));bottom:calc(-1 * var(--fp));height:calc(var(--frise) + var(--fp))}
+.imprimeur .papier{inset:calc(-1 * var(--fp))}
+.imprimeur .reperes{position:absolute;inset:0;width:100%;height:100%}
