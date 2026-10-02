@@ -14,12 +14,12 @@ start(() => {
     el('path', {d: 'M ' + pts.map(q => q.join(' ')).join(' L '), stroke: C.yellow, 'stroke-width': 6, fill: 'none', 'stroke-linejoin': 'round'});
     pts.forEach(([a, b]) => el('circle', {cx: a, cy: b, r: 9, fill: C.white, stroke: C.yellow, 'stroke-width': 5}));
   });
-  // 5 Pourquoi : un escalier de briques jusqu'à la cause
+  // 5 Pourquoi : cinq briques « ? » en escalier, puis la brique verte de la cause
   card(1, 0, '5 Pourquoi', (x, y) => {
-    const bw = 84, bh = 60;
-    for (let k = 0; k < 5; k++) { const cx = x + CW / 2 - 180 + k * 90, cy = y + 80 + k * 32;
-      if (k < 4) brick(cx, cy, bw, bh, C.blue, '?', {size: 46});
-      else { brick(cx, cy, bw, bh, C.green); el('path', {d: `M ${cx - 16} ${cy + 1} L ${cx - 5} ${cy + 12} L ${cx + 17} ${cy - 10}`, fill: 'none', stroke: C.white, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}) } }
+    const bw = 70, bh = 54, sp = 80;
+    for (let k = 0; k < 6; k++) { const cx = x + CW / 2 - 2.5 * sp + k * sp, cy = y + 74 + k * 27;
+      if (k < 5) brick(cx, cy, bw, bh, C.blue, '?', {size: 48});
+      else { brick(cx, cy, bw, bh, C.green); el('path', {d: `M ${cx - 15} ${cy + 1} L ${cx - 5} ${cy + 11} L ${cx + 16} ${cy - 9}`, fill: 'none', stroke: C.white, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}) } }
   });
   // Ishikawa : l'arête centrale, six arêtes de causes, la tête = le problème
   card(0, 1, 'Ishikawa', (x, y) => {
@@ -32,12 +32,10 @@ start(() => {
       [-1, 1].forEach(s => { el('path', {d: `M ${bx} ${my + s * 88} L ${bx + 54} ${my}`, stroke: C.stitch, 'stroke-width': 7, 'stroke-linecap': 'round'});
         el('circle', {cx: bx, cy: my + s * 88, r: 12, fill: C.lblue}) }) });
   });
-  // DMAIC : cinq étapes en boucle
+  // DMAIC : cinq étapes à la suite (D, M, A, I, C)
   card(1, 1, 'DMAIC', (x, y) => {
-    const L = ['D', 'M', 'A', 'I', 'C'], r = 38, sp = 92, x0 = x + CW / 2 - 2 * sp, cy = y + 104;
-    el('path', {d: `M ${x0 + 4 * sp} ${cy + r + 8} Q ${x0 + 4 * sp} ${cy + 104} ${x0 + 2 * sp} ${cy + 104} Q ${x0} ${cy + 104} ${x0} ${cy + r + 14}`, stroke: C.stitch, 'stroke-width': 6, fill: 'none', 'stroke-dasharray': '13 9', 'stroke-linecap': 'round'});
-    el('path', {d: `M ${x0 - 14} ${cy + r + 30} L ${x0} ${cy + r + 12} L ${x0 + 14} ${cy + r + 30}`, stroke: C.stitch, 'stroke-width': 6, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'});
+    const L = ['D', 'M', 'A', 'I', 'C'], r = 40, sp = 96, x0 = x + CW / 2 - 2 * sp, cy = y + 128;
     L.forEach((l, k) => { if (k) el('path', {d: `M ${x0 + (k - 1) * sp + r} ${cy} H ${x0 + k * sp - r}`, stroke: C.blue, 'stroke-width': 6});
-      el('circle', {cx: x0 + k * sp, cy, r, fill: k === 4 ? C.ink : C.blue}); tx(S, x0 + k * sp, cy + 16, l, {size: 44, weight: 800, fill: C.white, anchor: 'middle'}) });
+      el('circle', {cx: x0 + k * sp, cy, r, fill: k === 4 ? C.ink : C.blue}); tx(S, x0 + k * sp, cy + 17, l, {size: 48, weight: 800, fill: C.white, anchor: 'middle'}) });
   });
 });

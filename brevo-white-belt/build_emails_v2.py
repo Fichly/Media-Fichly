@@ -38,8 +38,17 @@ ASSETS = HERE.parent / "assets"
 
 IMAGES = {k: str(VIS / f"{k}.png") for k in KEYS}
 IMAGES["avatar"] = str(VIS / "avatar-hugo.png")
-# URL de la galerie Brevo, à renseigner après l'import des PNG (mêmes clés que IMAGES).
+# Logo d'en-tête en 2× (192 × 110, affiché à 96 × 55) sur pastille opaque #F2F2F0 aux coins arrondis :
+# invisible sur le papier en mode clair, lisible quand un client assombrit le fond sans toucher aux images.
+IMAGES["logo"] = str(VIS / "logo-fichly.png")
+# URL de la galerie Brevo, à renseigner après l'import des PNG (mêmes clés que IMAGES : 8 illustrations, avatar, logo).
 IMAGES_BREVO = {}
+
+def png_size(key):
+    """Taille du PNG local (largeur, hauteur) : sert aux attributs width/height des balises img."""
+    from PIL import Image
+    with Image.open(IMAGES[key]) as im:
+        return im.size
 
 # ---------------------------------------------------------------- upsell (textes validés, mot pour mot)
 UPSELL_LABEL = "Pour aller plus loin"
@@ -83,15 +92,21 @@ SERIES_ACCENT = ["e1", "e2", "e3", "e4"]
 # ---------------------------------------------------------------- typographie
 GROUPS = ["White Belt", "Green Belt", "Mon Compte Formation", "Gemba Walk", "Lean flash"]
 
+NOWRAP = '<span style="white-space:nowrap;">'
+
 def fr(t):
-    """Espaces insécables françaises (build_emails.fr) + chiffre lié au mot qui suit, hors balises."""
+    """Espaces insécables françaises (build_emails.fr) + chiffre lié au mot qui suit, hors balises.
+    Les mots composés à trait d'union (celle-ci, ci-dessous, a-t-elle, Montre-moi…) ne se coupent plus au trait d'union."""
     parts = re.split(r"(<[^>]+>)", ce.fr(t))
     for i, x in enumerate(parts):
         if not x.startswith("<"):
             x = x.replace("Le Lean en 1 page", "Le&nbsp;Lean&nbsp;en&nbsp;1&nbsp;page")
             for name in GROUPS:
                 x = x.replace(name, name.replace(" ", "&nbsp;"))
-            parts[i] = re.sub(r"(?<=\d) (?=[^\s\d])", "&nbsp;", x)
+            x = re.sub(r"(?<=\d) (?=[^\s\d])", "&nbsp;", x)
+            if not (i and parts[i - 1] == NOWRAP):          # déjà protégé (fr appliqué deux fois)
+                x = re.sub(r"(?<![\w&#])(\w+(?:-\w+)+)(?![\w;])", NOWRAP + r"\1</span>", x)
+            parts[i] = x
     return "".join(parts)
 
 def nowidow(t):
@@ -216,7 +231,7 @@ def steps_v2(items, marks=None):
     out = []
     for i, it in enumerate(items):
         if i:
-            out.append(f'<tr><td colspan="2" style="padding:12px 0 12px 56px;"><div style="border-top:1px dashed {STITCH};font-size:0;line-height:0;height:0;">&nbsp;</div></td></tr>')
+            out.append(f'<tr><td colspan="2" style="padding:12px 0 12px 56px;">{rule(1)}</td></tr>')
         txt = mark(it, marks[i]) if i in marks else it
         out.append(f'<tr><td width="42" valign="top" style="width:42px;">{brick(i + 1)}</td>'
                    f'<td valign="top" style="padding:10px 0 0 14px;{font(16, 24, 500, INK)}">{fr(txt)}</td></tr>')
@@ -229,13 +244,14 @@ def tool_rows(items):
         m = re.match(r"<b>(.+?)</b>,\s*(.+)$", it)
         name, cond = m.group(1), m.group(2)
         if i:
-            out.append(f'<tr><td colspan="2" style="padding:12px 0;"><div style="border-top:1px dashed {STITCH};font-size:0;line-height:0;height:0;">&nbsp;</div></td></tr>')
+            out.append(f'<tr><td colspan="2" style="padding:12px 0;">{rule(1)}</td></tr>')
         out.append(f'<tr><td class="stk" width="112" valign="top" style="width:112px;">{brick_wide(name, BLUE, "#FFFFFF", 112)}</td>'
                    f'<td class="stk stk-t" valign="top" style="padding:7px 0 0 14px;{font(16, 24, 500, INK)}">{fr(cond)}</td></tr>')
     return TW + "".join(out) + "</table>"
 
-def brick_wide(label, bg, color, w=None, border=None, size=13, lh=15):
+def brick_wide(label, bg, color, w=None, border=None, size=13, lh=15, cls=""):
     """Brique large (fil de la série, noms d'outils)."""
+    c = f' class="{cls}"' if cls else ""
     bd = f"border:2px {border[0]} {border[1]};" if border else ""
     sbg = border[1] if border else bg
     stud = (f'<td width="12" height="6" bgcolor="{sbg}" style="width:12px;height:6px;background-color:{sbg};border-radius:3px 3px 0 0;'
@@ -245,21 +261,22 @@ def brick_wide(label, bg, color, w=None, border=None, size=13, lh=15):
     wa = f'width="{w}" style="width:{w}px;"' if w else 'width="100%"'
     h = 34 - (4 if border else 0)
     return (f'{T(wa)}<tr>{side}{stud}{gap}{stud}{side}</tr>'
-            f'<tr><td colspan="5" height="{h}" align="center" valign="middle" bgcolor="{bg}" style="height:{h}px;background-color:{bg};{bd}border-radius:9px;'
-            f'{font(size, lh, 700, color)}padding:0 3px;">{fr(label)}</td></tr></table>')
+            f'<tr><td{c} colspan="5" height="{h}" align="center" valign="middle" bgcolor="{bg}" style="height:{h}px;background-color:{bg};{bd}border-radius:9px;'
+            f'{font(size, lh, 700, color)}{"letter-spacing:-0.2px;padding:0 1px;" if cls == "rl" else "padding:0 3px;"}">{fr(label)}</td></tr></table>')
 
 def series(current=None):
     """Fil de la série : Outil 1 · Outil 2 · Outil 3 · Et après ?, chaque brique dans la couleur de son envoi.
-    current=None : aperçu (E0). Sinon : fait = vert + coche, en cours = teinte + contour d'accent, à venir = pointillés."""
+    current=None : aperçu (E0). Sinon : déjà envoyé = vert plein (sans coche : le fil suit les envois, pas ce que le lecteur a fait),
+    en cours = teinte + contour d'accent, à venir = pointillés. Libellés en 11 px sur mobile (classe rl) : « Et après ? » tient sur une ligne."""
     cells = []
     for i, lab in enumerate(SERIES):
         acc, tint = ACCENT[SERIES_ACCENT[i]]
         label = "Et après&nbsp;?" if lab == "Et après ?" else lab.replace(" ", "&nbsp;")
-        kw = dict(size=12, lh=14)
+        kw = dict(size=12, lh=14, cls="rl")
         if current is None:
             b = brick_wide(label, tint, INK, border=("solid", acc), **kw)
         elif i < current:
-            b = brick_wide("&#10003;&nbsp;" + label, GREEN, INK, **kw)
+            b = brick_wide(label, GREEN, INK, **kw)
         elif i == current:
             b = brick_wide(label, tint, INK, border=("solid", acc), **kw)
         else:
@@ -279,8 +296,12 @@ def quote_left(label, text):
             f'<p style="margin:0 0 6px 0;{font(12, 16, 700, PGT, "letter-spacing:0.6px;word-spacing:2px;text-transform:uppercase;")}">{fr(label)}</p>'
             f'<p style="margin:0;{font(16, 26, 500, INK)}">{fr(nowidow(text))}</p></td></tr></table>')
 
+def rule(w=2, color=STITCH):
+    """Filet pointillé en cellule de tableau (Outlook ignore height:0 et font-size:0 sur un div et ajoute de l'espace)."""
+    return (f'{TW}<tr><td style="border-top:{w}px dashed {color};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table>')
+
 def stitch():
-    return f'<div style="border-top:2px dashed {STITCH};font-size:0;line-height:0;height:0;mso-line-height-rule:exactly;">&nbsp;</div>'
+    return rule(2)
 
 def vml_width(label, per_char, base):
     return min(520, int(round((len(html.unescape(label)) + 2) * per_char + base)))
@@ -297,22 +318,27 @@ def cta(label, url):
             f'border-bottom:4px solid {INK};border-radius:14px;padding:16px 30px 14px 30px;{font(17, 22, 700, "#FFFFFF")}text-decoration:none;">'
             f'{fr(label)}&nbsp;&#8594;</a><!--<![endif]--></td></tr></table>')
 
-def cta2(label, url):
-    """Bouton secondaire : contour bleu 2 px porté par le lien (pas de double cadre sous Outlook)."""
-    u, w = esc(url), vml_width(label, 8, 50)
-    return (f'{TB}<tr><td align="center" style="border-radius:14px;">'
+def cta2(label, url, cls="btn", size=15, lh=22, pad="12px 22px", h=50, radius=14):
+    """Bouton secondaire : contour bleu 2 px porté par le lien (pas de double cadre sous Outlook).
+    Upsell : cls="btn2", plus petit (14 px, 44 px de haut) pour rester sous les boutons contour du corps."""
+    u, w = esc(url), vml_width(label, size - 7, 50)
+    arc = int(round(100 * radius / h))
+    tb = T(f'class="{cls}"')
+    return (f'{tb}<tr><td align="center" style="border-radius:{radius}px;">'
             f'<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{u}" '
-            f'style="height:50px;v-text-anchor:middle;width:{w}px;" arcsize="28%" strokecolor="{BLUE}" strokeweight="2px" fillcolor="{CARD}">'
-            f'<w:anchorlock/><center style="color:{BLUE};font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;">{fr(label)}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
+            f'style="height:{h}px;v-text-anchor:middle;width:{w}px;" arcsize="{arc}%" strokecolor="{BLUE}" strokeweight="2px" fillcolor="{CARD}">'
+            f'<w:anchorlock/><center style="color:{BLUE};font-family:Arial,Helvetica,sans-serif;font-size:{size}px;font-weight:bold;">{fr(label)}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
             f'<!--[if !mso]><!--><a href="{u}" target="_blank" style="display:inline-block;background-color:{CARD};border:2px solid {BLUE};'
-            f'border-radius:14px;padding:12px 22px;{font(15, 22, 700, BLUE)}text-decoration:none;">{fr(label)}&nbsp;&#8594;</a><!--<![endif]-->'
+            f'border-radius:{radius}px;padding:{pad};{font(size, lh, 700, BLUE)}text-decoration:none;">{fr(label)}&nbsp;&#8594;</a><!--<![endif]-->'
             f'</td></tr></table>')
 
 def illus(key, alt):
     """Illustration 1200 px : 544 px par défaut (Outlook, gouttières de 28 px), 520 px sur ordinateur, 100 % sur mobile.
     Fond teinté si l'image est bloquée."""
     tint = ACCENT[code(key)][1]
-    return (f'<img src="IMG:{key}" width="544" alt="{esc(alt)}" style="display:block;width:100%;max-width:544px;height:auto;border:0;'
+    w, h = png_size(key)
+    hh = int(round(544 * h / w))          # hauteur réservée (Outlook, images bloquées) ; height:auto en CSS pour le responsive
+    return (f'<img src="IMG:{key}" width="544" height="{hh}" alt="{esc(alt)}" style="display:block;width:100%;max-width:544px;height:auto;border:0;'
             f'border-radius:16px;outline:none;text-decoration:none;background-color:{tint};{font(14, 21, 500, INK)}">')
 
 def kicker(text, accent):
@@ -330,18 +356,20 @@ def title_block(e, l1, l2):
             f'<tr><td class="t tin" style="padding:0 10px;{ts}">{fr(l1)}</td></tr>'
             f'<tr><td style="padding:6px 0 0 0;">{T()}<tr><td class="t tfr bg-blue on-blue" bgcolor="{BLUE}" style="background-color:{BLUE};'
             f'border-radius:14px;padding:3px 10px 7px 10px;{ts.replace("color:" + BLUE, "color:#FFFFFF")}">{fr(l2)}</td></tr></table></td></tr>'
-            f'</table></div>'
-            f'<p class="chap tin" style="margin:18px 0 0 0;padding:0 10px;{font(18, 28, 500, BLUE)}">{fr(nowidow(e["preheader"]))}</p>')
+            f'</table></div>')
+    # Pas de chapô : le preheader reste dans le bloc caché (aperçu de la boîte de réception), il n'est pas répété dans le corps.
 
 def signature(close):
-    """Photo ronde de Hugo à gauche de la formule de fin et du nom (marqueur IMG:avatar)."""
+    """Photo ronde de Hugo à gauche de la formule de fin et du nom (marqueur IMG:avatar), centrée sur ces deux lignes :
+    le trait vert est dans une seconde rangée, hors du centrage."""
     return (f'{T()}<tr>'
             f'<td width="56" valign="middle" style="width:56px;"><img src="IMG:avatar" width="56" height="56" alt="Hugo, Fichly" '
             f'style="display:block;width:56px;height:56px;border:0;border-radius:50%;outline:none;text-decoration:none;{font(11, 14, 700, BLUE)}"></td>'
             f'<td valign="middle" style="padding:0 0 0 14px;">'
             f'<p style="margin:0 0 2px 0;{font(16, 24, 400, TXT)}">{fr(nowidow(close))}</p>'
-            f'<p style="margin:0 0 6px 0;{font(18, 26, 800, BLUE)}">Hugo, Fichly</p>{bar(64, 4, GREEN)}'
-            f'</td></tr></table>')
+            f'<p style="margin:0;{font(18, 26, 800, BLUE)}">Hugo, Fichly</p>'
+            f'</td></tr>'
+            f'<tr><td width="56" style="width:56px;font-size:0;line-height:0;">&nbsp;</td><td style="padding:6px 0 0 14px;">{bar(64, 4, GREEN)}</td></tr></table>')
 
 def upsell(key):
     """Carte secondaire « Pour aller plus loin », juste avant la signature. Pas d'image, bouton contour."""
@@ -349,7 +377,7 @@ def upsell(key):
     inner = (chip(UPSELL_LABEL, PL, BLUE) +
              f'<p style="margin:12px 0 6px 0;{font(19, 26, 800, INK)}">{fr(u["title"])}</p>' +
              p(u["text"], mb=16, size=15, lh=24) +
-             cta2(u["button"], upsell_url(key)))
+             cta2(u["button"], upsell_url(key), cls="btn2", size=14, lh=20, pad="10px 18px", h=44, radius=12))
     return f'<!-- upsell:{UPSELL_FOR[key]} -->' + card(inner, bg=CARD, border=STITCH, pad="20px 24px 22px 24px", dashed=True) + '<!-- /upsell -->'
 
 def band(h=10):
@@ -360,11 +388,14 @@ def row(inner, top=28, cls="px", side=28):
     return f'<tr><td class="{cls}" style="padding:{top}px {side}px 0 {side}px;">{inner}</td></tr>'
 
 def header_row():
-    return (f'<tr><td class="px" style="padding:30px 28px 0 28px;">'
-            f'<img src="{ce.LOGO}" width="88" alt="Fichly" style="display:block;width:88px;height:auto;border:0;{font(20, 24, 700, INK)}"></td></tr>')
+    """Logo sur pastille opaque (lisible en mode sombre) ; la pastille déborde de 7 px : les lettres restent alignées sur le texte."""
+    w, h = (x // 2 for x in png_size("logo"))
+    return (f'<tr><td class="pxl" style="padding:26px 21px 0 21px;">'
+            f'<img src="IMG:logo" width="{w}" height="{h}" alt="Fichly" style="display:block;width:{w}px;height:auto;border:0;'
+            f'border-radius:9px;outline:none;text-decoration:none;{font(20, 24, 700, INK)}"></td></tr>')
 
 def title_row(e, l1, l2):
-    return row(title_block(e, l1, l2), top=26, cls="pxt", side=18)
+    return row(title_block(e, l1, l2), top=22, cls="pxt", side=18)   # 26 − 4 : la pastille du logo ajoute 4,5 px sous les lettres
 
 def footer():
     s = font(12, 19, 400, MUTED)
@@ -397,6 +428,7 @@ def page(e, rows):
   a[x-apple-data-detectors] {{ color:inherit !important; text-decoration:none !important; }}
   @media only screen and (min-width:621px) {{
     .px {{ padding-left:40px !important; padding-right:40px !important; }}
+    .pxl {{ padding-left:33px !important; padding-right:33px !important; }}
     .pxt {{ padding-left:28px !important; padding-right:28px !important; }}
     .tin, .tfr {{ padding-left:12px !important; padding-right:12px !important; }}
     .t {{ font-size:40px !important; line-height:48px !important; }}
@@ -405,15 +437,18 @@ def page(e, rows):
     .outer {{ padding:0 !important; }}
     .sheet {{ border-radius:0 !important; }}
     .px {{ padding-left:22px !important; padding-right:22px !important; }}
+    .pxl {{ padding-left:15px !important; padding-right:15px !important; }}
     .pxt {{ padding-left:14px !important; padding-right:14px !important; }}
     .tin, .tfr {{ padding-left:8px !important; padding-right:8px !important; }}
     .t {{ font-size:31px !important; line-height:39px !important; }}
-    .chap {{ font-size:17px !important; line-height:26px !important; }}
     .cardpad {{ padding-left:18px !important; padding-right:18px !important; }}
     .stk {{ display:block !important; width:100% !important; }}
     .stk-t {{ padding:8px 0 0 0 !important; }}
     .btn {{ width:100% !important; }}
     .btn a {{ display:block !important; padding-left:16px !important; padding-right:16px !important; }}
+    .btn2 {{ width:100% !important; }}
+    .btn2 a {{ display:block !important; padding:9px 16px !important; font-size:14px !important; line-height:20px !important; }}
+    .rl {{ font-size:11px !important; }}
     .foot {{ padding:22px 22px 30px 22px !important; }}
   }}
   [data-ogsc] .on-blue {{ color:#FFFFFF !important; }}
@@ -429,7 +464,7 @@ def page(e, rows):
 {rows}
 <tr><td style="padding:40px 0 0 0;">{band()}</td></tr>
 </table>
-{T('width="100%" style="max-width:600px;"')}<tr><td align="center" class="foot" style="padding:26px 28px 36px 28px;">{footer()}</td></tr></table>
+{FOOT_MARK}{T('width="100%" style="max-width:600px;"')}<tr><td align="center" class="foot" style="padding:26px 28px 36px 28px;">{footer()}</td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
 </table>
@@ -491,11 +526,11 @@ def e2():
     q_intro, question, q_after = split(B[4][1], "gardez celle-ci :", "est bonne. »")
     une_q, gemba = split(B[5][1], "depuis mon bureau ?")
     rows = [header_row(), title_row(e, "Une grille,", "quatre colonnes"),
-            row(illus("e2", "Une feuille d’observation en quatre colonnes : attentes, déplacements, ruptures, retouches, avec les bâtons notés au poste."), top=26),
+            row(illus("e2", "Une feuille d’observation en quatre colonnes : attentes, déplacements, ruptures, retouches, avec quelques bâtons notés au poste."), top=26),
             row(p(B[0][1]) + lead(intro), top=30),
             row(card(pill("Trois règles") + spacer(16) + p(B[2][1], mb=18, color=INK, weight=500) + steps_v2(B[3][1])), top=24),
             row(p(q_intro, mb=10) + exergue(question) + spacer(16) + p(q_after, mb=0), top=32),
-            row(callout("Une question", une_q, PY, YELLOW), top=26),
+            row(callout("En repartant", une_q, PY, YELLOW), top=26),
             row(stitch() + spacer(26) + p(gemba, mb=20) + cta(B[6][1], B[6][2]), top=32),
             ] + ending(e, B[7][1])
     return page(e, "\n".join(rows))
@@ -587,10 +622,46 @@ def apply_images(src, images):
         return f'src="{esc(images[k])}"'
     return re.sub(r'src="IMG:([\w-]+)"', rep, src)
 
-def body_words(e):
-    """Mots du corps : titre + blocs + signature (comme la v1) + bloc upsell."""
-    u = UPSELL[UPSELL_FOR[e["key"]]]
-    return ce.visible_words(e) + len(re.findall(r"[\wÀ-ÿ’'-]+", " ".join([UPSELL_LABEL, u["title"], u["text"], u["button"]])))
+FOOT_MARK = "<!-- pied -->"
+
+def body_text(src):
+    """Texte visible du corps : tout ce qui précède le pied de page (kicker, titre, étiquettes, numéros, fil de la série,
+    upsell, signature compris ; preheader caché, VML Outlook et footer légal exclus)."""
+    return visible_text(src.split(FOOT_MARK)[0])
+
+def body_words(src):
+    """Nombre de mots réellement visibles dans le corps (même découpage des mots que la v1)."""
+    return len(re.findall(r"[\wÀ-ÿ’'-]+", body_text(src)))
+
+# Ajouts de forme autorisés (en plus du texte v1 et de l'upsell) : étiquettes reprises du texte, qui le répètent.
+# Les étiquettes qui remplacent un fragment du texte (e3 « Voici un repère simple », « Quoi / Où… » ; e4-equipe les rôles ;
+# e0 « En cadeau ») ne répètent rien et ne sont donc pas listées.
+LABELS = {
+    "e0": ["Votre point de départ", "Dans les deux semaines"],
+    "e1": ["Un exercice de trente minutes", "Une règle", "Avec un opérateur"],
+    "e2": ["Trois règles", "En repartant"],
+    "e3": ["Une règle"],
+    "e4-decouvrir": ["Chaque jeudi"],
+    "e4-equipe": [],
+    "e4-formation": ["Formation certifiante", "Éligible au CPF"],
+    "e4-accompagnement": [],
+}
+STEPS = {"e1": 6, "e2": 3}          # numéros des briques d'étapes (listes numérotées)
+
+def allowed_tokens(key):
+    """Multiensemble des mots autorisés dans le corps v2 : texte v1 (kicker, titre, blocs, signature), upsell, étiquettes, fil, numéros."""
+    from collections import Counter
+    e = EM[key]
+    texts = [e["kicker"], e["title"], "Hugo, Fichly"]
+    for b in e["blocks"]:
+        if b[0] in ("p", "h2", "cta", "link"):
+            texts.append(b[1])
+        elif b[0] in ("ol", "ul"):
+            texts += b[1]
+    u = UPSELL[UPSELL_FOR[key]]
+    texts += [UPSELL_LABEL, u["title"], u["text"], u["button"]] + LABELS[key] + SERIES
+    texts += [str(i + 1) for i in range(STEPS.get(key, 0))]
+    return Counter(t for x in texts for t in tokens(x))
 
 # ---------------------------------------------------------------- contrôles
 EMOJI = re.compile("[\U0001F000-\U0001FAFF\U00002600-\U000026FF\U00002700-\U000027BF\U0001F1E6-\U0001F1FF️‍]")
@@ -629,6 +700,9 @@ def check(key, src, images):
                 if " " + " ".join(tokens(c)) + " " not in vt:
                     miss.append(c.strip())
     res["fond : toutes les phrases d'origine présentes"] = (not miss, miss)
+    from collections import Counter
+    extra = Counter(tokens(body_text(src))) - allowed_tokens(key)
+    res["fond : aucun mot ajouté (v2 − v1 − upsell − étiquettes)"] = (not extra, dict(extra))
     a_new, v_new = hrefs(src)
     a_old, _ = hrefs((V1 / f"{key}.html").read_text(encoding="utf-8"))
     want = a_old | {upsell_url(key)}
@@ -650,9 +724,12 @@ def check(key, src, images):
     tags = re.findall(r"\{\{[^}]*\}\}", src)
     res["balises {{ }} : {{ unsubscribe }} seule"] = (tags == ["{{ unsubscribe }}"], tags)
     imgs = re.findall(r"<img [^>]+>", src)
-    ill = [i for i in imgs if ce.LOGO not in i and 'alt="Hugo, Fichly"' not in i]
+    logo = [i for i in imgs if f'src="{esc(images["logo"])}"' in i]
+    res["logo (alt « Fichly », pastille 2×)"] = (len(logo) == 1 and 'alt="Fichly"' in logo[0], len(logo))
+    ill = [i for i in imgs if i not in logo and 'alt="Hugo, Fichly"' not in i]
     res["une illustration au plus (hors logo, avatar)"] = (len(ill) <= 1, len(ill))
     res["alt sur chaque image"] = (all(re.search(r'alt="[^"]+"', i) for i in imgs), "")
+    res["width et height sur chaque image"] = (all(re.search(r'width="\d+"', i) and re.search(r'height="\d+"', i) for i in imgs), "")
     res["marqueurs IMG: remplacés"] = ("IMG:" not in src, "")
     for i in ill:
         s = re.search(r'src="([^"]+)"', i).group(1)
@@ -664,8 +741,8 @@ def check(key, src, images):
     emo = sorted({ch for ch in html.unescape(src) if EMOJI.match(ch) and ch not in ALLOWED_SYMBOLS})
     res["pas d'émojis"] = (not emo, emo)
     res["objet ≤ 50 caractères"] = (len(e["subject"]) <= 50, len(e["subject"]))
-    n = body_words(e)
-    res["corps 150–300 mots (upsell compris)"] = (150 <= n <= 300, n)
+    n = body_words(src)
+    res["corps 150–300 mots visibles (upsell compris, hors footer)"] = (150 <= n <= 300, n)
     res["objet = <title>, preheader"] = (f"<title>{html.escape(e['subject'])}</title>" in src and html.escape(e["preheader"]) in src, "")
     res["footer légal"] = (all(s in vis for s in ["Fichly, le Lean accessible", "22 avenue Danton Demar, 34660 Cournonterral, France",
                                                    "TVA FR69933450322 · APE 4791B", "Vous recevez cet email suite à votre inscription à la White Belt Lean de Fichly."]), "")
@@ -689,7 +766,6 @@ def run_checks(sources, images):
 # ---------------------------------------------------------------- aperçu local
 def preview(src, mode="poppins"):
     fonts = "".join(f"@font-face{{font-family:Poppins;font-weight:{w};src:url({ASSETS}/fonts/poppins-latin-{w}-normal.woff2) format('woff2')}}" for w in (400, 500, 700, 800))
-    src = src.replace(ce.LOGO, str(ASSETS / "fichly-logo.png"))
     if mode == "arial":
         src = re.sub(r'<link href="https://fonts.googleapis.com[^>]*>', "", src).replace("Poppins,Montserrat,", "")
     else:
@@ -710,8 +786,9 @@ def main(argv):
         src = apply_images(BUILD[k](), images)
         (OUT / f"{k}.html").write_text(src, encoding="utf-8")
         sources[k] = src
-        meta.append({"clé": k, "nom": e["name"], "objet": e["subject"], "preheader": e["preheader"], "mots": body_words(e),
-                     "image": images[k], "avatar": images["avatar"], "upsell": UPSELL_FOR[k], "fichier": f"emails-v2/{k}.html"})
+        meta.append({"clé": k, "nom": e["name"], "objet": e["subject"], "preheader": e["preheader"], "mots": body_words(src),
+                     "image": images[k], "avatar": images["avatar"], "logo": images["logo"], "upsell": UPSELL_FOR[k],
+                     "fichier": f"emails-v2/{k}.html"})
     (OUT / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     for m in meta:
         print(f"{m['clé']:<18} {m['mots']:>4} mots · objet {len(m['objet']):>2} car. · upsell {m['upsell']:<10} · {m['objet']}")

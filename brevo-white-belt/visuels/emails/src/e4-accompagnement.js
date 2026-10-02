@@ -30,7 +30,7 @@ start(() => {
     el('path', {d: `M ${cx + 130} ${GY - 252} V ${GY - 234}`, stroke: C.white, 'stroke-width': 8, 'stroke-linecap': 'round'}); el('circle', {cx: cx + 130, cy: GY - 220, r: 5, fill: C.white}) }
   // Libellés (deux lignes au plus)
   const lab = [['Stock tampon'], ['Poste', 'de retouche'], ['Réunion', 'de crise']];
-  lab.forEach((ls, i) => ls.forEach((s, k) => { const t = tx(S, cols[i], 540 + k * 50 + (ls.length === 1 ? 24 : 0), s, {size: 44, weight: 700, anchor: 'middle'}); fit(t, cols[i] - 186, cols[i] + 186, s) }));
+  lab.forEach((ls, i) => ls.forEach((s, k) => { const t = tx(S, cols[i], 542 + k * 54 + (ls.length === 1 ? 27 : 0), s, {size: 48, weight: 700, anchor: 'middle'}); fit(t, cols[i] - 186, cols[i] + 186, s) }));
   // La loupe, posée sur le poste de retouche
   const LX = cols[1], LY = GY - 150, LR = 150;
   el('path', {d: `M ${LX + LR * 0.72} ${LY + LR * 0.72} L ${LX + LR * 1.1} ${LY + LR * 1.1}`, stroke: C.ink, 'stroke-width': 32, 'stroke-linecap': 'round'});

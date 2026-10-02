@@ -12,7 +12,7 @@ let S; const errs = [];
 function el(t, a = {}, p = S) { const n = document.createElementNS(NS, t); for (const [k, v] of Object.entries(a)) n.setAttribute(k, v); p.appendChild(n); return n }
 function tx(p, x, y, str, {size = 44, weight = 700, fill = C.ink, anchor = 'start', ls = 0} = {}) {
   const t = el('text', {x, y, 'font-family': 'Poppins', 'font-size': size, 'font-weight': weight, fill, 'text-anchor': anchor, 'letter-spacing': ls}, p);
-  t.textContent = str; if (size < 42) errs.push('texte < 42 px : ' + str); return t }
+  t.textContent = str; if (size < 48) errs.push('texte < 48 px : ' + str); return t }
 function fit(n, minL, maxR, label) { const b = n.getBBox(); if (b.x + b.width > maxR + .5 || b.x < minL - .5) errs.push(label + ' ' + Math.round(b.x) + '→' + Math.round(b.x + b.width)) }
 function bg(W, H, key) { el('rect', {x: 0, y: 0, width: W, height: H, fill: TINT[key]}) }
 function cardRect(x, y, w, h, {fill = C.card, stroke = C.line, sw = 4, rx = 28, p = S} = {}) { return el('rect', {x, y, width: w, height: h, rx, fill, stroke, 'stroke-width': sw}, p) }

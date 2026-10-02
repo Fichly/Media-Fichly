@@ -17,11 +17,11 @@ start(() => {
   el('path', {d: `M ${xs[0] - 54} ${bY} v 16 H ${xs[5] + 54} v -16`, fill: 'none', stroke: C.stitch, 'stroke-width': 5, 'stroke-dasharray': '13 9', 'stroke-linecap': 'round'});
   const l1 = tx(S, (xs[0] + xs[5]) / 2, bY + 74, '6 chapitres courts', {size: 54, weight: 700, anchor: 'middle'}); fit(l1, 40, 860, 'l1');
   el('path', {d: `M ${XT - 78} ${bY} v 16 H ${XT + 78} v -16`, fill: 'none', stroke: C.stitch, 'stroke-width': 5, 'stroke-dasharray': '13 9', 'stroke-linecap': 'round'});
-  const l2 = tx(S, XT, bY + 74, '10 questions', {size: 44, weight: 700, anchor: 'middle'}); fit(l2, 760, RX - 14, 'l2');
+  const l2 = tx(S, XT, bY + 74, '10 questions', {size: 48, weight: 700, anchor: 'middle'}); fit(l2, 760, RX - 14, 'l2');
   // Ceinture blanche
   belt({L, R, top: BT, th, sag, label: 'WHITE BELT', knot: 0.36, offset: '47%'});
   // Sceau : la durée
-  seal(150, BT + 50, 116, ['environ', '1 h'], {size: 46, rot: -10});
+  seal(150, BT + 52, 132, ['environ', '1 h'], {size: 48, rot: -10});
   // L'attestation
   const la = tx(S, RX, 622, 'Votre attestation', {size: 48, weight: 700, anchor: 'end'}); fit(la, 640, 1160, 'attestation');
   check(la.getBBox().x - 48, 606, 34);

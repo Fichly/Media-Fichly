@@ -7,7 +7,7 @@ start(() => {
   const PY = 168;
   el('path', {d: `M ${X0 - 14} ${PY} H ${X1 + 4}`, stroke: C.blue, 'stroke-width': 6, 'stroke-dasharray': '16 13', 'stroke-linecap': 'round', fill: 'none'});
   el('path', {d: `M ${X1 - 12} ${PY - 16} L ${X1 + 8} ${PY} L ${X1 - 12} ${PY + 16}`, stroke: C.blue, 'stroke-width': 6, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'});
-  const SW = 206, SH = 176, SY = PY - SH / 2, xs = [X0 + 6, 352, 640, 928];
+  const SW = 196, SH = 176, SY = PY - SH / 2, xs = [X0 - 4, 398, 664, 938];
   const station = (x, kind) => {
     const g = el('g');
     el('rect', {x, y: SY, width: SW, height: SH, rx: 28, fill: C.white, stroke: kind === 'machine' ? C.green : '#c4e3e3', 'stroke-width': kind === 'machine' ? 6 : 4}, g);
@@ -39,15 +39,15 @@ start(() => {
       el('circle', {cx: cx + 44, cy: cy + 30, r: 13, fill: C.white, stroke: C.blue, 'stroke-width': 6}, g);
     }
     const bx = x + SW - 14, by = SY + 12;
-    if (kind === 'machine') checkBadge(bx, by, 27, g); else clockBadge(bx, by, 27, C.red, g);
+    if (kind === 'machine') checkBadge(bx, by, 32, g); else clockBadge(bx, by, 32, C.red, g);
   };
   station(xs[0], 'stock'); station(xs[1], 'queue'); station(xs[2], 'machine'); station(xs[3], 'truck');
   // La pièce, chronomètre accroché, dans l'allée entre le stock et l'en-cours
   const px = (xs[0] + SW + xs[1]) / 2;
   el('rect', {x: px - 24, y: PY - 24, width: 48, height: 48, rx: 10, fill: C.blue, stroke: TINT.e1, 'stroke-width': 5});
   el('circle', {cx: px, cy: PY, r: 8, fill: C.white});
-  el('path', {d: `M ${px} ${PY - 28} V ${PY - 44}`, stroke: C.ink, 'stroke-width': 5});
-  stopwatch(px, PY - 72, 24, {col: C.ink});
+  el('path', {d: `M ${px} ${PY - 28} V ${PY - 42}`, stroke: C.ink, 'stroke-width': 5});
+  stopwatch(px, PY - 42 - 36, 34, {col: C.ink});
   // Les deux totaux
   const mx = xs[2] + SW / 2;
   const l1 = tx(S, X0, 336, 'Temps total', {size: 50, weight: 700}); fit(l1, 40, 1160, 'l1');

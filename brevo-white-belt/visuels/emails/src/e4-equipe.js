@@ -12,8 +12,8 @@ start(() => {
     el('path', {d: `M ${cx - 24} ${BY + BH - 2} L ${cx} ${BY + BH + 26} L ${cx + 24} ${BY + BH - 2} Z`, fill: C.card, stroke: EDGE.e4, 'stroke-width': 4, 'stroke-linejoin': 'round'});
     el('rect', {x: cx - 30, y: BY + BH - 8, width: 60, height: 10, fill: C.card});
     person(cx, BY + 84, 52, col);
-    const t = tx(S, cx, BY + 190, name, {size: 44, weight: 700, anchor: 'middle'}); fit(t, x + 14, x + BW - 14, name);
+    const t = tx(S, cx, BY + 192, name, {size: 48, weight: 700, anchor: 'middle'}); fit(t, x + 14, x + BW - 14, name);
   });
   belt({L, R, top: BT, th: 84, sag: 20, label: 'WHITE BELT', knot: 0.64, offset: '9%'});
-  seal(1012, 618, 130, ['Gratuite'], {size: 42, rot: -8});
+  seal(1010, 608, 144, ['Gratuite'], {size: 48, rot: -8});
 });
