@@ -28,11 +28,30 @@
 | V9 | contact désinscrit (emailBlacklisted, TITRE_JOB 17) qui coche la newsletter | reste désinscrit, données conservées | emailBlacklisted toujours vrai, TITRE_JOB 17, prénom conservé, OPT_IN vrai, liste 49 | OK (voir la note sur les désinscrits dans la checklist) |
 | V10 | adresse refusée par Brevo (« pas-un-email ») | erreur relancée et gardée, rien de perdu | exécution terminée en avertissement, 1 exécution incomplète stockée avec relances | OK |
 
+## Version 2.1 (après la contre-vérification de la revue)
+
+Deux faiblesses restantes, signalées par la revue sur la v2 :
+- une erreur de lecture autre que « contact absent » (limite de débit, panne) faisait traiter un contact existant comme nouveau : l'upsert pouvait alors écraser ses données, et l'opt-in passer de vrai à faux ;
+- avec le traitement séquentiel, une seule exécution incomplète bloquait toutes les inscriptions suivantes (constaté en V10 : `iswaiting: true`).
+
+Corrections :
+- sur erreur du GetContact, on ne continue que si Brevo répond « Contact does not exist » ; toute autre erreur est relancée (3 × 15 min) puis gardée ;
+- l'opt-in n'est écrit que si la case est cochée, sinon la valeur existante est gardée (jamais de « faux » par défaut) ;
+- le traitement séquentiel est désactivé : l'upsert rend les doublons impossibles.
+
+Harnais recréé (9906111) :
+
+| Cas | Entrée | Attendu | Obtenu | Résultat |
+| --- | --- | --- | --- | --- |
+| W1 | nouveau contact (le GetContact répond 404) | « absent » reconnu, création, liste 49 | id 20341, [49], tous les attributs justes | OK, `{{2.error.message}}` est bien lisible |
+| W2 | adresse refusée (le GetContact répond 400) | relance et exécution incomplète, rien n'est créé | dlqCount 1, aucune création | OK |
+| W3 | nouvelle inscription juste après W2 | traitée sans attendre | id 20342, [49], WB_BESOIN 4, OPT_IN non écrit (case non cochée) | OK, `iswaiting: false` |
+
 ## Nettoyage
 
-- Les 7 contacts de test créés pendant les tests (ids 20334 à 20340) ont été supprimés. La liste 49 est revenue à 0 contact.
-- Le scénario harnais 9905753 a été désactivé puis supprimé. Il se recrée depuis `blueprint_harnais_test.json`, avec l'entrée de scénario `payload` (texte).
-- Le scénario réel 9905705 est en version 2, **inactif**. La file du hook 4410784 est vide.
+- Les 9 contacts de test créés pendant les tests (ids 20334 à 20342) ont été supprimés. La liste 49 est revenue à 0 contact.
+- Les scénarios harnais 9905753 et 9906111 ont été désactivés puis supprimés. Il se recrée depuis `blueprint_harnais_test.json`, avec l'entrée de scénario `payload` (texte).
+- Le scénario réel 9905705 est en version 2.1, **inactif**. La file du hook 4410784 est vide.
 
 ## Encore à tester après la publication du formulaire
 

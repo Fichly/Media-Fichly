@@ -27,23 +27,23 @@ Rien n'est envoyé ni activé à ce stade.
 | 212 | WB · E4 · J+14 · Formation | J+14, besoin 3 |
 | 213 | WB · E4 · J+14 · Accompagnement | J+14, besoin 4 |
 
-### Ce que fait le scénario Make (version 2, testée)
+### Ce que fait le scénario Make (version 2.1, testée)
 
 1. Tally envoie la réponse au hook 4410784.
 2. **Garde** : la réponse n'est traitée que si l'e-mail est présent, la case de consentement cochée, et si elle vient de la nouvelle version du formulaire, c'est-à-dire qu'elle contient la question « Qu'attendez-vous de cette formation ? ». Les réponses de l'ancienne version, dont le consentement ne couvre pas les 4 e-mails de suivi, n'entrent pas dans la séquence.
-3. Brevo cherche le contact. L'adresse est mise en minuscules et nettoyée de ses espaces.
+3. Brevo cherche le contact. L'adresse est mise en minuscules et nettoyée de ses espaces. Le scénario ne continue que si Brevo répond « contact absent ». Toute autre erreur est relancée, pour ne jamais traiter un contact existant comme nouveau.
 4. **Création ou mise à jour en une seule étape**, donc jamais de doublon, même en cas de double clic :
    - prénom, nom, entreprise et `TITRE_JOB` déjà présents sont **conservés**, puisque la saisie existante est plus précise ;
    - `WB_BESOIN` prend la réponse la plus récente ;
    - `WB_DATE_INSCRIPTION` garde la première inscription (date de Paris) ;
-   - un opt-in déjà donné n'est jamais retiré ;
+   - l'opt-in n'est écrit que si la case newsletter est cochée, et un opt-in déjà donné n'est jamais retiré ;
    - le bloc UTM du premier contact est gardé tel quel s'il existe, sinon c'est celui de la réponse qui est écrit (jamais de mélange source / medium) ;
    - `ASSET_DERNIER = white_belt` et `DATE_DERNIERE_INTERACTION` prennent la date de la réponse.
 5. Ajout à la liste 49 seulement si le contact n'y est pas déjà. C'est cet ajout qui déclenche la séquence.
-6. En cas d'erreur Brevo : 3 nouvelles tentatives à 15 minutes d'intervalle, puis la réponse est gardée en « exécution incomplète » dans Make. Rien n'est perdu en silence.
-7. Les réponses sont traitées une par une (traitement séquentiel).
+6. En cas d'erreur Brevo : 3 nouvelles tentatives à 15 minutes d'intervalle, puis la réponse est gardée en « exécution incomplète » dans Make. Rien n'est perdu en silence, et les inscriptions suivantes ne sont pas bloquées.
+7. Pensez à activer dans Make (Profil → Notifications) l'alerte sur les avertissements et les exécutions incomplètes, puis jetez un œil à l'onglet « Exécutions incomplètes » du scénario pendant les premiers jours.
 
-Les résultats des 18 cas de test sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
+Les résultats des 21 cas de test sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
 Correspondance « Votre fonction » → `TITRE_JOB` :
 

@@ -54,17 +54,80 @@
    },
    "onerror": [
     {
-     "id": 5,
-     "module": "builtin:Resume",
+     "id": 8,
+     "module": "builtin:BasicRouter",
      "version": 1,
-     "parameters": {},
-     "mapper": {},
+     "mapper": null,
      "metadata": {
       "designer": {
        "x": 300,
        "y": 600
       }
-     }
+     },
+     "routes": [
+      {
+       "flow": [
+        {
+         "id": 5,
+         "module": "builtin:Resume",
+         "version": 1,
+         "parameters": {},
+         "mapper": {},
+         "metadata": {
+          "designer": {
+           "x": 600,
+           "y": 500
+          }
+         },
+         "filter": {
+          "name": "Contact absent (404)",
+          "conditions": [
+           [
+            {
+             "a": "{{if(contains(lower(2.error.message); \"does not exist\"); \"absent\"; if(contains(lower(2.error.message); \"document_not_found\"); \"absent\"; \"autre\"))}}",
+             "o": "text:equal",
+             "b": "absent"
+            }
+           ]
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "flow": [
+        {
+         "id": 9,
+         "module": "builtin:Break",
+         "version": 1,
+         "parameters": {},
+         "mapper": {
+          "retry": true,
+          "count": 3,
+          "interval": 15
+         },
+         "metadata": {
+          "designer": {
+           "x": 600,
+           "y": 700
+          }
+         },
+         "filter": {
+          "name": "Autre erreur",
+          "conditions": [
+           [
+            {
+             "a": "{{if(contains(lower(2.error.message); \"does not exist\"); \"absent\"; if(contains(lower(2.error.message); \"document_not_found\"); \"absent\"; \"autre\"))}}",
+             "o": "text:equal",
+             "b": "autre"
+            }
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
     }
    ]
   },
@@ -86,7 +149,7 @@
      "WB_BESOIN": "{{switch(first(ifempty(ifempty(1.fields.`Qu’attendez-vous de cette formation ?`; 1.fields.`Qu’attendez-vous de cette formation ?`); 1.fields.`Qu’attendez-vous de cette formation ?`)); \"Découvrir les bases du Lean\"; \"1\"; \"Lancer une démarche avec mon équipe\"; \"2\"; \"Me former ou me certifier\"; \"3\"; \"Faire accompagner mon site\"; \"4\"; \"\")}}",
      "INSCRIT_WHITEBELT": true,
      "WB_DATE_INSCRIPTION": "{{formatDate(ifempty(2.attributes.WB_DATE_INSCRIPTION; 1.createdAt); \"YYYY-MM-DD\"; \"Europe/Paris\")}}",
-     "OPT_IN": "{{if(1.fieldsById.`question_xN1q15_0a3d003f-d0f7-43f0-9619-fab48845c688`; true; ifempty(2.attributes.OPT_IN; false))}}",
+     "OPT_IN": "{{if(1.fieldsById.`question_xN1q15_0a3d003f-d0f7-43f0-9619-fab48845c688`; true; 2.attributes.OPT_IN)}}",
      "ASSET_DERNIER": "white_belt",
      "DATE_DERNIERE_INTERACTION": "{{formatDate(1.createdAt; \"YYYY-MM-DD\"; \"Europe/Paris\")}}",
      "UTM_SOURCE": "{{if(ifempty(2.attributes.UTM_SOURCE; ifempty(2.attributes.UTM_MEDIUM; ifempty(2.attributes.UTM_CAMPAIGN; ifempty(2.attributes.UTM_CONTENT; \"\")))) = \"\"; 1.fieldsById.`question_GB4G4k_ca989a49-b750-4ae5-9575-3e69d77b1b58`; 2.attributes.UTM_SOURCE)}}",
@@ -181,7 +244,7 @@
    "maxErrors": 3,
    "autoCommit": true,
    "autoCommitTriggerLast": true,
-   "sequential": true,
+   "sequential": false,
    "confidential": false,
    "dataloss": false,
    "dlq": true,

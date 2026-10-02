@@ -5,7 +5,8 @@ Tally (formulaire ODOB5p, hook 4410784) → Brevo :
 2. lecture du contact Brevo (absent → sortie vide) ;
 3. création ou mise à jour en une seule étape (upsert), en conservant les données déjà présentes ;
 4. ajout à la liste 49 « White Belt — Inscrits » s'il n'y est pas encore : c'est ce qui déclenche la séquence.
-Les erreurs Brevo sont relancées 3 fois (15 min) puis gardées en exécutions incomplètes.
+Les erreurs Brevo sont relancées 3 fois (15 min) puis gardées en exécutions incomplètes,
+sans bloquer les inscriptions suivantes (pas de traitement séquentiel : l'upsert rend les doublons impossibles).
 """
 import json
 
@@ -83,8 +84,8 @@ attributs = {
     "WB_BESOIN": iml(switch(BESOIN, BESOINS)),
     "INSCRIT_WHITEBELT": True,
     "WB_DATE_INSCRIPTION": iml("formatDate(ifempty(%s; %d.createdAt); \"YYYY-MM-DD\"; \"%s\")" % (existant("WB_DATE_INSCRIPTION"), T, PARIS)),
-    # Un opt-in déjà donné n'est jamais retiré
-    "OPT_IN": iml("if(%s; true; ifempty(%s; false))" % (NEWSLETTER, existant("OPT_IN"))),
+    # Un opt-in déjà donné n'est jamais retiré ; case non cochée → on n'écrit rien
+    "OPT_IN": iml("if(%s; true; %s)" % (NEWSLETTER, existant("OPT_IN"))),
     "ASSET_DERNIER": "white_belt",
     "DATE_DERNIERE_INTERACTION": iml("formatDate(%d.createdAt; \"YYYY-MM-DD\"; \"%s\")" % (T, PARIS)),
     **{k: iml("if(%s = \"\"; %s; %s)" % (UTM_EXISTANTS, champ(v), existant(k))) for k, v in UTM.items()},
@@ -110,11 +111,27 @@ PAS_ENCORE_INSCRIT = {"name": "Pas encore dans la liste 49", "conditions": [[
     {"a": iml("if(contains(ifempty(%d.listIds; emptyarray); %d); \"oui\"; \"non\")" % (G, LISTE)), "o": "text:equal", "b": "non"},
 ]]}
 
+# Une erreur du GetContact n'est « contact absent » que si Brevo répond 404 document_not_found.
+# Toute autre erreur (limite de débit, panne) est relancée, pour ne jamais traiter un contact existant comme nouveau.
+MESSAGE = "lower(%d.error.message)" % G
+GENRE_ERREUR = ('if(contains(%s; "does not exist"); "absent"; if(contains(%s; "document_not_found"); "absent"; "autre"))'
+                % (MESSAGE, MESSAGE))
+
 def suite():
     """Modules 2 à 7, communs au scénario réel et au harnais de test."""
     return [
         mod(G, "sendinblue:GetContact", 300, 300, {"email": iml(EMAIL)}, filter=GARDE,
-            onerror=[mod(5, "builtin:Resume", 300, 600, parameters={})]),
+            onerror=[{"id": 8, "module": "builtin:BasicRouter", "version": 1, "mapper": None,
+                      "metadata": {"designer": {"x": 300, "y": 600}},
+                      "routes": [
+                          {"flow": [mod(5, "builtin:Resume", 600, 500, parameters={},
+                                        filter={"name": "Contact absent (404)", "conditions": [[
+                                            {"a": iml(GENRE_ERREUR), "o": "text:equal", "b": "absent"}]]})]},
+                          {"flow": [mod(9, "builtin:Break", 600, 700, {"retry": True, "count": 3, "interval": 15},
+                                        parameters={},
+                                        filter={"name": "Autre erreur", "conditions": [[
+                                            {"a": iml(GENRE_ERREUR), "o": "text:equal", "b": "autre"}]]})]},
+                      ]}]),
         mod(3, "sendinblue:CreateContact", 600, 300,
             {"email": iml(EMAIL), "updateEnabled": True, "attributes": attributs},
             onerror=relance(6, 600, 600)),
@@ -124,7 +141,7 @@ def suite():
 
 META = {"version": 1, "instant": True,
         "scenario": {"roundtrips": 1, "maxErrors": 3, "autoCommit": True, "autoCommitTriggerLast": True,
-                     "sequential": True, "confidential": False, "dataloss": False, "dlq": True,
+                     "sequential": False, "confidential": False, "dataloss": False, "dlq": True,
                      "freshVariables": False},
         "designer": {"orphans": []}}
 
