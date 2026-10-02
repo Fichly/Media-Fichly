@@ -89,5 +89,8 @@ Dans cet ordre :
 3. **Case newsletter** : elle est facultative, alors que tous les inscrits recevront L'Atelier une fois les deux bases connectées. Soit on la retire et on mentionne L'Atelier dans la case de consentement, soit on ne connecte que les inscrits qui l'ont cochée (`OPT_IN = oui`). À trancher.
 4. **Publier le formulaire Tally** (vous).
 5. **Faire une inscription test** avec une adresse à vous. Ensuite je vérifie dans Make la clé exacte de la question « Qu'attendez-vous de cette formation ? ». Elle n'existe qu'après publication. Pour l'instant, le scénario la lit par son libellé.
-6. **Activer le scénario Make 9905705**. Attention : tant que le scénario est inactif, les réponses Tally s'accumulent dans la file du hook et seront toutes traitées à l'activation. Videz la file si elle ne contient que des tests.
-7. **Activer le workflow Brevo**, puis refaire une inscription test et vérifier l'arrivée de E0, la fiche contact et la présence dans la liste 49.
+6. **Activer d'abord le workflow Brevo.** Le déclencheur « ajouté à une liste » ne rattrape pas les contacts ajoutés avant son activation. Si Make tourne en premier, les premiers inscrits ne reçoivent jamais la séquence.
+7. **Activer ensuite le scénario Make 9905705.** Attention : tant que le scénario est inactif, les réponses Tally s'accumulent dans la file du hook et seront toutes traitées à l'activation. Videz la file si elle ne contient que des tests.
+8. **Refaire une inscription test** et vérifier l'arrivée de E0, la fiche contact et la présence dans la liste 49.
+
+Une personne déjà présente dans la liste 49 qui se réinscrit voit sa fiche mise à jour, mais la séquence ne repart pas. C'est voulu : elle ne reçoit pas deux fois les mêmes e-mails.

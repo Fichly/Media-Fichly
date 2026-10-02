@@ -93,25 +93,28 @@ def ajout_liste(id_, x, y, onerror=None):
     extra = {"onerror": onerror} if onerror else {}
     return mod(id_, "sendinblue:AddExistingContacts", x, y, {"emails": [EMAIL], "listId": LISTE}, **extra)
 
-flow = [
-    mod(T, "tally:watchNewResponse", 0, 300, parameters={"__IMTHOOK__": HOOK}),
-    mod(G, "sendinblue:GetContact", 300, 300, {"email": EMAIL},
-        onerror=[mod(9, "builtin:Resume", 300, 600, parameters={})]),
-    {"id": 3, "module": "builtin:BasicRouter", "version": 1, "mapper": None,
-     "metadata": {"designer": {"x": 600, "y": 300}},
-     "routes": [
-         {"flow": [
-             mod(4, "sendinblue:CreateContact", 900, 150, {"email": EMAIL, "attributes": nouveau},
-                 filter={"name": "Nouveau contact", "conditions": [[{"a": "{{%d.email}}" % G, "o": "notexist"}]]}),
-             ajout_liste(5, 1200, 150),
+def suite():
+    """Modules 2 à 9, communs au scénario réel et au harnais de test."""
+    return [
+        mod(G, "sendinblue:GetContact", 300, 300, {"email": EMAIL},
+            onerror=[mod(9, "builtin:Resume", 300, 600, parameters={})]),
+        {"id": 3, "module": "builtin:BasicRouter", "version": 1, "mapper": None,
+         "metadata": {"designer": {"x": 600, "y": 300}},
+         "routes": [
+             {"flow": [
+                 mod(4, "sendinblue:CreateContact", 900, 150, {"email": EMAIL, "attributes": nouveau},
+                     filter={"name": "Nouveau contact", "conditions": [[{"a": "{{%d.email}}" % G, "o": "notexist"}]]}),
+                 ajout_liste(5, 1200, 150),
+             ]},
+             {"flow": [
+                 mod(6, "sendinblue:UpdateContact", 900, 450, {"email": EMAIL, "attributes": existant},
+                     filter={"name": "Contact existant", "conditions": [[{"a": "{{%d.email}}" % G, "o": "exist"}]]}),
+                 ajout_liste(7, 1200, 450, onerror=[mod(8, "builtin:Ignore", 1500, 600, parameters={})]),
+             ]},
          ]},
-         {"flow": [
-             mod(6, "sendinblue:UpdateContact", 900, 450, {"email": EMAIL, "attributes": existant},
-                 filter={"name": "Contact existant", "conditions": [[{"a": "{{%d.email}}" % G, "o": "exist"}]]}),
-             ajout_liste(7, 1200, 450, onerror=[mod(8, "builtin:Ignore", 1500, 600, parameters={})]),
-         ]},
-     ]},
-]
+    ]
+
+flow = [mod(T, "tally:watchNewResponse", 0, 300, parameters={"__IMTHOOK__": HOOK})] + suite()
 
 blueprint = {
     "name": "White Belt Lean · Tally → Brevo",
@@ -123,6 +126,15 @@ blueprint = {
                  "designer": {"orphans": []}},
 }
 
+# Harnais de test : même suite de modules, mais le module 1 lit une réponse Tally simulée
+# (entrée de scénario « payload », au format de sortie du module Tally) au lieu du hook.
+harnais = {
+    "name": "TEST · White Belt · harnais Tally → Brevo",
+    "flow": [mod(T, "json:ParseJSON", 0, 300, {"json": "{{var.input.payload}}"}, parameters={})] + suite(),
+    "metadata": {**blueprint["metadata"], "instant": False},
+}
+
 if __name__ == "__main__":
     json.dump(blueprint, open("blueprint_white_belt.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(harnais, open("blueprint_harnais_test.json", "w"), ensure_ascii=False, indent=1)
     print(json.dumps(nouveau, ensure_ascii=False, indent=1))
