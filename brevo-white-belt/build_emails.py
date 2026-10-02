@@ -96,7 +96,7 @@ EMAILS = [
          ("p", "Pour continuer à découvrir le Lean, le plus efficace est d’avoir les outils à portée de main au moment où une situation se présente sur le terrain. Nos fiches Lean rassemblent 40 outils du Lean, à ressortir avant une réunion d’équipe ou un passage en atelier."),
          ("cta", "Découvrir les fiches Lean", u(FICHES, "e4")),
          ("p", "Si vous avez gardé la fiche « Le Lean en 1 page », c’est aussi le bon moment pour reposer ses six questions sur votre atelier. Celle qui reste sans réponse claire vous indique par où continuer."),
-         ("p", "Et chaque jeudi, L’Atelier de Fichly, notre newsletter, revient sur un fondamental du terrain : les gaspillages, l’observation, la résolution de problème, les standards. Si vous ne la recevez pas encore et souhaitez vous y abonner, répondez simplement « Atelier » à cet email."),
+         ("p", "Et pour continuer sans effort, vous recevrez chaque jeudi L’Atelier de Fichly, notre newsletter. Chaque numéro revient sur un fondamental du terrain, des gaspillages à l’observation, de la résolution de problème aux standards, dans le prolongement de ce que vous avez vu dans la White Belt."),
          ("p", "Merci d’avoir suivi ces quelques emails,"), ("sig",),
        ]),
   dict(key="e4-equipe", name="WB · E4 · J+14 · Équipe", subject="Poser un langage commun avec votre équipe",
