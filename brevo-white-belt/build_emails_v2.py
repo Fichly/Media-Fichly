@@ -4,18 +4,23 @@
 Le fond (textes, liens et UTM, objets, preheaders) vient tel quel de la liste EMAILS de build_emails.py.
 Ce script ne réécrit rien : il découpe les blocs et les met en forme (cartes, étapes en briques, exergues, étiquettes).
 Il ajoute dans chaque email le bloc « Pour aller plus loin » (upsell FICHES ou GREEN BELT, textes validés mot pour mot)
-et la photo de Hugo dans la signature.
+et la photo de Hugo dans la signature. Ajout n° 2 du 2 octobre : salutation au prénom (balises Brevo), bandeau fin
+« Notre formation Green Belt éligible au CPF » en haut de la feuille, carte « Votre formation » (rappel, E1 à E4),
+code de réduction WHITEBELT15 dans la carte cadeau d'E0.
 
 Usage :
-  python3 build_emails_v2.py                 génère emails-v2/<clé>.html + meta.json, puis lance les contrôles
-  python3 build_emails_v2.py --brevo         idem avec les URL de la galerie Brevo (IMAGES_BREVO, à remplir)
-  python3 build_emails_v2.py --preview DIR   écrit aussi des copies d'aperçu (Poppins en local, version Arial)
+  python3 build_emails_v2.py                 aperçu : images locales, « Bonjour Camille, » à la place des balises Brevo
+  python3 build_emails_v2.py --brevo         version à charger dans Brevo : URL de la galerie (IMAGES_BREVO), balises
+                                             {% if contact.FIRSTNAME %}… de la salutation
+  python3 build_emails_v2.py --preview DIR   écrit aussi des copies d'aperçu (Poppins en local, version Arial, « Bonjour Camille, »)
+Les deux premiers modes écrivent emails-v2/<clé>.html + meta.json, puis lancent les contrôles.
 
 Images : le HTML porte des marqueurs « IMG:<clé> », « IMG:avatar » et « IMG:logo », remplacés à la fin par IMAGES
 (chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans Brevo : 10 PNG).
 Illustrations : visuels/emails/src/<clé>.js, rendues par visuels/emails/src/render.py (textes ≥ 48 px, soit 13 px à 375 px).
-Contrôles : le fond v1 est présent en entier (clauses) et rien n'est ajouté (multiensemble des mots du corps visible
-⊂ texte v1 + upsell + étiquettes LABELS + fil de la série + numéros d'étapes) ; mots comptés sur le corps visible, hors footer.
+Contrôles : le fond (EMAILS) est présent en entier (clauses) et rien n'est ajouté (multiensemble des mots du corps visible
+⊂ texte EMAILS + upsell + rappel + étiquettes LABELS + fil de la série + numéros d'étapes) ; mots comptés sur le corps
+visible, bandeau et pied exclus ; liens attendus = liens des blocs + bandeau + rappel + upsell + désinscription.
 """
 import html
 import importlib.util
@@ -75,7 +80,8 @@ UPSELL = {
                        text="Chez Fichly, l’étape suivante après la White Belt est la Green Belt. C’est une formation certifiante, éligible au CPF : le formulaire permet de demander votre inscription.",
                        button="Compléter le formulaire Green Belt"),
 }
-UPSELL_FOR = {"e0": "FICHES", "e1": "GREEN BELT", "e2": "FICHES", "e3": "GREEN BELT",
+# Répartition de l'ajout n° 2 (tableau G) : jamais le bouton principal de l'email.
+UPSELL_FOR = {"e0": "GREEN BELT", "e1": "FICHES", "e2": "GREEN BELT", "e3": "FICHES",
               "e4-decouvrir": "GREEN BELT", "e4-equipe": "FICHES", "e4-formation": "FICHES", "e4-accompagnement": "GREEN BELT"}
 
 def code(key):
@@ -84,6 +90,31 @@ def code(key):
 
 def upsell_url(key):
     return ce.u(UPSELL[UPSELL_FOR[key]]["url"], code(key))
+
+# ---------------------------------------------------------------- salutation, bandeau, rappel (ajout n° 2, textes mot pour mot)
+# Salutation au prénom, en langage de template Brevo (seules balises autorisées avec {{ unsubscribe }}).
+# Aperçu et captures : « Bonjour Camille, » à la place du bloc.
+GREETING_BREVO = "{% if contact.FIRSTNAME %}Bonjour {{ contact.FIRSTNAME }},{% else %}Bonjour,{% endif %}"
+GREETING_PREVIEW = "Bonjour Camille,"
+BREVO_TAGS = ["{% if contact.FIRSTNAME %}", "{{ contact.FIRSTNAME }}", "{% else %}", "{% endif %}", "{{ unsubscribe }}"]
+
+BANNER_TEXT = "Notre formation Green Belt éligible au CPF"          # + « → »
+
+def banner_url(key):
+    """Bandeau : formulaire Green Belt, utm_content=<eN>-bandeau."""
+    return ce.u(ce.GREENBELT, f"{code(key)}-bandeau")
+
+RAPPEL_LABEL = "Votre formation"
+RAPPEL_LINK = "Revoir la formation"                                 # + « → », vers ACCESS
+RAPPEL = {
+    "e1": "Dans la formation White Belt, vous avez vu la valeur ajoutée et les 8 gaspillages. Votre accès reste ouvert : revenez-y quand vous voulez.",
+    "e2": "Dans la formation White Belt, vous avez vu les 8 gaspillages. Votre accès reste ouvert : revenez-y quand vous voulez.",
+    "e3": "Dans la formation White Belt, vous avez vu la résolution de problème. Votre accès reste ouvert : revenez-y quand vous voulez.",
+    "e4": "Dans la formation White Belt, vous avez vu les bases du Lean : la valeur ajoutée, les 8 gaspillages, les 5S, le standard et le management visuel, puis la résolution de problème. Votre accès reste ouvert : revenez-y quand vous voulez.",
+}
+
+def rappel_url(key):
+    return ce.u(ce.ACCESS, code(key))
 
 # ---------------------------------------------------------------- jetons
 F = "Poppins,Montserrat,Arial,Helvetica,sans-serif"
@@ -393,6 +424,57 @@ def upsell(key):
              cta2(u["button"], upsell_url(key), cls="btn2", size=14, lh=20, pad="10px 18px", h=44, radius=12))
     return f'<!-- upsell:{UPSELL_FOR[key]} -->' + card(inner, bg=CARD, border=STITCH, pad="20px 24px 22px 24px", dashed=True) + '<!-- /upsell -->'
 
+def salut(text):
+    """Salutation : le bloc Brevo est écrit tel quel (ni fr() ni nowidow(), qui toucheraient aux balises)."""
+    assert text == "Bonjour,", text
+    return f'<p style="margin:0 0 16px 0;{font(16, 27, 400, TXT)}">{GREETING_BREVO}</p>'
+
+def rappel(key):
+    """Carte discrète « Votre formation » (E1 à E4) : papier clair, filet fin, texte 14 px, lien texte vers la formation."""
+    inner = (f'<p style="margin:0 0 6px 0;{font(12, 16, 700, BLUE, "letter-spacing:0.6px;word-spacing:2px;text-transform:uppercase;")}">{fr(RAPPEL_LABEL)}</p>'
+             f'<p style="margin:0 0 8px 0;{font(14, 22, 400, TXT)}">{fr(nowidow(RAPPEL[code(key)]))}</p>'
+             f'<p style="margin:0;{font(14, 20, 700, BLUE)}"><a href="{esc(rappel_url(key))}" target="_blank" '
+             f'style="color:{BLUE};font-weight:700;text-decoration:underline;">{fr(RAPPEL_LINK)}&nbsp;&#8594;</a></p>')
+    return ('<!-- rappel -->' + f'{TW}<tr><td class="cardpad" bgcolor="{CARD}" style="background-color:{CARD};border:1px solid {LINE};'
+            f'border-radius:14px;padding:14px 18px 15px 18px;">{inner}</td></tr></table>' + '<!-- /rappel -->')
+
+def hello(key, salutation):
+    """Salutation, puis la carte rappel (sauf E0, qui donne l'accès)."""
+    return salut(salutation) + ("" if key == "e0" else rappel(key) + spacer(22))
+
+def coupon(text):
+    """Code de réduction : vrai texte sélectionnable (un appui le sélectionne en entier), grandes capitales, contour pointillé."""
+    return (f'{TW}<tr><td class="coupon" align="center" bgcolor="#FFFFFF" style="background-color:#FFFFFF;border:2px dashed {YELLOW};'
+            f'border-radius:14px;padding:13px 10px 14px 10px;">'
+            f'<p style="margin:0;{font(26, 34, 800, INK, "letter-spacing:2px;")}text-rendering:geometricPrecision;-webkit-user-select:all;user-select:all;">{text}</p>'
+            f'</td></tr></table>')
+
+def code_note(text, code_):
+    """Rappel du code (E4 Découvrir) : contour pointillé jaune comme le code d'E0 (le jaune signale ce qui est offert),
+    sur papier clair pour ne pas se fondre dans le fond jaune de l'illustration placée juste au-dessus ;
+    le code en pastille jaune pastel."""
+    assert code_ in text, code_
+    tag = (f'<span style="white-space:nowrap;background-color:{PY};border-radius:6px;padding:2px 7px;'
+           f'font-weight:800;letter-spacing:1px;color:{INK};text-rendering:geometricPrecision;">{code_}</span>')
+    return (f'{TW}<tr><td class="cardpad" bgcolor="{CARD}" style="background-color:{CARD};border:2px dashed {YELLOW};border-radius:16px;padding:13px 18px;">'
+            f'<p style="margin:0;{font(15, 26, 500, INK)}">{fr(nowidow(text)).replace(code_, tag, 1)}</p>'
+            f'</td></tr></table>')
+
+def banner(key):
+    """Bandeau fin, tout en haut de la feuille : fond encre, texte blanc 13 px, toute la bande cliquable
+    (v:rect pour Outlook, lien en bloc ailleurs). 10 + 18 + 10 = 38 px de haut."""
+    u = esc(banner_url(key))
+    label = f"{fr(BANNER_TEXT)}&nbsp;&#8594;"
+    return ('<!-- bandeau -->'
+            f'<tr><td class="topband bg-ink" align="center" bgcolor="{INK}" style="background-color:{INK};border-radius:22px 22px 0 0;">'
+            f'<!--[if mso]><v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{u}" '
+            f'style="width:600px;height:38px;v-text-anchor:middle;" fillcolor="{INK}" stroke="f"><w:anchorlock/>'
+            f'<center style="color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;">{label}</center></v:rect><![endif]-->'
+            f'<!--[if !mso]><!--><a class="on-blue" href="{u}" target="_blank" style="display:block;padding:10px 12px;'
+            f'{font(13, 18, 700, "#FFFFFF", "letter-spacing:0.2px;")}text-rendering:geometricPrecision;text-align:center;text-decoration:none;border-radius:22px 22px 0 0;">'
+            f'{label}</a><!--<![endif]--></td></tr>'
+            '<!-- /bandeau -->')
+
 def band(h=10):
     tds = "".join(f'<td width="16.66%" height="{h}" bgcolor="{c}" style="height:{h}px;background-color:{c};font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td>' for c in BAND)
     return f'{TW}<tr>{tds}</tr></table>'
@@ -449,6 +531,8 @@ def page(e, rows):
   @media only screen and (max-width:620px) {{
     .outer {{ padding:0 !important; }}
     .sheet {{ border-radius:0 !important; }}
+    .topband, .topband a {{ border-radius:0 !important; }}
+    .topband a {{ padding-left:8px !important; padding-right:8px !important; }}
     .px {{ padding-left:22px !important; padding-right:22px !important; }}
     .pxl {{ padding-left:15px !important; padding-right:15px !important; }}
     .pxt {{ padding-left:14px !important; padding-right:14px !important; }}
@@ -466,6 +550,7 @@ def page(e, rows):
   }}
   [data-ogsc] .on-blue {{ color:#FFFFFF !important; }}
   [data-ogsb] .bg-blue {{ background-color:{BLUE} !important; }}
+  [data-ogsb] .bg-ink {{ background-color:{INK} !important; }}
 </style>
 </head>
 <body style="margin:0;padding:0;background-color:{DESK};">
@@ -474,6 +559,7 @@ def page(e, rows):
 <tr><td align="center" class="outer" style="padding:28px 0 0 0;">
 <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
 <table role="presentation" class="sheet" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{PAPER}" style="width:100%;max-width:600px;background-color:{PAPER};border-radius:22px 22px 0 0;">
+{banner(e["key"])}
 {rows}
 <tr><td style="padding:40px 0 0 0;">{band()}</td></tr>
 </table>
@@ -501,20 +587,19 @@ def kinds(e, expected):
 
 # ---------------------------------------------------------------- les 8 emails
 def e0():
-    e = EM["e0"]; B = kinds(e, ["p", "p", "cta", "p", "h2", "p", "link", "p", "p", "sig"])
+    e = EM["e0"]; B = kinds(e, ["p", "p", "cta", "p", "h2", "p", "code", "link", "p", "p", "sig"])
     merci = bold(B[1][1], "Votre accès est prêt")
     duree, compo, rythme = split(B[3][1], "Comptez environ une heure au total.", "Lean White Belt ».")
     compo = bold(compo, "six chapitres courts", "un test de dix questions")
-    assert B[4][1] == "En cadeau : le Lean en 1 page"
-    cadeau, posez = split(B[5][1], "sur leur poste.")
+    assert B[4][1] == "En cadeau : 15 % sur toutes nos fiches"
     rows = [header_row(), title_row(e, "Votre formation", "est ouverte"),
-            row(p(B[0][1]) + lead(merci) + spacer(24) + cta(B[2][1], B[2][2]), top=30),
+            row(hello("e0", B[0][1]) + lead(merci) + spacer(24) + cta(B[2][1], B[2][2]), top=30),
             row(illus("e0", "Le parcours de la White Belt : six chapitres courts, un test de dix questions, puis votre attestation, en environ une heure."), top=40),
             row(attack(duree) + p(compo, mb=16) + note(rythme), top=22),
-            row(card(chip("En cadeau", YELLOW, INK) + h2("Le Lean en 1 page") + p(cadeau, mb=18)
-                     + quote_left("Votre point de départ", posez) + spacer(20) + cta2(B[6][1], B[6][2]), bg=PY, border=None), top=34),
-            row(card(chip("Dans les deux semaines", BLUE, "#FFFFFF") + spacer(12) + p(B[7][1], mb=18) + series(None), bg=PL, border=None), top=20),
-            ] + ending(e, B[8][1], rail=False)
+            row('<!-- cadeau -->' + card(chip("En cadeau", YELLOW, INK) + h2(nowidow("15 % sur toutes nos fiches")) + p(B[5][1].replace(" code :", "\u00a0code :"), mb=16)
+                     + coupon(B[6][1]) + spacer(18) + cta2(B[7][1], B[7][2]), bg=PY, border=None) + '<!-- /cadeau -->', top=34),
+            row(card(chip("Dans les deux semaines", BLUE, "#FFFFFF") + spacer(12) + p(B[8][1], mb=18) + series(None), bg=PL, border=None), top=20),
+            ] + ending(e, B[9][1], rail=False)
     return page(e, "\n".join(rows))
 
 def e1():
@@ -524,7 +609,7 @@ def e1():
     regle = bold(regle, "le chronomètre est sur la pièce, pas sur les personnes.")
     rows = [header_row(), title_row(e, "Suivez une pièce :", "elle attend"),
             row(illus("e1", "Une pièce traverse le stock, l’en-cours, la machine et l’expédition, le chronomètre accroché à elle. Elle attend à chaque poste et n’est transformée qu’à la machine. Temps total, temps de transformation : l’écart est votre premier chantier."), top=26),
-            row(p(B[0][1]) + lead(intro), top=30),
+            row(hello(e["key"], B[0][1]) + lead(intro), top=30),
             row(card(pill("Un exercice de trente minutes") + spacer(20) + steps_v2(B[2][1], marks={4: "transforment réellement"})
                      + spacer(22) + stitch() + spacer(22) + exergue(ecart)), top=24),
             row(callout("Une règle", regle, PY, YELLOW) + spacer(12)
@@ -540,7 +625,7 @@ def e2():
     une_q, gemba = split(B[5][1], "depuis mon bureau ?")
     rows = [header_row(), title_row(e, "Une grille,", "quatre colonnes"),
             row(illus("e2", "Une feuille d’observation en quatre colonnes : attentes, déplacements, ruptures, retouches, avec quelques bâtons notés au poste."), top=26),
-            row(p(B[0][1]) + lead(intro), top=30),
+            row(hello(e["key"], B[0][1]) + lead(intro), top=30),
             row(card(pill("Trois règles") + spacer(16) + p(B[2][1], mb=18, color=INK, weight=500) + steps_v2(B[3][1])), top=24),
             row(p(q_intro, mb=10) + exergue(question) + spacer(16) + p(q_after, mb=0), top=32),
             row(callout("En repartant", une_q, PY, YELLOW), top=26),
@@ -557,7 +642,7 @@ def e3():
     regle = bold(B[4][1], "quand la réponse est « erreur humaine », on continue.")
     rows = [header_row(), title_row(e, "Choisir", "le bon outil"),
             row(illus("e3", "Les quatre outils du repère : Pareto, 5 Pourquoi, Ishikawa et DMAIC."), top=26),
-            row(p(B[0][1]) + lead(intro), top=30),
+            row(hello(e["key"], B[0][1]) + lead(intro), top=30),
             row(card(chip(repere.rstrip(" :"), PL, BLUE) + spacer(18) + tool_rows(B[2][1])), top=24),
             row(p(avant, mb=12) + pills_inline(["Quoi", "Où", "Depuis quand", "Combien"]) + spacer(6) + p(cest, mb=0), top=30),
             row(callout("Une règle", regle, PY, YELLOW), top=26),
@@ -570,10 +655,10 @@ def e4_decouvrir():
     fiches = bold(B[2][1], "Nos fiches Lean rassemblent 40 outils du Lean")
     jeudi, numero = split(B[5][1], "notre newsletter.")
     rows = [header_row(), title_row(e, "Garder les outils", "sous la main"),
-            row(p(B[0][1]) + lead(B[1][1], mb=20) + series(3), top=30),
+            row(hello(e["key"], B[0][1]) + lead(B[1][1], mb=20) + series(3), top=30),
             row(p(fiches, mb=20) + cta(B[3][1], B[3][2]), top=28),
             row(illus("e4-decouvrir", "Un éventail de fiches Lean : 40 outils du Lean, à ressortir avant une réunion d’équipe ou un passage en atelier."), top=40),
-            row(note(B[4][1]), top=22),
+            row(code_note(B[4][1], "WHITEBELT15"), top=22),
             row(card(chip("Chaque jeudi", BLUE, "#FFFFFF") + spacer(12) + p(jeudi, mb=10, color=INK, weight=500) + p(numero, mb=0), bg=PL, border=None), top=20),
             ] + ending(e, B[6][1], rail=False)
     return page(e, "\n".join(rows))
@@ -590,7 +675,7 @@ def e4_equipe():
         traps += (spacer(8) if i else "") + callout(role, txt[len(low):].strip(), PR, RED, pad="14px 18px 15px 18px", gap=7)
     rows = [header_row(), title_row(e, "Embarquer", "votre équipe"),
             row(illus("e4-equipe", "L’opérateur, le manager et la direction, réunis par une même ceinture : la White Belt, une formation commune, gratuite."), top=26),
-            row(p(B[0][1]) + lead(B[1][1]), top=30),
+            row(hello(e["key"], B[0][1]) + lead(B[1][1]), top=30),
             row(p(intro, mb=14, color=INK, weight=500) + traps, top=26),
             row(p(heure, mb=14) + p(transmettre, mb=20) + cta2(B[3][1], B[3][2]), top=26),
             row(stitch() + spacer(26) + p(B[4][1], mb=20) + cta(B[5][1], B[5][2]), top=32),
@@ -602,7 +687,7 @@ def e4_formation():
     intro = bold(B[1][1], "Chez Fichly, l’étape suivante est la Green Belt.")
     rows = [header_row(), title_row(e, "Passer à", "la Green Belt"),
             row(illus("e4-formation", "Après la White Belt, la Green Belt : une ceinture verte, une formation certifiante, éligible au CPF."), top=26),
-            row(p(B[0][1]) + lead(intro), top=30),
+            row(hello(e["key"], B[0][1]) + lead(intro), top=30),
             row(pills_inline(["Formation certifiante", "Éligible au CPF"]) + spacer(8) + p(B[2][1], mb=22)
                 + cta(B[3][1], B[3][2]) + spacer(14) + cta2(B[4][1], B[4][2]), top=26),
             row(note(B[5][1]), top=30),
@@ -617,7 +702,7 @@ def e4_accompagnement():
     lst = "".join((spacer(8) if i else "") + pill(t, radius=20) for i, t in enumerate([a, b, c, d]))
     rows = [header_row(), title_row(e, "Un regard", "extérieur"),
             row(illus("e4-accompagnement", "Une loupe sur l’atelier : le stock tampon, le poste de retouche, la réunion de crise."), top=26),
-            row(p(B[0][1]) + lead(B[1][1]), top=30),
+            row(hello(e["key"], B[0][1]) + lead(B[1][1]), top=30),
             row(p(voir, mb=14) + p(regard, mb=20) + cta(B[3][1], B[3][2]), top=26),
             row(card(p(durer, mb=14, color=INK, weight=500) + lst), top=34),
             row(note(B[5][1]), top=20),
@@ -635,22 +720,29 @@ def apply_images(src, images):
         return f'src="{esc(images[k])}"'
     return re.sub(r'src="IMG:([\w-]+)"', rep, src)
 
+def apply_greeting(src, brevo):
+    """--brevo : balises Brevo de la salutation ; aperçu et captures : « Bonjour Camille, »."""
+    return src if brevo else src.replace(GREETING_BREVO, GREETING_PREVIEW)
+
 FOOT_MARK = "<!-- pied -->"
+BANNER_RE = re.compile(r"<!-- bandeau -->.*?<!-- /bandeau -->", re.S)
 
 def body_text(src):
-    """Texte visible du corps : tout ce qui précède le pied de page (kicker, titre, étiquettes, numéros, fil de la série,
-    upsell, signature compris ; preheader caché, VML Outlook et footer légal exclus)."""
-    return visible_text(src.split(FOOT_MARK)[0])
+    """Texte visible du corps : ce qui précède le pied de page, sans le bandeau (kicker, titre, rappel, étiquettes, numéros,
+    fil de la série, upsell, signature compris ; preheader caché, VML Outlook, bandeau et footer légal exclus).
+    La salutation compte pour « Bonjour, » quel que soit le mode (balises Brevo ou prénom d'aperçu)."""
+    s = BANNER_RE.sub(" ", src.split(FOOT_MARK)[0])
+    return visible_text(s.replace(GREETING_BREVO, "Bonjour,").replace(GREETING_PREVIEW, "Bonjour,"))
 
 def body_words(src):
     """Nombre de mots réellement visibles dans le corps (même découpage des mots que la v1)."""
     return len(re.findall(r"[\wÀ-ÿ’'-]+", body_text(src)))
 
-# Ajouts de forme autorisés (en plus du texte v1 et de l'upsell) : étiquettes reprises du texte, qui le répètent.
+# Ajouts de forme autorisés (en plus du fond, de l'upsell et du rappel) : étiquettes reprises du texte, qui le répètent.
 # Les étiquettes qui remplacent un fragment du texte (e3 « Voici un repère simple », « Quoi / Où… » ; e4-equipe les rôles ;
 # e0 « En cadeau ») ne répètent rien et ne sont donc pas listées.
 LABELS = {
-    "e0": ["Votre point de départ", "Dans les deux semaines"],
+    "e0": ["Dans les deux semaines"],
     "e1": ["Un exercice de trente minutes", "Une règle", "Avec un opérateur"],
     "e2": ["Trois règles", "En repartant"],
     "e3": ["Une règle"],
@@ -661,20 +753,43 @@ LABELS = {
 }
 STEPS = {"e1": 6, "e2": 3}          # numéros des briques d'étapes (listes numérotées)
 
+def block_texts(e):
+    """Textes du fond d'un email, bloc par bloc (listes à plat, signature « Hugo, Fichly »)."""
+    out = []
+    for b in e["blocks"]:
+        if b[0] in ("p", "h2", "cta", "link", "code"):
+            out.append(b[1])
+        elif b[0] in ("ol", "ul"):
+            out += b[1]
+        elif b[0] == "sig":
+            out.append("Hugo, Fichly")
+        else:
+            raise ValueError(b[0])
+    return out
+
+def rappel_texts(key):
+    return [] if key == "e0" else [RAPPEL_LABEL, RAPPEL[code(key)], RAPPEL_LINK]
+
 def allowed_tokens(key):
-    """Multiensemble des mots autorisés dans le corps v2 : texte v1 (kicker, titre, blocs, signature), upsell, étiquettes, fil, numéros."""
+    """Multiensemble des mots autorisés dans le corps : fond (kicker, titre, blocs, signature), rappel, upsell,
+    étiquettes, fil, numéros."""
     from collections import Counter
     e = EM[key]
-    texts = [e["kicker"], e["title"], "Hugo, Fichly"]
-    for b in e["blocks"]:
-        if b[0] in ("p", "h2", "cta", "link"):
-            texts.append(b[1])
-        elif b[0] in ("ol", "ul"):
-            texts += b[1]
     u = UPSELL[UPSELL_FOR[key]]
+    texts = [e["kicker"], e["title"]] + block_texts(e) + rappel_texts(key)
     texts += [UPSELL_LABEL, u["title"], u["text"], u["button"]] + LABELS[key] + SERIES
     texts += [str(i + 1) for i in range(STEPS.get(key, 0))]
     return Counter(t for x in texts for t in tokens(x))
+
+def expected_links(key):
+    """URL attendues : boutons et liens du fond (ACCESS, LANDING, DISCOUNT… avec UTM), bandeau, rappel (E1 à E4),
+    upsell du tableau G, désinscription."""
+    e = EM[key]
+    want = {b[2] for b in e["blocks"] if b[0] in ("cta", "link")}
+    want |= {"{{ unsubscribe }}", banner_url(key), upsell_url(key)}
+    if key != "e0":
+        want.add(rappel_url(key))
+    return want
 
 # ---------------------------------------------------------------- contrôles
 EMOJI = re.compile("[\U0001F000-\U0001FAFF\U00002600-\U000026FF\U00002700-\U000027BF\U0001F1E6-\U0001F1FF️‍]")
@@ -687,7 +802,7 @@ def visible_text(src):
     h = re.sub(r'<table [^>]*aria-hidden="true".*?</table>', " ", h, flags=re.S)
     h = re.sub(r"</?(strong|b|span|a|em)\b[^>]*>", "", h)
     h = html.unescape(re.sub(r"<[^>]+>", " ", h))
-    return re.sub(r"\s+", " ", h.replace(" ", " ").replace("͏", "").replace("‌", "")).strip()
+    return re.sub(r"\s+", " ", h.replace(" ", " ").replace("͏", "").replace("‌", "")).strip()
 
 def tokens(t):
     return re.findall(r"[0-9a-zà-ÿœæ’']+", html.unescape(re.sub(r"<[^>]+>", " ", t)).lower())
@@ -697,30 +812,81 @@ def clauses(t):
 
 def hrefs(src):
     a = re.findall(r'<a\b[^>]*\shref="([^"]+)"', src)
-    v = re.findall(r'<v:roundrect\b[^>]*\shref="([^"]+)"', src)
+    v = re.findall(r'<v:(?:roundrect|rect)\b[^>]*\shref="([^"]+)"', src)
     return {html.unescape(x) for x in a}, {html.unescape(x) for x in v}
 
-def check(key, src, images):
+def section(src, name):
+    m = re.search(rf"<!-- {name}(?::[^>]*)? -->(.*?)<!-- /{name} -->", src, flags=re.S)
+    return m.group(1) if m else None
+
+def check(key, src, images, brevo):
     e = EM[key]
     res = {}
     vis = visible_text(src)
     vt = " " + " ".join(tokens(vis)) + " "
-    miss = []
-    for b in e["blocks"]:
-        parts = [b[1]] if b[0] in ("p", "h2", "cta", "link") else (b[1] if b[0] in ("ol", "ul") else ["Hugo, Fichly"])
-        for part in parts:
-            for c in clauses(part):
-                if " " + " ".join(tokens(c)) + " " not in vt:
-                    miss.append(c.strip())
-    res["fond : toutes les phrases d'origine présentes"] = (not miss, miss)
+    miss = [c.strip() for part in block_texts(e) for c in clauses(part) if " " + " ".join(tokens(c)) + " " not in vt]
+    res["fond : toutes les phrases présentes (EMAILS)"] = (not miss, miss)
     from collections import Counter
     extra = Counter(tokens(body_text(src))) - allowed_tokens(key)
-    res["fond : aucun mot ajouté (v2 − v1 − upsell − étiquettes)"] = (not extra, dict(extra))
+    res["fond : aucun mot ajouté (corps − fond − rappel − upsell − étiquettes)"] = (not extra, dict(extra))
+
+    # liens
     a_new, v_new = hrefs(src)
-    a_old, _ = hrefs((V1 / f"{key}.html").read_text(encoding="utf-8"))
-    want = a_old | {upsell_url(key)}
-    res["liens = v1 + upsell"] = (a_new == want, sorted(a_new ^ want))
+    want = expected_links(key)
+    res["liens = fond + bandeau + rappel + upsell (G) + désinscription"] = (a_new == want, sorted(a_new ^ want))
     res["liens VML ⊂ liens HTML"] = (v_new <= a_new, sorted(v_new - a_new))
+    stale = re.findall(r"A-REMPLACER|lean-en-1-page|Lean en 1 page|Le&nbsp;Lean&nbsp;en", src, flags=re.I)
+    res["aucun lien provisoire ni « Le Lean en 1 page »"] = (not stale, stale)
+    frag = [x for x in a_new if "#" in x and x != ce.CPF and "utm_content=" not in x.split("#")[0]]
+    res["UTM avant le fragment # (ACCESS)"] = (not frag, frag)
+    res["UTM : utm_content de l'email partout"] = (
+        all(f"utm_content={code(key)}" in x for x in a_new if "utm_" in x)
+        and all(x == ce.CPF or "utm_content=" in x for x in a_new if x.startswith("http")), "")
+
+    # salutation et balises
+    greet = GREETING_BREVO if brevo else GREETING_PREVIEW
+    res[f"salutation ({'balises Brevo' if brevo else 'aperçu « Bonjour Camille, »'})"] = (
+        src.count(greet) == 1 and "Bonjour," not in vis.replace(greet, "") and (brevo or "{%" not in src), greet)
+    tags = re.findall(r"\{\{.*?\}\}|\{%.*?%\}|\{#", src)
+    res["balises : FIRSTNAME (si/sinon) et {{ unsubscribe }} seules"] = (
+        tags == (BREVO_TAGS if brevo else ["{{ unsubscribe }}"]), tags)
+
+    # bandeau
+    bd = section(src, "bandeau")
+    sheet = src.index('class="sheet"')
+    bd_ok = bool(bd) and visible_text(bd) == BANNER_TEXT + " →" and hrefs(bd) == ({banner_url(key)}, {banner_url(key)})
+    first = bool(bd) and "<tr" not in src[sheet:src.index("<!-- bandeau -->")] and src.index("<!-- bandeau -->") < src.index('alt="Fichly"')
+    res["bandeau : texte exact, lien <eN>-bandeau (HTML + VML)"] = (bd_ok, visible_text(bd) if bd else None)
+    res["bandeau : première rangée de la feuille, au-dessus du logo, 38 px"] = (
+        first and f"background-color:{INK}" in bd and "height:38px" in bd and "padding:10px 12px" in bd
+        and "font-size:13px;line-height:18px;font-weight:700;color:#FFFFFF" in bd, "")
+
+    # rappel « Votre formation »
+    rp = section(src, "rappel")
+    if key == "e0":
+        res["rappel : absent d'E0"] = (rp is None, "")
+    else:
+        rv = visible_text(rp) if rp else ""
+        res["rappel : textes mot pour mot, lien ACCESS"] = (
+            bool(rp) and rv == f"{RAPPEL_LABEL} {RAPPEL[code(key)]} {RAPPEL_LINK} →" and hrefs(rp)[0] == {rappel_url(key)}, rv)
+        res["rappel : un seul, juste après la salutation"] = (
+            src.count("<!-- rappel -->") == 1 and bool(re.search(re.escape(greet) + r"</p><!-- rappel -->", src)), "")
+
+    # code de réduction
+    n_code = vis.count("WHITEBELT15")
+    if key == "e0":
+        cd = section(src, "cadeau") or ""
+        cv = visible_text(cd)
+        res["cadeau E0 : étiquette, titre, texte, code WHITEBELT15, bouton DISCOUNT"] = (
+            cv == "En cadeau 15 % sur toutes nos fiches " + EM["e0"]["blocks"][5][1] + " WHITEBELT15 Profiter de mes 15 % →"
+            and hrefs(cd)[0] == {ce.u(ce.DISCOUNT, "e0")}, cv)
+        res["cadeau E0 : jaune pastel, code en texte, contour pointillé"] = (
+            f"background-color:{PY}" in cd and re.search(r'class="coupon"[^>]*border:2px dashed', cd) is not None
+            and re.search(r">WHITEBELT15</p>", cd) is not None and n_code == 1, n_code)
+    else:
+        res["code WHITEBELT15 : seulement en E0 et E4 Découvrir"] = (n_code == (1 if key == "e4-decouvrir" else 0), n_code)
+
+    # upsell
     m = re.search(r"<!-- upsell:(.+?) -->(.*?)<!-- /upsell -->", src, flags=re.S)
     kind = m.group(1) if m else None
     u = UPSELL.get(kind, {})
@@ -729,13 +895,14 @@ def check(key, src, images):
     exact = bool(m) and all(s in up_vis for s in (UPSELL_LABEL, u["title"], u["text"], u["button"]))
     res["upsell : textes mot pour mot"] = (exact, up_vis)
     main = {html.unescape(b[2]) for b in e["blocks"] if b[0] == "cta"}
-    res["upsell : répartition FICHES / GREEN BELT"] = (kind == UPSELL_FOR[key] and up_links == {upsell_url(key)} and not (up_links & main), kind)
+    res["upsell : répartition du tableau G, jamais le bouton principal"] = (
+        kind == UPSELL_FOR[key] and up_links == {upsell_url(key)} and not (up_links & main), kind)
     end, sig = src.find("<!-- /upsell -->"), src.find('alt="Hugo, Fichly"')
     res["upsell : un seul, avant la signature"] = (src.count("<!-- upsell:") == 1 and -1 < end < sig, "")
+
+    # images
     av = re.findall(r'<img [^>]*alt="Hugo, Fichly"[^>]*>', src)
     res["avatar (alt « Hugo, Fichly », 56 × 56)"] = (len(av) == 1 and f'src="{esc(images["avatar"])}"' in av[0] and 'width="56"' in av[0] and 'height="56"' in av[0], av)
-    tags = re.findall(r"\{\{[^}]*\}\}", src)
-    res["balises {{ }} : {{ unsubscribe }} seule"] = (tags == ["{{ unsubscribe }}"], tags)
     imgs = re.findall(r"<img [^>]+>", src)
     logo = [i for i in imgs if f'src="{esc(images["logo"])}"' in i]
     res["logo (alt « Fichly », pastille 2×)"] = (len(logo) == 1 and 'alt="Fichly"' in logo[0], len(logo))
@@ -751,22 +918,26 @@ def check(key, src, images):
             from PIL import Image
             w = Image.open(pth).size[0]
             res["illustration PNG 1200 px ≤ 250 Ko"] = (w == 1200 and pth.stat().st_size <= 250 * 1024, f"{w} px, {pth.stat().st_size // 1024} Ko")
+        else:
+            res["illustration : URL de la galerie Brevo"] = (s == images[key], s)
+
+    # forme et règles
     emo = sorted({ch for ch in html.unescape(src) if EMOJI.match(ch) and ch not in ALLOWED_SYMBOLS})
     res["pas d'émojis"] = (not emo, emo)
     res["objet ≤ 50 caractères"] = (len(e["subject"]) <= 50, len(e["subject"]))
     n = body_words(src)
-    res["corps 150–300 mots visibles (upsell compris, hors footer)"] = (150 <= n <= 300, n)
+    res["corps 150–300 mots visibles (bandeau et pied exclus)"] = (150 <= n <= 300, n)
     res["objet = <title>, preheader"] = (f"<title>{html.escape(e['subject'])}</title>" in src and html.escape(e["preheader"]) in src, "")
     res["footer légal"] = (all(s in vis for s in ["Fichly, le Lean accessible", "22 avenue Danton Demar, 34660 Cournonterral, France",
                                                    "TVA FR69933450322 · APE 4791B", "Vous recevez cet email suite à votre inscription à la White Belt Lean de Fichly."]), "")
-    res["« Bonjour, » et « Hugo, Fichly »"] = ("Bonjour," in vis and "Hugo, Fichly" in vis, "")
+    res["signature « Hugo, Fichly »"] = ("Hugo, Fichly" in vis, "")
     res["pas de flex, grid ni position"] = (not re.search(r"display:\s*(flex|grid)|position:\s*(absolute|relative|fixed)", src), "")
     return res
 
-def run_checks(sources, images):
+def run_checks(sources, images, brevo):
     ok = True
     for key, src in sources.items():
-        res = check(key, src, images)
+        res = check(key, src, images, brevo)
         bad = {k: v for k, v in res.items() if not v[0]}
         ok &= not bad
         print(f"── {key:<18} {'OK' if not bad else 'ÉCART'}  ({len(res) - len(bad)}/{len(res)})")
@@ -779,6 +950,7 @@ def run_checks(sources, images):
 # ---------------------------------------------------------------- aperçu local
 def preview(src, mode="poppins"):
     fonts = "".join(f"@font-face{{font-family:Poppins;font-weight:{w};src:url({ASSETS}/fonts/poppins-latin-{w}-normal.woff2) format('woff2')}}" for w in (400, 500, 700, 800))
+    src = src.replace(GREETING_BREVO, GREETING_PREVIEW)        # aperçu et captures : prénom d'exemple
     if mode == "arial":
         src = re.sub(r'<link href="https://fonts.googleapis.com[^>]*>', "", src).replace("Poppins,Montserrat,", "")
     else:
@@ -786,21 +958,25 @@ def preview(src, mode="poppins"):
     return src
 
 def main(argv):
+    brevo = "--brevo" in argv
     images = dict(IMAGES)
-    if "--brevo" in argv:
+    if brevo:
         missing = [k for k in images if k not in IMAGES_BREVO]
         if missing:
             sys.exit(f"IMAGES_BREVO incomplet : {', '.join(missing)}")
         images = dict(IMAGES_BREVO)
+    print("MODE :", "Brevo (galerie Brevo, balises de salutation)" if brevo else "aperçu (images locales, « Bonjour Camille, »)")
     OUT.mkdir(exist_ok=True)
     sources, meta = {}, []
     for e in EMAILS:
         k = e["key"]
-        src = apply_images(BUILD[k](), images)
+        src = apply_greeting(apply_images(BUILD[k](), images), brevo)
         (OUT / f"{k}.html").write_text(src, encoding="utf-8")
         sources[k] = src
         meta.append({"clé": k, "nom": e["name"], "objet": e["subject"], "preheader": e["preheader"], "mots": body_words(src),
                      "image": images[k], "avatar": images["avatar"], "logo": images["logo"], "upsell": UPSELL_FOR[k],
+                     "bandeau": banner_url(k), "rappel": k != "e0",
+                     "salutation": "balises Brevo" if brevo else "aperçu (Bonjour Camille,)",
                      "fichier": f"emails-v2/{k}.html"})
     (OUT / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     for m in meta:
@@ -811,7 +987,7 @@ def main(argv):
         for k, src in sources.items():
             (d / f"{k}.html").write_text(preview(src), encoding="utf-8")
             (d / f"{k}-arial.html").write_text(preview(src, "arial"), encoding="utf-8")
-    return 0 if run_checks(sources, images) else 1
+    return 0 if run_checks(sources, images, brevo) else 1
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

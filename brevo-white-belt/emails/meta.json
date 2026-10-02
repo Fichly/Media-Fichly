@@ -3,8 +3,8 @@
   "key": "e0",
   "name": "WB · E0 · Accès",
   "subject": "Votre accès à la White Belt Lean",
-  "preheader": "Six chapitres courts, un test final, et une fiche offerte.",
-  "words": 208,
+  "preheader": "Six chapitres courts, un test final, et 15 % sur nos fiches.",
+  "words": 171,
   "file": "emails/e0.html"
  },
  {
@@ -36,7 +36,7 @@
   "name": "WB · E4 · J+14 · Découvrir",
   "subject": "Et après la White Belt ?",
   "preheader": "Une suite simple pour garder les outils du Lean sous la main.",
-  "words": 175,
+  "words": 152,
   "file": "emails/e4-decouvrir.html"
  },
  {
