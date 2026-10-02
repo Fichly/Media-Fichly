@@ -14,14 +14,16 @@ Story.scene({
     const { el, text, pill, C, ZONE } = A;
     const X0 = ZONE.x, L1 = 830, L2 = 1150, BH = 112;
     S.L1 = L1; S.L2 = L2;
-    const widths = [150, 120, 170, 110, 160, 170];      // somme = 880, la largeur de la zone
-    const ext = [0, 2, 5];                               // tâches qui peuvent se faire machine en marche
+    // Somme = 880, la largeur de la zone. Les externes pèsent 20 % de l'arrêt (article : 52 → 41 min à l'étape 2),
+    // la réduction de l'interne mène à environ −40 % (un premier chantier gagne couramment 30 à 50 %).
+    const widths = [70, 170, 60, 200, 50, 330];
+    const ext = [0, 2, 4];                               // tâches qui peuvent se faire machine en marche
     // Contour fantôme de l'arrêt d'origine
     S.ghost = el('rect', { x: X0, y: L1, width: ZONE.w, height: BH, rx: 16, fill: 'none', stroke: C.coral, 'stroke-width': 3, 'stroke-dasharray': '12 10' }, root);
     S.l1 = el('g', {}, root);
     pill(S.l1, X0, L1 - 62, 'Interne · machine arrêtée', { size: 32, bg: C.coralSoft, fg: C.ko, h: 56 });
     S.l2 = el('g', {}, root);
-    pill(S.l2, X0, L2 - 62, 'Externe · machine en marche', { size: 32, bg: C.greenSoft, fg: C.ok, h: 56 });
+    pill(S.l2, X0, L2 + BH + 54, 'Externe · machine en marche', { size: 32, bg: C.greenSoft, fg: C.ok, h: 56 });
     S.lane2 = el('rect', { x: X0, y: L2, width: ZONE.w, height: BH, rx: 16, fill: C.surface }, root);
     // Les six tâches
     let x = X0, xe = X0;
@@ -36,7 +38,7 @@ Story.scene({
     });
     // Positions resserrées puis réduites des tâches internes
     let xi = X0, xs = X0;
-    S.tasks.filter(tk => !tk.isExt).forEach(tk => { tk.xc = xi; xi += tk.w; tk.xs = xs; xs += tk.w * 0.62; });
+    S.tasks.filter(tk => !tk.isExt).forEach(tk => { tk.xc = xi; xi += tk.w; tk.xs = xs; xs += tk.w * 0.75; });
     S.endShort = xs;
     S.shrink = el('g', {}, root);
     text(S.shrink, X0, L1 + BH + 66, 'Puis réduire l’interne', { size: 36, weight: 600, fill: C.indigo, italic: true });
@@ -62,7 +64,7 @@ Story.scene({
         const pc = easeInOut(prog(t, 6.75, 0.5));
         const ps = easeInOut(prog(t, 8.3, 0.7));
         x = lerp(lerp(tk.x0, tk.xc, pc), tk.xs, ps);
-        w = (tk.w - 8) * lerp(1, 0.62, ps) + (ps > 0 ? 8 * 0.38 * ps : 0) - 0;
+        w = tk.w * lerp(1, 0.75, ps) - 8;
       }
       tk.g.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)})`);
       tk.g.setAttribute('opacity', pin.toFixed(3));

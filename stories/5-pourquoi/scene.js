@@ -7,7 +7,7 @@ Story.scene({
   outil: '5 Pourquoi',
   titre: ['5 Pourquoi'],
   accroche: { lignes: ['Le même défaut', 'revient sans cesse.'], accent: 1 },
-  retenir: 'Accuser une personne, c’est s’arrêter trop tôt.',
+  retenir: 'La réponse désigne une personne ? Posez un pourquoi de plus.',
   poster: 11.2,
 
   build(S, A, root) {
@@ -22,7 +22,8 @@ Story.scene({
     S.R = rows;
     // Rail : se trace d'un badge à l'autre
     S.rail = rows.slice(1).map((r, i) => el('line', { x1: RX, y1: rows[i].y + 34, x2: RX, y2: r.y - 34, stroke: C.indigo100, 'stroke-width': 8, 'stroke-linecap': 'round' }, root));
-    S.railCm = el('line', { x1: RX, y1: rows[3].y + 34, x2: RX, y2: 1262, stroke: C.indigo100, 'stroke-width': 8, 'stroke-linecap': 'round' }, root);
+    // La contre-mesure n'est pas la réponse à un pourquoi : connecteur vert en pointillé, sans numéro
+    S.railCm = el('line', { x1: RX, y1: rows[3].y + 34, x2: RX, y2: 1262, stroke: C.green, 'stroke-width': 8, 'stroke-linecap': 'round' }, root);
     rows.forEach((r, i) => {
       r.badge = el('g', {}, root);
       el('circle', { cx: RX, cy: r.y, r: 34, fill: C.indigo }, r.badge);
@@ -64,6 +65,7 @@ Story.scene({
     r3.ans.setAttribute('opacity', (t < 8.2 ? +r3.ans.getAttribute('opacity') : 1 - 0.55 * A.prog(t, 8.2, 0.4)).toFixed(3));
     show(S.fix, t, 8.25, { dur: 0.45, from: 'up', d: 24 });
     stroke(S.railCm, t, 10.0, 0.3);
+    if (t >= 10.3) S.railCm.setAttribute('stroke-dasharray', '2 16');
     show(S.cm, t, 10.25, { dur: 0.5, from: 'up', d: 30 });
   },
 });

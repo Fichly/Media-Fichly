@@ -9,8 +9,10 @@ Story.scene({
   retenir: 'Rendre l’erreur impossible plutôt que compter sur l’attention.',
   poster: 10.8,
 
-  build(S, A, root) {
+  build(S, A, root0) {
     const { el, text, width, C, cross, check } = A;
+    // Gabarit, pièce et détrompeur agrandis de 30 % autour du logement, pour rester lisibles en bulle
+    const root = el('g', { transform: 'translate(540 1150) scale(1.3) translate(-540 -1150)' }, root0);
     // Gabarit de montage : socle et logement
     S.base = el('g', {}, root);
     el('rect', { x: 290, y: 1060, width: 500, height: 250, rx: 26, fill: C.rustSoft }, S.base);
@@ -24,10 +26,10 @@ Story.scene({
     const w = 300, h = 160, n = 72, m = 62;
     el('path', { d: `M ${-w / 2} ${-h / 2} H ${w / 2} V ${h / 2 - m} H ${w / 2 - n} V ${h / 2} H ${-w / 2} Z`, fill: C.indigo, stroke: C.indigo700, 'stroke-width': 4, 'stroke-linejoin': 'round' }, S.partInner);
     el('circle', { cx: -w / 2 + 48, cy: -h / 2 + 44, r: 14, fill: C.white }, S.partInner);   // repère : le côté se voit
-    S.cx = 540; S.seat = 1260 - h / 2; S.blocked = 1200 - h / 2; S.top = 900;
+    S.cx = 540; S.seat = 1260 - h / 2; S.blocked = 1200 - h / 2; S.top = 960;
     // Légendes, au même endroit, l'une après l'autre
     const cap = (str, kind) => {
-      const g = el('g', {}, root);
+      const g = el('g', {}, root0);
       const tx = text(g, 0, 732, str, { size: 52, weight: 700, fill: kind === 'ok' ? C.ok : kind === 'note' ? C.ink : C.ko });
       const tw = width(tx), iw = kind === 'note' ? 0 : 66, x0 = 540 - (tw + iw) / 2;
       tx.setAttribute('x', x0 + iw);

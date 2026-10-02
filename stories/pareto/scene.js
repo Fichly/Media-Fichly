@@ -20,7 +20,7 @@ Story.scene({
     S.axis = el('line', { x1: 160, y1: AX, x2: 920, y2: AX, stroke: C.ink, 'stroke-width': 4, 'stroke-linecap': 'round' }, root);
     S.bars = occ.map((v, i) => {
       const g = el('g', {}, root);
-      const r = el('rect', { x: -45, y: 0, width: 90, height: 0, rx: 8, fill: C.coral }, g);
+      const r = el('rect', { x: -45, y: 0, width: 90, height: 0, rx: 8, fill: C.coral, stroke: C.white, 'stroke-width': 4 }, g);
       return { g, r, h: v * K, from: slots[order[i]], to: slots[i], i };
     });
     // Courbe cumulée
@@ -66,7 +66,7 @@ Story.scene({
     S.bars.forEach((b, k) => {
       const h = b.h * easeOut(prog(t, 3.3 + b.from / 1000, 0.45));
       const p = easeInOut(prog(t, 4.95 + k * 0.05, 0.8));
-      const x = lerp(b.from, b.to, p), lift = Math.sin(p * Math.PI) * 34;
+      const x = lerp(b.from, b.to, p), lift = Math.sin(p * Math.PI) * (20 + 16 * b.i);
       b.g.setAttribute('transform', `translate(${x.toFixed(2)} ${(S.AX - h - lift).toFixed(2)})`);
       b.r.setAttribute('height', h.toFixed(2));
       b.r.setAttribute('fill', b.i < 3 && fade > 0.5 ? C.indigo : C.coral);

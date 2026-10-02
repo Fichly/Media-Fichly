@@ -7,7 +7,7 @@ Story.scene({
   outil: 'VSM',
   titre: ['VSM'],
   accroche: { lignes: ['Chaque poste tourne vite.', 'Le client attend.'], accent: 1 },
-  retenir: 'Le temps se perd entre les postes, pas dedans.',
+  retenir: 'Le temps se perd surtout entre les postes.',
   poster: 10.4,
 
   build(S, A, root) {
@@ -33,14 +33,15 @@ Story.scene({
     S.FY = FY;
     // Ligne de temps : attentes en bas (hachurées), transformation en haut
     const LOW = 1150, HIGH = 1066;
-    const waits = [[110, 330], [360, 690], [720, 830]];
-    const va = [[330, 342], [690, 714], [830, 842]];
+    // Ligne en escalier sous la carte : attente sous chaque stock, transformation sous chaque poste
+    const waits = [[95, 195], [380, 480], [665, 765]];
+    const va = [[205, 355], [490, 640], [775, 925]];
     S.waits = waits.map(([a, b]) => el('rect', { x: a, y: LOW - 14, width: 0, height: 28, rx: 5, fill: 'url(#hachures)' }, root)).map((r, i) => ({ r, w: waits[i][1] - waits[i][0] }));
     S.va = el('g', {}, root);
     va.forEach(([a, b], i) => {
-      el('line', { x1: a, y1: LOW, x2: a, y2: HIGH, stroke: C.indigo, 'stroke-width': 4 }, S.va);
+      el('line', { x1: a - 10, y1: LOW, x2: a, y2: HIGH, stroke: C.indigo, 'stroke-width': 4 }, S.va);
       el('line', { x1: a, y1: HIGH, x2: b, y2: HIGH, stroke: C.indigo, 'stroke-width': 12, 'stroke-linecap': 'round' }, S.va);
-      el('line', { x1: b, y1: HIGH, x2: b, y2: LOW, stroke: C.indigo, 'stroke-width': 4 }, S.va);
+      el('line', { x1: b, y1: HIGH, x2: b + 10, y2: LOW, stroke: C.indigo, 'stroke-width': 4 }, S.va);
     });
     // Comparaison : 3 jours d'attente contre 5 minutes de transformation
     S.cmp = el('g', {}, root);
@@ -48,10 +49,9 @@ Story.scene({
     el('rect', { x: ZONE.x + ZONE.w - 8, y: 1250, width: 8, height: 56, rx: 3, fill: C.indigo }, S.cmp);
     // Éclair kaizen sur la plus longue attente
     S.burst = el('g', {}, root);
-    const bx = 430, by = 1000, pts = [];
+    const bx = 540, by = 1278, pts = [];
     for (let i = 0; i < 16; i++) { const r = i % 2 ? 26 : 50, a = -Math.PI / 2 + i * Math.PI / 8; pts.push(`${(bx + r * Math.cos(a)).toFixed(1)} ${(by + r * Math.sin(a)).toFixed(1)}`); }
     el('polygon', { points: pts.join(' '), fill: C.green, stroke: C.ink, 'stroke-width': 4, 'stroke-linejoin': 'round' }, S.burst);
-    S.focus = el('rect', { x: 352, y: LOW - 24, width: 346, height: 48, rx: 10, fill: 'none', stroke: C.ink, 'stroke-width': 4, 'stroke-dasharray': '10 8' }, root);
     // Légendes
     const cap = parts => {
       const g = el('g', {}, root);
@@ -64,7 +64,7 @@ Story.scene({
       [cap([['Suivre une pièce', C.ink]]), 3.15, 4.85],
       [cap([['Attente : ', C.ink], ['3 jours', C.ko]]), 5.0, 6.85],
       [cap([['Machine : ', C.ink], ['5 minutes', C.indigo]]), 7.0, 9.05],
-      [cap([['Ici, on agit', C.ink]]), 9.2, null],
+      [cap([['Réduire l’attente', C.ink]]), 9.2, null],
     ];
   },
 
@@ -82,14 +82,8 @@ Story.scene({
     S.waits.forEach((w, i) => w.r.setAttribute('width', (w.w * easeInOut(prog(t, 5.1 + i * 0.4, 0.4))).toFixed(1)));
     show(S.va, t, 7.05, { dur: 0.4, from: 'fade' });
     show(S.cmp, t, 8.2, { dur: 0.5, from: 'left', d: 60 });
-    // Focus sur la plus longue attente
-    const dim = prog(t, 9.2, 0.35);
-    S.items.forEach((it, i) => { if (i !== 2) it.g.setAttribute('opacity', (+it.g.getAttribute('opacity') * (1 - 0.6 * dim)).toFixed(3)); });
-    S.waits.forEach((w, i) => w.r.setAttribute('opacity', i === 1 ? 1 : (1 - 0.6 * dim).toFixed(3)));
-    S.va.setAttribute('opacity', (+S.va.getAttribute('opacity') * (1 - 0.6 * dim)).toFixed(3));
-    S.cmp.setAttribute('opacity', (+S.cmp.getAttribute('opacity') * (1 - 0.6 * dim)).toFixed(3));
-    show(S.focus, t, 9.3, { dur: 0.3, from: 'fade' });
-    show(S.burst, t, 9.35, { from: 'pop', cx: 430, cy: 1000, dur: 0.45 });
+    // L'éclair kaizen se pose sur l'attente, qui reste à l'écran jusqu'au message
+    show(S.burst, t, 9.35, { from: 'pop', cx: 540, cy: 1278, dur: 0.45 });
     S.caps.forEach(([g, s, o]) => show(g, t, s, { dur: 0.35, from: 'up', d: 20, out: o, outDur: 0.15 }));
   },
 });

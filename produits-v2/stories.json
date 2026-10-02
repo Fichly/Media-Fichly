@@ -11,7 +11,7 @@
     "nom": "5 Pourquoi",
     "famille": 1,
     "article": "methode-5-pourquoi-cause-racine",
-    "texte": "Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? « L'opérateur a oublié » : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement. À retenir : accuser une personne, c'est s'arrêter trop tôt."
+    "texte": "Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? « L'opérateur a oublié » : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement. À retenir : la réponse désigne une personne ? Posez un pourquoi de plus."
   },
   {
     "id": "obeya",
@@ -32,7 +32,7 @@
     "nom": "VSM",
     "famille": 4,
     "article": "value-stream-mapping-definition-et-etapes",
-    "texte": "Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Ici, on agit : sur la plus longue attente. À retenir : le temps se perd entre les postes, pas dedans."
+    "texte": "Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Réduire l'attente. À retenir : le temps se perd surtout entre les postes."
   },
   {
     "id": "smed",
