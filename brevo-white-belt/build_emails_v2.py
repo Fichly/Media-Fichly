@@ -81,12 +81,16 @@ SERIES = ["Outil 1", "Outil 2", "Outil 3", "Et après ?"]
 SERIES_ACCENT = ["e1", "e2", "e3", "e4"]
 
 # ---------------------------------------------------------------- typographie
+GROUPS = ["White Belt", "Green Belt", "Mon Compte Formation", "Gemba Walk", "Lean flash"]
+
 def fr(t):
     """Espaces insécables françaises (build_emails.fr) + chiffre lié au mot qui suit, hors balises."""
     parts = re.split(r"(<[^>]+>)", ce.fr(t))
     for i, x in enumerate(parts):
         if not x.startswith("<"):
             x = x.replace("Le Lean en 1 page", "Le&nbsp;Lean&nbsp;en&nbsp;1&nbsp;page")
+            for name in GROUPS:
+                x = x.replace(name, name.replace(" ", "&nbsp;"))
             parts[i] = re.sub(r"(?<=\d) (?=[^\s\d])", "&nbsp;", x)
     return "".join(parts)
 
@@ -288,10 +292,10 @@ def cta(label, url):
             f'<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{u}" '
             f'style="height:52px;v-text-anchor:middle;width:{w}px;" arcsize="27%" stroke="f" fillcolor="{BLUE}">'
             f'<v:shadow on="t" color="{INK}" offset="0,4px"/><w:anchorlock/>'
-            f'<center style="color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;">{fr(nowidow(label))}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
+            f'<center style="color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;">{fr(label)}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
             f'<!--[if !mso]><!--><a class="bg-blue on-blue" href="{u}" target="_blank" style="display:inline-block;background-color:{BLUE};'
             f'border-bottom:4px solid {INK};border-radius:14px;padding:16px 30px 14px 30px;{font(17, 22, 700, "#FFFFFF")}text-decoration:none;">'
-            f'{fr(nowidow(label))}&nbsp;&#8594;</a><!--<![endif]--></td></tr></table>')
+            f'{fr(label)}&nbsp;&#8594;</a><!--<![endif]--></td></tr></table>')
 
 def cta2(label, url):
     """Bouton secondaire : contour bleu 2 px porté par le lien (pas de double cadre sous Outlook)."""
@@ -299,15 +303,16 @@ def cta2(label, url):
     return (f'{TB}<tr><td align="center" style="border-radius:14px;">'
             f'<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{u}" '
             f'style="height:50px;v-text-anchor:middle;width:{w}px;" arcsize="28%" strokecolor="{BLUE}" strokeweight="2px" fillcolor="{CARD}">'
-            f'<w:anchorlock/><center style="color:{BLUE};font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;">{fr(nowidow(label))}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
+            f'<w:anchorlock/><center style="color:{BLUE};font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;">{fr(label)}&nbsp;&#8594;</center></v:roundrect><![endif]-->'
             f'<!--[if !mso]><!--><a href="{u}" target="_blank" style="display:inline-block;background-color:{CARD};border:2px solid {BLUE};'
-            f'border-radius:14px;padding:12px 22px;{font(15, 22, 700, BLUE)}text-decoration:none;">{fr(nowidow(label))}&nbsp;&#8594;</a><!--<![endif]-->'
+            f'border-radius:14px;padding:12px 22px;{font(15, 22, 700, BLUE)}text-decoration:none;">{fr(label)}&nbsp;&#8594;</a><!--<![endif]-->'
             f'</td></tr></table>')
 
 def illus(key, alt):
-    """Illustration 1200 px affichée à 520 px (100 % sur mobile) ; fond teinté si l'image est bloquée."""
+    """Illustration 1200 px : 544 px par défaut (Outlook, gouttières de 28 px), 520 px sur ordinateur, 100 % sur mobile.
+    Fond teinté si l'image est bloquée."""
     tint = ACCENT[code(key)][1]
-    return (f'<img src="IMG:{key}" width="520" alt="{esc(alt)}" style="display:block;width:100%;max-width:520px;height:auto;border:0;'
+    return (f'<img src="IMG:{key}" width="544" alt="{esc(alt)}" style="display:block;width:100%;max-width:544px;height:auto;border:0;'
             f'border-radius:16px;outline:none;text-decoration:none;background-color:{tint};{font(14, 21, 500, INK)}">')
 
 def kicker(text, accent):
@@ -319,20 +324,20 @@ def kicker(text, accent):
 def title_block(e, l1, l2):
     assert f"{l1} {l2}" == e["title"], (l1, l2, e["title"])
     acc = ACCENT[code(e["key"])][0]
-    ts = font(36, 44, 800, BLUE, "letter-spacing:-0.3px;")
+    ts = font(34, 42, 800, BLUE, "letter-spacing:-0.3px;")
     return (kicker(e["kicker"], acc) + spacer(18) +
             f'<div role="heading" aria-level="1">{T()}'
-            f'<tr><td class="t tin" style="padding:0 12px;{ts}">{fr(l1)}</td></tr>'
+            f'<tr><td class="t tin" style="padding:0 10px;{ts}">{fr(l1)}</td></tr>'
             f'<tr><td style="padding:6px 0 0 0;">{T()}<tr><td class="t tfr bg-blue on-blue" bgcolor="{BLUE}" style="background-color:{BLUE};'
-            f'border-radius:14px;padding:3px 12px 7px 12px;{ts.replace("color:" + BLUE, "color:#FFFFFF")}">{fr(l2)}</td></tr></table></td></tr>'
+            f'border-radius:14px;padding:3px 10px 7px 10px;{ts.replace("color:" + BLUE, "color:#FFFFFF")}">{fr(l2)}</td></tr></table></td></tr>'
             f'</table></div>'
-            f'<p class="chap tin" style="margin:18px 0 0 0;padding:0 12px;{font(18, 28, 500, BLUE)}">{fr(nowidow(e["preheader"]))}</p>')
+            f'<p class="chap tin" style="margin:18px 0 0 0;padding:0 10px;{font(18, 28, 500, BLUE)}">{fr(nowidow(e["preheader"]))}</p>')
 
 def signature(close):
     """Photo ronde de Hugo à gauche de la formule de fin et du nom (marqueur IMG:avatar)."""
     return (f'{T()}<tr>'
             f'<td width="56" valign="middle" style="width:56px;"><img src="IMG:avatar" width="56" height="56" alt="Hugo, Fichly" '
-            f'style="display:block;width:56px;height:56px;border:0;border-radius:50%;outline:none;text-decoration:none;background-color:{BLUE};{font(11, 14, 700, "#FFFFFF")}"></td>'
+            f'style="display:block;width:56px;height:56px;border:0;border-radius:50%;outline:none;text-decoration:none;{font(11, 14, 700, BLUE)}"></td>'
             f'<td valign="middle" style="padding:0 0 0 14px;">'
             f'<p style="margin:0 0 2px 0;{font(16, 24, 400, TXT)}">{fr(nowidow(close))}</p>'
             f'<p style="margin:0 0 6px 0;{font(18, 26, 800, BLUE)}">Hugo, Fichly</p>{bar(64, 4, GREEN)}'
@@ -351,15 +356,15 @@ def band(h=10):
     tds = "".join(f'<td width="16.66%" height="{h}" bgcolor="{c}" style="height:{h}px;background-color:{c};font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td>' for c in BAND)
     return f'{TW}<tr>{tds}</tr></table>'
 
-def row(inner, top=28, cls="px", side=32):
+def row(inner, top=28, cls="px", side=28):
     return f'<tr><td class="{cls}" style="padding:{top}px {side}px 0 {side}px;">{inner}</td></tr>'
 
 def header_row():
-    return (f'<tr><td class="px" style="padding:30px 32px 0 32px;">'
+    return (f'<tr><td class="px" style="padding:30px 28px 0 28px;">'
             f'<img src="{ce.LOGO}" width="88" alt="Fichly" style="display:block;width:88px;height:auto;border:0;{font(20, 24, 700, INK)}"></td></tr>')
 
 def title_row(e, l1, l2):
-    return row(title_block(e, l1, l2), top=26, cls="pxt", side=20)
+    return row(title_block(e, l1, l2), top=26, cls="pxt", side=18)
 
 def footer():
     s = font(12, 19, 400, MUTED)
@@ -393,6 +398,7 @@ def page(e, rows):
   @media only screen and (min-width:621px) {{
     .px {{ padding-left:40px !important; padding-right:40px !important; }}
     .pxt {{ padding-left:28px !important; padding-right:28px !important; }}
+    .tin, .tfr {{ padding-left:12px !important; padding-right:12px !important; }}
     .t {{ font-size:40px !important; line-height:48px !important; }}
   }}
   @media only screen and (max-width:620px) {{
@@ -417,13 +423,13 @@ def page(e, rows):
 <body style="margin:0;padding:0;background-color:{DESK};">
 <div style="display:none;font-size:1px;color:{DESK};line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">{pre}{"&#847;&zwnj;&nbsp;" * 40}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{DESK}" style="background-color:{DESK};">
-<tr><td align="center" class="outer" style="padding:28px 12px 0 12px;">
+<tr><td align="center" class="outer" style="padding:28px 0 0 0;">
 <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
 <table role="presentation" class="sheet" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{PAPER}" style="width:100%;max-width:600px;background-color:{PAPER};border-radius:22px 22px 0 0;">
 {rows}
 <tr><td style="padding:40px 0 0 0;">{band()}</td></tr>
 </table>
-{T('width="100%" style="max-width:600px;"')}<tr><td align="center" class="foot" style="padding:26px 40px 36px 40px;">{footer()}</td></tr></table>
+{T('width="100%" style="max-width:600px;"')}<tr><td align="center" class="foot" style="padding:26px 28px 36px 28px;">{footer()}</td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
 </table>
@@ -637,7 +643,8 @@ def check(key, src, images):
     res["upsell : textes mot pour mot"] = (exact, up_vis)
     main = {html.unescape(b[2]) for b in e["blocks"] if b[0] == "cta"}
     res["upsell : répartition FICHES / GREEN BELT"] = (kind == UPSELL_FOR[key] and up_links == {upsell_url(key)} and not (up_links & main), kind)
-    res["upsell : un seul, avant la signature"] = (src.count("<!-- upsell:") == 1 and src.index("<!-- /upsell -->") < src.index('alt="Hugo, Fichly"'), "")
+    end, sig = src.find("<!-- /upsell -->"), src.find('alt="Hugo, Fichly"')
+    res["upsell : un seul, avant la signature"] = (src.count("<!-- upsell:") == 1 and -1 < end < sig, "")
     av = re.findall(r'<img [^>]*alt="Hugo, Fichly"[^>]*>', src)
     res["avatar (alt « Hugo, Fichly », 56 × 56)"] = (len(av) == 1 and f'src="{esc(images["avatar"])}"' in av[0] and 'width="56"' in av[0] and 'height="56"' in av[0], av)
     tags = re.findall(r"\{\{[^}]*\}\}", src)

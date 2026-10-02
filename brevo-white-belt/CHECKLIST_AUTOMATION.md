@@ -90,6 +90,18 @@ L'API Brevo ne permet pas de créer un workflow d'automation : cette étape se f
 14. Facultatif : dans les réglages d'envoi, limiter les envois aux jours ouvrés de 8 h à 18 h.
 15. **Enregistrer sans activer.**
 
+### Variante test : voir toute la séquence en 10 minutes
+
+Pour le test de bout en bout, créez le même workflow avec des délais de **2 minutes** à la place de 2, 3, 4 et 5 jours (étapes 6, 8, 10 et 12). Activez-le, puis faites l'inscription test (section 3). Les 5 e-mails arrivent en une dizaine de minutes : E0, E1, E2, E3, puis l'E4 qui correspond au besoin choisi dans le formulaire.
+
+Après le test, avant le vrai lancement :
+1. mettez le workflow en pause ;
+2. remettez les délais à 2, 3, 4 et 5 jours ;
+3. retirez le contact de test de la liste 49 ;
+4. réactivez le workflow.
+
+Pendant le test, vous recevrez deux e-mails d'accès : celui de Tally et E0. C'est normal. L'e-mail de Tally reste actif tant que le workflow n'est pas en service avec les vrais délais, pour qu'un vrai inscrit ne reste jamais sans accès.
+
 ## 3. Avant la mise en ligne
 
 Dans cet ordre :
