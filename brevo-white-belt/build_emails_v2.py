@@ -9,11 +9,13 @@ et la photo de Hugo dans la signature.
 Usage :
   python3 build_emails_v2.py                 génère emails-v2/<clé>.html + meta.json, puis lance les contrôles
   python3 build_emails_v2.py --brevo         idem avec les URL de la galerie Brevo (IMAGES_BREVO, à remplir)
-  python3 build_emails_v2.py --preview DIR   écrit aussi des copies d'aperçu (logo et Poppins en local, version Arial)
+  python3 build_emails_v2.py --preview DIR   écrit aussi des copies d'aperçu (Poppins en local, version Arial)
 
-Images : le HTML porte des marqueurs « IMG:<clé> » et « IMG:avatar », remplacés à la fin par IMAGES
-(chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans Brevo).
-Illustrations : visuels/emails/src/<clé>.js, rendues par visuels/emails/src/render.py.
+Images : le HTML porte des marqueurs « IMG:<clé> », « IMG:avatar » et « IMG:logo », remplacés à la fin par IMAGES
+(chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans Brevo : 10 PNG).
+Illustrations : visuels/emails/src/<clé>.js, rendues par visuels/emails/src/render.py (textes ≥ 48 px, soit 13 px à 375 px).
+Contrôles : le fond v1 est présent en entier (clauses) et rien n'est ajouté (multiensemble des mots du corps visible
+⊂ texte v1 + upsell + étiquettes LABELS + fil de la série + numéros d'étapes) ; mots comptés sur le corps visible, hors footer.
 """
 import html
 import importlib.util
