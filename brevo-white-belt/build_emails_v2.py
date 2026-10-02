@@ -4,9 +4,9 @@
 Le fond (textes, liens et UTM, objets, preheaders) vient tel quel de la liste EMAILS de build_emails.py.
 Ce script ne réécrit rien : il découpe les blocs et les met en forme (cartes, étapes en briques, exergues, étiquettes).
 Il ajoute dans chaque email le bloc « Pour aller plus loin » (upsell FICHES ou GREEN BELT, textes validés mot pour mot)
-et la photo de Hugo dans la signature. Ajout n° 2 du 2 octobre : salutation au prénom (balises Brevo), bandeau fin
-« Notre formation Green Belt éligible au CPF » en haut de la feuille, carte « Votre formation » (rappel, E1 à E4),
-code de réduction WHITEBELT15 dans la carte cadeau d'E0.
+et la photo de Hugo dans la signature. Ajout n° 2 du 2 octobre : salutation au prénom (balises Brevo), bandeau
+« Notre formation Green Belt éligible au CPF » en haut de la feuille (ceinture verte cousue + pictogramme de la ceinture nouée),
+carte « Votre formation » (rappel, E1 à E4), code de réduction WHITEBELT15 dans la carte cadeau d'E0.
 
 Usage :
   python3 build_emails_v2.py                 aperçu : images locales, « Bonjour Camille, » à la place des balises Brevo.
@@ -17,8 +17,9 @@ Usage :
 Chaque lancement contrôle aussi les fichiers présents dans emails-v2/ : ni « Camille », ni chemin local, ni marqueur IMG:,
 balises Brevo de la salutation présentes. Un écart fait échouer le script.
 
-Images : le HTML porte des marqueurs « IMG:<clé> », « IMG:avatar » et « IMG:logo », remplacés à la fin par IMAGES
-(chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans Brevo : 10 PNG).
+Images : le HTML porte des marqueurs « IMG:<clé> », « IMG:avatar », « IMG:logo » et « IMG:greenbelt » (pictogramme du bandeau),
+remplacés à la fin par IMAGES (chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans
+Brevo : 11 PNG). Le pictogramme est exclu du compte « une illustration au plus ».
 Illustrations : visuels/emails/src/<clé>.js, rendues par visuels/emails/src/render.py (textes ≥ 48 px, soit 13 px à 375 px).
 Contrôles : le fond (EMAILS) est présent en entier (clauses) et rien n'est ajouté (multiensemble des mots du corps visible
 ⊂ texte EMAILS + upsell + rappel + étiquettes LABELS + fil de la série + numéros d'étapes) ; mots comptés sur le corps
@@ -50,7 +51,11 @@ IMAGES["avatar"] = str(VIS / "avatar-hugo.png")
 # Logo d'en-tête en 2× (192 × 110, affiché à 96 × 55) sur pastille opaque #F2F2F0 aux coins arrondis :
 # invisible sur le papier en mode clair, lisible quand un client assombrit le fond sans toucher aux images.
 IMAGES["logo"] = str(VIS / "logo-fichly.png")
-# URL de la galerie Brevo, à renseigner après l'import des PNG (mêmes clés que IMAGES : 8 illustrations, avatar, logo).
+# Pictogramme du bandeau Green Belt : ceinture verte nouée, 144 × 102 à fond transparent (3× l'affichage maximal 48 × 34),
+# source visuels/emails/src/greenbelt.js (python3 visuels/emails/src/render.py greenbelt). Décoratif : alt="".
+IMAGES["greenbelt"] = str(VIS / "greenbelt.png")
+# URL de la galerie Brevo, à renseigner après l'import des PNG (mêmes clés que IMAGES : 8 illustrations, avatar, logo, greenbelt).
+# « greenbelt » manque tant que greenbelt.png n'est pas chargé dans la galerie : --brevo s'arrête (IMAGES_BREVO incomplet).
 IMAGES_BREVO = {
     "e0": "https://img.mailinblue.com/8576704/images/rnb/original/6abfca8e2331f4cc5b391a15.png",
     "e1": "https://img.mailinblue.com/8576704/images/rnb/original/6abfca9a54b05e9d6c187c1e.png",
@@ -468,19 +473,72 @@ def code_note(text, code_):
             f'<p style="margin:0;{font(15, 26, 500, INK)}">{fr(nowidow(text)).replace(code_, tag, 1)}</p>'
             f'</td></tr></table>')
 
+# Pictogramme du bandeau (visuels/emails/src/greenbelt.js, PNG 144 × 102 à fond transparent) : (largeur, hauteur) affichées.
+GB_PICTO = (44, 31)        # styles en ligne : 360 à 413 px, et clients qui retirent le <style>
+GB_PICTO_L = (48, 34)      # 414 px et plus (ordinateur compris), Outlook Windows
+GB_PICTO_S = (40, 28)      # 341 à 359 px
+GB_PICTO_XS = (36, 25)     # 340 px et moins
+GB_TEXT = 12.5             # taille du texte en ligne (clients sans <style> : Arial ou Roboto, une ligne dès 320 px en Arial)
+
+def banner_css():
+    """Règles du bandeau dans le <style> (tailles du picto et du texte, marges), par largeur d'écran ; repris tels quels par check()."""
+    gi = lambda wh: f".gb-i {{ width:{wh[0]}px !important; height:{wh[1]}px !important; }}"
+    return {
+        "min414": [gi(GB_PICTO_L)],
+        "min621": [".gb-l { padding-left:12px !important; padding-right:12px !important; }",
+                   ".gb-t { font-size:14px !important; padding-left:10px !important; }"],
+        "max620": [".gb-s { margin-left:10px !important; margin-right:10px !important; }",
+                   ".gb-l { padding-left:6px !important; padding-right:6px !important; }",
+                   ".gb-t { font-size:13px !important; padding-left:7px !important; }"],
+        "max374": [".gb-l { padding-left:5px !important; padding-right:5px !important; }",
+                   ".gb-t { font-size:12.5px !important; }"],
+        "max359": [gi(GB_PICTO_S), ".gb-l { padding-left:4px !important; padding-right:4px !important; }",
+                   ".gb-t { font-size:12px !important; padding-left:6px !important; }"],
+        "max340": [gi(GB_PICTO_XS), ".gb-l { padding-left:3px !important; padding-right:3px !important; }",
+                   ".gb-t { font-size:11.5px !important; padding-left:5px !important; }"],
+    }
+
 def banner(key):
-    """Bandeau fin, tout en haut de la feuille : fond encre, texte blanc 13 px, toute la bande cliquable
-    (v:rect pour Outlook, lien en bloc ailleurs). 10 + 18 + 10 = 38 px de haut."""
+    """Bandeau Green Belt, tout en haut de la feuille : la bande est une ceinture verte cousue (fond #8CC978, coins du haut arrondis
+    sur ordinateur, couture blanche en pointillé de 2 px en haut et en bas, comme belt() dans les illustrations), avec à gauche du
+    texte le pictogramme de la ceinture nouée (alt="" : décoratif). Texte encre (7,4:1 sur le vert), Poppins 500, « Green Belt » en 800.
+    Une seule ligne de 320 à 640 px, en Poppins comme en Arial (banner_css) :
+      ordinateur (≥ 621 px)  picto 48 × 34, texte 14 px     414 à 620 px  48 × 34, 13 px     375 à 413 px  44 × 31, 13 px
+      360 à 374 px           44 × 31, 12,5 px               341 à 359 px  40 × 28, 12 px     ≤ 340 px      36 × 25, 11,5 px
+    Styles en ligne (clients qui retirent le <style>) : picto 44 × 31, texte 12,5 px ; une ligne dès 320 px en Arial, et dès 360 px
+    en Roboto (Android) ; plus étroit, le texte passe sous le picto, centré.
+    Hauteur : 3 + 2 + 5 + picto + 5 + 2 + 3, soit 45 à 54 px (Outlook : 3 + 3 + 4 + 34 + 4 + 3 + 3 = 54 px).
+    Toute la bande est cliquable (lien en bloc). Outlook Windows : tableau vert avec deux liens (pictogramme, texte) et les coutures
+    en cellules (comme rule()), sans VML (une image dans une zone de texte VML se décale selon le DPI) ; cellule du texte à hauteur
+    fixe (34 px, interligne exact). Outlook.com en mode sombre : [data-ogsb] .bg-green et [data-ogsc] .on-green gardent vert et encre.
+    Images bloquées : la place du pictogramme reste réservée (width/height), le texte est du vrai texte."""
     u = esc(banner_url(key))
-    label = f"{fr(BANNER_TEXT)}&nbsp;&#8594;"
+    label = (fr(BANNER_TEXT).replace("Green&nbsp;Belt", f'<strong class="on-green" style="font-weight:800;color:{INK};">Green&nbsp;Belt</strong>', 1)
+             .replace("au CPF", "au&nbsp;CPF") + "&nbsp;&#8594;")
+    assert label.count("<strong") == 1 and "au&nbsp;CPF" in label, label
+    (w, h), (wl, hl) = GB_PICTO, GB_PICTO_L
+    img = lambda cls, pw, ph, disp: (f'<img{cls} src="IMG:greenbelt" width="{pw}" height="{ph}" alt="" style="display:{disp};'
+                                     f'vertical-align:middle;width:{pw}px;height:{ph}px;border:0;outline:none;text-decoration:none;">')
+    seam = ('<span class="gb-s" style="display:block;height:0;margin:0 16px;border-top:2px dashed #FFFFFF;'
+            'font-size:0;line-height:0;"></span>')
+    mso_seam = lambda pad: (f'<tr><td style="padding:{pad};">{TW}<tr><td style="border-top:2px dashed #FFFFFF;font-size:1px;line-height:1px;'
+                            f'mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>')
+    mso = (f'<!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0">{mso_seam("3px 16px 0 16px")}'
+           f'<tr><td align="center" style="padding:4px 12px;">{T()}<tr>'
+           f'<td valign="middle" style="padding:0 10px 0 0;"><a href="{u}" target="_blank">{img("", wl, hl, "block")}</a></td>'
+           f'<td class="on-green" valign="middle" height="{hl}" style="height:{hl}px;font-family:Arial,Helvetica,sans-serif;font-size:14px;'
+           f'line-height:18px;color:{INK};mso-line-height-rule:exactly;">'
+           f'<a class="on-green" href="{u}" target="_blank" style="color:{INK};text-decoration:none;">{label}</a></td>'
+           f'</tr></table></td></tr>{mso_seam("0 16px 3px 16px")}</table><![endif]-->')
     return ('<!-- bandeau -->'
-            f'<tr><td class="topband bg-ink" align="center" bgcolor="{INK}" style="background-color:{INK};border-radius:22px 22px 0 0;">'
-            f'<!--[if mso]><v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{u}" '
-            f'style="width:600px;height:38px;v-text-anchor:middle;" fillcolor="{INK}" stroke="f"><w:anchorlock/>'
-            f'<center style="color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;">{label}</center></v:rect><![endif]-->'
-            f'<!--[if !mso]><!--><a class="on-blue" href="{u}" target="_blank" style="display:block;padding:10px 12px;'
-            f'{font(13, 18, 700, "#FFFFFF", "letter-spacing:0.2px;")}text-rendering:geometricPrecision;text-align:center;text-decoration:none;border-radius:22px 22px 0 0;">'
-            f'{label}</a><!--<![endif]--></td></tr>'
+            f'<tr><td class="topband bg-green" align="center" bgcolor="{GREEN}" style="background-color:{GREEN};border-radius:22px 22px 0 0;">'
+            + mso +
+            f'<!--[if !mso]><!--><a class="on-green" href="{u}" target="_blank" style="display:block;padding:3px 0;'
+            f'{font(GB_TEXT, 18, 500, INK)}text-rendering:geometricPrecision;text-align:center;text-decoration:none;border-radius:22px 22px 0 0;">'
+            f'{seam}<span class="gb-l" style="display:block;padding:5px 4px;">'
+            + img(' class="gb-i"', w, h, "inline-block") +
+            f'<span class="gb-t" style="display:inline-block;vertical-align:middle;padding-left:6px;">{label}</span></span>'
+            f'{seam}</a><!--<![endif]--></td></tr>'
             '<!-- /bandeau -->')
 
 def band(h=10):
@@ -506,6 +564,9 @@ def footer():
             f'<p style="margin:0 0 8px 0;{s}">22 avenue Danton Demar, 34660&nbsp;Cournonterral,&nbsp;France<br>TVA FR69933450322 · APE 4791B</p>'
             f'<p style="margin:0;{s}">Vous recevez cet email suite à votre inscription à la White Belt Lean de Fichly. '
             f'<a href="{{{{ unsubscribe }}}}" style="color:{INK};font-weight:700;text-decoration:underline;">Se&nbsp;désinscrire</a></p>')
+
+def gbcss(k):
+    return "\n    ".join(banner_css()[k])
 
 def page(e, rows):
     pre = html.escape(e["preheader"])
@@ -537,12 +598,16 @@ def page(e, rows):
     .t {{ font-size:40px !important; line-height:48px !important; }}
     .coupon {{ padding-left:10px !important; padding-right:10px !important; }}
     .coupon p {{ font-size:26px !important; line-height:34px !important; letter-spacing:2px !important; }}
+    {gbcss("min621")}
+  }}
+  @media only screen and (min-width:414px) {{
+    {gbcss("min414")}
   }}
   @media only screen and (max-width:620px) {{
     .outer {{ padding:0 !important; }}
     .sheet {{ border-radius:0 !important; }}
     .topband, .topband a {{ border-radius:0 !important; }}
-    .topband a {{ padding-left:8px !important; padding-right:8px !important; }}
+    {gbcss("max620")}
     .px {{ padding-left:22px !important; padding-right:22px !important; }}
     .pxl {{ padding-left:15px !important; padding-right:15px !important; }}
     .pxt {{ padding-left:14px !important; padding-right:14px !important; }}
@@ -558,12 +623,19 @@ def page(e, rows):
     .rl {{ font-size:11px !important; }}
     .foot {{ padding:22px 22px 30px 22px !important; }}
   }}
+  @media only screen and (max-width:374px) {{
+    {gbcss("max374")}
+  }}
+  @media only screen and (max-width:359px) {{
+    {gbcss("max359")}
+  }}
   @media only screen and (max-width:340px) {{
-    .topband a {{ letter-spacing:0 !important; padding-left:4px !important; padding-right:4px !important; font-size:12px !important; }}
+    {gbcss("max340")}
   }}
   [data-ogsc] .on-blue {{ color:#FFFFFF !important; }}
   [data-ogsb] .bg-blue {{ background-color:{BLUE} !important; }}
-  [data-ogsb] .bg-ink {{ background-color:{INK} !important; }}
+  [data-ogsc] .on-green {{ color:{INK} !important; }}
+  [data-ogsb] .bg-green {{ background-color:{GREEN} !important; }}
 </style>
 </head>
 <body style="margin:0;padding:0;background-color:{DESK};">
@@ -869,12 +941,28 @@ def check(key, src, images, brevo):
     # bandeau
     bd = section(src, "bandeau")
     sheet = src.index('class="sheet"')
-    bd_ok = bool(bd) and visible_text(bd) == BANNER_TEXT + " →" and hrefs(bd) == ({banner_url(key)}, {banner_url(key)})
+    n_links = len(re.findall(r'<a\b[^>]*\shref="', bd or ""))
+    bd_ok = (bool(bd) and visible_text(bd) == BANNER_TEXT + " →" and hrefs(bd) == ({banner_url(key)}, set()) and n_links == 3)
     first = bool(bd) and "<tr" not in src[sheet:src.index("<!-- bandeau -->")] and src.index("<!-- bandeau -->") < src.index('alt="Fichly"')
-    res["bandeau : texte exact, lien <eN>-bandeau (HTML + VML)"] = (bd_ok, visible_text(bd) if bd else None)
-    res["bandeau : première rangée de la feuille, au-dessus du logo, 38 px"] = (
-        first and f"background-color:{INK}" in bd and "height:38px" in bd and "padding:10px 12px" in bd
-        and "font-size:13px;line-height:18px;font-weight:700;color:#FFFFFF" in bd, "")
+    res["bandeau : texte exact, lien <eN>-bandeau (bloc + Outlook : picto et texte)"] = (bd_ok, (visible_text(bd), n_links) if bd else None)
+    gb = re.findall(r"<img [^>]+>", bd or "")
+    wh = lambda i: (int(re.search(r'width="(\d+)"', i).group(1)), int(re.search(r'height="(\d+)"', i).group(1)))
+    gb_ok = (len(gb) == 2 and all(f'src="{esc(images["greenbelt"])}"' in i and 'alt=""' in i for i in gb)
+             and sorted(map(wh, gb)) == sorted([GB_PICTO, GB_PICTO_L]))
+    res["bandeau : première rangée de la feuille, au-dessus du logo, vert ceinture, coutures, picto (alt vide)"] = (
+        first and gb_ok and f"background-color:{GREEN}" in bd and bd.count("border-top:2px dashed #FFFFFF") == 4
+        and font(GB_TEXT, 18, 500, INK) in bd and "v:rect" not in bd
+        and bd.count(f'<strong class="on-green" style="font-weight:800;color:{INK};">Green&nbsp;Belt</strong>') == 2, (len(gb), sorted(map(wh, gb))))
+    mso = re.findall(r"<!--\[if mso\]>(.*?)<!\[endif\]-->", bd or "", flags=re.S)
+    res["bandeau Outlook : tableau vert sans VML, picto 48 × 34, texte en cellule à hauteur fixe, interligne exact"] = (
+        len(mso) == 1 and f'width="{GB_PICTO_L[0]}" height="{GB_PICTO_L[1]}"' in mso[0]
+        and re.search(rf'<td class="on-green" valign="middle" height="{GB_PICTO_L[1]}" style="height:{GB_PICTO_L[1]}px;[^"]*'
+                      r'line-height:18px;[^"]*mso-line-height-rule:exactly;', mso[0]) is not None, "")
+    css = [r for rules in banner_css().values() for r in rules]
+    res["bandeau : <style> (picto 48 × 34 dès 414 px, 40 × 28 ≤ 359 px, 36 × 25 ≤ 340 px ; Outlook.com sombre)"] = (
+        all(r in src for r in css) and "@media only screen and (min-width:414px)" in src
+        and "@media only screen and (max-width:359px)" in src and "@media only screen and (max-width:374px)" in src
+        and "[data-ogsc] .on-green" in src and "[data-ogsb] .bg-green" in src, "")
 
     # rappel « Votre formation »
     rp = section(src, "rappel")
@@ -921,9 +1009,11 @@ def check(key, src, images, brevo):
     imgs = re.findall(r"<img [^>]+>", src)
     logo = [i for i in imgs if f'src="{esc(images["logo"])}"' in i]
     res["logo (alt « Fichly », pastille 2×)"] = (len(logo) == 1 and 'alt="Fichly"' in logo[0], len(logo))
-    ill = [i for i in imgs if i not in logo and 'alt="Hugo, Fichly"' not in i]
-    res["une illustration au plus (hors logo, avatar)"] = (len(ill) <= 1, len(ill))
-    res["alt sur chaque image"] = (all(re.search(r'alt="[^"]+"', i) for i in imgs), "")
+    picto = [i for i in imgs if f'src="{esc(images["greenbelt"])}"' in i]
+    ill = [i for i in imgs if i not in logo and i not in picto and 'alt="Hugo, Fichly"' not in i]
+    res["une illustration au plus (hors logo, avatar, picto du bandeau)"] = (len(ill) <= 1, len(ill))
+    res["alt sur chaque image (vide pour le picto décoratif du bandeau)"] = (
+        all(re.search(r'alt="[^"]+"', i) for i in imgs if i not in picto) and all('alt=""' in i for i in picto), "")
     res["width et height sur chaque image"] = (all(re.search(r'width="\d+"', i) and re.search(r'height="\d+"', i) for i in imgs), "")
     res["marqueurs IMG: remplacés"] = ("IMG:" not in src, "")
     for i in ill:
