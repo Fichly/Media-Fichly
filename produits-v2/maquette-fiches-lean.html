@@ -161,6 +161,8 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
 .price strong { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 .price small { font-size: 13px; color: var(--ink-500); }
+.price-pro { font-size: 13px; color: var(--ink-700); margin-top: -10px; }
+.ship { font-size: 14px; color: var(--ink-700); display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline; }
 .gains { list-style: none; padding: 0; display: grid; gap: 10px; }
 .gains li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; font-size: 15px; line-height: 1.45; }
 .gains li::before { content: ""; width: 22px; height: 22px; border-radius: var(--r-pill); background: var(--sec) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 13px no-repeat; margin-top: 1px; }
@@ -263,6 +265,9 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .hist i { height: 8px; border-radius: 4px; background: var(--line); position: relative; overflow: hidden; }
 .hist i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--star); border-radius: 4px; }
 .hist li span:last-child { text-align: right; }
+.avis-ctrl { font-size: 13px; }
+.rev__reply { border-left: 3px solid var(--indigo-100); padding-left: 12px; font-size: 14px; color: var(--ink-700); }
+.rev__reply b { display: block; font-size: 13px; color: var(--ink); }
 .rev-list { display: grid; gap: 14px; }
 @container site (min-width: 760px) { .rev-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .rev { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 8px; align-content: start; }
@@ -366,6 +371,79 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
 .fixes li { border: 1px solid var(--line); border-left: 4px solid var(--sec); border-radius: var(--r-md); padding: 12px 14px; font-size: 14px; color: var(--ink-700); }
 .fixes li strong { display: block; color: var(--ink); margin-bottom: 2px; }
 .fixes li small { display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--sec-ink, var(--ink-500)); }
+/* ---------- 1c. Bulles : les outils en 15 secondes ---------- */
+.bubbles { display: grid; gap: 10px; padding-top: 6px; min-width: 0; }
+.bubbles__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+.bubbles__head h2 { font-size: 15px; font-weight: 600; }
+.bubbles__head span { font-size: 12px; color: var(--ink-500); }
+.bubbles__row { list-style: none; padding: 4px 2px 6px; margin: 0 -2px; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.bubbles__row::-webkit-scrollbar { display: none; }
+.bubbles__row li { scroll-snap-align: start; flex: none; }
+.bubble { --rc: var(--indigo); width: 82px; display: grid; justify-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: var(--ink); }
+.bubble__ring { position: relative; width: 78px; height: 78px; border-radius: var(--r-pill); padding: 3px; background: var(--rc); display: grid; place-items: center; transition: transform .15s ease; }
+.bubble__dur { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; line-height: 1; padding: 3px 6px; border-radius: var(--r-pill); background: var(--navy); color: var(--white); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bubble__dur svg { width: 8px; height: 8px; }
+.bubble[data-deck] .bubble__ring { background: var(--ring); }
+.bubble.is-seen .bubble__ring { background: var(--line); }
+.bubble__ring img { width: 100%; height: 100%; border-radius: var(--r-pill); border: 3px solid var(--bg); background: var(--bg); object-fit: cover; display: block; }
+.bubble__name { font-size: 12px; font-weight: 600; line-height: 1.25; text-align: center; max-width: 82px; margin-top: 4px; }
+.bubble:hover .bubble__ring { transform: scale(1.04); }
+.bubble:focus-visible { outline: none; }
+.bubble:focus-visible .bubble__ring { box-shadow: var(--focus); }
+.bubble.is-soon { cursor: default; opacity: .55; }
+.bubble.is-soon .bubble__ring { background: var(--line); }
+.bubble.is-soon .bubble__ring i { width: 100%; height: 100%; border-radius: var(--r-pill); border: 3px solid var(--bg); background: var(--sec-soft, var(--surface)); display: grid; place-items: center; font-style: normal; font-size: 11px; font-weight: 600; color: var(--ink-500); }
+@media (prefers-reduced-motion: reduce) { .bubble__ring { transition: none; } }
+
+/* Lecteur de stories */
+.sp-dialog [hidden] { display: none !important; }
+.sp-dialog { border: 0; padding: 0; margin: 0; width: 100%; height: 100%; max-width: none; max-height: none; background: transparent; color: var(--on-navy); overflow: hidden; }
+.sp-dialog::backdrop { background: rgba(21, 27, 67, .92); }
+.sp-dialog[open] { display: grid; place-items: center; }
+.sp-wrap { display: flex; align-items: center; gap: 16px; padding: 16px; height: 100%; }
+.sp { --pw: min(440px, calc((100dvh - 200px) * 9 / 16)); width: var(--pw); display: grid; gap: 12px; position: relative; }
+.sp__media { position: relative; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--navy-2); touch-action: none; user-select: none; -webkit-user-select: none; }
+.sp__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.sp__top { position: absolute; inset: 0 0 auto 0; padding: 10px 10px 28px; display: grid; gap: 10px; background: linear-gradient(rgba(21,27,67,.78), rgba(21,27,67,.35) 70%, rgba(21,27,67,0)); z-index: 2; pointer-events: none; text-shadow: 0 1px 2px rgba(21,27,67,.6); }
+.sp__bars { display: flex; gap: 4px; }
+.sp__bars i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; position: relative; }
+.sp__bars i b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--white); }
+.sp__head { display: flex; align-items: center; gap: 10px; pointer-events: auto; }
+.sp__head img { width: 34px; height: 34px; border-radius: var(--r-pill); border: 2px solid var(--white); background: var(--white); }
+.sp__head div { min-width: 0; flex: 1; display: grid; }
+.sp__head strong { font-size: 14px; color: var(--white); }
+.sp__head span { font-size: 12px; color: var(--on-navy-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sp__btn { width: 38px; height: 38px; border-radius: var(--r-pill); border: 0; background: rgba(21,27,67,.45); color: var(--white); display: grid; place-items: center; cursor: pointer; flex: none; }
+.sp__btn:hover { background: rgba(21,27,67,.7); }
+.sp__btn svg { width: 18px; height: 18px; }
+.sp__btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6); }
+.sp__tap { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-columns: 1fr 2fr; }
+.sp__tap button { background: transparent; border: 0; cursor: pointer; }
+.sp__tap button:focus-visible { outline: none; box-shadow: inset 0 0 0 3px rgba(255,255,255,.5); }
+.sp__play { position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: var(--r-pill); border: 0; background: rgba(21,27,67,.7); color: var(--white); z-index: 3; display: grid; place-items: center; cursor: pointer; }
+.sp__play svg { width: 30px; height: 30px; }
+.sp__text { position: absolute; inset: 0; z-index: 4; background: rgba(21,27,67,.94); padding: 76px 24px 24px; display: grid; align-content: start; gap: 12px; font-size: 16px; line-height: 1.6; color: var(--white); overflow-y: auto; }
+.sp__text h3 { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--on-navy-2); }
+.sp__cta { background: var(--bg); color: var(--ink); border-radius: 16px; padding: 12px; display: grid; gap: 10px; }
+.sp__cta p { font-size: 13px; color: var(--ink-700); display: flex; align-items: center; gap: 8px; }
+.sp__cta p i { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--sec, var(--indigo)); flex: none; }
+.sp__cta p { flex-wrap: wrap; }
+.sp__note { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.sp__cta div { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.sp__cta .btn { padding: 13px 14px; font-size: 14px; }
+.sp__nav { width: 46px; height: 46px; border-radius: var(--r-pill); border: 0; background: rgba(255,255,255,.12); color: var(--white); display: grid; place-items: center; cursor: pointer; flex: none; }
+.sp__nav:hover { background: rgba(255,255,255,.22); }
+.sp__nav:disabled { opacity: .3; cursor: default; }
+.sp__nav svg { width: 22px; height: 22px; }
+.sp__nav:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6); }
+@media (max-width: 600px) {
+  .sp-wrap { padding: 0; gap: 0; width: 100%; }
+  .sp__nav { display: none; }
+  .sp { --pw: 100vw; width: 100vw; height: 100dvh; grid-template-rows: minmax(0, 1fr) auto; gap: 0; background: var(--navy); }
+  .sp__media { border-radius: 0; aspect-ratio: auto; height: 100%; }
+  .sp__cta { border-radius: 16px 16px 0 0; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .sp__top { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+}
 </style>
 
 <div class="proto-bar" id="protoBar">
@@ -389,6 +467,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li><strong>Six familles, six couleurs</strong>Le deck compte six familles d'outils, comme notre liseré a six couleurs. Chaque famille garde sa couleur partout : galerie, liste, pack <span class="n">(bloc 3)</span>.</li>
     <li><strong>Chaque outil mène à son article</strong>Les articles du blog renvoient déjà vers le deck. La page renvoie maintenant vers les articles : le maillage marche dans les deux sens <span class="n">(3, 9)</span>.</li>
     <li><strong>La preuve avant les questions</strong>Le mot d'Hugo, puis les 28 avis et la note de 4,79 sur 5, remontés du widget Judge.me <span class="n">(5, 6)</span>.</li>
+    <li><strong>Nouveau : les outils en 15 secondes</strong>Sous la galerie, une rangée de bulles ouvre des vidéos verticales en motion design. Sept sont déjà rendues : le deck et un outil par famille. Touchez une bulle <span class="n">(bloc 1c)</span>.</li>
     <li><strong>Le panier moyen</strong>Le pack à −22 % sous le bouton, le guide VSM et la Green Belt en fin de page, une barre d'achat qui suit sur mobile <span class="n">(2, 8, 10)</span>.</li>
   </ul>
 </section>
@@ -439,6 +518,10 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
           <li><button type="button" class="c4" data-v="4" aria-current="false" aria-label="Visuel 5">5</button></li>
           <li><button type="button" class="c5" data-v="5" aria-current="false" aria-label="Vidéo">▶</button></li>
         </ul>
+        <section class="bubbles" aria-labelledby="bulles" data-anno="1c" data-label="Bulles · les outils en 15 s">
+          <div class="bubbles__head"><h2 id="bulles">Les outils en 15 secondes</h2><span id="bubblesCount">vidéos sans le son</span></div>
+          <ul class="bubbles__row" id="bubbles"></ul>
+        </section>
       </div>
 
       <div class="buy" data-anno="2" data-label="Bloc d'achat">
@@ -446,7 +529,9 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <h1>40 outils du Lean <em>à portée de main</em></h1>
         <p class="buy__sub">Les outils clés pour structurer, animer et améliorer. Un deck de 40 fiches imprimées en France, à garder sur le terrain.</p>
         <a class="rating" href="#avis"><span class="stars" style="--v: 4.79" aria-hidden="true"></span><b>4,79/5</b><u>28 avis vérifiés</u></a>
-        <div class="price"><strong id="unitPrice">49,90 €</strong><small>TTC · prix lu dans la boutique</small></div>
+        <div class="price"><strong id="unitPrice">49,90 €</strong><small>TTC · soit 1,25 € par outil</small></div>
+        <p class="price-pro">41,58 € HT pour les entreprises, facture à votre nom <span class="todo">taux de TVA à confirmer</span></p>
+        <p class="ship">Livraison <span class="todo">prix</span>, reçu entre le <span class="todo">date</span> et le <span class="todo">date</span> · 14 jours pour changer d'avis</p>
         <ul class="gains">
           <li class="c1">Comprendre les principes du Lean et ses outils</li>
           <li class="c2">Identifier et éliminer les gaspillages facilement</li>
@@ -459,13 +544,14 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <div class="team"><span>Pour équiper une équipe ou une promotion</span><a href="#top">Demander un devis <span class="todo">tarif dégressif à définir</span></a></div>
         <a class="pack" href="#top" data-anno="2b" data-label="Pack · produit complémentaire">
           <div class="pack__img" aria-hidden="true"><i class="c1"></i><i class="c4"></i><i class="c6"></i></div>
-          <div><small>Économisez 22 %</small><b>Pack Lean Management</b><span>VSM, 5S et résolution de problèmes <i class="todo">contenu exact à confirmer</i></span></div>
+          <div><small>−22 % par rapport aux produits achetés séparément <i class="todo">prix de référence à afficher</i></small><b>Pack Lean Management</b><span>VSM, 5S et résolution de problèmes <i class="todo">contenu exact à confirmer</i></span></div>
           <div class="pack__price">109,90 €<em>Voir le pack →</em></div>
         </a>
         <ul class="reassure">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg><div><b>Imprimé en France</b>Un deck de 40 fiches</div></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><div><b>Livraison</b><span class="todo">délai et prix à fournir</span></div></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Paiement sécurisé</b>Par la boutique Shopify</div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><div><b>Garantie légale</b>Conformité 2 ans, <a href="#top">voir les CGV</a></div></li>
         </ul>
       </div>
     </section>
@@ -613,10 +699,11 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
             <li><span>1 ★</span><i style="--w: 0%"></i><span>0</span></li>
           </ul>
           <a class="btn btn--line" href="#top">Laisser un avis</a>
+          <a class="avis-ctrl" href="#top">Comment sont collectés et contrôlés nos avis ?</a>
         </div>
         <div class="rev-list">
           <article class="rev"><div class="rev__head"><h3>Une référence !</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>La meilleure synthèse pratico-pratique que je déploie au sein de mes équipes…</p><footer><span>Anonyme</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
-          <article class="rev"><div class="rev__head"><h3>Très bon outil</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ce deck est un très bon outil pédagogique de second temps. Il permet d'avoir un aide-mémoire de qualité, complet mais synthétique pour engager une démarche d'amélioration.</p><footer><span>Erwan</span><span class="v">Achat vérifié</span><span>mai 2025</span></footer></article>
+          <article class="rev"><div class="rev__head"><h3>Très bon outil</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ce deck est un très bon outil pédagogique de second temps. Il permet d'avoir un aide-mémoire de qualité, complet mais synthétique pour engager une démarche d'amélioration.</p><footer><span>Erwan</span><span class="v">Achat vérifié</span><span>mai 2025</span></footer><div class="rev__reply"><b>Réponse d'Hugo</b>Merci beaucoup pour votre commentaire positif sur notre produit. Nous sommes ravis de savoir que vous trouvez notre deck très utile pour votre démarche d'amélioration.</div></article>
           <article class="rev"><div class="rev__head"><h3>Ces fiches sont au top</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Ces fiches sont au top de leur design à leur format et pour le contenu c'est d'une clarté… Rien à dire… Bravo !!</p><footer><span>Lara</span><span class="v">Achat vérifié</span><span>juillet 2025</span></footer></article>
           <article class="rev"><div class="rev__head"><h3>Excellentes fiches pédagogiques</h3><span class="stars" style="--v: 5" aria-label="5 sur 5"></span></div><p>Excellentes fiches pédagogiques ^^</p><footer><span>Guillaume Gaston</span><span class="v">Achat vérifié</span><span>avril 2026</span></footer></article>
         </div>
@@ -632,6 +719,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <details><summary>Où les fiches sont-elles imprimées ?</summary><p>En France.</p></details>
         <details><summary>Quel est le format des fiches ?</summary><p><span class="todo">Dimensions, papier, boîte : à fournir par Hugo.</span></p></details>
         <details><summary>Sous combien de temps vais-je le recevoir ?</summary><p><span class="todo">Délai et frais de livraison : à fournir par Hugo.</span></p></details>
+        <details><summary>Puis-je le retourner ?</summary><p>Oui. Vous disposez de 14 jours après réception pour changer d'avis. <span class="todo">Frais de retour à la charge du client ou de Fichly : à préciser.</span></p></details>
         <details><summary>Puis-je en commander pour toute mon équipe ?</summary><p><span class="todo">Conditions de commande en volume et facture entreprise : à fournir par Hugo.</span></p></details>
       </div>
     </section>
@@ -688,6 +776,7 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
       <thead><tr><th>#</th><th>Bloc</th><th>Contenu et source</th><th>État actuel</th></tr></thead>
       <tbody>
         <tr><td><span class="n">1</span></td><td>Galerie</td><td>6 médias du produit (5 images, 1 vidéo <code>custom.video_fiche_produit</code>). Premier visuel : le deck ouvert, avec le liseré en tête. Pastilles sous les vignettes : la couleur de la famille montrée.</td><td>6 images sans texte alternatif</td></tr>
+        <tr><td><span class="n">1c</span></td><td>Bulles · les outils en 15 s</td><td>Métachamp produit <code>fichly.stories</code> (liste de métaobjets <code>story_outil</code> : nom, famille 1 à 6, vidéo MP4, affiche, vignette, texte de la vidéo, article lié). Rangée de vignettes sous la galerie ; le lecteur ne charge la vidéo qu'au tap.</td><td>Nouveau · 7 vidéos rendues sur 41</td></tr>
         <tr><td><span class="n">2</span></td><td>Bloc d'achat</td><td>Titre (sans le point final), <code>custom.sous_titre</code>, note <code>reviews.rating</code> et <code>reviews.rating_count</code>, prix lu dans la boutique, <code>custom.avantage_1</code> à <code>_3</code>, quantité, devis équipe, réassurance.</td><td>Avantages et sous-titre déjà remplis</td></tr>
         <tr><td><span class="n">2b</span></td><td>Pack sous le bouton</td><td>Premier produit de <code>shopify--discovery--product_recommendation.complementary_products</code>, à remplacer par le pack.</td><td>Ce champ pointe vers le guide VSM, pas vers le pack</td></tr>
         <tr><td><span class="n">3</span></td><td>Les outils par famille</td><td><code>custom.les_outils_abordes</code>, découpé par paragraphe : une famille par paragraphe, une couleur par famille. Lien vers l'article quand l'outil en a un (nouveau métachamp <code>fichly.articles_outils</code>, ou correspondance par tag).</td><td>37 outils listés sur 40, fautes de saisie</td></tr>
@@ -699,6 +788,46 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
         <tr><td><span class="n">9</span></td><td>Formation Green Belt</td><td>Le bloc des articles V2, avec un message adapté : le pack Lean est offert avec la formation.</td><td>Textes déjà validés pour les articles</td></tr>
         <tr><td><span class="n">10</span></td><td>Le deck dans nos articles</td><td>Trois articles publiés dont l'outil est dans le deck, choisis par tag. Six autres arrivent avec la publication des brouillons (QQOQCCP, Ishikawa, Obeya, Pareto, Takt Time, AMDEC).</td><td>Nouveau</td></tr>
         <tr><td><span class="n">11</span></td><td>Barre d'achat qui suit</td><td>Apparaît quand le bouton principal sort de l'écran. Titre court, prix, bouton.</td><td>Nouveau</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Les bulles, <em>comment ça marche</em></h2>
+  <p>Chaque vidéo est dessinée par un petit programme, comme vos fiches LinkedIn animées : la fiche s'anime, dans la couleur de sa famille. Même gabarit pour les 40 outils, donc une nouvelle vidéo coûte une scène à écrire, pas un tournage. Les sept vidéos de cette maquette sont réelles : ce sont les fichiers que l'on mettrait en ligne.</p>
+  <ul class="fixes">
+    <li class="c1"><strong>Le même déroulé pour les 40 outils</strong>0 à 3 s : un problème vécu, en huit mots au plus. 3 à 11,5 s : le geste de l'outil, animé. 11,5 à 14 s : « À retenir ». Puis le liseré se remplit. 35 mots au plus, lisibles sans le son.<br><small>stories/moteur.js</small></li>
+    <li class="c2"><strong>Ancrées dans vos articles</strong>5 Pourquoi, VSM, SMED, Pareto et Obeya reprennent l'exemple et le vocabulaire de l'article Fichly (chaîne du contrôle de début de série, 3 jours contre 5 minutes, interne et externe…). Poka-Yoke suit la définition de Shingo, faute d'article.<br><small>Textes à relire par Hugo</small></li>
+    <li class="c3"><strong>Légères et rapides</strong>Environ 0,3 Mo par vidéo web (720 × 1280, H.264 et WebM, sans piste son). La rangée n'affiche que des vignettes de 15 à 20 Ko : rien ne se charge avant le tap, et seule la story suivante est préchargée.<br><small>livrables/stories/</small></li>
+    <li class="c4"><strong>Accessibles</strong>Bouton pause (WCAG 2.2.2), texte de chaque vidéo pour les lecteurs d'écran et le bouton « Texte » (WCAG 1.2.1), clavier (flèches, espace, Échap), lecture en pause si l'utilisateur limite les animations, pause quand l'onglet passe en arrière-plan.<br><small>Dans le lecteur</small></li>
+    <li class="c5"><strong>Dans Shopify sans application</strong>Vidéos dans Contenu &gt; Fichiers, un métaobjet par story, une section de thème faite maison. Pas d'abonnement à une appli de stories, et Hugo ajoute une vidéo sans toucher au code.<br><small>À développer sur le thème copié</small></li>
+    <li class="c6"><strong>Réutilisables partout</strong>Les maîtres 1080 × 1920 servent tels quels en Reels, Shorts et LinkedIn : une série « un outil Lean par semaine » sur le profil d'Hugo, avec le lien vers le deck.<br><small>Mêmes fichiers</small></li>
+  </ul>
+  <p>À mesurer dès la mise en ligne : ouverture d'une bulle, vidéo vue jusqu'au bout, clic sur « Ajouter au panier » dans le lecteur. On compare ensuite le taux d'ajout au panier de ceux qui ouvrent une story à celui des autres. Les hausses de conversion annoncées par les éditeurs d'applis de stories viennent de leur marketing : on ne s'y fie pas.</p>
+
+  <h2>Ce qui se fait de mieux, <em>et ce qu'on en garde</em></h2>
+  <p>Veille du 2 octobre 2026 : pages de decks d'outils (Pip Decks, Kitted, MethodKit, Facilitator Cards, SuperTilt, Dunod), applis de stories Shopify, recherche Baymard et obligations françaises. Le réseau de la session a bloqué la lecture complète de la plupart des pages : les constats reposent sur les extraits des résultats de recherche.</p>
+  <div class="plan-wrap">
+    <table class="plan">
+      <thead><tr><th>#</th><th>Constat</th><th>Ce que ça donne chez Fichly</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">Déjà dans la maquette</td></tr>
+        <tr><td><span class="n">1c</span></td><td>Les vidéos produit doivent être dans la galerie ou juste dessous, avec une icône lecture.</td><td>Rangée de bulles sous l'image, pastille « ▶ 15 s » sur chaque bulle.</td><td><a href="https://baymard.com/blog/embedding-product-page-videos" target="_blank" rel="noopener">Baymard</a></td></tr>
+        <tr><td><span class="n">1c</span></td><td>Format « PDP Stories » : vignettes rondes, lecteur 9:16 en surimpression, achat sans quitter la vidéo.</td><td>Lecteur avec barres de progression, tap gauche / droite, appui long, glisser pour fermer, bouton d'achat dans le lecteur.</td><td><a href="https://help.gotolstoy.com/en/articles/15707642-how-to-create-and-publish-pdp-stories" target="_blank" rel="noopener">Tolstoy</a></td></tr>
+        <tr><td><span class="n">1c</span></td><td>Un éditeur français de référence ajoute déjà des vidéos par QR code à sa boîte à outils du Lean (8 vidéos).</td><td>Fichly peut faire plus : une vidéo par outil, 40 au total, au format terrain.</td><td><a href="https://dunod.com/entreprise-et-economie/boite-outils-du-lean" target="_blank" rel="noopener">Dunod</a></td></tr>
+        <tr><td><span class="n">2</span></td><td>Frais et date de livraison visibles avant le panier.</td><td>Ligne « Livraison · reçu entre le … et le … » sous le prix.</td><td><a href="https://baymard.com/blog/show-shipping-costs-on-product-pages" target="_blank" rel="noopener">Baymard</a></td></tr>
+        <tr><td><span class="n">2</span></td><td>Justifier le prix par l'unité plutôt que le baisser.</td><td>« Soit 1,25 € par outil ». Prix HT et facture pour les entreprises.</td><td><a href="https://pipdecks.com/products/workshop-tactics" target="_blank" rel="noopener">Pip Decks</a></td></tr>
+        <tr><td><span class="n">6</span></td><td>Les avis négatifs sont recherchés ; répondre est un signe de sérieux.</td><td>Répartition des notes et réponse d'Hugo sous l'avis.</td><td><a href="https://baymard.com/research-articles/respond-to-negative-user-reviews" target="_blank" rel="noopener">Baymard</a></td></tr>
+        <tr class="grp"><td colspan="4">Obligations françaises</td></tr>
+        <tr><td><span class="n">6</span></td><td>Une page qui affiche des avis doit dire s'ils sont contrôlés et comment, et dater chaque avis.</td><td>Lien « Comment sont collectés et contrôlés nos avis ? » vers une courte rubrique (Judge.me, invitation après achat).</td><td><a href="https://www.inc-conso.fr/node/10142" target="_blank" rel="noopener">INC</a>, art. L111-7-2</td></tr>
+        <tr><td><span class="n">2b</span></td><td>Une annonce de réduction se calcule sur un prix de référence réel. Pour un pack, on compare au total des articles achetés séparément.</td><td>Écrire « 109,90 € au lieu de … € achetés séparément » avec les vrais prix.</td><td><a href="https://www.economie.gouv.fr/dgccrf/des-regles-plus-claires-contre-les-faux-rabais" target="_blank" rel="noopener">DGCCRF</a>, art. L112-1-1</td></tr>
+        <tr><td><span class="n">7</span></td><td>Délai de livraison, droit de rétractation de 14 jours et frais de retour à annoncer avant la commande.</td><td>Ligne sous le prix et question « Puis-je le retourner ? ».</td><td><a href="https://www.economie.gouv.fr/dgccrf/vente-a-distance" target="_blank" rel="noopener">DGCCRF</a>, art. L221-5</td></tr>
+        <tr><td><span class="n">2</span></td><td>Encadré obligatoire sur les garanties légales dans les CGV depuis octobre 2022.</td><td>Réassurance « Garantie légale de conformité 2 ans » avec lien vers les CGV, à vérifier.</td><td><a href="https://www.engage.hoganlovells.com/knowledgeservices/news/france-e-merchants-dont-forget-to-update-your-tcs-of-sale" target="_blank" rel="noopener">Hogan Lovells</a>, décret 2022-946</td></tr>
+        <tr class="grp"><td colspan="4">À décider avec Hugo</td></tr>
+        <tr><td>—</td><td>Les decks premium détaillent la boîte : nombre de cartes, format en mm, grammage, finition, étui, avec un repère de taille.</td><td>Bloc « Dans la boîte » et une photo du deck tenu en main. Il faut les caractéristiques exactes.</td><td><a href="https://methodkit.com/kits/" target="_blank" rel="noopener">MethodKit</a>, <a href="https://kitted.shop/products/design-thinking-tools-deck" target="_blank" rel="noopener">Kitted</a></td></tr>
+        <tr><td>—</td><td>Les leaders font télécharger un échantillon gratuit avant l'achat.</td><td>Une fiche exemple en PDF contre une adresse e-mail, relancée ensuite avec les vidéos.</td><td><a href="https://pipdecks.com/pages/free-pdf-download" target="_blank" rel="noopener">Pip Decks</a></td></tr>
+        <tr><td>—</td><td>Offre entreprise explicite : remises de volume, facture, logo client.</td><td>Paliers 1 / 3 / 10 decks et page « Pour vos équipes ».</td><td><a href="https://pipdecks.com/pages/pip-decks-for-business" target="_blank" rel="noopener">Pip Decks for Business</a></td></tr>
+        <tr><td>—</td><td>Les meilleurs decks associent un compagnon numérique à la carte imprimée.</td><td>Un QR code discret au verso de chaque fiche, vers sa vidéo de 15 s sur fichly.com, à la prochaine impression.</td><td><a href="https://pipdecks.com/pages/app" target="_blank" rel="noopener">Pip Decks</a>, Dunod</td></tr>
+        <tr><td>—</td><td>Les decks Lean imprimés en français sont rares ; la plupart des références sont agiles ou design thinking.</td><td>Le dire : un deck d'outils Lean, en français, imprimé en France, pour le terrain.</td><td><a href="https://supertilt.fr/boutique/le-deck-agile/" target="_blank" rel="noopener">SuperTilt</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -715,6 +844,39 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     <li class="c1"><strong>Titre SEO</strong>« 40 outils du Lean management - des fiches à emporter partout. » : pas de point final, tiret long ou deux-points, et le mot « deck » que les acheteurs emploient dans leurs avis.<br><small>Proposition à valider</small></li>
   </ul>
 </section>
+
+<dialog class="sp-dialog" id="sp" aria-label="Les outils en 15 secondes">
+  <div class="sp-wrap">
+    <button type="button" class="sp__nav" id="spPrev" aria-label="Story précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="sp" id="spPanel">
+      <div class="sp__media" id="spMedia">
+        <video id="spVideo" muted playsinline preload="auto" aria-describedby="spDesc"></video>
+        <div class="sp__tap" aria-hidden="true"><button type="button" tabindex="-1" data-go="-1"></button><button type="button" tabindex="-1" data-go="1"></button></div>
+        <div class="sp__top">
+          <div class="sp__bars" id="spBars"></div>
+          <div class="sp__head">
+            <img id="spAvatar" src="" alt="">
+            <div aria-live="polite"><strong id="spTitle"></strong><span id="spFam"></span></div>
+            <button type="button" class="sp__btn" id="spTextBtn" aria-label="Lire le texte de la vidéo" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/></svg></button>
+            <button type="button" class="sp__btn" id="spPause" aria-label="Mettre en pause"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+            <button type="button" class="sp__btn" id="spClose" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+        </div>
+        <button type="button" class="sp__play" id="spPlay" hidden aria-label="Lancer la vidéo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+        <div class="sp__text" id="spText" hidden><h3>Texte de la vidéo</h3><p id="spDesc"></p></div>
+      </div>
+      <div class="sp__cta" id="spCta">
+        <p><i></i><span id="spCtaText">Cet outil est dans le deck 40 outils du Lean</span><span class="sp__note"><span class="stars" style="--v: 4.79; width: 60px; height: 11px" aria-hidden="true"></span>4,79 · 28 avis</span></p>
+        <div><button type="button" class="btn" id="spAdd">Ajouter au panier · 49,90 €</button><a class="btn btn--line" id="spMore" href="#outils">Voir les 40</a></div>
+      </div>
+    </div>
+    <button type="button" class="sp__nav" id="spNext" aria-label="Story suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</dialog>
+
+<script type="application/json" id="storiesData">
+[{"id": "le-deck", "nom": "Le deck", "famille": 0, "article": null, "texte": "Des fiches à emporter partout. Six fiches s'étalent : 5 Pourquoi, Obeya, Pareto, VSM, SMED, Poka-Yoke. 40 fiches. 6 familles, une couleur chacune. À retenir : pour apprendre, consolider et transmettre, sur le terrain.", "video": "stories/le-deck-720.mp4", "affiche": "stories/le-deck.jpg", "bulle": "stories/le-deck-bulle.png"}, {"id": "5-pourquoi", "nom": "5 Pourquoi", "famille": 1, "article": "methode-5-pourquoi-cause-racine", "texte": "Le même défaut revient sans cesse. Pourquoi ? Réglage hors tolérance. Pourquoi ? Contrôle non fait. Pourquoi ? « L'opérateur a oublié » : la réponse est barrée, c'est une personne, pas une cause. Absent du mode opératoire. Pourquoi ? Mode opératoire pas revu. Contre-mesure : revue à chaque changement. À retenir : accuser une personne, c'est s'arrêter trop tôt.", "video": "stories/5-pourquoi-720.mp4", "affiche": "stories/5-pourquoi.jpg", "bulle": "stories/5-pourquoi-bulle.png"}, {"id": "obeya", "nom": "Obeya", "famille": 2, "article": null, "texte": "Chacun travaille sur sa version du projet. Les versions éparses rejoignent un seul mur en cinq zones : objectif et écart, plan, problèmes, indicateurs, décisions. Lu dans l'ordre. Debout, à heure fixe. Une décision écrite. Décider, pas informer. À retenir : une Obeya se mesure aux décisions prises devant elle.", "video": "stories/obeya-720.mp4", "affiche": "stories/obeya.jpg", "bulle": "stories/obeya-bulle.png"}, {"id": "pareto", "nom": "Pareto", "famille": 3, "article": null, "texte": "Des arrêts partout. Par où commencer ? Exemple illustratif : 6 causes en vrac. Trier par poids, de la plus fréquente à la plus rare. Cumuler les parts. 3 causes : 82 % des arrêts. Commencer par là. À retenir : quelques causes font le gros du problème. Commencez par elles."}, {"id": "vsm", "nom": "VSM", "famille": 4, "article": "value-stream-mapping-definition-et-etapes", "texte": "Chaque poste tourne vite. Le client attend. Suivre une pièce, de stock en poste. Attente : 3 jours, dans les stocks entre les postes. Machine : 5 minutes de transformation. Ici, on agit : sur la plus longue attente. À retenir : le temps se perd entre les postes, pas dedans."}, {"id": "smed", "nom": "SMED", "famille": 5, "article": "methode-smed-5-etapes", "texte": "Changer de série bloque la machine. Toutes les tâches commencent machine arrêtée : c'est l'interne. Celles qui peuvent se faire machine en marche passent en externe. Puis réduire l'interne. Arrêt plus court. À retenir : ce qui peut se faire machine en marche sort de l'arrêt."}, {"id": "poka-yoke", "nom": "Poka-Yoke", "famille": 6, "article": null, "texte": "L'erreur arrive même aux meilleurs. La pièce est montée à l'envers. « Faire attention » ne suffit pas. Un détrompeur. Impossible à l'envers : la pièce bute. Retournée, elle est bonne du premier coup. À retenir : rendre l'erreur impossible plutôt que compter sur l'attention."}]
+</script>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -796,5 +958,143 @@ p, ul, ol, dl, figure, blockquote { margin: 0; }
     count();
   }));
   count();
+
+  // ---------- Bulles et lecteur de stories ----------
+  const STORIES = JSON.parse(document.getElementById('storiesData').textContent);
+  const ready = STORIES.filter(st => st.video);
+  const row = document.getElementById('bubbles');
+  const SEEN_KEY = 'fichly-stories-vues';
+  let seen = [];
+  try { seen = JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch (e) { seen = []; }
+  const markSeen = id => {
+    if (!seen.includes(id)) seen.push(id);
+    try { localStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch (e) {}
+    const b = row.querySelector(`[data-id="${id}"]`);
+    if (b) b.classList.add('is-seen');
+  };
+  STORIES.forEach(st => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'bubble c' + st.famille + (seen.includes(st.id) ? ' is-seen' : '') + (st.video ? '' : ' is-soon');
+    b.dataset.id = st.id;
+    if (st.famille === 0) b.dataset.deck = '';
+    b.style.setProperty('--rc', 'var(--sec)');
+    b.innerHTML = `<span class="bubble__ring">${st.video ? `<img src="${st.bulle}" alt="" width="72" height="72" loading="lazy"><span class="bubble__dur"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M2 1l7 4-7 4z"/></svg>15 s</span>` : '<i>bientôt</i>'}</span><span class="bubble__name">${st.nom}</span>`;
+    if (st.video) b.setAttribute('aria-label', `${st.nom} : vidéo de 15 secondes`);
+    else { b.disabled = true; b.setAttribute('aria-label', `${st.nom} : vidéo à venir`); }
+    b.addEventListener('click', () => open(ready.indexOf(st)));
+    li.appendChild(b); row.appendChild(li);
+  });
+  document.getElementById('bubblesCount').textContent = ready.length + (ready.length > 1 ? ' vidéos' : ' vidéo') + ' sans le son';
+
+  const dlg = document.getElementById('sp'), video = document.getElementById('spVideo');
+  const canH264 = !!video.canPlayType('video/mp4; codecs="avc1.640028"');
+  const bars = document.getElementById('spBars');
+  const els = id => document.getElementById(id);
+  const pauseBtn = els('spPause'), playBtn = els('spPlay'), textBtn = els('spTextBtn'), textBox = els('spText');
+  let cur = 0, paused = false, raf = 0, opener = null;
+  bars.innerHTML = ready.map(() => '<i><b></b></i>').join('');
+  const fills = [...bars.querySelectorAll('b')];
+  const famNames = { 0: '40 outils du Lean', 1: 'Résolution de problèmes', 2: 'Engagement et visualisation', 3: 'Planification et stratégie', 4: 'Optimisation des flux', 5: 'Efficacité de production', 6: 'Amélioration de la production' };
+  const PAUSE_ICON = pauseBtn.innerHTML, PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+  function setPaused(p) {
+    paused = p;
+    pauseBtn.innerHTML = p ? PLAY_ICON : PAUSE_ICON;
+    pauseBtn.setAttribute('aria-label', p ? 'Reprendre la lecture' : 'Mettre en pause');
+    if (p) video.pause(); else { const pr = video.play(); if (pr) pr.catch(() => { playBtn.hidden = false; }); }
+  }
+  function load(i) {
+    cur = i;
+    const st = ready[i];
+    video.src = canH264 ? st.video : st.video.replace('.mp4', '.webm'); video.poster = st.affiche;
+    els('spAvatar').src = st.bulle;
+    els('spTitle').textContent = st.nom;
+    els('spFam').textContent = famNames[st.famille];
+    els('spDesc').textContent = st.texte;
+    els('spPanel').className = 'sp c' + st.famille;
+    els('spCtaText').textContent = st.famille === 0 ? 'Le deck des 40 outils, imprimé en France' : `${st.nom} fait partie des 40 fiches du deck`;
+    const more = els('spMore');
+    if (st.article) { more.textContent = "Lire l'article"; more.href = '#top'; }
+    else { more.textContent = 'Voir les 40'; more.href = '#outils'; }
+    fills.forEach((f, j) => { f.style.width = j < i ? '100%' : '0%'; });
+    els('spPrev').disabled = i === 0;
+    els('spNext').disabled = i === ready.length - 1;
+    playBtn.hidden = true;
+    textBox.hidden = true; textBtn.setAttribute('aria-pressed', 'false');
+    markSeen(st.id);
+    if (reduce) { setPaused(true); playBtn.hidden = false; } else setPaused(false);
+  }
+  function tick() {
+    if (video.duration) fills[cur].style.width = (video.currentTime / video.duration * 100).toFixed(2) + '%';
+    raf = requestAnimationFrame(tick);
+  }
+  function go(d) {
+    const n = cur + d;
+    if (n < 0) { video.currentTime = 0; return; }
+    if (n >= ready.length) { close(); return; }
+    load(n);
+  }
+  function open(i) {
+    opener = document.activeElement;
+    dlg.showModal();
+    load(i);
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
+    pauseBtn.focus();
+  }
+  function close() { if (dlg.open) dlg.close(); }
+  dlg.addEventListener('close', () => { video.pause(); video.removeAttribute('src'); video.load(); cancelAnimationFrame(raf); if (opener) opener.focus(); });
+  video.addEventListener('ended', () => { fills[cur].style.width = '100%'; if (!reduce) go(1); else playBtn.hidden = false; });
+  els('spClose').addEventListener('click', close);
+  els('spPrev').addEventListener('click', () => go(-1));
+  els('spNext').addEventListener('click', () => go(1));
+  pauseBtn.addEventListener('click', () => setPaused(!paused));
+  playBtn.addEventListener('click', () => { playBtn.hidden = true; if (video.ended) video.currentTime = 0; setPaused(false); });
+  textBtn.addEventListener('click', () => {
+    const on = textBox.hidden;
+    textBox.hidden = !on; textBtn.setAttribute('aria-pressed', String(on));
+    setPaused(on);
+  });
+  els('spAdd').addEventListener('click', () => { add(1); close(); });
+  // Pause quand l'onglet passe en arrière-plan ; reprise au retour si la lecture n'était pas en pause
+  document.addEventListener('visibilitychange', () => {
+    if (!dlg.open) return;
+    if (document.hidden) video.pause(); else if (!paused) video.play().catch(() => {});
+  });
+  // Précharge seulement la story suivante
+  const nextVid = document.createElement('video');
+  nextVid.muted = true; nextVid.preload = 'auto';
+  video.addEventListener('playing', () => {
+    const nx = ready[cur + 1];
+    if (nx) nextVid.src = canH264 ? nx.video : nx.video.replace('.mp4', '.webm');
+  });
+  els('spMore').addEventListener('click', () => close());
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.classList.contains('sp-wrap')) close(); });
+  dlg.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    else if ((e.key === ' ' || e.key === 'k') && !/^(BUTTON|A)$/.test(e.target.tagName)) { e.preventDefault(); setPaused(!paused); }
+  });
+  // Tap à gauche / à droite, appui long pour mettre en pause, glisser vers le bas pour fermer
+  const media = els('spMedia');
+  let down = null, holdT = 0, held = false;
+  media.addEventListener('pointerdown', e => {
+    if (e.target.closest('.sp__head, .sp__play, .sp__text')) return;
+    down = { x: e.clientX, y: e.clientY }; held = false;
+    holdT = setTimeout(() => { held = true; if (!paused) { video.pause(); } }, 260);
+  });
+  media.addEventListener('pointerup', e => {
+    if (!down) return;
+    clearTimeout(holdT);
+    const dy = e.clientY - down.y, dx = Math.abs(e.clientX - down.x);
+    const r = media.getBoundingClientRect();
+    const wasHeld = held; down = null;
+    if (dy > 90 && dx < 80) { close(); return; }
+    if (wasHeld) { if (!paused) video.play().catch(() => {}); return; }
+    if (dx > 40) return;
+    go(e.clientX - r.left < r.width / 3 ? -1 : 1);
+  });
+  media.addEventListener('pointercancel', () => { clearTimeout(holdT); down = null; if (held && !paused) video.play().catch(() => {}); });
 })();
 </script>
