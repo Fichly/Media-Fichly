@@ -22,7 +22,8 @@ def iml(e):
     return "{{%s}}" % e
 
 C = 2  # module Iterator : un bundle par contact
-ETAPE = "toString(%d.attributes.WB_ETAPE)" % C
+# Une étape absente vaut 0 (E0 envoyé) : Make peut omettre un 0, mais WB_DERNIER_ENVOI est toujours posé avec E0.
+ETAPE = "toString(ifempty(%d.attributes.WB_ETAPE; 0))" % C
 DERNIER = "ifempty(%d.attributes.WB_DERNIER_ENVOI; now)" % C
 DELAI = "switch(%s; %s; 99999)" % (ETAPE, "; ".join('"%s"; %d' % kv for kv in DELAIS.items()))
 MAINTENANT = 'formatDate(now; "YYYY-MM-DDTHH:mm:ss[Z]"; "UTC")'
