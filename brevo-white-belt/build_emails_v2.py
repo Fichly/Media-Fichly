@@ -26,6 +26,7 @@ Contrôles : le fond (EMAILS) est présent en entier (clauses) et rien n'est ajo
 visible, bandeau et pied exclus ; liens attendus = liens des blocs + bandeau + rappel + upsell + désinscription.
 """
 import html
+import html.parser
 import importlib.util
 import json
 import pathlib
@@ -478,7 +479,8 @@ GB_PICTO = (44, 31)        # styles en ligne : 360 à 413 px, et clients qui ret
 GB_PICTO_L = (48, 34)      # 414 px et plus (ordinateur compris), Outlook Windows
 GB_PICTO_S = (40, 28)      # 341 à 359 px
 GB_PICTO_XS = (36, 25)     # 340 px et moins
-GB_TEXT = 12.5             # taille du texte en ligne (clients sans <style>, en Arial : une ligne dès 320 px)
+GB_TEXT = 12.5             # taille du texte en ligne (clients sans <style>) : une ligne dès 320 px en Arial (5 px de jeu sur la ligne,
+                           # 8 px en Roboto) ; plus étroit, ou Poppins sans <style> sous 339 px : le texte passe sous le picto, centré
 
 def banner_css():
     """Règles du bandeau dans le <style> (tailles du picto et du texte, marges), par largeur d'écran ; repris tels quels par check()."""
@@ -505,11 +507,13 @@ def banner(key):
     Une seule ligne de 320 à 640 px, en Poppins comme en Arial (banner_css) :
       ordinateur (≥ 621 px)  picto 48 × 34, texte 14 px     414 à 620 px  48 × 34, 13 px     375 à 413 px  44 × 31, 13 px
       360 à 374 px           44 × 31, 12,5 px               341 à 359 px  40 × 28, 12 px     ≤ 340 px      36 × 25, 11,5 px
-    Styles en ligne (clients qui retirent le <style>) : picto 44 × 31, texte 12,5 px ; une ligne dès 320 px en Arial (13 px de marge) ;
-    plus étroit, ou police plus large, le texte passe sous le picto, centré.
+    Styles en ligne (clients qui retirent le <style>) : picto 44 × 31, texte 12,5 px ; une ligne dès 320 px en Arial (5 px de jeu sur
+    la ligne à 320 px, 8 px en Roboto) ; plus étroit, ou police plus large (Poppins sans <style> sous 339 px), le texte passe sous
+    le picto, centré. (Jeu = place restante sur la ligne, dans le padding de .gb-l ; avec <style>, au plus juste : 14,6 px en Poppins à 320 px.)
     Hauteur : 3 + 2 + 5 + picto + 5 + 2 + 3, soit 45 à 54 px (Outlook : 3 + 3 + 4 + 34 + 4 + 3 + 3 = 54 px).
     Toute la bande est cliquable (lien en bloc). Outlook Windows : tableau vert avec deux liens (pictogramme, texte) et les coutures
-    en cellules (comme rule()), sans VML (une image dans une zone de texte VML se décale selon le DPI) ; cellule du texte à hauteur
+    en cellules (comme rule()) ; le lien du pictogramme, sans texte, sort des lecteurs d'écran et de la tabulation (aria-hidden,
+    tabindex="-1") : le lien texte suffit. Sans VML (une image dans une zone de texte VML se décale selon le DPI) ; cellule du texte à hauteur
     fixe (34 px, interligne exact). Outlook.com en mode sombre : [data-ogsb] .bg-green et [data-ogsc] .on-green gardent vert et encre.
     Images bloquées : la place du pictogramme reste réservée (width/height), le texte est du vrai texte."""
     u = esc(banner_url(key))
@@ -525,7 +529,7 @@ def banner(key):
                             f'mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>')
     mso = (f'<!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0">{mso_seam("3px 16px 0 16px")}'
            f'<tr><td align="center" style="padding:4px 12px;">{T()}<tr>'
-           f'<td valign="middle" style="padding:0 10px 0 0;"><a href="{u}" target="_blank">{img("", wl, hl, "block")}</a></td>'
+           f'<td valign="middle" style="padding:0 10px 0 0;"><a href="{u}" target="_blank" aria-hidden="true" tabindex="-1">{img("", wl, hl, "block")}</a></td>'
            f'<td class="on-green" valign="middle" height="{hl}" style="height:{hl}px;font-family:Arial,Helvetica,sans-serif;font-size:14px;'
            f'line-height:18px;color:{INK};mso-line-height-rule:exactly;">'
            f'<a class="on-green" href="{u}" target="_blank" style="color:{INK};text-decoration:none;">{label}</a></td>'
@@ -906,6 +910,40 @@ def section(src, name):
     m = re.search(rf"<!-- {name}(?::[^>]*)? -->(.*?)<!-- /{name} -->", src, flags=re.S)
     return m.group(1) if m else None
 
+MSO_BLOCK = re.compile(r"<!--\[if mso\]>(.*?)<!\[endif\]-->", re.S)              # lu par Outlook Windows seul
+NOT_MSO_BLOCK = re.compile(r"<!--\[if !mso\]><!-->(.*?)<!--<!\[endif\]-->", re.S)  # lu par tous les autres clients
+
+def mso_view(h):
+    """Ce que lit Outlook Windows : blocs [if mso] ouverts, blocs !mso retirés."""
+    return MSO_BLOCK.sub(r"\1", NOT_MSO_BLOCK.sub("", h))
+
+def other_view(h):
+    """Ce que lisent les autres clients : blocs [if mso] retirés (simples commentaires), blocs !mso ouverts."""
+    return NOT_MSO_BLOCK.sub(r"\1", MSO_BLOCK.sub("", h))
+
+class _Nesting(html.parser.HTMLParser):
+    """Pile des balises de structure : chaque fermeture doit répondre à la dernière ouverture, et tout doit être refermé."""
+    TAGS = {"table", "tr", "td", "a", "span", "strong", "p", "div"}
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.stack, self.bad = [], []
+    def handle_starttag(self, tag, attrs):
+        if tag in self.TAGS:
+            self.stack.append(tag)
+    def handle_endtag(self, tag):
+        if tag in self.TAGS:
+            if self.stack and self.stack[-1] == tag:
+                self.stack.pop()
+            else:
+                self.bad.append(f"</{tag}> (ouvert : {self.stack[-1] if self.stack else 'rien'})")
+
+def nesting(h):
+    """(équilibré, détail) pour un fragment HTML : pile vide et aucune fermeture inattendue."""
+    n = _Nesting()
+    n.feed(h)
+    n.close()
+    return not n.stack and not n.bad, {"non fermées": n.stack, "fermetures inattendues": n.bad}
+
 def check(key, src, images, brevo):
     e = EM[key]
     res = {}
@@ -942,6 +980,14 @@ def check(key, src, images, brevo):
     bd = section(src, "bandeau")
     sheet = src.index('class="sheet"')
     n_links = len(re.findall(r'<a\b[^>]*\shref="', bd or ""))
+    mso = MSO_BLOCK.findall(bd or "")
+    marks = ["<!--[if mso]>", "<!--[if !mso]><!-->", "<!--<![endif]-->", "<![endif]-->"]
+    cc = [(bd or "").count(m) for m in marks]
+    pos = [(bd or "").find(m) for m in ("<!--[if mso]>", "<![endif]-->", "<!--[if !mso]><!-->", "<!--<![endif]-->")]
+    nest_mso, nest_other = nesting(mso_view(bd or "")), nesting(other_view(bd or ""))
+    res["bandeau : commentaires conditionnels et balises équilibrés (Outlook et autres)"] = (
+        bool(bd) and cc == [1, 1, 1, 2] and pos == sorted(pos) and -1 not in pos and nest_mso[0] and nest_other[0],
+        {"marqueurs": dict(zip(marks, cc)), "Outlook": nest_mso[1], "autres": nest_other[1]})
     bd_ok = (bool(bd) and visible_text(bd) == BANNER_TEXT + " →" and hrefs(bd) == ({banner_url(key)}, set()) and n_links == 3)
     first = bool(bd) and "<tr" not in src[sheet:src.index("<!-- bandeau -->")] and src.index("<!-- bandeau -->") < src.index('alt="Fichly"')
     res["bandeau : texte exact, lien <eN>-bandeau (bloc + Outlook : picto et texte)"] = (bd_ok, (visible_text(bd), n_links) if bd else None)
@@ -953,11 +999,23 @@ def check(key, src, images, brevo):
         first and gb_ok and f"background-color:{GREEN}" in bd and bd.count("border-top:2px dashed #FFFFFF") == 4
         and font(GB_TEXT, 18, 500, INK) in bd and "v:rect" not in bd
         and bd.count(f'<strong class="on-green" style="font-weight:800;color:{INK};">Green&nbsp;Belt</strong>') == 2, (len(gb), sorted(map(wh, gb))))
-    mso = re.findall(r"<!--\[if mso\]>(.*?)<!\[endif\]-->", bd or "", flags=re.S)
-    res["bandeau Outlook : tableau vert sans VML, picto 48 × 34, texte en cellule à hauteur fixe, interligne exact"] = (
-        len(mso) == 1 and f'width="{GB_PICTO_L[0]}" height="{GB_PICTO_L[1]}"' in mso[0]
+    mso_txt = (re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", mso[0])).replace("\xa0", " ")).strip()
+               if len(mso) == 1 else None)
+    res["bandeau Outlook : texte exact, tableau vert sans VML, picto 48 × 34 hors lecteur d'écran, texte à hauteur fixe"] = (
+        len(mso) == 1 and mso_txt == BANNER_TEXT + " →" and f'width="{GB_PICTO_L[0]}" height="{GB_PICTO_L[1]}"' in mso[0]
+        and f'<a href="{esc(banner_url(key))}" target="_blank" aria-hidden="true" tabindex="-1"><img ' in mso[0]
         and re.search(rf'<td class="on-green" valign="middle" height="{GB_PICTO_L[1]}" style="height:{GB_PICTO_L[1]}px;[^"]*'
-                      r'line-height:18px;[^"]*mso-line-height-rule:exactly;', mso[0]) is not None, "")
+                      r'line-height:18px;[^"]*mso-line-height-rule:exactly;', mso[0]) is not None, mso_txt)
+    # cibles des règles du <style> : toutes dans le lien en bloc (toute la bande cliquable), picto gb-i en 44 × 31 hors Outlook
+    nv = other_view(bd or "")
+    blk = re.search(r'<a class="on-green" href="[^"]+" target="_blank" style="display:block;padding:3px 0;[^"]*">(.*)</a>', nv, flags=re.S)
+    inner = blk.group(1) if blk else ""
+    gi = [i for i in re.findall(r"<img [^>]+>", inner) if 'class="gb-i"' in i]
+    want_cls = sorted(set(re.findall(r"\.(gb-[\w-]+)", " ".join(r for rules in banner_css().values() for r in rules))))
+    res["bandeau : cibles du <style> (" + ", ".join(want_cls) + ", topband) dans le lien en bloc, picto gb-i en 44 × 31"] = (
+        bool(blk) and (bd or "").count('class="gb-i"') == 1 and len(gi) == 1 and wh(gi[0]) == GB_PICTO
+        and inner.count('class="gb-s"') == 2 and all(f'class="{c}"' in inner for c in want_cls)
+        and (bd or "").startswith('<tr><td class="topband bg-green" '), want_cls)
     css = [r for rules in banner_css().values() for r in rules]
     res["bandeau : <style> (picto 48 × 34 dès 414 px, 40 × 28 ≤ 359 px, 36 × 25 ≤ 340 px ; Outlook.com sombre)"] = (
         all(r in src for r in css) and "@media only screen and (min-width:414px)" in src
@@ -1012,6 +1070,13 @@ def check(key, src, images, brevo):
     picto = [i for i in imgs if f'src="{esc(images["greenbelt"])}"' in i]
     ill = [i for i in imgs if i not in logo and i not in picto and 'alt="Hugo, Fichly"' not in i]
     res["une illustration au plus (hors logo, avatar, picto du bandeau)"] = (len(ill) <= 1, len(ill))
+    from PIL import Image
+    with Image.open(IMAGES["greenbelt"]) as im:            # fichier local (aussi en --brevo : même PNG que dans la galerie)
+        gsz, gmode = im.size, im.mode
+    ratio = gsz[0] / gsz[1]
+    res["picto du bandeau : PNG RGBA 3× de 48 × 34 (144 × 102), tailles affichées sans déformation (± 2,5 %)"] = (
+        gsz == (GB_PICTO_L[0] * 3, GB_PICTO_L[1] * 3) and gmode == "RGBA"
+        and all(abs(w / h / ratio - 1) <= 0.025 for w, h in (GB_PICTO, GB_PICTO_L, GB_PICTO_S, GB_PICTO_XS)), (gsz, gmode))
     res["alt sur chaque image (vide pour le picto décoratif du bandeau)"] = (
         all(re.search(r'alt="[^"]+"', i) for i in imgs if i not in picto) and all('alt=""' in i for i in picto), "")
     res["width et height sur chaque image"] = (all(re.search(r'width="\d+"', i) and re.search(r'height="\d+"', i) for i in imgs), "")
