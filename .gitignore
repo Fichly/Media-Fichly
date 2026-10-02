@@ -1,3 +1,4 @@
 controle/
 node_modules/
 articles-v2/sauvegardes/
+__pycache__/
