@@ -27,13 +27,23 @@ Rien n'est envoyé ni activé à ce stade.
 | 212 | WB · E4 · J+14 · Formation | J+14, besoin 3 |
 | 213 | WB · E4 · J+14 · Accompagnement | J+14, besoin 4 |
 
-### Ce que fait le scénario Make
+### Ce que fait le scénario Make (version 2, testée)
 
 1. Tally envoie la réponse au hook 4410784.
-2. Brevo cherche le contact par son e-mail.
-3. **Nouveau contact** : création avec prénom, nom, entreprise, `TITRE_JOB`, `WB_BESOIN`, `INSCRIT_WHITEBELT = oui`, `WB_DATE_INSCRIPTION`, `OPT_IN` selon la case newsletter, `ASSET_DERNIER = white_belt`, `DATE_DERNIERE_INTERACTION` et les 4 UTM.
-4. **Contact existant** : mêmes champs, mais on garde les UTM et la date d'inscription déjà présents (premier contact), et un opt-in déjà donné n'est jamais retiré.
-5. Ajout à la liste 49. C'est cet ajout qui déclenche la séquence Brevo.
+2. **Garde** : la réponse n'est traitée que si l'e-mail est présent, la case de consentement cochée, et si elle vient de la nouvelle version du formulaire, c'est-à-dire qu'elle contient la question « Qu'attendez-vous de cette formation ? ». Les réponses de l'ancienne version, dont le consentement ne couvre pas les 4 e-mails de suivi, n'entrent pas dans la séquence.
+3. Brevo cherche le contact. L'adresse est mise en minuscules et nettoyée de ses espaces.
+4. **Création ou mise à jour en une seule étape**, donc jamais de doublon, même en cas de double clic :
+   - prénom, nom, entreprise et `TITRE_JOB` déjà présents sont **conservés**, puisque la saisie existante est plus précise ;
+   - `WB_BESOIN` prend la réponse la plus récente ;
+   - `WB_DATE_INSCRIPTION` garde la première inscription (date de Paris) ;
+   - un opt-in déjà donné n'est jamais retiré ;
+   - le bloc UTM du premier contact est gardé tel quel s'il existe, sinon c'est celui de la réponse qui est écrit (jamais de mélange source / medium) ;
+   - `ASSET_DERNIER = white_belt` et `DATE_DERNIERE_INTERACTION` prennent la date de la réponse.
+5. Ajout à la liste 49 seulement si le contact n'y est pas déjà. C'est cet ajout qui déclenche la séquence.
+6. En cas d'erreur Brevo : 3 nouvelles tentatives à 15 minutes d'intervalle, puis la réponse est gardée en « exécution incomplète » dans Make. Rien n'est perdu en silence.
+7. Les réponses sont traitées une par une (traitement séquentiel).
+
+Les résultats des 18 cas de test sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
 Correspondance « Votre fonction » → `TITRE_JOB` :
 
@@ -88,9 +98,18 @@ Dans cet ordre :
 2. **Tally, e-mail au répondant** : il est encore activé (« Votre accès à la White Belt Lean en 1 h »). Avec E0 envoyé par Brevo, l'inscrit recevrait deux e-mails d'accès. À désactiver dans Tally (Paramètres → Notifications → e-mail au répondant).
 3. **Case newsletter** : elle est facultative, alors que tous les inscrits recevront L'Atelier une fois les deux bases connectées. Soit on la retire et on mentionne L'Atelier dans la case de consentement, soit on ne connecte que les inscrits qui l'ont cochée (`OPT_IN = oui`). À trancher.
 4. **Publier le formulaire Tally** (vous).
-5. **Faire une inscription test** avec une adresse à vous. Ensuite je vérifie dans Make la clé exacte de la question « Qu'attendez-vous de cette formation ? ». Elle n'existe qu'après publication. Pour l'instant, le scénario la lit par son libellé.
+5. **Faire une inscription test** avec une adresse à vous, en ajoutant `?utm_source=test&utm_medium=test&utm_campaign=test&utm_content=test` au lien du formulaire. Ensuite je relis la réponse dans Make. Je remplace la lecture par libellé de la question « Qu'attendez-vous de cette formation ? » par son identifiant, qui n'existe qu'après publication, et je vérifie les clés `utm_medium` et `utm_content`.
 6. **Activer d'abord le workflow Brevo.** Le déclencheur « ajouté à une liste » ne rattrape pas les contacts ajoutés avant son activation. Si Make tourne en premier, les premiers inscrits ne reçoivent jamais la séquence.
 7. **Activer ensuite le scénario Make 9905705.** Attention : tant que le scénario est inactif, les réponses Tally s'accumulent dans la file du hook et seront toutes traitées à l'activation. Videz la file si elle ne contient que des tests.
 8. **Refaire une inscription test** et vérifier l'arrivée de E0, la fiche contact et la présence dans la liste 49.
 
 Une personne déjà présente dans la liste 49 qui se réinscrit voit sa fiche mise à jour, mais la séquence ne repart pas. C'est voulu : elle ne reçoit pas deux fois les mêmes e-mails.
+
+## 4. Points à trancher
+
+- **Robots** : sans protection, une soumission automatique créerait un contact et lui enverrait la séquence. Activez la protection anti-spam de Tally avant la publication. Je n'ai pas ajouté de filtre « devinette » dans Make, qui risquerait d'écarter de vrais inscrits.
+- **Contacts désinscrits** : un contact désinscrit de Brevo qui s'inscrit à la White Belt reste désinscrit. Le scénario ne réabonne jamais personne. Il entre dans la liste 49, mais Brevo ne lui enverra probablement pas la séquence. À surveiller dans les premiers jours.
+- **Réinscription** : une personne déjà dans la liste 49 qui refait le formulaire ne reçoit pas de nouvel e-mail d'accès. Elle est quand même redirigée vers la formation en fin de formulaire. Si vous voulez lui renvoyer l'accès, je peux ajouter l'envoi du template 206 dans ce cas précis.
+- **Table « Votre fonction » → `TITRE_JOB`** : « Direction » donne « Président / PDG / Gérant / Dirigeant » (13), alors que « Directeur des opérations/industriel » (8) existe aussi. « Qualité ou HSE » donne « Responsable Qualité » (21). À valider.
+- **Taille d'entreprise et niveau Lean** : ces deux réponses ne sont pas enregistrées dans Brevo. Il faudrait deux attributs, à créer avec votre accord.
+- **Traçabilité du consentement** : `INSCRIT_WHITEBELT` et `WB_DATE_INSCRIPTION` attestent l'inscription par la nouvelle version du formulaire, donc l'accord pour les 4 e-mails. Si vous voulez une preuve plus explicite, on peut ajouter un attribut date dédié.

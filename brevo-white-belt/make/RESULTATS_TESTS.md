@@ -25,4 +25,15 @@
 | V6 | réponse de l'ancienne version (pas de question « Qu'attendez-vous ») | aucun contact | 404 : aucun contact | OK |
 | V8 | e-mail absent | rien, sans erreur | exécution réussie, rien écrit | OK |
 
-Liste 49 après les tests : 6 contacts, tous de test (wbtest-1, -3, -4, -10, -11, -14).
+| V9 | contact désinscrit (emailBlacklisted, TITRE_JOB 17) qui coche la newsletter | reste désinscrit, données conservées | emailBlacklisted toujours vrai, TITRE_JOB 17, prénom conservé, OPT_IN vrai, liste 49 | OK (voir la note sur les désinscrits dans la checklist) |
+| V10 | adresse refusée par Brevo (« pas-un-email ») | erreur relancée et gardée, rien de perdu | exécution terminée en avertissement, 1 exécution incomplète stockée avec relances | OK |
+
+## Nettoyage
+
+- Les 7 contacts de test créés pendant les tests (ids 20334 à 20340) ont été supprimés. La liste 49 est revenue à 0 contact.
+- Le scénario harnais 9905753 a été désactivé puis supprimé. Il se recrée depuis `blueprint_harnais_test.json`, avec l'entrée de scénario `payload` (texte).
+- Le scénario réel 9905705 est en version 2, **inactif**. La file du hook 4410784 est vide.
+
+## Encore à tester après la publication du formulaire
+
+Une vraie soumission Tally doit confirmer, sur la structure publiée, la clé de la question « Qu’attendez-vous de cette formation ? » et les clés `utm_medium` / `utm_content`, qui n'ont jamais été observées dans une sortie réelle.

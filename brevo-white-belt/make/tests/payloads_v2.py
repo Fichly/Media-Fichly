@@ -41,5 +41,12 @@ CAS["V5"]["fieldsById"]["question_2xyWy9"] = None
 avec_besoin(CAS["V7"], "Faire accompagner mon site", " ")
 del CAS["V8"]["fieldsById"]["question_PBexee"]; del CAS["V8"]["fields"]["E-mail professionnel"]
 
+
+# V9 contact désinscrit (emailBlacklisted, TITRE_JOB 17) qui coche la newsletter
+CAS["V9"] = reponse("hugo.duc+wbtest-15@fichly.com", fonction="Responsable production", besoin="Lancer une démarche avec mon équipe",
+                    newsletter=True, created="2026-10-09T11:00:00.000Z")
+# V10 adresse refusée par Brevo (400) : l'erreur doit être relancée puis gardée, pas perdue
+CAS["V10"] = reponse("pas-un-email", fonction="Autre", besoin="Découvrir les bases du Lean")
+
 if __name__ == "__main__":
     print(json.dumps({"payload": json.dumps(CAS[sys.argv[1]], ensure_ascii=True)}, ensure_ascii=True))
