@@ -9,11 +9,13 @@ et la photo de Hugo dans la signature. Ajout n° 2 du 2 octobre : salutation au 
 code de réduction WHITEBELT15 dans la carte cadeau d'E0.
 
 Usage :
-  python3 build_emails_v2.py                 aperçu : images locales, « Bonjour Camille, » à la place des balises Brevo
+  python3 build_emails_v2.py                 aperçu : images locales, « Bonjour Camille, » à la place des balises Brevo.
+                                             Écrit dans emails-v2-apercu/ (ou dans DIR avec --preview DIR), JAMAIS dans emails-v2/.
   python3 build_emails_v2.py --brevo         version à charger dans Brevo : URL de la galerie (IMAGES_BREVO), balises
-                                             {% if contact.FIRSTNAME %}… de la salutation
-  python3 build_emails_v2.py --preview DIR   écrit aussi des copies d'aperçu (Poppins en local, version Arial, « Bonjour Camille, »)
-Les deux premiers modes écrivent emails-v2/<clé>.html + meta.json, puis lancent les contrôles.
+                                             {% if contact.FIRSTNAME %}… de la salutation. Seul mode qui écrit emails-v2/.
+  --preview DIR                              écrit les pages d'aperçu dans DIR (Poppins en local, version Arial, « Bonjour Camille, »)
+Chaque lancement contrôle aussi les fichiers présents dans emails-v2/ : ni « Camille », ni chemin local, ni marqueur IMG:,
+balises Brevo de la salutation présentes. Un écart fait échouer le script.
 
 Images : le HTML porte des marqueurs « IMG:<clé> », « IMG:avatar » et « IMG:logo », remplacés à la fin par IMAGES
 (chemins locaux absolus pour l'aperçu) ou IMAGES_BREVO (URL de la galerie, pour l'import dans Brevo : 10 PNG).
@@ -144,7 +146,6 @@ def fr(t):
     parts = re.split(r"(<[^>]+>)", ce.fr(t))
     for i, x in enumerate(parts):
         if not x.startswith("<"):
-            x = x.replace("Le Lean en 1 page", "Le&nbsp;Lean&nbsp;en&nbsp;1&nbsp;page")
             for name in GROUPS:
                 x = x.replace(name, name.replace(" ", "&nbsp;"))
             x = re.sub(r"(?<=\d) (?=[^\s\d])", "&nbsp;", x)
@@ -282,15 +283,17 @@ def steps_v2(items, marks=None):
     return TW + "".join(out) + "</table>"
 
 def tool_rows(items):
-    """Lignes de carte : brique large portant le nom de l'outil, puis la condition."""
+    """Lignes de carte : brique large portant le nom de l'outil, puis la condition.
+    Brique de 100 px (« 5 Pourquoi » : 77 px) et retrait de 12 px : sans <style> (pas d'empilement .stk), la rangée
+    tient à 320 px avec les marges en ligne (28 + 24 px de chaque côté)."""
     out = []
     for i, it in enumerate(items):
         m = re.match(r"<b>(.+?)</b>,\s*(.+)$", it)
         name, cond = m.group(1), m.group(2)
         if i:
             out.append(f'<tr><td colspan="2" style="padding:12px 0;">{rule(1)}</td></tr>')
-        out.append(f'<tr><td class="stk" width="112" valign="top" style="width:112px;">{brick_wide(name, BLUE, "#FFFFFF", 112)}</td>'
-                   f'<td class="stk stk-t" valign="top" style="padding:7px 0 0 14px;{font(16, 24, 500, INK)}">{fr(cond)}</td></tr>')
+        out.append(f'<tr><td class="stk" width="100" valign="top" style="width:100px;">{brick_wide(name, BLUE, "#FFFFFF", 100)}</td>'
+                   f'<td class="stk stk-t" valign="top" style="padding:7px 0 0 12px;{font(16, 24, 500, INK)}">{fr(cond)}</td></tr>')
     return TW + "".join(out) + "</table>"
 
 def brick_wide(label, bg, color, w=None, border=None, size=13, lh=15, cls=""):
@@ -430,29 +433,34 @@ def salut(text):
     return f'<p style="margin:0 0 16px 0;{font(16, 27, 400, TXT)}">{GREETING_BREVO}</p>'
 
 def rappel(key):
-    """Carte discrète « Votre formation » (E1 à E4) : papier clair, filet fin, texte 14 px, lien texte vers la formation."""
-    inner = (f'<p style="margin:0 0 6px 0;{font(12, 16, 700, BLUE, "letter-spacing:0.6px;word-spacing:2px;text-transform:uppercase;")}">{fr(RAPPEL_LABEL)}</p>'
-             f'<p style="margin:0 0 8px 0;{font(14, 22, 400, TXT)}">{fr(nowidow(RAPPEL[code(key)]))}</p>'
-             f'<p style="margin:0;{font(14, 20, 700, BLUE)}"><a href="{esc(rappel_url(key))}" target="_blank" '
-             f'style="color:{BLUE};font-weight:700;text-decoration:underline;">{fr(RAPPEL_LINK)}&nbsp;&#8594;</a></p>')
-    return ('<!-- rappel -->' + f'{TW}<tr><td class="cardpad" bgcolor="{CARD}" style="background-color:{CARD};border:1px solid {LINE};'
-            f'border-radius:14px;padding:14px 18px 15px 18px;">{inner}</td></tr></table>' + '<!-- /rappel -->')
+    """Aparté « Votre formation » (E1 à E4) : ni fond ni cadre, un filet lavande à gauche (border-left, rendu par Outlook),
+    étiquette 11 px, texte 14/21 gris (contraste 5,7:1 sur le papier), lien texte vers la formation en fin de paragraphe.
+    Espace simple avant le lien (insécable à l'intérieur) : une espace insécable collerait « vous voulez. » au lien et
+    formerait un bloc de 250 px qui laisse une ligne courte au-dessus.
+    Il se lit comme une note en marge, pas comme un premier bloc de contenu : le chapô reste le texte le plus fort."""
+    link = (f'<a href="{esc(rappel_url(key))}" target="_blank" style="color:{BLUE};font-weight:700;text-decoration:underline;'
+            f'white-space:nowrap;">{fr(RAPPEL_LINK)}&nbsp;&#8594;</a>')
+    inner = (f'<p style="margin:0 0 4px 0;{font(11, 15, 700, BLUE, "letter-spacing:0.6px;word-spacing:2px;text-transform:uppercase;")}">{fr(RAPPEL_LABEL)}</p>'
+             f'<p style="margin:0;{font(14, 21, 400, MUTED)}">{fr(RAPPEL[code(key)])} {link}</p>')
+    return ('<!-- rappel -->' + f'{TW}<tr><td style="background-color:transparent;border:0;border-left:3px solid {STITCH};'
+            f'border-radius:0;padding:2px 0 2px 14px;">{inner}</td></tr></table>' + '<!-- /rappel -->')
 
 def hello(key, salutation):
-    """Salutation, puis la carte rappel (sauf E0, qui donne l'accès)."""
-    return salut(salutation) + ("" if key == "e0" else rappel(key) + spacer(22))
+    """Salutation, puis l'aparté rappel (sauf E0, qui donne l'accès)."""
+    return salut(salutation) + ("" if key == "e0" else rappel(key) + spacer(18))
 
 def coupon(text):
-    """Code de réduction : vrai texte sélectionnable (un appui le sélectionne en entier), grandes capitales, contour pointillé."""
+    """Code de réduction : vrai texte sélectionnable (un appui le sélectionne en entier), grandes capitales, contour pointillé.
+    Version compacte en ligne (24/32, espacement 1 px, marges 6 px) : elle tient à 320 px même quand le client ignore
+    le <style> (marges mobiles .px et .cardpad absentes). Le 26 px espacé de 2 px revient sur ordinateur (min-width:621px)."""
     return (f'{TW}<tr><td class="coupon" align="center" bgcolor="#FFFFFF" style="background-color:#FFFFFF;border:2px dashed {YELLOW};'
-            f'border-radius:14px;padding:13px 10px 14px 10px;">'
-            f'<p style="margin:0;{font(26, 34, 800, INK, "letter-spacing:2px;")}text-rendering:geometricPrecision;-webkit-user-select:all;user-select:all;">{text}</p>'
+            f'border-radius:14px;padding:13px 6px 14px 6px;">'
+            f'<p style="margin:0;{font(24, 32, 800, INK, "letter-spacing:1px;")}text-rendering:geometricPrecision;-webkit-user-select:all;user-select:all;">{text}</p>'
             f'</td></tr></table>')
 
 def code_note(text, code_):
-    """Rappel du code (E4 Découvrir) : contour pointillé jaune comme le code d'E0 (le jaune signale ce qui est offert),
-    sur papier clair pour ne pas se fondre dans le fond jaune de l'illustration placée juste au-dessus ;
-    le code en pastille jaune pastel."""
+    """Rappel du code (E4 Découvrir), collé sous le bouton des fiches qu'il motive : contour pointillé jaune comme le code
+    d'E0 (le jaune signale ce qui est offert), sur papier clair ; le code en pastille jaune pastel."""
     assert code_ in text, code_
     tag = (f'<span style="white-space:nowrap;background-color:{PY};border-radius:6px;padding:2px 7px;'
            f'font-weight:800;letter-spacing:1px;color:{INK};text-rendering:geometricPrecision;">{code_}</span>')
@@ -527,6 +535,8 @@ def page(e, rows):
     .pxt {{ padding-left:28px !important; padding-right:28px !important; }}
     .tin, .tfr {{ padding-left:12px !important; padding-right:12px !important; }}
     .t {{ font-size:40px !important; line-height:48px !important; }}
+    .coupon {{ padding-left:10px !important; padding-right:10px !important; }}
+    .coupon p {{ font-size:26px !important; line-height:34px !important; letter-spacing:2px !important; }}
   }}
   @media only screen and (max-width:620px) {{
     .outer {{ padding:0 !important; }}
@@ -548,13 +558,16 @@ def page(e, rows):
     .rl {{ font-size:11px !important; }}
     .foot {{ padding:22px 22px 30px 22px !important; }}
   }}
+  @media only screen and (max-width:340px) {{
+    .topband a {{ letter-spacing:0 !important; padding-left:4px !important; padding-right:4px !important; font-size:12px !important; }}
+  }}
   [data-ogsc] .on-blue {{ color:#FFFFFF !important; }}
   [data-ogsb] .bg-blue {{ background-color:{BLUE} !important; }}
   [data-ogsb] .bg-ink {{ background-color:{INK} !important; }}
 </style>
 </head>
 <body style="margin:0;padding:0;background-color:{DESK};">
-<div style="display:none;font-size:1px;color:{DESK};line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">{pre}{"&#847;&zwnj;&nbsp;" * 40}</div>
+<div style="display:none;font-size:1px;color:{DESK};line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">{pre}{"&#847;&zwnj;&nbsp;" * 100}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{DESK}" style="background-color:{DESK};">
 <tr><td align="center" class="outer" style="padding:28px 0 0 0;">
 <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
@@ -654,11 +667,13 @@ def e4_decouvrir():
     e = EM["e4-decouvrir"]; B = kinds(e, ["p", "p", "p", "cta", "p", "p", "p", "sig"])
     fiches = bold(B[2][1], "Nos fiches Lean rassemblent 40 outils du Lean")
     jeudi, numero = split(B[5][1], "notre newsletter.")
+    # Illustration juste après le fil de la série : le paragraphe des fiches, le bouton et le rappel du code se suivent,
+    # le code (raison de cliquer maintenant) arrive collé au bouton, sans image entre les deux.
     rows = [header_row(), title_row(e, "Garder les outils", "sous la main"),
             row(hello(e["key"], B[0][1]) + lead(B[1][1], mb=20) + series(3), top=30),
+            row(illus("e4-decouvrir", "Un éventail de fiches Lean : 40 outils du Lean, à ressortir avant une réunion d’équipe ou un passage en atelier."), top=30),
             row(p(fiches, mb=20) + cta(B[3][1], B[3][2]), top=28),
-            row(illus("e4-decouvrir", "Un éventail de fiches Lean : 40 outils du Lean, à ressortir avant une réunion d’équipe ou un passage en atelier."), top=40),
-            row(code_note(B[4][1], "WHITEBELT15"), top=22),
+            row(code_note(B[4][1], "WHITEBELT15"), top=16),
             row(card(chip("Chaque jeudi", BLUE, "#FFFFFF") + spacer(12) + p(jeudi, mb=10, color=INK, weight=500) + p(numero, mb=0), bg=PL, border=None), top=20),
             ] + ending(e, B[6][1], rail=False)
     return page(e, "\n".join(rows))
@@ -957,6 +972,40 @@ def preview(src, mode="poppins"):
         src = re.sub(r'<link href="https://fonts.googleapis.com[^>]*>', f"<style>{fonts}</style>", src)
     return src
 
+APERCU = HERE / "emails-v2-apercu"          # aperçu par défaut (hors Git) : emails-v2/ ne reçoit que la version Brevo
+LOCAL_PATH = re.compile(r"/home/|/tmp/|/Users/|file:|[A-Za-z]:\\\\")
+
+def check_brevo_folder():
+    """Garde-fou sur les fichiers réellement présents dans emails-v2/ (ceux qu'on charge dans Brevo), quel que soit le mode :
+    les 8 emails et meta.json, rien d'autre ; ni « Camille », ni chemin local, ni marqueur IMG: ; balises Brevo présentes."""
+    bad = []
+    want = {f"{k}.html" for k in KEYS} | {"meta.json"}
+    have = {x.name for x in OUT.iterdir()} if OUT.exists() else set()
+    if have != want:
+        bad.append(f"fichiers : en trop {sorted(have - want)}, manquants {sorted(want - have)}")
+    for k in KEYS:
+        f = OUT / f"{k}.html"
+        if not f.exists():
+            continue
+        s = f.read_text(encoding="utf-8")
+        if GREETING_PREVIEW in s or "Camille" in s:
+            bad.append(f"{k} : « Camille » (version d'aperçu)")
+        if LOCAL_PATH.search(s):
+            bad.append(f"{k} : chemin local {LOCAL_PATH.search(s).group(0)!r}")
+        if "IMG:" in s:
+            bad.append(f"{k} : marqueur IMG: non remplacé")
+        if s.count(GREETING_BREVO) != 1 or "{{ unsubscribe }}" not in s:
+            bad.append(f"{k} : balises Brevo (salutation, désinscription) absentes")
+    m = OUT / "meta.json"
+    if m.exists():
+        ms = m.read_text(encoding="utf-8")
+        if LOCAL_PATH.search(ms) or "Camille" in ms:
+            bad.append("meta.json : chemin local ou « Camille »")
+    print(f"── emails-v2/ (à charger dans Brevo) {'OK' if not bad else 'ÉCART'}")
+    for b in bad:
+        print(f"     KO  {b}")
+    return not bad
+
 def main(argv):
     brevo = "--brevo" in argv
     images = dict(IMAGES)
@@ -965,29 +1014,34 @@ def main(argv):
         if missing:
             sys.exit(f"IMAGES_BREVO incomplet : {', '.join(missing)}")
         images = dict(IMAGES_BREVO)
-    print("MODE :", "Brevo (galerie Brevo, balises de salutation)" if brevo else "aperçu (images locales, « Bonjour Camille, »)")
-    OUT.mkdir(exist_ok=True)
+    pdir = pathlib.Path(argv[argv.index("--preview") + 1]) if "--preview" in argv else (None if brevo else APERCU)
+    out = OUT if brevo else pdir
+    print("MODE :", "Brevo (galerie Brevo, balises de salutation) → emails-v2/" if brevo
+          else f"aperçu (images locales, « Bonjour Camille, ») → {pdir} (emails-v2/ n'est pas touché)")
     sources, meta = {}, []
     for e in EMAILS:
         k = e["key"]
-        src = apply_greeting(apply_images(BUILD[k](), images), brevo)
-        (OUT / f"{k}.html").write_text(src, encoding="utf-8")
-        sources[k] = src
+        sources[k] = src = apply_greeting(apply_images(BUILD[k](), images), brevo)
         meta.append({"clé": k, "nom": e["name"], "objet": e["subject"], "preheader": e["preheader"], "mots": body_words(src),
                      "image": images[k], "avatar": images["avatar"], "logo": images["logo"], "upsell": UPSELL_FOR[k],
                      "bandeau": banner_url(k), "rappel": k != "e0",
                      "salutation": "balises Brevo" if brevo else "aperçu (Bonjour Camille,)",
-                     "fichier": f"emails-v2/{k}.html"})
-    (OUT / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+                     "fichier": f"{out.name}/{k}.html"})
+    out.mkdir(parents=True, exist_ok=True)
+    if brevo:
+        for k, src in sources.items():
+            (OUT / f"{k}.html").write_text(src, encoding="utf-8")
+    (out / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    if pdir:
+        pdir.mkdir(parents=True, exist_ok=True)
+        for k, src in sources.items():
+            (pdir / f"{k}.html").write_text(preview(src), encoding="utf-8")
+            (pdir / f"{k}-arial.html").write_text(preview(src, "arial"), encoding="utf-8")
     for m in meta:
         print(f"{m['clé']:<18} {m['mots']:>4} mots · objet {len(m['objet']):>2} car. · upsell {m['upsell']:<10} · {m['objet']}")
-    if "--preview" in argv:
-        d = pathlib.Path(argv[argv.index("--preview") + 1])
-        d.mkdir(parents=True, exist_ok=True)
-        for k, src in sources.items():
-            (d / f"{k}.html").write_text(preview(src), encoding="utf-8")
-            (d / f"{k}-arial.html").write_text(preview(src, "arial"), encoding="utf-8")
-    return 0 if run_checks(sources, images, brevo) else 1
+    ok = run_checks(sources, images, brevo)
+    ok &= check_brevo_folder()
+    return 0 if ok else 1
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

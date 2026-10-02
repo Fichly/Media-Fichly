@@ -1,7 +1,14 @@
 # Génère les 8 templates de nurturing White Belt (HTML email, 600 px, charte Fichly).
+#
+# ATTENTION : v1 obsolète, ne pas charger dans Brevo : la version à envoyer est emails-v2/
+# (générée par build_emails_v2.py --brevo). Le rendu v1 de ce script (dossier emails/) n'a ni salutation au prénom,
+# ni bandeau Green Belt, ni rappel « Votre formation », ni bloc « Pour aller plus loin ».
+# Ce fichier reste la source du fond : la liste EMAILS (textes, liens et UTM, objets, preheaders) et u(), lues par
+# build_emails_v2.py. La salutation Brevo, le bandeau, le rappel et l'upsell sont écrits dans build_emails_v2.py.
 import json, html, re, pathlib
 
 OUT = pathlib.Path(__file__).parent / "emails"
+OBSOLETE = "v1 obsolète, ne pas charger dans Brevo : la version à envoyer est emails-v2/"
 UTM = "utm_source=brevo&utm_medium=email&utm_campaign=white-belt-nurturing&utm_content={}"
 
 def u(url, code):
@@ -185,7 +192,7 @@ def block_html(b):
 def render(e):
     body = "\n".join(block_html(b) for b in e["blocks"])
     pre = html.escape(e["preheader"])
-    return f'''<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only"><title>{html.escape(e["subject"])}</title>
+    return f'''<!DOCTYPE html><!-- {OBSOLETE} --><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only"><title>{html.escape(e["subject"])}</title>
 <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]-->
 <style>
   body {{ margin:0; padding:0; background-color:#F2F2F2; -webkit-text-size-adjust:100%; word-break:break-word; }}
@@ -232,6 +239,7 @@ if __name__ == "__main__":
         (OUT / f"{e['key']}.html").write_text(h, encoding="utf-8")
         meta.append(dict(key=e["key"], name=e["name"], subject=e["subject"], preheader=e["preheader"],
                          words=visible_words(e), file=f"emails/{e['key']}.html"))
-    (OUT / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / "meta.json").write_text(json.dumps({"avertissement": OBSOLETE, "emails": meta}, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("ATTENTION :", OBSOLETE)
     for m in meta:
         print(f"{m['key']:<20} {m['words']:>4} mots · objet {len(m['subject']):>2} car. · {m['subject']}")
