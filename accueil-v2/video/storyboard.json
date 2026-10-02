@@ -1,0 +1,15 @@
+{
+  "duree": 18,
+  "images_par_seconde": 30,
+  "formats": ["16x9 (1920 × 1080)", "4x5 (1080 × 1350)"],
+  "affiche": 5.6,
+  "transcription": "Vidéo muette de 18 secondes, en boucle. Le logo Fichly apparaît avec « Le Lean accessible. », puis les trois têtes de Fichly : Hugo Duc et Clément Boniol, cofondateurs, et Clément Raymond, associé, suivis par plus de 70 000 professionnels. Viennent ensuite les fiches, « Des fiches pour agir, seul, dès demain. », avec une fiche qui se retourne du recto (comprendre) au verso (mettre en place), puis les formations sur fond bleu nuit, « Des formations pour être accompagné et certifié. », avec les ceintures White, Yellow, Green et Black. La vidéo se termine sur « Seul ou accompagné. ».",
+  "scenes": [
+    { "debut": 0, "fin": 2.9, "titre": "Ouverture", "textes": ["Le Lean accessible."] },
+    { "debut": 2.7, "fin": 7.1, "titre": "Les trois têtes", "textes": ["Derrière Fichly", "Hugo Duc", "Co-Fondateur", "« Créer, tester, transmettre »", "Clément Boniol", "Co-Fondateur", "« La complexité en clarté »", "Clément Raymond", "Associé", "« Envie de faire, envie de progresser »", "Suivis par +70 000 professionnels"] },
+    { "debut": 7.0, "fin": 11.5, "titre": "Les fiches", "textes": ["Les fiches", "Des fiches pour agir, seul, dès demain.", "Un outil = une fiche", "Imprimées en France", "Recto : comprendre", "Verso : mettre en place", "Clément Boniol, Co-Fondateur"] },
+    { "debut": 11.0, "fin": 15.5, "titre": "Les formations", "textes": ["Les formations", "Des formations pour être accompagné et certifié.", "80 % de pratique", "Qualiopi", "Green Belt éligible CPF", "White", "Yellow", "Green", "Black", "Clément Raymond, Associé"] },
+    { "debut": 15.3, "fin": 17.4, "titre": "Conclusion", "textes": ["Seul ou accompagné.", "Des fiches et des formations pour apprendre le Lean."] },
+    { "debut": 17.1, "fin": 18, "titre": "Retour à l'ouverture (boucle)", "textes": ["Le Lean accessible."] }
+  ]
+}
