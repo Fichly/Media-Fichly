@@ -44,7 +44,18 @@ IMAGES["avatar"] = str(VIS / "avatar-hugo.png")
 # invisible sur le papier en mode clair, lisible quand un client assombrit le fond sans toucher aux images.
 IMAGES["logo"] = str(VIS / "logo-fichly.png")
 # URL de la galerie Brevo, à renseigner après l'import des PNG (mêmes clés que IMAGES : 8 illustrations, avatar, logo).
-IMAGES_BREVO = {}
+IMAGES_BREVO = {
+    "e0": "https://img.mailinblue.com/8576704/images/rnb/original/6abfca8e2331f4cc5b391a15.png",
+    "e1": "https://img.mailinblue.com/8576704/images/rnb/original/6abfca9a54b05e9d6c187c1e.png",
+    "e2": "https://img.mailinblue.com/8576704/images/rnb/original/6abfca9d0c32667a87f768f9.png",
+    "e3": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcaa054b05e9d6c187c1f.png",
+    "e4-decouvrir": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcabf0c32667a87f768fc.png",
+    "e4-equipe": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcaa72331f4cc5b391a17.png",
+    "e4-formation": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcaab2331f4cc5b391a18.png",
+    "e4-accompagnement": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcab11e05abe1505bad59.png",
+    "logo": "https://img.mailinblue.com/8576704/images/rnb/original/6abfcab60c32667a87f768fb.png",
+    "avatar": "https://img.mailinblue.com/8576704/images/rnb/original/6abfc3400c32667a87f76874.png",
+}
 
 def png_size(key):
     """Taille du PNG local (largeur, hauteur) : sert aux attributs width/height des balises img."""
