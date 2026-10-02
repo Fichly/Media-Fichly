@@ -1,0 +1,181 @@
+{
+ "name": "White Belt Lean · Séquence E1 → E4",
+ "flow": [
+  {
+   "id": 1,
+   "module": "sendinblue:MakeAPICall",
+   "version": 2,
+   "parameters": {
+    "__IMTCONN__": 7809870
+   },
+   "mapper": {
+    "url": "/v3/contacts",
+    "method": "GET",
+    "qs": [
+     {
+      "key": "listIds",
+      "value": "49"
+     },
+     {
+      "key": "limit",
+      "value": "1000"
+     },
+     {
+      "key": "modifiedSince",
+      "value": "{{formatDate(addDays(now; -20); \"YYYY-MM-DDTHH:mm:ss.SSS[Z]\"; \"UTC\")}}"
+     }
+    ]
+   },
+   "metadata": {
+    "designer": {
+     "x": 0,
+     "y": 0
+    }
+   }
+  },
+  {
+   "id": 2,
+   "module": "builtin:BasicFeeder",
+   "version": 1,
+   "parameters": {},
+   "mapper": {
+    "array": "{{1.body.contacts}}"
+   },
+   "metadata": {
+    "designer": {
+     "x": 300,
+     "y": 0
+    }
+   }
+  },
+  {
+   "id": 3,
+   "module": "sendinblue:SendEmail",
+   "version": 2,
+   "parameters": {
+    "__IMTCONN__": 7809870
+   },
+   "mapper": {
+    "templateId": "{{switch(toString(2.attributes.WB_ETAPE); \"0\"; 207; \"1\"; 208; \"2\"; 209; \"3\"; switch(toString(2.attributes.WB_BESOIN); \"2\"; 211; \"3\"; 212; \"4\"; 213; 210); 0)}}",
+    "to": [
+     {
+      "email": "{{2.email}}",
+      "name": "{{2.attributes.FIRSTNAME}}"
+     }
+    ],
+    "replyTo": {
+     "email": "hugo.duc@fichly.com",
+     "name": "Hugo de Fichly"
+    },
+    "tags": [
+     "white-belt-nurturing"
+    ]
+   },
+   "metadata": {
+    "designer": {
+     "x": 600,
+     "y": 0
+    }
+   },
+   "filter": {
+    "name": "Email suivant dû",
+    "conditions": [
+     [
+      {
+       "a": "{{2.emailBlacklisted}}",
+       "o": "boolean:equal",
+       "b": "false"
+      },
+      {
+       "a": "{{if(contains(split(\"0,1,2,3\"; \",\"); toString(2.attributes.WB_ETAPE)); \"oui\"; \"non\")}}",
+       "o": "text:equal",
+       "b": "oui"
+      },
+      {
+       "a": "{{if((parseNumber(formatDate(now; \"X\")) - parseNumber(formatDate(ifempty(2.attributes.WB_DERNIER_ENVOI; now); \"X\"))) / 60 >= switch(toString(2.attributes.WB_ETAPE); \"0\"; 2; \"1\"; 3; \"2\"; 4; \"3\"; 5; 99999); \"oui\"; \"non\")}}",
+       "o": "text:equal",
+       "b": "oui"
+      }
+     ]
+    ]
+   },
+   "onerror": [
+    {
+     "id": 5,
+     "module": "builtin:Break",
+     "version": 1,
+     "parameters": {},
+     "mapper": {
+      "retry": true,
+      "count": 3,
+      "interval": 15
+     },
+     "metadata": {
+      "designer": {
+       "x": 600,
+       "y": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "module": "sendinblue:UpdateContact",
+   "version": 2,
+   "parameters": {
+    "__IMTCONN__": 7809870
+   },
+   "mapper": {
+    "email": "{{2.email}}",
+    "attributes": {
+     "WB_ETAPE": "{{parseNumber(toString(2.attributes.WB_ETAPE)) + 1}}",
+     "WB_DERNIER_ENVOI": "{{formatDate(now; \"YYYY-MM-DDTHH:mm:ss[Z]\"; \"UTC\")}}"
+    }
+   },
+   "metadata": {
+    "designer": {
+     "x": 900,
+     "y": 0
+    }
+   },
+   "onerror": [
+    {
+     "id": 6,
+     "module": "builtin:Break",
+     "version": 1,
+     "parameters": {},
+     "mapper": {
+      "retry": true,
+      "count": 3,
+      "interval": 15
+     },
+     "metadata": {
+      "designer": {
+       "x": 900,
+       "y": 0
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "metadata": {
+  "version": 1,
+  "instant": false,
+  "scenario": {
+   "roundtrips": 1,
+   "maxErrors": 3,
+   "autoCommit": true,
+   "autoCommitTriggerLast": true,
+   "sequential": false,
+   "confidential": false,
+   "dataloss": false,
+   "dlq": true,
+   "freshVariables": false
+  },
+  "designer": {
+   "orphans": []
+  }
+ }
+}

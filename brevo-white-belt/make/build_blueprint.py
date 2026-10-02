@@ -61,11 +61,13 @@ def switch(expr, pairs):
     parts = [expr] + [x for a, b in pairs for x in ('"%s"' % a, '"%s"' % b)] + ['""']
     return "switch(%s)" % "; ".join(parts)
 
-# La question « Qu’attendez-vous » n'existe que dans la nouvelle version du formulaire, encore en brouillon :
-# on la lit par son libellé (espace, espace insécable ou espace fine avant « ? »).
-# Après publication, remplacer par son identifiant question_… (voir CHECKLIST_AUTOMATION.md).
+# La question « Qu’attendez-vous » n'existe que dans la nouvelle version du formulaire (publiée le 2 octobre) :
+# identifiant question_DvOEkj, avec le libellé en secours (espace, espace insécable ou espace fine avant « ? »).
 Q = "Qu’attendez-vous de cette formation"
-BESOIN = "first(ifempty(ifempty(%d.fields.`%s ?`; %d.fields.`%s ?`); %d.fields.`%s ?`))" % (T, Q, T, Q, T, Q)
+BESOIN = ("first(ifempty(%s; ifempty(ifempty(%d.fields.`%s ?`; %d.fields.`%s\u00a0?`); %d.fields.`%s\u202f?`)))"
+          % (champ("question_DvOEkj"), T, Q, T, Q, T, Q))
+
+MAINTENANT = 'formatDate(now; "YYYY-MM-DDTHH:mm:ss[Z]"; "UTC")'
 
 def existant(attr):
     return "%d.attributes.%s" % (G, attr)
@@ -137,6 +139,14 @@ def suite():
             onerror=relance(6, 600, 600)),
         mod(4, "sendinblue:AddExistingContacts", 900, 300, {"emails": [iml(EMAIL)], "listId": LISTE},
             filter=PAS_ENCORE_INSCRIT, onerror=relance(7, 900, 600)),
+        # E0 tout de suite, puis début du suivi de séquence (lu par le scénario « Séquence E1 → E4 »)
+        mod(10, "sendinblue:SendEmail", 1200, 300,
+            {"templateId": 206, "to": [{"email": iml(EMAIL), "name": iml(PRENOM)}],
+             "replyTo": {"email": "hugo.duc@fichly.com", "name": "Hugo de Fichly"}, "tags": ["white-belt-nurturing", "wb-e0"]},
+            onerror=relance(11, 1200, 600)),
+        mod(12, "sendinblue:UpdateContact", 1500, 300,
+            {"email": iml(EMAIL), "attributes": {"WB_ETAPE": 0, "WB_DERNIER_ENVOI": iml(MAINTENANT)}},
+            onerror=relance(13, 1500, 600)),
     ]
 
 META = {"version": 1, "instant": True,

@@ -46,7 +46,7 @@
        "b": "true"
       },
       {
-       "a": "{{first(ifempty(ifempty(1.fields.`Qu’attendez-vous de cette formation ?`; 1.fields.`Qu’attendez-vous de cette formation ?`); 1.fields.`Qu’attendez-vous de cette formation ?`))}}",
+       "a": "{{first(ifempty(1.fieldsById.`question_DvOEkj`; ifempty(ifempty(1.fields.`Qu’attendez-vous de cette formation ?`; 1.fields.`Qu’attendez-vous de cette formation ?`); 1.fields.`Qu’attendez-vous de cette formation ?`)))}}",
        "o": "exist"
       }
      ]
@@ -146,7 +146,7 @@
      "LASTNAME": "{{ifempty(2.attributes.LASTNAME; trim(1.fieldsById.`question_V1AeAy`))}}",
      "ENTREPRISE": "{{ifempty(2.attributes.ENTREPRISE; trim(1.fieldsById.`question_EbEREr`))}}",
      "TITRE_JOB": "{{ifempty(2.attributes.TITRE_JOB; switch(first(1.fieldsById.`question_rr141R`); \"Opérateur ou technicien\"; \"23\"; \"Chef d’équipe\"; \"12\"; \"Méthodes ou industrialisation\"; \"18\"; \"Responsable production\"; \"20\"; \"Qualité ou HSE\"; \"21\"; \"Amélioration continue\"; \"14\"; \"Direction\"; \"13\"; \"Étudiant\"; \"10\"; \"Autre\"; \"24\"; \"\"))}}",
-     "WB_BESOIN": "{{switch(first(ifempty(ifempty(1.fields.`Qu’attendez-vous de cette formation ?`; 1.fields.`Qu’attendez-vous de cette formation ?`); 1.fields.`Qu’attendez-vous de cette formation ?`)); \"Découvrir les bases du Lean\"; \"1\"; \"Lancer une démarche avec mon équipe\"; \"2\"; \"Me former ou me certifier\"; \"3\"; \"Faire accompagner mon site\"; \"4\"; \"\")}}",
+     "WB_BESOIN": "{{switch(first(ifempty(1.fieldsById.`question_DvOEkj`; ifempty(ifempty(1.fields.`Qu’attendez-vous de cette formation ?`; 1.fields.`Qu’attendez-vous de cette formation ?`); 1.fields.`Qu’attendez-vous de cette formation ?`))); \"Découvrir les bases du Lean\"; \"1\"; \"Lancer une démarche avec mon équipe\"; \"2\"; \"Me former ou me certifier\"; \"3\"; \"Faire accompagner mon site\"; \"4\"; \"\")}}",
      "INSCRIT_WHITEBELT": true,
      "WB_DATE_INSCRIPTION": "{{formatDate(ifempty(2.attributes.WB_DATE_INSCRIPTION; 1.createdAt); \"YYYY-MM-DD\"; \"Europe/Paris\")}}",
      "OPT_IN": "{{if(1.fieldsById.`question_xN1q15_0a3d003f-d0f7-43f0-9619-fab48845c688`; true; 2.attributes.OPT_IN)}}",
@@ -229,6 +229,96 @@
      "metadata": {
       "designer": {
        "x": 900,
+       "y": 600
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "module": "sendinblue:SendEmail",
+   "version": 2,
+   "parameters": {
+    "__IMTCONN__": 7809870
+   },
+   "mapper": {
+    "templateId": "206",
+    "to": [
+     {
+      "email": "{{lower(trim(1.fieldsById.`question_PBexee`))}}",
+      "name": "{{trim(1.fieldsById.`question_OB929g`)}}"
+     }
+    ],
+    "replyTo": {
+     "email": "hugo.duc@fichly.com",
+     "name": "Hugo de Fichly"
+    },
+    "tags": [
+     "white-belt-nurturing",
+     "wb-e0"
+    ]
+   },
+   "metadata": {
+    "designer": {
+     "x": 1200,
+     "y": 300
+    }
+   },
+   "onerror": [
+    {
+     "id": 11,
+     "module": "builtin:Break",
+     "version": 1,
+     "parameters": {},
+     "mapper": {
+      "retry": true,
+      "count": 3,
+      "interval": 15
+     },
+     "metadata": {
+      "designer": {
+       "x": 1200,
+       "y": 600
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "module": "sendinblue:UpdateContact",
+   "version": 2,
+   "parameters": {
+    "__IMTCONN__": 7809870
+   },
+   "mapper": {
+    "email": "{{lower(trim(1.fieldsById.`question_PBexee`))}}",
+    "attributes": {
+     "WB_ETAPE": 0,
+     "WB_DERNIER_ENVOI": "{{formatDate(now; \"YYYY-MM-DDTHH:mm:ss[Z]\"; \"UTC\")}}"
+    }
+   },
+   "metadata": {
+    "designer": {
+     "x": 1500,
+     "y": 300
+    }
+   },
+   "onerror": [
+    {
+     "id": 13,
+     "module": "builtin:Break",
+     "version": 1,
+     "parameters": {},
+     "mapper": {
+      "retry": true,
+      "count": 3,
+      "interval": 15
+     },
+     "metadata": {
+      "designer": {
+       "x": 1500,
        "y": 600
       }
      }
