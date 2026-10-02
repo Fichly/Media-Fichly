@@ -40,7 +40,8 @@ Tally ODOB5p → Make « Tally → Brevo » → contact + liste 49 + E0
 2. **Garde** : la réponse n'est traitée que si l'e-mail est présent, la case de consentement cochée, et si elle vient de la nouvelle version du formulaire, c'est-à-dire qu'elle contient la question « Qu'attendez-vous de cette formation ? ». Les réponses de l'ancienne version, dont le consentement ne couvre pas les 4 e-mails de suivi, n'entrent pas dans la séquence.
 3. Brevo cherche le contact. L'adresse est mise en minuscules et nettoyée de ses espaces. Le scénario ne continue que si Brevo répond « contact absent ». Toute autre erreur est relancée, pour ne jamais traiter un contact existant comme nouveau.
 4. **Création ou mise à jour en une seule étape**, donc jamais de doublon, même en cas de double clic :
-   - prénom, nom, entreprise et `TITRE_JOB` déjà présents sont **conservés** ;
+   - le **prénom saisi dans le formulaire** remplace celui de Brevo, puisque c'est lui qui apparaît dans « Bonjour … » (décision du 2 octobre) ;
+   - nom, entreprise et `TITRE_JOB` déjà présents sont **conservés** ;
    - `WB_BESOIN` prend la réponse la plus récente ;
    - `WB_DATE_INSCRIPTION` garde la première inscription (date de Paris) ;
    - l'opt-in n'est écrit que si la case newsletter est cochée, et un opt-in déjà donné n'est jamais retiré ;
@@ -91,14 +92,14 @@ Une personne inscrite le lundi reçoit donc E1 le mercredi à 9 h, E2 le samedi,
 
 ## 4. Suivi
 
+- L'e-mail au répondant de Tally est désactivé depuis le 2 octobre : l'accès part uniquement de Brevo (E0).
+
 - Dans Make (Profil → Notifications), activez l'alerte sur les avertissements et les exécutions incomplètes, puis jetez un œil à l'onglet « Exécutions incomplètes » des deux scénarios pendant les premiers jours.
 - Le test de bout en bout du 2 octobre et les 21 cas de test du scénario d'inscription sont dans [make/RESULTATS_TESTS.md](make/RESULTATS_TESTS.md).
 
 ## 5. Points à trancher
 
-- **E-mail au répondant de Tally** : il est encore activé (« Votre accès à la White Belt Lean en 1 h »). Chaque inscrit reçoit donc deux e-mails d'accès, celui de Tally et E0. Je peux le désactiver dans Tally avec votre accord.
 - **Case newsletter** : elle est facultative, alors que tous les inscrits recevront L'Atelier une fois les deux bases connectées. Soit on la retire et on mentionne L'Atelier dans la case de consentement, soit on ne connecte que les inscrits qui l'ont cochée (`OPT_IN = oui`).
-- **Prénom déjà présent dans Brevo** : il est conservé et c'est lui qui apparaît dans « Bonjour … ». Exemple : contact@fichly.com, importé de Shopify, s'appelle « Fiches » dans Brevo. On peut préférer le prénom saisi dans le formulaire pour la salutation.
 - **Robots** : sans protection, une soumission automatique créerait un contact et lui enverrait la séquence. Activez la protection anti-spam de Tally. Je n'ai pas ajouté de filtre « devinette » dans Make, qui risquerait d'écarter de vrais inscrits.
 - **Contacts désinscrits** : un contact désinscrit de Brevo qui s'inscrit à la White Belt reste désinscrit, le scénario ne réabonne jamais personne. Il reçoit E0, l'accès qu'il vient de demander, mais pas E1 à E4.
 - **Réinscription** : une personne déjà dans la liste 49 qui refait le formulaire ne reçoit pas de nouvel e-mail d'accès. Elle est quand même redirigée vers la formation en fin de formulaire. Si vous voulez lui renvoyer l'accès, je peux ajouter l'envoi du template 206 dans ce cas précis.

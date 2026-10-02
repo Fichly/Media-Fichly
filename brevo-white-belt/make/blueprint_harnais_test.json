@@ -142,7 +142,7 @@
     "email": "{{lower(trim(1.fieldsById.`question_PBexee`))}}",
     "updateEnabled": true,
     "attributes": {
-     "FIRSTNAME": "{{ifempty(2.attributes.FIRSTNAME; trim(1.fieldsById.`question_OB929g`))}}",
+     "FIRSTNAME": "{{ifempty(trim(1.fieldsById.`question_OB929g`); 2.attributes.FIRSTNAME)}}",
      "LASTNAME": "{{ifempty(2.attributes.LASTNAME; trim(1.fieldsById.`question_V1AeAy`))}}",
      "ENTREPRISE": "{{ifempty(2.attributes.ENTREPRISE; trim(1.fieldsById.`question_EbEREr`))}}",
      "TITRE_JOB": "{{ifempty(2.attributes.TITRE_JOB; switch(first(1.fieldsById.`question_rr141R`); \"Opérateur ou technicien\"; \"23\"; \"Chef d’équipe\"; \"12\"; \"Méthodes ou industrialisation\"; \"18\"; \"Responsable production\"; \"20\"; \"Qualité ou HSE\"; \"21\"; \"Amélioration continue\"; \"14\"; \"Direction\"; \"13\"; \"Étudiant\"; \"10\"; \"Autre\"; \"24\"; \"\"))}}",

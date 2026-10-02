@@ -77,8 +77,9 @@ def existant(attr):
 UTM_EXISTANTS = "ifempty(%s; ifempty(%s; ifempty(%s; ifempty(%s; \"\"))))" % tuple(existant(k) for k in UTM)
 
 attributs = {
-    # Données déjà présentes dans Brevo conservées (saisie plus précise, casse correcte)
-    "FIRSTNAME": iml("ifempty(%s; %s)" % (existant("FIRSTNAME"), PRENOM)),
+    # Prénom : celui saisi dans le formulaire (il sert à la salutation des e-mails), sinon celui déjà dans Brevo
+    "FIRSTNAME": iml("ifempty(%s; %s)" % (PRENOM, existant("FIRSTNAME"))),
+    # Autres données déjà présentes dans Brevo conservées (saisie plus précise, casse correcte)
     "LASTNAME": iml("ifempty(%s; %s)" % (existant("LASTNAME"), NOM)),
     "ENTREPRISE": iml("ifempty(%s; %s)" % (existant("ENTREPRISE"), ENTREPRISE)),
     "TITRE_JOB": iml("ifempty(%s; %s)" % (existant("TITRE_JOB"), switch(FONCTION, FONCTIONS))),
